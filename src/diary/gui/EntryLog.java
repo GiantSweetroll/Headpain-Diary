@@ -3,8 +3,6 @@ package diary.gui;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.text.DateFormat;
-import java.text.NumberFormat;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
