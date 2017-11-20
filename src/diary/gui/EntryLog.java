@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -43,6 +44,8 @@ public class EntryLog extends JPanel implements DocumentListener
 	private JTextField tfActivity;
 	private JTextArea taComments;
 	private JButton butBack, butFinish;
+	
+	private int nyeriAmount;
 	
 	protected EntryLog()
 	{
@@ -89,6 +92,7 @@ public class EntryLog extends JPanel implements DocumentListener
 		this.tfStartTime.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfNyeriAmount.setColumns(5);
 		this.tfNyeriAmount.setHorizontalAlignment(SwingConstants.CENTER);
+		this.tfNyeriAmount.setText("1");
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		//Add to panel
@@ -111,26 +115,66 @@ public class EntryLog extends JPanel implements DocumentListener
 		this.scrollCenter = ScrollPaneManager.generateDefaultScrollPane(this.panelCenter, Constants.SCROLL_SPEED, Constants.SCROLL_SPEED);
 		this.scrollNyeriTypes = ScrollPaneManager.generateDefaultScrollPane(this.panelNyeriTypes, Constants.SCROLL_SPEED, Constants.SCROLL_SPEED);
 	}
+	private void initPanelNyeriTypes()
+	{
+		//Initialization
+		this.panelNyeriTypes = new JPanel();
+		
+		//Properties
+		this.panelNyeriTypes.setLayout(new BoxLayout(this.panelNyeriTypes, BoxLayout.Y_AXIS));
+		this.panelNyeriTypes.setOpaque(false);
+		
+		//Add to panel
+		
+	}
+	private void configureListenersForMembers()
+	{
+		this.tfNyeriAmount.getDocument().addDocumentListener(this);
+	}
+	private void getNyeriAmount()
+	{
+		int amount = 1;
+		try
+		{
+			if (this.tfNyeriAmount.getText().trim().equals(""))
+			{
+				amount = 1;
+				this.tfNyeriAmount.setText("1");
+			}
+			else
+			{
+				amount = Integer.parseInt(this.tfNyeriAmount.getText().trim().replaceAll(",", ""));
+				if (amount <= 0)
+				{
+					amount = 1;
+					this.tfNyeriAmount.setText("1");
+				}
+			}
+		}
+		catch (NullPointerException ex)
+		{
+			amount = 1;
+		}
+		
+		this.nyeriAmount = amount;
+	}
 	
 	//Interfaces
 	@Override
 	public void changedUpdate(DocumentEvent e) 
 	{
-		// TODO Auto-generated method stub
-		
+		this.getNyeriAmount();
 	}
 
 	@Override
 	public void insertUpdate(DocumentEvent e) 
 	{
-		// TODO Auto-generated method stub
-		
+		this.getNyeriAmount();
 	}
 
 	@Override
 	public void removeUpdate(DocumentEvent e) 
 	{
-		// TODO Auto-generated method stub
-		
+		this.getNyeriAmount();
 	}	
 }

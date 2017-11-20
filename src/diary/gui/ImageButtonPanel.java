@@ -29,37 +29,37 @@ public class ImageButtonPanel extends JScrollPane implements ActionListener
 	
 	//Constants
 	//Identifiers
-	protected final byte GENERAL_SELECTION = -6;
-	protected final byte SPECIFIC_SELECTION = -7;
-	protected final byte HEAD = -1;
-	protected final byte EYES = -2;
-	protected final byte EARS = -3;
-	protected final byte CHEEKS = -4;
-	protected final byte CHIN = -5;
+	protected static final byte GENERAL_SELECTION = -6;			//For use with head, eyes, ears, cheeks, and chin constants
+	protected static final byte SPECIFIC_SELECTION = -7;			//For use with the other constants
+	protected static final byte HEAD = -1;
+	protected static final byte EYES = -2;
+	protected static final byte EARS = -3;
+	protected static final byte CHEEKS = -4;
+	protected static final byte CHIN = -5;
 	//Head
-	protected final byte HEAD_FRONT = 0;
-	protected final byte HEAD_LEFT = 1;
-	protected final byte HEAD_RIGHT = 2;
-	protected final byte HEAD_BACK = 3;
-	protected final byte HEAD_FRONT_LEFT = 4;
-	protected final byte HEAD_FRONT_CENTER = 5;
-	protected final byte HEAD_FRONT_RIGHT = 6;
+	protected static final byte HEAD_FRONT = 0;
+	protected static final byte HEAD_LEFT = 1;
+	protected static final byte HEAD_RIGHT = 2;
+	protected static final byte HEAD_BACK = 3;
+	protected static final byte HEAD_FRONT_LEFT = 4;
+	protected static final byte HEAD_FRONT_CENTER = 5;
+	protected static final byte HEAD_FRONT_RIGHT = 6;
 	//Eyes
-	protected final byte EYES_RIGHT = 7;
-	protected final byte EYES_LEFT = 8;
-	protected final byte EYES_RIGHT_BROW = 9;
-	protected final byte EYES_RIGHT_EYELASH = 10;
-	protected final byte EYES_RIGHT_SOCKET = 11;
-	protected final byte EYES_RIGHT_EYEBALL = 12;
-	protected final byte EYES_RIGHT_BEHIND = 13;
-	protected final byte EYES_LEFT_BROW = 14;
-	protected final byte EYES_LEFT_EYELASH = 15;
-	protected final byte EYES_LEFT_SOCKET = 16;
-	protected final byte EYES_LEFT_EYEBALL = 17;
-	protected final byte EYES_LEFT_BEHIND = 18;
+	protected static final byte EYES_RIGHT = 7;
+	protected static final byte EYES_LEFT = 8;
+	protected static final byte EYES_RIGHT_BROW = 9;
+	protected static final byte EYES_RIGHT_EYELASH = 10;
+	protected static final byte EYES_RIGHT_SOCKET = 11;
+	protected static final byte EYES_RIGHT_EYEBALL = 12;
+	protected static final byte EYES_RIGHT_BEHIND = 13;
+	protected static final byte EYES_LEFT_BROW = 14;
+	protected static final byte EYES_LEFT_EYELASH = 15;
+	protected static final byte EYES_LEFT_SOCKET = 16;
+	protected static final byte EYES_LEFT_EYEBALL = 17;
+	protected static final byte EYES_LEFT_BEHIND = 18;
 	//Ears
-	protected final byte EARS_LEFT = 19;
-	protected final byte EARS_RIGHT = 20;
+	protected static final byte EARS_LEFT = 19;
+	protected static final byte EARS_RIGHT = 20;
 	
 	protected ImageButtonPanel(byte selection, byte selection2)
 	{
