@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedHashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -15,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
+import diary.constants.PainDataIdentifier;
+import diary.methods.Methods;
 import giantsweetroll.Misc;
 import giantsweetroll.VectorInt;
 import giantsweetroll.gui.swing.Gbm;
@@ -161,6 +164,20 @@ public class HeadPainPosition extends JPanel
 		}
 		
 		return mark;
+	}
+	
+	protected LinkedHashMap<String, String> getDataMap()
+	{
+		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+		
+		map.put(PainDataIdentifier.GENERAL_POSITION, Misc.getItem(this.comboGeneralPos).toString());
+		map.put(PainDataIdentifier.GENERAL_POSITION_2, this.ibpGeneral.getData());
+//		map.put(PainDataIdentifier.SPECIFIC_LOCATION, this.ibpSpecific.getData());
+		map.put(PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
+		map.put(PainDataIdentifier.INTENSITY, Methods.getTextData(this.tfIntensity));
+		map.put(PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
+		
+		return map;
 	}
 	//Interfaces
 	private ActionListener generalPositionListener = new ActionListener()

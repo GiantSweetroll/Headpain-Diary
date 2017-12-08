@@ -1,6 +1,7 @@
 package diary.gui;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
@@ -32,5 +33,16 @@ public class NyeriTypesScrollPane extends JScrollPane
 			this.list.add(new HeadPainPosition());
 			this.add(this.list.get(i));
 		}
+	}
+	
+	protected ArrayList<LinkedHashMap<String, String>> getData()
+	{
+		ArrayList<LinkedHashMap<String, String>> list = new ArrayList<LinkedHashMap<String, String>>();
+		for (int i=0; i<this.list.size(); i++)
+		{
+			list.add(this.list.get(i).getDataMap());
+		}
+		
+		return list;
 	}
 }

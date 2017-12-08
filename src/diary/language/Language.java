@@ -1,5 +1,6 @@
 package diary.language;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,6 +19,10 @@ import giantsweetroll.xml.dom.XMLManager;
 
 public class Language 
 {
+	//Misc
+	public String backText;
+	public String finishText;
+	
 	//Main Menu
 	//Button Texts
 	public String mainNewEntryButtonText;
@@ -56,7 +61,7 @@ public class Language
 	
 	public Language()
 	{
-		
+		this.setLanguage("english");
 	}
 	
 	public Language(String language)
@@ -78,6 +83,9 @@ public class Language
 			LinkedHashMap<String, String> textMap = this.createTextMap(rootElement);
 			
 			//Get data
+			//Misc
+			this.backText = textMap.get(XMLIdentifier.BACK_TEXT);
+			this.finishText = textMap.get(XMLIdentifier.FINISH_TEXT);
 			//Main
 			this.mainNewEntryButtonText = textMap.get(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT);
 			this.mainViewGraphButtonText = textMap.get(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT);

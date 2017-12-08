@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -295,6 +296,7 @@ public final class MainMenu extends JPanel implements ActionListener, KeyListene
 		if (keyCode == KeyEvent.VK_1 || keyCode == KeyEvent.VK_NUMPAD1)
 		{
 			//Log new
+			MainFrame.changePanel(new EntryLog());
 		}
 		else if (keyCode == KeyEvent.VK_2 || keyCode == KeyEvent.VK_NUMPAD2)
 		{
@@ -341,6 +343,7 @@ public final class MainMenu extends JPanel implements ActionListener, KeyListene
 		switch(e.getActionCommand())
 		{
 			case NEW_LOG:
+				MainFrame.changePanel(new EntryLog());
 				break;
 				
 			case GRAPH:
@@ -356,5 +359,13 @@ public final class MainMenu extends JPanel implements ActionListener, KeyListene
 				System.exit(0);
 				break;
 		}
+	}
+	
+	public static void main(String args[])
+	{
+		JFrame frame = new JFrame();
+		frame.add(new EntryLog());
+		frame.pack();
+		frame.setVisible(true);
 	}
 }

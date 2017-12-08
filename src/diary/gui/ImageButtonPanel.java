@@ -60,6 +60,12 @@ public class ImageButtonPanel extends JScrollPane implements ActionListener
 	//Ears
 	protected static final byte EARS_LEFT = 19;
 	protected static final byte EARS_RIGHT = 20;
+	protected static final byte EARS_LEFT_HOLE = 21;
+	protected static final byte EARS_RIGHT_HOLE = 22;
+	protected static final byte EARS_LEFT_LEAF = 23;
+	protected static final byte EARS_RIGHT_LEAF = 24;
+	
+	private String selected;
 	
 	protected ImageButtonPanel(byte selection, byte selection2)
 	{
@@ -121,12 +127,18 @@ public class ImageButtonPanel extends JScrollPane implements ActionListener
 		this.repaint();
 	}
 	
+	protected String getData()
+	{
+		return this.selected;
+	}
+	private void setData(byte data)
+	{
+		
+	}
+	
 	//Interface
 	public void actionPerformed(ActionEvent e)
 	{
-		switch (e.getActionCommand())
-		{
-		
-		}
+		this.setData(Byte.parseByte(e.getActionCommand()));
 	}
 }

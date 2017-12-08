@@ -15,6 +15,11 @@ public class XMLIdentifier
 	public static final String SECTION_MAIN_MENU = "main menu";
 	public static final String SECTION_ENTRY_LOG = "entry log";
 	public static final String SECTION_PAIN_POSITION = "pain position";
+	public static final String SECTION_MISC = "misc";
+	
+	//Misc
+	public static final String BACK_TEXT = "back text";
+	public static final String FINISH_TEXT = "finish text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -48,5 +53,4 @@ public class XMLIdentifier
 	public static final String INTENSITY_LABEL = "intensity label";
 	public static final String DURATION_LABEL = "duration label";
 	public static final String DURATION_UNIT_LABEL = "duration units label";
-	
 }

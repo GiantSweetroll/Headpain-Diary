@@ -33,4 +33,8 @@
 	    <text identifier="duration label">Duration</text>
 	    <text identifier="duration units label">Seconds</text>
 	</section>
+	<section part="misc">
+	    <text identifier="back text">Back</text>
+	    <text identifier="finish text">Finish</text>
+	</section>
 </language>

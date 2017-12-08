@@ -1,12 +1,15 @@
 package diary.gui;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,7 +23,7 @@ import diary.constants.Constants;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class EntryLog extends JPanel implements DocumentListener
+public class EntryLog extends JPanel implements DocumentListener, ActionListener
 {
 	/**
 	 * 
@@ -33,8 +36,7 @@ public class EntryLog extends JPanel implements DocumentListener
 	private JPanel panelBelow;
 	private JPanel panelBelowLeft, panelBelowRight;
 	
-	private JScrollPane scrollCenter;
-	private JScrollPane scrollNyeriTypes;
+	private JScrollPane scrollCenter, scrollComments;
 	
 	private JLabel labTitle, labStartTime, labNyeriAmount, labActivity, labComments;
 	
@@ -43,17 +45,40 @@ public class EntryLog extends JPanel implements DocumentListener
 	private JTextArea taComments;
 	private JButton butBack, butFinish;
 	
+	//Constants
+	private final String BACK = "back";
+	private final String FINISH = "finish";
+	
 	private int nyeriAmount;
 	
-	protected EntryLog()
+	public EntryLog()
 	{
-		
+		this.createAndShowGUI();
 	}
 	
 	//Initialization of GUI
 	private void createAndShowGUI()
 	{
+		//Initialize
+		this.initPanelTitle();
+		this.initPanelCenter();
+		this.initPanelBelow();
+		this.initScrollPanes();
 		
+		//properties
+		this.setLayout(new BorderLayout());
+		this.setOpaque(false);
+		
+		//add
+		this.add(this.panelTitle, BorderLayout.NORTH);
+		this.add(this.scrollCenter, BorderLayout.CENTER);
+		this.add(this.panelBelow, BorderLayout.SOUTH);
+		
+		//Initialize Listeners
+		this.configureListenersForMembers();
+		
+		this.revalidate();
+		this.repaint();
 	}
 	private void initPanelTitle()
 	{
@@ -81,22 +106,25 @@ public class EntryLog extends JPanel implements DocumentListener
 		this.labActivity = new JLabel(Constants.LANGUAGE.entryLogActivityLabel, SwingConstants.RIGHT);
 		this.tfActivity = new JTextField("", 20);
 		this.labComments = new JLabel(Constants.LANGUAGE.entryLogCommentsLabel, SwingConstants.RIGHT);
-		this.taComments = new JTextArea(20, 35);
+		this.taComments = new JTextArea(10, 35);
+		this.scrollComments = ScrollPaneManager.generateDefaultScrollPane(this.taComments, 10, 10);
 		
 		//Properties
 		this.panelCenter.setLayout(new GridBagLayout());
 		this.panelCenter.setOpaque(false);
-		this.tfStartTime.setColumns(20);
+		this.tfStartTime.setColumns(10);
 		this.tfStartTime.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfNyeriAmount.setColumns(5);
 		this.tfNyeriAmount.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfNyeriAmount.setText("1");
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
+		this.taComments.setBorder(this.tfActivity.getBorder());
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
+		c.gridwidth = 1;
 		this.panelCenter.add(this.labStartTime, c);			//Start Time
 		Gbm.nextGridColumn(c);
 		this.panelCenter.add(this.tfStartTime, c);			//Start Time Text Field
@@ -104,30 +132,72 @@ public class EntryLog extends JPanel implements DocumentListener
 		this.panelCenter.add(this.labNyeriAmount, c);		//Amount of head pain
 		Gbm.nextGridColumn(c);
 		this.panelCenter.add(this.tfNyeriAmount, c);		//Amount of head pain text field
+		Gbm.newGridLine(c);
 		
+		//insert headpain position panel here
+		Gbm.newGridLine(c);
+		this.panelCenter.add(this.labActivity, c);			//Activity
+		c.gridwidth = 2;
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.tfActivity, c);			//Activity Text Field
+		Gbm.newGridLine(c);
+		c.gridwidth = 1;
+		this.panelCenter.add(this.labComments, c);			//Comments
+		Gbm.nextGridColumn(c);
+		c.gridwidth = 3;
+		this.panelCenter.add(this.scrollComments, c);		//Comments Text Area
 		
 	}
 	private void initScrollPanes()
 	{
 		//Initialization
 		this.scrollCenter = ScrollPaneManager.generateDefaultScrollPane(this.panelCenter, Constants.SCROLL_SPEED, Constants.SCROLL_SPEED);
-		this.scrollNyeriTypes = ScrollPaneManager.generateDefaultScrollPane(this.panelNyeriTypes, Constants.SCROLL_SPEED, Constants.SCROLL_SPEED);
 	}
-	private void initPanelNyeriTypes()
+	private void initPanelBelowLeft()
 	{
 		//Initialization
-		this.panelNyeriTypes = new JPanel();
+		this.panelBelowLeft = new JPanel();
+		this.butBack = new JButton(Constants.LANGUAGE.backText);
+		
+		//properties
+		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		//add to panel
+		this.panelBelowLeft.add(this.butBack);
+	}
+	private void initPanelBelowRight()
+	{
+		//Initialization
+		this.panelBelowRight = new JPanel();
+		this.butFinish = new JButton(Constants.LANGUAGE.finishText);
+		
+		//properties
+		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		//add to panel
+		this.panelBelowRight.add(this.butFinish);
+	}
+	private void initPanelBelow()
+	{
+		//Initialization
+		this.panelBelow = new JPanel();
+		this.initPanelBelowLeft();
+		this.initPanelBelowRight();
 		
 		//Properties
-		this.panelNyeriTypes.setLayout(new BoxLayout(this.panelNyeriTypes, BoxLayout.Y_AXIS));
-		this.panelNyeriTypes.setOpaque(false);
+		this.panelBelow.setLayout(new BorderLayout());
 		
 		//Add to panel
-		
+		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);
+		this.panelBelow.add(this.panelBelowRight, BorderLayout.EAST);
 	}
 	private void configureListenersForMembers()
 	{
-		this.tfNyeriAmount.getDocument().addDocumentListener(this);
+//		this.tfNyeriAmount.getDocument().addDocumentListener(this);
+		this.butBack.addActionListener(this);
+		this.butBack.setActionCommand(this.BACK);
+		this.butFinish.addActionListener(this);
+		this.butFinish.setActionCommand(this.FINISH);
 	}
 	private void getNyeriAmount()
 	{
@@ -175,4 +245,27 @@ public class EntryLog extends JPanel implements DocumentListener
 	{
 		this.getNyeriAmount();
 	}	
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		switch (e.getActionCommand())
+		{
+			case BACK:
+				MainFrame.changePanel(new MainMenu());
+				break;
+				
+			case FINISH:
+				break;
+		}
+	}
+	
+	public static void main(String args[])
+	{
+		JFrame frame = new JFrame();
+		frame.add(new EntryLog());
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
 }

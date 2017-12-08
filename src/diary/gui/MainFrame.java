@@ -11,11 +11,13 @@ import diary.constants.Constants;
 /**
  * The Class MainFrame.
  */
-public final class MainFrame
+public class MainFrame
 {
 	
 	/** The frame. */
 	public static JFrame frame;
+	
+	private static JComponent jComponent;
 	
 	/**
 	 * Instantiates a new main frame.
@@ -32,9 +34,9 @@ public final class MainFrame
 	{
 		//Initialization
 		frame = new JFrame(Constants.PROGRAM_TITLE);
-		MainMenu mp = new MainMenu();
+		jComponent = new MainMenu();
 		
-		frame.add(mp);
+		frame.add(jComponent);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
@@ -49,8 +51,11 @@ public final class MainFrame
 	 */
 	public static final void changePanel(JComponent component)
 	{
-		MainFrame.frame.removeAll();
-		MainFrame.frame.add(component);
+		frame.remove(jComponent);
+		frame.add(component);
+		jComponent = component;
+		frame.revalidate();
+		frame.repaint();
 	}
 
 	/**

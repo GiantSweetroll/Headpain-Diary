@@ -18,8 +18,8 @@ public class Constants
 	
 	public static final Dimension SCREENSIZE = Misc.getScreenSize();
 	
-	public static final Language LANGUAGE = new English();
-	public static final String LANGUAGE_FOLDER_PATH = "data" + File.separator + "settings" + File.separator + "language" + File.separator;
+	public static final Language LANGUAGE = new Language();
+	public static final String LANGUAGE_FOLDER_PATH = "data" + "/" + "settings" + "/" + "language" + "/";
 	
 	//Text Field Formats
 	public static final NumberFormat AMOUNT_FORMAT = NumberFormat.getNumberInstance();
@@ -56,4 +56,9 @@ public class Constants
 	
 	//JScrollPane
 	public static final int SCROLL_SPEED = 10;
+	
+	public static void main(String args[])
+	{
+		System.out.println(Constants.LANGUAGE_FOLDER_PATH);
+	}
 }
