@@ -24,7 +24,7 @@ import giantsweetroll.gui.swing.Gbm;
 /**
  * The Class MainMenu.
  */
-public final class MainMenu extends JPanel implements ActionListener, KeyListener
+public final class MainMenu extends JPanel implements ActionListener
 {
 
 	/** The Constant serialVersionUID. */
@@ -215,7 +215,7 @@ public final class MainMenu extends JPanel implements ActionListener, KeyListene
 		{
 			this.listButtons.get(i).setFont(Constants.FONT_GENERAL);
 			this.listButtons.get(i).addActionListener(this);
-			this.listButtons.get(i).addKeyListener(this);
+			this.listButtons.get(i).addKeyListener(this.keyListener);
 			listNumbers.add(new JLabel(Integer.toString(i+1) + "."));
 			listNumbers.get(i).setFont(Constants.FONT_GENERAL_BOLD);
 			listNumbers.get(i).setHorizontalAlignment(SwingConstants.LEFT);
@@ -288,51 +288,46 @@ public final class MainMenu extends JPanel implements ActionListener, KeyListene
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
 	//Interfaces
-	@Override
-	public void keyPressed(KeyEvent e)
-	{
-		int keyCode = e.getKeyCode();
-		
-		if (keyCode == KeyEvent.VK_1 || keyCode == KeyEvent.VK_NUMPAD1)
-		{
-			//Log new
-			MainFrame.changePanel(new EntryLog());
-		}
-		else if (keyCode == KeyEvent.VK_2 || keyCode == KeyEvent.VK_NUMPAD2)
-		{
-			//Graph
-		}
-		else if (keyCode == KeyEvent.VK_3 || keyCode == KeyEvent.VK_NUMPAD3)
-		{
-			//Table
-		}
-		else if (keyCode == KeyEvent.VK_4 || keyCode == KeyEvent.VK_NUMPAD4)
-		{
-			//Settings
-		}
-		else if (keyCode == KeyEvent.VK_5 || keyCode == KeyEvent.VK_NUMPAD5)
-		{
-			System.exit(0);
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyReleased(KeyEvent e) 
-	{
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-	 */
-	@Override
-	public void keyTyped(KeyEvent e) 
-	{
-		
-	}
+	private KeyListener keyListener = new KeyListener()
+			{
+				@Override
+				public void keyPressed(KeyEvent e)
+				{
+					int keyCode = e.getKeyCode();
+					
+					if (keyCode == KeyEvent.VK_1 || keyCode == KeyEvent.VK_NUMPAD1)
+					{
+						//Log new
+						MainFrame.changePanel(new EntryLog());
+					}
+					else if (keyCode == KeyEvent.VK_2 || keyCode == KeyEvent.VK_NUMPAD2)
+					{
+						//Graph
+					}
+					else if (keyCode == KeyEvent.VK_3 || keyCode == KeyEvent.VK_NUMPAD3)
+					{
+						//Table
+					}
+					else if (keyCode == KeyEvent.VK_4 || keyCode == KeyEvent.VK_NUMPAD4)
+					{
+						//Settings
+					}
+					else if (keyCode == KeyEvent.VK_5 || keyCode == KeyEvent.VK_NUMPAD5)
+					{
+						System.exit(0);
+					}
+				}
+				@Override
+				public void keyReleased(KeyEvent e) 
+				{
+					
+				}
+				@Override
+				public void keyTyped(KeyEvent e) 
+				{
+					
+				}
+			};
 	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
