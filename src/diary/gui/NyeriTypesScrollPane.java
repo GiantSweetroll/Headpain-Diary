@@ -1,10 +1,14 @@
 package diary.gui;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import diary.constants.Constants;
 
 public class NyeriTypesScrollPane extends JScrollPane
 {
@@ -14,24 +18,27 @@ public class NyeriTypesScrollPane extends JScrollPane
 	 */
 	private static final long serialVersionUID = 7167068873969898308L;
 
-	ArrayList<HeadPainPosition> list;
+	private ArrayList<HeadPainPosition> list;
+	private JPanel panel;
 	
 	public NyeriTypesScrollPane(int amount)
 	{
 		//Initialization
 		this.list = new ArrayList<HeadPainPosition>();
+		this.panel = new JPanel();
 		
 		//Properties
+		this.panel.setOpaque(false);
+		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
 		this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		this.setOpaque(false);
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setViewportView(this.panel);
 		
 		//add
 		for (int i=0; i<amount; i++)
 		{
 			this.list.add(new HeadPainPosition());
-			this.add(this.list.get(i));
+			this.panel.add(this.list.get(i));
 		}
 	}
 	

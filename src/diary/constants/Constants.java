@@ -3,11 +3,9 @@ package diary.constants;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-import java.io.File;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 
-import diary.language.English;
 import diary.language.Language;
 import giantsweetroll.Misc;
 
@@ -17,6 +15,7 @@ public class Constants
 	public static final String VERSION = "1.0";
 	
 	public static final Dimension SCREENSIZE = Misc.getScreenSize();
+	public static final Dimension IMAGE_SIZE = new Dimension(150, 130);
 	
 	public static final Language LANGUAGE = new Language();
 	public static final String LANGUAGE_FOLDER_PATH = "data" + "/" + "settings" + "/" + "language" + "/";

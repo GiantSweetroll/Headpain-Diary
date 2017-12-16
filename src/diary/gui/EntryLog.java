@@ -20,6 +20,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import diary.constants.Constants;
+import diary.constants.XMLIdentifier;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
@@ -32,7 +33,7 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 	
 	private JPanel panelTitle;
 	private JPanel panelCenter;
-	private JPanel panelNyeriTypes;
+	private JScrollPane panelNyeriTypes;
 	private JPanel panelBelow;
 	private JPanel panelBelowLeft, panelBelowRight;
 	
@@ -84,7 +85,7 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 	{
 		//Initialization
 		this.panelTitle = new JPanel();
-		this.labTitle = new JLabel(Constants.LANGUAGE.entryLogTitle);
+		this.labTitle = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.ENTRY_LOG_TITLE));
 		
 		//Properties
 		this.labTitle.setFont(Constants.FONT_TITLE);
@@ -99,13 +100,13 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 		//Initialization
 		this.panelCenter = new JPanel();
 		GridBagConstraints c = new GridBagConstraints();
-		this.labStartTime = new JLabel(Constants.LANGUAGE.entryLogStartTimeLabel, SwingConstants.RIGHT);
+		this.labStartTime = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
 		this.tfStartTime = new JFormattedTextField(Constants.DATE_FORMAT);
-		this.labNyeriAmount = new JLabel (Constants.LANGUAGE.entryLogHeadpainLocationAmountLabel, SwingConstants.RIGHT);
+		this.labNyeriAmount = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL), SwingConstants.RIGHT);
 		this.tfNyeriAmount = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.labActivity = new JLabel(Constants.LANGUAGE.entryLogActivityLabel, SwingConstants.RIGHT);
+		this.labActivity = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.ACTIVITY_LABEL), SwingConstants.RIGHT);
 		this.tfActivity = new JTextField("", 20);
-		this.labComments = new JLabel(Constants.LANGUAGE.entryLogCommentsLabel, SwingConstants.RIGHT);
+		this.labComments = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.COMMENTS_LABEL), SwingConstants.RIGHT);
 		this.taComments = new JTextArea(10, 35);
 		this.scrollComments = ScrollPaneManager.generateDefaultScrollPane(this.taComments, 10, 10);
 		
@@ -120,6 +121,8 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.taComments.setBorder(this.tfActivity.getBorder());
 		
+		this.panelNyeriTypes = new NyeriTypesScrollPane(Integer.parseInt(this.tfNyeriAmount.getText().trim()));
+		
 		//Add to panel
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
@@ -133,9 +136,10 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 		Gbm.nextGridColumn(c);
 		this.panelCenter.add(this.tfNyeriAmount, c);		//Amount of head pain text field
 		Gbm.newGridLine(c);
-		
-		//insert headpain position panel here
+		c.gridwidth = 100;
+		this.panelCenter.add(this.panelNyeriTypes, c);		//Nyeri type scroll pane
 		Gbm.newGridLine(c);
+		c.gridwidth = 1;
 		this.panelCenter.add(this.labActivity, c);			//Activity
 		c.gridwidth = 2;
 		Gbm.nextGridColumn(c);
@@ -157,7 +161,7 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butBack = new JButton(Constants.LANGUAGE.backText);
+		this.butBack = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
 		
 		//properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -169,7 +173,7 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butFinish = new JButton(Constants.LANGUAGE.finishText);
+		this.butFinish = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FINISH_TEXT));
 		
 		//properties
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.LEFT));

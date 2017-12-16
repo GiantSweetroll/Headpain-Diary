@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
+import diary.constants.XMLIdentifier;
 import giantsweetroll.gui.swing.Gbm;
 
 // TODO: Auto-generated Javadoc
@@ -53,7 +54,7 @@ public final class MainMenu extends JPanel implements ActionListener
 	private JLabel labVersion;
 	
 	//Arrays
-	private ArrayList<ArrayList<JLabel>> listButtonTextLabels;
+//	private ArrayList<ArrayList<JLabel>> listButtonTextLabels;
 	private ArrayList<JButton> listButtons;
 	
 	//Constants
@@ -62,7 +63,6 @@ public final class MainMenu extends JPanel implements ActionListener
 	private final String TABLE = "table";
 	private final String SETTINGS = "settings";
 	private final String EXIT = "exit";
-	private final String[] HOTKEY_MAPS = {"1. ", "2. ", "3. ", "4. ", "5. "};
 	
 	/**
 	 * Instantiates a new main menu.
@@ -98,7 +98,7 @@ public final class MainMenu extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowAuthor = new JPanel();
-		this.labAuthor = new JLabel ("   " + Constants.LANGUAGE.mainAuthorCreatedByText + " Gardyan P. Akbar   ");
+		this.labAuthor = new JLabel ("   " + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.AUTHOR_TEXT) + " Gardyan P. Akbar   ");
 		
 		//Properties
 		this.panelBelowAuthor.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -116,7 +116,7 @@ public final class MainMenu extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowVersion = new JPanel();
-		this.labVersion = new JLabel ("   " + Constants.LANGUAGE.mainVersionText + " " + Constants.VERSION + "   ");
+		this.labVersion = new JLabel ("   " + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERSION_TEXT) + " " + Constants.VERSION + "   ");
 		
 		//Properties
 		this.panelBelowVersion.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -174,13 +174,12 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.panelButtons = new JPanel();
 		GridBagConstraints c = new GridBagConstraints();
 		this.listButtons = new ArrayList<JButton>();
-		this.butNew = new JButton (Constants.LANGUAGE.mainNewEntryButtonText);
-		this.butGraph = new JButton (Constants.LANGUAGE.mainViewGraphButtonText);
-		this.butTable = new JButton (Constants.LANGUAGE.mainViewTableButtonText);
-		this.butSettings = new JButton (Constants.LANGUAGE.mainSettingsButtonText);
-		this.butExit = new JButton (Constants.LANGUAGE.mainExitButtonText);
+		this.butNew = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT));
+		this.butGraph = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT));
+		this.butTable = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT));
+		this.butSettings = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_BUTTON_TEXT));
+		this.butExit = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.EXIT_BUTTON_TEXT));
 		ArrayList<JLabel> listNumbers = new ArrayList<JLabel>();
-		this.listButtonTextLabels = new ArrayList<ArrayList<JLabel>>();
 		
 		//Add to array
 		this.listButtons.add(this.butNew);
@@ -188,16 +187,6 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.listButtons.add(this.butTable);
 		this.listButtons.add(this.butSettings);
 		this.listButtons.add(this.butExit);
-		for (int i=0; i<this.HOTKEY_MAPS.length; i++)
-		{
-			this.listButtonTextLabels.add(new ArrayList<JLabel>());
-			this.listButtonTextLabels.get(i).add(new JLabel(this.HOTKEY_MAPS[i]));
-			this.listButtonTextLabels.get(i).add(new JLabel(Constants.LANGUAGE.mainNewEntryButtonText, SwingConstants.CENTER));
-			for (int a=0; a<listButtonTextLabels.get(i).size(); a++)
-			{
-				this.listButtonTextLabels.get(i).get(a).setFont(Constants.FONT_GENERAL);
-			}
-		}
 		
 		//Properties
 		this.panelButtons.setLayout(new GridBagLayout());
@@ -207,10 +196,10 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.butTable.setActionCommand(this.TABLE);
 		this.butSettings.setActionCommand(this.SETTINGS);
 		this.butExit.setActionCommand(this.EXIT);
-		this.butNew.setToolTipText(Constants.LANGUAGE.mainNewEntryButtonTipsText);
-		this.butGraph.setToolTipText(Constants.LANGUAGE.mainViewGraphButtonTipsText);
-		this.butTable.setToolTipText(Constants.LANGUAGE.mainViewTableButtonTipsText);
-		this.butSettings.setToolTipText(Constants.LANGUAGE.mainSettingsButtonTipsText);
+		this.butNew.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
+		this.butGraph.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP));
+		this.butTable.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP));
+		this.butSettings.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_BUTTON_TOOLTIP));
 		for (int i=0; i<this.listButtons.size(); i++)
 		{
 			this.listButtons.get(i).setFont(Constants.FONT_GENERAL);

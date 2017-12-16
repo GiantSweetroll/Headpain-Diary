@@ -12,11 +12,14 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
+import diary.constants.PainLocationConstants;
+import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.Misc;
 import giantsweetroll.VectorInt;
@@ -44,7 +47,10 @@ public class HeadPainPosition extends JPanel
 	
 	private JFormattedTextField tfIntensity, tfDuration;
 	
-	private ImageButtonPanel ibpGeneral, ibpSpecific;
+	private PainLocationSelectionPanelGeneral generalPos;
+	private PainLocationSelectionPanelSpecific specificPos;
+	
+	private JScrollPane scrollGeneral, scrollSpecific;
 	
 	//Vectors
 	private VectorInt vecGeneralPosPanel;
@@ -59,17 +65,20 @@ public class HeadPainPosition extends JPanel
 	{
 		//Initialization
 		this.c = new GridBagConstraints();
-		this.labGeneralPosition = new JLabel (Constants.LANGUAGE.generalPositionLabel, SwingConstants.RIGHT);
+		this.labGeneralPosition = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_LABEL), SwingConstants.RIGHT);
 		this.comboGeneralPos = new JComboBox<String>(this.getGeneralLocationOptions());
-		this.labPainKind = new JLabel(Constants.LANGUAGE.kindOfHeadpainLabel, SwingConstants.RIGHT);
+		this.labPainKind = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), SwingConstants.RIGHT);
 		this.tfPainKind = new JTextField("", 20);
-		this.labIntensity = new JLabel(Constants.LANGUAGE.intensityLabel, SwingConstants.RIGHT);
+		this.labIntensity = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.INTENSITY_LABEL), SwingConstants.RIGHT);
 		this.tfIntensity = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.labIntensityRange = new JLabel("(0.0 - 10.0)", SwingConstants.RIGHT);
-		this.labDuration = new JLabel(Constants.LANGUAGE.durationLabel, SwingConstants.RIGHT);
+		this.labIntensityRange = new JLabel("(0.0 - 10.0)", SwingConstants.LEFT);
+		this.labDuration = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
 		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.labDurationUnit = new JLabel (Constants.LANGUAGE.durationUnitsLabel, SwingConstants.RIGHT);
-		this.changeGeneralSelectionOptions(this.getLocationIdentifier(Misc.getItem(this.comboGeneralPos).toString()));
+		this.labDurationUnit = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_LABEL), SwingConstants.LEFT);
+		this.generalPos = new PainLocationSelectionPanelGeneral(this.getLocationIdentifier(Misc.getItem(this.comboGeneralPos).toString()));
+		this.scrollGeneral = new JScrollPane(this.generalPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.specificPos = new PainLocationSelectionPanelSpecific(this.generalPos.getSelected());
+		this.scrollSpecific = new JScrollPane(this.specificPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//Properties
 		this.setLayout(new GridBagLayout());
@@ -77,6 +86,10 @@ public class HeadPainPosition extends JPanel
 		this.tfIntensity.setColumns(5);
 		this.tfDuration.setColumns(5);
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		this.scrollGeneral.setOpaque(false);
+		this.scrollGeneral.getViewport().setOpaque(false);
+		this.scrollSpecific.setOpaque(false);
+		this.scrollSpecific.getViewport().setOpaque(false);
 		
 		//add to panel
 		Gbm.goToOrigin(c);
@@ -87,14 +100,14 @@ public class HeadPainPosition extends JPanel
 		this.add(this.comboGeneralPos, c);							//General Position Options
 		c.insets = Constants.INSETS_GENERAL;
 		Gbm.newGridLine(c);
-		this.vecGeneralPosPanel.x = c.gridx;
-		this.vecGeneralPosPanel.y = c.gridy;
-		this.add(this.ibpGeneral, c);								//Image Button Panel (General)
+		c.gridwidth = 100;
+		this.vecGeneralPosPanel = new VectorInt(c.gridx, c.gridy);
+		this.add(this.scrollGeneral, c);								//Image Button Panel (General)
 		Gbm.newGridLine(c);
-		this.vecSpecificPosPanel.x = c.gridx;
-		this.vecSpecificPosPanel.y = c.gridy;
-//		this.add(this.ibpSpecific, c);								//Image Button Panel (Specific)
+		this.vecSpecificPosPanel = new VectorInt(c.gridx, c.gridy);
+		this.add(this.scrollSpecific, c);								//Image Button Panel (Specific)
 		Gbm.newGridLine(c);
+		c.gridwidth = 1;
 		this.add(this.labPainKind, c);								//Kind of Headpain
 		Gbm.nextGridColumn(c);
 		c.gridwidth = 2;
@@ -122,48 +135,71 @@ public class HeadPainPosition extends JPanel
 	
 	private String[] getGeneralLocationOptions()
 	{
-		String[] array = {Constants.LANGUAGE.generalPositionHeadText,
-							Constants.LANGUAGE.generalPositionEyesText,
-							Constants.LANGUAGE.generalPositionEarsText,
-							Constants.LANGUAGE.generalPositionCheeksText,
-							Constants.LANGUAGE.generalPositionChinText};
+		String[] array = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT),
+							Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EARS_TEXT),
+							Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EYES_TEXT),
+							Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT)};
 		return array;
 	}
 
-	private void changeGeneralSelectionOptions(byte change)
+	private void changeGeneralSelectionOptions(String location)
 	{
-		this.ibpGeneral = new ImageButtonPanel(ImageButtonPanel.GENERAL_SELECTION, change);
-	}
-	private void changeSpecificSelectionOptions(byte change)
-	{
-		this.ibpSpecific = new ImageButtonPanel(ImageButtonPanel.SPECIFIC_SELECTION, change);
-	}
-	private byte getLocationIdentifier(String item)
-	{
-		byte mark = ImageButtonPanel.HEAD;
+		this.remove(this.scrollGeneral);
 		
-		if (item.equals(Constants.LANGUAGE.generalPositionHeadText))
+		this.generalPos = new PainLocationSelectionPanelGeneral(location);
+		this.scrollGeneral = new JScrollPane(this.generalPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scrollGeneral.setOpaque(false);
+		this.scrollGeneral.getViewport().setOpaque(false);
+		
+		c.gridwidth = 100;
+		c.gridx = this.vecGeneralPosPanel.x;
+		c.gridy = this.vecGeneralPosPanel.y;
+		this.add(this.scrollGeneral, c);
+		c.gridwidth = 1;
+		
+		this.revalidate();
+		this.repaint();
+	}
+	private void changeSpecificSelectionOptions(String location)
+	{
+		this.remove(this.scrollSpecific);
+		
+		this.specificPos = new PainLocationSelectionPanelSpecific(location);
+		this.scrollSpecific = new JScrollPane(this.specificPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scrollSpecific.setOpaque(false);
+		this.scrollSpecific.getViewport().setOpaque(false);
+		
+		c.gridwidth = 100;
+		c.gridx = this.vecSpecificPosPanel.x;
+		c.gridy = this.vecSpecificPosPanel.y;
+		this.add(this.scrollSpecific, c);
+		c.gridwidth = 1;
+		
+		this.revalidate();
+		this.repaint();
+	}
+	private String getLocationIdentifier(String item)
+	{
+		String location = "";
+		
+		if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT)))
 		{
-			mark = ImageButtonPanel.HEAD;
+			location = PainLocationConstants.HEAD;
 		}
-		else if (item.equals(Constants.LANGUAGE.generalPositionEyesText))
+		else if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EYES_TEXT)))
 		{
-			mark = ImageButtonPanel.EYES;
+			location = PainLocationConstants.EYES;
 		}
-		else if (item.equals(Constants.LANGUAGE.generalPositionEarsText))
+		else if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EARS_TEXT)))
 		{
-			mark = ImageButtonPanel.EARS;
+			location = PainLocationConstants.EARS;
 		}
-		else if (item.equals(Constants.LANGUAGE.generalPositionCheeksText))
+		else if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT)))
 		{
-			mark = ImageButtonPanel.CHEEKS;
-		}
-		else if (item.equals(Constants.LANGUAGE.generalPositionChinText))
-		{
-			mark = ImageButtonPanel.CHIN;
+			location = PainLocationConstants.CHEEKS;
 		}
 		
-		return mark;
+		return location;
 	}
 	
 	protected LinkedHashMap<String, String> getDataMap()
@@ -171,8 +207,8 @@ public class HeadPainPosition extends JPanel
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		
 		map.put(PainDataIdentifier.GENERAL_POSITION, Misc.getItem(this.comboGeneralPos).toString());
-		map.put(PainDataIdentifier.GENERAL_POSITION_2, this.ibpGeneral.getData());
-//		map.put(PainDataIdentifier.SPECIFIC_LOCATION, this.ibpSpecific.getData());
+		map.put(PainDataIdentifier.GENERAL_POSITION_2, this.generalPos.getSelected());
+		map.put(PainDataIdentifier.SPECIFIC_LOCATION, this.specificPos.getSelected());
 		map.put(PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
 		map.put(PainDataIdentifier.INTENSITY, Methods.getTextData(this.tfIntensity));
 		map.put(PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
@@ -187,6 +223,7 @@ public class HeadPainPosition extends JPanel
 					JComboBox combo = (JComboBox)e.getSource();
 					String item = combo.getSelectedItem().toString();
 					changeGeneralSelectionOptions(getLocationIdentifier(item));
+					changeSpecificSelectionOptions(generalPos.getSelected());
 				}
 			};
 }

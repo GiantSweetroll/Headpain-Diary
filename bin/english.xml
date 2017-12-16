@@ -20,18 +20,20 @@
 		<text identifier="activity label">Activity</text>
 		<text identifier="comments label">Comments</text>
 	</section>
-	<section part="pain position">
+	<section part="pain data">
 	    <text identifier="general position label">General Position</text>
-	    <text identifier="general position head text">Head</text>
-	    <text identifier="general position eyes text">Eyes</text>
-	    <text identifier="general position ears text">Ears</text>
-	    <text identifier="general position cheeks text">Cheeks</text>
-	    <text identifier="general position chin text">Chin</text>
 	    <text identifier="select location label">Select Location</text>
 	    <text identifier="kind of headpain label">Kind of Headpain</text>
 	    <text identifier="intensity label">Intensity</text>
 	    <text identifier="duration label">Duration</text>
 	    <text identifier="duration units label">Seconds</text>
+	</section>
+	<section part="pain location">
+	    <text identifier="general position head text">Head</text>
+	    <text identifier="general position eyes text">Eyes</text>
+	    <text identifier="general position ears text">Ears</text>
+	    <text identifier="general position cheeks text">Cheeks</text>
+	    <text identifier="general position chin text">Chin</text>
 	</section>
 	<section part="misc">
 	    <text identifier="back text">Back</text>
