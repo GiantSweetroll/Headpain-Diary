@@ -9,7 +9,7 @@ import java.text.NumberFormat;
 import diary.language.Language;
 import giantsweetroll.Misc;
 
-public class Constants 
+public final class Constants 
 {
 	public static final String PROGRAM_TITLE = "My Headpain Diary";
 	public static final String VERSION = "1.0";
@@ -56,8 +56,28 @@ public class Constants
 	//JScrollPane
 	public static final int SCROLL_SPEED = 10;
 	
-	public static void main(String args[])
+	//Time
+	public static final int[] TIME_60()
 	{
-		System.out.println(Constants.LANGUAGE_FOLDER_PATH);
+		int[] arr = new int[61];
+		
+		for (int i=0; i<arr.length; i++)
+		{
+			arr[i] = i;
+		}
+		
+		return arr;
 	}
+	public static final int[] TIME_24()
+	{
+		int[] arr = new int[25];
+		
+		for (int i=0; i<arr.length; i++)
+		{
+			arr[i] = i;
+		}
+		
+		return arr;	
+	}
+
 }

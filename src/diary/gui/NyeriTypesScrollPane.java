@@ -1,14 +1,11 @@
 package diary.gui;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-import diary.constants.Constants;
 
 public class NyeriTypesScrollPane extends JScrollPane
 {

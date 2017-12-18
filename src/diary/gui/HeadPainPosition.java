@@ -47,8 +47,7 @@ public class HeadPainPosition extends JPanel
 	
 	private JFormattedTextField tfIntensity, tfDuration;
 	
-	private PainLocationSelectionPanelGeneral generalPos;
-	private PainLocationSelectionPanelSpecific specificPos;
+	private PainLocationSelectionPanel generalPos, specificPos;
 	
 	private JScrollPane scrollGeneral, scrollSpecific;
 	
@@ -75,12 +74,13 @@ public class HeadPainPosition extends JPanel
 		this.labDuration = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
 		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
 		this.labDurationUnit = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_LABEL), SwingConstants.LEFT);
-		this.generalPos = new PainLocationSelectionPanelGeneral(this.getLocationIdentifier(Misc.getItem(this.comboGeneralPos).toString()));
+		this.generalPos = new PainLocationSelectionPanel(this.getLocationIdentifier(Misc.getItem(this.comboGeneralPos).toString()));
 		this.scrollGeneral = new JScrollPane(this.generalPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		this.specificPos = new PainLocationSelectionPanelSpecific(this.generalPos.getSelected());
+		this.specificPos = new PainLocationSelectionPanel(this.generalPos.getSelected());
 		this.scrollSpecific = new JScrollPane(this.specificPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//Properties
+		this.generalPos.addLinkedPanel(this.specificPos);
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
 		this.tfIntensity.setColumns(5);
@@ -146,7 +146,7 @@ public class HeadPainPosition extends JPanel
 	{
 		this.remove(this.scrollGeneral);
 		
-		this.generalPos = new PainLocationSelectionPanelGeneral(location);
+		this.generalPos = new PainLocationSelectionPanel(location);
 		this.scrollGeneral = new JScrollPane(this.generalPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.scrollGeneral.setOpaque(false);
 		this.scrollGeneral.getViewport().setOpaque(false);
@@ -164,10 +164,11 @@ public class HeadPainPosition extends JPanel
 	{
 		this.remove(this.scrollSpecific);
 		
-		this.specificPos = new PainLocationSelectionPanelSpecific(location);
+		this.specificPos = new PainLocationSelectionPanel(location);
 		this.scrollSpecific = new JScrollPane(this.specificPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.scrollSpecific.setOpaque(false);
 		this.scrollSpecific.getViewport().setOpaque(false);
+		this.generalPos.addLinkedPanel(this.specificPos);
 		
 		c.gridwidth = 100;
 		c.gridx = this.vecSpecificPosPanel.x;

@@ -12,6 +12,7 @@
      <text identifier="author text">Created by</text>
      <text identifier="version text">Version</text>
      <text identifier="entry log title">Entry Log</text>
+     <text identifier="date label">Date</text>
      <text identifier="start time label">Start Time</text>
      <text identifier="headpain location amount label">Amount of Headpain Location(s)</text>
      <text identifier="activity label">Activity</text>

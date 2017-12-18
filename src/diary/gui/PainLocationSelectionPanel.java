@@ -17,19 +17,20 @@ import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
 import giantsweetroll.ImageManager;
 
-public class PainLocationSelectionPanelSpecific extends JPanel implements ItemListener
+public class PainLocationSelectionPanel extends JPanel implements ItemListener
 {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3593645171381986255L;
+	private static final long serialVersionUID = -8670810287480715132L;
 	private JLabel labSelectPos;
 	private ButtonGroup group;
 	private List<JCheckBox> checkList;
 	private List<PainLocationImagePanel> imageList;
 	private String selectedPosition;
+	private PainLocationSelectionPanel linkedPanel;
 	
-	protected PainLocationSelectionPanelSpecific(String location)
+	public PainLocationSelectionPanel(String location)
 	{
 		this.init(location);
 		this.checkList.get(0).setSelected(true);
@@ -44,8 +45,132 @@ public class PainLocationSelectionPanelSpecific extends JPanel implements ItemLi
 		this.checkList = new ArrayList<JCheckBox>();
 		this.imageList = new ArrayList<PainLocationImagePanel>();
 		
-		//Add to checkList
-		if (location.equals(PainLocationConstants.HEAD_BACK_GENERAL))
+		this.gatherImage(location);
+		
+		//Properties
+		this.setOpaque(false);
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		//add to panel
+		this.add(this.labSelectPos);
+		for (int i=0; i<this.checkList.size(); i++)
+		{
+			this.add(this.checkList.get(i));
+			this.add(this.imageList.get(i));
+		}
+	}
+	
+	public void changeLocation(String location)
+	{
+		//Remove all images from panel
+		for (int i=0; i<this.checkList.size(); i++)
+		{
+			this.remove(this.checkList.get(i));
+			this.remove(this.imageList.get(i));
+		}
+		
+		//Prepare images
+		this.gatherImage(location);
+		
+		//add back to panel
+		for (int i=0; i<this.checkList.size(); i++)
+		{
+			this.add(this.checkList.get(i));
+			this.add(this.imageList.get(i));
+		}
+		
+		this.revalidate();
+		this.repaint();
+	}
+	public void changeLocation(PainLocationSelectionPanel panel, String location)
+	{
+		//Remove all images from panel
+		for (int i=0; i<panel.checkList.size(); i++)
+		{
+			panel.remove(panel.checkList.get(i));
+			panel.remove(panel.imageList.get(i));
+		}
+		
+		//Prepare images
+		panel.gatherImage(location);
+		
+		//add back to panel
+		for (int i=0; i<panel.checkList.size(); i++)
+		{
+			panel.add(panel.checkList.get(i));
+			panel.add(panel.imageList.get(i));
+		}
+		
+		panel.revalidate();
+		panel.repaint();
+	}
+	
+	private void gatherImage(String location)
+	{
+		this.checkList.clear();
+		this.imageList.clear();
+		
+		if (location.equals(PainLocationConstants.HEAD))
+		{
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_BACK_TEXT), ImageManager.getImageIcon(ImageConstants.HEAD_BACK_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_FRONT_TEXT), ImageManager.getImageIcon(ImageConstants.HEAD_FRONT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_LEFT_TEXT), ImageManager.getImageIcon(ImageConstants.HEAD_LEFT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_RIGHT_TEXT), ImageManager.getImageIcon(ImageConstants.HEAD_RIGHT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+			
+			for (int i=0; i<this.imageList.size(); i++)
+			{
+				this.checkList.add(new JCheckBox());
+			}
+			
+			//Set ID
+			this.checkList.get(0).setName(PainLocationConstants.HEAD_BACK_GENERAL);
+			this.checkList.get(1).setName(PainLocationConstants.HEAD_FRONT_GENERAL);
+			this.checkList.get(2).setName(PainLocationConstants.HEAD_SIDE_LEFT_GENERAL);
+			this.checkList.get(3).setName(PainLocationConstants.HEAD_SIDE_RIGHT_GENERAL);
+		}
+		else if (location.equals(PainLocationConstants.EARS))
+		{
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EARS_LEFT_TEXT), ImageManager.getImageIcon(ImageConstants.EARS_LEFT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EARS_RIGHT_TEXT), ImageManager.getImageIcon(ImageConstants.EARS_RIGHT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+		
+			for (int i=0; i<this.imageList.size(); i++)
+			{
+				this.checkList.add(new JCheckBox());
+			}
+			
+			//Set ID
+			this.checkList.get(0).setName(PainLocationConstants.EARS_LEFT_GENERAL);
+			this.checkList.get(1).setName(PainLocationConstants.EARS_RIGHT_GENERAL);
+		}
+		else if (location.equals(PainLocationConstants.EYES))
+		{
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EYES_LEFT_TEXT), ImageManager.getImageIcon(ImageConstants.EYES_LEFT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EYES_RIGHT_TEXT), ImageManager.getImageIcon(ImageConstants.EYES_RIGHT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+		
+			for (int i=0; i<this.imageList.size(); i++)
+			{
+				this.checkList.add(new JCheckBox());
+			}
+			
+			//Set ID
+			this.checkList.get(0).setName(PainLocationConstants.EYES_LEFT_GENERAL);
+			this.checkList.get(1).setName(PainLocationConstants.EYES_RIGHT_GENERAL);
+		}
+		else if (location.equals(PainLocationConstants.CHEEKS))
+		{
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_CHEEKS_LEFT_TEXT), ImageManager.getImageIcon(ImageConstants.CHEEKS_LEFT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_CHEEKS_RIGHT_TEXT), ImageManager.getImageIcon(ImageConstants.CHEEKS_RIGHT_GENERAL, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
+		
+			for (int i=0; i<this.imageList.size(); i++)
+			{
+				this.checkList.add(new JCheckBox());
+			}
+			
+			//Set ID
+			this.checkList.get(0).setName(PainLocationConstants.CHEEKS_LEFT_GENERAL);
+			this.checkList.get(1).setName(PainLocationConstants.CHEEKS_RIGHT_GENERAL);
+		}
+		else if (location.equals(PainLocationConstants.HEAD_BACK_GENERAL))
 		{
 			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_BOTTOM_LEFT_TEXT), ImageManager.getImageIcon(ImageConstants.HEAD_BACK_BOTTOM_LEFT, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
 			this.imageList.add(new PainLocationImagePanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_BOTTOM_RIGHT_TEXT), ImageManager.getImageIcon(ImageConstants.HEAD_BACK_BOTTOM_RIGHT, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height)));
@@ -211,28 +336,20 @@ public class PainLocationSelectionPanelSpecific extends JPanel implements ItemLi
 		}
 		
 		//Properties
-		for (int i=0; i<this.checkList.size(); i++)			//Only allow one selection
+		for (int i=0; i<this.checkList.size(); i++)			
 		{
-			this.group.add(this.checkList.get(i));
-			this.checkList.get(i).addItemListener(this);
+			this.group.add(this.checkList.get(i));			//Only allow one selection
+			this.checkList.get(i).addItemListener(this);	//Add Item Listener to each
 		}
-		this.setOpaque(false);
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
-		
-		//add to panel
-		this.add(this.labSelectPos);
-		for (int i=0; i<this.checkList.size(); i++)
-		{
-			this.add(this.checkList.get(i));
-			this.add(this.imageList.get(i));
-		}
+		this.checkList.get(0).setSelected(true);
+		this.setSelected(this.checkList.get(0).getName());
 	}
 	
-	protected String getSelected()
+	public String getSelected()
 	{
 		return this.selectedPosition;
 	}
-	protected void setSelected(String location)
+	public void setSelected(String location)
 	{
 		for (int i=0; i<this.checkList.size(); i++)
 		{
@@ -242,11 +359,21 @@ public class PainLocationSelectionPanelSpecific extends JPanel implements ItemLi
 			}
 		}
 	}
-
+	
+	public void addLinkedPanel(PainLocationSelectionPanel panel)
+	{
+		this.linkedPanel = panel;
+	}
+	
 	@Override
 	public void itemStateChanged(ItemEvent e) 
 	{
 		JCheckBox cb = (JCheckBox)e.getSource();
 		this.selectedPosition = cb.getName();
+		try
+		{
+			this.changeLocation(this.linkedPanel, this.selectedPosition);
+		}
+		catch(NullPointerException ex) {};
 	}
 }

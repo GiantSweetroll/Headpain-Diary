@@ -21,6 +21,8 @@ import javax.swing.event.DocumentListener;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.methods.DateOperation;
+import giantsweetroll.GDateManager;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
@@ -39,7 +41,9 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 	
 	private JScrollPane scrollCenter, scrollComments;
 	
-	private JLabel labTitle, labStartTime, labNyeriAmount, labActivity, labComments;
+	private JLabel labTitle, labDate, labStartTime, labNyeriAmount, labActivity, labComments;
+	
+	private DatePanel panelDate;
 	
 	private JFormattedTextField tfStartTime, tfNyeriAmount;
 	private JTextField tfActivity;
@@ -100,6 +104,8 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 		//Initialization
 		this.panelCenter = new JPanel();
 		GridBagConstraints c = new GridBagConstraints();
+		this.labDate = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_LABEL), SwingConstants.RIGHT);
+		this.panelDate = new DatePanel(true);
 		this.labStartTime = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
 		this.tfStartTime = new JFormattedTextField(Constants.DATE_FORMAT);
 		this.labNyeriAmount = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL), SwingConstants.RIGHT);
@@ -120,6 +126,7 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 		this.tfNyeriAmount.setText("1");
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.taComments.setBorder(this.tfActivity.getBorder());
+		this.panelDate.setDate(DateOperation.getCurrentDay(), DateOperation.getCurrentMonth(), GDateManager.getCurrentYear());
 		
 		this.panelNyeriTypes = new NyeriTypesScrollPane(Integer.parseInt(this.tfNyeriAmount.getText().trim()));
 		
@@ -128,6 +135,11 @@ public class EntryLog extends JPanel implements DocumentListener, ActionListener
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
 		c.gridwidth = 1;
+		this.panelCenter.add(this.labDate, c);				//Date
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.panelDate, c);			//Date Panel
+		Gbm.newGridLine(c);
+		c.insets = Constants.INSETS_GENERAL;
 		this.panelCenter.add(this.labStartTime, c);			//Start Time
 		Gbm.nextGridColumn(c);
 		this.panelCenter.add(this.tfStartTime, c);			//Start Time Text Field

@@ -3,6 +3,9 @@ package diary.methods;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
+import diary.constants.DateConstants;
+import giantsweetroll.GDateManager;
+
 public class Methods 
 {
 	public static String getTextData(JTextField tf)

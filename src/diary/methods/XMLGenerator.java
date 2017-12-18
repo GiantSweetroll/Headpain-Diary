@@ -63,6 +63,7 @@ public class XMLGenerator
 		
 		//Entry Log
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TITLE, "Entry Log");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_LABEL, "Date");
 		appendComponentToMap(doc, map, XMLIdentifier.START_TIME_LABEL, "Start Time");
 		appendComponentToMap(doc, map, XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL, "Amount of Headpain Location(s)");
 		appendComponentToMap(doc, map, XMLIdentifier.ACTIVITY_LABEL, "Activity");
