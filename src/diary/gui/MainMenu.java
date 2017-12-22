@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.gui.EntryLog.EntryLog;
 import giantsweetroll.gui.swing.Gbm;
 
 // TODO: Auto-generated Javadoc
@@ -67,14 +68,11 @@ public final class MainMenu extends JPanel implements ActionListener
 	/**
 	 * Instantiates a new main menu.
 	 */
-	protected MainMenu()
+	public MainMenu()
 	{
 		this.init();
 	}
 	
-	/**
-	 * Inits the.
-	 */
 	//Methods
 	private void init()
 	{

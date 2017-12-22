@@ -3,6 +3,7 @@ package diary.constants;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 
@@ -19,6 +20,10 @@ public final class Constants
 	
 	public static final Language LANGUAGE = new Language();
 	public static final String LANGUAGE_FOLDER_PATH = "data" + "/" + "settings" + "/" + "language" + "/";
+	
+	public static final String REQUIRED_IDENTIFIER = "* ";
+	
+	public static final String DATABASE_PATH = "." + File.separator + "data" + File.separator + "database" + File.separator;
 	
 	//Text Field Formats
 	public static final NumberFormat AMOUNT_FORMAT = NumberFormat.getNumberInstance();

@@ -6,6 +6,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import diary.constants.Constants;
+import diary.methods.FileOperation;
+import diary.methods.XMLGenerator;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -43,7 +45,6 @@ public class MainFrame
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-	
 	/**
 	 * Change the active panel of the frame.
 	 *
@@ -72,6 +73,12 @@ public class MainFrame
 						try
 						{
 							UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+							
+							if (!FileOperation.defaultLanguageExists())
+							{
+								XMLGenerator.generateXML();
+							}
+							
 							new MainFrame();
 						}
 						catch(Exception ex)

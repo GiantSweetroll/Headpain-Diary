@@ -23,6 +23,22 @@
      <text identifier="intensity label">Intensity</text>
      <text identifier="duration label">Duration</text>
      <text identifier="duration units label">Seconds</text>
+     <text identifier="date auto button tooltip text">Automatically set the date to that of local time</text>
+     <text identifier="date reselt button tooltip text">Resets date changes to it's orginal status</text>
+     <text identifier="date month january">January</text>
+     <text identifier="date month february">February</text>
+     <text identifier="date month march">March</text>
+     <text identifier="date month april">April</text>
+     <text identifier="date month may">May</text>
+     <text identifier="date month june">June</text>
+     <text identifier="date month july">July</text>
+     <text identifier="date month august">August</text>
+     <text identifier="date month september">September</text>
+     <text identifier="date month october">October</text>
+     <text identifier="date month november">November</text>
+     <text identifier="date month december">December</text>
+     <text identifier="time auto button tooltip text">Automatically set the time to that of local time</text>
+     <text identifier="time reselt button tooltip text">Resets time changes to it's orginal values</text>
      <text identifier="general position head text">Head</text>
      <text identifier="general position cheeks text">Cheeks</text>
      <text identifier="general position ears text">Ears</text>
@@ -59,4 +75,10 @@
      <text identifier="very specific position eyes socket text">Socket</text>
      <text identifier="back text">Back</text>
      <text identifier="finish text">Finish</text>
+     <text identifier="reset">Reset</text>
+     <text identifier="current">Current</text>
+     <text identifier="auto text">Auto</text>
+     <text identifier="confirm text">Confirm</text>
+     <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
+     <text identifier="unfilled required fields dialog title">Fill in all required fields</text>
 </language>

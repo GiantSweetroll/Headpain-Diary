@@ -20,6 +20,10 @@ public class XMLIdentifier
 	//Misc
 	public static final String BACK_TEXT = "back text";
 	public static final String FINISH_TEXT = "finish text";
+	public static final String RESET_TEXT = "reset";
+	public static final String CURRENT_TEXT  ="current";
+	public static final String AUTO_TEXT = "auto text";
+	public static final String CONFIRM_TEXT = "confirm text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -41,6 +45,27 @@ public class XMLIdentifier
 	public static final String HEADPAIN_LOCATION_AMOUNT_LABEL = "headpain location amount label";
 	public static final String ACTIVITY_LABEL = "activity label";
 	public static final String COMMENTS_LABEL = "comments label";
+	
+	//Date
+	public static final String DATE_AUTO_BUTTON_TOOLTIP_TEXT = "date auto button tooltip text";
+	public static final String DATE_RESET_BUTTON_TOOLTIP_TEXT = "date reselt button tooltip text";
+	//Month Names
+	public static final String DATE_MONTH_JANUARY = "date month january";
+	public static final String DATE_MONTH_FEBRUARY = "date month february";
+	public static final String DATE_MONTH_MARCH = "date month march";
+	public static final String DATE_MONTH_APRIL = "date month april";
+	public static final String DATE_MONTH_MAY = "date month may";
+	public static final String DATE_MONTH_JUNE = "date month june";
+	public static final String DATE_MONTH_JULY = "date month july";
+	public static final String DATE_MONTH_AUGUST = "date month august";
+	public static final String DATE_MONTH_SEPTEMBER = "date month september";
+	public static final String DATE_MONTH_OCTOBER = "date month october";
+	public static final String DATE_MONTH_NOVEMBER = "date month november";
+	public static final String DATE_MONTH_DECEMBER = "date month december";
+	
+	//Time
+	public static final String TIME_AUTO_BUTTON_TOOLTIP_TEXT = "time auto button tooltip text";
+	public static final String TIME_RESET_BUTTON_TOOLTIP_TEXT = "time reselt button tooltip text";
 	
 	//Pain Data
 	public static final String GENERAL_POSITION_LABEL = "general position label";
@@ -97,4 +122,8 @@ public class XMLIdentifier
 	public static final String VERY_SPECIFIC_POSITION_CHEEKS_LOWER_TEXT = "very specific position cheeks lower text";
 	public static final String VERY_SPECIFIC_POSITION_CHEEKS_UPPER_TEXT = "very specific position cheeks upper text";
 	//-->Cheeks end
+	
+	//Error Handling
+	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";
+	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TITLE = "unfilled required fields dialog title";
 }

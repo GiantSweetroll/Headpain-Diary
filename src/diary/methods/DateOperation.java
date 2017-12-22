@@ -1,8 +1,12 @@
 package diary.methods;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import diary.constants.Constants;
 import diary.constants.DateConstants;
+import diary.constants.XMLIdentifier;
 import giantsweetroll.GDateManager;
-import giantsweetroll.message.MessageManager;
 
 public class DateOperation 
 {
@@ -95,7 +99,14 @@ public class DateOperation
 		
 		for (int i=0; i<daysString.length; i++)
 		{
-			daysString[i] = Byte.toString(days[i]);
+			if (isOneDigit(Byte.toString(days[i])))
+			{
+				daysString[i] = 0 + Byte.toString(days[i]);
+			}
+			else
+			{
+				daysString[i] = Byte.toString(days[i]);
+			}
 		}
 		
 		return daysString;
@@ -106,7 +117,14 @@ public class DateOperation
 		
 		for (int i=0; i<arr.length; i++)
 		{
-			arr[i] = Integer.toString(i+1);
+			if (isOneDigit(Integer.toString(i)))
+			{
+				arr[i] = 0 + Integer.toString(i+1);
+			}
+			else
+			{
+				arr[i] = Integer.toString(i+1);
+			}
 		}
 		
 		return arr;
@@ -145,30 +163,35 @@ public class DateOperation
 		}
 	}
 	
-	public static String getCurrentDay()
+	public static final List<String> getMonthNameList()
 	{
-		String day = GDateManager.getCurrentDay();
+		List<String> list = new ArrayList<String>();
 		
-		if (day.substring(0, 1).equals("0"))
-		{
-			return day.substring(1);
-		}
-		else
-		{
-			return day;
-		}
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JANUARY));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_FEBRUARY));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_MARCH));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_APRIL));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_MAY));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JUNE));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JULY));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_AUGUST));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_SEPTEMBER));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_OCTOBER));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_NOVEMBER));
+		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_DECEMBER));
+		
+		return list;
 	}
-	public static String getCurrentMonth()
+	
+	public static boolean isOneDigit(String value)
 	{
-		String month = GDateManager.getCurrentMonth();
-		
-		if (month.substring(0, 1).equals("0"))
+		if (value.length()==1)
 		{
-			return month.substring(1);
+			return true;
 		}
 		else
 		{
-			return month;
+			return false;
 		}
 	}
 }

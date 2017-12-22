@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>22</date_day>
+     <date_month>12</date_month>
+     <date_year>2017</date_year>
+     <time_hour>15</time_hour>
+     <time_minute>49</time_minute>
+     <time_seconds>35</time_seconds>
+     <nyeri_amount>1</nyeri_amount>
+     <pain_location>
+          <pain_location pain_loc_id="0">
+               <general_location>Cheeks</general_location>
+               <general_location_2>cheeks right general</general_location_2>
+               <specific_location>cheeks right upper</specific_location>
+               <pain_kind>Ripping</pain_kind>
+               <intensity>6.4</intensity>
+               <duration>8</duration>
+          </pain_location>
+     </pain_location>
+     <activity>Playing</activity>
+     <comments/>
+</Entry>

@@ -75,6 +75,27 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_LABEL, "Duration");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_LABEL, "Seconds");
 		
+		//Date
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the date to that of local time");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT, "Resets date changes to it's orginal status");
+		//Month Names
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_JANUARY, "January");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_FEBRUARY, "February");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_MARCH, "March");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_APRIL, "April");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_MAY, "May");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_JUNE, "June");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_JULY, "July");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_AUGUST, "August");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_SEPTEMBER, "September");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_OCTOBER, "October");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_NOVEMBER, "November");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_DECEMBER, "December");
+		
+		//Time
+		appendComponentToMap(doc, map, XMLIdentifier.TIME_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the time to that of local time");
+		appendComponentToMap(doc, map, XMLIdentifier.TIME_RESET_BUTTON_TOOLTIP_TEXT, "Resets time changes to it's orginal values");
+		
 		//Pain Location
 		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_HEAD_TEXT, "Head");
 		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT, "Cheeks");
@@ -118,6 +139,14 @@ public class XMLGenerator
 		//Misc
 		appendComponentToMap(doc, map, XMLIdentifier.BACK_TEXT, "Back");
 		appendComponentToMap(doc, map, XMLIdentifier.FINISH_TEXT, "Finish");
+		appendComponentToMap(doc, map, XMLIdentifier.RESET_TEXT, "Reset");
+		appendComponentToMap(doc, map, XMLIdentifier.CURRENT_TEXT, "Current");
+		appendComponentToMap(doc, map, XMLIdentifier.AUTO_TEXT, "Auto");
+		appendComponentToMap(doc, map, XMLIdentifier.CONFIRM_TEXT, "Confirm");
+		
+		//Error Handling
+		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT, "Please fill all required fields (marked with *)");
+		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE, "Fill in all required fields");
 		
 		return map;
 	}
