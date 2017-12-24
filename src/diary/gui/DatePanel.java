@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.gui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,7 +41,7 @@ public class DatePanel extends JPanel implements ActionListener
 	private final String MONTH = "month";
 	private final String DAY = "day";
 	
-	protected DatePanel(boolean enabled)
+	public DatePanel(boolean enabled)
 	{
 		this.init();
 		
@@ -105,14 +105,14 @@ public class DatePanel extends JPanel implements ActionListener
 		this.repaint();
 	}
 	
-	protected void setDate(String day, String month, String year)
+	public void setDate(String day, String month, String year)
 	{
 		this.comboYear.setSelectedItem(year);
 		this.comboMonth.setSelectedItem(DateConstants.MONTH_NAME_LIST.get(Integer.parseInt(month)-1));
 		this.comboDay.setSelectedItem(day);
 	}
 	
-	protected LinkedHashMap<String, String> getData()
+	public LinkedHashMap<String, String> getData()
 	{
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		
@@ -123,21 +123,39 @@ public class DatePanel extends JPanel implements ActionListener
 		return map;
 	}
 	
-	protected void setDefaultData(String day, String month, String year)
+	public String getDay()
+	{
+		return this.comboDay.getSelectedItem().toString();
+	}
+	public String getMonth()
+	{
+		return this.comboMonth.getSelectedItem().toString();
+	}
+	public String getYear()
+	{
+		return this.comboYear.getSelectedItem().toString();
+	}
+	
+	public void setAsDefaultDataThis()
+	{
+		this.setDefaultData(this.getDay(), this.getMonth(), this.getYear());
+	}
+	
+	public void setDefaultData(String day, String month, String year)
 	{
 		this.defaultMap.put(this.DAY, day);
 		this.defaultMap.put(this.MONTH, month);
 		this.defaultMap.put(this.YEAR, year);
 	}
 	
-	protected void resetDefault()
+	public void resetDefault()
 	{
 		this.comboYear.setSelectedItem(this.defaultMap.get(this.YEAR));
 		this.comboMonth.setSelectedIndex(Integer.parseInt(this.defaultMap.get(this.MONTH))-1);
 		this.comboDay.setSelectedItem(this.defaultMap.get(this.DAY));
 	}
 	
-	protected void autoSetDate()
+	public void autoSetDate()
 	{
 		this.setDate(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
 	}

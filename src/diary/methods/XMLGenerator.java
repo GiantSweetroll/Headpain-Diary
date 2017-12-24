@@ -78,6 +78,8 @@ public class XMLGenerator
 		//Date
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the date to that of local time");
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT, "Resets date changes to it's orginal status");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_FROM_LABEL, "From");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_TO_LABEL, "To");
 		//Month Names
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_JANUARY, "January");
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_MONTH_FEBRUARY, "February");

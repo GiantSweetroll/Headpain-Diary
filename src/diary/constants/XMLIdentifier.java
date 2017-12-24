@@ -49,6 +49,8 @@ public class XMLIdentifier
 	//Date
 	public static final String DATE_AUTO_BUTTON_TOOLTIP_TEXT = "date auto button tooltip text";
 	public static final String DATE_RESET_BUTTON_TOOLTIP_TEXT = "date reselt button tooltip text";
+	public static final String DATE_FROM_LABEL = "date from label";
+	public static final String DATE_TO_LABEL = "date to label";
 	//Month Names
 	public static final String DATE_MONTH_JANUARY = "date month january";
 	public static final String DATE_MONTH_FEBRUARY = "date month february";

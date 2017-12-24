@@ -25,6 +25,8 @@
      <text identifier="duration units label">Seconds</text>
      <text identifier="date auto button tooltip text">Automatically set the date to that of local time</text>
      <text identifier="date reselt button tooltip text">Resets date changes to it's orginal status</text>
+     <text identifier="date from label">From</text>
+     <text identifier="date to label">To</text>
      <text identifier="date month january">January</text>
      <text identifier="date month february">February</text>
      <text identifier="date month march">March</text>

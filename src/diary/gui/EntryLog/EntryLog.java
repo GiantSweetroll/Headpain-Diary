@@ -24,6 +24,7 @@ import org.w3c.dom.Element;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.gui.DatePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
 import diary.methods.FileOperation;
