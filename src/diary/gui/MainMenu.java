@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.EntryLog.EntryLog;
+import diary.gui.graphs.LineGraphPanel;
 import giantsweetroll.gui.swing.Gbm;
 
 // TODO: Auto-generated Javadoc

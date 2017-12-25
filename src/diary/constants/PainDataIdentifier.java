@@ -15,7 +15,7 @@ public final class PainDataIdentifier
 	public static final String DURATION = "duration";
 	
 	//Pain Data
-	public static final String PAIN_LOCATIONS = "pain_location";
+	public static final String PAIN_LOCATIONS = "pain_locations";
 	public static final String PAIN_LOCATION = "pain_location";
 	public static final String PAIN_LOCATION_ID = "pain_loc_id";
 	

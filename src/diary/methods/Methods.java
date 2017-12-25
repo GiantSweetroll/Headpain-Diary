@@ -1,6 +1,7 @@
 package diary.methods;
 
 import java.io.File;
+import java.util.List;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
@@ -53,5 +54,19 @@ public class Methods
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.TIME_MINUTE), 0).getTextContent() + "-" +
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.TIME_SECONDS), 0).getTextContent() +
 				".xml";
+	}
+	
+	public static int getHighestValue(List<Integer> list)
+	{
+		int max = 0;
+		for (int i=0; i<list.size(); i++)
+		{
+			if (list.get(i)>max)
+			{
+				max = list.get(i);
+			}
+		}
+		
+		return max;
 	}
 }
