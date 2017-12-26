@@ -70,4 +70,34 @@ public class PainEntryData
 	{
 		return this.dataMap;
 	}
+	
+	public String getFullDate()
+	{
+		return this.dataMap.get(PainDataIdentifier.DATE_DAY) + "/"
+				+ this.dataMap.get(PainDataIdentifier.DATE_MONTH) + "/"
+				+ this.dataMap.get(PainDataIdentifier.DATE_YEAR);
+	}
+	
+	public String getFullTime()
+	{
+		return this.dataMap.get(PainDataIdentifier.TIME_HOUR) + ":"
+				+ this.dataMap.get(PainDataIdentifier.TIME_MINUTE) + ":"
+				+ this.dataMap.get(PainDataIdentifier.TIME_SECONDS);
+	}
+	
+	public String getFullTimeAndDate()
+	{
+		return this.getFullTime() + " " + this.getFullDate();
+	}
+	
+	public LinkedHashMap<String, String> getDateMap()
+	{
+		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+		
+		map.put(PainDataIdentifier.DATE_DAY, this.dataMap.get(PainDataIdentifier.DATE_DAY).toString());
+		map.put(PainDataIdentifier.DATE_MONTH, this.dataMap.get(PainDataIdentifier.DATE_MONTH).toString());
+		map.put(PainDataIdentifier.DATE_YEAR, this.dataMap.get(PainDataIdentifier.DATE_YEAR).toString());
+		
+		return map;
+	}
 }

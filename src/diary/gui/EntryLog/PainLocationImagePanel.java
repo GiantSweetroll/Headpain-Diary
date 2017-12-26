@@ -31,6 +31,7 @@ public class PainLocationImagePanel extends JPanel
 		this.c = new GridBagConstraints();
 		
 		//Properties
+		this.panel.setPreferredSize(Constants.IMAGE_SIZE);
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
 		

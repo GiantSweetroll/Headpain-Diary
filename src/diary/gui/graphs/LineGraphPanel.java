@@ -67,6 +67,7 @@ public class LineGraphPanel extends JPanel
 		this.drawAxesMarkers(g, Color.BLACK);
 		this.drawXAxisMarkerLabels(g, Color.BLUE);
 		this.drawYAxisMarkerLabels(g, Color.BLUE);
+		this.drawConnectingLines(g, Color.RED);
 	}
 	
 	//Drawing parts of the graph
@@ -143,6 +144,18 @@ public class LineGraphPanel extends JPanel
 			g.drawString(text, 
 							this.dataPoints.get(i).x, 
 							this.axesOrigin.y - this.AXES_POINTERS_LENGTH - this.MARKER_LABEL_PADDING);
+		}
+	}
+	private void drawConnectingLines(Graphics g, Color c)
+	{
+		g.setColor(c);
+		
+		for (int i=0; i<this.dataPoints.size()-1; i++)
+		{
+			g.drawLine(this.dataPoints.get(i).x, 
+						this.dataPoints.get(i).y, 
+						this.dataPoints.get(i+1).x,
+						this.dataPoints.get(i+1).y);
 		}
 	}
 }

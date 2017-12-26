@@ -1,6 +1,7 @@
 package diary.gui.EntryLog;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -37,6 +38,7 @@ public class ImagePanel extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		g.drawImage(image, 0, 0, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height, null);
+		Graphics2D g2 = (Graphics2D)g;
+		g2.drawImage(image, 0, 0, Constants.IMAGE_SIZE.width, Constants.IMAGE_SIZE.height, this);
 	}
 }

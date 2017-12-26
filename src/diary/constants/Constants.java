@@ -17,6 +17,7 @@ public final class Constants
 	
 	public static final Dimension SCREENSIZE = Misc.getScreenSize();
 	public static final Dimension IMAGE_SIZE = new Dimension(150, 130);
+//	public static final Dimension IMAGE_SIZE = new Dimension(200, 180);
 	
 	public static final Language LANGUAGE = new Language();
 	public static final String LANGUAGE_FOLDER_PATH = "data" + "/" + "settings" + "/" + "language" + "/";
