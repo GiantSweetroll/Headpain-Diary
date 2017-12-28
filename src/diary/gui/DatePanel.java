@@ -131,6 +131,10 @@ public class DatePanel extends JPanel implements ActionListener
 	{
 		return this.comboMonth.getSelectedItem().toString();
 	}
+	public int getMonthValue()
+	{
+		return this.comboMonth.getSelectedIndex() + 1;
+	}
 	public String getYear()
 	{
 		return this.comboYear.getSelectedItem().toString();
@@ -138,7 +142,7 @@ public class DatePanel extends JPanel implements ActionListener
 	
 	public void setAsDefaultDataThis()
 	{
-		this.setDefaultData(this.getDay(), this.getMonth(), this.getYear());
+		this.setDefaultData(this.getDay(), Integer.toString(this.getMonthValue()), this.getYear());
 	}
 	
 	public void setDefaultData(String day, String month, String year)

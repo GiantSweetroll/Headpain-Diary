@@ -145,6 +145,14 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.CURRENT_TEXT, "Current");
 		appendComponentToMap(doc, map, XMLIdentifier.AUTO_TEXT, "Auto");
 		appendComponentToMap(doc, map, XMLIdentifier.CONFIRM_TEXT, "Confirm");
+		appendComponentToMap(doc, map, XMLIdentifier.REFRESH_TEXT, "Refresh");
+		
+		//Graph
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT, "Pain vs Date");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT, "Entries vs Date");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME_TEXT, "Intensity vs Time");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME_TEXT, "Duration vs Time");
 		
 		//Error Handling
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT, "Please fill all required fields (marked with *)");

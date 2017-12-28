@@ -21,6 +21,7 @@ public class PainEntryData
 	
 	public PainEntryData(Document doc)
 	{
+		this.dataMap = new LinkedHashMap<String, Object>();
 		Element rootElement = XMLManager.getElement(doc.getElementsByTagName(PainDataIdentifier.MASTER_NODE), 0);
 		
 		//add to map

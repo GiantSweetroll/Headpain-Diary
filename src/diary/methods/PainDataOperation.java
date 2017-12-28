@@ -35,11 +35,11 @@ public class PainDataOperation
 		{
 			try
 			{
-				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + (int)list.get(i).getDataMap().get(PainDataIdentifier.PAIN_AMOUNT));
+				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + Integer.parseInt((String)list.get(i).getDataMap().get(PainDataIdentifier.PAIN_AMOUNT)));
 			}
 			catch(NullPointerException ex)
 			{
-				map.put(list.get(i).getFullDate(), (int)list.get(i).getDataMap().get(PainDataIdentifier.PAIN_AMOUNT));
+				map.put(list.get(i).getFullDate(), Integer.parseInt((String)list.get(i).getDataMap().get(PainDataIdentifier.PAIN_AMOUNT)));
 			}
 		}
 		

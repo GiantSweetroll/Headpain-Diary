@@ -24,6 +24,7 @@ public class XMLIdentifier
 	public static final String CURRENT_TEXT  ="current";
 	public static final String AUTO_TEXT = "auto text";
 	public static final String CONFIRM_TEXT = "confirm text";
+	public static final String REFRESH_TEXT = "refresh text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -124,6 +125,13 @@ public class XMLIdentifier
 	public static final String VERY_SPECIFIC_POSITION_CHEEKS_LOWER_TEXT = "very specific position cheeks lower text";
 	public static final String VERY_SPECIFIC_POSITION_CHEEKS_UPPER_TEXT = "very specific position cheeks upper text";
 	//-->Cheeks end
+	
+	//Graph
+	public static final String GRAPH_CATEGORY_LABEL = "graph category label";
+	public static final String GRAPH_CATEGORY_PAIN_VS_DATE_TEXT = "graph category pain vs date text";
+	public static final String GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT = "graph category entries vs date text";
+	public static final String GRAPH_CATEGORY_INTENSITY_VS_TIME_TEXT = "graph category intensity vs time text";
+	public static final String GRAPH_CATEGORY_DURATION_VS_TIME_TEXT = "graph category duration vs time text";
 	
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";

@@ -64,13 +64,14 @@ public class FileOperation
 		//Get year range
 		List<String> legibleYears = new ArrayList<String>();
 		FileManager.getListOfFiles(legibleYears, Constants.DATABASE_PATH, false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+	//	MessageManager.printLine("Size of years: " + legibleYears.size());
 		for (int i=0; i<legibleYears.size(); i++)
 		{
 			try
 			{
 				int yearNow = Integer.parseInt(legibleYears.get(i));
-				int yearMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_DAY));
-				int yearMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_DAY));
+				int yearMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_YEAR));
+				int yearMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_YEAR));
 				if (yearNow < yearMin || yearNow > yearMax)
 				{
 					legibleYears.remove(i);		//Remove Illegible year
@@ -83,15 +84,19 @@ public class FileOperation
 				i = -1;			//Reset index to loop from beginning of array (it's -1 because at the end of loop will be added by 1 = 0)
 			}
 		}
+//		MessageManager.printLine("Size of elligible years: " + legibleYears.size());
 		
 		//Get month range
 		LinkedHashMap<String, List<String>> legibleMonthsMap = new LinkedHashMap<String, List<String>>();
+	//	MessageManager.printLine("Size of eligible months before: " + legibleMonthsMap.size());
 		if (legibleYears.size() == 1)
 		{
 			List<String> legibleMonths = new ArrayList<String>();
 			FileManager.getListOfFiles(legibleMonths, Constants.DATABASE_PATH + legibleYears.get(0), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+	//		MessageManager.printLine("Number of months: " + legibleMonths.size());
 			for (int i=0; i<legibleMonths.size(); i++)
 			{
+		//		MessageManager.printLine("Iteration month: " + i);
 				try
 				{
 					int monthNow = Integer.parseInt(legibleMonths.get(i));
@@ -109,6 +114,7 @@ public class FileOperation
 					i = -1;		//Reset index to loop from beginning of array (it's -1 because at the end of loop will be added by 1 = 0)
 				}
 			}
+		//	MessageManager.printLine("Number of months after filter: " + legibleMonths.size());
 			legibleMonthsMap.put(legibleYears.get(0), legibleMonths);
 		}
 		else
@@ -167,6 +173,7 @@ public class FileOperation
 				legibleMonthsMap.put(legibleYears.get(i), legibleMonths);
 			}
 		}
+	//	MessageManager.printLine("Size of eligible months after: " + legibleMonthsMap.size());
 		
 		//Get day range
 		LinkedHashMap<LinkedHashMap<String, String>, List<String>> legibleDaysMap = new LinkedHashMap<LinkedHashMap<String, String>, List<String>>();
@@ -182,7 +189,8 @@ public class FileOperation
 			for (int b=0; b<entry.getValue().size(); b++)
 			{
 				List<String> legibleDays = new ArrayList<String>();
-				FileManager.getListOfFiles(legibleDays, Constants.DATABASE_PATH + entry.getKey() + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+		//		MessageManager.printLine(Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b));
+				FileManager.getListOfFiles(legibleDays, Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 				
 				if (iteration==0)
 				{
@@ -242,7 +250,7 @@ public class FileOperation
 				for (int i=0; i<entry.getValue().size(); i++)
 				{
 					List<String> fileList = new ArrayList<String>();
-					FileManager.getListOfFiles(fileList, Constants.DATABASE_PATH + entry2.getKey() + entry2.getValue() + entry.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+					FileManager.getListOfFiles(fileList, Constants.DATABASE_PATH + entry2.getKey() + File.separator + entry2.getValue() + File.separator + entry.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
 					for (int a=0; a<fileList.size(); a++)
 					{
 						filePaths.add(fileList.get(a));
@@ -263,6 +271,7 @@ public class FileOperation
 			}
 		}
 		
+//		MessageManager.printLine("Size of entries: " + list.size());
 		
 		return list;
 	}

@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import diary.methods.Methods;
+import giantsweetroll.message.MessageManager;
 
 public class LineGraphPanel extends JPanel
 {
@@ -56,18 +57,24 @@ public class LineGraphPanel extends JPanel
 						this.axesOrigin,
 						this.getWidth()-this.AXES_PADDING_WITH_PANEL_EDGE, 
 						this.AXES_PADDING_WITH_PANEL_EDGE);
-		
-		this.drawDataPoints(g, Color.GREEN, 
-							this.yAxisValues, 
-							this.axesOrigin, 
-							this.getWidth()-this.AXES_PADDING_WITH_PANEL_EDGE, 
-							this.AXES_PADDING_WITH_PANEL_EDGE, 
-							this.DATA_POINT_RADIUS);
-		
-		this.drawAxesMarkers(g, Color.BLACK);
-		this.drawXAxisMarkerLabels(g, Color.BLUE);
-		this.drawYAxisMarkerLabels(g, Color.BLUE);
-		this.drawConnectingLines(g, Color.RED);
+		try
+		{
+			this.drawDataPoints(g, Color.GREEN, 
+					this.yAxisValues, 
+					this.axesOrigin, 
+					this.getWidth()-this.AXES_PADDING_WITH_PANEL_EDGE, 
+					this.AXES_PADDING_WITH_PANEL_EDGE, 
+					this.DATA_POINT_RADIUS);
+
+			this.drawAxesMarkers(g, Color.BLACK);
+			this.drawXAxisMarkerLabels(g, Color.BLUE);
+			this.drawYAxisMarkerLabels(g, Color.BLUE);
+			this.drawConnectingLines(g, Color.RED);
+		}
+		catch(ArithmeticException ex)
+		{
+//			ex.printStackTrace();
+		};
 	}
 	
 	//Drawing parts of the graph
@@ -81,7 +88,7 @@ public class LineGraphPanel extends JPanel
 		//Draw Y-Axis
 		g.drawLine(origin.x, origin.y, origin.x, yLength);
 	}
-	private void drawDataPoints(Graphics g, Color c, List<Integer> data, Point origin, int xAxisEnd, int yAxisEnd, int radius)
+	private void drawDataPoints(Graphics g, Color c, List<Integer> data, Point origin, int xAxisEnd, int yAxisEnd, int diameter)
 	{
 		//Set distance between each data point in the x-axis
 		int xDiff = (xAxisEnd - origin.x)/data.size();
@@ -97,11 +104,17 @@ public class LineGraphPanel extends JPanel
 			xPos+=xDiff;
 		}
 		
+		for (int i=0; i<this.dataPoints.size(); i++)
+		{
+			MessageManager.printLine("Data: " + data.get(i));
+			MessageManager.printLine("Coordinate y: " + dataPoints.get(i));
+		}
+		
 		//Draw
 		g.setColor(c);
 		for (int i=0; i<this.dataPoints.size(); i++)
 		{
-			g.fillOval(this.dataPoints.get(i).x, this.dataPoints.get(i).y, radius, radius);
+			g.fillOval(this.dataPoints.get(i).x - diameter/2, this.dataPoints.get(i).y - diameter/2, diameter, diameter);
 		}
 	}
 	private void drawAxesMarkers(Graphics g, Color c)
@@ -142,8 +155,8 @@ public class LineGraphPanel extends JPanel
 		{
 			String text = this.xAxisLabels.get(i);
 			g.drawString(text, 
-							this.dataPoints.get(i).x, 
-							this.axesOrigin.y - this.AXES_POINTERS_LENGTH - this.MARKER_LABEL_PADDING);
+							this.dataPoints.get(i).x - text.length(), 
+							this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING);
 		}
 	}
 	private void drawConnectingLines(Graphics g, Color c)

@@ -1,0 +1,199 @@
+package diary.gui.graphs;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+
+import diary.PainEntryData;
+import diary.constants.Constants;
+import diary.constants.XMLIdentifier;
+import diary.gui.DateRangePanel;
+import diary.gui.MainFrame;
+import diary.gui.MainMenu;
+import diary.methods.FileOperation;
+import diary.methods.PainDataOperation;
+import giantsweetroll.gui.swing.Gbm;
+
+public class GraphPanel extends JPanel implements ActionListener
+{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5865211789435235389L;
+	private JPanel panelTop, panelTopLeft, panelBelow, panelBelowLeft, panelBelowCenter;
+	private JLabel labCategory;
+	private JComboBox<String> comboCategory;
+	private LineGraphPanel lineGraph;
+	private JScrollPane scrollGraph;
+	private DateRangePanel panelDateRange;
+	private JButton butBack, butRefresh;
+	
+	//Constants
+	private final String BACK = "back";
+	private final String REFRESH = "refresh";
+	
+	public GraphPanel()
+	{
+		this.init();
+	}
+	
+	//Create GUI
+	private void init()
+	{
+		//Initialization
+		this.initPanelTop();
+		this.initPanelBelow();
+		
+		//Properties
+		this.setLayout(new BorderLayout());
+		this.setOpaque(false);
+		
+		this.initGraph();
+		
+		//add to panel
+		this.add(this.panelTop, BorderLayout.NORTH);
+		this.add(this.panelBelow, BorderLayout.SOUTH);
+	}
+	private void initPanelTop()
+	{
+		//Initialization
+		this.panelTop = new JPanel();
+		this.initPanelTopLeft();
+		this.panelDateRange = new DateRangePanel();
+		
+		//Properties
+		this.panelTop.setOpaque(false);
+		this.panelTop.setLayout(new BorderLayout());
+		this.panelDateRange.dateFrom.autoSetDate();
+		this.panelDateRange.dateFrom.setAsDefaultDataThis();
+		this.panelDateRange.dateTo.autoSetDate();
+		this.panelDateRange.dateTo.setAsDefaultDataThis();
+
+		//Add to panel
+		this.panelTop.add(this.panelTopLeft, BorderLayout.WEST);
+		this.panelTop.add(this.panelDateRange, BorderLayout.EAST);
+	}
+	private void initPanelTopLeft()
+	{
+		//Initialization
+		this.panelTopLeft = new JPanel();
+		this.labCategory = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_LABEL), SwingConstants.RIGHT);
+		this.comboCategory = new JComboBox<String>(Constants.GRAPH_CATEGORIES);
+		GridBagConstraints c = new GridBagConstraints();
+		
+		//Properties
+		this.panelTopLeft.setOpaque(false);
+		this.panelTopLeft.setLayout(new GridBagLayout());
+		
+		//Add to panel
+		Gbm.goToOrigin(c);
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		this.panelTopLeft.add(this.labCategory, c);					//Category
+		Gbm.nextGridColumn(c);
+		this.panelTopLeft.add(this.comboCategory, c);				//Category Selection
+	}
+	private void initPanelBelow()
+	{
+		//Initialization
+		this.panelBelow = new JPanel();
+		this.initPanelBelowCenter();
+		this.initPanelBelowLeft();
+		
+		//Properties
+		this.panelBelow.setOpaque(false);
+		this.panelBelow.setLayout(new BorderLayout());
+		
+		//Add to panel
+		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);
+		this.panelBelow.add(this.panelBelowCenter, BorderLayout.CENTER);
+	}
+	private void initPanelBelowLeft()
+	{
+		//Initialization
+		this.panelBelowLeft = new JPanel();
+		this.butBack = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
+		
+		//Properties
+		this.panelBelowLeft.setOpaque(false);
+		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.butBack.setActionCommand(this.BACK);
+		this.butBack.addActionListener(this);
+		
+		//add to panel
+		this.panelBelowLeft.add(this.butBack);
+	}
+	private void initPanelBelowCenter()
+	{
+		//Initialization
+		this.panelBelowCenter = new JPanel();
+		this.butRefresh = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.REFRESH_TEXT));
+		
+		//Properties
+		this.panelBelowCenter.setOpaque(false);
+		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.butRefresh.setActionCommand(this.REFRESH);
+		this.butRefresh.addActionListener(this);
+		
+		//add to panel
+		this.panelBelowCenter.add(this.butRefresh);
+	}
+	private void initGraph()
+	{
+		try
+		{
+			this.remove(this.scrollGraph);
+		}
+		catch(NullPointerException ex) {};
+		
+		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
+		String category = this.comboCategory.getSelectedItem().toString();
+		
+		List<PainEntryData> list = FileOperation.getListOfEntries(dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
+		System.out.println(list.size());
+		
+		if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
+		{
+			this.lineGraph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate
+													(FileOperation.getListOfEntries
+															(dateRangeMap.get(DateRangePanel.FROM), 
+																	dateRangeMap.get(DateRangePanel.TO))));
+		
+			this.scrollGraph = new JScrollPane(this.lineGraph, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			this.scrollGraph.setOpaque(false);
+			this.scrollGraph.getViewport().setOpaque(false);
+		}
+		
+		this.add(this.scrollGraph, BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
+	}
+
+	//Interfaces
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		switch(e.getActionCommand())
+			{
+			case BACK:
+				MainFrame.changePanel(new MainMenu());
+				break;
+				
+			case REFRESH:
+				this.initGraph();
+				break;
+		}
+	}
+}

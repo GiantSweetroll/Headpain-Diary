@@ -81,6 +81,12 @@
      <text identifier="current">Current</text>
      <text identifier="auto text">Auto</text>
      <text identifier="confirm text">Confirm</text>
+     <text identifier="refresh text">Refresh</text>
+     <text identifier="graph category label">Category</text>
+     <text identifier="graph category pain vs date text">Pain vs Date</text>
+     <text identifier="graph category entries vs date text">Entries vs Date</text>
+     <text identifier="graph category intensity vs time text">Intensity vs Time</text>
+     <text identifier="graph category duration vs time text">Duration vs Time</text>
      <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
      <text identifier="unfilled required fields dialog title">Fill in all required fields</text>
 </language>

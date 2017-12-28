@@ -19,7 +19,7 @@ public class DateRangePanel extends JPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 3166809849008171874L;
-	private DatePanel dateFrom, dateTo;
+	public DatePanel dateFrom, dateTo;
 	private JLabel labFrom, labTo;
 	private GridBagConstraints c;
 	
@@ -65,5 +65,14 @@ public class DateRangePanel extends JPanel
 		map.put(TO, this.dateTo.getData());
 		
 		return map;
+	}
+	
+	public void setFromDate(String day, String month, String year)
+	{
+		this.dateFrom.setDate(day, month, year);
+	}
+	public void setToDate(String day, String month, String year)
+	{
+		this.dateTo.setDate(day, month, year);
 	}
 }

@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.EntryLog.EntryLog;
-import diary.gui.graphs.LineGraphPanel;
+import diary.gui.graphs.GraphPanel;
 import giantsweetroll.gui.swing.Gbm;
 
 // TODO: Auto-generated Javadoc
@@ -291,6 +291,7 @@ public final class MainMenu extends JPanel implements ActionListener
 					else if (keyCode == KeyEvent.VK_2 || keyCode == KeyEvent.VK_NUMPAD2)
 					{
 						//Graph
+						MainFrame.changePanel(new GraphPanel());
 					}
 					else if (keyCode == KeyEvent.VK_3 || keyCode == KeyEvent.VK_NUMPAD3)
 					{
@@ -330,6 +331,7 @@ public final class MainMenu extends JPanel implements ActionListener
 				break;
 				
 			case GRAPH:
+				MainFrame.changePanel(new GraphPanel());
 				break;
 				
 			case TABLE:
