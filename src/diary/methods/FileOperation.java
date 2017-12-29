@@ -182,23 +182,23 @@ public class FileOperation
 		 * and the last month of the last year to get the max day,
 		 * as all other days in the months between will be selected regardless
 		 */
-		int iteration = 0;
 		for (Map.Entry<String, List<String>> entry : legibleMonthsMap.entrySet())
 		{
-			LinkedHashMap<String, String> monthYearMap = new LinkedHashMap<String, String>();
+			LinkedHashMap<String, String> yearMonthMap = new LinkedHashMap<String, String>();
 			for (int b=0; b<entry.getValue().size(); b++)
 			{
 				List<String> legibleDays = new ArrayList<String>();
 		//		MessageManager.printLine(Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b));
 				FileManager.getListOfFiles(legibleDays, Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 				
+				int iteration = 0;
 				if (iteration==0)
 				{
 					for (int a=0; a<legibleDays.size(); a++)
 					{
 						try
 						{
-							int dayNow = Integer.parseInt(legibleDays.get(iteration));
+							int dayNow = Integer.parseInt(legibleDays.get(a));
 							int dayMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_DAY));
 							if (dayNow < dayMin)
 							{
@@ -213,13 +213,14 @@ public class FileOperation
 						}
 					}
 				}
-				else if (iteration==legibleMonthsMap.size()-1)
+				
+				if (iteration==legibleMonthsMap.size()-1)
 				{
 					for (int a=0; a<legibleDays.size(); a++)
 					{
 						try
 						{
-							int dayNow = Integer.parseInt(legibleDays.get(iteration));
+							int dayNow = Integer.parseInt(legibleDays.get(a));
 							int dayMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_DAY));
 							if (dayNow > dayMax)
 							{
@@ -234,10 +235,10 @@ public class FileOperation
 						}
 					}
 				}
-				monthYearMap.put(entry.getKey(), entry.getValue().get(b));
-				legibleDaysMap.put(monthYearMap, legibleDays);
+				yearMonthMap.put(entry.getKey(), entry.getValue().get(b));
+				legibleDaysMap.put(yearMonthMap, legibleDays);
+				iteration++;
 			}
-			iteration++;
 		}
 		//Filtering end
 		

@@ -1,7 +1,10 @@
 package diary.methods;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
@@ -9,7 +12,10 @@ import javax.swing.JTextField;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
+import diary.constants.PainLocationConstants;
+import diary.constants.XMLIdentifier;
 import giantsweetroll.xml.dom.XMLManager;
 
 public class Methods 
@@ -56,9 +62,9 @@ public class Methods
 				".xml";
 	}
 	
-	public static int getHighestValue(List<Integer> list)
+	public static float getHighestValue(List<Float> list)
 	{
-		int max = 0;
+		float max = 0;
 		for (int i=0; i<list.size(); i++)
 		{
 			if (list.get(i)>max)
@@ -68,5 +74,204 @@ public class Methods
 		}
 		
 		return max;
+	}
+	
+	public static float round(float value, int precision)
+	{
+	    int scale = (int) Math.pow(10, precision);
+	    return (float) Math.round(value * scale) / scale;
+	}
+	
+	public static String convertToLanguageText(String painLocationID)	//Method used to convert Pain Location ID to the language's text
+	{
+		//General
+		if (painLocationID.equals(PainLocationConstants.HEAD))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EARS_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EYES_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.CHEEKS))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT);
+		}
+		//General 2
+		else if (painLocationID.equals(PainLocationConstants.HEAD_BACK_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_BACK_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_FRONT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_FRONT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_LEFT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_LEFT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_RIGHT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_HEAD_RIGHT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_LEFT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EARS_LEFT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_RIGHT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EARS_RIGHT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_LEFT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EYES_LEFT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_RIGHT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_EYES_RIGHT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.CHEEKS_LEFT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_CHEEKS_LEFT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.CHEEKS_RIGHT_GENERAL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SPECIFIC_POSITION_CHEEKS_RIGHT_TEXT);
+		}
+		//Specific
+		else if (painLocationID.equals(PainLocationConstants.HEAD_BACK_BOTTOM_LEFT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_BOTTOM_LEFT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_BACK_BOTTOM_RIGHT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_BOTTOM_RIGHT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_BACK_CENTER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_CENTER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_BACK_TOP_LEFT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_TOP_LEFT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_BACK_TOP_RIGHT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_TOP_RIGHT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_FRONT_CENTER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_FRONT_CENTER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_FRONT_LEFT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_FRONT_LEFT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_FRONT_RIGHT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_FRONT_RIGHT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_LEFT_BACK))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_BACK_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_LEFT_CENTER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_CENTER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_LEFT_FRONT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_FRONT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_RIGHT_BACK))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_BACK_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_RIGHT_CENTER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_CENTER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.HEAD_SIDE_RIGHT_FRONT))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_FRONT_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_LEFT_HOLE))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_HOLE_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_LEFT_LEAF_BOTTOM))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_LOWER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_LEFT_LEAF_TOP))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_UPPER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_RIGHT_HOLE))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_HOLE_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_RIGHT_LEAF_BOTTOM))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_LOWER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EARS_RIGHT_LEAF_TOP))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_UPPER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_LEFT_EYEBALL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_EYEBALL_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_LEFT_BEHIND))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_BEHIND_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_LEFT_EYEBROW))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_EYEBROW_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_LEFT_SOCKET))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_SOCKET_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_RIGHT_EYEBALL))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_EYEBALL_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_RIGHT_BEHIND))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_BEHIND_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_RIGHT_EYEBROW))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_EYEBROW_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.EYES_RIGHT_SOCKET))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_SOCKET_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.CHEEKS_LEFT_LOWER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_CHEEKS_LOWER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.CHEEKS_LEFT_UPPER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_CHEEKS_UPPER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.CHEEKS_RIGHT_LOWER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_CHEEKS_LOWER_TEXT);
+		}
+		else if (painLocationID.equals(PainLocationConstants.CHEEKS_RIGHT_UPPER))
+		{
+			return Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERY_SPECIFIC_POSITION_CHEEKS_UPPER_TEXT);
+		}
+		
+		return "";
 	}
 }

@@ -85,8 +85,11 @@
      <text identifier="graph category label">Category</text>
      <text identifier="graph category pain vs date text">Pain vs Date</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
-     <text identifier="graph category intensity vs time text">Intensity vs Time</text>
-     <text identifier="graph category duration vs time text">Duration vs Time</text>
+     <text identifier="graph category intensity average vs time text">Average Intensity vs Time</text>
+     <text identifier="graph category duration average vs time text">Average Duration vs Time</text>
+     <text identifier="graph category pain kind vs date">Kinds of Pains vs Date</text>
+     <text identifier="graph category pain location vs date">Pain Locations vs Date</text>
+     <text identifier="graph category activity vs date">Activity vs Date</text>
      <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
      <text identifier="unfilled required fields dialog title">Fill in all required fields</text>
 </language>

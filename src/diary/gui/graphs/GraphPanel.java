@@ -36,7 +36,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	private JPanel panelTop, panelTopLeft, panelBelow, panelBelowLeft, panelBelowCenter;
 	private JLabel labCategory;
 	private JComboBox<String> comboCategory;
-	private LineGraphPanel lineGraph;
+	private Graph graph;
 	private JScrollPane scrollGraph;
 	private DateRangePanel panelDateRange;
 	private JButton butBack, butRefresh;
@@ -162,23 +162,47 @@ public class GraphPanel extends JPanel implements ActionListener
 		String category = this.comboCategory.getSelectedItem().toString();
 		
 		List<PainEntryData> list = FileOperation.getListOfEntries(dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
-		System.out.println(list.size());
 		
 		if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{
-			this.lineGraph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate
-													(FileOperation.getListOfEntries
-															(dateRangeMap.get(DateRangePanel.FROM), 
-																	dateRangeMap.get(DateRangePanel.TO))));
-		
-			this.scrollGraph = new JScrollPane(this.lineGraph, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			this.scrollGraph.setOpaque(false);
-			this.scrollGraph.getViewport().setOpaque(false);
+			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
 		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getIntensityAverageVSTime(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainLocations(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfActivity(list));
+		}
+		this.initGraphScroll(graph);
 		
 		this.add(this.scrollGraph, BorderLayout.CENTER);
 		this.revalidate();
 		this.repaint();
+	}
+	
+	private void initGraphScroll(Graph graph)
+	{
+		this.scrollGraph = new JScrollPane(graph, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scrollGraph.setOpaque(false);
+		this.scrollGraph.getViewport().setOpaque(false);
 	}
 
 	//Interfaces

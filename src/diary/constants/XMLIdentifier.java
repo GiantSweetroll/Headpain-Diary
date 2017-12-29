@@ -130,8 +130,11 @@ public class XMLIdentifier
 	public static final String GRAPH_CATEGORY_LABEL = "graph category label";
 	public static final String GRAPH_CATEGORY_PAIN_VS_DATE_TEXT = "graph category pain vs date text";
 	public static final String GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT = "graph category entries vs date text";
-	public static final String GRAPH_CATEGORY_INTENSITY_VS_TIME_TEXT = "graph category intensity vs time text";
-	public static final String GRAPH_CATEGORY_DURATION_VS_TIME_TEXT = "graph category duration vs time text";
+	public static final String GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT = "graph category intensity average vs time text";
+	public static final String GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT = "graph category duration average vs time text";
+	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_DATE = "graph category pain kind vs date";
+	public static final String GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE = "graph category pain location vs date";
+	public static final String GRAPH_CATEGORY_ACTIVITY_VS_DATE = "graph category activity vs date";
 	
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";
