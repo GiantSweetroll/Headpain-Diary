@@ -135,6 +135,8 @@ public class XMLIdentifier
 	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_DATE = "graph category pain kind vs date";
 	public static final String GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE = "graph category pain location vs date";
 	public static final String GRAPH_CATEGORY_ACTIVITY_VS_DATE = "graph category activity vs date";
+	//Graph Settings
+	public static final String GRAPH_SETTINGS_ENABLE_DATA_VALUES = "graph settings enable data values";
 	
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";

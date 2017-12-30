@@ -160,19 +160,15 @@ public class PainDataOperation
 		
 		for (int i=0; i<list.size(); i++)
 		{
-			List<LinkedHashMap<String, Object>> painLocations = (List<LinkedHashMap<String, Object>>)list.get(i).getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
-			for (int a=0; a<painLocations.size(); a++)
+			String key = list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
+			
+			try
 			{
-				String key = painLocations.get(a).get(PainDataIdentifier.ACTIVITY).toString();
-				
-				try
-				{
-					map.put(key, map.get(key) + 1f);
-				}
-				catch(NullPointerException ex)
-				{
-					map.put(key, 1f);
-				}
+				map.put(key, map.get(key) + 1f);
+			}
+			catch(NullPointerException ex)
+			{
+				map.put(key, 1f);
 			}
 		}
 		

@@ -40,6 +40,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	private JScrollPane scrollGraph;
 	private DateRangePanel panelDateRange;
 	private JButton butBack, butRefresh;
+	private GraphSettingsPanel panelGraphSettings;
 	
 	//Constants
 	private final String BACK = "back";
@@ -92,6 +93,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.panelTopLeft = new JPanel();
 		this.labCategory = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_LABEL), SwingConstants.RIGHT);
 		this.comboCategory = new JComboBox<String>(Constants.GRAPH_CATEGORIES);
+		this.panelGraphSettings = new GraphSettingsPanel();
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -104,6 +106,9 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.panelTopLeft.add(this.labCategory, c);					//Category
 		Gbm.nextGridColumn(c);
 		this.panelTopLeft.add(this.comboCategory, c);				//Category Selection
+		Gbm.newGridLine(c);
+		c.gridwidth = 2;
+		this.panelTopLeft.add(this.panelGraphSettings, c);			//Graph Settings Panel
 	}
 	private void initPanelBelow()
 	{
@@ -191,6 +196,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfActivity(list));
 		}
+		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.initGraphScroll(graph);
 		
 		this.add(this.scrollGraph, BorderLayout.CENTER);

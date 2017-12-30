@@ -27,6 +27,9 @@ public abstract class Graph extends JPanel
 	protected List<Float> yAxisValues;
 	protected List<Point> yAxisMarkerPoints;
 	
+	//Options
+	protected boolean enableDataValueMarkers;
+	
 	//Constants
 	protected final int AXES_PADDING_WITH_PANEL_EDGE = 50;
 	protected final int DATA_POINT_WIDTH = 10;
@@ -42,6 +45,8 @@ public abstract class Graph extends JPanel
 		this.yAxisValues = new ArrayList<Float>();
 		this.yAxisMarkerPoints = new ArrayList<Point>();
 		this.dataPoints = new ArrayList<Point>();
+		
+		this.enableDataValueMarkers = false;
 		
 		for (Map.Entry<String, Float> entry : dataMap.entrySet())
 		{
@@ -66,7 +71,10 @@ public abstract class Graph extends JPanel
 			this.drawAxesMarkers(g, Color.BLACK);
 			this.drawXAxisMarkerLabels(g, Color.BLUE);
 			this.drawYAxisMarkerLabels(g, Color.BLUE);
-			this.drawDataValues(g, Color.BLACK);
+			if (this.enableDataValueMarkers)
+			{
+				this.drawDataValues(g, Color.BLACK);
+			}
 		}
 		catch(ArithmeticException ex)
 		{
@@ -177,5 +185,12 @@ public abstract class Graph extends JPanel
 			
 			g.drawString(text, this.dataPoints.get(i).x - textWidth/2, this.dataPoints.get(i).y - this.GENERAL_PADDING);
 		}
+	}
+
+	//Graph Settings
+	protected void displayDataValues(boolean bool)
+	{
+		this.enableDataValueMarkers = bool;
+		this.repaint();
 	}
 }

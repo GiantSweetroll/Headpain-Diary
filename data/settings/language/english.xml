@@ -90,6 +90,7 @@
      <text identifier="graph category pain kind vs date">Kinds of Pains vs Date</text>
      <text identifier="graph category pain location vs date">Pain Locations vs Date</text>
      <text identifier="graph category activity vs date">Activity vs Date</text>
+     <text identifier="graph settings enable data values">Show Data Values</text>
      <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
      <text identifier="unfilled required fields dialog title">Fill in all required fields</text>
 </language>

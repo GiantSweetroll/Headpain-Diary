@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>29</date_day>
+     <date_month>12</date_month>
+     <date_year>2017</date_year>
+     <time_hour>18</time_hour>
+     <time_minute>54</time_minute>
+     <time_seconds>51</time_seconds>
+     <nyeri_amount>1</nyeri_amount>
+     <pain_locations>
+          <pain_location pain_loc_id="0">
+               <general_location>Ears</general_location>
+               <general_location_2>ears right general</general_location_2>
+               <specific_location>ears right hole</specific_location>
+               <pain_kind>Airplane like</pain_kind>
+               <intensity>5.25</intensity>
+               <duration>8.7</duration>
+          </pain_location>
+     </pain_locations>
+     <activity>Coding</activity>
+     <comments/>
+</Entry>
