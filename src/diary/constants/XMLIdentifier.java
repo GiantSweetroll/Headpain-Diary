@@ -25,6 +25,10 @@ public class XMLIdentifier
 	public static final String AUTO_TEXT = "auto text";
 	public static final String CONFIRM_TEXT = "confirm text";
 	public static final String REFRESH_TEXT = "refresh text";
+	public static final String DELETE_TEXT = "delete text";
+	public static final String SELECT_TEXT = "select text";
+	public static final String NOTE_TEXT = "note text";
+	public static final String FILTER_TEXT = "filter text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -137,6 +141,35 @@ public class XMLIdentifier
 	public static final String GRAPH_CATEGORY_ACTIVITY_VS_DATE = "graph category activity vs date";
 	//Graph Settings
 	public static final String GRAPH_SETTINGS_ENABLE_DATA_VALUES = "graph settings enable data values";
+	
+	//Table
+	public static final String TABLE_FILTER_BY_LABEL = "table filter by label";
+	public static final String TABLE_FILTER_KEYWORD_LABEL = "table filter keyword label";
+	//Table Filters
+	public static final String TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT = "table filter type pain amount text";
+	public static final String TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT = "table filter type pain positions text";
+	public static final String TABLE_FILTER_TYPE_PAIN_KINDS_TEXT = "table filter type pain kinds text";
+	public static final String TABLE_FILTER_TYPE_INTENSITIES_TEXT = "table filter type intensities text";
+	public static final String TABLE_FILTER_TYPE_DURATIONS_TEXT = "table filter type durations text";
+	public static final String TABLE_FILTER_TYPE_ACTIVITY_TEXT = "table filter type activity text";
+	public static final String TABLE_FILTER_TYPE_COMMENTS_TEXT = "table filter type comments text";
+	//Table Usage Guide Notes
+	public static final String TABLE_FILTER_GUIDE_USAGE_TEXT = "table filter guide usage text";
+	//Table Button Tooltips
+	public static final String TABLE_TOOLTIPS_BUTTON_BACK_TEXT = "table tooltips button back text";
+	public static final String TABLE_TOOLTIPS_BUTTON_DELETE_TEXT = "table tooltips button delete text";
+	public static final String TABLE_TOOLTIPS_BUTTON_SELECT_TEXT = "table tooltips button select text";
+	//Table Headers
+	public static final String TABLE_HEADERS_SELECT_TEXT = "table headers select text";
+	public static final String TABLE_HEADERS_DATE_TEXT = "table headers date text";
+	public static final String TABLE_HEADERS_START_TIME_TEXT = "table headers start time text";
+	public static final String TABLE_HEADERS_PAIN_AMOUNT_TEXT = "table headers pain amount text";
+	public static final String TABLE_HEADERS_PAIN_POSITIONS_TEXT = "table headers pain positions text";
+	public static final String TABLE_HEADERS_PAIN_KINDS_TEXT = "table headers pain kinds text";
+	public static final String TABLE_HEADERS_INTENSITIES_TEXT = "table headers intensities text";
+	public static final String TABLE_HEADERS_DURATIONS_TEXT = "table headers durations text";
+	public static final String TABLE_HEADERS_ACTIVITY_TEXT = "table headers acitivity text";
+	public static final String TABLE_HEADERS_COMMENTS_TEXT = "table headers comments text";
 	
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";

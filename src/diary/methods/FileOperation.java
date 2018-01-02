@@ -64,7 +64,7 @@ public class FileOperation
 		//Get year range
 		List<String> legibleYears = new ArrayList<String>();
 		FileManager.getListOfFiles(legibleYears, Constants.DATABASE_PATH, false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
-	//	MessageManager.printLine("Size of years: " + legibleYears.size());
+//		MessageManager.printLine("Size of years: " + legibleYears.size());
 		for (int i=0; i<legibleYears.size(); i++)
 		{
 			try
@@ -102,10 +102,23 @@ public class FileOperation
 					int monthNow = Integer.parseInt(legibleMonths.get(i));
 					int monthMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_MONTH));
 					int monthMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_MONTH));
-					if (monthNow < monthMin || monthNow > monthMax)
+					if (legibleYears.get(0).equals(dateToMap.get(PainDataIdentifier.DATE_YEAR)))		//If the only legible year is the same as the max year
 					{
-						legibleMonths.remove(i);	//remove Illegible month
-						i = -1;		//Reset index to loop from beginning of array (it's -1 because at the end of loop will be added by 1 = 0)
+						if (monthNow < monthMin || monthNow > monthMax)
+						{
+				//			MessageManager.printLine("Month " + legibleMonths.get(i) + " is not within range of " + monthMin + " and " + monthMax);
+							legibleMonths.remove(i);	//remove Illegible month
+							i = -1;		//Reset index to loop from beginning of array (it's -1 because at the end of loop will be added by 1 = 0)
+						}
+					}
+					else
+					{
+						if (monthNow < monthMin)
+						{
+		//					MessageManager.printLine("Month " + legibleMonths.get(i) + " is less than " + monthMin);
+							legibleMonths.remove(i);	//remove Illegible month
+							i = -1;		//Reset index to loop from beginning of array (it's -1 because at the end of loop will be added by 1 = 0)
+						}
 					}
 				}
 				catch (NumberFormatException ex)
@@ -134,7 +147,7 @@ public class FileOperation
 					{
 						try
 						{
-							int monthNow = Integer.parseInt(legibleMonths.get(i));
+							int monthNow = Integer.parseInt(legibleMonths.get(a));
 							int monthMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_MONTH));
 							if (monthNow < monthMin)
 							{
@@ -155,7 +168,7 @@ public class FileOperation
 					{
 						try
 						{
-							int monthNow = Integer.parseInt(legibleMonths.get(i));
+							int monthNow = Integer.parseInt(legibleMonths.get(a));
 							int monthMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_MONTH));
 							if (monthNow > monthMax)
 							{
@@ -176,22 +189,89 @@ public class FileOperation
 	//	MessageManager.printLine("Size of eligible months after: " + legibleMonthsMap.size());
 		
 		//Get day range
-		LinkedHashMap<LinkedHashMap<String, String>, List<String>> legibleDaysMap = new LinkedHashMap<LinkedHashMap<String, String>, List<String>>();
+//		LinkedHashMap<LinkedHashMap<String, String>, List<String>> legibleDaysMap = new LinkedHashMap<LinkedHashMap<String, String>, List<String>>();
+		LinkedHashMap<String, LinkedHashMap<String, List<String>>> legibleDaysMap = new LinkedHashMap<String, LinkedHashMap<String, List<String>>>();
 		/*
 		 * Program only needs to check the first month of the first year to get the min day,
 		 * and the last month of the last year to get the max day,
 		 * as all other days in the months between will be selected regardless
 		 */
+		
+		for (Map.Entry<String, List<String>> entry : legibleMonthsMap.entrySet())
+		{	
+			LinkedHashMap<String, List<String>> monthDayMap = new LinkedHashMap<String, List<String>>();
+			for (int i=0; i<entry.getValue().size(); i++)
+			{
+				List<String> legibleDays = new ArrayList<String>();
+				FileManager.getListOfFiles(legibleDays, Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(i), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+	//			MessageManager.printLine("Amount of legible days from month " + entry.getValue().get(i) + "before filter: " + legibleDays.size());
+				
+				if (entry.getKey().equals(dateFromMap.get(PainDataIdentifier.DATE_YEAR)))		//if the first eligible year is equal to the min year
+				{
+					if (entry.getValue().get(i).equals(dateFromMap.get(PainDataIdentifier.DATE_MONTH)))		//If the month is equal to the min month
+					{
+						int dayMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_DAY));
+						for (int a=0; a<legibleDays.size(); a++)
+						{
+							try
+							{
+								int dayNow = Integer.parseInt(legibleDays.get(a));
+								if (dayNow < dayMin)		//If day is less than the min day
+								{
+									legibleDays.remove(a);
+									a = -1;
+								}
+							}
+							catch (NumberFormatException ex)
+							{
+								legibleDays.remove(a);
+								a = -1;
+							}
+						}
+					}
+				}
+				else if (entry.getKey().equals(dateToMap.get(PainDataIdentifier.DATE_YEAR)))	//if the last eligible year is equal to the max year
+				{
+					if (entry.getValue().get(i).equals(dateToMap.get(PainDataIdentifier.DATE_MONTH)))	//if the month is equal to the max month
+					{
+						int dayMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_DAY));
+						for (int a=0; a<legibleDays.size(); a++)
+						{
+							try
+							{
+								int dayNow = Integer.parseInt(legibleDays.get(a));
+								if (dayNow > dayMax)		//If day is greater than the max day
+								{
+									legibleDays.remove(a);
+									a = -1;
+								}
+							}
+							catch (NumberFormatException ex)
+							{
+								legibleDays.remove(a);
+								a = -1;
+							}
+						}
+					}
+				}
+				
+				monthDayMap.put(entry.getValue().get(i), legibleDays);
+			}
+			legibleDaysMap.put(entry.getKey(), monthDayMap);
+		}
+		
+		/*
 		for (Map.Entry<String, List<String>> entry : legibleMonthsMap.entrySet())
 		{
 			LinkedHashMap<String, String> yearMonthMap = new LinkedHashMap<String, String>();
+			int iteration = 0;
 			for (int b=0; b<entry.getValue().size(); b++)
 			{
 				List<String> legibleDays = new ArrayList<String>();
-		//		MessageManager.printLine(Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b));
+				MessageManager.printLine(Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b));
 				FileManager.getListOfFiles(legibleDays, Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
-				
-				int iteration = 0;
+				MessageManager.printLine("Number of days before filter: " + legibleDays.size());
+						
 				if (iteration==0)
 				{
 					for (int a=0; a<legibleDays.size(); a++)
@@ -238,12 +318,30 @@ public class FileOperation
 				yearMonthMap.put(entry.getKey(), entry.getValue().get(b));
 				legibleDaysMap.put(yearMonthMap, legibleDays);
 				iteration++;
+				MessageManager.printLine("Number of legible days after filter: " + legibleDays.size());
 			}
 		}
+		*/
 		//Filtering end
 		
 		//Gather list of files from each folder
 		List<String> filePaths = new ArrayList<String>();
+		for (Map.Entry<String, LinkedHashMap<String, List<String>>> entryYear : legibleDaysMap.entrySet())
+		{
+			for (Map.Entry<String, List<String>> entryMonth : entryYear.getValue().entrySet())
+			{
+				for (int i=0; i<entryMonth.getValue().size(); i++)
+				{
+					List<String> fileList = new ArrayList<String>();
+					FileManager.getListOfFiles(fileList, Constants.DATABASE_PATH + entryYear.getKey() + File.separator + entryMonth.getKey() + File.separator + entryMonth.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+					for (int a=0; a<fileList.size(); a++)
+					{
+						filePaths.add(fileList.get(a));
+					}
+				}
+			}
+		}
+		/*
 		for (Map.Entry<LinkedHashMap<String, String>, List<String>> entry : legibleDaysMap.entrySet())
 		{
 			for (Map.Entry<String, String> entry2 : entry.getKey().entrySet())
@@ -259,6 +357,7 @@ public class FileOperation
 				}
 			}
 		}
+		*/
 		//Parse into PainEntryData
 		for (int i=0; i<filePaths.size(); i++)
 		{

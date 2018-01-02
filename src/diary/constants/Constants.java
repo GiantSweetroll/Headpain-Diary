@@ -35,6 +35,7 @@ public final class Constants
 	public static final Font FONT_GENERAL = new Font(FONT_TYPE_GENERAL, Font.PLAIN, 15);
 	public static final Font FONT_GENERAL_BOLD = new Font(FONT_TYPE_GENERAL, Font.BOLD, 15);
 	public static final Font FONT_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, 40);
+	public static final Font FONT_SMALL_NOTE = new Font(FONT_TYPE_GENERAL, Font.ITALIC, 8);
 	
 	//Insets
 	private static final int INSETS_BASE = 5;
@@ -86,6 +87,7 @@ public final class Constants
 		return arr;	
 	}
 
+	//Arrays
 	public static final String[] GRAPH_CATEGORIES = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT),
 														Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT),
 														Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT),
@@ -93,4 +95,23 @@ public final class Constants
 														Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE),
 														Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE),
 														Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)};
+	
+	public static final String[] TABLE_FILTER_OPTIONS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)};
+	
+	public static final String[] TABLE_HEADERS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_SELECT_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_DATE_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_PAIN_POSITIONS_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_PAIN_KINDS_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_INTENSITIES_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_ACTIVITY_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_COMMENTS_TEXT)};
 }

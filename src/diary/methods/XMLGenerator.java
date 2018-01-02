@@ -146,6 +146,10 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.AUTO_TEXT, "Auto");
 		appendComponentToMap(doc, map, XMLIdentifier.CONFIRM_TEXT, "Confirm");
 		appendComponentToMap(doc, map, XMLIdentifier.REFRESH_TEXT, "Refresh");
+		appendComponentToMap(doc, map, XMLIdentifier.DELETE_TEXT, "Delete");
+		appendComponentToMap(doc, map, XMLIdentifier.SELECT_TEXT, "Select");
+		appendComponentToMap(doc, map, XMLIdentifier.NOTE_TEXT, "Note");
+		appendComponentToMap(doc, map, XMLIdentifier.FILTER_TEXT, "Filter");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -158,6 +162,35 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE, "Activity vs Date");
 		//Graph Settings
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES, "Show Data Values");
+		
+		//Table
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_BY_LABEL, "Filter By");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_KEYWORD_LABEL, "Keyword");
+		//Table Filters
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT, "Pain Amount");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT, "Comments");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT, "Duration");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT, "Intensity");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT, "Activity");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT, "Pain Kind");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT, "Pain Position");
+		//Table Usage Guide
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_GUIDE_USAGE_TEXT, "Empty fields means all data (no filter), otherwise it will search the table for the exact text");
+		//Table Button Tooltips
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_TOOLTIPS_BUTTON_BACK_TEXT, "Go back to main menu");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT, "Delete the selected entries (cannot be undone)");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT, "Open the Entry Log of the selected entry (only one at a time)");
+		//Table Headers
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_ACTIVITY_TEXT, "Activity");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_COMMENTS_TEXT, "Comments");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_DATE_TEXT, "Date");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT, "Duration");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_INTENSITIES_TEXT, "Intensities");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT, "Amount of Headpain Location(s)");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_PAIN_KINDS_TEXT, "Kinds of Headpain");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_PAIN_POSITIONS_TEXT, "Pain Positions");
+		appendComponentToMap(doc,map, XMLIdentifier.TABLE_HEADERS_SELECT_TEXT, "Select");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT, "Start Time");
 		
 		//Error Handling
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT, "Please fill all required fields (marked with *)");

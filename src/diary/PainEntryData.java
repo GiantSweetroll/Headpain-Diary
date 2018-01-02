@@ -101,4 +101,78 @@ public class PainEntryData
 		
 		return map;
 	}
+	
+	public String getPainPositionsAsString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
+		for (int i=0; i<list.size(); i++)
+		{
+			sb.append(list.get(i).get(PainDataIdentifier.GENERAL_POSITION).toString());
+			sb.append(" (" + list.get(i).get(PainDataIdentifier.GENERAL_POSITION_2).toString() + ")");
+			sb.append(" (" + list.get(i).get(PainDataIdentifier.SPECIFIC_LOCATION) + ")");
+			
+			if (list.size()-i!=1)
+			{
+				sb.append(", ");
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+	public String getPainKindAsString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
+		for (int i=0; i<list.size(); i++)
+		{
+			sb.append(list.get(i).get(PainDataIdentifier.PAIN_KIND).toString());
+			
+			if (list.size()-i!=1)
+			{
+				sb.append(", ");
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+	public String getIntensitiesAsString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
+		for (int i=0; i<list.size(); i++)
+		{
+			sb.append(list.get(i).get(PainDataIdentifier.INTENSITY).toString());
+			
+			if (list.size()-i!=1)
+			{
+				sb.append(", ");
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+	public String getDurationsAsString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
+		for (int i=0; i<list.size(); i++)
+		{
+			sb.append(list.get(i).get(PainDataIdentifier.DURATION).toString());
+			
+			if (list.size()-i!=1)
+			{
+				sb.append(", ");
+			}
+		}
+		
+		return sb.toString();
+	}
 }

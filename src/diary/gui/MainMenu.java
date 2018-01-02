@@ -21,6 +21,7 @@ import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.EntryLog.EntryLog;
 import diary.gui.graphs.GraphPanel;
+import diary.gui.table.TableScreen;
 import giantsweetroll.gui.swing.Gbm;
 
 // TODO: Auto-generated Javadoc
@@ -90,9 +91,6 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.add(this.panelBelow, BorderLayout.SOUTH);
 	}
 	
-	/**
-	 * Inits the panel below author.
-	 */
 	private void initPanelBelowAuthor()
 	{
 		//Initialization
@@ -107,10 +105,7 @@ public final class MainMenu extends JPanel implements ActionListener
 		//add to panel
 		this.panelBelowAuthor.add(this.labAuthor);
 	}
-	
-	/**
-	 * Inits the panel below version.
-	 */
+
 	private void initPanelBelowVersion()
 	{
 		//Initialization
@@ -126,9 +121,6 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.panelBelowVersion.add(this.labVersion);
 	}
 	
-	/**
-	 * Inits the panel below.
-	 */
 	private void initPanelBelow()
 	{
 		//Initialization
@@ -145,9 +137,6 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.panelBelow.add(this.panelBelowVersion, BorderLayout.EAST);
 	}
 	
-	/**
-	 * Inits the panel title.
-	 */
 	private void initPanelTitle()
 	{
 		//Initialization
@@ -164,9 +153,6 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.panelTitle.add(this.labTitle);
 	}
 	
-	/**
-	 * Inits the panel buttons.
-	 */
 	private void initPanelButtons()
 	{
 		//Initialization
@@ -242,9 +228,6 @@ public final class MainMenu extends JPanel implements ActionListener
 		}
 	}
 	
-	/**
-	 * Inits the panel center.
-	 */
 	private void initPanelCenter()
 	{
 		//Initialization
@@ -296,6 +279,7 @@ public final class MainMenu extends JPanel implements ActionListener
 					else if (keyCode == KeyEvent.VK_3 || keyCode == KeyEvent.VK_NUMPAD3)
 					{
 						//Table
+						MainFrame.changePanel(new TableScreen());
 					}
 					else if (keyCode == KeyEvent.VK_4 || keyCode == KeyEvent.VK_NUMPAD4)
 					{
@@ -335,6 +319,7 @@ public final class MainMenu extends JPanel implements ActionListener
 				break;
 				
 			case TABLE:
+				MainFrame.changePanel(new TableScreen());
 				break;
 				
 			case SETTINGS:
