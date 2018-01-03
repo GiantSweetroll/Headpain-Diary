@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
+import diary.methods.PainDataOperation;
 
 public class TablePanel extends JPanel
 {
@@ -20,9 +21,10 @@ public class TablePanel extends JPanel
 	private Table table;
 	private JScrollPane scroll;
 	
-	protected TablePanel(List<PainEntryData> list)
+	protected TablePanel(List<PainEntryData> list, String filterType, String filter)
 	{
 		//Initialization
+		list = PainDataOperation.getFilteredData(filterType, filter, list);
 		Object[][] objects = this.convertToTableDataArray(list);
 		this.table = new Table(objects, Constants.TABLE_HEADERS);
 		{
@@ -67,5 +69,10 @@ public class TablePanel extends JPanel
 		}
 		
 		return arr;
+	}
+
+	protected Table getTable()
+	{
+		return this.table;
 	}
 }

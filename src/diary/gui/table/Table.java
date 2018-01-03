@@ -2,6 +2,8 @@ package diary.gui.table;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -16,6 +18,7 @@ public class Table extends JTable
 	 * 
 	 */
 	private static final long serialVersionUID = 7051752509928960116L;
+	private List<String> selectedEntries;
 	
 	protected Table(Object[][] data, String[] columns)
 	{
@@ -38,15 +41,18 @@ public class Table extends JTable
 		JLabel headerLabel = ((JLabel)this.getTableHeader().getDefaultRenderer());
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		
 		//Center align cells data
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		for (int i=0; i<this.getColumnCount(); i++)
+		for (int i=1; i<this.getColumnCount(); i++)			//Ignore first column, otherwise won't be able to display boolean check box
 		{
 			this.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 		}
+		
 	}
-	
+
+	//Override Methods
 	@Override
 	public boolean isCellEditable(int row, int column)		//Make the table data un-editable (except the check box column)
 	{
@@ -63,7 +69,7 @@ public class Table extends JTable
 	@Override
     public Class<?> getColumnClass(int column)
     {
-        return getValueAt(0, column).getClass();
+		return getValueAt(0, column).getClass();
     }
 	
 	@Override

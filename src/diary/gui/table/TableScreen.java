@@ -6,13 +6,20 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
@@ -20,6 +27,7 @@ import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
 import diary.methods.FileOperation;
+import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 
 public class TableScreen extends JPanel implements ActionListener
@@ -37,6 +45,7 @@ public class TableScreen extends JPanel implements ActionListener
 	private JTextField tfFilter;
 	private JButton butFilter, butBack, butDelete, butSelect;
 	private JLabel labFilter, labKeyword, labGuide;
+	private List<String> selectedEntries;
 	
 	//Constants
 	private final String FILTER = "filter";
@@ -197,11 +206,126 @@ public class TableScreen extends JPanel implements ActionListener
 		}
 		catch(NullPointerException ex) {};
 		
-		this.table = new TablePanel(FileOperation.getListOfEntries(this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO)));
+		this.butDelete.setEnabled(false);
+		this.butSelect.setEnabled(false);
+		
+		String filterType = this.getFilterType();
+		
+		String filter = Methods.getTextData(this.tfFilter);
+		this.table = new TablePanel(FileOperation.getListOfEntries(this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO)), filterType, filter);
 		this.add(this.table, BorderLayout.CENTER);
+		
+		this.table.getTable().getModel().addTableModelListener(new TableModelListener()
+				{
+					@Override
+					public void tableChanged(TableModelEvent e)
+					{
+						gatherSelectedEntries(table.getTable());
+					}
+					
+				});
+		this.table.getTable().addMouseListener(new MouseListener()
+				{
+
+					@Override
+					public void mouseClicked(MouseEvent e) 
+					{
+						gatherSelectedEntries(table.getTable());
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+			
+				});
 		
 		this.revalidate();
 		this.repaint();
+	}
+	private String getFilterType()
+	{
+		String filterType = this.comboFilter.getSelectedItem().toString();
+		
+		if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT)))
+		{
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT;
+		}
+		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT)))
+		{
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT;
+		}
+		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT)))
+		{
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT;
+		}
+		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT)))
+		{
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT;
+		}
+		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT)))
+		{
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT;
+		}
+		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT)))
+		{
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT;
+		}
+		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)))
+		{
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT;
+		}
+		
+		return filterType;
+	}
+	private void gatherSelectedEntries(JTable table)
+	{
+		this.selectedEntries = new ArrayList<String>();
+		int selected = 0;
+		
+		for (int i=0; i<table.getRowCount(); i++)		//Check which entries are selected
+		{
+			if ((Boolean)table.getValueAt(i, 0))
+			{
+				this.selectedEntries.add(table.getModel().getValueAt(table.convertRowIndexToView(i), 2).toString().replaceAll(":", "-"));		//Replace ":" to "-" to unify with file name
+				selected++;
+			}
+		}
+		
+		if (selected==1)
+		{
+			this.butSelect.setEnabled(true);
+			this.butDelete.setEnabled(true);
+		}
+		else if (selected > 1)
+		{
+			this.butSelect.setEnabled(false);
+			this.butDelete.setEnabled(true);;
+		}
+		else
+		{
+			this.butDelete.setEnabled(false);
+			this.butSelect.setEnabled(false);
+		}
 	}
 	
 	//Interfaces
