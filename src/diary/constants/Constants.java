@@ -114,4 +114,8 @@ public final class Constants
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_ACTIVITY_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_COMMENTS_TEXT)};
+	
+	public static final Object[] OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.YES_TEXT),
+																			Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NO_TEXT),
+																			Constants.LANGUAGE.getTextMap().get(XMLIdentifier.CANCEL_TEXT)};
 }

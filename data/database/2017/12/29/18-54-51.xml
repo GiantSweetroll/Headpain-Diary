@@ -9,7 +9,7 @@
      <nyeri_amount>1</nyeri_amount>
      <pain_locations>
           <pain_location pain_loc_id="0">
-               <general_location>Ears</general_location>
+               <general_location>ears</general_location>
                <general_location_2>ears right general</general_location_2>
                <specific_location>ears right hole</specific_location>
                <pain_kind>Airplane like</pain_kind>

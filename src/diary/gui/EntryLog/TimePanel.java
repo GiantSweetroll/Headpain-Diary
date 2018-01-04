@@ -92,17 +92,23 @@ public class TimePanel extends JPanel implements ActionListener
 		this.add(this.butCurrent, c);			//Current
 	}
 	
-	protected void setData(String hour, String minute, String second)
+	protected void setTime(String hour, String minute, String second)
 	{
 		this.comboHour.setSelectedItem(hour);
 		this.comboMinute.setSelectedItem(minute);
 		this.comboSec.setSelectedItem(second);
 	}
-	protected void setDefaultData(String hour, String minute, String second)
+	protected void setDefaultTime(String hour, String minute, String second)
 	{
 		this.defaultMap.put(this.HOUR, hour);
 		this.defaultMap.put(this.MINUTE, minute);
 		this.defaultMap.put(this.SECONDS, second);
+	}
+	protected void setAsDefaultTimeThis()
+	{
+		this.defaultMap.put(this.HOUR, this.comboHour.getSelectedItem().toString());
+		this.defaultMap.put(this.MINUTE, this.comboMinute.getSelectedItem().toString());
+		this.defaultMap.put(this.SECONDS, this.comboSec.getSelectedItem().toString());
 	}
 	
 	protected void resetDefault()

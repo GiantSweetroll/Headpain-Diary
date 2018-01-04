@@ -29,6 +29,9 @@ public class XMLIdentifier
 	public static final String SELECT_TEXT = "select text";
 	public static final String NOTE_TEXT = "note text";
 	public static final String FILTER_TEXT = "filter text";
+	public static final String YES_TEXT = "yes text";
+	public static final String NO_TEXT = "no text";
+	public static final String CANCEL_TEXT = "cancel text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -174,4 +177,8 @@ public class XMLIdentifier
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TITLE = "unfilled required fields dialog title";
+	
+	//Message Dialogs
+	public static final String MESSAGE_DELETE_CONFIRM_TITLE = "message delete confirm title";
+	public static final String MESSAGE_DELETE_CONFIRM_TEXT = "message delete confirm text";
 }

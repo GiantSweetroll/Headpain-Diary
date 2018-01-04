@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -21,6 +22,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
@@ -63,6 +65,9 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private GridBagConstraints c;
 	
+	private boolean isNewEntry;
+	private PainEntryData oldEntry;
+	
 	//Constants
 	private final String BACK = "back";
 	private final String FINISH = "finish";
@@ -75,6 +80,16 @@ public class EntryLog extends JPanel implements ActionListener
 	public EntryLog()
 	{
 		this.createAndShowGUI();
+		this.isNewEntry = true;
+	}
+	public EntryLog(PainEntryData entry)
+	{
+		this.createAndShowGUI();
+		this.oldEntry = entry;
+		this.fillData(entry);
+		this.revalidate();
+		this.repaint();
+		this.isNewEntry = false;
 	}
 	
 	//Initialization of GUI
@@ -136,7 +151,7 @@ public class EntryLog extends JPanel implements ActionListener
 		//Properties
 		this.panelCenter.setLayout(new GridBagLayout());
 		this.panelCenter.setOpaque(false);
-		this.panelTime.setDefaultData(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute(), GDateManager.getCurrentSecond());
+		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute(), GDateManager.getCurrentSecond());
 		this.panelTime.resetDefault();
 		this.tfNyeriAmount.setColumns(5);
 		this.tfNyeriAmount.setHorizontalAlignment(SwingConstants.CENTER);
@@ -335,6 +350,52 @@ public class EntryLog extends JPanel implements ActionListener
 		}
 	}
 	
+	private void fillData(PainEntryData entry)
+	{
+		this.panelDate.setDate(entry.getDataMap().get(PainDataIdentifier.DATE_DAY).toString(), 
+								entry.getDataMap().get(PainDataIdentifier.DATE_MONTH).toString(), 
+								entry.getDataMap().get(PainDataIdentifier.DATE_YEAR).toString());
+		this.panelDate.setAsDefaultDataThis();
+		
+		this.panelTime.setTime(entry.getDataMap().get(PainDataIdentifier.TIME_HOUR).toString(),
+								entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE).toString(),
+								entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS).toString());
+		this.panelTime.setAsDefaultTimeThis();
+		
+		this.tfNyeriAmount.setText(entry.getDataMap().get(PainDataIdentifier.PAIN_AMOUNT).toString());
+		this.refreshPainPositions();
+		
+		List<LinkedHashMap<String, Object>> painLocations = (List<LinkedHashMap<String, Object>>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
+		for (int i=0; i<painLocations.size(); i++)
+		{
+			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setSelectedPosition(painLocations.get(i).get(PainDataIdentifier.GENERAL_POSITION).toString(),
+																														painLocations.get(i).get(PainDataIdentifier.GENERAL_POSITION_2).toString(),
+																														painLocations.get(i).get(PainDataIdentifier.SPECIFIC_LOCATION).toString());
+			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setPainKind(painLocations.get(i).get(PainDataIdentifier.PAIN_KIND).toString());
+			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setIntensity(painLocations.get(i).get(PainDataIdentifier.INTENSITY).toString());
+			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDuration(painLocations.get(i).get(PainDataIdentifier.DURATION).toString());
+		}
+		this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+		this.taComments.setText(entry.getDataMap().get(PainDataIdentifier.COMMENTS).toString());
+	}
+	
+	private void refreshPainPositions()
+	{
+		getNyeriAmount();
+		
+		panelCenter.remove(panelNyeriTypes);
+		
+		panelNyeriTypes = new CollectivePainLocationDataScrollPane(nyeriAmount);
+		
+		c.gridwidth = 1000;
+		c.gridx = vecPainLocationPanel.x;
+		c.gridy = vecPainLocationPanel.y;
+		panelCenter.add(panelNyeriTypes, c);
+		
+		revalidate();
+		repaint();
+	}
+	
 	//Interfaces
 	
 	public void actionPerformed(ActionEvent e)
@@ -348,10 +409,14 @@ public class EntryLog extends JPanel implements ActionListener
 			case FINISH:
 				if (this.allRequiredFieldsFilled())
 				{
-					Document doc = this.createDataXMLDocument();
+					PainEntryData entry = new PainEntryData(this.createDataXMLDocument());
 					
-					FileOperation.exportPainData(doc);
+					FileOperation.exportPainData(entry);
 			//		MessageManager.showDialog("Entry saved successfully");
+					if (!this.isNewEntry)
+					{
+						FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldEntry));
+					}
 					MainFrame.changePanel(new MainMenu());
 				}
 				else
@@ -367,19 +432,7 @@ public class EntryLog extends JPanel implements ActionListener
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					getNyeriAmount();
-					
-					panelCenter.remove(panelNyeriTypes);
-					
-					panelNyeriTypes = new CollectivePainLocationDataScrollPane(nyeriAmount);
-					
-					c.gridwidth = 1000;
-					c.gridx = vecPainLocationPanel.x;
-					c.gridy = vecPainLocationPanel.y;
-					panelCenter.add(panelNyeriTypes, c);
-					
-					revalidate();
-					repaint();
+					refreshPainPositions();
 				}
 			};
 }

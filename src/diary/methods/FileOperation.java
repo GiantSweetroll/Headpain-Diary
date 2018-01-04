@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import diary.PainEntryData;
@@ -22,18 +21,18 @@ import giantsweetroll.xml.dom.XMLManager;
 
 public class FileOperation
 {
-	public static final void exportPainData(Document doc)
+	public static final void exportPainData(PainEntryData entry)
 	{
-		File file = new File(Methods.generatePainDataFolderPathName(doc));
+		File file = new File(Methods.generatePainDataFolderPathName(entry));
 		if (!file.exists())				//Check if the folder directory exists, if not make it
 		{
 			file.mkdirs();
 		}
 		
-		file = new File(Methods.generatePainDataFilePathName(doc));
+		file = new File(Methods.generatePainDataFilePathName(entry));
 		try 
 		{
-			XMLManager.exportXML(doc, file, 5);
+			XMLManager.exportXML(entry.getDocumentForm(), file, 5);
 		} 
 		catch (TransformerException e) 
 		{
@@ -374,5 +373,20 @@ public class FileOperation
 //		MessageManager.printLine("Size of entries: " + list.size());
 		
 		return list;
+	}
+
+	public static void deleteEntries(List<String> filePaths)
+	{
+		for (int i=0; i<filePaths.size(); i++)
+		{
+			File file = new File(filePaths.get(i));
+			file.delete();
+		}
+	}
+	
+	public static void deleteEntry(String filePath)
+	{
+		File file = new File(filePath);
+		file.delete();
 	}
 }

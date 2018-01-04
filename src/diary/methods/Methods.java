@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
@@ -16,7 +17,7 @@ import diary.constants.XMLIdentifier;
 import giantsweetroll.xml.dom.XMLManager;
 
 public class Methods 
-{
+{	
 	public static String getTextData(JTextField tf)
 	{
 		return tf.getText().trim();
@@ -38,11 +39,28 @@ public class Methods
 		}
 	}
 	
+	
+	public static String generatePainDataFolderPathName(PainEntryData entry)
+	{
+		return Constants.DATABASE_PATH +
+				entry.getDataMap().get(PainDataIdentifier.DATE_YEAR) + File.separator +
+				entry.getDataMap().get(PainDataIdentifier.DATE_MONTH) + File.separator +
+				entry.getDataMap().get(PainDataIdentifier.DATE_DAY);
+	}
+	public static String generatePainDataFilePathName(PainEntryData entry)
+	{
+		return 	generatePainDataFolderPathName(entry) + File.separator +
+				entry.getDataMap().get(PainDataIdentifier.TIME_HOUR) + "-" +
+				entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE) + "-" +
+				entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS) +
+				".xml";
+	}
+	/*
 	public static String generatePainDataFolderPathName(Document doc)
 	{
 		Element rootElement = XMLManager.getElement(doc.getElementsByTagName(PainDataIdentifier.MASTER_NODE), 0);
 		
-		return "." + File.separator + "data" + File.separator + "database" + File.separator +
+		return Constants.DATABASE_PATH +
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.DATE_YEAR), 0).getTextContent() + File.separator +
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.DATE_MONTH), 0).getTextContent() + File.separator +
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.DATE_DAY), 0).getTextContent();
@@ -58,6 +76,7 @@ public class Methods
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.TIME_SECONDS), 0).getTextContent() +
 				".xml";
 	}
+	*/
 	
 	public static float getHighestValue(List<Float> list)
 	{

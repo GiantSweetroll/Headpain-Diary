@@ -13,6 +13,7 @@ import giantsweetroll.xml.dom.XMLManager;
 public class PainEntryData 
 {
 	private LinkedHashMap<String, Object> dataMap;
+	private Document document;
 	
 	public PainEntryData(LinkedHashMap<String, Object> dataMap)
 	{
@@ -21,6 +22,7 @@ public class PainEntryData
 	
 	public PainEntryData(Document doc)
 	{
+		this.document = doc;
 		this.dataMap = new LinkedHashMap<String, Object>();
 		Element rootElement = XMLManager.getElement(doc.getElementsByTagName(PainDataIdentifier.MASTER_NODE), 0);
 		
@@ -174,5 +176,10 @@ public class PainEntryData
 		}
 		
 		return sb.toString();
+	}
+	
+	public Document getDocumentForm() 
+	{
+		return this.document;
 	}
 }

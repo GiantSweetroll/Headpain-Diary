@@ -1,6 +1,7 @@
 package diary.gui.EntryLog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -19,7 +20,7 @@ public class CollectivePainLocationDataScrollPane extends JScrollPane
 	 */
 	private static final long serialVersionUID = 7167068873969898308L;
 
-	private ArrayList<IndividualPainLocationDataPanel> list;
+	private List<IndividualPainLocationDataPanel> list;
 	private JPanel panel;
 	
 	public CollectivePainLocationDataScrollPane(int amount)
@@ -41,6 +42,11 @@ public class CollectivePainLocationDataScrollPane extends JScrollPane
 			this.list.add(new IndividualPainLocationDataPanel());
 			this.panel.add(this.list.get(i));
 		}
+	}
+	
+	protected List<IndividualPainLocationDataPanel> getPainPositions()
+	{
+		return this.list;
 	}
 	
 	protected Element getLocationsElement(Document doc)

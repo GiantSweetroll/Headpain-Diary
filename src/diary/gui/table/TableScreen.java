@@ -8,12 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -21,11 +23,14 @@ import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import diary.PainEntryData;
 import diary.constants.Constants;
+import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
+import diary.gui.EntryLog.EntryLog;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
@@ -45,7 +50,9 @@ public class TableScreen extends JPanel implements ActionListener
 	private JTextField tfFilter;
 	private JButton butFilter, butBack, butDelete, butSelect;
 	private JLabel labFilter, labKeyword, labGuide;
-	private List<String> selectedEntries;
+	private List<String> selectedEntryIDs;
+	private List<PainEntryData> entries;
+	private PainEntryData activeEntry;
 	
 	//Constants
 	private final String FILTER = "filter";
@@ -212,7 +219,8 @@ public class TableScreen extends JPanel implements ActionListener
 		String filterType = this.getFilterType();
 		
 		String filter = Methods.getTextData(this.tfFilter);
-		this.table = new TablePanel(FileOperation.getListOfEntries(this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO)), filterType, filter);
+		this.entries = FileOperation.getListOfEntries(this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO));
+		this.table = new TablePanel(this.entries, filterType, filter);
 		this.add(this.table, BorderLayout.CENTER);
 		
 		this.table.getTable().getModel().addTableModelListener(new TableModelListener()
@@ -299,14 +307,30 @@ public class TableScreen extends JPanel implements ActionListener
 	}
 	private void gatherSelectedEntries(JTable table)
 	{
-		this.selectedEntries = new ArrayList<String>();
+		this.selectedEntryIDs = new ArrayList<String>();
 		int selected = 0;
 		
 		for (int i=0; i<table.getRowCount(); i++)		//Check which entries are selected
 		{
 			if ((Boolean)table.getValueAt(i, 0))
 			{
-				this.selectedEntries.add(table.getModel().getValueAt(table.convertRowIndexToView(i), 2).toString().replaceAll(":", "-"));		//Replace ":" to "-" to unify with file name
+				String key = table.getModel().getValueAt(table.convertRowIndexToView(i), 2).toString();
+				PainEntryData entry = null;
+				for (int a=0; a<this.entries.size(); a++)
+				{
+					if(key.equals(this.entries.get(i).getFullTime()))
+					{
+						entry = this.entries.get(i);
+					}
+				}
+				//Entry ID is the start time
+				
+				this.activeEntry = entry;
+				this.selectedEntryIDs.add(Constants.DATABASE_PATH + 
+											entry.getDataMap().get(PainDataIdentifier.DATE_YEAR)+ File.separator +
+											entry.getDataMap().get(PainDataIdentifier.DATE_MONTH)+ File.separator +
+											entry.getDataMap().get(PainDataIdentifier.DATE_DAY)+ File.separator +
+											key.replaceAll(":", "-") + ".xml");		//Replace ":" to "-" to unify with file name
 				selected++;
 			}
 		}
@@ -339,9 +363,23 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case DELETE:
+				int response = JOptionPane.showOptionDialog(null, 
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE), 
+															JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
+															null, 
+															Constants.OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS, 
+															Constants.OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS[2]);
+				
+				if (response == JOptionPane.YES_OPTION)
+				{
+					FileOperation.deleteEntries(this.selectedEntryIDs);
+					this.initTable();
+				}
 				break;
 				
 			case SELECT:
+				MainFrame.changePanel(new EntryLog(this.activeEntry));
 				break;
 				
 			case BACK:

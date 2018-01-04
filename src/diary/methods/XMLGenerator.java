@@ -150,6 +150,9 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.SELECT_TEXT, "Select");
 		appendComponentToMap(doc, map, XMLIdentifier.NOTE_TEXT, "Note");
 		appendComponentToMap(doc, map, XMLIdentifier.FILTER_TEXT, "Filter");
+		appendComponentToMap(doc, map, XMLIdentifier.YES_TEXT, "Yes");
+		appendComponentToMap(doc, map, XMLIdentifier.NO_TEXT, "No");
+		appendComponentToMap(doc, map, XMLIdentifier.CANCEL_TEXT, "Cancel");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -195,6 +198,10 @@ public class XMLGenerator
 		//Error Handling
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT, "Please fill all required fields (marked with *)");
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE, "Fill in all required fields");
+		
+		//Message Dialogs
+		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT, "Are you sure you want to delete the following entries?");
+		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE, "Confirm delete?");
 		
 		return map;
 	}
