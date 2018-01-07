@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import diary.constants.Constants;
+import diary.gui.settings.SettingsPanel;
 import diary.methods.FileOperation;
 import diary.methods.XMLGenerator;
 

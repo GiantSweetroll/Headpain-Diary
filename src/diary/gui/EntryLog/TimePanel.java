@@ -118,6 +118,11 @@ public class TimePanel extends JPanel implements ActionListener
 		this.comboSec.setSelectedItem(this.defaultMap.get(this.SECONDS));
 	}
 	
+	protected Map<String, String> getDefaultMap()
+	{
+		return this.defaultMap;
+	}
+	
 	protected void setToCurrentTime()
 	{
 		this.comboHour.setSelectedItem(GDateManager.getCurrentHour());
@@ -134,6 +139,21 @@ public class TimePanel extends JPanel implements ActionListener
 		map.put(PainDataIdentifier.TIME_SECONDS, this.comboSec.getSelectedItem().toString());
 		
 		return map;
+	}
+	
+	protected boolean sameAsDefault()
+	{
+		LinkedHashMap<String, String> data = this.getData();
+		if (this.defaultMap.get(this.HOUR).equals(data.get(PainDataIdentifier.TIME_HOUR)) && 
+				this.defaultMap.get(this.MINUTE).equals(data.get(PainDataIdentifier.TIME_MINUTE)) && 
+				this.defaultMap.get(this.SECONDS).equals(data.get(PainDataIdentifier.TIME_SECONDS)))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	//Interfaces

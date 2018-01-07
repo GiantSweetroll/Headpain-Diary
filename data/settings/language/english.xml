@@ -89,6 +89,8 @@
      <text identifier="yes text">Yes</text>
      <text identifier="no text">No</text>
      <text identifier="cancel text">Cancel</text>
+     <text identifier="browse text">Browse</text>
+     <text identifier="save text">Save</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category pain vs date text">Pain vs Date</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
@@ -121,8 +123,16 @@
      <text identifier="table headers pain positions text">Pain Positions</text>
      <text identifier="table headers select text">Select</text>
      <text identifier="table headers start time text">Start Time</text>
+     <text identifier="settings window title">Window</text>
+     <text identifier="settings window mode text">Window Mode</text>
+     <text identifier="settings window mode fullscreen text">Fullscreen</text>
+     <text identifier="setttings window mode windowed text">Windowed</text>
+     <text identifier="settings database title">Database</text>
+     <text identifier="settings database path text">Database Location</text>
      <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
      <text identifier="unfilled required fields dialog title">Fill in all required fields</text>
      <text identifier="message delete confirm text">Are you sure you want to delete the following entries?</text>
      <text identifier="message delete confirm title">Confirm delete?</text>
+     <text identifier="message overwrite confirm text">Another entry of the same start time already exists. Overwrite?</text>
+     <text identifier="message overwrite confirm title">Overwrite?</text>
 </language>

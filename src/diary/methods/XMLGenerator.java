@@ -153,6 +153,8 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.YES_TEXT, "Yes");
 		appendComponentToMap(doc, map, XMLIdentifier.NO_TEXT, "No");
 		appendComponentToMap(doc, map, XMLIdentifier.CANCEL_TEXT, "Cancel");
+		appendComponentToMap(doc, map, XMLIdentifier.BROWSE_TEXT, "Browse");
+		appendComponentToMap(doc, map, XMLIdentifier.SAVE_TEXT, "Save");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -195,6 +197,14 @@ public class XMLGenerator
 		appendComponentToMap(doc,map, XMLIdentifier.TABLE_HEADERS_SELECT_TEXT, "Select");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT, "Start Time");
 		
+		//Program Settings
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_WINDOW_TITLE, "Window");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT, "Window Mode");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT, "Fullscreen");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT, "Windowed");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_TITLE, "Database");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT, "Database Location");
+		
 		//Error Handling
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT, "Please fill all required fields (marked with *)");
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE, "Fill in all required fields");
@@ -202,6 +212,8 @@ public class XMLGenerator
 		//Message Dialogs
 		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT, "Are you sure you want to delete the following entries?");
 		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE, "Confirm delete?");
+		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT, "Another entry of the same start time already exists. Overwrite?");
+		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE, "Overwrite?");
 		
 		return map;
 	}

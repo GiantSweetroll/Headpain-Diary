@@ -32,6 +32,8 @@ public class XMLIdentifier
 	public static final String YES_TEXT = "yes text";
 	public static final String NO_TEXT = "no text";
 	public static final String CANCEL_TEXT = "cancel text";
+	public static final String BROWSE_TEXT = "browse text";
+	public static final String SAVE_TEXT = "save text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -174,6 +176,14 @@ public class XMLIdentifier
 	public static final String TABLE_HEADERS_ACTIVITY_TEXT = "table headers acitivity text";
 	public static final String TABLE_HEADERS_COMMENTS_TEXT = "table headers comments text";
 	
+	//Program Settings
+	public static final String SETTINGS_WINDOW_TITLE = "settings window title";
+	public static final String SETTINGS_WINDOW_MODE_TEXT = "settings window mode text";
+	public static final String SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT = "settings window mode fullscreen text";
+	public static final String SETTINGS_WINDOW_MODE_WINDOWED_TEXT = "setttings window mode windowed text";
+	public static final String SETTINGS_DATABASE_TITLE = "settings database title";
+	public static final String SETTINGS_DATABASE_PATH_TEXT = "settings database path text";
+	
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TITLE = "unfilled required fields dialog title";
@@ -181,4 +191,6 @@ public class XMLIdentifier
 	//Message Dialogs
 	public static final String MESSAGE_DELETE_CONFIRM_TITLE = "message delete confirm title";
 	public static final String MESSAGE_DELETE_CONFIRM_TEXT = "message delete confirm text";
+	public static final String MESSAGE_OVERWRITE_CONFIRM_TITLE = "message overwrite confirm title";
+	public static final String MESSAGE_OVERWRITE_CONFIRM_TEXT = "message overwrite confirm text";
 }

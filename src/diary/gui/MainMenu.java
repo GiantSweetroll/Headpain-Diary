@@ -21,6 +21,7 @@ import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.EntryLog.EntryLog;
 import diary.gui.graphs.GraphPanel;
+import diary.gui.settings.SettingsPanel;
 import diary.gui.table.TableScreen;
 import giantsweetroll.gui.swing.Gbm;
 
@@ -284,6 +285,7 @@ public final class MainMenu extends JPanel implements ActionListener
 					else if (keyCode == KeyEvent.VK_4 || keyCode == KeyEvent.VK_NUMPAD4)
 					{
 						//Settings
+						MainFrame.changePanel(new SettingsPanel());
 					}
 					else if (keyCode == KeyEvent.VK_5 || keyCode == KeyEvent.VK_NUMPAD5)
 					{
@@ -323,6 +325,7 @@ public final class MainMenu extends JPanel implements ActionListener
 				break;
 				
 			case SETTINGS:
+				MainFrame.changePanel(new SettingsPanel());
 				break;
 				
 			case EXIT:

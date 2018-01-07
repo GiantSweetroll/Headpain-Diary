@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -26,6 +27,7 @@ import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.gui.CustomDialog;
 import diary.gui.DatePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
@@ -411,13 +413,29 @@ public class EntryLog extends JPanel implements ActionListener
 				{
 					PainEntryData entry = new PainEntryData(this.createDataXMLDocument());
 					
-					FileOperation.exportPainData(entry);
-			//		MessageManager.showDialog("Entry saved successfully");
-					if (!this.isNewEntry)
+					if (FileOperation.entryExists(entry) && this.isNewEntry)
 					{
-						FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldEntry));
+						int response = CustomDialog.showConfirmDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
+																	Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
+						
+						if (response == JOptionPane.YES_OPTION)
+						{
+							FileOperation.exportPainData(entry);
+							MainFrame.changePanel(new MainMenu());
+						}
 					}
-					MainFrame.changePanel(new MainMenu());
+					else
+					{
+						FileOperation.exportPainData(entry);
+						if (!this.isNewEntry)
+						{
+							if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
+							{
+								FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldEntry));
+							}
+						}
+						MainFrame.changePanel(new MainMenu());
+					}
 				}
 				else
 				{

@@ -19,12 +19,14 @@ public final class Constants
 	public static final Dimension IMAGE_SIZE = new Dimension(150, 130);
 //	public static final Dimension IMAGE_SIZE = new Dimension(200, 180);
 	
+	public static final String LANGUAGE_FOLDER_PATH = "data" + File.separator + "settings" + File.separator + "language" + File.separator;
 	public static final Language LANGUAGE = new Language();
-	public static final String LANGUAGE_FOLDER_PATH = "data" + "/" + "settings" + "/" + "language" + "/";
 	
 	public static final String REQUIRED_IDENTIFIER = "* ";
 	
-	public static final String DATABASE_PATH = "." + File.separator + "data" + File.separator + "database" + File.separator;
+	public static final String DATABASE_PATH = "data" + File.separator + "database" + File.separator;
+	public static final String DATABASE_DEFAULT_PATH = "data" + File.separator + "database" + File.separator;
+	public static final String SETTINGS_FOLDER_PATH = "data" + "/" + "settings" + "/";
 	
 	//Text Field Formats
 	public static final NumberFormat AMOUNT_FORMAT = NumberFormat.getNumberInstance();

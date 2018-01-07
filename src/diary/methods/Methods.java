@@ -4,17 +4,14 @@ import java.io.File;
 import java.util.List;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
-import giantsweetroll.xml.dom.XMLManager;
 
 public class Methods 
 {	
@@ -289,5 +286,25 @@ public class Methods
 		}
 		
 		return "";
+	}
+	
+	protected static void makeFullscreen(JFrame frame)
+	{
+		frame.dispose();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setUndecorated(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+	protected static void makeWindowed(JFrame frame)
+	{
+		frame.dispose();
+		frame.setExtendedState(JFrame.NORMAL);
+		frame.setUndecorated(false);
+		frame.setSize((Constants.SCREENSIZE.width/4)*3, (Constants.SCREENSIZE.height/4)*3);
+	//	frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 }

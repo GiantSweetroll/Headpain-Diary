@@ -21,6 +21,32 @@ import giantsweetroll.xml.dom.XMLManager;
 
 public class FileOperation
 {
+	public static final boolean entryExists(PainEntryData entry)
+	{
+		File file = new File(Methods.generatePainDataFilePathName(entry));
+		if (file.exists())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public static final boolean dataExists(String path)
+	{
+		File file = new File(path);
+		if (file.exists())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	public static final void exportPainData(PainEntryData entry)
 	{
 		File file = new File(Methods.generatePainDataFolderPathName(entry));

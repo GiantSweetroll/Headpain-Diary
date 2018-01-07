@@ -27,6 +27,7 @@ import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
@@ -363,13 +364,8 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case DELETE:
-				int response = JOptionPane.showOptionDialog(null, 
-															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
-															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE), 
-															JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
-															null, 
-															Constants.OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS, 
-															Constants.OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS[2]);
+				int response = CustomDialog.showConfirmDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
+																Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
 				
 				if (response == JOptionPane.YES_OPTION)
 				{

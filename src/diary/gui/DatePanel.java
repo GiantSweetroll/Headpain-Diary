@@ -164,6 +164,21 @@ public class DatePanel extends JPanel implements ActionListener
 		this.setDate(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
 	}
 	
+	public boolean sameAsDefault()
+	{
+		LinkedHashMap<String, String> data = this.getData();
+		if (this.defaultMap.get(this.YEAR).equals(data.get(PainDataIdentifier.DATE_YEAR)) && 
+				this.defaultMap.get(this.MONTH).equals(data.get(PainDataIdentifier.DATE_MONTH)) && 
+				this.defaultMap.get(this.DAY).equals(data.get(PainDataIdentifier.DATE_DAY)))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	//Interfaces
 	private ActionListener yearListener = new ActionListener()
 		{
