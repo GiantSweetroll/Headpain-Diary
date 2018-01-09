@@ -6,14 +6,32 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.util.LinkedHashMap;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
+import diary.methods.FileOperation;
+import giantsweetroll.gui.swing.Gbm;
 
 public class SettingsPanel extends JPanel implements ActionListener
 {
@@ -24,9 +42,9 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private static final long serialVersionUID = -8823949814661108143L;	
 	
 	private JPanel panelCenter, panelBelow;
-	private DatabaseSettingsPanel catDatabase;
-	private WindowSettingsPanel catWindow;
+	private SettingsCategoryPanel catDatabase, catWindow;
 	private JButton butCancel, butSave;
+	private LinkedHashMap<String, String> dataMap;
 	
 	//Constants
 	private final String CANCEL = "cancel";
@@ -35,6 +53,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 	public SettingsPanel()
 	{
 		//Initialization
+		this.gatherData();
 		this.initPanelBelow();
 		this.initPanelCenter();
 		
@@ -52,8 +71,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelCenter = new JPanel();
-		this.catDatabase = new DatabaseSettingsPanel();
-		this.catWindow = new WindowSettingsPanel();
+		this.initCatDatabase();
+		this.initCatWindow();
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -67,6 +86,134 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.panelCenter.add(this.catWindow, c);					//Window Settings
 		c.insets = Constants.INSETS_GENERAL;
 		this.panelCenter.add(this.catDatabase, c);					//Database Settings		
+	}
+	private void initCatDatabase()
+	{
+		//Initialization
+		this.catDatabase = new SettingsCategoryPanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_TITLE));
+		JLabel labDatabasePath = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT), SwingConstants.RIGHT);
+		JTextField tfDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_PATH), 30);
+		JButton butBrowseDatabasePath = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BROWSE_TEXT));
+		GridBagConstraints c = new GridBagConstraints();
+		
+		//Properties
+		this.catDatabase.setLayout(new GridBagLayout());
+		this.catDatabase.setOpaque(false);
+		tfDatabasePath.setEditable(false);
+		butBrowseDatabasePath.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JFileChooser jfc = new JFileChooser();
+				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				jfc.setDialogTitle(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT));
+				int response = jfc.showDialog(null, Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT));
+				
+				if (response == JFileChooser.APPROVE_OPTION)
+				{
+					tfDatabasePath.setText(jfc.getSelectedFile().getAbsolutePath());
+				}
+			}
+		});
+		tfDatabasePath.getDocument().addDocumentListener(new DocumentListener()
+		{
+
+			@Override
+			public void changedUpdate(DocumentEvent e) 
+			{
+				dataMap.put(Settings.DATABASE_PATH, tfDatabasePath.getText().trim());
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) 
+			{
+				dataMap.put(Settings.DATABASE_PATH, tfDatabasePath.getText().trim());
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) 
+			{
+				dataMap.put(Settings.DATABASE_PATH, tfDatabasePath.getText().trim());
+			}
+			
+		});
+		
+		//Add to panel
+		Gbm.goToOrigin(c);
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		c.fill = GridBagConstraints.BOTH;
+		this.catDatabase.add(labDatabasePath, c);			//Database Path
+		Gbm.nextGridColumn(c);
+		this.catDatabase.add(tfDatabasePath, c);			//Database Path Text Field
+		Gbm.nextGridColumn(c);
+		this.catDatabase.add(butBrowseDatabasePath , c);	//Browse database Path button
+	}
+	private void initCatWindow()
+	{
+		//Initialization
+		this.catWindow = new SettingsCategoryPanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_TITLE));
+		JLabel labWindowMode = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT));
+		JRadioButton radFullscreen = new JRadioButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT));
+		JRadioButton radWindowed = new JRadioButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT));
+		ButtonGroup group = new ButtonGroup();
+		GridBagConstraints c = new GridBagConstraints();
+		String chosenWindowState = this.dataMap.get(Settings.WINDOW_MODE);
+		
+		//Properties
+		this.catWindow.setLayout(new GridBagLayout());
+		this.catWindow.setOpaque(false);
+		group.add(radWindowed);
+		group.add(radFullscreen);
+		if (chosenWindowState.equals(Settings.FULLSCREEN))
+		{
+			radFullscreen.setSelected(true);
+		}
+		else
+		{
+			radWindowed.setSelected(true);
+		}
+		radWindowed.addItemListener(new ItemListener()
+				{
+			@Override
+			public void itemStateChanged(ItemEvent e) 
+			{
+				if (radWindowed.isSelected())
+				{
+					dataMap.put(Settings.WINDOW_MODE, Settings.WINDOWED);
+				}
+				else
+				{
+					dataMap.put(Settings.WINDOW_MODE, Settings.FULLSCREEN);
+				}
+			}
+			
+		});
+		radFullscreen.addItemListener(new ItemListener()
+		{
+			@Override
+			public void itemStateChanged(ItemEvent e) 
+			{
+				if (radWindowed.isSelected())
+				{
+					dataMap.put(Settings.WINDOW_MODE, Settings.WINDOWED);
+				}
+				else
+				{
+					dataMap.put(Settings.WINDOW_MODE, Settings.FULLSCREEN);
+				}
+			}
+			
+		});		
+		
+		//Add to panel
+		Gbm.goToOrigin(c);
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		c.fill = GridBagConstraints.BOTH;
+		this.catWindow.add(labWindowMode, c);			//Window Mode
+		Gbm.nextGridColumn(c);
+		this.catWindow.add(radFullscreen, c);			//Fullscreen radio Button
+		Gbm.nextGridColumn(c);
+		this.catWindow.add(radWindowed, c);				//Windowed radio button
 	}
 	private void initPanelBelow()
 	{
@@ -87,6 +234,20 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.panelBelow.add(this.butCancel);
 		this.panelBelow.add(this.butSave);
 	}
+	private void gatherData()
+	{
+		try 
+		{
+			Settings setting = new Settings(FileOperation.loadSettingsDocument());
+			this.dataMap = setting.getDataMap();
+		} 
+		catch (ParserConfigurationException | SAXException | IOException e) 
+		{
+			e.printStackTrace();
+			Settings setting = new Settings();
+			this.dataMap = setting.getDataMap();
+		}
+	}
 	
 	//Interfaces
 	public void actionPerformed(ActionEvent e)
@@ -98,8 +259,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 				break;
 				
 			case SAVE:
-				this.catDatabase.saveData();
-				this.catWindow.saveData();
+				FileOperation.saveSettings(new Settings(this.dataMap));
+				MainFrame.refreshSettings();
 				MainFrame.changePanel(new MainMenu());
 				break;
 		}

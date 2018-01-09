@@ -24,9 +24,10 @@ public final class Constants
 	
 	public static final String REQUIRED_IDENTIFIER = "* ";
 	
-	public static final String DATABASE_PATH = "data" + File.separator + "database" + File.separator;
 	public static final String DATABASE_DEFAULT_PATH = "data" + File.separator + "database" + File.separator;
+//	public static final String DATABASE_PATH = MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator;
 	public static final String SETTINGS_FOLDER_PATH = "data" + "/" + "settings" + "/";
+	public static final String SETTINGS_FILE_NAME = "settings.xml";
 	
 	//Text Field Formats
 	public static final NumberFormat AMOUNT_FORMAT = NumberFormat.getNumberInstance();

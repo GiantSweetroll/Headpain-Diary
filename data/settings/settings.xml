@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<setting>
+<settings>
      <database_path>F:\Projects 4 - School\Headpain-Diary\data\database</database_path>
-</setting>
+     <window_mode>windowed</window_mode>
+</settings>

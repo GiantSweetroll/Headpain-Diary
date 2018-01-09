@@ -10,11 +10,14 @@ import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import diary.PainEntryData;
+import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
+import diary.gui.MainFrame;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.message.MessageManager;
 import giantsweetroll.xml.dom.XMLManager;
@@ -45,6 +48,23 @@ public class FileOperation
 		{
 			return false;
 		}
+	}
+	
+	public static final void saveSettings(Settings setting)
+	{
+		try 
+		{
+			XMLManager.exportXML(setting.getXMLDocument(), new File(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME), 5);
+		} 
+		catch (TransformerException | ParserConfigurationException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static final Document loadSettingsDocument() throws ParserConfigurationException, SAXException, IOException
+	{
+		return XMLManager.createDocument(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME, false);
 	}
 	
 	public static final void exportPainData(PainEntryData entry)
@@ -88,7 +108,7 @@ public class FileOperation
 		//Filtering Start
 		//Get year range
 		List<String> legibleYears = new ArrayList<String>();
-		FileManager.getListOfFiles(legibleYears, Constants.DATABASE_PATH, false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+		FileManager.getListOfFiles(legibleYears, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator, false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 //		MessageManager.printLine("Size of years: " + legibleYears.size());
 		for (int i=0; i<legibleYears.size(); i++)
 		{
@@ -117,7 +137,7 @@ public class FileOperation
 		if (legibleYears.size() == 1)
 		{
 			List<String> legibleMonths = new ArrayList<String>();
-			FileManager.getListOfFiles(legibleMonths, Constants.DATABASE_PATH + legibleYears.get(0), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+			FileManager.getListOfFiles(legibleMonths, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + legibleYears.get(0), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 	//		MessageManager.printLine("Number of months: " + legibleMonths.size());
 			for (int i=0; i<legibleMonths.size(); i++)
 			{
@@ -160,7 +180,7 @@ public class FileOperation
 			for (int i=0; i<legibleYears.size(); i++)
 			{
 				List<String> legibleMonths = new ArrayList<String>();
-				FileManager.getListOfFiles(legibleMonths, Constants.DATABASE_PATH + legibleYears.get(i), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+				FileManager.getListOfFiles(legibleMonths, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + legibleYears.get(i), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 				/*
 				 * Program only needs to check the first year for the min month,
 				 * and the last year for the max month, 
@@ -228,7 +248,7 @@ public class FileOperation
 			for (int i=0; i<entry.getValue().size(); i++)
 			{
 				List<String> legibleDays = new ArrayList<String>();
-				FileManager.getListOfFiles(legibleDays, Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(i), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+				FileManager.getListOfFiles(legibleDays, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(i), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 	//			MessageManager.printLine("Amount of legible days from month " + entry.getValue().get(i) + "before filter: " + legibleDays.size());
 				
 				if (entry.getKey().equals(dateFromMap.get(PainDataIdentifier.DATE_YEAR)))		//if the first eligible year is equal to the min year
@@ -293,8 +313,8 @@ public class FileOperation
 			for (int b=0; b<entry.getValue().size(); b++)
 			{
 				List<String> legibleDays = new ArrayList<String>();
-				MessageManager.printLine(Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b));
-				FileManager.getListOfFiles(legibleDays, Constants.DATABASE_PATH + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+				MessageManager.printLine(MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b));
+				FileManager.getListOfFiles(legibleDays, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 				MessageManager.printLine("Number of days before filter: " + legibleDays.size());
 						
 				if (iteration==0)
@@ -358,7 +378,7 @@ public class FileOperation
 				for (int i=0; i<entryMonth.getValue().size(); i++)
 				{
 					List<String> fileList = new ArrayList<String>();
-					FileManager.getListOfFiles(fileList, Constants.DATABASE_PATH + entryYear.getKey() + File.separator + entryMonth.getKey() + File.separator + entryMonth.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+					FileManager.getListOfFiles(fileList, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entryYear.getKey() + File.separator + entryMonth.getKey() + File.separator + entryMonth.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
 					for (int a=0; a<fileList.size(); a++)
 					{
 						filePaths.add(fileList.get(a));
@@ -374,7 +394,7 @@ public class FileOperation
 				for (int i=0; i<entry.getValue().size(); i++)
 				{
 					List<String> fileList = new ArrayList<String>();
-					FileManager.getListOfFiles(fileList, Constants.DATABASE_PATH + entry2.getKey() + File.separator + entry2.getValue() + File.separator + entry.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+					FileManager.getListOfFiles(fileList, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry2.getKey() + File.separator + entry2.getValue() + File.separator + entry.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
 					for (int a=0; a<fileList.size(); a++)
 					{
 						filePaths.add(fileList.get(a));

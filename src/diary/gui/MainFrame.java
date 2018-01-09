@@ -1,12 +1,17 @@
 package diary.gui;
 
+import java.io.IOException;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import diary.Settings;
 import diary.constants.Constants;
-import diary.gui.settings.SettingsPanel;
 import diary.methods.FileOperation;
 import diary.methods.XMLGenerator;
 
@@ -19,6 +24,7 @@ public class MainFrame
 	
 	/** The frame. */
 	public static JFrame frame;
+	public static Settings setting;
 	
 	private static JComponent jComponent;
 	
@@ -38,6 +44,7 @@ public class MainFrame
 		//Initialization
 		frame = new JFrame(Constants.PROGRAM_TITLE);
 		jComponent = new MainMenu();
+		MainFrame.refreshSettings();
 		
 		frame.add(jComponent);
 		
@@ -59,6 +66,18 @@ public class MainFrame
 		frame.revalidate();
 		frame.repaint();
 	}
+	
+	public static final void refreshSettings()
+	{
+		try 
+		{
+			MainFrame.setting = new Settings(FileOperation.loadSettingsDocument());
+		} 
+		catch (ParserConfigurationException | SAXException | IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * The main method.
@@ -75,7 +94,12 @@ public class MainFrame
 						{
 							UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 							
-							if (!FileOperation.defaultLanguageExists())
+							if(!FileOperation.dataExists(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME))		//If settings file doesn't exists
+							{
+								FileOperation.saveSettings(new Settings());
+							}
+							
+							if (!FileOperation.defaultLanguageExists())		//If default language (english) doesn't exist
 							{
 								XMLGenerator.generateXML();
 							}

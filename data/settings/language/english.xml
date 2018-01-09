@@ -129,6 +129,7 @@
      <text identifier="setttings window mode windowed text">Windowed</text>
      <text identifier="settings database title">Database</text>
      <text identifier="settings database path text">Database Location</text>
+     <text identifier="settings database path select text">Select Database Location</text>
      <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
      <text identifier="unfilled required fields dialog title">Fill in all required fields</text>
      <text identifier="message delete confirm text">Are you sure you want to delete the following entries?</text>

@@ -8,10 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import diary.PainEntryData;
+import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
+import diary.gui.MainFrame;
 
 public class Methods 
 {	
@@ -39,7 +41,7 @@ public class Methods
 	
 	public static String generatePainDataFolderPathName(PainEntryData entry)
 	{
-		return Constants.DATABASE_PATH +
+		return MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_YEAR) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_MONTH) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_DAY);
@@ -57,7 +59,7 @@ public class Methods
 	{
 		Element rootElement = XMLManager.getElement(doc.getElementsByTagName(PainDataIdentifier.MASTER_NODE), 0);
 		
-		return Constants.DATABASE_PATH +
+		return MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator +
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.DATE_YEAR), 0).getTextContent() + File.separator +
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.DATE_MONTH), 0).getTextContent() + File.separator +
 				XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.DATE_DAY), 0).getTextContent();

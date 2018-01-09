@@ -24,6 +24,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import diary.PainEntryData;
+import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
@@ -327,7 +328,7 @@ public class TableScreen extends JPanel implements ActionListener
 				//Entry ID is the start time
 				
 				this.activeEntry = entry;
-				this.selectedEntryIDs.add(Constants.DATABASE_PATH + 
+				this.selectedEntryIDs.add(MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + 
 											entry.getDataMap().get(PainDataIdentifier.DATE_YEAR)+ File.separator +
 											entry.getDataMap().get(PainDataIdentifier.DATE_MONTH)+ File.separator +
 											entry.getDataMap().get(PainDataIdentifier.DATE_DAY)+ File.separator +

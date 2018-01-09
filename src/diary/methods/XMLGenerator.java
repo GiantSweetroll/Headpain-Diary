@@ -204,6 +204,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT, "Windowed");
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_TITLE, "Database");
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT, "Database Location");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT, "Select Database Location");
 		
 		//Error Handling
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT, "Please fill all required fields (marked with *)");
