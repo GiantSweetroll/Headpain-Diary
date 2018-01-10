@@ -290,7 +290,7 @@ public class Methods
 		return "";
 	}
 	
-	protected static void makeFullscreen(JFrame frame)
+	public static void makeFullscreen(JFrame frame)
 	{
 		frame.dispose();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -298,7 +298,7 @@ public class Methods
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
-	protected static void makeWindowed(JFrame frame)
+	public static void makeWindowed(JFrame frame)
 	{
 		frame.dispose();
 		frame.setExtendedState(JFrame.NORMAL);

@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import diary.Settings;
 import diary.constants.Constants;
 import diary.methods.FileOperation;
+import diary.methods.Methods;
 import diary.methods.XMLGenerator;
 
 // TODO: Auto-generated Javadoc
@@ -72,6 +73,14 @@ public class MainFrame
 		try 
 		{
 			MainFrame.setting = new Settings(FileOperation.loadSettingsDocument());
+			if(MainFrame.setting.getDataMap().get(Settings.WINDOW_MODE).equals(Settings.WINDOWED))
+			{
+				Methods.makeWindowed(MainFrame.frame);
+			}
+			else
+			{
+				Methods.makeFullscreen(MainFrame.frame);
+			}
 		} 
 		catch (ParserConfigurationException | SAXException | IOException e) 
 		{

@@ -134,6 +134,11 @@ public class FileOperation
 		//Get month range
 		LinkedHashMap<String, List<String>> legibleMonthsMap = new LinkedHashMap<String, List<String>>();
 	//	MessageManager.printLine("Size of eligible months before: " + legibleMonthsMap.size());
+		/*
+		 * Program only needs to check the first month of the first year,
+		 * and the last month of the last year,
+		 * as all other months in between will be selected
+		 */
 		if (legibleYears.size() == 1)
 		{
 			List<String> legibleMonths = new ArrayList<String>();

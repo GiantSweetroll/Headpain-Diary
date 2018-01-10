@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
@@ -94,6 +95,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		JLabel labDatabasePath = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT), SwingConstants.RIGHT);
 		JTextField tfDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_PATH), 30);
 		JButton butBrowseDatabasePath = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BROWSE_TEXT));
+		JButton butDefaultDatabase = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -113,6 +115,14 @@ public class SettingsPanel extends JPanel implements ActionListener
 				{
 					tfDatabasePath.setText(jfc.getSelectedFile().getAbsolutePath());
 				}
+			}
+		});
+		butDefaultDatabase.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				File file = new File(Constants.DATABASE_DEFAULT_PATH);
+				tfDatabasePath.setText(file.getAbsolutePath());
 			}
 		});
 		tfDatabasePath.getDocument().addDocumentListener(new DocumentListener()
@@ -147,6 +157,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.catDatabase.add(tfDatabasePath, c);			//Database Path Text Field
 		Gbm.nextGridColumn(c);
 		this.catDatabase.add(butBrowseDatabasePath , c);	//Browse database Path button
+		Gbm.nextGridColumn(c);
+		this.catDatabase.add(butDefaultDatabase , c);		//Reset Database button
 	}
 	private void initCatWindow()
 	{

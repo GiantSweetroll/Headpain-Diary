@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="xml"/>
 	<classpathentry kind="src" path="images"/>
-	<classpathentry kind="lib" path="G:/Program Files/Programming Libraries/Java Libraries/GG-Library/GG-Library.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Programming Libraries/Java Libraries/GG-Library/GG-Library.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

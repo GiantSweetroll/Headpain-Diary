@@ -194,7 +194,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT, "Amount of Headpain Location(s)");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_PAIN_KINDS_TEXT, "Kinds of Headpain");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_PAIN_POSITIONS_TEXT, "Pain Positions");
-		appendComponentToMap(doc,map, XMLIdentifier.TABLE_HEADERS_SELECT_TEXT, "Select");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_SELECT_TEXT, "Select");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT, "Start Time");
 		
 		//Program Settings
