@@ -133,12 +133,14 @@ public abstract class Graph extends JPanel
 		this.yAxisMarkerPoints = new ArrayList<Point>();
 		for (int i=1; i<=this.MAX_MARKERS_IN_Y_AXIS; i++)
 		{
-			g.drawLine(this.axesOrigin.x - this.AXES_POINTERS_LENGTH/2, 
-					this.axesOrigin.y - yDiff*i, 
-					this.axesOrigin.x + this.AXES_POINTERS_LENGTH/2, 
-					this.axesOrigin.y - yDiff*i);
+			int x = this.axesOrigin.x - this.AXES_POINTERS_LENGTH/2;
+			int y = this.axesOrigin.y - (yDiff*i);
+			g.drawLine(x, 
+						y, 
+						this.axesOrigin.x + this.AXES_POINTERS_LENGTH/2, 
+						y);
 			
-			this.yAxisMarkerPoints.add(new Point(this.axesOrigin.x - this.AXES_POINTERS_LENGTH/2, this.axesOrigin.y - yDiff*i));	//Take note of the coordinate position of each Y-Axis markers
+			this.yAxisMarkerPoints.add(new Point(x, y));	//Take note of the coordinate position of each Y-Axis markers
 		}
 	}
 	protected void drawYAxisMarkerLabels(Graphics g, Color c)

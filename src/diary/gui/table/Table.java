@@ -2,7 +2,6 @@ package diary.gui.table;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -80,17 +79,21 @@ public class Table extends JTable
 		//Table row color patterns
 		if (row%2==1)
 		{
-			c.setBackground(Color.WHITE);
+			//c.setBackground(Color.WHITE);
+			//c.setBackground(new Color(101, 214, 214));		//Cyan blue
+			c.setBackground(new Color(222, 220, 220));
 		}
 		else
 		{
 			c.setBackground(Color.LIGHT_GRAY);
+			//c.setBackground(new Color(0, 45, 255));			//Lapis Blue
 		}
 		
 		//Different color for selected row(s)
 		if (super.isCellSelected(row, column))
 		{
-			c.setBackground(new Color (8, 243, 240));
+			//c.setBackground(new Color (8, 243, 240));		//Cyan Blue
+			c.setBackground(new Color(77, 72, 72));
 		}
 		
 		return c;
