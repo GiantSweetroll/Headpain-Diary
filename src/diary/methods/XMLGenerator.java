@@ -16,7 +16,7 @@ import giantsweetroll.xml.dom.XMLManager;
 
 public class XMLGenerator 
 {
-	private static final String XML_PATH = "." + File.separator + "data" + File.separator + "settings" + File.separator + "language" + File.separator + "english.xml";
+	private static final String XML_PATH ="data" + File.separator + "settings" + File.separator + "language" + File.separator + "english.xml";
 	
 	public static final void generateXML()
 	{
@@ -35,7 +35,12 @@ public class XMLGenerator
 			}
 			
 			//Export
-			XMLManager.exportXML(doc, new File(XMLGenerator.XML_PATH), 5);
+			File file = new File(XMLGenerator.XML_PATH);
+			if (!file.exists())
+			{
+				file.getParentFile().mkdirs();
+			}
+			XMLManager.exportXML(doc, file, 5);
 		} 
 		catch (ParserConfigurationException | TransformerException e) 
 		{

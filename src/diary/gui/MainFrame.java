@@ -1,5 +1,6 @@
 package diary.gui;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JComponent;
@@ -73,6 +74,7 @@ public class MainFrame
 		try 
 		{
 			MainFrame.setting = new Settings(FileOperation.loadSettingsDocument());
+			//Select window mode
 			if(MainFrame.setting.getDataMap().get(Settings.WINDOW_MODE).equals(Settings.WINDOWED))
 			{
 				Methods.makeWindowed(MainFrame.frame);
@@ -82,7 +84,15 @@ public class MainFrame
 				Methods.makeFullscreen(MainFrame.frame);
 			}
 			
+			//Selected Language
 			Constants.LANGUAGE.setLanguage(MainFrame.setting.getDataMap().get(Settings.LANGUAGE));
+			
+			//Database path
+			File file = new File(setting.getDataMap().get(Settings.DATABASE_PATH));
+			if(!file.exists())
+			{
+				file.mkdirs();
+			}
 		} 
 		catch (ParserConfigurationException | SAXException | IOException e) 
 		{

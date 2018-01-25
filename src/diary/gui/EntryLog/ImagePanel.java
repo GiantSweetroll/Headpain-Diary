@@ -3,13 +3,17 @@ package diary.gui.EntryLog;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
+import giantsweetroll.message.MessageManager;
 
 public class ImagePanel extends JPanel
 {
@@ -29,6 +33,16 @@ public class ImagePanel extends JPanel
 		catch (IOException ex)
 		{
 			ex.printStackTrace();
+		}
+		catch(Exception ex)
+		{
+			MessageManager.showErrorDialog(ex);
+			try {
+				ex.printStackTrace(new PrintStream(new File("debug.txt")));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		this.repaint();
