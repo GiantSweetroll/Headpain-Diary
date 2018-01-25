@@ -250,6 +250,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 			public void actionPerformed(ActionEvent e)
 			{
 				comboLanguages.setModel(new DefaultComboBoxModel(Methods.getLanguages()));
+				comboLanguages.setSelectedItem(selectedLanguage);
 			}
 		});
 		comboLanguages.addActionListener(new ActionListener()
