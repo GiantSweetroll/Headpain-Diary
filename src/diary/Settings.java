@@ -21,6 +21,7 @@ public class Settings
 	public static final String WINDOW_MODE = "window_mode";
 	public static final String FULLSCREEN = "fullscreen";
 	public static final String WINDOWED = "windowed";
+	public static final String LANGUAGE = "language";
 	
 	//Constructors
 	public Settings()
@@ -35,6 +36,7 @@ public class Settings
 		
 		this.map.put(Settings.DATABASE_PATH, map.get(Settings.DATABASE_PATH));
 		this.map.put(Settings.WINDOW_MODE, map.get(Settings.WINDOW_MODE));
+		this.map.put(Settings.LANGUAGE, map.get(Settings.LANGUAGE));
 	}
 	public Settings(Document doc)
 	{
@@ -43,6 +45,7 @@ public class Settings
 		
 		this.map.put(Settings.DATABASE_PATH, XMLManager.getElement(rootElement.getElementsByTagName(Settings.DATABASE_PATH), 0).getTextContent());
 		this.map.put(Settings.WINDOW_MODE, XMLManager.getElement(rootElement.getElementsByTagName(Settings.WINDOW_MODE), 0).getTextContent());
+		this.map.put(Settings.LANGUAGE, XMLManager.getElement(rootElement.getElementsByTagName(Settings.LANGUAGE), 0).getTextContent());
 	}
 	
 	//Methods
@@ -52,6 +55,7 @@ public class Settings
 		 this.map.put(Settings.WINDOW_MODE, Settings.WINDOWED);
 		 File file = new File(Constants.DATABASE_DEFAULT_PATH);
 		 this.map.put(Settings.DATABASE_PATH, file.getAbsolutePath());
+		 this.map.put(Settings.LANGUAGE, "english");
 	}
 	
 	//Public methods
@@ -72,9 +76,13 @@ public class Settings
 		Element windowModeElement = doc.createElement(Settings.WINDOW_MODE);
 		windowModeElement.setTextContent(this.map.get(Settings.WINDOW_MODE));
 		
+		Element languageElement = doc.createElement(Settings.LANGUAGE);
+		languageElement.setTextContent(this.map.get(Settings.LANGUAGE));
+		
 		//append to rootElement
 		rootElement.appendChild(databasePathElement);
 		rootElement.appendChild(windowModeElement);
+		rootElement.appendChild(languageElement);
 		
 		//append to document
 		doc.appendChild(rootElement);

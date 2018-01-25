@@ -1,10 +1,8 @@
 package diary.language;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -33,7 +31,7 @@ public class Language
 	}
 	
 	//Methods
-	private void setLanguage(String language)
+	public void setLanguage(String language)
 	{
 		try 
 		{

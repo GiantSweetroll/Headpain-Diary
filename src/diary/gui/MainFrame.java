@@ -81,6 +81,8 @@ public class MainFrame
 			{
 				Methods.makeFullscreen(MainFrame.frame);
 			}
+			
+			Constants.LANGUAGE.setLanguage(MainFrame.setting.getDataMap().get(Settings.LANGUAGE));
 		} 
 		catch (ParserConfigurationException | SAXException | IOException e) 
 		{

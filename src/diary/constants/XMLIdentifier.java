@@ -184,6 +184,8 @@ public class XMLIdentifier
 	public static final String SETTINGS_DATABASE_TITLE = "settings database title";
 	public static final String SETTINGS_DATABASE_PATH_TEXT = "settings database path text";
 	public static final String SETTINGS_DATABASE_PATH_SELECT_TEXT = "settings database path select text";
+	public static final String SETTINGS_PROGRAM_TITLE = "settings program title";
+	public static final String SETTINGS_LANGUAGE_TEXT = "settings language text";
 	
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";

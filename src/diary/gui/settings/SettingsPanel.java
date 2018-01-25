@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,6 +34,7 @@ import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
 import diary.methods.FileOperation;
+import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 
 public class SettingsPanel extends JPanel implements ActionListener
@@ -43,7 +46,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private static final long serialVersionUID = -8823949814661108143L;	
 	
 	private JPanel panelCenter, panelBelow;
-	private SettingsCategoryPanel catDatabase, catWindow;
+	private SettingsCategoryPanel catDatabase, catWindow, catProgram;
 	private JButton butCancel, butSave;
 	private LinkedHashMap<String, String> dataMap;
 	
@@ -74,6 +77,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.panelCenter = new JPanel();
 		this.initCatDatabase();
 		this.initCatWindow();
+		this.initCatProgram();
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -84,8 +88,9 @@ public class SettingsPanel extends JPanel implements ActionListener
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
-		this.panelCenter.add(this.catWindow, c);					//Window Settings
+		this.panelCenter.add(this.catProgram, c);					//Program Settings
 		c.insets = Constants.INSETS_GENERAL;
+		this.panelCenter.add(this.catWindow, c);					//Window Settings
 		this.panelCenter.add(this.catDatabase, c);					//Database Settings		
 	}
 	private void initCatDatabase()
@@ -226,6 +231,45 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.catWindow.add(radFullscreen, c);			//Fullscreen radio Button
 		Gbm.nextGridColumn(c);
 		this.catWindow.add(radWindowed, c);				//Windowed radio button
+	}
+	private void initCatProgram()
+	{
+		//Initialization
+		this.catProgram = new SettingsCategoryPanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_PROGRAM_TITLE));
+		JLabel labLanguage = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_LANGUAGE_TEXT));
+		JComboBox<String> comboLanguages = new JComboBox<String>(Methods.getLanguages());
+		JButton butRefresh = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.REFRESH_TEXT));
+		GridBagConstraints c = new GridBagConstraints();
+		String selectedLanguage = this.dataMap.get(Settings.LANGUAGE);
+		
+		//Properties
+		this.catProgram.setLayout(new GridBagLayout());
+		this.catProgram.setOpaque(false);
+		butRefresh.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				comboLanguages.setModel(new DefaultComboBoxModel(Methods.getLanguages()));
+			}
+		});
+		comboLanguages.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				dataMap.put(Settings.LANGUAGE, comboLanguages.getSelectedItem().toString());
+			}
+		});
+		comboLanguages.setSelectedItem(selectedLanguage);
+		
+		//Add to panel
+		Gbm.goToOrigin(c);
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		c.fill = GridBagConstraints.BOTH;
+		this.catProgram.add(labLanguage, c);			//Language
+		Gbm.nextGridColumn(c);
+		this.catProgram.add(comboLanguages, c);			//Language Options
+		Gbm.nextGridColumn(c);
+		this.catProgram.add(butRefresh, c);				//Refresh Language Button
 	}
 	private void initPanelBelow()
 	{

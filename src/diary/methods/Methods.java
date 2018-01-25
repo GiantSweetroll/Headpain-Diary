@@ -1,6 +1,7 @@
 package diary.methods;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFormattedTextField;
@@ -14,6 +15,7 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
+import giantsweetroll.files.FileManager;
 
 public class Methods 
 {	
@@ -303,10 +305,38 @@ public class Methods
 		frame.dispose();
 		frame.setExtendedState(JFrame.NORMAL);
 		frame.setUndecorated(false);
-		frame.setSize((Constants.SCREENSIZE.width/4)*3, (Constants.SCREENSIZE.height/4)*3);
+		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
 	//	frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+	}
+
+	public static String[] getLanguages()
+	{
+		List<String> rawFiles = new ArrayList<String>();
+		FileManager.getListOfFiles(rawFiles, Constants.LANGUAGE_FOLDER_PATH, false, FileManager.FILE_ONLY, FileManager.NAME_ONLY);
+		
+		//Trim to only xml files
+		for (int i=0; i<rawFiles.size(); i++)
+		{
+	//		System.out.println(rawFiles.get(i));
+	//		System.out.println(rawFiles.get(i).substring(rawFiles.get(i).length()-4, rawFiles.get(i).length()));
+			
+			if (!rawFiles.get(i).substring(rawFiles.get(i).length()-4, rawFiles.get(i).length()).equalsIgnoreCase(".xml"))
+			{
+	//			System.out.println("Deleting " + rawFiles.get(i) + ".....");
+				rawFiles.remove(i);
+				i = -1;
+			}
+		}
+		
+		for (int i=0; i<rawFiles.size(); i++)
+		{
+			//Remove XML extension
+			rawFiles.set(i, rawFiles.get(i).substring(0, rawFiles.get(i).length()-4));
+		}
+		
+		return rawFiles.toArray(new String[rawFiles.size()]);
 	}
 }
