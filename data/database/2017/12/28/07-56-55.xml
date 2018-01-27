@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>28</date_day>
+     <date_month>12</date_month>
+     <date_year>2017</date_year>
+     <time_hour>07</time_hour>
+     <time_minute>56</time_minute>
+     <time_seconds>55</time_seconds>
+     <nyeri_amount>1</nyeri_amount>
+     <pain_locations>
+          <pain_location pain_loc_id="0">
+               <general_location>head</general_location>
+               <general_location_2>head back general</general_location_2>
+               <specific_location>head back bottom left</specific_location>
+               <pain_kind>Stabbing</pain_kind>
+               <intensity>4</intensity>
+               <duration>4.5</duration>
+          </pain_location>
+     </pain_locations>
+     <activity>Testing</activity>
+     <comments/>
+</Entry>

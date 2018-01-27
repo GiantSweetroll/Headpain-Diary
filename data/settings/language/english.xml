@@ -91,6 +91,7 @@
      <text identifier="cancel text">Cancel</text>
      <text identifier="browse text">Browse</text>
      <text identifier="save text">Save</text>
+     <text identifier="switch text">Switch</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category pain vs date text">Pain vs Date</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
@@ -100,6 +101,7 @@
      <text identifier="graph category pain location vs date">Pain Locations vs Date</text>
      <text identifier="graph category activity vs date">Activity vs Date</text>
      <text identifier="graph settings enable data values">Show Data Values</text>
+     <text identifier="graph settings display void data">Display Empty Data</text>
      <text identifier="table filter by label">Filter By</text>
      <text identifier="table filter keyword label">Keyword</text>
      <text identifier="table filter type pain amount text">Pain Amount</text>

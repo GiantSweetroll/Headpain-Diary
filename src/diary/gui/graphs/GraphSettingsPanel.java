@@ -16,7 +16,7 @@ public class GraphSettingsPanel extends JPanel
 	 */
 	private static final long serialVersionUID = 6912507407501414504L;
 	
-	private JCheckBox enableDataValues;
+	private JCheckBox enableDataValues, displayVoidData;
 	
 	protected GraphSettingsPanel()
 	{
@@ -27,6 +27,7 @@ public class GraphSettingsPanel extends JPanel
 	{
 		//Initialization
 		this.enableDataValues = new JCheckBox(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES), false);
+		this.displayVoidData = new JCheckBox(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_SETTINGS_DISPLAY_VOID_DATA));
 		
 		//Properties
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -35,11 +36,24 @@ public class GraphSettingsPanel extends JPanel
 		
 		//add to panel
 		this.add(this.enableDataValues);
+		this.add(this.displayVoidData);
 	}
 	
 	protected boolean isDataValuesEnabled()
 	{
 		if (this.enableDataValues.isSelected())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	protected boolean isDisplayVoidData()
+	{
+		if (this.displayVoidData.isSelected())
 		{
 			return true;
 		}

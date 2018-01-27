@@ -160,6 +160,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.CANCEL_TEXT, "Cancel");
 		appendComponentToMap(doc, map, XMLIdentifier.BROWSE_TEXT, "Browse");
 		appendComponentToMap(doc, map, XMLIdentifier.SAVE_TEXT, "Save");
+		appendComponentToMap(doc, map, XMLIdentifier.SWITCH_TEXT, "Switch");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -172,6 +173,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE, "Activity vs Date");
 		//Graph Settings
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES, "Show Data Values");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_DISPLAY_VOID_DATA, "Display Empty Data");
 		
 		//Table
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_BY_LABEL, "Filter By");

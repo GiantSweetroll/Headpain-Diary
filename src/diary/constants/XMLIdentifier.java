@@ -34,6 +34,7 @@ public class XMLIdentifier
 	public static final String CANCEL_TEXT = "cancel text";
 	public static final String BROWSE_TEXT = "browse text";
 	public static final String SAVE_TEXT = "save text";
+	public static final String SWITCH_TEXT = "switch text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -146,6 +147,7 @@ public class XMLIdentifier
 	public static final String GRAPH_CATEGORY_ACTIVITY_VS_DATE = "graph category activity vs date";
 	//Graph Settings
 	public static final String GRAPH_SETTINGS_ENABLE_DATA_VALUES = "graph settings enable data values";
+	public static final String GRAPH_SETTINGS_DISPLAY_VOID_DATA = "graph settings display void data";
 	
 	//Table
 	public static final String TABLE_FILTER_BY_LABEL = "table filter by label";

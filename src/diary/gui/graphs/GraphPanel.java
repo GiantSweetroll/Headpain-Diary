@@ -39,12 +39,16 @@ public class GraphPanel extends JPanel implements ActionListener
 	private Graph graph;
 	private JScrollPane scrollGraph;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butRefresh;
+	private JButton butBack, butRefresh, butSwitchGraph;
 	private GraphSettingsPanel panelGraphSettings;
+	
+	//Condition storing
+	private boolean graphReversed;
 	
 	//Constants
 	private final String BACK = "back";
 	private final String REFRESH = "refresh";
+	private final String SWITCH_GRAPH = "switch graph";
 	
 	public GraphPanel()
 	{
@@ -145,15 +149,19 @@ public class GraphPanel extends JPanel implements ActionListener
 		//Initialization
 		this.panelBelowCenter = new JPanel();
 		this.butRefresh = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.REFRESH_TEXT));
+		this.butSwitchGraph = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SWITCH_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.butRefresh.setActionCommand(this.REFRESH);
 		this.butRefresh.addActionListener(this);
+		this.butSwitchGraph.setActionCommand(this.SWITCH_GRAPH);
+		this.butSwitchGraph.addActionListener(this);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butRefresh);
+		this.panelBelowCenter.add(this.butSwitchGraph);
 	}
 	private void initGraph()
 	{
@@ -162,6 +170,8 @@ public class GraphPanel extends JPanel implements ActionListener
 			this.remove(this.scrollGraph);
 		}
 		catch(NullPointerException ex) {};
+		
+		this.graphReversed = false;
 		
 		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
 		String category = this.comboCategory.getSelectedItem().toString();
@@ -203,6 +213,54 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.revalidate();
 		this.repaint();
 	}
+	private void initReverseGraph()
+	{
+		try
+		{
+			this.remove(this.scrollGraph);
+		}
+		catch(NullPointerException ex) {};
+		
+		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
+		String category = this.comboCategory.getSelectedItem().toString();
+		
+		List<PainEntryData> list = FileOperation.getListOfEntries(dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
+		
+		if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getIntensityAverageVSTime(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainLocations(list));
+		}
+		else if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfActivity(list));
+		}
+		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
+		this.initGraphScroll(graph);
+		
+		this.add(this.scrollGraph, BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
+	}
 	
 	private void initGraphScroll(Graph graph)
 	{
@@ -223,6 +281,19 @@ public class GraphPanel extends JPanel implements ActionListener
 				
 			case REFRESH:
 				this.initGraph();
+				break;
+				
+			case SWITCH_GRAPH:
+				if(this.graphReversed)
+				{
+					this.graphReversed = false;
+					this.initGraph();
+				}
+				else
+				{
+					this.graphReversed = true;
+					this.initReverseGraph();
+				}
 				break;
 		}
 	}
