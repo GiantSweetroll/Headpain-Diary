@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import diary.PainEntryData;
 import diary.constants.Constants;
+import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
@@ -177,6 +178,23 @@ public class GraphPanel extends JPanel implements ActionListener
 		String category = this.comboCategory.getSelectedItem().toString();
 		
 		List<PainEntryData> list = FileOperation.getListOfEntries(dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
+		
+		if (this.panelGraphSettings.isDisplayVoidData())
+		{
+			/*
+			List<PainEntryData> tempList = PainDataOperation.insertEmptyData(list);
+			
+			System.out.println("Size of data with empty data: " + tempList.size());
+			for (int i=0; i<tempList.size(); i++)
+			{
+				System.out.println("Entry Date: " + tempList.get(i).getDataMap().get(PainDataIdentifier.DATE_DAY) + "/"
+													+ tempList.get(i).getDataMap().get(PainDataIdentifier.DATE_MONTH) + "/"
+													+ tempList.get(i).getDataMap().get(PainDataIdentifier.DATE_YEAR));
+			}
+			*/
+			
+			list = PainDataOperation.insertEmptyData(list);
+		}
 		
 		if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{

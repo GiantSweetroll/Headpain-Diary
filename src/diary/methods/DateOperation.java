@@ -151,7 +151,7 @@ public class DateOperation
 		}
 		return false;
 	}
-	public static boolean isLeapYear(short year)
+	public static boolean isLeapYear(int year)
 	{
 		if (year%4==0)
 		{

@@ -8,12 +8,39 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import diary.constants.PainDataIdentifier;
+import diary.constants.PainLocationConstants;
 import giantsweetroll.xml.dom.XMLManager;
 
 public class PainEntryData 
 {
 	private LinkedHashMap<String, Object> dataMap;
 	private Document document;
+	
+	public PainEntryData()		//Empty data
+	{
+		this.dataMap = new LinkedHashMap<String, Object>();
+		
+		//Enter default values
+		this.dataMap.put(PainDataIdentifier.DATE_DAY, "01");
+		this.dataMap.put(PainDataIdentifier.DATE_MONTH, "1");
+		this.dataMap.put(PainDataIdentifier.DATE_YEAR, "2016");
+		this.dataMap.put(PainDataIdentifier.TIME_HOUR, "00");
+		this.dataMap.put(PainDataIdentifier.TIME_MINUTE, "00");
+		this.dataMap.put(PainDataIdentifier.TIME_SECONDS, "00");
+		this.dataMap.put(PainDataIdentifier.PAIN_AMOUNT, "1");
+		List<LinkedHashMap<String, Object>> painLocationsMapList = new ArrayList<LinkedHashMap<String, Object>>();
+		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put(PainDataIdentifier.GENERAL_POSITION, PainLocationConstants.HEAD);
+		map.put(PainDataIdentifier.GENERAL_POSITION_2, PainLocationConstants.HEAD_BACK_GENERAL);
+		map.put(PainDataIdentifier.SPECIFIC_LOCATION, PainLocationConstants.HEAD_BACK_BOTTOM_LEFT);
+		map.put(PainDataIdentifier.PAIN_KIND, "");
+		map.put(PainDataIdentifier.INTENSITY, "0");
+		map.put(PainDataIdentifier.DURATION, "0");
+		painLocationsMapList.add(map);
+		this.dataMap.put(PainDataIdentifier.PAIN_LOCATIONS, painLocationsMapList);
+		this.dataMap.put(PainDataIdentifier.ACTIVITY, "");
+		this.dataMap.put(PainDataIdentifier.COMMENTS, "");
+	}
 	
 	public PainEntryData(LinkedHashMap<String, Object> dataMap)
 	{
