@@ -121,4 +121,8 @@ public final class Constants
 	public static final Object[] OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.YES_TEXT),
 																			Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NO_TEXT),
 																			Constants.LANGUAGE.getTextMap().get(XMLIdentifier.CANCEL_TEXT)};
+	
+	public static final String[] DURATION_UNITS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT),
+													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)};
 }

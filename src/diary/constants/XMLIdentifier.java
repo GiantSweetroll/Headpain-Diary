@@ -87,6 +87,9 @@ public class XMLIdentifier
 	public static final String INTENSITY_LABEL = "intensity label";
 	public static final String DURATION_LABEL = "duration label";
 	public static final String DURATION_UNIT_LABEL = "duration units label";
+	public static final String DURATION_UNIT_SECONDS_TEXT = "duration unit seconds text";
+	public static final String DURATION_UNIT_MINUTES_TEXT = "duration unit minutes text";
+	public static final String DURATION_UNIT_HOURS_TEXT = "duration unit hours text";
 	
 	//Pain Locations
 	public static final String GENERAL_POSITION_HEAD_TEXT = "general position head text";
@@ -148,6 +151,7 @@ public class XMLIdentifier
 	//Graph Settings
 	public static final String GRAPH_SETTINGS_ENABLE_DATA_VALUES = "graph settings enable data values";
 	public static final String GRAPH_SETTINGS_DISPLAY_VOID_DATA = "graph settings display void data";
+	public static final String GRAPH_SETTINGS_DISPLAY_DATA_POINTS = "graph settings display data points";
 	
 	//Table
 	public static final String TABLE_FILTER_BY_LABEL = "table filter by label";

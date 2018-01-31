@@ -29,6 +29,7 @@ public abstract class Graph extends JPanel
 	
 	//Options
 	protected boolean enableDataValueMarkers;
+	protected boolean displayDataPoint;
 	
 	//Constants
 	protected final int AXES_PADDING_WITH_PANEL_EDGE = 50;
@@ -47,6 +48,7 @@ public abstract class Graph extends JPanel
 		this.dataPoints = new ArrayList<Point>();
 		
 		this.enableDataValueMarkers = false;
+		this.displayDataPoint = true;
 		
 		for (Map.Entry<String, Float> entry : dataMap.entrySet())
 		{
@@ -65,7 +67,10 @@ public abstract class Graph extends JPanel
 		this.drawAxes(g, Color.BLACK, this.getWidth()-this.AXES_PADDING_WITH_PANEL_EDGE, this.AXES_PADDING_WITH_PANEL_EDGE);
 		try
 		{
-			this.drawDataPoints(g, Color.GREEN, this.DATA_POINT_WIDTH);
+			if (this.displayDataPoint)
+			{
+				this.drawDataPoints(g, Color.GREEN, this.DATA_POINT_WIDTH);
+			}
 
 			this.generateDataPoints(this.yAxisValues);
 			this.drawAxesMarkers(g, Color.BLACK);
@@ -193,6 +198,11 @@ public abstract class Graph extends JPanel
 	protected void displayDataValues(boolean bool)
 	{
 		this.enableDataValueMarkers = bool;
+		this.repaint();
+	}
+	protected void displayDataPoint(boolean show)
+	{
+		this.displayDataPoint = show;
 		this.repaint();
 	}
 }

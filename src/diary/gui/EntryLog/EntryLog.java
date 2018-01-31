@@ -64,7 +64,7 @@ public class EntryLog extends JPanel implements ActionListener
 	private JTextField tfActivity;
 	private JTextArea taComments;
 	private JButton butBack, butFinish, butConfirm;
-	
+		
 	private GridBagConstraints c;
 	
 	private boolean isNewEntry;
@@ -375,7 +375,28 @@ public class EntryLog extends JPanel implements ActionListener
 																														painLocations.get(i).get(PainDataIdentifier.SPECIFIC_LOCATION).toString());
 			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setPainKind(painLocations.get(i).get(PainDataIdentifier.PAIN_KIND).toString());
 			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setIntensity(painLocations.get(i).get(PainDataIdentifier.INTENSITY).toString());
-			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDuration(painLocations.get(i).get(PainDataIdentifier.DURATION).toString());
+			//Duration unit handling
+			String duration = painLocations.get(i).get(PainDataIdentifier.DURATION).toString();
+			double durationValue = Double.parseDouble(duration);
+			String durationUnit = IndividualPainLocationDataPanel.SECONDS;
+			if (durationValue>=3600d)	//Hours
+			{
+				durationValue = durationValue/3600d;
+				duration = Double.toString(durationValue);
+				durationUnit = IndividualPainLocationDataPanel.HOURS;
+			}
+			else if (durationValue<3600 && durationValue>=60)		//Minutes
+			{
+				durationValue = durationValue/60d;
+				duration = Double.toString(durationValue);
+				durationUnit = IndividualPainLocationDataPanel.MINUTES;
+			}
+			else
+			{
+				//Nothing, leave it at seconds
+			}
+			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDuration(duration);
+			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDurationUnit(durationUnit);
 		}
 		this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
 		this.taComments.setText(entry.getDataMap().get(PainDataIdentifier.COMMENTS).toString());

@@ -79,6 +79,9 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.INTENSITY_LABEL, "Intensity");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_LABEL, "Duration");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_LABEL, "Seconds");
+		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_SECONDS_TEXT, "Seconds");
+		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_MINUTES_TEXT, "Minutes");
+		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_HOURS_TEXT, "Hours");
 		
 		//Date
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the date to that of local time");
@@ -174,6 +177,7 @@ public class XMLGenerator
 		//Graph Settings
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES, "Show Data Values");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_DISPLAY_VOID_DATA, "Display Empty Data");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_DISPLAY_DATA_POINTS, "Display Data Points");
 		
 		//Table
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_BY_LABEL, "Filter By");

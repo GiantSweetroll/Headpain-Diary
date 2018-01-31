@@ -225,6 +225,7 @@ public class GraphPanel extends JPanel implements ActionListener
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfActivity(list));
 		}
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
+		this.graph.displayDataPoint(this.panelGraphSettings.isDisplayDataPoints());
 		this.initGraphScroll(graph);
 		
 		this.add(this.scrollGraph, BorderLayout.CENTER);
@@ -298,7 +299,14 @@ public class GraphPanel extends JPanel implements ActionListener
 				break;
 				
 			case REFRESH:
-				this.initGraph();
+				if (this.graphReversed)
+				{
+					this.initReverseGraph();
+				}
+				else
+				{
+					this.initGraph();
+				}
 				break;
 				
 			case SWITCH_GRAPH:

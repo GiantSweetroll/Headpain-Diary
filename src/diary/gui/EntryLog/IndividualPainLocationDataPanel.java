@@ -46,7 +46,7 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	private JLabel labIntensityRange;
 	private JLabel labDurationUnit;
 	
-	private JComboBox<String> comboGeneralPos;
+	private JComboBox<String> comboGeneralPos, comboDurationUnit;
 	
 	private JTextField tfPainKind;
 	
@@ -55,6 +55,11 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	private PainLocationSelectionPanel generalPos, specificPos;
 	
 	private JScrollPane scrollGeneral, scrollSpecific;
+	
+	//Constants
+	protected static final String SECONDS = "seconds";
+	protected static final String MINUTES = "minutes";
+	protected static final String HOURS = "hours";
 	
 	//Vectors
 	private VectorInt vecGeneralPosPanel;
@@ -79,7 +84,8 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		this.labIntensityRange = new JLabel("(0.0 - 10.0)", SwingConstants.LEFT);
 		this.labDuration = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
 		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.labDurationUnit = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_LABEL), SwingConstants.LEFT);
+	//	this.labDurationUnit = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_LABEL), SwingConstants.LEFT);
+		this.comboDurationUnit = new JComboBox<String>(Constants.DURATION_UNITS);
 		this.generalPos = new PainLocationSelectionPanel(this.getLocationIdentifier(Misc.getItem(this.comboGeneralPos).toString()));
 		this.scrollGeneral = new JScrollPane(this.generalPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.specificPos = new PainLocationSelectionPanel(this.generalPos.getSelected());
@@ -131,7 +137,8 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		Gbm.nextGridColumn(c);
 		this.add(this.tfDuration, c);								//Duration Text Field
 		Gbm.nextGridColumn(c);
-		this.add(this.labDurationUnit, c);							//Duration Unit
+//		this.add(this.labDurationUnit, c);							//Duration Unit
+		this.add(this.comboDurationUnit, c);						//Duration Unit Options
 		
 		this.configureListenersForMembers();
 	}
@@ -160,6 +167,21 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	protected void setDuration(String duration)
 	{
 		this.tfDuration.setText(duration);
+	}
+	protected void setDurationUnit(String unit)		//Parameter is from this class constants
+	{
+		if (unit.equals(SECONDS))
+		{
+			this.comboDurationUnit.setSelectedItem(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT));
+		}
+		else if (unit.equals(MINUTES))
+		{
+			this.comboDurationUnit.setSelectedItem(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT));
+		}
+		else if (unit.equals(HOURS))
+		{
+			this.comboDurationUnit.setSelectedItem(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_HOURS_TEXT));
+		}
 	}
 	
 	protected void setSelectedPosition(String generalPositionConstant, String specificPositionConstant, String verySpecificPositionConstant)
@@ -281,7 +303,21 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		this.appendToNode(doc, locationElement, PainDataIdentifier.SPECIFIC_LOCATION, this.specificPos.getSelected());
 		this.appendToNode(doc, locationElement, PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
 		this.appendToNode(doc, locationElement, PainDataIdentifier.INTENSITY, Methods.getTextData(this.tfIntensity));
-		this.appendToNode(doc, locationElement, PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
+		String durationUnit = this.comboDurationUnit.getSelectedItem().toString();
+		if (durationUnit.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT)))
+		{
+			this.appendToNode(doc, locationElement, PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
+		}
+		else if (durationUnit.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT)))
+		{
+			double durationSeconds = Double.parseDouble(Methods.getTextData(this.tfDuration)) * 60d;
+			this.appendToNode(doc, locationElement, PainDataIdentifier.DURATION, Double.toString(durationSeconds));
+		}
+		else if (durationUnit.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)))
+		{
+			double durationSeconds = Double.parseDouble(Methods.getTextData(this.tfDuration)) * 3600d;
+			this.appendToNode(doc, locationElement, PainDataIdentifier.DURATION, Double.toString(durationSeconds));
+		}
 		
 		return locationElement;
 	}

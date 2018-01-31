@@ -23,6 +23,9 @@
      <text identifier="intensity label">Intensity</text>
      <text identifier="duration label">Duration</text>
      <text identifier="duration units label">Seconds</text>
+     <text identifier="duration unit seconds text">Seconds</text>
+     <text identifier="duration unit minutes text">Minutes</text>
+     <text identifier="duration unit hours text">Hours</text>
      <text identifier="date auto button tooltip text">Automatically set the date to that of local time</text>
      <text identifier="date reselt button tooltip text">Resets date changes to it's orginal status</text>
      <text identifier="date from label">From</text>
@@ -102,6 +105,7 @@
      <text identifier="graph category activity vs date">Activity vs Date</text>
      <text identifier="graph settings enable data values">Show Data Values</text>
      <text identifier="graph settings display void data">Display Empty Data</text>
+     <text identifier="graph settings display data points">Display Data Points</text>
      <text identifier="table filter by label">Filter By</text>
      <text identifier="table filter keyword label">Keyword</text>
      <text identifier="table filter type pain amount text">Pain Amount</text>
