@@ -18,6 +18,7 @@ import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.gui.MainFrame;
+import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.message.MessageManager;
 import giantsweetroll.xml.dom.XMLManager;
@@ -433,6 +434,45 @@ public class FileOperation
 	public static void deleteEntry(String filePath)
 	{
 		File file = new File(filePath);
+		file.delete();
+	}
+	
+	public static List<PatientData> getListOfPatients()
+	{
+		List<PatientData> list = new ArrayList<PatientData>();
+		List<String> files = new ArrayList<String>();
+		
+		FileManager.getListOfFiles(files, MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+		
+		for (int i=0; i<files.size(); i++)
+		{
+			try 
+			{
+				list.add(new PatientData(XMLManager.createDocument(files.get(i), false)));
+			} 
+			catch (ParserConfigurationException | SAXException | IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
+	public static void savePatientData(PatientData patientData)
+	{
+		try 
+		{
+			XMLManager.exportXML(patientData.getXMLDocument(), new File(MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + patientData.getDataMap().get(PatientData.MEDICAL_RECORD_ID) + ".xml"), 5);
+		} 
+		catch (TransformerException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	public static void deletePatientData(String medID)
+	{
+		File file = new File (MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + medID + ".xml");
 		file.delete();
 	}
 }

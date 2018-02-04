@@ -339,4 +339,16 @@ public class Methods
 		
 		return rawFiles.toArray(new String[rawFiles.size()]);
 	}
+	
+	public static boolean hasRegisteredUser()		//Check if there are registered users
+	{
+		if (FileOperation.getListOfPatients().size()>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

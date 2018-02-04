@@ -25,6 +25,7 @@ public final class Constants
 	public static final String REQUIRED_IDENTIFIER = "* ";
 	
 	public static final String DATABASE_DEFAULT_PATH = "data" + File.separator + "database" + File.separator;
+	public static final String PATIENTS_LIST_DEFAULT_PATH = "data" + File.separator + "users" + File.separator;
 //	public static final String DATABASE_PATH = MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator;
 	public static final String SETTINGS_FOLDER_PATH = "data" + "/" + "settings" + "/";
 	public static final String SETTINGS_FILE_NAME = "settings.xml";
@@ -37,8 +38,12 @@ public final class Constants
 	private static final String FONT_TYPE_GENERAL = "verdana";
 	public static final Font FONT_GENERAL = new Font(FONT_TYPE_GENERAL, Font.PLAIN, 15);
 	public static final Font FONT_GENERAL_BOLD = new Font(FONT_TYPE_GENERAL, Font.BOLD, 15);
+	public static final Font FONT_SUB_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, 30);
 	public static final Font FONT_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, 40);
 	public static final Font FONT_SMALL_NOTE = new Font(FONT_TYPE_GENERAL, Font.ITALIC, 8);
+	
+	//Date
+	
 	
 	//Insets
 	private static final int INSETS_BASE = 5;

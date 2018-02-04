@@ -12,4 +12,6 @@ public class DateConstants
 	public static final byte[] MONTHS_30 = {2, 4, 6, 9, 11};
 	
 	public static final List<String> MONTH_NAME_LIST = DateOperation.getMonthNameList();
+	
+	public static final short START_YEAR_RANGE = 1800;
 }

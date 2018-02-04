@@ -95,6 +95,7 @@
      <text identifier="browse text">Browse</text>
      <text identifier="save text">Save</text>
      <text identifier="switch text">Switch</text>
+     <text identifier="show text">Show</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category pain vs date text">Pain vs Date</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
@@ -136,6 +137,8 @@
      <text identifier="settings database title">Database</text>
      <text identifier="settings database path text">Database Location</text>
      <text identifier="settings database path select text">Select Database Location</text>
+     <text identifier="settings database users path text">Users Database Location</text>
+     <text identifier="settings database users select text">Select Users Database Location</text>
      <text identifier="settings program title">Program</text>
      <text identifier="settings language text">Language</text>
      <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
@@ -144,4 +147,16 @@
      <text identifier="message delete confirm title">Confirm delete?</text>
      <text identifier="message overwrite confirm text">Another entry of the same start time already exists. Overwrite?</text>
      <text identifier="message overwrite confirm title">Overwrite?</text>
+     <text identifier="patient data form medical record id label">Medical ID</text>
+     <text identifier="patient data form name label">Name</text>
+     <text identifier="patient data form dob label">Date of Birth</text>
+     <text identifier="patient data form medical record id tooltip text">Medical Record (If for personal use only, just enter anything)</text>
+     <text identifier="patient data registeration form title label">Patient Data Registeration Form</text>
+     <text identifier="patient data registeration form empty id message">Medical ID cannot be empty!</text>
+     <text identifier="patient data registeration form empty name message">Name cannot be empty!</text>
+     <text identifier="patient data registeration form empty id message title">Empty ID</text>
+     <text identifier="patient data registeration form empty name message title">Empty Name</text>
+     <text identifier="patient data registeration form overwrite message title">Confirm Overwrite</text>
+     <text identifier="patient data registeration form overwrite message text">Another data of the same ID already exists, do you want to overwrite?</text>
+     <text identifier="active patient panel patient text">User</text>
 </language>

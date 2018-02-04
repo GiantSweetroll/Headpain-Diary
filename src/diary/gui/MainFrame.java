@@ -16,6 +16,7 @@ import diary.constants.Constants;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.XMLGenerator;
+import diary.patientdata.PatientDataRegisterationForm;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -27,6 +28,7 @@ public class MainFrame
 	/** The frame. */
 	public static JFrame frame;
 	public static Settings setting;
+	public static JComponent lastComponent;
 	
 	private static JComponent jComponent;
 	
@@ -62,11 +64,19 @@ public class MainFrame
 	 */
 	public static final void changePanel(JComponent component)
 	{
-		frame.remove(jComponent);
-		frame.add(component);
-		jComponent = component;
-		frame.revalidate();
-		frame.repaint();
+		try
+		{
+			lastComponent = jComponent;
+			frame.remove(jComponent);
+			frame.add(component);
+			jComponent = component;
+			frame.revalidate();
+			frame.repaint();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 	
 	public static final void refreshSettings()
@@ -92,6 +102,24 @@ public class MainFrame
 			if(!file.exists())
 			{
 				file.mkdirs();
+			}
+			//User Database path
+			file = new File(setting.getDataMap().get(Settings.DATABASE_USERS_PATH));
+			if (!file.exists())
+			{
+				file.mkdirs();
+			}
+			//If no users were found
+			if (!Methods.hasRegisteredUser())
+			{
+				try
+				{
+					MainFrame.changePanel(new PatientDataRegisterationForm());
+				}
+				catch(NullPointerException ex)
+				{
+					ex.printStackTrace();
+				}
 			}
 		} 
 		catch (ParserConfigurationException | SAXException | IOException e) 

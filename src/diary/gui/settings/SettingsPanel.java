@@ -101,12 +101,17 @@ public class SettingsPanel extends JPanel implements ActionListener
 		JTextField tfDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_PATH), 30);
 		JButton butBrowseDatabasePath = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BROWSE_TEXT));
 		JButton butDefaultDatabase = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
+		JLabel labUserDatabasePath = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
+		JTextField tfUserDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_USERS_PATH), 30);
+		JButton butBrowseUserDatabasePath = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BROWSE_TEXT));
+		JButton butDefaultUserDatabase = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
 		this.catDatabase.setLayout(new GridBagLayout());
 		this.catDatabase.setOpaque(false);
 		tfDatabasePath.setEditable(false);
+		tfUserDatabasePath.setEditable(false);
 		butBrowseDatabasePath.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -152,6 +157,51 @@ public class SettingsPanel extends JPanel implements ActionListener
 			}
 			
 		});
+		butBrowseUserDatabasePath.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JFileChooser jfc = new JFileChooser();
+				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				jfc.setDialogTitle(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT));
+				int response = jfc.showDialog(null, Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT));
+				
+				if (response == JFileChooser.APPROVE_OPTION)
+				{
+					tfUserDatabasePath.setText(jfc.getSelectedFile().getAbsolutePath());
+				}
+			}
+		});
+		butDefaultUserDatabase.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				File file = new File(Constants.PATIENTS_LIST_DEFAULT_PATH);
+				tfUserDatabasePath.setText(file.getAbsolutePath());
+			}
+		});
+		tfUserDatabasePath.getDocument().addDocumentListener(new DocumentListener()
+		{
+
+			@Override
+			public void changedUpdate(DocumentEvent e) 
+			{
+				dataMap.put(Settings.DATABASE_USERS_PATH, tfUserDatabasePath.getText().trim());
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) 
+			{
+				dataMap.put(Settings.DATABASE_USERS_PATH, tfUserDatabasePath.getText().trim());
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) 
+			{
+				dataMap.put(Settings.DATABASE_USERS_PATH, tfUserDatabasePath.getText().trim());
+			}
+			
+		});
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -164,6 +214,14 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.catDatabase.add(butBrowseDatabasePath , c);	//Browse database Path button
 		Gbm.nextGridColumn(c);
 		this.catDatabase.add(butDefaultDatabase , c);		//Reset Database button
+		Gbm.newGridLine(c);
+		this.catDatabase.add(labUserDatabasePath, c);		//User Database path
+		Gbm.nextGridColumn(c);
+		this.catDatabase.add(tfUserDatabasePath, c);		//User Database path Text Field
+		Gbm.nextGridColumn(c);
+		this.catDatabase.add(butBrowseUserDatabasePath, c);	//Browse User Database Path Button
+		Gbm.nextGridColumn(c);
+		this.catDatabase.add(butDefaultUserDatabase, c);	//Reset User Database Path Button
 	}
 	private void initCatWindow()
 	{

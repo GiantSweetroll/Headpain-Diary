@@ -1,6 +1,8 @@
 package diary.methods;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import diary.constants.Constants;
@@ -57,7 +59,7 @@ public class DateOperation
 	}
 	public static short[] getYearRange()
 	{
-		short startYear = 2016;
+		short startYear = DateConstants.START_YEAR_RANGE;
 		short maxYear = Short.parseShort(GDateManager.getCurrentYear());
 		
 		short[] years;
@@ -161,6 +163,12 @@ public class DateOperation
 		{
 			return false;
 		}
+	}
+	public static String[] getYearRangeStringReversed()
+	{
+		List<String> list = Arrays.asList(DateOperation.getYearRangeString());
+		Collections.reverse(list);
+		return list.toArray(new String[list.size()]);
 	}
 	
 	public static final List<String> getMonthNameList()

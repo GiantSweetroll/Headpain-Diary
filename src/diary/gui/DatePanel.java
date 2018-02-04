@@ -44,8 +44,20 @@ public class DatePanel extends JPanel implements ActionListener
 	public DatePanel(boolean enabled)
 	{
 		this.init();
-		
-		if (!enabled)
+		this.enableComponents(enabled);
+	}
+	
+	//Methods
+	public void enableComponents(boolean enable)
+	{
+		if (enable)
+		{
+			this.comboDay.setEnabled(true);
+			this.comboMonth.setEnabled(true);
+			this.comboYear.setEnabled(true);
+			this.butAuto.setEnabled(true);
+		}
+		else
 		{
 			this.comboDay.setEnabled(false);
 			this.comboMonth.setEnabled(false);
@@ -53,12 +65,11 @@ public class DatePanel extends JPanel implements ActionListener
 			this.butAuto.setEnabled(false);
 		}
 	}
-	
-	//Methods
 	private final void init()
 	{
 		//Initialization
-		this.comboYear = new JComboBox<String>(DateOperation.getYearRangeString());
+		this.comboYear = new JComboBox<String>(DateOperation.getYearRangeStringReversed());
+	//	this.comboYear = new JComboBox<String>(DateOperation.getYearRangeString());
 		this.comboMonth = new JComboBox<String>(DateOperation.getMonthNameList().toArray(new String[12]));
 		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), Short.parseShort(this.comboYear.getSelectedItem().toString())));
 		this.butAuto = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.AUTO_TEXT));
@@ -77,6 +88,7 @@ public class DatePanel extends JPanel implements ActionListener
 		this.butDefault.addActionListener(this);
 		this.butDefault.setActionCommand(this.DEFAULT);
 		this.butDefault.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT));
+		this.setAsDefaultDataThis();
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -96,7 +108,9 @@ public class DatePanel extends JPanel implements ActionListener
 	private void refreshDayRange()
 	{
 		this.remove(this.comboDay);
-		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), Short.parseShort(this.comboYear.getSelectedItem().toString())));
+//		System.out.println(this.comboYear.getSelectedItem());
+		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
+																				Short.parseShort(this.comboYear.getSelectedItem().toString())));
 		c.gridx = this.vecDay.x;
 		c.gridy = this.vecDay.y;
 		this.add(this.comboDay, c);
@@ -154,9 +168,13 @@ public class DatePanel extends JPanel implements ActionListener
 	
 	public void resetDefault()
 	{
-		this.comboYear.setSelectedItem(this.defaultMap.get(this.YEAR));
-		this.comboMonth.setSelectedIndex(Integer.parseInt(this.defaultMap.get(this.MONTH))-1);
-		this.comboDay.setSelectedItem(this.defaultMap.get(this.DAY));
+		try
+		{
+			this.comboYear.setSelectedItem(this.defaultMap.get(this.YEAR));
+			this.comboMonth.setSelectedIndex(Integer.parseInt(this.defaultMap.get(this.MONTH))-1);
+			this.comboDay.setSelectedItem(this.defaultMap.get(this.DAY));
+		}
+		catch(NullPointerException ex){}
 	}
 	
 	public void autoSetDate()

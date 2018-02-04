@@ -164,6 +164,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.BROWSE_TEXT, "Browse");
 		appendComponentToMap(doc, map, XMLIdentifier.SAVE_TEXT, "Save");
 		appendComponentToMap(doc, map, XMLIdentifier.SWITCH_TEXT, "Switch");
+		appendComponentToMap(doc, map, XMLIdentifier.SHOW_TEXT, "Show");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -216,6 +217,8 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_TITLE, "Database");
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT, "Database Location");
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT, "Select Database Location");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT, "Users Database Location");
+		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT, "Select Users Database Location");
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_PROGRAM_TITLE, "Program");
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_LANGUAGE_TEXT, "Language");
 		
@@ -228,6 +231,24 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE, "Confirm delete?");
 		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT, "Another entry of the same start time already exists. Overwrite?");
 		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE, "Overwrite?");
+		
+		//Patient Data Form
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL, "Medical ID");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL, "Name");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL, "Date of Birth");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT, "Medical Record (If for personal use only, just enter anything)");
+		
+		//Patient Data Registration Form
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL, "Patient Data Registeration Form");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE, "Medical ID cannot be empty!");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE, "Name cannot be empty!");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE_TITLE, "Empty ID");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE_TITLE, "Empty Name");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TITLE, "Confirm Overwrite");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TEXT, "Another data of the same ID already exists, do you want to overwrite?");
+		
+		//Active Patient Panel
+		appendComponentToMap(doc, map, XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT, "User");
 		
 		return map;
 	}

@@ -35,6 +35,7 @@ public class XMLIdentifier
 	public static final String BROWSE_TEXT = "browse text";
 	public static final String SAVE_TEXT = "save text";
 	public static final String SWITCH_TEXT = "switch text";
+	public static final String SHOW_TEXT = "show text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -190,6 +191,8 @@ public class XMLIdentifier
 	public static final String SETTINGS_DATABASE_TITLE = "settings database title";
 	public static final String SETTINGS_DATABASE_PATH_TEXT = "settings database path text";
 	public static final String SETTINGS_DATABASE_PATH_SELECT_TEXT = "settings database path select text";
+	public static final String SETTINGS_DATABASE_USERS_PATH_TEXT = "settings database users path text";
+	public static final String SETTINGS_DATABASE_USERS_SELECT_TEXT = "settings database users select text";
 	public static final String SETTINGS_PROGRAM_TITLE = "settings program title";
 	public static final String SETTINGS_LANGUAGE_TEXT = "settings language text";
 	
@@ -202,4 +205,22 @@ public class XMLIdentifier
 	public static final String MESSAGE_DELETE_CONFIRM_TEXT = "message delete confirm text";
 	public static final String MESSAGE_OVERWRITE_CONFIRM_TITLE = "message overwrite confirm title";
 	public static final String MESSAGE_OVERWRITE_CONFIRM_TEXT = "message overwrite confirm text";
+	
+	//Patient Data Form
+	public static final String PATIENT_DATA_FORM_MED_ID_LABEL = "patient data form medical record id label";
+	public static final String PATIENT_DATA_FORM_NAME_LABEL = "patient data form name label";
+	public static final String PATIENT_DATA_FORM_DOB_LABEL = "patient data form dob label";
+	public static final String PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT = "patient data form medical record id tooltip text";
+	
+	//Patient Data Registration From
+	public static final String PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL = "patient data registeration form title label";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE = "patient data registeration form empty id message";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE = "patient data registeration form empty name message";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE_TITLE = "patient data registeration form empty id message title";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE_TITLE = "patient data registeration form empty name message title";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TITLE = "patient data registeration form overwrite message title";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TEXT = "patient data registeration form overwrite message text";
+	
+	//Active Patient Panel
+	public static final String ACTIVE_PATIENT_PANEL_PATIENT_TEXT = "active patient panel patient text";
 }
