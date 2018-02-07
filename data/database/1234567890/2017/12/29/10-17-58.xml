@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>29</date_day>
+     <date_month>12</date_month>
+     <date_year>2017</date_year>
+     <time_hour>10</time_hour>
+     <time_minute>17</time_minute>
+     <time_seconds>58</time_seconds>
+     <nyeri_amount>1</nyeri_amount>
+     <pain_locations>
+          <pain_location pain_loc_id="0">
+               <general_location>head</general_location>
+               <general_location_2>head front general</general_location_2>
+               <specific_location>head front center</specific_location>
+               <pain_kind>Tearing</pain_kind>
+               <intensity>3</intensity>
+               <duration>4.3</duration>
+          </pain_location>
+     </pain_locations>
+     <activity>Nothing</activity>
+     <comments/>
+</Entry>

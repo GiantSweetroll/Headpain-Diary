@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,8 +19,8 @@ import javax.swing.SwingConstants;
 
 import diary.PainEntryData;
 import diary.constants.Constants;
-import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
@@ -34,7 +35,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	 * 
 	 */
 	private static final long serialVersionUID = 5865211789435235389L;
-	private JPanel panelTop, panelTopLeft, panelBelow, panelBelowLeft, panelBelowCenter;
+	private JPanel panelTop, panelTopLeft, panelTopRight, panelBelow, panelBelowLeft, panelBelowCenter;
 	private JLabel labCategory;
 	private JComboBox<String> comboCategory;
 	private Graph graph;
@@ -42,6 +43,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	private DateRangePanel panelDateRange;
 	private JButton butBack, butRefresh, butSwitchGraph;
 	private GraphSettingsPanel panelGraphSettings;
+	private ActivePatientPanel activePatientPanel;
 	
 	//Condition storing
 	private boolean graphReversed;
@@ -78,19 +80,34 @@ public class GraphPanel extends JPanel implements ActionListener
 		//Initialization
 		this.panelTop = new JPanel();
 		this.initPanelTopLeft();
-		this.panelDateRange = new DateRangePanel();
+		this.initPanelTopRight();
 		
 		//Properties
 		this.panelTop.setOpaque(false);
 		this.panelTop.setLayout(new BorderLayout());
+
+		//Add to panel
+		this.panelTop.add(this.panelTopLeft, BorderLayout.WEST);
+		this.panelTop.add(this.panelTopRight, BorderLayout.EAST);
+	}
+	private void initPanelTopRight()
+	{
+		//Initialization
+		this.panelTopRight = new JPanel();
+		this.activePatientPanel = new ActivePatientPanel();
+		this.panelDateRange = new DateRangePanel();
+		
+		//Properties
+		this.panelTopRight.setLayout(new BoxLayout(this.panelTopRight, BoxLayout.Y_AXIS));
+		this.panelTopRight.setOpaque(false);
 		this.panelDateRange.dateFrom.autoSetDate();
 		this.panelDateRange.dateFrom.setAsDefaultDataThis();
 		this.panelDateRange.dateTo.autoSetDate();
 		this.panelDateRange.dateTo.setAsDefaultDataThis();
-
-		//Add to panel
-		this.panelTop.add(this.panelTopLeft, BorderLayout.WEST);
-		this.panelTop.add(this.panelDateRange, BorderLayout.EAST);
+		
+		//add to panel
+		this.panelTopRight.add(this.activePatientPanel);
+		this.panelTopRight.add(this.panelDateRange);
 	}
 	private void initPanelTopLeft()
 	{
@@ -177,7 +194,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
 		String category = this.comboCategory.getSelectedItem().toString();
 		
-		List<PainEntryData> list = FileOperation.getListOfEntries(dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
+		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
 		
 		if (this.panelGraphSettings.isDisplayVoidData())
 		{
@@ -243,7 +260,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
 		String category = this.comboCategory.getSelectedItem().toString();
 		
-		List<PainEntryData> list = FileOperation.getListOfEntries(dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
+		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
 		
 		if (category.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{

@@ -47,6 +47,8 @@ public class XMLIdentifier
 	public static final String VIEW_GRAPH_BUTTON_TOOLTIP = "view graph button tooltip";
 	public static final String VIEW_TABLE_BUTTON_TOOLTIP = "view table button tooltip";
 	public static final String SETTINGS_BUTTON_TOOLTIP = "settings button tooltip";
+	public static final String MANAGE_PATIENTS_BUTTON_TEXT = "manage patients button text";
+	public static final String MANAGE_PATIENTS_BUTTON_TOOLTIP = "manage patient button tooltip";
 	public static final String AUTHOR_TEXT = "author text";
 	public static final String VERSION_TEXT = "version text";
 	

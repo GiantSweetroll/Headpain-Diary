@@ -15,6 +15,7 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
+import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 
 public class Methods 
@@ -41,16 +42,17 @@ public class Methods
 	}
 	
 	
-	public static String generatePainDataFolderPathName(PainEntryData entry)
+	public static String generatePainDataFolderPathName(PatientData patient, PainEntryData entry)
 	{
 		return MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator +
+				patient.getID() + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_YEAR) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_MONTH) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_DAY);
 	}
-	public static String generatePainDataFilePathName(PainEntryData entry)
+	public static String generatePainDataFilePathName(PatientData patient, PainEntryData entry)
 	{
-		return 	generatePainDataFolderPathName(entry) + File.separator +
+		return 	generatePainDataFolderPathName(patient, entry) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.TIME_HOUR) + "-" +
 				entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE) + "-" +
 				entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS) +

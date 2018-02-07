@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
@@ -45,7 +47,7 @@ public class TableScreen extends JPanel implements ActionListener
 	 */
 	private static final long serialVersionUID = -6429132267457024269L;
 	
-	private JPanel panelTop, panelTopLeft, panelBelowLeft, panelBelowCenter, panelBelowRight, panelBelow;
+	private JPanel panelTop, panelTopLeft, panelTopRight, panelBelowLeft, panelBelowCenter, panelBelowRight, panelBelow;
 	private TablePanel table;
 	private DateRangePanel panelDateRange;
 	private JComboBox<String> comboFilter;
@@ -55,6 +57,7 @@ public class TableScreen extends JPanel implements ActionListener
 	private List<String> selectedEntryIDs;
 	private List<PainEntryData> entries;
 	private PainEntryData activeEntry;
+	private ActivePatientPanel activePatientPanel;
 	
 	//Constants
 	private final String FILTER = "filter";
@@ -189,22 +192,37 @@ public class TableScreen extends JPanel implements ActionListener
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		this.panelTopLeft.add(this.butFilter, c);			//Filter Button
 	}
-	private void initPanelTop()
+	private void initPanelTopRight()
 	{
 		//Initialization
-		this.panelTop = new JPanel();
+		this.panelTopRight = new JPanel();
+		this.activePatientPanel = new ActivePatientPanel();
 		this.panelDateRange = new DateRangePanel();
-		this.initPanelTopLeft();
 		
 		//Properties
-		this.panelTop.setOpaque(false);
-		this.panelTop.setLayout(new BorderLayout());
+		this.panelTopRight.setLayout(new BoxLayout(this.panelTopRight, BoxLayout.Y_AXIS));
+		this.panelTopRight.setOpaque(false);
 		this.panelDateRange.dateFrom.autoSetDate();
 		this.panelDateRange.dateTo.autoSetDate();
 		
 		//Add to panel
+		this.panelTopRight.add(this.activePatientPanel);
+		this.panelTopRight.add(this.panelDateRange);
+	}
+	private void initPanelTop()
+	{
+		//Initialization
+		this.panelTop = new JPanel();
+		this.initPanelTopLeft();
+		this.initPanelTopRight();
+		
+		//Properties
+		this.panelTop.setOpaque(false);
+		this.panelTop.setLayout(new BorderLayout());
+		
+		//Add to panel
 		this.panelTop.add(this.panelTopLeft, BorderLayout.WEST);
-		this.panelTop.add(this.panelDateRange, BorderLayout.EAST);
+		this.panelTop.add(this.panelTopRight, BorderLayout.EAST);
 	}
 	//Other Methods
 	private void initTable()
@@ -221,7 +239,7 @@ public class TableScreen extends JPanel implements ActionListener
 		String filterType = this.getFilterType();
 		
 		String filter = Methods.getTextData(this.tfFilter);
-		this.entries = FileOperation.getListOfEntries(this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO));
+		this.entries = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO));
 		this.table = new TablePanel(this.entries, filterType, filter);
 		this.add(this.table, BorderLayout.CENTER);
 		
@@ -376,7 +394,7 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case SELECT:
-				MainFrame.changePanel(new EntryLog(this.activeEntry));
+				MainFrame.changePanel(new EntryLog(this.activePatientPanel.getSelectedPatientData(), this.activeEntry));
 				break;
 				
 			case BACK:

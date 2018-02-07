@@ -9,6 +9,8 @@
      <text identifier="view graph button tooltip">View pain history graph</text>
      <text identifier="view table button tooltip">View pain history table</text>
      <text identifier="settings button tooltip">Configure program settings</text>
+     <text identifier="manage patients button text">Manage Patients</text>
+     <text identifier="manage patient button tooltip">Manage patients data</text>
      <text identifier="author text">Created by</text>
      <text identifier="version text">Version</text>
      <text identifier="entry log title">Entry Log</text>

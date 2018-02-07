@@ -52,6 +52,7 @@ public final class MainMenu extends JPanel implements ActionListener
 	private JButton butNew;
 	private JButton butGraph;
 	private JButton butTable;
+	private JButton butManagePatients;
 	private JButton butSettings;
 	private JButton butExit;
 	private JLabel labAuthor;
@@ -65,6 +66,7 @@ public final class MainMenu extends JPanel implements ActionListener
 	private final String NEW_LOG = "new";
 	private final String GRAPH = "graph";
 	private final String TABLE = "table";
+	private final String MANAGE_PATIENTS = "manage patients";
 	private final String SETTINGS = "settings";
 	private final String EXIT = "exit";
 	
@@ -163,6 +165,7 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.butNew = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT));
 		this.butGraph = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT));
 		this.butTable = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT));
+		this.butManagePatients = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT));
 		this.butSettings = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_BUTTON_TEXT));
 		this.butExit = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.EXIT_BUTTON_TEXT));
 		ArrayList<JLabel> listNumbers = new ArrayList<JLabel>();
@@ -171,6 +174,7 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.listButtons.add(this.butNew);
 		this.listButtons.add(this.butGraph);
 		this.listButtons.add(this.butTable);
+		this.listButtons.add(this.butManagePatients);
 		this.listButtons.add(this.butSettings);
 		this.listButtons.add(this.butExit);
 		
@@ -185,6 +189,7 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.butNew.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
 		this.butGraph.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP));
 		this.butTable.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP));
+		this.butManagePatients.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP));
 		this.butSettings.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_BUTTON_TOOLTIP));
 		for (int i=0; i<this.listButtons.size(); i++)
 		{
@@ -209,6 +214,9 @@ public final class MainMenu extends JPanel implements ActionListener
 		Gbm.newGridLine(c);
 		Gbm.nextGridColumn(c);
 		this.panelButtons.add(this.butTable, c);			//View Table
+		Gbm.newGridLine(c);
+		Gbm.nextGridColumn(c);
+		this.panelButtons.add(this.butManagePatients, c);	//Manage Patients
 		Gbm.newGridLine(c);
 		Gbm.nextGridColumn(c);
 		this.panelButtons.add(this.butSettings, c);			//Settings
@@ -284,10 +292,15 @@ public final class MainMenu extends JPanel implements ActionListener
 					}
 					else if (keyCode == KeyEvent.VK_4 || keyCode == KeyEvent.VK_NUMPAD4)
 					{
+						//Manage Patients
+						
+					}
+					else if (keyCode == KeyEvent.VK_5 || keyCode == KeyEvent.VK_NUMPAD5)
+					{
 						//Settings
 						MainFrame.changePanel(new SettingsPanel());
 					}
-					else if (keyCode == KeyEvent.VK_5 || keyCode == KeyEvent.VK_NUMPAD5)
+					else if (keyCode == KeyEvent.VK_6 || keyCode == KeyEvent.VK_NUMPAD6)
 					{
 						System.exit(0);
 					}
@@ -322,6 +335,9 @@ public final class MainMenu extends JPanel implements ActionListener
 				
 			case TABLE:
 				MainFrame.changePanel(new TableScreen());
+				break;
+				
+			case MANAGE_PATIENTS:
 				break;
 				
 			case SETTINGS:

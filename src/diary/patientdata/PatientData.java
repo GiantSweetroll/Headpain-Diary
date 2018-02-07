@@ -71,6 +71,11 @@ public class PatientData
 		return doc;
 	}
 	
+	public String getID()
+	{
+		return this.dataMap.get(PatientData.MEDICAL_RECORD_ID);
+	}
+	
 	public String getNameAndID()
 	{
 		return this.dataMap.get(PatientData.NAME) + " - " + this.dataMap.get(PatientData.MEDICAL_RECORD_ID);
@@ -78,5 +83,12 @@ public class PatientData
 	public String getIDAndName()
 	{
 		return this.dataMap.get(PatientData.MEDICAL_RECORD_ID) + " - " + this.dataMap.get(PatientData.NAME);
+	}
+	
+	//Override Methods
+	@Override
+	public String toString()
+	{
+		return this.getNameAndID();
 	}
 }

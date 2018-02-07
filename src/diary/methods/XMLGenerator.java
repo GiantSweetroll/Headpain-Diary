@@ -63,6 +63,8 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP, "View pain history graph");
 		appendComponentToMap(doc, map, XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP, "View pain history table");
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_BUTTON_TOOLTIP, "Configure program settings");
+		appendComponentToMap(doc, map, XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT, "Manage Patients");
+		appendComponentToMap(doc, map, XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP, "Manage patients data");
 		appendComponentToMap(doc, map, XMLIdentifier.AUTHOR_TEXT, "Created by");
 		appendComponentToMap(doc, map, XMLIdentifier.VERSION_TEXT, "Version");
 		

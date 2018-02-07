@@ -41,8 +41,13 @@ public class DatePanel extends JPanel implements ActionListener
 	private final String MONTH = "month";
 	private final String DAY = "day";
 	
+	//Conditional
+	private boolean enable;
+	
+	//Constructor
 	public DatePanel(boolean enabled)
 	{
+		this.enable = enabled;
 		this.init();
 		this.enableComponents(enabled);
 	}
@@ -50,20 +55,11 @@ public class DatePanel extends JPanel implements ActionListener
 	//Methods
 	public void enableComponents(boolean enable)
 	{
-		if (enable)
-		{
-			this.comboDay.setEnabled(true);
-			this.comboMonth.setEnabled(true);
-			this.comboYear.setEnabled(true);
-			this.butAuto.setEnabled(true);
-		}
-		else
-		{
-			this.comboDay.setEnabled(false);
-			this.comboMonth.setEnabled(false);
-			this.comboYear.setEnabled(false);
-			this.butAuto.setEnabled(false);
-		}
+		this.comboMonth.setEnabled(enable);
+		this.comboYear.setEnabled(enable);
+		this.comboDay.setEnabled(enable);
+		this.butAuto.setEnabled(enable);
+		this.butDefault.setEnabled(enable);
 	}
 	private final void init()
 	{
@@ -82,6 +78,7 @@ public class DatePanel extends JPanel implements ActionListener
 		this.setOpaque(false);
 		this.comboYear.addActionListener(this.yearListener);
 		this.comboMonth.addActionListener(this.monthListener);
+		this.comboDay.setEnabled(this.enable);
 		this.butAuto.addActionListener(this);
 		this.butAuto.setActionCommand(this.AUTO);
 		this.butAuto.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT));
@@ -111,6 +108,8 @@ public class DatePanel extends JPanel implements ActionListener
 //		System.out.println(this.comboYear.getSelectedItem());
 		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
 																				Short.parseShort(this.comboYear.getSelectedItem().toString())));
+		this.comboDay.setEnabled(this.enable);
+		
 		c.gridx = this.vecDay.x;
 		c.gridy = this.vecDay.y;
 		this.add(this.comboDay, c);

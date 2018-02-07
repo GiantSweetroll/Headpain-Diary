@@ -31,31 +31,27 @@ public class PatientDataForm extends JPanel
 	public PatientDataForm(boolean enable)
 	{
 		this.init();
-		if (!enable)
-		{
-			this.tfMedID.setEditable(false);
-			this.tfName.setEditable(false);
-			this.panelDOB.enableComponents(false);
-		}
+		this.enableComponents(enable);
 	}
 	public PatientDataForm(PatientData patientData, boolean enable)
 	{
 		this.init();
-		if (!enable)
-		{
-			this.tfMedID.setEditable(false);
-			this.tfName.setEditable(false);
-			this.panelDOB.enableComponents(false);
-		}
 		
 		LinkedHashMap<String, String> dataMap = patientData.getDataMap();
 		this.tfMedID.setText(dataMap.get(PatientData.MEDICAL_RECORD_ID));
 		this.tfName.setText(dataMap.get(PatientData.NAME));
 		this.panelDOB.setDate(dataMap.get(PatientData.DOB_DAY), dataMap.get(PatientData.DOB_MONTH), dataMap.get(PatientData.DOB_YEAR));
 		this.panelDOB.setAsDefaultDataThis();
+		this.enableComponents(enable);
 	}
 	
 	//Methods
+	private void enableComponents(boolean enable)
+	{
+		this.tfMedID.setEditable(enable);
+		this.tfName.setEditable(enable);
+		this.panelDOB.enableComponents(enable);
+	}
 	private void init()
 	{
 		//Initialization

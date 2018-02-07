@@ -1,6 +1,7 @@
 package diary.gui.EntryLog;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -27,12 +29,14 @@ import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DatePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
+import diary.patientdata.PatientData;
 import giantsweetroll.GDateManager;
 import giantsweetroll.VectorInt;
 import giantsweetroll.gui.swing.Gbm;
@@ -60,6 +64,8 @@ public class EntryLog extends JPanel implements ActionListener
 	private DatePanel panelDate;
 	private TimePanel panelTime;
 	
+	private ActivePatientPanel activePatientPanel;
+	
 	private JFormattedTextField tfNyeriAmount;
 	private JTextField tfActivity;
 	private JTextArea taComments;
@@ -69,6 +75,7 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private boolean isNewEntry;
 	private PainEntryData oldEntry;
+	private PatientData oldPatient;
 	
 	//Constants
 	private final String BACK = "back";
@@ -84,11 +91,12 @@ public class EntryLog extends JPanel implements ActionListener
 		this.createAndShowGUI();
 		this.isNewEntry = true;
 	}
-	public EntryLog(PainEntryData entry)
+	public EntryLog(PatientData patient, PainEntryData entry)
 	{
 		this.createAndShowGUI();
 		this.oldEntry = entry;
-		this.fillData(entry);
+		this.oldPatient = patient;
+		this.fillData(patient, entry);
 		this.revalidate();
 		this.repaint();
 		this.isNewEntry = false;
@@ -137,6 +145,7 @@ public class EntryLog extends JPanel implements ActionListener
 		//Initialization
 		this.panelCenter = new JPanel();
 		this.c = new GridBagConstraints();
+		this.activePatientPanel = new ActivePatientPanel();
 		this.labDate = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_LABEL), SwingConstants.RIGHT);
 		this.panelDate = new DatePanel(true);
 		this.labStartTime = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
@@ -153,6 +162,7 @@ public class EntryLog extends JPanel implements ActionListener
 		//Properties
 		this.panelCenter.setLayout(new GridBagLayout());
 		this.panelCenter.setOpaque(false);
+		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute(), GDateManager.getCurrentSecond());
 		this.panelTime.resetDefault();
 		this.tfNyeriAmount.setColumns(5);
@@ -169,6 +179,10 @@ public class EntryLog extends JPanel implements ActionListener
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
+		c.gridwidth = 1000;
+		this.panelCenter.add(this.activePatientPanel, c);	//Active Patient Panel
+		Gbm.newGridLine(c);
+		c.insets = Constants.INSETS_GENERAL;
 		c.gridwidth = 1;
 		this.panelCenter.add(this.labDate, c);				//Date
 		Gbm.nextGridColumn(c);
@@ -176,7 +190,6 @@ public class EntryLog extends JPanel implements ActionListener
 		this.panelCenter.add(this.panelDate, c);			//Date Panel
 		Gbm.newGridLine(c);
 		c.gridwidth = 1;
-		c.insets = Constants.INSETS_GENERAL;
 		this.panelCenter.add(this.labStartTime, c);			//Start Time
 		Gbm.nextGridColumn(c);
 		c.gridwidth = 4;
@@ -352,8 +365,9 @@ public class EntryLog extends JPanel implements ActionListener
 		}
 	}
 	
-	private void fillData(PainEntryData entry)
+	private void fillData(PatientData patient, PainEntryData entry)
 	{
+		this.activePatientPanel.setSelectedPatient(patient);
 		this.panelDate.setDate(entry.getDataMap().get(PainDataIdentifier.DATE_DAY).toString(), 
 								entry.getDataMap().get(PainDataIdentifier.DATE_MONTH).toString(), 
 								entry.getDataMap().get(PainDataIdentifier.DATE_YEAR).toString());
@@ -433,26 +447,27 @@ public class EntryLog extends JPanel implements ActionListener
 				if (this.allRequiredFieldsFilled())
 				{
 					PainEntryData entry = new PainEntryData(this.createDataXMLDocument());
+					PatientData patient = this.activePatientPanel.getSelectedPatientData();
 					
-					if (FileOperation.entryExists(entry) && this.isNewEntry)
+					if (FileOperation.entryExists(patient, entry) && this.isNewEntry)
 					{
 						int response = CustomDialog.showConfirmDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
 																	Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
 						
 						if (response == JOptionPane.YES_OPTION)
 						{
-							FileOperation.exportPainData(entry);
+							FileOperation.exportPainData(patient, entry);
 							MainFrame.changePanel(new MainMenu());
 						}
 					}
 					else
 					{
-						FileOperation.exportPainData(entry);
+						FileOperation.exportPainData(patient, entry);
 						if (!this.isNewEntry)
 						{
 							if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
 							{
-								FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldEntry));
+								FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
 							}
 						}
 						MainFrame.changePanel(new MainMenu());
