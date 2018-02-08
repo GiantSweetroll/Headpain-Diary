@@ -167,6 +167,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.SAVE_TEXT, "Save");
 		appendComponentToMap(doc, map, XMLIdentifier.SWITCH_TEXT, "Switch");
 		appendComponentToMap(doc, map, XMLIdentifier.SHOW_TEXT, "Show");
+		appendComponentToMap(doc, map, XMLIdentifier.NEW_TEXT, "New");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

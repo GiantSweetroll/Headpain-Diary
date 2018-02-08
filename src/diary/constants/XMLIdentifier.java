@@ -36,6 +36,7 @@ public class XMLIdentifier
 	public static final String SAVE_TEXT = "save text";
 	public static final String SWITCH_TEXT = "switch text";
 	public static final String SHOW_TEXT = "show text";
+	public static final String NEW_TEXT = "new text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
