@@ -76,6 +76,16 @@ public class PatientData
 		return this.dataMap.get(PatientData.MEDICAL_RECORD_ID);
 	}
 	
+	public String getName()
+	{
+		return this.dataMap.get(PatientData.NAME);
+	}
+	
+	public String getDOB()
+	{
+		return this.dataMap.get(PatientData.DOB_DAY) + "-" + this.dataMap.get(PatientData.DOB_MONTH) + "-" + this.dataMap.get(PatientData.DOB_YEAR);
+	}
+	
 	public String getNameAndID()
 	{
 		return this.dataMap.get(PatientData.NAME) + " - " + this.dataMap.get(PatientData.MEDICAL_RECORD_ID);

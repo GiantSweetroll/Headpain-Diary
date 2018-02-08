@@ -26,10 +26,6 @@ public class TablePanel extends JPanel
 		//Initialization
 		list = PainDataOperation.getFilteredData(filterType, filter, list);
 		Object[][] objects = this.convertToTableDataArray(list);
-		this.table = new Table(objects, Constants.TABLE_HEADERS);
-		{
-			//Internal JTable personalization
-		}
 		this.scroll = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//Properties

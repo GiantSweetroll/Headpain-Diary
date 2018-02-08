@@ -23,6 +23,7 @@ import diary.gui.EntryLog.EntryLog;
 import diary.gui.graphs.GraphPanel;
 import diary.gui.settings.SettingsPanel;
 import diary.gui.table.TableScreen;
+import diary.patientdata.PatientDataManagePanel;
 import giantsweetroll.gui.swing.Gbm;
 
 // TODO: Auto-generated Javadoc
@@ -184,6 +185,7 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.butNew.setActionCommand(this.NEW_LOG);
 		this.butGraph.setActionCommand(this.GRAPH);
 		this.butTable.setActionCommand(this.TABLE);
+		this.butManagePatients.setActionCommand(this.MANAGE_PATIENTS);
 		this.butSettings.setActionCommand(this.SETTINGS);
 		this.butExit.setActionCommand(this.EXIT);
 		this.butNew.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
@@ -293,7 +295,7 @@ public final class MainMenu extends JPanel implements ActionListener
 					else if (keyCode == KeyEvent.VK_4 || keyCode == KeyEvent.VK_NUMPAD4)
 					{
 						//Manage Patients
-						
+						MainFrame.changePanel(new PatientDataManagePanel());
 					}
 					else if (keyCode == KeyEvent.VK_5 || keyCode == KeyEvent.VK_NUMPAD5)
 					{
@@ -338,6 +340,7 @@ public final class MainMenu extends JPanel implements ActionListener
 				break;
 				
 			case MANAGE_PATIENTS:
+				MainFrame.changePanel(new PatientDataManagePanel());
 				break;
 				
 			case SETTINGS:

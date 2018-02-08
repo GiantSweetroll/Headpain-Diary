@@ -480,6 +480,26 @@ public class FileOperation
 			e.printStackTrace();
 		}
 	}
+	public static List<PatientData> loadPatients()
+	{
+		List<PatientData> list = new ArrayList<PatientData>();
+		List<String> files = new ArrayList<String>();
+		
+		FileManager.getListOfFiles(files, MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator, false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+		
+		for (int i=0; i<files.size(); i++)
+		{
+			try
+			{
+				list.add(new PatientData(XMLManager.createDocument(files.get(i), false)));
+			}
+			catch(Exception ex)
+			{
+			}
+		}
+		
+		return list;
+	}
 	public static void deletePatientData(String medID)
 	{
 		File file = new File (MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + medID + ".xml");

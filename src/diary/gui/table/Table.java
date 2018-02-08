@@ -19,7 +19,7 @@ public class Table extends JTable
 	private static final long serialVersionUID = 7051752509928960116L;
 	private List<String> selectedEntries;
 	
-	protected Table(Object[][] data, String[] columns)
+	public Table(Object[][] data, String[] columns)
 	{
 		super(data, columns);
 		

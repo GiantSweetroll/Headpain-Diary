@@ -112,7 +112,7 @@ public final class Constants
 															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT),
 															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)};
 	
-	public static final String[] TABLE_HEADERS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_SELECT_TEXT),
+	public static final String[] ENTRY_TABLE_HEADERS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_SELECT_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_DATE_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT),
@@ -130,4 +130,8 @@ public final class Constants
 	public static final String[] DURATION_UNITS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)};
+	
+	public static final String[] PATIENT_TABLE_HEADERS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL)};
 }
