@@ -119,7 +119,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		this.butSelect = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT));
 		
 		//Properties
-		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.panelBelowCenter.setOpaque(false);
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.addActionListener(this);

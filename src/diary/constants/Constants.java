@@ -131,7 +131,8 @@ public final class Constants
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT),
 													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)};
 	
-	public static final String[] PATIENT_TABLE_HEADERS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL),
+	public static final String[] PATIENT_TABLE_HEADERS = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT),
+															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL),
 															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL),
 															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL)};
 }
