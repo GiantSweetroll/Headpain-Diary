@@ -2,7 +2,6 @@ package diary.gui.table;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -17,7 +16,6 @@ public class Table extends JTable
 	 * 
 	 */
 	private static final long serialVersionUID = 7051752509928960116L;
-	private List<String> selectedEntries;
 	
 	public Table(Object[][] data, String[] columns)
 	{
@@ -33,7 +31,6 @@ public class Table extends JTable
 		for (int i=0; i<this.getColumnCount(); i++)
 		{
 			this.getColumnModel().getColumn(i).setMinWidth(this.getColumnName(i).length()*10);
-			
 		}
 		
 		//Center align headers
@@ -48,7 +45,6 @@ public class Table extends JTable
 		{
 			this.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 		}
-		
 	}
 
 	//Override Methods
@@ -97,5 +93,11 @@ public class Table extends JTable
 		}
 		
 		return c;
+	}
+	
+	@Override
+	public boolean getScrollableTracksViewportWidth()			//Resizes the table cells width to its preferred size or the viewport size, whichever is greater
+	{
+		return getPreferredSize().width < getParent().getWidth();
 	}
 }

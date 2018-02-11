@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.methods.FileOperation;
+import diary.methods.Methods;
 import diary.patientdata.PatientData;
 import diary.patientdata.PatientDataForm;
 import diary.patientdata.PatientDataRenderer;
@@ -64,10 +65,10 @@ public class ActivePatientPanel extends JPanel implements ItemListener
 	{
 		//Initialization
 		this.panelCenter = new JPanel();
-		this.labUser = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT), SwingConstants.CENTER);
+		this.labUser = new JLabel(Methods.getLanguageText(XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT), SwingConstants.CENTER);
 		List<PatientData> list = FileOperation.getListOfPatients();
 		this.comboUsers = new JComboBox<PatientData>(list.toArray(new PatientData[list.size()]));
-		this.radShow = new JRadioButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SHOW_TEXT));
+		this.radShow = new JRadioButton(Methods.getLanguageText(XMLIdentifier.SHOW_TEXT));
 		this.c = new GridBagConstraints();
 		
 		//Properties

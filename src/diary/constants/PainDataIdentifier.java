@@ -6,6 +6,8 @@ public final class PainDataIdentifier
 	
 	public static final String PAIN_AMOUNT = "nyeri_amount";
 	public static final String ACTIVITY = "activity";
+	public static final String ACTIVITY_DETAILS = "activity_details";
+	public static final String RECENT_MEDICATION = "recent_medication";
 	public static final String COMMENTS = "comments";
 	public static final String GENERAL_POSITION = "general_location";
 	public static final String GENERAL_POSITION_2 = "general_location_2";

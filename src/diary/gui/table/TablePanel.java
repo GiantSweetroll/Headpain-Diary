@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import diary.PainEntryData;
 import diary.constants.Constants;
@@ -26,6 +27,7 @@ public class TablePanel extends JPanel
 		//Initialization
 		list = PainDataOperation.getFilteredData(filterType, filter, list);
 		Object[][] objects = this.convertToTableDataArray(list);
+		this.table = new Table(objects, Constants.ENTRY_TABLE_HEADERS);
 		this.scroll = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//Properties
@@ -38,7 +40,7 @@ public class TablePanel extends JPanel
 	
 	private Object[][] convertToTableDataArray(List<PainEntryData> list)
 	{
-		Object arr[][] = new Object[list.size()][10];
+		Object arr[][] = new Object[list.size()][12];
 		
 		for (int i=0; i<arr.length; i++)
 		{	
@@ -60,6 +62,10 @@ public class TablePanel extends JPanel
 			arr[i][index]= list.get(i).getDurationsAsString();			//Durations
 			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY);		//Activity
+			index++;
+			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY_DETAILS);//Activity Details
+			index++;
+			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.RECENT_MEDICATION);//Recent Medication
 			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.COMMENTS);		//Comments
 		}

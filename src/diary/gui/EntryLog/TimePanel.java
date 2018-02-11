@@ -16,6 +16,7 @@ import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.TimeConstants;
 import diary.constants.XMLIdentifier;
+import diary.methods.Methods;
 import giantsweetroll.GDateManager;
 import giantsweetroll.gui.swing.Gbm;
 
@@ -59,8 +60,8 @@ public class TimePanel extends JPanel implements ActionListener
 		this.comboHour = new JComboBox<String>(TimeConstants.HOURS_RANGE);
 		this.comboMinute = new JComboBox<String>(TimeConstants.GENERAL_TIME_RANGE);
 		this.comboSec = new JComboBox<String>(TimeConstants.GENERAL_TIME_RANGE);
-		this.butCurrent = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.AUTO_TEXT));
-		this.butReset = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
+		this.butCurrent = new JButton(Methods.getLanguageText(XMLIdentifier.AUTO_TEXT));
+		this.butReset = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		this.c = new GridBagConstraints();
 		this.defaultMap = new LinkedHashMap<String, String>();
 		
@@ -69,10 +70,10 @@ public class TimePanel extends JPanel implements ActionListener
 		this.setOpaque(false);
 		this.butCurrent.addActionListener(this);
 		this.butCurrent.setActionCommand(this.CURRENT);
-		this.butCurrent.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TIME_AUTO_BUTTON_TOOLTIP_TEXT));
+		this.butCurrent.setToolTipText(Methods.getLanguageText(XMLIdentifier.TIME_AUTO_BUTTON_TOOLTIP_TEXT));
 		this.butReset.addActionListener(this);
 		this.butReset.setActionCommand(this.RESET);
-		this.butReset.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TIME_RESET_BUTTON_TOOLTIP_TEXT));
+		this.butReset.setToolTipText(Methods.getLanguageText(XMLIdentifier.TIME_RESET_BUTTON_TOOLTIP_TEXT));
 		
 		//Add to panel
 		Gbm.goToOrigin(c);

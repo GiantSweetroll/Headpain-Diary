@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>11</date_day>
+     <date_month>2</date_month>
+     <date_year>2018</date_year>
+     <time_hour>11</time_hour>
+     <time_minute>01</time_minute>
+     <time_seconds>26</time_seconds>
+     <nyeri_amount>1</nyeri_amount>
+     <pain_locations>
+          <pain_location pain_loc_id="0">
+               <general_location>cheeks</general_location>
+               <general_location_2>cheeks right general</general_location_2>
+               <specific_location>cheeks right lower</specific_location>
+               <pain_kind>Throbbing</pain_kind>
+               <intensity>4</intensity>
+               <duration>12</duration>
+          </pain_location>
+     </pain_locations>
+     <activity>Sunlight</activity>
+     <activity_details/>
+     <recent_medication>Panadol + Pil</recent_medication>
+     <comments/>
+</Entry>

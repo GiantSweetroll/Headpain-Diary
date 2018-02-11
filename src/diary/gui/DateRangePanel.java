@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 
 public class DateRangePanel extends JPanel
@@ -33,8 +34,8 @@ public class DateRangePanel extends JPanel
 		this.dateFrom = new DatePanel(true);
 		this.dateTo = new DatePanel(true);
 		this.c = new GridBagConstraints();
-		this.labFrom = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_FROM_LABEL) + ":", SwingConstants.RIGHT);
-		this.labTo = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_TO_LABEL) + ":", SwingConstants.RIGHT);
+		this.labFrom = new JLabel (Methods.getLanguageText(XMLIdentifier.DATE_FROM_LABEL) + ":", SwingConstants.RIGHT);
+		this.labTo = new JLabel (Methods.getLanguageText(XMLIdentifier.DATE_TO_LABEL) + ":", SwingConstants.RIGHT);
 		
 		//Properties
 		this.dateFrom.setAsDefaultDataThis();

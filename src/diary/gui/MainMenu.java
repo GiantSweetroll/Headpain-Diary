@@ -23,6 +23,7 @@ import diary.gui.EntryLog.EntryLog;
 import diary.gui.graphs.GraphPanel;
 import diary.gui.settings.SettingsPanel;
 import diary.gui.table.TableScreen;
+import diary.methods.Methods;
 import diary.patientdata.PatientDataManagePanel;
 import giantsweetroll.gui.swing.Gbm;
 
@@ -99,7 +100,7 @@ public final class MainMenu extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowAuthor = new JPanel();
-		this.labAuthor = new JLabel ("   " + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.AUTHOR_TEXT) + " Gardyan P. Akbar   ");
+		this.labAuthor = new JLabel ("   " + Methods.getLanguageText(XMLIdentifier.AUTHOR_TEXT) + " Gardyan P. Akbar   ");
 		
 		//Properties
 		this.panelBelowAuthor.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -114,7 +115,7 @@ public final class MainMenu extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowVersion = new JPanel();
-		this.labVersion = new JLabel ("   " + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VERSION_TEXT) + " " + Constants.VERSION + "   ");
+		this.labVersion = new JLabel ("   " + Methods.getLanguageText(XMLIdentifier.VERSION_TEXT) + " " + Constants.VERSION + "   ");
 		
 		//Properties
 		this.panelBelowVersion.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -163,12 +164,12 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.panelButtons = new JPanel();
 		GridBagConstraints c = new GridBagConstraints();
 		this.listButtons = new ArrayList<JButton>();
-		this.butNew = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT));
-		this.butGraph = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT));
-		this.butTable = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT));
-		this.butManagePatients = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT));
-		this.butSettings = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_BUTTON_TEXT));
-		this.butExit = new JButton (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.EXIT_BUTTON_TEXT));
+		this.butNew = new JButton (Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT));
+		this.butGraph = new JButton (Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT));
+		this.butTable = new JButton (Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT));
+		this.butManagePatients = new JButton(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT));
+		this.butSettings = new JButton (Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT));
+		this.butExit = new JButton (Methods.getLanguageText(XMLIdentifier.EXIT_BUTTON_TEXT));
 		ArrayList<JLabel> listNumbers = new ArrayList<JLabel>();
 		
 		//Add to array
@@ -188,11 +189,11 @@ public final class MainMenu extends JPanel implements ActionListener
 		this.butManagePatients.setActionCommand(this.MANAGE_PATIENTS);
 		this.butSettings.setActionCommand(this.SETTINGS);
 		this.butExit.setActionCommand(this.EXIT);
-		this.butNew.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
-		this.butGraph.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP));
-		this.butTable.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP));
-		this.butManagePatients.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP));
-		this.butSettings.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_BUTTON_TOOLTIP));
+		this.butNew.setToolTipText(Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
+		this.butGraph.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP));
+		this.butTable.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP));
+		this.butManagePatients.setToolTipText(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP));
+		this.butSettings.setToolTipText(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TOOLTIP));
 		for (int i=0; i<this.listButtons.size(); i++)
 		{
 			this.listButtons.get(i).setFont(Constants.FONT_GENERAL);

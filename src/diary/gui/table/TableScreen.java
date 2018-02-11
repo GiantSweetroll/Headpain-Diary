@@ -8,10 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -92,13 +95,13 @@ public class TableScreen extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butBack = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
+		this.butBack = new JButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setOpaque(false);
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.butBack.setActionCommand(this.BACK);
-		this.butBack.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_BACK_TEXT));
+		this.butBack.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_BACK_TEXT));
 		this.butBack.addActionListener(this);
 		
 		//add to panel
@@ -108,13 +111,13 @@ public class TableScreen extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowCenter = new JPanel();
-		this.butDelete = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DELETE_TEXT));
+		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.butDelete.setActionCommand(this.DELETE);
-		this.butDelete.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT));
+		this.butDelete.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT));
 		this.butDelete.addActionListener(this);
 		
 		//add to panel
@@ -124,13 +127,13 @@ public class TableScreen extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butSelect = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT));
+		this.butSelect = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		
 		//Properties
 		this.panelBelowRight.setOpaque(false);
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		this.butSelect.setActionCommand(this.SELECT);
-		this.butSelect.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT));
+		this.butSelect.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT));
 		this.butSelect.addActionListener(this);
 		
 		//add to panel
@@ -157,12 +160,12 @@ public class TableScreen extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelTopLeft = new JPanel();
-		this.labFilter = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_BY_LABEL), SwingConstants.RIGHT);
-		this.labKeyword = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_KEYWORD_LABEL), SwingConstants.RIGHT);
+		this.labFilter = new JLabel(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_BY_LABEL), SwingConstants.RIGHT);
+		this.labKeyword = new JLabel(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_KEYWORD_LABEL), SwingConstants.RIGHT);
 		this.tfFilter = new JTextField("", 20);
 		this.comboFilter = new JComboBox<String>(Constants.TABLE_FILTER_OPTIONS);
-		this.butFilter = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT));
-		this.labGuide = new JLabel ("<html> " + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NOTE_TEXT) + ": " + "<br/>" + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_GUIDE_USAGE_TEXT) + "</html>");
+		this.butFilter = new JButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
+		this.labGuide = new JLabel ("<html> " + Methods.getLanguageText(XMLIdentifier.NOTE_TEXT) + ": " + "<br/>" + Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_GUIDE_USAGE_TEXT) + "</html>");
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -294,31 +297,31 @@ public class TableScreen extends JPanel implements ActionListener
 	{
 		String filterType = this.comboFilter.getSelectedItem().toString();
 		
-		if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT)))
+		if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT)))
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT;
 		}
-		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT)))
+		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT)))
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT;
 		}
-		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT)))
+		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT)))
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT;
 		}
-		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT)))
+		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT)))
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT;
 		}
-		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT)))
+		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT)))
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT;
 		}
-		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT)))
+		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT)))
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT;
 		}
-		else if (filterType.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)))
+		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)))
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT;
 		}
@@ -383,8 +386,8 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case DELETE:
-				int response = CustomDialog.showConfirmDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
-																Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
+				int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
+																Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
 				
 				if (response == JOptionPane.YES_OPTION)
 				{

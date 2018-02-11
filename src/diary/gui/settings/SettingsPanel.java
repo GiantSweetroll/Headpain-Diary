@@ -96,15 +96,15 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private void initCatDatabase()
 	{
 		//Initialization
-		this.catDatabase = new SettingsCategoryPanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_TITLE));
-		JLabel labDatabasePath = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT), SwingConstants.RIGHT);
+		this.catDatabase = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_TITLE));
+		JLabel labDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT), SwingConstants.RIGHT);
 		JTextField tfDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_PATH), 30);
-		JButton butBrowseDatabasePath = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BROWSE_TEXT));
-		JButton butDefaultDatabase = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
-		JLabel labUserDatabasePath = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
+		JButton butBrowseDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		JButton butDefaultDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		JLabel labUserDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
 		JTextField tfUserDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_USERS_PATH), 30);
-		JButton butBrowseUserDatabasePath = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BROWSE_TEXT));
-		JButton butDefaultUserDatabase = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
+		JButton butBrowseUserDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		JButton butDefaultUserDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -118,8 +118,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 			{
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				jfc.setDialogTitle(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT));
-				int response = jfc.showDialog(null, Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT));
+				jfc.setDialogTitle(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT));
+				int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 				
 				if (response == JFileChooser.APPROVE_OPTION)
 				{
@@ -163,8 +163,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 			{
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				jfc.setDialogTitle(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT));
-				int response = jfc.showDialog(null, Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT));
+				jfc.setDialogTitle(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT));
+				int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 				
 				if (response == JFileChooser.APPROVE_OPTION)
 				{
@@ -226,10 +226,10 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private void initCatWindow()
 	{
 		//Initialization
-		this.catWindow = new SettingsCategoryPanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_TITLE));
-		JLabel labWindowMode = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT));
-		JRadioButton radFullscreen = new JRadioButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT));
-		JRadioButton radWindowed = new JRadioButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT));
+		this.catWindow = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_TITLE));
+		JLabel labWindowMode = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT));
+		JRadioButton radFullscreen = new JRadioButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT));
+		JRadioButton radWindowed = new JRadioButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT));
 		ButtonGroup group = new ButtonGroup();
 		GridBagConstraints c = new GridBagConstraints();
 		String chosenWindowState = this.dataMap.get(Settings.WINDOW_MODE);
@@ -293,10 +293,10 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private void initCatProgram()
 	{
 		//Initialization
-		this.catProgram = new SettingsCategoryPanel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_PROGRAM_TITLE));
-		JLabel labLanguage = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SETTINGS_LANGUAGE_TEXT));
+		this.catProgram = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_PROGRAM_TITLE));
+		JLabel labLanguage = new JLabel(Methods.getLanguageText(XMLIdentifier.SETTINGS_LANGUAGE_TEXT));
 		JComboBox<String> comboLanguages = new JComboBox<String>(Methods.getLanguages());
-		JButton butRefresh = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.REFRESH_TEXT));
+		JButton butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		String selectedLanguage = this.dataMap.get(Settings.LANGUAGE);
 		
@@ -334,8 +334,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelow = new JPanel();
-		this.butCancel = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.CANCEL_TEXT));
-		this.butSave = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SAVE_TEXT));
+		this.butCancel = new JButton(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
+		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
 		
 		//Properties
 		this.panelBelow.setLayout(new FlowLayout(FlowLayout.CENTER));

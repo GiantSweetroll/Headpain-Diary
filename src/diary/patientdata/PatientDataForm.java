@@ -121,5 +121,14 @@ public class PatientDataForm extends JPanel
 			return false;
 		}
 	}
-
+	public void setData(PatientData patient)
+	{
+		LinkedHashMap<String, String> dataMap = patient.getDataMap();
+		this.tfMedID.setText(dataMap.get(PatientData.MEDICAL_RECORD_ID));
+		this.tfName.setText(dataMap.get(PatientData.NAME));
+		this.panelDOB.setDate(dataMap.get(PatientData.DOB_DAY), dataMap.get(PatientData.DOB_MONTH), dataMap.get(PatientData.DOB_YEAR));
+		this.panelDOB.setAsDefaultDataThis();
+		this.revalidate();
+		this.repaint();
+	}
 }

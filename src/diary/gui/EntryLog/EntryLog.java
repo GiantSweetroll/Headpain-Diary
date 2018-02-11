@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ import org.w3c.dom.Element;
 
 import diary.PainEntryData;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.gui.ActivePatientPanel;
@@ -34,6 +36,7 @@ import diary.gui.CustomDialog;
 import diary.gui.DatePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainMenu;
+import diary.history.HistoryPanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
@@ -59,15 +62,17 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private JScrollPane scrollCenter, scrollComments;
 	
-	private JLabel labTitle, labDate, labStartTime, labNyeriAmount, labActivity, labComments;
+	private JLabel labTitle, labDate, labStartTime, labNyeriAmount, labActivity, labRecentMedication, labComments;
 	
 	private DatePanel panelDate;
 	private TimePanel panelTime;
 	
 	private ActivePatientPanel activePatientPanel;
+	private HistoryPanel historyRecentMedication;
 	
 	private JFormattedTextField tfNyeriAmount;
 	private JTextField tfActivity;
+	private JComboBox<String> comboActivity;
 	private JTextArea taComments;
 	private JButton butBack, butFinish, butConfirm;
 		
@@ -130,7 +135,7 @@ public class EntryLog extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelTitle = new JPanel();
-		this.labTitle = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.ENTRY_LOG_TITLE));
+		this.labTitle = new JLabel(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_TITLE));
 		
 		//Properties
 		this.labTitle.setFont(Constants.FONT_TITLE);
@@ -146,16 +151,19 @@ public class EntryLog extends JPanel implements ActionListener
 		this.panelCenter = new JPanel();
 		this.c = new GridBagConstraints();
 		this.activePatientPanel = new ActivePatientPanel();
-		this.labDate = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_LABEL), SwingConstants.RIGHT);
+		this.labDate = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.DATE_LABEL), SwingConstants.RIGHT);
 		this.panelDate = new DatePanel(true);
-		this.labStartTime = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
+		this.labStartTime = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
 		this.panelTime = new TimePanel(true);
-		this.labNyeriAmount = new JLabel (Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL), SwingConstants.RIGHT);
+		this.labNyeriAmount = new JLabel (Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL), SwingConstants.RIGHT);
 		this.tfNyeriAmount = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.butConfirm = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.CONFIRM_TEXT));
-		this.labActivity = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.ACTIVITY_LABEL), SwingConstants.RIGHT);
+		this.butConfirm = new JButton(Methods.getLanguageText(XMLIdentifier.CONFIRM_TEXT));
+		this.labActivity = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL), SwingConstants.RIGHT);
+		this.comboActivity = new JComboBox<String>(Constants.DEFAULT_ACTIVITIES);
 		this.tfActivity = new JTextField("", 20);
-		this.labComments = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.COMMENTS_LABEL), SwingConstants.RIGHT);
+		this.labRecentMedication = new JLabel(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL), SwingConstants.RIGHT);
+		this.historyRecentMedication = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION);
+		this.labComments = new JLabel(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL), SwingConstants.RIGHT);
 		this.taComments = new JTextArea(10, 35);
 		this.scrollComments = ScrollPaneManager.generateDefaultScrollPane(this.taComments, 10, 10);
 		
@@ -168,6 +176,7 @@ public class EntryLog extends JPanel implements ActionListener
 		this.tfNyeriAmount.setColumns(5);
 		this.tfNyeriAmount.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfNyeriAmount.setText("1");
+		this.tfActivity.setEditable(false);
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.taComments.setBorder(this.tfActivity.getBorder());
 		this.panelDate.setDefaultData(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
@@ -209,11 +218,16 @@ public class EntryLog extends JPanel implements ActionListener
 		Gbm.newGridLine(c);
 		c.gridwidth = 1;
 		this.panelCenter.add(this.labActivity, c);			//Activity
-		c.gridwidth = 2;
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.comboActivity, c);		//Default Activities
 		Gbm.nextGridColumn(c);
 		this.panelCenter.add(this.tfActivity, c);			//Activity Text Field
 		Gbm.newGridLine(c);
 		c.gridwidth = 1;
+		this.panelCenter.add(this.labRecentMedication, c);	//Recent Medication
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.historyRecentMedication, c);	//Recent Medication Historu Panel
+		Gbm.newGridLine(c);
 		this.panelCenter.add(this.labComments, c);			//Comments
 		Gbm.nextGridColumn(c);
 		c.gridwidth = 3;
@@ -230,7 +244,7 @@ public class EntryLog extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butBack = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
+		this.butBack = new JButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		
 		//properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -242,7 +256,7 @@ public class EntryLog extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butFinish = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FINISH_TEXT));
+		this.butFinish = new JButton(Methods.getLanguageText(XMLIdentifier.FINISH_TEXT));
 		
 		//properties
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -272,6 +286,7 @@ public class EntryLog extends JPanel implements ActionListener
 		this.butFinish.addActionListener(this);
 		this.butFinish.setActionCommand(this.FINISH);
 		this.butConfirm.addActionListener(this.nyeriAmountListener);
+		this.comboActivity.addActionListener(this.activityListener);
 	}
 	private void getNyeriAmount()
 	{
@@ -329,7 +344,9 @@ public class EntryLog extends JPanel implements ActionListener
 			//Pain Locations
 			rootElement.appendChild(((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getLocationsElement(doc));
 			
-			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY, Methods.getTextData(this.tfActivity));
+			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY, this.comboActivity.getSelectedItem().toString());
+			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY_DETAILS, Methods.getTextData(this.tfActivity));
+			this.appendToRootNode(doc, rootElement, PainDataIdentifier.RECENT_MEDICATION, this.historyRecentMedication.getItem());
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.COMMENTS, this.taComments.getText());
 			
 			doc.appendChild(rootElement);
@@ -351,10 +368,40 @@ public class EntryLog extends JPanel implements ActionListener
 		rootElement.appendChild(element);
 	}
 	
+	private boolean activityShouldBeFilled()
+	{
+		if (this.selectedActivityIsOther())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	private boolean activityFilled()
+	{
+		if (this.activityShouldBeFilled())
+		{
+			if (Methods.isEmpty(this.tfActivity))
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
 	private boolean allRequiredFieldsFilled()
 	{
 		if (Methods.isEmpty(this.tfNyeriAmount) ||
-			Methods.isEmpty(this.tfActivity) ||
+			!this.activityFilled() ||
 			!((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).allFieldsEntered())
 		{
 			return false;
@@ -412,8 +459,35 @@ public class EntryLog extends JPanel implements ActionListener
 			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDuration(duration);
 			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDurationUnit(durationUnit);
 		}
-		this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+	//	this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+		String activity = entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
+		if (Methods.isPartOfDefaultActivity(activity))
+		{
+			this.comboActivity.setSelectedItem(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+		}
+		else
+		{
+			this.comboActivity.setSelectedIndex(Constants.DEFAULT_ACTIVITIES.length-1);
+			this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+		}
+		try
+		{
+			this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY_DETAILS).toString());
+		}
+		catch(NullPointerException ex) {}
 		this.taComments.setText(entry.getDataMap().get(PainDataIdentifier.COMMENTS).toString());
+	}
+	
+	private boolean selectedActivityIsOther()
+	{
+		if (this.comboActivity.getSelectedIndex() == Constants.DEFAULT_ACTIVITIES.length-1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	private void refreshPainPositions()
@@ -433,8 +507,6 @@ public class EntryLog extends JPanel implements ActionListener
 		repaint();
 	}
 	
-	//Interfaces
-	
 	public void actionPerformed(ActionEvent e)
 	{
 		switch (e.getActionCommand())
@@ -451,17 +523,19 @@ public class EntryLog extends JPanel implements ActionListener
 					
 					if (FileOperation.entryExists(patient, entry) && this.isNewEntry)
 					{
-						int response = CustomDialog.showConfirmDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
-																	Constants.LANGUAGE.getTextMap().get(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
+						int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
+																	Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
 						
 						if (response == JOptionPane.YES_OPTION)
 						{
+							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
 							FileOperation.exportPainData(patient, entry);
 							MainFrame.changePanel(new MainMenu());
 						}
 					}
 					else
 					{
+						FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
 						FileOperation.exportPainData(patient, entry);
 						if (!this.isNewEntry)
 						{
@@ -475,8 +549,8 @@ public class EntryLog extends JPanel implements ActionListener
 				}
 				else
 				{
-					MessageManager.showErrorDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT),
-													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE));
+					MessageManager.showErrorDialog(Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT),
+													Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE));
 				}
 				break;
 		}
@@ -487,6 +561,23 @@ public class EntryLog extends JPanel implements ActionListener
 				public void actionPerformed(ActionEvent e)
 				{
 					refreshPainPositions();
+				}
+			};
+	
+	private ActionListener activityListener = new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					int index = comboActivity.getSelectedIndex();
+					if (index == Constants.DEFAULT_ACTIVITIES.length-1)
+					{
+						tfActivity.setEditable(true);
+					}
+					else
+					{
+						tfActivity.setEditable(false);
+						tfActivity.setText("");
+					}
 				}
 			};
 }

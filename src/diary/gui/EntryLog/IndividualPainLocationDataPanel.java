@@ -44,9 +44,9 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	private JLabel labIntensity;
 	private JLabel labDuration;
 	private JLabel labIntensityRange;
-	private JLabel labDurationUnit;
+//	private JLabel labDurationUnit;
 	
-	private JComboBox<String> comboGeneralPos, comboDurationUnit;
+	private JComboBox<String> comboGeneralPos, comboDurationUnit, comboPainKind;
 	
 	private JTextField tfPainKind;
 	
@@ -75,16 +75,17 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	{
 		//Initialization
 		this.c = new GridBagConstraints();
-		this.labGeneralPosition = new JLabel (Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_LABEL), SwingConstants.RIGHT);
+		this.labGeneralPosition = new JLabel (Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_LABEL), SwingConstants.RIGHT);
 		this.comboGeneralPos = new JComboBox<String>(this.getGeneralLocationOptions());
-		this.labPainKind = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), SwingConstants.RIGHT);
-		this.tfPainKind = new JTextField("", 20);
-		this.labIntensity = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.INTENSITY_LABEL), SwingConstants.RIGHT);
+		this.labPainKind = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), SwingConstants.RIGHT);
+		this.tfPainKind = new JTextField("", 10);
+		this.comboPainKind = new JComboBox<String>(Constants.DEFAULT_PAIN_KIND);
+		this.labIntensity = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), SwingConstants.RIGHT);
 		this.tfIntensity = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.labIntensityRange = new JLabel("(0.0 - 10.0)", SwingConstants.LEFT);
-		this.labDuration = new JLabel(Constants.REQUIRED_IDENTIFIER + Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
+		this.labIntensityRange = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL), SwingConstants.LEFT);
+		this.labDuration = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
 		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-	//	this.labDurationUnit = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_LABEL), SwingConstants.LEFT);
+	//	this.labDurationUnit = new JLabel (Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_LABEL), SwingConstants.LEFT);
 		this.comboDurationUnit = new JComboBox<String>(Constants.DURATION_UNITS);
 		this.generalPos = new PainLocationSelectionPanel(this.getLocationIdentifier(Misc.getItem(this.comboGeneralPos).toString()));
 		this.scrollGeneral = new JScrollPane(this.generalPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -103,6 +104,7 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		this.scrollGeneral.getViewport().setOpaque(false);
 		this.scrollSpecific.setOpaque(false);
 		this.scrollSpecific.getViewport().setOpaque(false);
+		this.tfPainKind.setEditable(false);
 		
 		//add to panel
 		Gbm.goToOrigin(c);
@@ -123,16 +125,20 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		c.gridwidth = 1;
 		this.add(this.labPainKind, c);								//Kind of Headpain
 		Gbm.nextGridColumn(c);
-		c.gridwidth = 2;
-		this.add(this.tfPainKind, c);								//Kind of Headpain Text Field
-		Gbm.newGridLine(c);
+		c.gridwidth = 2;											
+		this.add(this.comboPainKind, c);							//Kind of Headpain Options
+		Gbm.nextGridColumn(c, 2);
 		c.gridwidth = 1;
+		this.add(this.tfPainKind, c);								//Kind of Headpain Text field
+		Gbm.newGridLine(c);
 		this.add(this.labIntensity, c);								//Intensity
 		Gbm.nextGridColumn(c);
 		this.add(this.tfIntensity, c);								//Intensity Text Field
 		Gbm.nextGridColumn(c);
+		c.gridwidth = 2;
 		this.add(this.labIntensityRange, c);						//Intensity Range
 		Gbm.newGridLine(c);
+		c.gridwidth = 1;
 		this.add(this.labDuration, c);								//Duration
 		Gbm.nextGridColumn(c);
 		this.add(this.tfDuration, c);								//Duration Text Field
@@ -145,20 +151,45 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	private void configureListenersForMembers()
 	{
 		this.comboGeneralPos.addActionListener(this.generalPositionListener);
+		this.comboPainKind.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						if (comboPainKind.getSelectedIndex() == Constants.DEFAULT_PAIN_KIND.length-1)
+						{
+							tfPainKind.setEditable(true);
+						}
+						else
+						{
+							tfPainKind.setEditable(false);
+						}
+					}
+				});
 	}
 	
 	private String[] getGeneralLocationOptions()
 	{
-		String[] array = {Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT),
-							Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EARS_TEXT),
-							Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EYES_TEXT),
-							Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT)};
+		String[] array = {Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT),
+							Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_EARS_TEXT),
+							Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_EYES_TEXT),
+							Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT)};
 		return array;
 	}
 
 	protected void setPainKind(String painKind)
 	{
-		this.tfPainKind.setText(painKind);
+	//	this.tfPainKind.setText(painKind);
+		if (Methods.isPartOfDefaultPainKind(painKind))
+		{
+			this.comboPainKind.setSelectedItem(painKind);
+			this.tfPainKind.setEditable(false);
+		}
+		else
+		{
+			this.comboPainKind.setSelectedIndex(Constants.DEFAULT_PAIN_KIND.length-1);
+			this.tfPainKind.setText(painKind);
+			this.tfPainKind.setEditable(true);
+		}
 	}
 	protected void setIntensity(String intensity)
 	{
@@ -172,15 +203,15 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	{
 		if (unit.equals(SECONDS))
 		{
-			this.comboDurationUnit.setSelectedItem(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT));
+			this.comboDurationUnit.setSelectedItem(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT));
 		}
 		else if (unit.equals(MINUTES))
 		{
-			this.comboDurationUnit.setSelectedItem(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT));
+			this.comboDurationUnit.setSelectedItem(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT));
 		}
 		else if (unit.equals(HOURS))
 		{
-			this.comboDurationUnit.setSelectedItem(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_HOURS_TEXT));
+			this.comboDurationUnit.setSelectedItem(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT));
 		}
 	}
 	
@@ -236,19 +267,19 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	{
 		String location = "";
 		
-		if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT)))
+		if (item.equals(Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT)))
 		{
 			location = PainLocationConstants.HEAD;
 		}
-		else if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EYES_TEXT)))
+		else if (item.equals(Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_EYES_TEXT)))
 		{
 			location = PainLocationConstants.EYES;
 		}
-		else if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EARS_TEXT)))
+		else if (item.equals(Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_EARS_TEXT)))
 		{
 			location = PainLocationConstants.EARS;
 		}
-		else if (item.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT)))
+		else if (item.equals(Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT)))
 		{
 			location = PainLocationConstants.CHEEKS;
 		}
@@ -261,19 +292,19 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		
 		if (painLocationConstant.equals(PainLocationConstants.HEAD))
 		{
-			location = Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT);
+			location = Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_HEAD_TEXT);
 		}
 		else if (painLocationConstant.equals(PainLocationConstants.EYES))
 		{
-			location = Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EYES_TEXT);
+			location = Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_EYES_TEXT);
 		}
 		else if (painLocationConstant.equals(PainLocationConstants.EARS))
 		{
-			location = Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_EARS_TEXT);
+			location = Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_EARS_TEXT);
 		}
 		else if (painLocationConstant.equals(PainLocationConstants.CHEEKS))
 		{
-			location = Constants.LANGUAGE.getTextMap().get(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT);
+			location = Methods.getLanguageText(XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT);
 		}
 		
 		return location;
@@ -286,7 +317,14 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		map.put(PainDataIdentifier.GENERAL_POSITION, Misc.getItem(this.comboGeneralPos).toString());
 		map.put(PainDataIdentifier.GENERAL_POSITION_2, this.generalPos.getSelected());
 		map.put(PainDataIdentifier.SPECIFIC_LOCATION, this.specificPos.getSelected());
-		map.put(PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
+		if (Methods.isLastIndex(this.comboPainKind))
+		{
+			map.put(PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
+		}
+		else
+		{
+			map.put(PainDataIdentifier.PAIN_KIND, this.comboPainKind.getSelectedItem().toString());
+		}
 		map.put(PainDataIdentifier.INTENSITY, Methods.getTextData(this.tfIntensity));
 		map.put(PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
 		
@@ -298,22 +336,29 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		Element locationElement = doc.createElement(PainDataIdentifier.PAIN_LOCATION);
 		locationElement.setAttribute(PainDataIdentifier.PAIN_LOCATION_ID, id);
 		
-		this.appendToNode(doc, locationElement, PainDataIdentifier.GENERAL_POSITION, this.getLocationIdentifier(this.comboGeneralPos.getSelectedItem().toString()));
+		this.appendToNode(doc, locationElement, PainDataIdentifier.GENERAL_POSITION, IndividualPainLocationDataPanel.getLocationIdentifier(this.comboGeneralPos.getSelectedItem().toString()));
 		this.appendToNode(doc, locationElement, PainDataIdentifier.GENERAL_POSITION_2, this.generalPos.getSelected());
-		this.appendToNode(doc, locationElement, PainDataIdentifier.SPECIFIC_LOCATION, this.specificPos.getSelected());
-		this.appendToNode(doc, locationElement, PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
+		this.appendToNode(doc, locationElement, PainDataIdentifier.SPECIFIC_LOCATION, this.specificPos.getSelected());	
+		if (Methods.isLastIndex(this.comboPainKind))
+		{
+			this.appendToNode(doc, locationElement, PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
+		}
+		else
+		{
+			this.appendToNode(doc, locationElement, PainDataIdentifier.PAIN_KIND, this.comboPainKind.getSelectedItem().toString());
+		}
 		this.appendToNode(doc, locationElement, PainDataIdentifier.INTENSITY, Methods.getTextData(this.tfIntensity));
 		String durationUnit = this.comboDurationUnit.getSelectedItem().toString();
-		if (durationUnit.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT)))
+		if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT)))
 		{
 			this.appendToNode(doc, locationElement, PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
 		}
-		else if (durationUnit.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT)))
+		else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT)))
 		{
 			double durationSeconds = Double.parseDouble(Methods.getTextData(this.tfDuration)) * 60d;
 			this.appendToNode(doc, locationElement, PainDataIdentifier.DURATION, Double.toString(durationSeconds));
 		}
-		else if (durationUnit.equals(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)))
+		else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)))
 		{
 			double durationSeconds = Double.parseDouble(Methods.getTextData(this.tfDuration)) * 3600d;
 			this.appendToNode(doc, locationElement, PainDataIdentifier.DURATION, Double.toString(durationSeconds));
@@ -331,8 +376,8 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	
 	protected boolean allFieldsEntered()
 	{
-		if (Methods.isEmpty(this.tfPainKind)||
-			Methods.isEmpty(this.tfIntensity) ||
+//		Methods.isEmpty(this.tfPainKind)||
+		if (Methods.isEmpty(this.tfIntensity) ||
 			Methods.isEmpty(this.tfDuration))
 		{
 			return false;
@@ -373,14 +418,14 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	{
 		try
 		{
-			double intensity = Double.parseDouble(this.tfIntensity.getText().trim());
-			if (intensity < 0d)
+			int intensity = Integer.parseInt(Methods.getTextData(this.tfIntensity));
+			if (intensity < 0)
 			{
 				this.tfIntensity.setText("0");
 			}
-			else if (intensity > 10.0d)
+			else if (intensity > 10)
 			{
-				this.tfIntensity.setText("10.0");
+				this.tfIntensity.setText("10");
 			}
 		}
 		catch (Exception ex)

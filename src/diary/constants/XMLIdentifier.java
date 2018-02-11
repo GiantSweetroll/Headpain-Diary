@@ -37,6 +37,8 @@ public class XMLIdentifier
 	public static final String SWITCH_TEXT = "switch text";
 	public static final String SHOW_TEXT = "show text";
 	public static final String NEW_TEXT = "new text";
+	public static final String ETC_TEXT = "etc text";
+	public static final String OTHER_TEXT = "other text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -59,7 +61,20 @@ public class XMLIdentifier
 	public static final String START_TIME_LABEL = "start time label";
 	public static final String HEADPAIN_LOCATION_AMOUNT_LABEL = "headpain location amount label";
 	public static final String ACTIVITY_LABEL = "activity label";
+	public static final String RECENT_MEDICATION_LABEL = "recent medication label";
 	public static final String COMMENTS_LABEL = "comments label";
+	
+	//Default Activities
+	public static final String DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY = "default activities physical activity";
+	public static final String DEFAULT_ACTIVITIES_STRESSOR = "default activity stressor";
+	public static final String DEFAULT_ACTIVITES_SUNLIGHT = "default activities sunlight";
+	public static final String DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP = "default activities improper diet sleep";
+	
+	//Default Pain Kind
+	public static final String DEFAULT_PAIN_KIND_THROBBING = "default pain kind throbbing";
+	public static final String DEFAULT_PAIN_KIND_PULSATING = "default pain kind pulsating";
+	public static final String DEFAULT_PAIN_KIND_RADIATING = "default pain kind radiating";
+	public static final String DEFAULT_PAIN_KIND_TIGHT_BAND = "default pain kind tight band";
 	
 	//Date
 	public static final String DATE_AUTO_BUTTON_TOOLTIP_TEXT = "date auto button tooltip text";
@@ -89,6 +104,7 @@ public class XMLIdentifier
 	public static final String SELECT_LOCATION_LABEL = "select location label";
 	public static final String KIND_OF_HEADPAIN_LABEL = "kind of headpain label";
 	public static final String INTENSITY_LABEL = "intensity label";
+	public static final String INTENSITIY_DESCRIPTION_LABEL = "intensity description label";
 	public static final String DURATION_LABEL = "duration label";
 	public static final String DURATION_UNIT_LABEL = "duration units label";
 	public static final String DURATION_UNIT_SECONDS_TEXT = "duration unit seconds text";
@@ -184,6 +200,8 @@ public class XMLIdentifier
 	public static final String TABLE_HEADERS_INTENSITIES_TEXT = "table headers intensities text";
 	public static final String TABLE_HEADERS_DURATIONS_TEXT = "table headers durations text";
 	public static final String TABLE_HEADERS_ACTIVITY_TEXT = "table headers acitivity text";
+	public static final String TABLE_HEADERS_ACTIVITY_DETAILS_TEXT = "table headers activity details text";
+	public static final String TABLE_HEADERS_RECENT_MEDICATION_TEXT = "table headers recent medication text";
 	public static final String TABLE_HEADERS_COMMENTS_TEXT = "table headers comments text";
 	
 	//Program Settings

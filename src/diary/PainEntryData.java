@@ -16,6 +16,7 @@ public class PainEntryData
 	private LinkedHashMap<String, Object> dataMap;
 	private Document document;
 	
+	//Constructor
 	public PainEntryData()		//Empty data
 	{
 		this.dataMap = new LinkedHashMap<String, Object>();
@@ -39,6 +40,8 @@ public class PainEntryData
 		painLocationsMapList.add(map);
 		this.dataMap.put(PainDataIdentifier.PAIN_LOCATIONS, painLocationsMapList);
 		this.dataMap.put(PainDataIdentifier.ACTIVITY, "");
+		this.dataMap.put(PainDataIdentifier.ACTIVITY_DETAILS, "");
+		this.dataMap.put(PainDataIdentifier.RECENT_MEDICATION, "");
 		this.dataMap.put(PainDataIdentifier.COMMENTS, "");
 	}
 	
@@ -74,6 +77,8 @@ public class PainEntryData
 		this.dataMap.put(PainDataIdentifier.PAIN_LOCATIONS, painLocationsMapList);
 		//Others
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.ACTIVITY);
+		appendToMap(this.dataMap, rootElement, PainDataIdentifier.ACTIVITY_DETAILS);
+		appendToMap(this.dataMap, rootElement, PainDataIdentifier.RECENT_MEDICATION);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.COMMENTS);
 	}
 	
@@ -93,7 +98,14 @@ public class PainEntryData
 	
 	private void appendToMap(LinkedHashMap<String, Object> map, Element sourceElement, String dataID)
 	{
-		map.put(dataID, XMLManager.getElement(sourceElement.getElementsByTagName(dataID), 0).getTextContent());
+		try
+		{
+			map.put(dataID, XMLManager.getElement(sourceElement.getElementsByTagName(dataID), 0).getTextContent());
+		}
+		catch(NullPointerException ex)
+		{
+			map.put(dataID, "");
+		}
 	}
 	
 	public LinkedHashMap<String, Object> getDataMap()

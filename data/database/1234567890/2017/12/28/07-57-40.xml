@@ -17,6 +17,8 @@
                <duration>3.6</duration>
           </pain_location>
      </pain_locations>
-     <activity>Bug Testing</activity>
+     <activity>Other</activity>
+     <activity_details>Bug Testing</activity_details>
+     <recent_medication>Panadol</recent_medication>
      <comments/>
 </Entry>

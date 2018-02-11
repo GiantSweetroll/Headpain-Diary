@@ -54,6 +54,7 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		this.createAndShowGUI();
 		this.situation = this.EDIT_USER;
 		this.lastMedID = patientData.getDataMap().get(PatientData.MEDICAL_RECORD_ID);
+		this.patientForm.setData(patientData);
 	}
 	
 	//Methods
@@ -157,7 +158,11 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		switch(e.getActionCommand())
 		{
 			case CANCEL:
-				
+				try
+				{
+					MainFrame.changePanel(MainFrame.lastComponent);
+				}
+				catch(NullPointerException ex) {}
 				break;
 				
 			case SAVE:

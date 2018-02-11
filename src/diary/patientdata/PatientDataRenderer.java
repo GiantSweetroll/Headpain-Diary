@@ -1,5 +1,6 @@
 package diary.patientdata;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ public class PatientDataRenderer extends JLabel implements ListCellRenderer
 
 	public PatientDataRenderer()
 	{
-//		this.setOpaque(true);
+		this.setOpaque(true);
 		this.setVerticalAlignment(SwingConstants.CENTER);
 	}
 	
@@ -26,6 +27,7 @@ public class PatientDataRenderer extends JLabel implements ListCellRenderer
 			boolean cellHasFocus) 
 	{
 //		int selectedIndex = ((Integer)value).intValue();		//Use this instead of the index from parameter
+		
 		
 		if (isSelected)
 		{
@@ -37,6 +39,7 @@ public class PatientDataRenderer extends JLabel implements ListCellRenderer
 			this.setBackground(list.getBackground());
 			this.setForeground(list.getForeground());
 		}
+		
 		
 		//Set text name
 		this.setText(value.toString());

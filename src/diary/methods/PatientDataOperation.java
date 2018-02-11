@@ -2,9 +2,11 @@ package diary.methods;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import diary.constants.PainDataIdentifier;
 import diary.patientdata.PatientData;
@@ -152,6 +154,7 @@ public class PatientDataOperation
 		//Data Sorting End
 		
 		//Filter Start
+//		System.out.println("Filtering years...");
 		//Filter Year
 		int yearMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_YEAR));
 		int yearMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_YEAR));
@@ -169,6 +172,11 @@ public class PatientDataOperation
 			yearMonthMap.remove(key);
 		}
 		keysToRemove.clear();
+		if (yearMonthMap.size()==0)			//Check if no legible data
+		{
+			return list;
+		}
+//		System.out.println("Filtering month...");
 		//Filter Month
 		/*
 		 * Program only needs to check the first months of the first year,
@@ -177,9 +185,11 @@ public class PatientDataOperation
 		 */
 		Map.Entry<String, LinkedHashMap<String, List<PatientData>>> firstYearEntry = yearMonthMap.entrySet().iterator().next();		//get first year
 		String lastYear = "";
-		while(yearMonthMap.entrySet().iterator().hasNext())		///Get Last key (last year)
+		Iterator<Entry<String, LinkedHashMap<String, List<PatientData>>>> iterator = yearMonthMap.entrySet().iterator();
+		while(iterator.hasNext())		///Get Last key (last year)
 		{
-			lastYear = yearMonthMap.entrySet().iterator().next().getKey();
+			lastYear = iterator.next().getKey();
+	//		System.out.println("last year: " + lastYear);
 		}
 		int monthMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_MONTH));
 		int monthMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_MONTH));
@@ -210,6 +220,7 @@ public class PatientDataOperation
 			yearMonthMap.get(lastYear).remove(key);
 		}
 		keysToRemove.clear();
+//		System.out.println("Filtering days...");
 		//Filter Day
 		/*
 		 * Program only needs to check the first days of the first month of the first year,
@@ -218,9 +229,10 @@ public class PatientDataOperation
 		 */
 		Map.Entry<String, List<PatientData>> firstMonthEntry = firstYearEntry.getValue().entrySet().iterator().next();
 		String lastMonth = "";
-		while (firstYearEntry.getValue().entrySet().iterator().hasNext()) 
+		Iterator<Entry<String, List<PatientData>>> iterator2 = firstYearEntry.getValue().entrySet().iterator();
+		while (iterator2.hasNext()) 
 		{
-			lastMonth = firstYearEntry.getValue().entrySet().iterator().next().getKey();
+			lastMonth = iterator2.next().getKey();
 		}
 		int dayMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_DAY));
 		int dayMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_DAY));

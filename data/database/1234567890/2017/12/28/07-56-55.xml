@@ -12,11 +12,13 @@
                <general_location>head</general_location>
                <general_location_2>head back general</general_location_2>
                <specific_location>head back bottom left</specific_location>
-               <pain_kind>Stabbing</pain_kind>
+               <pain_kind>Pulsating</pain_kind>
                <intensity>4</intensity>
                <duration>4.5</duration>
           </pain_location>
      </pain_locations>
-     <activity>Testing</activity>
+     <activity>Physical Activity</activity>
+     <activity_details/>
+     <recent_medication>Panadol</recent_medication>
      <comments/>
 </Entry>

@@ -1,11 +1,14 @@
 package diary.methods;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -16,8 +19,10 @@ import org.xml.sax.SAXException;
 import diary.PainEntryData;
 import diary.Settings;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
 import diary.gui.MainFrame;
+import diary.history.History;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.message.MessageManager;
@@ -504,5 +509,61 @@ public class FileOperation
 	{
 		File file = new File (MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + medID + ".xml");
 		file.delete();
+	}
+	
+	public static void saveHistory(History history)
+	{
+		try
+		{
+			File file = new File(Constants.HISTORY_FOLDER_PATH + history.getFileName());
+			
+			if (!file.exists())
+			{
+				file.createNewFile();
+			}
+			
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			
+			List<String> historyList = history.getHistory();
+			
+			for (String item : historyList)
+			{
+				bw.write(item);
+				bw.newLine();
+			}
+			
+			bw.close();
+		}
+		catch(IOException ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	public static void updateHistory(History history, String item)
+	{
+		Globals.HISTORY_RECENT_MEDICATION.add(item);
+		FileOperation.saveHistory(Globals.HISTORY_RECENT_MEDICATION);
+	}
+	
+	public static List<String> loadTextFile(File file)
+	{
+		List<String> list = new ArrayList<String>();
+		
+		try
+		{
+			Scanner sc = new Scanner(file);
+			
+			while(sc.hasNext())
+			{
+				list.add(sc.nextLine());
+			}
+			sc.close();
+		}
+		catch(IOException ex)
+		{
+	//		ex.printStackTrace();
+		}
+		
+		return list;
 	}
 }

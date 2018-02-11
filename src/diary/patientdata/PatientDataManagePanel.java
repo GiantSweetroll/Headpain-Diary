@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,11 +22,12 @@ import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
+import diary.gui.MainMenu;
 import diary.gui.table.Table;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -49,6 +51,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 	private List<PatientData> patients;
 	private List<String> selectedPatientIDs;
 	private PatientData activePatient;
+	private JScrollPane scrollTable;
 	
 	//Constants
 	private final String BACK = "back";
@@ -204,21 +207,21 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		//Initialization
 		this.panelTable = new JPanel();
 		this.initTable();
-		JScrollPane scroll = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scrollTable = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//Properties
 		this.panelTable.setLayout(new BorderLayout());
 		this.panelTable.setOpaque(false);
 		
 		//Add to panel
-		this.panelTable.add(scroll, BorderLayout.CENTER);
+		this.panelTable.add(this.scrollTable, BorderLayout.CENTER);
 	}
 	
 	private void initTable()
 	{
 		try
 		{
-			this.panelTable.remove(this.table);
+			this.panelTable.remove(this.scrollTable);
 		}
 		catch(NullPointerException ex) {}
 	
@@ -228,7 +231,8 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		this.patients = FileOperation.getListOfPatients();
 		this.filterPatients();
 		this.table = new Table(convertToTableArray(this.patients), Constants.PATIENT_TABLE_HEADERS);
-		this.panelTable.add(this.table, BorderLayout.CENTER);
+		this.scrollTable = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.panelTable.add(this.scrollTable, BorderLayout.CENTER);
 		
 		this.table.getModel().addTableModelListener(new TableModelListener()
 				{
@@ -315,7 +319,8 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 				}
 				
 				this.activePatient = patient;
-				this.selectedPatientIDs.add(MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + key + ".xml");
+	//			this.selectedPatientIDs.add(MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + key + ".xml");
+				this.selectedPatientIDs.add(key);
 				
 				selected++;
 			}
@@ -340,6 +345,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 	
 	private void filterPatients()
 	{
+//		System.out.println("Size of list before filter: " + this.patients.size());
 		if (this.checkMedRec.isSelected())
 		{
 			this.patients = PatientDataOperation.getFilteredData(PatientDataManagePanel.FILTER_MED_REC, Methods.getTextData(this.tfMedRec), this.patients);
@@ -352,6 +358,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		{
 			this.patients = PatientDataOperation.getFilteredData(this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO), this.patients);
 		}
+//		System.out.println("Size of list after filter: " + this.patients.size());
 	}
 	
 	//Interfaces
@@ -360,19 +367,35 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		switch(e.getActionCommand())
 		{
 			case BACK:
+				MainFrame.changePanel(new MainMenu());
 				break;
 				
 			case NEW:
+				MainFrame.changePanel(new PatientDataRegisterationForm());
 				break;
 				
 			case FILTER:
 				this.initTable();
+				this.revalidate();
+				this.repaint();
 				break;
 				
 			case DELETE:
+				int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
+						Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
+
+				if (response == JOptionPane.YES_OPTION)
+				{
+					for (String id : this.selectedPatientIDs)
+					{
+						FileOperation.deletePatientData(id);
+					}
+					this.initTable();
+				}				
 				break;
 				
 			case SELECT:
+				MainFrame.changePanel(new PatientDataRegisterationForm(this.activePatient));
 				break;
 		}
 	}

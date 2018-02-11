@@ -47,8 +47,8 @@ public class MainFrame
 	{
 		//Initialization
 		frame = new JFrame(Constants.PROGRAM_TITLE);
-		jComponent = new MainMenu();
 		MainFrame.refreshSettings();
+	//	jComponent = new MainMenu();
 		
 		frame.add(jComponent);
 		
@@ -68,12 +68,23 @@ public class MainFrame
 		{
 			lastComponent = jComponent;
 			frame.remove(jComponent);
-			frame.add(component);
-			jComponent = component;
+		}
+		catch(NullPointerException ex) {}
+		try
+		{
+			if(component instanceof MainMenu)
+			{
+				MainFrame.checkUsers();
+			}
+			else
+			{
+				frame.add(component);
+				jComponent = component;
+			}
 			frame.revalidate();
 			frame.repaint();
 		}
-		catch(Exception ex)
+		catch(NullPointerException ex)
 		{
 			ex.printStackTrace();
 		}
@@ -109,22 +120,41 @@ public class MainFrame
 			{
 				file.mkdirs();
 			}
-			//If no users were found
-			if (!Methods.hasRegisteredUser())
+			//Check for users
+			MainFrame.checkUsers();
+			
+			//If history path is not found
+			file = new File(Constants.HISTORY_FOLDER_PATH);
+			if (!file.exists())
 			{
-				try
-				{
-					MainFrame.changePanel(new PatientDataRegisterationForm());
-				}
-				catch(NullPointerException ex)
-				{
-					ex.printStackTrace();
-				}
+				file.mkdirs();
 			}
 		} 
 		catch (ParserConfigurationException | SAXException | IOException e) 
 		{
 			e.printStackTrace();
+		}
+	}
+	
+	public static void checkUsers()
+	{
+		if (!Methods.hasRegisteredUser())
+		{
+			try
+			{
+				jComponent = new MainMenu();
+				MainFrame.lastComponent = new MainMenu();
+				MainFrame.changePanel(new PatientDataRegisterationForm());
+			}
+			catch(NullPointerException ex)
+			{
+				ex.printStackTrace();
+			}
+		}
+		else
+		{
+			jComponent = new MainMenu();
+			MainFrame.frame.add(jComponent);
 		}
 	}
 
