@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
+import diary.ImagePanel;
 import diary.PainEntryData;
 import diary.Settings;
 import diary.constants.Constants;
@@ -21,6 +22,7 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
+import diary.gui.graphs.GraphPanel;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 
@@ -411,6 +413,14 @@ public class Methods
 		panel.paint(g2);
 		
 		return image;
+	}
+	
+	public static void exportPanelImage(ImagePanel panel)
+	{
+		MainFrame.changePanel(panel);
+		((GraphPanel)MainFrame.lastComponent).refreshGraph();
+		MainFrame.changePanel(MainFrame.lastComponent);
+		FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.lastComponent));
 	}
 	
 	public static boolean isLastIndex(JComboBox<?> combo)

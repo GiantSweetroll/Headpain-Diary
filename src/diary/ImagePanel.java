@@ -23,8 +23,9 @@ public class ImagePanel extends JPanel
 		JPanel panelTop = new JPanel();
 		
 		//Properties
+		
 		this.setLayout(new BorderLayout());
-		this.setOpaque(false);
+		this.setOpaque(true);
 		panelTop.setLayout(new BorderLayout());
 		panelTop.setOpaque(false);
 		

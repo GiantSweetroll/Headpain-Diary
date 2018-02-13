@@ -586,6 +586,7 @@ public class FileOperation
 			catch(IOException ex) 
 			{
 				ex.printStackTrace();
+				MessageManager.showErrorDialog(ex);
 			}
 		}
 	}

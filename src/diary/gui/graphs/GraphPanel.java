@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import diary.ImagePanel;
 import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
@@ -27,6 +28,7 @@ import diary.gui.MainMenu;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
+import diary.patientdata.PatientDataForm;
 import giantsweetroll.gui.swing.Gbm;
 
 public class GraphPanel extends JPanel implements ActionListener
@@ -42,7 +44,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	private Graph graph;
 	private JScrollPane scrollGraph;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butRefresh, butSwitchGraph;
+	private JButton butBack, butRefresh, butSwitchGraph, buttonSave;
 	private GraphSettingsPanel panelGraphSettings;
 	private ActivePatientPanel activePatientPanel;
 	
@@ -53,6 +55,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	private final String BACK = "back";
 	private final String REFRESH = "refresh";
 	private final String SWITCH_GRAPH = "switch graph";
+	private final String SAVE = "save";
 	
 	public GraphPanel()
 	{
@@ -169,6 +172,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.panelBelowCenter = new JPanel();
 		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSwitchGraph = new JButton(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
+		this.buttonSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);
@@ -177,8 +181,11 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.butRefresh.addActionListener(this);
 		this.butSwitchGraph.setActionCommand(this.SWITCH_GRAPH);
 		this.butSwitchGraph.addActionListener(this);
+		this.buttonSave.setActionCommand(this.SAVE);
+		this.buttonSave.addActionListener(this);
 		
 		//add to panel
+		this.panelBelowCenter.add(this.buttonSave);
 		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butSwitchGraph);
 	}
@@ -305,6 +312,18 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.scrollGraph.setOpaque(false);
 		this.scrollGraph.getViewport().setOpaque(false);
 	}
+	
+	public void refreshGraph()
+	{
+		if (this.graphReversed)
+		{
+			this.initReverseGraph();
+		}
+		else
+		{
+			this.initGraph();
+		}
+	}
 
 	//Interfaces
 	@Override
@@ -317,14 +336,7 @@ public class GraphPanel extends JPanel implements ActionListener
 				break;
 				
 			case REFRESH:
-				if (this.graphReversed)
-				{
-					this.initReverseGraph();
-				}
-				else
-				{
-					this.initGraph();
-				}
+				refreshGraph();
 				break;
 				
 			case SWITCH_GRAPH:
@@ -338,6 +350,11 @@ public class GraphPanel extends JPanel implements ActionListener
 					this.graphReversed = true;
 					this.initReverseGraph();
 				}
+				break;
+				
+			case SAVE:
+				ImagePanel imagePanel = new ImagePanel(this.graph, new PatientDataForm(this.activePatientPanel.getSelectedPatientData(), false), this.panelDateRange);
+				Methods.exportPanelImage(imagePanel);
 				break;
 		}
 	}
