@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>09</date_day>
+     <date_month>2</date_month>
+     <date_year>2018</date_year>
+     <time_hour>16</time_hour>
+     <time_minute>52</time_minute>
+     <time_seconds>53</time_seconds>
+     <nyeri_amount>1</nyeri_amount>
+     <pain_locations>
+          <pain_location pain_loc_id="0">
+               <general_location>ears</general_location>
+               <general_location_2>ears right general</general_location_2>
+               <specific_location>ears right hole</specific_location>
+               <pain_kind>Stabbing</pain_kind>
+               <intensity>4</intensity>
+               <duration>12</duration>
+          </pain_location>
+     </pain_locations>
+     <activity>Heello</activity>
+     <comments/>
+</Entry>

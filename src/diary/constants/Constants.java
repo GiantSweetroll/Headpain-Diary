@@ -7,6 +7,8 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import diary.language.Language;
 import diary.methods.Methods;
 import giantsweetroll.Misc;
@@ -46,7 +48,11 @@ public final class Constants
 	public static final Font FONT_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, 40);
 	public static final Font FONT_SMALL_NOTE = new Font(FONT_TYPE_GENERAL, Font.ITALIC, 8);
 	
-	//Date
+	//File Filter for JFileChooser
+	public static final FileNameExtensionFilter FILTER_IMAGE_FILES = new FileNameExtensionFilter(Methods.getLanguageText(XMLIdentifier.IMAGE_FILES_TEXT), 
+																									"jpg",
+																									"png",
+																									"jpeg");
 	
 	
 	//Insets

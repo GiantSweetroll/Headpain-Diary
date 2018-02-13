@@ -1,5 +1,6 @@
 package diary.methods;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
@@ -21,6 +24,7 @@ import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
+import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
 import diary.history.History;
 import diary.patientdata.PatientData;
@@ -565,5 +569,32 @@ public class FileOperation
 		}
 		
 		return list;
+	}
+	
+	public static void exportImage(BufferedImage image)
+	{
+		JFileChooser jfc = new JFileChooser();
+		jfc.setCurrentDirectory(new File("." + File.separator));
+		
+		int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		if (response == JFileChooser.APPROVE_OPTION)
+		{
+			try
+			{
+				ImageIO.write(image, FileOperation.getExtension(jfc.getSelectedFile()), jfc.getSelectedFile());
+			}
+			catch(IOException ex) 
+			{
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public static String getExtension(File file)
+	{
+		String filePath = file.getName();
+		int index = filePath.indexOf(".");
+		
+		return filePath.substring(index+1, filePath.length());
 	}
 }

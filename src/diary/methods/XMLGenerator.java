@@ -186,6 +186,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.NEW_TEXT, "New");
 		appendComponentToMap(doc, map, XMLIdentifier.ETC_TEXT, "Etc");
 		appendComponentToMap(doc, map, XMLIdentifier.OTHER_TEXT, "Other");
+		appendComponentToMap(doc, map, XMLIdentifier.IMAGE_FILES_TEXT, "Image Files");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

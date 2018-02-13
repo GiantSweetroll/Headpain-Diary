@@ -111,6 +111,7 @@
      <text identifier="new text">New</text>
      <text identifier="etc text">Etc</text>
      <text identifier="other text">Other</text>
+     <text identifier="image files text">Image Files</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category pain vs date text">Pain vs Date</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
