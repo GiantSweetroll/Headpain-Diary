@@ -23,6 +23,7 @@ import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
 import diary.gui.graphs.GraphPanel;
+import diary.gui.table.TableScreen;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 
@@ -415,12 +416,30 @@ public class Methods
 		return image;
 	}
 	
-	public static void exportPanelImage(ImagePanel panel)
+	public static void exportPanelImage(ImagePanel panel, boolean showPreview)
 	{
 		MainFrame.changePanel(panel);
-		((GraphPanel)MainFrame.lastComponent).refreshGraph();
+		if (showPreview)
+		{
+			FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.jComponent));
+		}		
 		MainFrame.changePanel(MainFrame.lastComponent);
-		FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.lastComponent));
+		try
+		{
+			if (MainFrame.jComponent instanceof GraphPanel)
+			{
+				((GraphPanel)MainFrame.jComponent).refreshGraph();		//Redraws graph to its original state
+			}
+			else if (MainFrame.jComponent instanceof TableScreen)
+			{
+				((TableScreen)MainFrame.jComponent).initTable();		//Recreates table to its original state
+			}
+		}
+		catch(ClassCastException ex) {}
+		if (!showPreview)
+		{
+			FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.lastComponent));
+		}
 	}
 	
 	public static boolean isLastIndex(JComboBox<?> combo)

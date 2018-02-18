@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
+import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
@@ -29,6 +30,22 @@ public class DateRangePanel extends JPanel
 	public static final String TO = "to";
 	
 	public DateRangePanel()
+	{
+		this.init();
+	}
+	
+	public DateRangePanel(LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap)
+	{
+		this.init();
+		this.setFromDate(dateRangeMap.get(FROM).get(PainDataIdentifier.DATE_DAY),
+							dateRangeMap.get(FROM).get(PainDataIdentifier.DATE_MONTH),
+							dateRangeMap.get(FROM).get(PainDataIdentifier.DATE_YEAR));
+		this.setToDate(dateRangeMap.get(TO).get(PainDataIdentifier.DATE_DAY),
+						dateRangeMap.get(TO).get(PainDataIdentifier.DATE_MONTH),
+						dateRangeMap.get(TO).get(PainDataIdentifier.DATE_YEAR));
+	}
+	
+	private void init()
 	{
 		//Initialization
 		this.dateFrom = new DatePanel(true);
@@ -55,7 +72,7 @@ public class DateRangePanel extends JPanel
 		c.insets = Constants.INSETS_GENERAL;
 		this.add(this.labTo, c);
 		Gbm.nextGridColumn(c);
-		this.add(this.dateTo, c);
+		this.add(this.dateTo, c);		
 	}
 	
 	public LinkedHashMap<String, LinkedHashMap<String, String>> getDateRangeMap()

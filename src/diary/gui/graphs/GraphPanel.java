@@ -183,6 +183,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.butSwitchGraph.addActionListener(this);
 		this.buttonSave.setActionCommand(this.SAVE);
 		this.buttonSave.addActionListener(this);
+		this.buttonSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
 		
 		//add to panel
 		this.panelBelowCenter.add(this.buttonSave);
@@ -353,8 +354,10 @@ public class GraphPanel extends JPanel implements ActionListener
 				break;
 				
 			case SAVE:
-				ImagePanel imagePanel = new ImagePanel(this.graph, new PatientDataForm(this.activePatientPanel.getSelectedPatientData(), false), this.panelDateRange);
-				Methods.exportPanelImage(imagePanel);
+				ImagePanel imagePanel = new ImagePanel(this.graph, 
+														new PatientDataForm(this.activePatientPanel.getSelectedPatientData(), false), 
+														new DateRangePanel(this.panelDateRange.getDateRangeMap()));
+				Methods.exportPanelImage(imagePanel, false);
 				break;
 		}
 	}

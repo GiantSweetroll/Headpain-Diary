@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import diary.methods.Methods;
+import giantsweetroll.numbers.GNumbers;
 
 public abstract class Graph extends JPanel
 {
@@ -37,6 +38,7 @@ public abstract class Graph extends JPanel
 	protected final int AXES_POINTERS_LENGTH = 10;
 	protected final int MARKER_LABEL_PADDING = 5;
 	protected final int MAX_MARKERS_IN_Y_AXIS = 10;
+	protected final int MAX_MARKERS_IN_X_AXIS = 5;
 	protected final int GENERAL_PADDING = 10;
 	protected final int DECIMAL_PLACES = 1;
 	
@@ -110,12 +112,12 @@ public abstract class Graph extends JPanel
 		
 		//Translate into coordinate points
 		this.dataPoints = new ArrayList<Point>();
-		int xPos = Math.round(xDiff);
+		int xPos = (int)GNumbers.round(xDiff, 1);
 		for (float i=0; i<dataValues.size(); i++)
 		{
-			float roundedDataValue = Methods.round(dataValues.get((int)i), this.DECIMAL_PLACES);
+			float roundedDataValue = GNumbers.round(dataValues.get((int)i), this.DECIMAL_PLACES);
 			float floatCoordinate = (float)this.axesOrigin.y - yDiff*roundedDataValue;
-			this.dataPoints.add(new Point(xPos, (int)Methods.round(floatCoordinate, this.DECIMAL_PLACES)));
+			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(floatCoordinate, this.DECIMAL_PLACES)));
 			xPos+=xDiff;
 		}
 	}
@@ -125,7 +127,22 @@ public abstract class Graph extends JPanel
 		g.setColor(c);
 		
 		//Draw X-Axis Marker Labels
-		for (int i=0; i<this.dataPoints.size(); i++)
+		int diff = 0;
+		
+		if (this.xAxisLabels.size()<=this.MAX_MARKERS_IN_X_AXIS)
+		{
+			diff = 1;
+		} 
+		else
+		{
+			diff = (int)GNumbers.round(this.xAxisLabels.size()/this.MAX_MARKERS_IN_X_AXIS, 1);
+			if (diff==1)
+			{
+				diff = 2;
+			}
+		}
+		
+		for (int i=0; i<this.dataPoints.size(); i+=diff)
 		{
 			g.drawLine(this.dataPoints.get(i).x, 
 						this.axesOrigin.y + this.AXES_POINTERS_LENGTH/2, 
@@ -172,7 +189,22 @@ public abstract class Graph extends JPanel
 	{
 		g.setColor(c);
 		
-		for (int i = 0; i<this.dataPoints.size(); i++)
+		int diff = 0;
+		
+		if (this.xAxisLabels.size()<=this.MAX_MARKERS_IN_X_AXIS)
+		{
+			diff = 1;
+		}
+		else
+		{
+			diff = (int)GNumbers.round(this.xAxisLabels.size()/this.MAX_MARKERS_IN_X_AXIS, 1);
+			if (diff==1)
+			{
+				diff = 2;
+			}
+		}
+		
+		for (int i = 0; i<this.dataPoints.size(); i+=diff)
 		{
 			String text = this.xAxisLabels.get(i);
 			int textWidth = g.getFontMetrics().stringWidth(text);

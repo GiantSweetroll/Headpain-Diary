@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import diary.constants.Constants;
 import giantsweetroll.message.MessageManager;
 
-public class ImagePanel extends JPanel
+public class PainImagePanel extends JPanel
 {
 
 	/**
@@ -24,7 +24,7 @@ public class ImagePanel extends JPanel
 	private static final long serialVersionUID = 8666216117020248796L;
 	private BufferedImage image;
 	
-	protected ImagePanel(URL imageUrl)
+	protected PainImagePanel(URL imageUrl)
 	{
 		try
 		{

@@ -187,6 +187,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.ETC_TEXT, "Etc");
 		appendComponentToMap(doc, map, XMLIdentifier.OTHER_TEXT, "Other");
 		appendComponentToMap(doc, map, XMLIdentifier.IMAGE_FILES_TEXT, "Image Files");
+		appendComponentToMap(doc, map, XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT, "Save as Image");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

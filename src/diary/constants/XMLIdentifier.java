@@ -40,6 +40,7 @@ public class XMLIdentifier
 	public static final String ETC_TEXT = "etc text";
 	public static final String OTHER_TEXT = "other text";
 	public static final String IMAGE_FILES_TEXT = "image files text";
+	public static final String SAVE_IMAGE_TOOLIP_TEXT = "save image tooltip text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";

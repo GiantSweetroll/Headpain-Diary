@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import diary.PainEntryData;
 import diary.constants.Constants;
@@ -76,5 +75,10 @@ public class TablePanel extends JPanel
 	protected Table getTable()
 	{
 		return this.table;
+	}
+	
+	public JScrollPane getScrollPane()
+	{
+		return this.scroll;
 	}
 }

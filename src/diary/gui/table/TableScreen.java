@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import diary.ImagePanel;
 import diary.PainEntryData;
 import diary.Settings;
 import diary.constants.Constants;
@@ -37,6 +38,7 @@ import diary.gui.MainMenu;
 import diary.gui.EntryLog.EntryLog;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
+import diary.patientdata.PatientDataForm;
 import giantsweetroll.gui.swing.Gbm;
 
 public class TableScreen extends JPanel implements ActionListener
@@ -52,7 +54,7 @@ public class TableScreen extends JPanel implements ActionListener
 	private DateRangePanel panelDateRange;
 	private JComboBox<String> comboFilter;
 	private JTextField tfFilter;
-	private JButton butFilter, butBack, butDelete, butSelect;
+	private JButton butFilter, butBack, butDelete, butSelect, butSave;
 	private JLabel labFilter, labKeyword, labGuide;
 	private List<String> selectedEntryIDs;
 	private List<PainEntryData> entries;
@@ -64,6 +66,7 @@ public class TableScreen extends JPanel implements ActionListener
 	private final String BACK = "back";
 	private final String DELETE = "delete";
 	private final String SELECT = "select";
+	private final String SAVE = "save image";
 	
 	public TableScreen()
 	{
@@ -109,6 +112,7 @@ public class TableScreen extends JPanel implements ActionListener
 		//Initialization
 		this.panelBelowCenter = new JPanel();
 		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
+		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);
@@ -116,8 +120,12 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT));
 		this.butDelete.addActionListener(this);
+		this.butSave.setActionCommand(this.SAVE);
+		this.butSave.addActionListener(this);
+		this.butSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
 		
 		//add to panel
+		this.panelBelowCenter.add(this.butSave);
 		this.panelBelowCenter.add(this.butDelete);
 	}
 	private void initPanelBelowRight()
@@ -225,7 +233,7 @@ public class TableScreen extends JPanel implements ActionListener
 		this.panelTop.add(this.panelTopRight, BorderLayout.EAST);
 	}
 	//Other Methods
-	private void initTable()
+	public void initTable()
 	{
 		try
 		{
@@ -380,6 +388,13 @@ public class TableScreen extends JPanel implements ActionListener
 		{
 			case FILTER:
 				this.initTable();
+				break;
+				
+			case SAVE:
+				ImagePanel imagePanel = new ImagePanel(this.table.getScrollPane(), 
+														new PatientDataForm(this.activePatientPanel.getSelectedPatientData(), false), 
+														new DateRangePanel(this.panelDateRange.getDateRangeMap()));
+				Methods.exportPanelImage(imagePanel, true);
 				break;
 				
 			case DELETE:

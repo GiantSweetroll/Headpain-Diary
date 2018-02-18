@@ -30,7 +30,7 @@ public class MainFrame
 	public static Settings setting;
 	public static JComponent lastComponent;
 	
-	private static JComponent jComponent;
+	public static JComponent jComponent;
 	
 	/**
 	 * Instantiates a new main frame.
