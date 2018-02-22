@@ -31,6 +31,7 @@ public abstract class Graph extends JPanel
 	//Options
 	protected boolean enableDataValueMarkers;
 	protected boolean displayDataPoint;
+	protected int maxMarkersXAxis;
 	
 	//Constants
 	protected final int AXES_PADDING_WITH_PANEL_EDGE = 50;
@@ -51,6 +52,7 @@ public abstract class Graph extends JPanel
 		
 		this.enableDataValueMarkers = false;
 		this.displayDataPoint = true;
+		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
 		
 		for (Map.Entry<String, Float> entry : dataMap.entrySet())
 		{
@@ -87,6 +89,10 @@ public abstract class Graph extends JPanel
 		{
 //			ex.printStackTrace();
 		}
+	}
+	protected void setMaxMarkersInXAxis(int max)
+	{
+		this.maxMarkersXAxis = max;
 	}
 	
 	//Draw Sections
@@ -129,13 +135,13 @@ public abstract class Graph extends JPanel
 		//Draw X-Axis Marker Labels
 		int diff = 0;
 		
-		if (this.xAxisLabels.size()<=this.MAX_MARKERS_IN_X_AXIS)
+		if (this.xAxisLabels.size()<=this.maxMarkersXAxis)
 		{
 			diff = 1;
 		} 
 		else
 		{
-			diff = (int)GNumbers.round(this.xAxisLabels.size()/this.MAX_MARKERS_IN_X_AXIS, 1);
+			diff = (int)GNumbers.round(this.xAxisLabels.size()/this.maxMarkersXAxis, 1);
 			if (diff==1)
 			{
 				diff = 2;
@@ -191,13 +197,13 @@ public abstract class Graph extends JPanel
 		
 		int diff = 0;
 		
-		if (this.xAxisLabels.size()<=this.MAX_MARKERS_IN_X_AXIS)
+		if (this.xAxisLabels.size()<=this.maxMarkersXAxis)
 		{
 			diff = 1;
 		}
 		else
 		{
-			diff = (int)GNumbers.round(this.xAxisLabels.size()/this.MAX_MARKERS_IN_X_AXIS, 1);
+			diff = (int)GNumbers.round(this.xAxisLabels.size()/this.maxMarkersXAxis, 1);
 			if (diff==1)
 			{
 				diff = 2;

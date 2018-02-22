@@ -15,6 +15,7 @@ public class BarGraphPanel extends Graph
 	public BarGraphPanel(LinkedHashMap<String, Float> dataMap)
 	{
 		super(dataMap);
+		super.setMaxMarkersInXAxis(dataMap.size());
 	}
 	
 	@Override
