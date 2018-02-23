@@ -138,23 +138,48 @@ public class MainFrame
 	
 	public static void checkUsers()
 	{
-		if (!Methods.hasRegisteredUser())
+		try
 		{
-			try
+			if (!Methods.hasRegisteredUser())
+			{
+				try
+				{
+					jComponent = new MainMenu();
+					MainFrame.lastComponent = new MainMenu();
+					MainFrame.changePanel(new PatientDataRegisterationForm());
+				}
+				catch(NullPointerException ex)
+				{
+					ex.printStackTrace();
+				}
+			}
+			else
 			{
 				jComponent = new MainMenu();
-				MainFrame.lastComponent = new MainMenu();
-				MainFrame.changePanel(new PatientDataRegisterationForm());
-			}
-			catch(NullPointerException ex)
-			{
-				ex.printStackTrace();
+				MainFrame.frame.add(jComponent);
 			}
 		}
-		else
+		catch(NullPointerException ex)
 		{
-			jComponent = new MainMenu();
-			MainFrame.frame.add(jComponent);
+			FileOperation.saveSettings(new Settings());
+			if (!Methods.hasRegisteredUser())
+			{
+				try
+				{
+					jComponent = new MainMenu();
+					MainFrame.lastComponent = new MainMenu();
+					MainFrame.changePanel(new PatientDataRegisterationForm());
+				}
+				catch(NullPointerException ex1)
+				{
+					ex1.printStackTrace();
+				}
+			}
+			else
+			{
+				jComponent = new MainMenu();
+				MainFrame.frame.add(jComponent);
+			}
 		}
 	}
 
