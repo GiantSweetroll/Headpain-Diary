@@ -1,11 +1,13 @@
 package diary.methods;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -445,5 +447,12 @@ public class Methods
 	public static boolean isLastIndex(JComboBox<?> combo)
 	{
 		return combo.getSelectedIndex() == combo.getModel().getSize()-1;
+	}
+	
+	public static ImageIcon resizeImageByRatio(ImageIcon image, int percentage)
+	{
+		Image img = image.getImage();
+		img = img.getScaledInstance((image.getIconWidth()/100)*percentage, (image.getIconHeight()/100)*percentage, Image.SCALE_SMOOTH);
+		return new ImageIcon(img);
 	}
 }

@@ -23,7 +23,7 @@ public class Table extends JTable
 		
 		//Table properties
 //		this.getTableHeader().setBackground(new Color (8, 243, 240));			//Set Header color background
-		this.getTableHeader().setBackground(Color.BLUE);	
+		this.getTableHeader().setBackground(Color.WHITE);	
 //		this.getTableHeader().setOpaque(false);					//Make the default background of the table transparent (to see background color)
 		this.setAutoCreateRowSorter(true);							//Automatically create Row sorter
 		this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);			//Set to manual column size, so it works with the JScrollPane

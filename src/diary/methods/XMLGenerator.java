@@ -67,6 +67,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP, "Manage patients data");
 		appendComponentToMap(doc, map, XMLIdentifier.AUTHOR_TEXT, "Created by");
 		appendComponentToMap(doc, map, XMLIdentifier.VERSION_TEXT, "Version");
+		appendComponentToMap(doc, map, XMLIdentifier.SUPPORTED_BY_TEXT, "Supported by");
 		
 		//Entry Log
 //		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TITLE, "Entry Log");

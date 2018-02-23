@@ -196,7 +196,7 @@ public class MainFrame
 					{
 						try
 						{
-							UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 							
 							if(!FileOperation.dataExists(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME))		//If settings file doesn't exists
 							{

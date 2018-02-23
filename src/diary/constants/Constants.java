@@ -1,5 +1,6 @@
 package diary.constants;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
@@ -40,10 +41,15 @@ public final class Constants
 	public static final NumberFormat AMOUNT_FORMAT = NumberFormat.getNumberInstance();
 	public static final DateFormat DATE_FORMAT = DateFormat.getDateInstance();
 	
+	//Colors
+	public static final Color COLOR_MAIN_MENU_BUTTONS = new Color(23, 74, 211);
+	public static final Color COLOR_MAIN_MENU_BACKGROUND = new Color(0, 187, 212);
+	
 	//Fonts
-	private static final String FONT_TYPE_GENERAL = "verdana";
+	private static final String FONT_TYPE_GENERAL = "century gothic";
 	public static final Font FONT_GENERAL = new Font(FONT_TYPE_GENERAL, Font.PLAIN, 15);
 	public static final Font FONT_GENERAL_BOLD = new Font(FONT_TYPE_GENERAL, Font.BOLD, 15);
+	public static final Font FONT_GENERAL_A_BIT_BIGGER = new Font(FONT_TYPE_GENERAL, Font.BOLD, 18);
 	public static final Font FONT_SUB_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, 30);
 	public static final Font FONT_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, 40);
 	public static final Font FONT_SMALL_NOTE = new Font(FONT_TYPE_GENERAL, Font.ITALIC, 8);
@@ -111,7 +117,7 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE),
-														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE),
+									//					Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)};
 	
 	public static final String[] TABLE_FILTER_OPTIONS = {Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT),

@@ -56,6 +56,7 @@ public class XMLIdentifier
 	public static final String MANAGE_PATIENTS_BUTTON_TOOLTIP = "manage patient button tooltip";
 	public static final String AUTHOR_TEXT = "author text";
 	public static final String VERSION_TEXT = "version text";
+	public static final String SUPPORTED_BY_TEXT = "supported by text";
 	
 	//Entry Log
 	public static final String ENTRY_LOG_TITLE = "entry log title";

@@ -13,6 +13,7 @@
      <text identifier="manage patient button tooltip">Manage patients data</text>
      <text identifier="author text">Created by</text>
      <text identifier="version text">Version</text>
+     <text identifier="supported by text">Supported by</text>
      <text identifier="entry log title">Input Your Data Here</text>
      <text identifier="date label">Date</text>
      <text identifier="start time label">Start Time</text>
@@ -112,6 +113,7 @@
      <text identifier="etc text">Etc</text>
      <text identifier="other text">Other</text>
      <text identifier="image files text">Image Files</text>
+     <text identifier="save image tooltip text">Save as Image</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category pain vs date text">Pain vs Date</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>

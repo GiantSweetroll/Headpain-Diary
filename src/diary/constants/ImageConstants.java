@@ -63,4 +63,19 @@ public class ImageConstants
 	public static final URL CHEEKS_RIGHT_GENERAL = ImageConstants.class.getResource("/cheeks/right/general.png");
 	public static final URL CHEEKS_RIGHT_LOWER = ImageConstants.class.getResource("/cheeks/right/lower.png");
 	public static final URL CHEEKS_RIGHT_UPPER = ImageConstants.class.getResource("/cheeks/right/upper.png");
+	
+	
+	
+	//Supporters
+	public static final URL FKUI = ImageConstants.class.getResource("/logo_icon/logo-fkui.png");
+	public static final URL RSCM = ImageConstants.class.getResource("/logo_icon/logo-rscm.png");
+	public static final URL MEDICAL_MEDIA = ImageConstants.class.getResource("/logo_icon/logo-medimedi.png");
+	
+	//Button Images
+	public static final URL NEW_ENTRY = ImageConstants.class.getResource("/logo_icon/icon-frontpage-newentry.png");
+	public static final URL VIEW_GRAPH = ImageConstants.class.getResource("/logo_icon/icon-frontpage-viewgraph.png");
+	public static final URL VIEW_TABLE = ImageConstants.class.getResource("/logo_icon/icon-frontpage-viewtable.png");
+	
+	//Other Images
+	public static final URL LOGO = ImageConstants.class.getResource("/logo_icon/logo-guardian.png");
 }
