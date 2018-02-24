@@ -375,8 +375,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 				
 			case SAVE:
 				FileOperation.saveSettings(new Settings(this.dataMap));
-	//			MainFrame.refreshSettings();
 				MainFrame.changePanel(Globals.MAIN_MENU);
+				MainFrame.refreshSettings();
 				break;
 		}
 	}

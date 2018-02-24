@@ -22,11 +22,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.ImageConstants;
 import diary.constants.XMLIdentifier;
 import diary.gui.EntryLog.EntryLog;
 import diary.gui.graphs.GraphPanel;
-import diary.gui.settings.SettingsPanel;
 import diary.gui.table.TableScreen;
 import diary.methods.Methods;
 import diary.patientdata.PatientDataManagePanel;
@@ -326,19 +326,19 @@ public class MainMenu extends JPanel implements ActionListener
 			break;
 			
 		case VIEW_GRAPH:
-			MainFrame.changePanel(new GraphPanel());
+			MainFrame.changePanel(Globals.GRAPH_PANEL);
 			break;
 			
 		case VIEW_TABLE:
-			MainFrame.changePanel(new TableScreen());
+			MainFrame.changePanel(Globals.PAIN_TABLE);
 			break;
 			
 		case MANAGE_PATIENTS:
-			MainFrame.changePanel(new PatientDataManagePanel());
+			MainFrame.changePanel(Globals.MANAGE_PATIENTS_PANEL);
 			break;
 			
 		case SETTINGS:
-			MainFrame.changePanel(new SettingsPanel());
+			MainFrame.changePanel(Globals.SETTINGS_PANEL);
 			break;
 			
 		case EXIT:

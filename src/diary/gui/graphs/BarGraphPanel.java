@@ -37,6 +37,5 @@ public class BarGraphPanel extends Graph
 		{
 			g.fillRect(super.dataPoints.get(i).x-width/2, super.dataPoints.get(i).y, width, super.axesOrigin.y - super.dataPoints.get(i).y);
 		}
-	}
-	
+	}	
 }
