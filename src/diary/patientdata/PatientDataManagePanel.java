@@ -23,11 +23,11 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
-import diary.gui.MainMenu;
 import diary.gui.table.Table;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -367,7 +367,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		switch(e.getActionCommand())
 		{
 			case BACK:
-				MainFrame.changePanel(new MainMenu());
+				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 				
 			case NEW:

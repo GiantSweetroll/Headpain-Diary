@@ -42,16 +42,4 @@ public class PainLocationImagePanel extends JPanel
 		c.insets = Constants.INSETS_GENERAL;
 		this.add(this.labText, c);
 	}
-	
-	public static void main(String args[])
-	{
-		JFrame frame = new JFrame();
-		
-		frame.add(new PainLocationImagePanel("Gambar", ImageConstants.CHEEKS_LEFT_GENERAL));
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500, 400);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
 }

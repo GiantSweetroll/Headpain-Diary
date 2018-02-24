@@ -20,11 +20,11 @@ import javax.swing.SwingConstants;
 import diary.ImagePanel;
 import diary.PainEntryData;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
-import diary.gui.MainMenu;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
@@ -333,7 +333,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		switch(e.getActionCommand())
 			{
 			case BACK:
-				MainFrame.changePanel(new MainMenu());
+				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 				
 			case REFRESH:

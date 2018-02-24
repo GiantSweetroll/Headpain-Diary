@@ -28,13 +28,13 @@ import diary.ImagePanel;
 import diary.PainEntryData;
 import diary.Settings;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
-import diary.gui.MainMenu;
 import diary.gui.EntryLog.EntryLog;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -413,7 +413,7 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case BACK:
-				MainFrame.changePanel(new MainMenu());
+				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 		}
 	}

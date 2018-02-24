@@ -2,15 +2,20 @@ package diary.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,7 +31,6 @@ import diary.gui.table.TableScreen;
 import diary.methods.Methods;
 import diary.patientdata.PatientDataManagePanel;
 import giantsweetroll.ImageManager;
-import giantsweetroll.gui.swing.Gbm;
 
 public class MainMenu extends JPanel implements ActionListener
 {
@@ -39,7 +43,7 @@ public class MainMenu extends JPanel implements ActionListener
 	private JLabel labLogo, labCreatedBy, labName, labSupport;
 	private List<JLabel> supportersList;
 	private JButton butNewEntry, butGraph, butTable, butSettings, butExit, butManagePatients;
-	private JPanel panelMainButtons, panelSupport, panelBelow, panelBelowLeft, panelBelowRight, panelBelowCenter, panelCenter;
+	private JPanel panelMainButtons, panelSupport, panelAuthor, panelBelow, panelBelowLeft, panelBelowRight, panelBelowCenter, panelCenter, panelCenterCenter, panelCenterBelow;
 	
 	//Constants
 	private final String NEW_ENTRY = "new entry";
@@ -48,7 +52,7 @@ public class MainMenu extends JPanel implements ActionListener
 	private final String SETTINGS = "settings";
 	private final String EXIT = "exit";
 	private final String MANAGE_PATIENTS = "manage patients";
-	private final Dimension IMAGE_BUTTONS_SIZE = new Dimension(200, 180);
+//	private final Dimension IMAGE_BUTTONS_SIZE = new Dimension(200, 180);
 //	private final Dimension IMAGE_SUPPORTERS_SIZE = new Dimension(120, 100);
 //	private final Dimension IMAGE_LOGO_SIZE = new Dimension(320, 280);
 	
@@ -77,49 +81,82 @@ public class MainMenu extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelCenter = new JPanel();
+		this.initPanelCenterCenter();
+		this.initPanelCenterBelow();
+		
+		//Properties
+		this.panelCenter.setLayout(new BorderLayout());
+		this.panelCenter.setOpaque(false);
+		
+		//Add to panel
+		this.panelCenter.add(this.panelCenterCenter, BorderLayout.CENTER);
+		this.panelCenter.add(this.panelCenterBelow, BorderLayout.SOUTH);
+	}
+	private void initPanelCenterBelow()
+	{
+		//Initialization
+		this.panelCenterBelow = new JPanel();
 		this.initPanelSupport();
+		this.initPanelAuthor();
+		this.labSupport = new JLabel(Methods.getLanguageText(XMLIdentifier.SUPPORTED_BY_TEXT) + ":");
+		
+		//Properties
+		this.panelCenterBelow.setLayout(new BoxLayout(this.panelCenterBelow, BoxLayout.Y_AXIS));
+		this.panelCenterBelow.setOpaque(false);
+		this.panelSupport.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.labSupport.setFont(Constants.FONT_GENERAL);
+		this.labSupport.setForeground(Color.WHITE);
+		this.labSupport.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		//Add to panel
+		this.panelCenterBelow.add(this.panelAuthor);
+		this.panelCenterBelow.add(this.labSupport);
+		this.panelCenterBelow.add(this.panelSupport);
+	}
+	private void initPanelCenterCenter()
+	{
+		//Initialization
+		this.panelCenterCenter = new JPanel();
 		this.initPanelMainButtons();
-		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
-		image = Methods.resizeImageByRatio(image, 20);
-		this.labLogo = new JLabel(image);
+		this.labLogo = new JLabel(Methods.resizeImageByRatio(ImageManager.getImageIcon(ImageConstants.LOGO), 23));
+		
+		//Properties
+		this.panelCenterCenter.setLayout(new BoxLayout(this.panelCenterCenter, BoxLayout.Y_AXIS));
+		this.panelCenterCenter.setOpaque(false);
+		this.panelMainButtons.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.labLogo.setFont(Constants.FONT_GENERAL);
+		this.labLogo.setForeground(Color.WHITE);
+		this.labLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		//Add to panel
+		this.panelCenterCenter.add(this.labLogo);
+		this.panelCenterCenter.add(this.panelMainButtons);
+	}
+	private void initPanelAuthor()
+	{
+		//Initialization
+		this.panelAuthor = new JPanel();
 		this.labCreatedBy = new JLabel(Methods.getLanguageText(XMLIdentifier.AUTHOR_TEXT) + ":");
 		this.labName = new JLabel ("Gardyan P Akbar");
-		this.labSupport = new JLabel(Methods.getLanguageText(XMLIdentifier.SUPPORTED_BY_TEXT) + ":");
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
-		this.panelCenter.setLayout(new GridBagLayout());
-		this.panelCenter.setOpaque(false);
-		this.labLogo.setFont(Constants.FONT_GENERAL);
-		this.labLogo.setForeground(Color.WHITE);
+		this.panelAuthor.setLayout(new GridBagLayout());
+		this.panelAuthor.setOpaque(false);
+//		this.panelAuthor.setBorder(BorderFactory.createLineBorder(new Color (0, 0, 0, 0), 10));			//Create empty/transparent border, to serve as padding
 		this.labCreatedBy.setFont(Constants.FONT_GENERAL);
 		this.labCreatedBy.setForeground(Color.WHITE);
+		this.labCreatedBy.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.labName.setFont(Constants.FONT_GENERAL_A_BIT_BIGGER);
 		this.labName.setForeground(Color.WHITE);
-		this.labSupport.setFont(Constants.FONT_GENERAL);
-		this.labSupport.setForeground(Color.WHITE);
+		this.labName.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Add to panel
-		Gbm.goToOrigin(c);
+		c.gridwidth = GridBagConstraints.REMAINDER;
 		c.insets = Constants.INSETS_TOP_COMPONENT;
-		c.gridwidth = 100;
-		this.panelCenter.add(this.labLogo, c);				//Logo
-		Gbm.newGridLine(c);
-		c.insets = Constants.INSETS_GENERAL;
-		c.gridwidth = 1;
-		this.panelCenter.add(this.panelMainButtons, c);		//Main Buttons Panel
-		Gbm.newGridLine(c);
-		c.insets = Constants.INSETS_TOP_COMPONENT;
-		this.panelCenter.add(this.labCreatedBy, c);			//Created By
-		Gbm.newGridLine(c);
-		c.insets = Constants.INSETS_GENERAL;
-		this.panelCenter.add(this.labName, c);				//Name
-		Gbm.newGridLine(c);
-		c.insets = Constants.INSETS_TOP_COMPONENT;
-		this.panelCenter.add(this.labSupport, c);			//Supported By
-		Gbm.newGridLine(c);
-		c.insets = Constants.INSETS_GENERAL;
-		this.panelCenter.add(this.panelSupport, c);			//Supported By Panel		
+		this.panelAuthor.add(this.labCreatedBy, c);
+		c.insets = new Insets (Constants.INSETS_BASE, Constants.INSETS_TITLE.left, Constants.INSETS_TITLE.bottom, Constants.INSETS_TITLE.right);
+		this.panelAuthor.add(this.labName, c);
 	}
 	private void initPanelSupport()
 	{
@@ -148,23 +185,44 @@ public class MainMenu extends JPanel implements ActionListener
 			this.panelSupport.add(label);
 		}
 	}
+	private void initButton(JButton button, ImageIcon image, String text, int imageRatioScale)
+	{
+		image = Methods.resizeImageByRatio(image, imageRatioScale);
+		ImageTextPanel panelImage = new ImageTextPanel(image, text);
+		panelImage.getTextLabel().setForeground(Color.WHITE);
+		panelImage.getTextLabel().setFont(Constants.FONT_SUB_TITLE);
+		button.add(panelImage);
+	}
 	private void initPanelMainButtons()
 	{
 		//Initialization
-		this.panelMainButtons = new JPanel();
-		ImageIcon image = ImageManager.getImageIcon(ImageConstants.NEW_ENTRY);
-		image = Methods.resizeImageByRatio(image, 45);
-		this.butNewEntry = new JButton(image);
-		image = ImageManager.getImageIcon(ImageConstants.VIEW_GRAPH);
-		image = Methods.resizeImageByRatio(image, 45);
-		this.butGraph = new JButton(image);
-		image = ImageManager.getImageIcon(ImageConstants.VIEW_TABLE);
-		image = Methods.resizeImageByRatio(image, 45);
-		this.butTable = new JButton(image);
+		final int RATIO = 15;
+		this.panelMainButtons = new JPanel()
+				{
+					/**
+					 * 
+					 */
+					private static final long serialVersionUID = 1324024801522805199L;
+
+					@Override
+					public Dimension getMaximumSize()			//Overriden to prevent height from being resized when component resizes
+					{
+						Dimension original = super.getMaximumSize();
+						
+						return new Dimension(original.width, super.getPreferredSize().height);
+					}
+				};
+		this.butNewEntry = new JButton();
+		this.initButton(this.butNewEntry, ImageManager.getImageIcon(ImageConstants.NEW_ENTRY), Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT), RATIO);
+		this.butGraph = new JButton();
+		this.initButton(this.butGraph, ImageManager.getImageIcon(ImageConstants.VIEW_GRAPH), Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT), RATIO);
+		this.butTable = new JButton();
+		this.initButton(this.butTable, ImageManager.getImageIcon(ImageConstants.VIEW_TABLE), Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT), RATIO);
 		
 		//Properties
-		this.panelMainButtons.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.panelMainButtons.setLayout(new GridLayout(1, 0, 20, 20));
 		this.panelMainButtons.setOpaque(false);
+		this.panelMainButtons.setBorder(BorderFactory.createLineBorder(new Color (0, 0, 0, 0), 20));			//Create empty/transparent border, to serve as padding
 		this.butNewEntry.setActionCommand(this.NEW_ENTRY);
 		this.butNewEntry.addActionListener(this);
 		this.butNewEntry.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);

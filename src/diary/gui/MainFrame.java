@@ -6,13 +6,13 @@ import java.io.IOException;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import diary.Settings;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.XMLGenerator;
@@ -48,7 +48,7 @@ public class MainFrame
 		//Initialization
 		frame = new JFrame(Constants.PROGRAM_TITLE);
 		MainFrame.refreshSettings();
-	//	jComponent = new MainMenu();
+	//	jComponent = Globals.MAIN_MENU;
 		
 		frame.add(jComponent);
 		
@@ -144,8 +144,8 @@ public class MainFrame
 			{
 				try
 				{
-					jComponent = new MainMenu();
-					MainFrame.lastComponent = new MainMenu();
+					jComponent = Globals.MAIN_MENU;
+					MainFrame.lastComponent = Globals.MAIN_MENU;
 					MainFrame.changePanel(new PatientDataRegisterationForm());
 				}
 				catch(NullPointerException ex)
@@ -155,7 +155,7 @@ public class MainFrame
 			}
 			else
 			{
-				jComponent = new MainMenu();
+				jComponent = Globals.MAIN_MENU;
 				MainFrame.frame.add(jComponent);
 			}
 		}
@@ -166,8 +166,8 @@ public class MainFrame
 			{
 				try
 				{
-					jComponent = new MainMenu();
-					MainFrame.lastComponent = new MainMenu();
+					jComponent = Globals.MAIN_MENU;
+					MainFrame.lastComponent = Globals.MAIN_MENU;
 					MainFrame.changePanel(new PatientDataRegisterationForm());
 				}
 				catch(NullPointerException ex1)
@@ -177,7 +177,7 @@ public class MainFrame
 			}
 			else
 			{
-				jComponent = new MainMenu();
+				jComponent = Globals.MAIN_MENU;
 				MainFrame.frame.add(jComponent);
 			}
 		}

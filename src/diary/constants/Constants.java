@@ -44,6 +44,7 @@ public final class Constants
 	//Colors
 	public static final Color COLOR_MAIN_MENU_BUTTONS = new Color(23, 74, 211);
 	public static final Color COLOR_MAIN_MENU_BACKGROUND = new Color(0, 187, 212);
+	public static final Color COLOR_TRANSPARENT = new Color (0, 0, 0, 0);
 	
 	//Fonts
 	private static final String FONT_TYPE_GENERAL = "century gothic";
@@ -62,7 +63,7 @@ public final class Constants
 	
 	
 	//Insets
-	private static final int INSETS_BASE = 5;
+	public static final int INSETS_BASE = 5;
 	public static final Insets INSETS_GENERAL = new Insets (INSETS_BASE, 
 															INSETS_BASE, 
 															INSETS_BASE, 

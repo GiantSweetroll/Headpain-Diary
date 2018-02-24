@@ -512,7 +512,7 @@ public class EntryLog extends JPanel implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case BACK:
-				MainFrame.changePanel(new MainMenu());
+				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 				
 			case FINISH:
@@ -530,7 +530,7 @@ public class EntryLog extends JPanel implements ActionListener
 						{
 							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
 							FileOperation.exportPainData(patient, entry);
-							MainFrame.changePanel(new MainMenu());
+							MainFrame.changePanel(Globals.MAIN_MENU);
 						}
 					}
 					else
@@ -544,7 +544,7 @@ public class EntryLog extends JPanel implements ActionListener
 								FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
 							}
 						}
-						MainFrame.changePanel(new MainMenu());
+						MainFrame.changePanel(Globals.MAIN_MENU);
 					}
 				}
 				else

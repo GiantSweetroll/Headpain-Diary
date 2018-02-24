@@ -30,9 +30,9 @@ import org.xml.sax.SAXException;
 
 import diary.Settings;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.gui.MainFrame;
-import diary.gui.MainMenu;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
@@ -370,13 +370,13 @@ public class SettingsPanel extends JPanel implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case CANCEL:
-				MainFrame.changePanel(new MainMenu());
+				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 				
 			case SAVE:
 				FileOperation.saveSettings(new Settings(this.dataMap));
 	//			MainFrame.refreshSettings();
-				MainFrame.changePanel(new MainMenu());
+				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 		}
 	}
