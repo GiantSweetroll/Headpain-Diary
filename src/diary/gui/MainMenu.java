@@ -26,10 +26,7 @@ import diary.constants.Globals;
 import diary.constants.ImageConstants;
 import diary.constants.XMLIdentifier;
 import diary.gui.EntryLog.EntryLog;
-import diary.gui.graphs.GraphPanel;
-import diary.gui.table.TableScreen;
 import diary.methods.Methods;
-import diary.patientdata.PatientDataManagePanel;
 import giantsweetroll.ImageManager;
 
 public class MainMenu extends JPanel implements ActionListener
