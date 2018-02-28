@@ -5,8 +5,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.io.File;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.util.LinkedHashMap;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -166,4 +168,6 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_RADIATING),
 														Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND),
 														Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
+	
+	public static final LinkedHashMap<String, LinkedHashMap<URL, String>> PAIN_LOCATIONS = Methods.generatePainLocationsTextURLMap();
 }

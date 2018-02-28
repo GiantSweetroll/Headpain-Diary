@@ -91,6 +91,12 @@
      <text identifier="very specific position eyes eyeball text">Eyeball</text>
      <text identifier="very specific position eyes eyebrow text">Eyebrow</text>
      <text identifier="very specific position eyes socket text">Socket</text>
+     <text identifier="pain location eye and forhead text">Eye Area And Forehead</text>
+     <text identifier="pain location face left and head text">Left-Side Face and Head</text>
+     <text identifier="pain location face right and head text">Right-Side Face And Head</text>
+     <text identifier="pain location head all text">Full Head</text>
+     <text identifier="pain location head back text">Back Head</text>
+     <text identifier="pain location head front text">Front Head</text>
      <text identifier="back text">Back</text>
      <text identifier="finish text">Finish</text>
      <text identifier="reset">Reset</text>

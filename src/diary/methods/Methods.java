@@ -4,7 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -20,6 +22,7 @@ import diary.ImagePanel;
 import diary.PainEntryData;
 import diary.Settings;
 import diary.constants.Constants;
+import diary.constants.ImageConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
@@ -454,5 +457,37 @@ public class Methods
 		Image img = image.getImage();
 		img = img.getScaledInstance((image.getIconWidth()/100)*percentage, (image.getIconHeight()/100)*percentage, Image.SCALE_SMOOTH);
 		return new ImageIcon(img);
+	}
+	
+	public static final LinkedHashMap<String, LinkedHashMap<URL, String>> generatePainLocationsTextURLMap()
+	{
+		LinkedHashMap<String, LinkedHashMap<URL, String>> map = new LinkedHashMap<String, LinkedHashMap<URL, String>>();
+		
+		LinkedHashMap<URL, String> subMap = new LinkedHashMap<URL, String>();
+		
+		subMap.put(ImageConstants.PAIN_LOCATION_EYES_AND_FOREHEAD, PainLocationConstants.EYES_AND_FOREHEAD);
+		map.put(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_EYE_AND_FOREHEAD_TEXT), subMap);
+		
+		subMap = new LinkedHashMap<URL, String>();
+		subMap.put(ImageConstants.PAIN_LOCATION_FACE_LEFT_AND_HEAD, PainLocationConstants.FACE_LEFT_AND_HEAD);
+		map.put(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_FACE_LEFT_AND_HEAD_TEXT), subMap);
+		
+		subMap = new LinkedHashMap<URL, String>();
+		subMap.put(ImageConstants.PAIN_LOCATION_FACE_RIGHT_AND_HEAD, PainLocationConstants.FACE_RIGHT_AND_HEAD);
+		map.put(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_FACE_RIGHT_AND_HEAD_TEXT), subMap);
+		
+		subMap = new LinkedHashMap<URL, String>();
+		subMap.put(ImageConstants.PAIN_LOCATION_HEAD_FULL, PainLocationConstants.HEAD_FULL);
+		map.put(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_HEAD_ALL_TEXT), subMap);
+		
+		subMap = new LinkedHashMap<URL, String>();
+		subMap.put(ImageConstants.PAIN_LOCATION_HEAD_BACK, PainLocationConstants.HEAD_BACK);
+		map.put(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_HEAD_BACK_TEXT), subMap);
+		
+		subMap = new LinkedHashMap<URL, String>();
+		subMap.put(ImageConstants.PAIN_LOCATION_HEAD_FRONT, PainLocationConstants.HEAD_FRONT);
+		map.put(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_HEAD_FRONT_TEXT), subMap);
+		
+		return map;
 	}
 }

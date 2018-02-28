@@ -4,13 +4,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.net.URL;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
-import diary.constants.ImageConstants;
 
 public class PainLocationImagePanel extends JPanel
 {

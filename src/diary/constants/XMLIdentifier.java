@@ -162,6 +162,14 @@ public class XMLIdentifier
 	public static final String VERY_SPECIFIC_POSITION_CHEEKS_UPPER_TEXT = "very specific position cheeks upper text";
 	//-->Cheeks end
 	
+	//Pain Locations New
+	public static final String PAIN_LOCATION_HEAD_ALL_TEXT = "pain location head all text";
+	public static final String PAIN_LOCATION_FACE_LEFT_AND_HEAD_TEXT = "pain location face left and head text";
+	public static final String PAIN_LOCATION_FACE_RIGHT_AND_HEAD_TEXT = "pain location face right and head text";
+	public static final String PAIN_LOCATION_EYE_AND_FOREHEAD_TEXT = "pain location eye and forhead text";
+	public static final String PAIN_LOCATION_HEAD_FRONT_TEXT = "pain location head front text";
+	public static final String PAIN_LOCATION_HEAD_BACK_TEXT = "pain location head back text";
+	
 	//Graph
 	public static final String GRAPH_CATEGORY_LABEL = "graph category label";
 	public static final String GRAPH_CATEGORY_PAIN_VS_DATE_TEXT = "graph category pain vs date text";

@@ -165,6 +165,14 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_EYEBROW_TEXT, "Eyebrow");
 		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_SOCKET_TEXT, "Socket");
 		
+		//Pain Location New
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_EYE_AND_FOREHEAD_TEXT, "Eye Area And Forehead");
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_FACE_LEFT_AND_HEAD_TEXT, "Left-Side Face and Head");
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_FACE_RIGHT_AND_HEAD_TEXT, "Right-Side Face And Head");
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_HEAD_ALL_TEXT, "Full Head");
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_HEAD_BACK_TEXT, "Back Head");
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_HEAD_FRONT_TEXT, "Front Head");
+		
 		//Misc
 		appendComponentToMap(doc, map, XMLIdentifier.BACK_TEXT, "Back");
 		appendComponentToMap(doc, map, XMLIdentifier.FINISH_TEXT, "Finish");

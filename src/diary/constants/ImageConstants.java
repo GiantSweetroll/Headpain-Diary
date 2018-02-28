@@ -65,6 +65,13 @@ public class ImageConstants
 	public static final URL CHEEKS_RIGHT_UPPER = ImageConstants.class.getResource("/cheeks/right/upper.png");
 	
 	
+	//Pain Locations New
+	public static final URL PAIN_LOCATION_HEAD_FULL = ImageConstants.class.getResource("/pain_location/1.png");
+	public static final URL PAIN_LOCATION_FACE_LEFT_AND_HEAD = ImageConstants.class.getResource("/pain_location/2.png");
+	public static final URL PAIN_LOCATION_FACE_RIGHT_AND_HEAD = ImageConstants.class.getResource("/pain_location/3.png");
+	public static final URL PAIN_LOCATION_EYES_AND_FOREHEAD = ImageConstants.class.getResource("/pain_location/4.png");
+	public static final URL PAIN_LOCATION_HEAD_FRONT = ImageConstants.class.getResource("/pain_location/5.png");
+	public static final URL PAIN_LOCATION_HEAD_BACK = ImageConstants.class.getResource("/pain_location/6.png");
 	
 	//Supporters
 	public static final URL FKUI = ImageConstants.class.getResource("/logo_icon/logo-fkui.png");

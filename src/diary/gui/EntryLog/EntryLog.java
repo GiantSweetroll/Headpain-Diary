@@ -35,7 +35,6 @@ import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DatePanel;
 import diary.gui.MainFrame;
-import diary.gui.MainMenu;
 import diary.history.HistoryPanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -56,25 +55,25 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private JPanel panelTitle;
 	private JPanel panelCenter;
-	private JScrollPane panelNyeriTypes;
+//	private JScrollPane panelNyeriTypes;
 	private JPanel panelBelow;
 	private JPanel panelBelowLeft, panelBelowRight;
 	
 	private JScrollPane scrollCenter, scrollComments;
 	
-	private JLabel labTitle, labDate, labStartTime, labNyeriAmount, labActivity, labRecentMedication, labComments;
+	private JLabel labTitle, labDate, labStartTime, /*labNyeriAmount,*/ labActivity, labRecentMedication, labComments, labPainKind, labIntensity, labIntensityDesc, labDuration;
 	
+	private PainLocationPresetSelectionPanel presetLocations;
 	private DatePanel panelDate;
 	private TimePanel panelTime;
-	
 	private ActivePatientPanel activePatientPanel;
 	private HistoryPanel historyRecentMedication;
 	
-	private JFormattedTextField tfNyeriAmount;
-	private JTextField tfActivity;
-	private JComboBox<String> comboActivity;
+//	private JFormattedTextField tfNyeriAmount;
+	private JTextField tfActivity, tfPainKind, tfDuration, tfIntensity;
+	private JComboBox<String> comboActivity, comboPainKind, comboDurationUnit;
 	private JTextArea taComments;
-	private JButton butBack, butFinish, butConfirm;
+	private JButton butBack, butFinish/*, butConfirm*/;
 		
 	private GridBagConstraints c;
 	
@@ -91,6 +90,7 @@ public class EntryLog extends JPanel implements ActionListener
 	//Vectors
 	private VectorInt vecPainLocationPanel;
 	
+	//Constructors
 	public EntryLog()
 	{
 		this.createAndShowGUI();
@@ -155,9 +155,10 @@ public class EntryLog extends JPanel implements ActionListener
 		this.panelDate = new DatePanel(true);
 		this.labStartTime = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
 		this.panelTime = new TimePanel(true);
-		this.labNyeriAmount = new JLabel (Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL), SwingConstants.RIGHT);
+/*		this.labNyeriAmount = new JLabel (Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL), SwingConstants.RIGHT);
 		this.tfNyeriAmount = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.butConfirm = new JButton(Methods.getLanguageText(XMLIdentifier.CONFIRM_TEXT));
+		this.butConfirm = new JButton(Methods.getLanguageText(XMLIdentifier.CONFIRM_TEXT));		*/
+		this.presetLocations = new PainLocationPresetSelectionPanel();
 		this.labActivity = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL), SwingConstants.RIGHT);
 		this.comboActivity = new JComboBox<String>(Constants.DEFAULT_ACTIVITIES);
 		this.tfActivity = new JTextField("", 20);
@@ -173,16 +174,16 @@ public class EntryLog extends JPanel implements ActionListener
 		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute(), GDateManager.getCurrentSecond());
 		this.panelTime.resetDefault();
-		this.tfNyeriAmount.setColumns(5);
+/*		this.tfNyeriAmount.setColumns(5);
 		this.tfNyeriAmount.setHorizontalAlignment(SwingConstants.CENTER);
-		this.tfNyeriAmount.setText("1");
+		this.tfNyeriAmount.setText("1");	*/
 		this.tfActivity.setEditable(false);
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.taComments.setBorder(this.tfActivity.getBorder());
 		this.panelDate.setDefaultData(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
 		this.panelDate.resetDefault();
 		
-		this.panelNyeriTypes = new CollectivePainLocationDataScrollPane(Integer.parseInt(this.tfNyeriAmount.getText().trim()));
+//		this.panelNyeriTypes = new CollectivePainLocationDataScrollPane(Integer.parseInt(this.tfNyeriAmount.getText().trim()));
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -205,6 +206,8 @@ public class EntryLog extends JPanel implements ActionListener
 		this.panelCenter.add(this.panelTime, c);			//Start Time Panel
 		Gbm.newGridLine(c);
 		c.gridwidth = 1;
+		this.panelCenter.add(this.presetLocations, c);		//Preset Locations
+		
 		this.panelCenter.add(this.labNyeriAmount, c);		//Amount of head pain
 		Gbm.nextGridColumn(c);
 		this.panelCenter.add(this.tfNyeriAmount, c);		//Amount of head pain text field

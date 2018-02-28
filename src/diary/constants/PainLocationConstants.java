@@ -65,4 +65,12 @@ public class PainLocationConstants
 	public static final String CHEEKS_LEFT_GENERAL = "cheeks left general";
 	public static final String CHEEKS_LEFT_LOWER = "cheeks left lower";
 	public static final String CHEEKS_LEFT_UPPER = "cheeks left upper";
+	
+	//New Locations
+	public static final String HEAD_FULL = "head full";
+	public static final String FACE_LEFT_AND_HEAD = "face left and head";
+	public static final String FACE_RIGHT_AND_HEAD = "face right and head";
+	public static final String EYES_AND_FOREHEAD = "eyes and forhead";
+	public static final String HEAD_FRONT = "head front";
+	public static final String HEAD_BACK = "head back";
 }
