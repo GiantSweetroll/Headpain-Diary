@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.legacy;
 
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;

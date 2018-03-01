@@ -31,6 +31,7 @@ import diary.gui.graphs.GraphPanel;
 import diary.gui.table.TableScreen;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
+import giantsweetroll.numbers.GNumbers;
 
 public class Methods 
 {	
@@ -489,5 +490,40 @@ public class Methods
 		map.put(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_HEAD_FRONT_TEXT), subMap);
 		
 		return map;
+	}
+	
+	public static boolean isSelectedItem(JComboBox<String> combo, String item, boolean ignoreCase)
+	{
+		if(ignoreCase)
+		{
+			if (combo.getSelectedItem().toString().equalsIgnoreCase(item))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			if (combo.getSelectedItem().toString().equals(item))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+	
+	public static int getPercentage(ImageIcon image, int targetValue)
+	{
+		return (int)GNumbers.round((((float)targetValue)/((float)image.getIconWidth())) * 100f, 0);
+	}
+	public static int getPercentageValue(int source, int percentage)
+	{
+		return (int)GNumbers.round((((float)source)/100f)* ((float)percentage), 0);
 	}
 }

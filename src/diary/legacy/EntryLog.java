@@ -35,8 +35,6 @@ import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DatePanel;
 import diary.gui.MainFrame;
-import diary.gui.EntryLog.CollectivePainLocationDataScrollPane;
-import diary.gui.EntryLog.IndividualPainLocationDataPanel;
 import diary.gui.EntryLog.TimePanel;
 import diary.history.HistoryPanel;
 import diary.methods.FileOperation;

@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -40,7 +39,7 @@ import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
 import giantsweetroll.GDateManager;
-import giantsweetroll.VectorInt;
+import giantsweetroll.Misc;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 import giantsweetroll.message.MessageManager;
@@ -55,24 +54,26 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private JPanel panelTitle;
 	private JPanel panelCenter;
-	private JScrollPane panelNyeriTypes;
+//	private JScrollPane panelNyeriTypes;
 	private JPanel panelBelow;
 	private JPanel panelBelowLeft, panelBelowRight;
 	
 	private JScrollPane scrollCenter, scrollComments;
 	
-	private JLabel labTitle, labDate, labStartTime/*, labNyeriAmount*/, labActivity, labRecentMedication, labComments;
+	private JLabel labTitle, labDate, labStartTime/*, labNyeriAmount*/, labActivity, labRecentMedication, labComments, labPainKind, labIntensity, labIntensityDesc, labDuration;
 	
+	private PainLocationPresetSelectionPanel presetPanel;
 	private DatePanel panelDate;
 	private TimePanel panelTime;
 	private ActivePatientPanel activePatientPanel;
 	private HistoryPanel historyRecentMedication;
 	
-	private JFormattedTextField tfNyeriAmount;
-	private JTextField tfActivity;
-	private JComboBox<String> comboActivity;
+//	private JFormattedTextField tfNyeriAmount;
+	private JFormattedTextField tfIntensity, tfDuration;
+	private JTextField tfActivity, tfPainKind;
+	private JComboBox<String> comboActivity, comboPainKind, comboDurationUnit;
 	private JTextArea taComments;
-	private JButton butBack, butFinish, butConfirm;
+	private JButton butBack, butFinish/*, butConfirm*/;
 		
 	private GridBagConstraints c;
 	
@@ -83,11 +84,6 @@ public class EntryLog extends JPanel implements ActionListener
 	//Constants
 	private final String BACK = "back";
 	private final String FINISH = "finish";
-	
-	private int nyeriAmount;
-	
-	//Vectors
-	private VectorInt vecPainLocationPanel;
 	
 	//Constructors
 	public EntryLog()
@@ -154,12 +150,19 @@ public class EntryLog extends JPanel implements ActionListener
 		this.panelDate = new DatePanel(true);
 		this.labStartTime = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
 		this.panelTime = new TimePanel(true);
-		this.labNyeriAmount = new JLabel (Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL), SwingConstants.RIGHT);
-		this.tfNyeriAmount = new JFormattedTextField(Constants.AMOUNT_FORMAT);
-		this.butConfirm = new JButton(Methods.getLanguageText(XMLIdentifier.CONFIRM_TEXT));
+		this.presetPanel = new PainLocationPresetSelectionPanel();
+		this.labPainKind = new JLabel(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), SwingConstants.RIGHT);
+		this.comboPainKind = new JComboBox<String>(Constants.DEFAULT_PAIN_KIND);
+		this.tfPainKind = new JTextField(10);
+		this.labIntensity = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), SwingConstants.RIGHT);
+		this.tfIntensity = new JFormattedTextField(Constants.AMOUNT_FORMAT);
+		this.labIntensityDesc = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
+		this.labDuration = new JLabel(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
+		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
+		this.comboDurationUnit = new JComboBox<String>(Constants.DURATION_UNITS);
 		this.labActivity = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL), SwingConstants.RIGHT);
 		this.comboActivity = new JComboBox<String>(Constants.DEFAULT_ACTIVITIES);
-		this.tfActivity = new JTextField("", 20);
+		this.tfActivity = new JTextField("", 10);
 		this.labRecentMedication = new JLabel(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL), SwingConstants.RIGHT);
 		this.historyRecentMedication = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION);
 		this.labComments = new JLabel(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL), SwingConstants.RIGHT);
@@ -172,16 +175,16 @@ public class EntryLog extends JPanel implements ActionListener
 		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute(), GDateManager.getCurrentSecond());
 		this.panelTime.resetDefault();
-		this.tfNyeriAmount.setColumns(5);
-		this.tfNyeriAmount.setHorizontalAlignment(SwingConstants.CENTER);
-		this.tfNyeriAmount.setText("1");
+		this.tfPainKind.setColumns(10);
+		this.tfPainKind.setHorizontalAlignment(SwingConstants.CENTER);
+		this.tfPainKind.setEditable(false);
+		this.tfDuration.setColumns(5);
+		this.tfDuration.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfActivity.setEditable(false);
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.taComments.setBorder(this.tfActivity.getBorder());
 		this.panelDate.setDefaultData(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
 		this.panelDate.resetDefault();
-		
-		this.panelNyeriTypes = new CollectivePainLocationDataScrollPane(Integer.parseInt(this.tfNyeriAmount.getText().trim()));
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -203,17 +206,27 @@ public class EntryLog extends JPanel implements ActionListener
 		c.gridwidth = 4;
 		this.panelCenter.add(this.panelTime, c);			//Start Time Panel
 		Gbm.newGridLine(c);
-		c.gridwidth = 1;
-		this.panelCenter.add(this.labNyeriAmount, c);		//Amount of head pain
-		Gbm.nextGridColumn(c);
-		this.panelCenter.add(this.tfNyeriAmount, c);		//Amount of head pain text field
-		Gbm.nextGridColumn(c);
-		this.panelCenter.add(this.butConfirm, c);			//Confirm button
+		c.gridwidth = 1000;
+		this.panelCenter.add(this.presetPanel, c);			//Preset Locations
 		Gbm.newGridLine(c);
-		c.gridwidth = 100;
-	//	Gbm.nextGridColumn(c);
-		this.vecPainLocationPanel = new VectorInt(c.gridx, c.gridy);
-		this.panelCenter.add(this.panelNyeriTypes, c);		//Nyeri type scroll pane
+		c.gridwidth = 1;
+		this.panelCenter.add(this.labPainKind, c);			//Pain Kind
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.comboPainKind, c);		//Pain Kind Options
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.tfPainKind, c);			//Pain Kind Text Field
+		Gbm.newGridLine(c);
+		this.panelCenter.add(this.labIntensity, c);			//Intensity
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.tfIntensity, c);			//Intensity Text Field
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.labIntensityDesc, c);		//Intensity Description
+		Gbm.newGridLine(c);
+		this.panelCenter.add(this.labDuration, c);			//Duration
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.tfDuration, c);			//Duration Text Field
+		Gbm.nextGridColumn(c);
+		this.panelCenter.add(this.comboDurationUnit, c);	//Duration unit
 		Gbm.newGridLine(c);
 		c.gridwidth = 1;
 		this.panelCenter.add(this.labActivity, c);			//Activity
@@ -232,7 +245,7 @@ public class EntryLog extends JPanel implements ActionListener
 		c.gridwidth = 3;
 		this.panelCenter.add(this.scrollComments, c);		//Comments Text Area
 		
-		this.getNyeriAmount();
+//		this.getNyeriAmount();
 	}
 	private void initScrollPanes()
 	{
@@ -279,40 +292,12 @@ public class EntryLog extends JPanel implements ActionListener
 	}
 	private void configureListenersForMembers()
 	{
-//		this.tfNyeriAmount.getDocument().addDocumentListener(this);
 		this.butBack.addActionListener(this);
 		this.butBack.setActionCommand(this.BACK);
 		this.butFinish.addActionListener(this);
 		this.butFinish.setActionCommand(this.FINISH);
-		this.butConfirm.addActionListener(this.nyeriAmountListener);
+		this.comboPainKind.addActionListener(this.painKindListener);
 		this.comboActivity.addActionListener(this.activityListener);
-	}
-	private void getNyeriAmount()
-	{
-		int amount = 1;
-		try
-		{
-			if (this.tfNyeriAmount.getText().trim().equals(""))
-			{
-				amount = 1;
-				this.tfNyeriAmount.setText("1");
-			}
-			else
-			{
-				amount = Integer.parseInt(this.tfNyeriAmount.getText().trim().replaceAll(",", ""));
-				if (amount <= 0)
-				{
-					amount = 1;
-					this.tfNyeriAmount.setText("1");
-				}
-			}
-		}
-		catch (NullPointerException ex)
-		{
-			amount = 1;
-		}
-		
-		this.nyeriAmount = amount;
 	}
 	
 	//Methods
@@ -338,11 +323,20 @@ public class EntryLog extends JPanel implements ActionListener
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.TIME_MINUTE, mapTime.get(PainDataIdentifier.TIME_MINUTE));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.TIME_SECONDS, mapTime.get(PainDataIdentifier.TIME_SECONDS));
 			
-			this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_AMOUNT, Integer.toString(this.nyeriAmount));
+			//Pain Location
 			
-			//Pain Locations
-			rootElement.appendChild(((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getLocationsElement(doc));
 			
+			//Other
+			if (Methods.isSelectedItem(this.comboPainKind, Methods.getLanguageText(XMLIdentifier.OTHER_TEXT), false))
+			{
+				this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_KIND, Methods.getTextData(this.tfPainKind));
+			}
+			else
+			{
+				this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_KIND, this.comboPainKind.getSelectedItem().toString());
+			}
+			this.appendToRootNode(doc, rootElement, PainDataIdentifier.INTENSITY, Methods.getTextData(this.tfIntensity));
+			this.appendToRootNode(doc, rootElement, PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY, this.comboActivity.getSelectedItem().toString());
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY_DETAILS, Methods.getTextData(this.tfActivity));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.RECENT_MEDICATION, this.historyRecentMedication.getItem());
@@ -399,15 +393,29 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private boolean allRequiredFieldsFilled()
 	{
-		if (Methods.isEmpty(this.tfNyeriAmount) ||
-			!this.activityFilled() ||
-			!((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).allFieldsEntered())
+		if (/*Methods.isEmpty(this.tfNyeriAmount) || */
+			!this.activityFilled()/* ||
+			!((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).allFieldsEntered()*/)
 		{
 			return false;
 		}
 		else
 		{
-			return true;
+			if (Misc.getItem(this.comboPainKind).toString().equals(XMLIdentifier.OTHER_TEXT))
+			{
+				if (Methods.isEmpty(this.tfPainKind))
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return true;
+			}
 		}
 	}
 	
@@ -424,50 +432,46 @@ public class EntryLog extends JPanel implements ActionListener
 								entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS).toString());
 		this.panelTime.setAsDefaultTimeThis();
 		
-		this.tfNyeriAmount.setText(entry.getDataMap().get(PainDataIdentifier.PAIN_AMOUNT).toString());
-		this.refreshPainPositions();
-		
-		List<LinkedHashMap<String, Object>> painLocations = (List<LinkedHashMap<String, Object>>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
-		for (int i=0; i<painLocations.size(); i++)
+		String painKind = entry.getDataMap().get(PainDataIdentifier.PAIN_KIND).toString();
+		if (Methods.isPartOfDefaultPainKind(painKind))
 		{
-			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setSelectedPosition(painLocations.get(i).get(PainDataIdentifier.GENERAL_POSITION).toString(),
-																														painLocations.get(i).get(PainDataIdentifier.GENERAL_POSITION_2).toString(),
-																														painLocations.get(i).get(PainDataIdentifier.SPECIFIC_LOCATION).toString());
-			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setPainKind(painLocations.get(i).get(PainDataIdentifier.PAIN_KIND).toString());
-			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setIntensity(painLocations.get(i).get(PainDataIdentifier.INTENSITY).toString());
-			//Duration unit handling
-			String duration = painLocations.get(i).get(PainDataIdentifier.DURATION).toString();
-			double durationValue = Double.parseDouble(duration);
-			String durationUnit = IndividualPainLocationDataPanel.SECONDS;
-			if (durationValue>=3600d)	//Hours
-			{
-				durationValue = durationValue/3600d;
-				duration = Double.toString(durationValue);
-				durationUnit = IndividualPainLocationDataPanel.HOURS;
-			}
-			else if (durationValue<3600 && durationValue>=60)		//Minutes
-			{
-				durationValue = durationValue/60d;
-				duration = Double.toString(durationValue);
-				durationUnit = IndividualPainLocationDataPanel.MINUTES;
-			}
-			else
-			{
-				//Nothing, leave it at seconds
-			}
-			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDuration(duration);
-			((CollectivePainLocationDataScrollPane)this.panelNyeriTypes).getPainPositions().get(i).setDurationUnit(durationUnit);
+			this.comboPainKind.setSelectedItem(painKind);
 		}
-	//	this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+		else
+		{
+			this.comboPainKind.setSelectedItem(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT));
+			this.tfPainKind.setText(painKind);
+		}
+		this.tfIntensity.setText(entry.getDataMap().get(PainDataIdentifier.INTENSITY).toString());
+		
+		//Duration unit handling
+		String duration = entry.getDataMap().get(PainDataIdentifier.DURATION).toString();
+		double durationValue = Double.parseDouble(duration);
+		String durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT);
+		if (durationValue>=3600d)	//Hours
+		{
+			durationValue = durationValue/3600d;
+			duration = Double.toString(durationValue);
+			durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT);
+		}
+		else if (durationValue<3600 && durationValue>=60)		//Minutes
+		{
+			durationValue = durationValue/60d;
+			duration = Double.toString(durationValue);
+			durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT);
+		}
+		this.tfDuration.setText(duration);
+		this.comboDurationUnit.setSelectedItem(durationUnit);
+		
 		String activity = entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
 		if (Methods.isPartOfDefaultActivity(activity))
 		{
-			this.comboActivity.setSelectedItem(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+			this.comboActivity.setSelectedItem(activity);
 		}
 		else
 		{
 			this.comboActivity.setSelectedIndex(Constants.DEFAULT_ACTIVITIES.length-1);
-			this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+			this.tfActivity.setText(activity);
 		}
 		try
 		{
@@ -489,23 +493,7 @@ public class EntryLog extends JPanel implements ActionListener
 		}
 	}
 	
-	private void refreshPainPositions()
-	{
-		getNyeriAmount();
-		
-		panelCenter.remove(panelNyeriTypes);
-		
-		panelNyeriTypes = new CollectivePainLocationDataScrollPane(nyeriAmount);
-		
-		c.gridwidth = 1000;
-		c.gridx = vecPainLocationPanel.x;
-		c.gridy = vecPainLocationPanel.y;
-		panelCenter.add(panelNyeriTypes, c);
-		
-		revalidate();
-		repaint();
-	}
-	
+	//Interfaces
 	public void actionPerformed(ActionEvent e)
 	{
 		switch (e.getActionCommand())
@@ -554,15 +542,7 @@ public class EntryLog extends JPanel implements ActionListener
 				break;
 		}
 	}
-	
-	private ActionListener nyeriAmountListener = new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					refreshPainPositions();
-				}
-			};
-	
+		
 	private ActionListener activityListener = new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -576,6 +556,23 @@ public class EntryLog extends JPanel implements ActionListener
 					{
 						tfActivity.setEditable(false);
 						tfActivity.setText("");
+					}
+				}
+			};
+			
+	private ActionListener painKindListener = new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					String item = Misc.getItem(comboPainKind).toString();
+					if (item.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
+					{
+						tfPainKind.setEditable(true);
+					}
+					else
+					{
+						tfPainKind.setEditable(false);
+						tfPainKind.setText("");
 					}
 				}
 			};

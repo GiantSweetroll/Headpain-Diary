@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.legacy;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

@@ -57,7 +57,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		{
 			for (Map.Entry<URL, String> subEntry : entry.getValue().entrySet())
 			{
-				ImageTextPanel imagePanel = new ImageTextPanel(ImageManager.getImageIcon(subEntry.getKey()), entry.getKey());
+				ImageTextPanel imagePanel = new ImageTextPanel(ImageManager.getImageIcon(subEntry.getKey()), entry.getKey(), 20);
 				JButton button = new JButton();
 				button.add(imagePanel);
 				button.setActionCommand(subEntry.getValue());

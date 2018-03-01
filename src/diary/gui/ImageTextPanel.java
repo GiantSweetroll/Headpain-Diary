@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import diary.methods.Methods;
+
 public class ImageTextPanel extends JPanel
 {
 
@@ -32,6 +34,20 @@ public class ImageTextPanel extends JPanel
 		this.panel.setOpaque(false);
 		
 		this.createAndShowGUI();
+	}
+	public ImageTextPanel(ImageIcon image, String text, int imageSizePercentage)
+	{
+		//Initialization
+		this.label = new JLabel(text, SwingConstants.CENTER);
+		this.panel = new JPanel();
+		
+		//Properties
+		image = Methods.resizeImageByRatio(image, imageSizePercentage);
+		this.panel.setLayout(new BorderLayout());
+		this.panel.add(new JLabel(image), BorderLayout.CENTER);
+		this.panel.setOpaque(false);
+		
+		this.createAndShowGUI();		
 	}
 	
 	//Methods

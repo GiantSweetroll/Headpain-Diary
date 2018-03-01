@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.legacy;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

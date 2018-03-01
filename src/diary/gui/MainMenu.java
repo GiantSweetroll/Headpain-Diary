@@ -115,7 +115,11 @@ public class MainMenu extends JPanel implements ActionListener
 		//Initialization
 		this.panelCenterCenter = new JPanel();
 		this.initPanelMainButtons();
-		this.labLogo = new JLabel(Methods.resizeImageByRatio(ImageManager.getImageIcon(ImageConstants.LOGO), 23));
+		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
+		this.labLogo = new JLabel(Methods.resizeImageByRatio
+									(image, Methods.getPercentage
+												(image, Methods.getPercentageValue
+															(MainFrame.frame.getWidth(), 48))));
 		
 		//Properties
 		this.panelCenterCenter.setLayout(new BoxLayout(this.panelCenterCenter, BoxLayout.Y_AXIS));
@@ -163,13 +167,16 @@ public class MainMenu extends JPanel implements ActionListener
 		
 		//Prepare JLabels
 		ImageIcon image = ImageManager.getImageIcon(ImageConstants.FKUI);
-		image = Methods.resizeImageByRatio(image, 30);
+//		image = Methods.resizeImageByRatio(image, 30);
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 28)));
 		this.supportersList.add(new JLabel(image));
 		image = ImageManager.getImageIcon(ImageConstants.RSCM);
-		image = Methods.resizeImageByRatio(image, 10);
+//		image = Methods.resizeImageByRatio(image, 10);
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 19)));
 		this.supportersList.add(new JLabel(image));
 		image = ImageManager.getImageIcon(ImageConstants.MEDICAL_MEDIA);
-		image = Methods.resizeImageByRatio(image, 20);
+//		image = Methods.resizeImageByRatio(image, 20);
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 19)));
 		this.supportersList.add(new JLabel(image));	
 	
 		//Properties
@@ -182,9 +189,9 @@ public class MainMenu extends JPanel implements ActionListener
 			this.panelSupport.add(label);
 		}
 	}
-	private void initButton(JButton button, ImageIcon image, String text, int imageRatioScale)
+	private void initButton(JButton button, ImageIcon image, String text)
 	{
-		image = Methods.resizeImageByRatio(image, imageRatioScale);
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 8)));
 		ImageTextPanel panelImage = new ImageTextPanel(image, text);
 		panelImage.getTextLabel().setForeground(Color.WHITE);
 		panelImage.getTextLabel().setFont(Constants.FONT_SUB_TITLE);
@@ -193,7 +200,6 @@ public class MainMenu extends JPanel implements ActionListener
 	private void initPanelMainButtons()
 	{
 		//Initialization
-		final int RATIO = 15;
 		this.panelMainButtons = new JPanel()
 				{
 					/**
@@ -210,11 +216,11 @@ public class MainMenu extends JPanel implements ActionListener
 					}
 				};
 		this.butNewEntry = new JButton();
-		this.initButton(this.butNewEntry, ImageManager.getImageIcon(ImageConstants.NEW_ENTRY), Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT), RATIO);
+		this.initButton(this.butNewEntry, ImageManager.getImageIcon(ImageConstants.NEW_ENTRY), Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT));
 		this.butGraph = new JButton();
-		this.initButton(this.butGraph, ImageManager.getImageIcon(ImageConstants.VIEW_GRAPH), Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT), RATIO);
+		this.initButton(this.butGraph, ImageManager.getImageIcon(ImageConstants.VIEW_GRAPH), Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT));
 		this.butTable = new JButton();
-		this.initButton(this.butTable, ImageManager.getImageIcon(ImageConstants.VIEW_TABLE), Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT), RATIO);
+		this.initButton(this.butTable, ImageManager.getImageIcon(ImageConstants.VIEW_TABLE), Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT));
 		
 		//Properties
 		this.panelMainButtons.setLayout(new GridLayout(1, 0, 20, 20));

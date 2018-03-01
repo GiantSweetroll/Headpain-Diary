@@ -13,9 +13,9 @@ public class Globals
 	public static final History HISTORY_RECENT_MEDICATION = new History(Constants.HISTORY_RECENT_MEDICATION_NAME);
 	
 	//Panels
-	public static final MainMenu MAIN_MENU = new MainMenu();
-	public static final SettingsPanel SETTINGS_PANEL = new SettingsPanel();
-	public static final PatientDataManagePanel MANAGE_PATIENTS_PANEL = new PatientDataManagePanel();
-	public static final GraphPanel GRAPH_PANEL = new GraphPanel();
-	public static final TableScreen PAIN_TABLE = new TableScreen();
+	public static MainMenu MAIN_MENU = new MainMenu();
+	public static SettingsPanel SETTINGS_PANEL = new SettingsPanel();
+	public static PatientDataManagePanel MANAGE_PATIENTS_PANEL = new PatientDataManagePanel();
+	public static GraphPanel GRAPH_PANEL = new GraphPanel();
+	public static TableScreen PAIN_TABLE = new TableScreen();
 }

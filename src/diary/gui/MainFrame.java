@@ -56,6 +56,8 @@ public class MainFrame
 		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		System.out.println(frame.getSize());
 	}
 	/**
 	 * Change the active panel of the frame.
@@ -209,6 +211,8 @@ public class MainFrame
 							}
 							
 							new MainFrame();
+							Globals.MAIN_MENU = new MainMenu();
+							
 						}
 						catch(Exception ex)
 						{
