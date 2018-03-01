@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.legacy;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,6 +35,9 @@ import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DatePanel;
 import diary.gui.MainFrame;
+import diary.gui.EntryLog.CollectivePainLocationDataScrollPane;
+import diary.gui.EntryLog.IndividualPainLocationDataPanel;
+import diary.gui.EntryLog.TimePanel;
 import diary.history.HistoryPanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -61,7 +64,7 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private JScrollPane scrollCenter, scrollComments;
 	
-	private JLabel labTitle, labDate, labStartTime/*, labNyeriAmount*/, labActivity, labRecentMedication, labComments;
+	private JLabel labTitle, labDate, labStartTime, labNyeriAmount, labActivity, labRecentMedication, labComments;
 	
 	private DatePanel panelDate;
 	private TimePanel panelTime;

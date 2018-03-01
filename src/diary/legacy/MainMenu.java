@@ -31,7 +31,7 @@ import giantsweetroll.gui.swing.Gbm;
 /**
  * The Class MainMenu.
  */
-public final class MainMenuOld extends JPanel implements ActionListener
+public final class MainMenu extends JPanel implements ActionListener
 {
 
 	/** The Constant serialVersionUID. */
@@ -75,7 +75,7 @@ public final class MainMenuOld extends JPanel implements ActionListener
 	/**
 	 * Instantiates a new main menu.
 	 */
-	public MainMenuOld()
+	public MainMenu()
 	{
 		this.init();
 	}
