@@ -41,6 +41,10 @@ public class XMLIdentifier
 	public static final String OTHER_TEXT = "other text";
 	public static final String IMAGE_FILES_TEXT = "image files text";
 	public static final String SAVE_IMAGE_TOOLIP_TEXT = "save image tooltip text";
+	public static final String YOUR_LEFT_TEXT = "your left text";
+	public static final String YOUR_RIGHT_TEXT = "your right text";
+	public static final String PRESETS_TEXT = "preset text";
+	public static final String CUSTOM_TEXT = "custom text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -66,6 +70,7 @@ public class XMLIdentifier
 	public static final String ACTIVITY_LABEL = "activity label";
 	public static final String RECENT_MEDICATION_LABEL = "recent medication label";
 	public static final String COMMENTS_LABEL = "comments label";
+	public static final String YOUR_MOST_PAINFUL_AREA_LABEL = "your most painful area label";
 	
 	//Default Activities
 	public static final String DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY = "default activities physical activity";

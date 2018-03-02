@@ -72,6 +72,7 @@ public class ImageConstants
 	public static final URL PAIN_LOCATION_EYES_AND_FOREHEAD = ImageConstants.class.getResource("/pain_location/4.png");
 	public static final URL PAIN_LOCATION_HEAD_FRONT = ImageConstants.class.getResource("/pain_location/5.png");
 	public static final URL PAIN_LOCATION_HEAD_BACK = ImageConstants.class.getResource("/pain_location/6.png");
+	public static final URL PAIN_LOCATION_CUSTOM = ImageConstants.class.getResource("/pain_location/tap-nojudul.png");
 	
 	//Supporters
 	public static final URL FKUI = ImageConstants.class.getResource("/logo_icon/logo-fkui.png");

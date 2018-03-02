@@ -1,6 +1,7 @@
 package diary.gui.EntryLog;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import diary.constants.Constants;
 import diary.gui.ImageTextPanel;
+import diary.gui.MainFrame;
+import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 
 public class PainLocationPresetSelectionPanel extends JPanel implements ActionListener
@@ -27,9 +30,9 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	 * 
 	 */
 	private static final long serialVersionUID = 4086464692168288860L;
-	
 	private List<JButton> buttons;
 	private String selectedPos;
+	private Border defaultBorder;
 	
 	//Constructors
 	public PainLocationPresetSelectionPanel()
@@ -57,10 +60,13 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		{
 			for (Map.Entry<URL, String> subEntry : entry.getValue().entrySet())
 			{
-				ImageTextPanel imagePanel = new ImageTextPanel(ImageManager.getImageIcon(subEntry.getKey()), entry.getKey(), 20);
+				ImageIcon image = ImageManager.getImageIcon(subEntry.getKey());
+				ImageTextPanel imagePanel = new ImageTextPanel(image, entry.getKey(), Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 10)));
 				JButton button = new JButton();
 				button.add(imagePanel);
 				button.setActionCommand(subEntry.getValue());
+				button.addActionListener(this);
+				this.defaultBorder = button.getBorder();
 				this.buttons.add(button);
 			}
 		}
@@ -69,12 +75,12 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	{
 		for (JButton button : this.buttons)
 		{
-			button.setBorder(null);
+			button.setBorder(this.defaultBorder);
 		}
 	}
 	private void setMarked(JButton button, boolean marked)
 	{
-		button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 20));
+		button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 	}
 	public String getSelectedPosition()
 	{
@@ -85,6 +91,10 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		for (JButton button : this.buttons)
 		{
 			button.setEnabled(enable);
+			for(Component component : button.getComponents())
+			{
+				component.setEnabled(enable);
+			}
 		}
 	}
 	public void setSelected(String painLocationConstant)		//Parameter is String from PainLocationConstants
@@ -100,20 +110,24 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		}
 	}
 	
+	//Overriden Methods
+	@Override
+	public void setEnabled(boolean enabled)
+	{
+		super.setEnabled(enabled);
+		
+		this.enableButtons(enabled);
+		if (!enabled)
+		{
+			this.unmarkAllButtons();
+		}
+	}
+	
 	//Interfaces
 	public void actionPerformed(ActionEvent e)
 	{
 		this.selectedPos = e.getActionCommand();
 		this.unmarkAllButtons();
 		this.setMarked((JButton)e.getSource(), true);
-	}
-	
-	public static void main(String[] args)
-	{
-		JFrame frame = new JFrame();
-		frame.add(new JScrollPane(new PainLocationPresetSelectionPanel()));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500, 300);
-		frame.setVisible(true);
 	}
 }

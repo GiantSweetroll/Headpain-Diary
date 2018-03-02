@@ -31,6 +31,7 @@
      <text identifier="duration unit seconds text">Seconds</text>
      <text identifier="duration unit minutes text">Minutes</text>
      <text identifier="duration unit hours text">Hours</text>
+     <text identifier="your most painful area label">Your Most Painful Area</text>
      <text identifier="default activities sunlight">Sunlight</text>
      <text identifier="default activities improper diet sleep">Improper Diet/Sleep Routine</text>
      <text identifier="default activities physical activity">Physical Activity</text>
@@ -120,6 +121,10 @@
      <text identifier="other text">Other</text>
      <text identifier="image files text">Image Files</text>
      <text identifier="save image tooltip text">Save as Image</text>
+     <text identifier="your left text">Your Left</text>
+     <text identifier="your right text">Your Right</text>
+     <text identifier="preset text">Presets</text>
+     <text identifier="custom text">Custom</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category pain vs date text">Pain vs Date</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>

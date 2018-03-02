@@ -47,6 +47,7 @@ public final class Constants
 	public static final Color COLOR_MAIN_MENU_BUTTONS = new Color(23, 74, 211);
 	public static final Color COLOR_MAIN_MENU_BACKGROUND = new Color(0, 187, 212);
 	public static final Color COLOR_TRANSPARENT = new Color (0, 0, 0, 0);
+	public static final Color COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT = new Color (16, 255, 22, 150);
 	
 	//Fonts
 	private static final String FONT_TYPE_GENERAL = "century gothic";

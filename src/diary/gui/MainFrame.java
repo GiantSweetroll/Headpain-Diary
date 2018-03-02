@@ -57,7 +57,7 @@ public class MainFrame
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
-		System.out.println(frame.getSize());
+	//	System.out.println(frame.getSize());
 	}
 	/**
 	 * Change the active panel of the frame.

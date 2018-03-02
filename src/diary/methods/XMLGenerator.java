@@ -89,6 +89,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_SECONDS_TEXT, "Seconds");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_MINUTES_TEXT, "Minutes");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_HOURS_TEXT, "Hours");
+		appendComponentToMap(doc, map, XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL, "Your Most Painful Area");
 		
 		//Default Activities
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT, "Sunlight");
@@ -197,6 +198,10 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.OTHER_TEXT, "Other");
 		appendComponentToMap(doc, map, XMLIdentifier.IMAGE_FILES_TEXT, "Image Files");
 		appendComponentToMap(doc, map, XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT, "Save as Image");
+		appendComponentToMap(doc, map, XMLIdentifier.YOUR_LEFT_TEXT, "Your Left");
+		appendComponentToMap(doc, map, XMLIdentifier.YOUR_RIGHT_TEXT, "Your Right");
+		appendComponentToMap(doc, map, XMLIdentifier.PRESETS_TEXT, "Presets");
+		appendComponentToMap(doc, map, XMLIdentifier.CUSTOM_TEXT, "Custom");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

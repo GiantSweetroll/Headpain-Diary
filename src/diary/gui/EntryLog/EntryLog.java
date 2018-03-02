@@ -54,26 +54,24 @@ public class EntryLog extends JPanel implements ActionListener
 	
 	private JPanel panelTitle;
 	private JPanel panelCenter;
-//	private JScrollPane panelNyeriTypes;
 	private JPanel panelBelow;
 	private JPanel panelBelowLeft, panelBelowRight;
 	
 	private JScrollPane scrollCenter, scrollComments;
 	
-	private JLabel labTitle, labDate, labStartTime/*, labNyeriAmount*/, labActivity, labRecentMedication, labComments, labPainKind, labIntensity, labIntensityDesc, labDuration;
+	private JLabel labTitle, labDate, labStartTime, labActivity, labRecentMedication, labComments, labPainKind, labIntensity, labIntensityDesc, labDuration;
 	
-	private PainLocationPresetSelectionPanel presetPanel;
+	private PainLocationSelectionPanel painLocation;
 	private DatePanel panelDate;
 	private TimePanel panelTime;
 	private ActivePatientPanel activePatientPanel;
 	private HistoryPanel historyRecentMedication;
 	
-//	private JFormattedTextField tfNyeriAmount;
 	private JFormattedTextField tfIntensity, tfDuration;
 	private JTextField tfActivity, tfPainKind;
 	private JComboBox<String> comboActivity, comboPainKind, comboDurationUnit;
 	private JTextArea taComments;
-	private JButton butBack, butFinish/*, butConfirm*/;
+	private JButton butBack, butFinish;
 		
 	private GridBagConstraints c;
 	
@@ -150,14 +148,14 @@ public class EntryLog extends JPanel implements ActionListener
 		this.panelDate = new DatePanel(true);
 		this.labStartTime = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
 		this.panelTime = new TimePanel(true);
-		this.presetPanel = new PainLocationPresetSelectionPanel();
-		this.labPainKind = new JLabel(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), SwingConstants.RIGHT);
+		this.painLocation = new PainLocationSelectionPanel();
+		this.labPainKind = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), SwingConstants.RIGHT);
 		this.comboPainKind = new JComboBox<String>(Constants.DEFAULT_PAIN_KIND);
 		this.tfPainKind = new JTextField(10);
-		this.labIntensity = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), SwingConstants.RIGHT);
+		this.labIntensity = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), SwingConstants.RIGHT);
 		this.tfIntensity = new JFormattedTextField(Constants.AMOUNT_FORMAT);
 		this.labIntensityDesc = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
-		this.labDuration = new JLabel(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
+		this.labDuration = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
 		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
 		this.comboDurationUnit = new JComboBox<String>(Constants.DURATION_UNITS);
 		this.labActivity = new JLabel(Constants.REQUIRED_IDENTIFIER + Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL), SwingConstants.RIGHT);
@@ -207,7 +205,7 @@ public class EntryLog extends JPanel implements ActionListener
 		this.panelCenter.add(this.panelTime, c);			//Start Time Panel
 		Gbm.newGridLine(c);
 		c.gridwidth = 1000;
-		this.panelCenter.add(this.presetPanel, c);			//Preset Locations
+		this.panelCenter.add(this.painLocation, c);			//Pain Location Selection
 		Gbm.newGridLine(c);
 		c.gridwidth = 1;
 		this.panelCenter.add(this.labPainKind, c);			//Pain Kind

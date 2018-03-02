@@ -1,6 +1,7 @@
 package diary.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -68,5 +69,20 @@ public class ImageTextPanel extends JPanel
 		//Add to panel
 		this.add(this.panel);
 		this.add(this.label);
+	}
+	
+	//Overriden Methods
+	@Override
+	public void setEnabled(boolean enabled)
+	{
+		super.setEnabled(enabled);
+		
+		this.panel.setEnabled(enabled);
+		this.label.setEnabled(enabled);
+		
+		for (Component component : this.panel.getComponents())
+		{
+			component.setEnabled(enabled);
+		}
 	}
 }
