@@ -2,7 +2,7 @@ package diary.gui.EntryLog;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -31,7 +31,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	 */
 	private static final long serialVersionUID = 4086464692168288860L;
 	private List<JButton> buttons;
-	private String selectedPos;
+	private List<String> selectedPos;
 	private Border defaultBorder;
 	
 	//Constructors
@@ -39,9 +39,10 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	{
 		//Initialization
 		this.initButtons();
+		this.selectedPos = new ArrayList<String>();
 		
 		//Properties
-		this.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+		this.setLayout(new GridLayout(1,0, 10, 10));
 		this.setOpaque(false);
 		
 		//Add to panel
@@ -82,9 +83,20 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	{
 		button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 	}
-	public String getSelectedPosition()
+	public List<String> getSelectedPosition()
 	{
 		return this.selectedPos;
+	}
+	public boolean isMarked(JButton button)
+	{
+		if (button.getBorder() == this.defaultBorder)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 	public void enableButtons(boolean enable)
 	{
@@ -104,9 +116,16 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 			if (button.getActionCommand().equals(painLocationConstant))
 			{
 				this.setMarked(button, true);
-				this.selectedPos = painLocationConstant;
+				this.appendLocation(painLocationConstant);
 				break;
 			}
+		}
+	}
+	public void appendLocation(String painLocationConstant)		//Parameter is String from PainLocationConstants
+	{
+		if (!Methods.elementExists(this.selectedPos, painLocationConstant, false));
+		{
+			this.selectedPos.add(painLocationConstant);
 		}
 	}
 	
@@ -126,8 +145,16 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	//Interfaces
 	public void actionPerformed(ActionEvent e)
 	{
-		this.selectedPos = e.getActionCommand();
-		this.unmarkAllButtons();
-		this.setMarked((JButton)e.getSource(), true);
+		JButton button = (JButton)e.getSource();
+		if (this.isMarked(button))
+		{
+			this.setMarked(button, false);
+			Methods.deleteElement(selectedPos, e.getActionCommand(), false);
+		}
+		else
+		{
+			this.setMarked(button, true);
+			this.appendLocation(e.getActionCommand());
+		}
 	}
 }

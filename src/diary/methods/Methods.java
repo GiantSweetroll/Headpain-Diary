@@ -526,4 +526,51 @@ public class Methods
 	{
 		return (int)GNumbers.round((((float)source)/100f)* ((float)percentage), 0);
 	}
+	
+	public static boolean elementExists(List<String> list, String element, boolean ignoreCase)
+	{
+		for (String item : list)
+		{
+			if (ignoreCase)
+			{
+				if (item.equalsIgnoreCase(element))
+				{
+					return true;
+				}
+			}
+			else
+			{
+				if (item.equals(element))
+				{
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	public static void deleteElement(List<String> list, String element, boolean ignoreCase)
+	{
+		for (int i=0; i<list.size(); i++)
+		{
+			if (ignoreCase)
+			{
+				if (list.get(i).equalsIgnoreCase(element))
+				{
+					list.remove(i);
+					i=-1;
+					continue;
+				}
+			}
+			else
+			{
+				if (list.get(i).equals(element))
+				{
+					list.remove(i);
+					i=-1;
+					continue;
+				}
+			}
+		}
+	}
 }

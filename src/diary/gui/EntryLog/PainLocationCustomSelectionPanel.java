@@ -31,6 +31,7 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 	
 	//Constants
 	private final int BORDER_THICKNESS = 3;
+	public static final String CUSTOM_PREFIX = "custom";
 	
 	//Constructors
 	public PainLocationCustomSelectionPanel(PainLocationCustomSelection image)

@@ -61,6 +61,19 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 	}
 	
 	//Methods
+	/*
+	public String getSelectedPosition()
+	{
+		if (this.radPreset.isSelected())
+		{
+			return this.preset.getSelectedPosition();
+		}
+		else
+		{
+		
+		}
+	}
+	*/
 	
 	//Interfaces
 	@Override
