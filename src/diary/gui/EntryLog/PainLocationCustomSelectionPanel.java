@@ -98,7 +98,7 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 		List<Point> coordinates = new ArrayList<Point>();
 		for (CustomPainLocation pos : positions)
 		{
-			coordinates.add(pos.getLocationCoordinate());
+			coordinates.add(this.image.convertPointFromOriginalImage(pos.getLocationCoordinate()));
 		}
 		
 		this.image.setCoordinates(coordinates, false);

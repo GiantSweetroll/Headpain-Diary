@@ -120,11 +120,11 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT),
-														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE),
+									//					Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE),
 									//					Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE),
-														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)};
+									/*					Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)*/};
 	
-	public static final String[] TABLE_FILTER_OPTIONS = {Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT),
+	public static final String[] TABLE_FILTER_OPTIONS = {//Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT),
@@ -135,7 +135,7 @@ public final class Constants
 	public static final String[] ENTRY_TABLE_HEADERS = {Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_SELECT_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_DATE_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT),
-													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT),
+					//								Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_POSITIONS_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_KINDS_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_INTENSITIES_TEXT),

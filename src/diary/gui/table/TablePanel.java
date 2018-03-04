@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.data.PainEntryData;
+import diary.methods.Methods;
 import diary.methods.PainDataOperation;
 
 public class TablePanel extends JPanel
@@ -50,17 +51,17 @@ public class TablePanel extends JPanel
 			index++;
 			arr[i][index]= list.get(i).getFullTime();		//Time
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.PAIN_AMOUNT);		//Pain Amount
-			index++;
+	//		arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.PAIN_AMOUNT);		//Pain Amount
+	//		index++;
 			arr[i][index]= list.get(i).getPainPositionsAsString();		//Pain Positions
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.PAIN_KIND);			//Pain Kinds
+			arr[i][index]= Methods.convertPainKindIDToLanguage(list.get(i).getDataMap().get(PainDataIdentifier.PAIN_KIND).toString());			//Pain Kind
 			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY);		//Intensity
 			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.DURATION);			//Durations
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY);		//Activity
+			arr[i][index]= Methods.convertActivityIDToLanguage(list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString());		//Activity
 			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY_DETAILS);//Activity Details
 			index++;

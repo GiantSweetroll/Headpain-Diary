@@ -15,6 +15,6 @@ public class PainEntryDataVoid extends PainEntryData
 		super.getDataMap().put(PainDataIdentifier.DATE_DAY, day);
 		super.getDataMap().put(PainDataIdentifier.DATE_MONTH, month);
 		super.getDataMap().put(PainDataIdentifier.DATE_YEAR, year);
-		super.getDataMap().put(PainDataIdentifier.PAIN_AMOUNT, "0");
+//		super.getDataMap().put(PainDataIdentifier.PAIN_AMOUNT, "0");
 	}
 }

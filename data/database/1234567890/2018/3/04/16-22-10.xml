@@ -3,14 +3,13 @@
      <date_day>04</date_day>
      <date_month>3</date_month>
      <date_year>2018</date_year>
-     <time_hour>12</time_hour>
-     <time_minute>06</time_minute>
-     <time_seconds>11</time_seconds>
-     <pain_location_preset pain_loc_id="0">face left and head</pain_location_preset>
-     <pain_location_preset pain_loc_id="1">head back</pain_location_preset>
+     <time_hour>16</time_hour>
+     <time_minute>22</time_minute>
+     <time_seconds>10</time_seconds>
+     <pain_location_custom pain_loc_id="0">190,305</pain_location_custom>
      <pain_kind>default pain kind throbbing</pain_kind>
-     <intensity>4</intensity>
-     <duration>5</duration>
+     <intensity>5</intensity>
+     <duration>12</duration>
      <activity>default activities physical activity</activity>
      <activity_details/>
      <recent_medication>Panadol + Pil</recent_medication>

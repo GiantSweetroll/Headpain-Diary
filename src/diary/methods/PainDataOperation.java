@@ -100,6 +100,18 @@ public class PainDataOperation
 		return map;
 	}
 	
+	public static LinkedHashMap<String, Float> getDurationVSTime(List<PainEntryData> list)
+	{
+		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
+		
+		for (PainEntryData entry : list)
+		{
+			map.put(entry.getFullTimeAndDate(), Float.parseFloat(entry.getDataMap().get(PainDataIdentifier.DURATION).toString()));
+		}
+		
+		return map;
+	}
+	
 	/*
 	public static LinkedHashMap<String, Float> getDurationAverageVSTime(List<PainEntryData> list)
 	{

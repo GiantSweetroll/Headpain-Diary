@@ -38,7 +38,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 		this.radCustom = new JRadioButton(Methods.getLanguageText(XMLIdentifier.CUSTOM_TEXT));
 		this.radPreset = new JRadioButton(Methods.getLanguageText(XMLIdentifier.PRESETS_TEXT));
 		this.preset = new PainLocationPresetSelectionPanel();
-		this.custom = new PainLocationCustomSelectionPanel(new PainLocationCustomSelection());
+		this.custom = new PainLocationCustomSelectionPanel(new PainLocationCustomSelection(20));
 		this.group = new ButtonGroup();
 		
 		//Properties
@@ -97,6 +97,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 	
 		if (presetLocations.size() == 0)
 		{
+			this.radCustom.setSelected(true);
 			List<CustomPainLocation> list = new ArrayList<CustomPainLocation>();
 			for (String location : customLocations)
 			{
@@ -110,6 +111,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 		}
 		else
 		{
+			this.radPreset.setSelected(true);
 			for (String location : presetLocations)
 			{
 				this.preset.setSelected(location);

@@ -222,11 +222,11 @@ public class GraphPanel extends JPanel implements ActionListener
 			list = PainDataOperation.insertEmptyData(list);
 		}
 		
-		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
+	/*	if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{
-	//		this.graph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
+		else */ if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
 		}
@@ -236,9 +236,9 @@ public class GraphPanel extends JPanel implements ActionListener
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
 		{
-	//		this.graph = new LineGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getDurationVSTime(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+/*		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
 		{
 //			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
 		}
@@ -249,7 +249,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfActivity(list));
-		}
+		}			*/
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.graph.displayDataPoint(this.panelGraphSettings.isDisplayDataPoints());
 		this.initGraphScroll(graph);
@@ -271,23 +271,23 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
 		
-		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
+	/*	if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{
 	//		this.graph = new BarGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
+		else */ if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT)))
 		{
-	//		this.graph = new BarGraphPanel(PainDataOperation.getIntensityAverageVSTime(list));
+			this.graph = new BarGraphPanel(PainDataOperation.getIntensityVSTime(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
 		{
-	//		this.graph = new BarGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
+			this.graph = new BarGraphPanel(PainDataOperation.getDurationVSTime(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+	/*	else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
 		{
 	//		this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
 		}
@@ -298,7 +298,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfActivity(list));
-		}
+		}		*/
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.initGraphScroll(graph);
 		

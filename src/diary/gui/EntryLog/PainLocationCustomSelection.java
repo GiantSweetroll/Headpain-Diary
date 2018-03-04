@@ -1,6 +1,7 @@
 package diary.gui.EntryLog;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -31,18 +32,24 @@ public class PainLocationCustomSelection extends JLabel implements MouseListener
 	private static final long serialVersionUID = -6306460492486489780L;
 	
 	private List<Point> coordinates;
+	private ImageIcon icon;
+	private Dimension originalImageSize;
 	
 	//Constants
 	private final int COORDINATE_POINT_RADIUS = 6;
-	public final int SCALE_FROM_ORIGINAL = 20;
+	
+	//Conditionals
+	private int imageScale;
 	
 	//Constructors
-	public PainLocationCustomSelection()
+	public PainLocationCustomSelection(int scaleFromOriginal)
 	{
 		//Initialization
-		ImageIcon icon = ImageManager.getImageIcon(ImageConstants.PAIN_LOCATION_CUSTOM);
+		this.imageScale = scaleFromOriginal;
+		icon = ImageManager.getImageIcon(ImageConstants.PAIN_LOCATION_CUSTOM);
+		this.originalImageSize = new Dimension(icon.getIconWidth(), icon.getIconHeight());
 		this.coordinates = new ArrayList<Point>();
-		this.setIcon(Methods.resizeImageByRatio(icon, Methods.getPercentage(icon, Methods.getPercentageValue(MainFrame.frame.getWidth(), SCALE_FROM_ORIGINAL))));
+		this.setIcon(Methods.resizeImageByRatio(icon, Methods.getPercentage(icon, Methods.getPercentageValue(MainFrame.frame.getWidth(), this.imageScale))));
 	
 		//Properties
 		this.addMouseListener(this);
@@ -56,8 +63,15 @@ public class PainLocationCustomSelection extends JLabel implements MouseListener
 	}
 	public Point convertPointToOriginalImage(Point point)
 	{
-		int x = (int)GNumbers.round((((float)point.x)*100f)/((float)this.SCALE_FROM_ORIGINAL), 0);
-		int y = (int)GNumbers.round((((float)point.y)*100f)/((float)this.SCALE_FROM_ORIGINAL), 0);
+		int x = (int)GNumbers.round((((float)point.x)*((float)originalImageSize.getWidth()))/((float)this.icon.getIconWidth()), 0);
+		int y = (int)GNumbers.round((((float)point.y)*((float)originalImageSize.getHeight()))/((float)this.icon.getIconHeight()), 0);
+		
+		return new Point(x, y);
+	}
+	public Point convertPointFromOriginalImage(Point point)
+	{
+		int x = (int)GNumbers.round((((float)point.x)*((float)this.icon.getIconWidth()))/((float)originalImageSize.getWidth()), 0);
+		int y = (int)GNumbers.round((((float)point.y)*((float)this.icon.getIconHeight()))/((float)originalImageSize.getHeight()), 0);
 		
 		return new Point(x, y);
 	}

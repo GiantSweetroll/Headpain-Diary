@@ -332,7 +332,7 @@ public class EntryLog extends JPanel implements ActionListener
 				{
 					this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_LOCATION_PRESET, locations.get(i), PainDataIdentifier.PAIN_LOCATION_ID, Integer.toString(i));
 				}
-				this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_LOCATION_CUSTOM, "", PainDataIdentifier.PAIN_LOCATION_ID, "0");
+	//			this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_LOCATION_CUSTOM, "", PainDataIdentifier.PAIN_LOCATION_ID, "0");
 			}
 			else
 			{
@@ -340,7 +340,7 @@ public class EntryLog extends JPanel implements ActionListener
 				{
 					this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_LOCATION_CUSTOM, locations.get(i), PainDataIdentifier.PAIN_LOCATION_ID, Integer.toString(i));
 				}
-				this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_LOCATION_PRESET, "", PainDataIdentifier.PAIN_LOCATION_ID, "0");
+	//			this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_LOCATION_PRESET, "", PainDataIdentifier.PAIN_LOCATION_ID, "0");
 			}
 			
 			//Other
@@ -456,7 +456,7 @@ public class EntryLog extends JPanel implements ActionListener
 		
 		this.painLocation.setSelectedPosition(entry);
 		
-		String painKind = entry.getDataMap().get(PainDataIdentifier.PAIN_KIND).toString();
+		String painKind = Methods.convertPainKindIDToLanguage(entry.getDataMap().get(PainDataIdentifier.PAIN_KIND).toString());
 		if (Methods.isPartOfDefaultPainKind(painKind))
 		{
 			this.comboPainKind.setSelectedItem(painKind);
@@ -486,8 +486,9 @@ public class EntryLog extends JPanel implements ActionListener
 		}
 		this.tfDuration.setText(duration);
 		this.comboDurationUnit.setSelectedItem(durationUnit);
+		//Duration Handling End
 		
-		String activity = entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
+		String activity = Methods.convertActivityIDToLanguage(entry.getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
 		if (Methods.isPartOfDefaultActivity(activity))
 		{
 			this.comboActivity.setSelectedItem(activity);
@@ -502,6 +503,7 @@ public class EntryLog extends JPanel implements ActionListener
 			this.tfActivity.setText(entry.getDataMap().get(PainDataIdentifier.ACTIVITY_DETAILS).toString());
 		}
 		catch(NullPointerException ex) {}
+		this.historyRecentMedication.setActiveItem(entry.getDataMap().get(PainDataIdentifier.RECENT_MEDICATION).toString());
 		this.taComments.setText(entry.getDataMap().get(PainDataIdentifier.COMMENTS).toString());
 	}
 	
