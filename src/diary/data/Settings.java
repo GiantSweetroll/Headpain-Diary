@@ -1,4 +1,4 @@
-package diary;
+package diary.data;
 
 import java.io.File;
 import java.util.LinkedHashMap;

@@ -6,9 +6,9 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
+import diary.data.PainEntryData;
 import diary.methods.PainDataOperation;
 
 public class TablePanel extends JPanel
@@ -54,11 +54,11 @@ public class TablePanel extends JPanel
 			index++;
 			arr[i][index]= list.get(i).getPainPositionsAsString();		//Pain Positions
 			index++;
-			arr[i][index]= list.get(i).getPainKindAsString();			//Pain Kinds
+			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.PAIN_KIND);			//Pain Kinds
 			index++;
-			arr[i][index]= list.get(i).getIntensitiesAsString();		//Intensities
+			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY);		//Intensity
 			index++;
-			arr[i][index]= list.get(i).getDurationsAsString();			//Durations
+			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.DURATION);			//Durations
 			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY);		//Activity
 			index++;

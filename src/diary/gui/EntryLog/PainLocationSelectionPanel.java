@@ -3,6 +3,8 @@ package diary.gui.EntryLog;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -10,7 +12,10 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.data.CustomPainLocation;
+import diary.data.PainEntryData;
 import diary.methods.Methods;
 
 public class PainLocationSelectionPanel extends JPanel implements ItemListener
@@ -61,8 +66,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 	}
 	
 	//Methods
-	/*
-	public String getSelectedPosition()
+	public List<String> getSelectedPositions()
 	{
 		if (this.radPreset.isSelected())
 		{
@@ -70,10 +74,48 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 		}
 		else
 		{
-		
+			List<String> list = new ArrayList<String>();
+			for (CustomPainLocation loc : this.custom.getLocations())
+			{
+				list.add(loc.getLocationAsString());
+			}
+			return list;
 		}
 	}
-	*/
+	public boolean presetLocationSelected()
+	{
+		return this.radPreset.isSelected();
+	}
+	public boolean customLocationSelected()
+	{
+		return this.radCustom.isSelected();
+	}
+	public void setSelectedPosition(PainEntryData entry)
+	{
+		List<String> presetLocations = (List<String>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATION_PRESET);
+		List<String> customLocations = (List<String>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATION_CUSTOM);
+	
+		if (presetLocations.size() == 0)
+		{
+			List<CustomPainLocation> list = new ArrayList<CustomPainLocation>();
+			for (String location : customLocations)
+			{
+				try
+				{
+					list.add(new CustomPainLocation(location));
+				}
+				catch(Exception ex) {}
+			}
+			this.custom.setLocations(list);
+		}
+		else
+		{
+			for (String location : presetLocations)
+			{
+				this.preset.setSelected(location);
+			}
+		}
+	}
 	
 	//Interfaces
 	@Override

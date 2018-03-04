@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import diary.PainEntryData;
-import diary.PainEntryDataVoid;
 import diary.constants.DateConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.data.PainEntryData;
+import diary.data.PainEntryDataVoid;
 
 public class PainDataOperation 
 {	
@@ -36,6 +36,7 @@ public class PainDataOperation
 		return map;
 	}
 	
+	/*
 	public static LinkedHashMap<String, Float> getAmountOfHeadPainsVSDate(List<PainEntryData> list)
 	{
 		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
@@ -54,7 +55,10 @@ public class PainDataOperation
 		
 		return map;
 	}
+	*/
 	
+	/*
+	@Deprecated
 	public static LinkedHashMap<String, Float> getIntensityAverageVSTime(List<PainEntryData> list)
 	{
 		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
@@ -83,7 +87,20 @@ public class PainDataOperation
 		
 		return map;
 	}
+	*/
+	public static LinkedHashMap<String, Float> getIntensityVSTime(List<PainEntryData> list)
+	{
+		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
+		
+		for (PainEntryData entry : list)
+		{
+			map.put(entry.getFullTimeAndDate(), Float.parseFloat(entry.getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+		}
+		
+		return map;
+	}
 	
+	/*
 	public static LinkedHashMap<String, Float> getDurationAverageVSTime(List<PainEntryData> list)
 	{
 		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
@@ -112,7 +129,9 @@ public class PainDataOperation
 		
 		return map;
 	}
+	*/
 
+	/*
 	public static LinkedHashMap<String, Float> getNumberOfDifferentPainKind(List<PainEntryData> list)
 	{
 		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
@@ -143,6 +162,7 @@ public class PainDataOperation
 		return map;
 	}
 	
+	@Deprecated
 	public static LinkedHashMap<String, Float> getNumberOfDifferentPainLocations(List<PainEntryData> list)
 	{
 		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
@@ -172,6 +192,7 @@ public class PainDataOperation
 		
 		return map;
 	}
+	*/
 	
 	public static LinkedHashMap<String, Float> getAmountOfActivity(List<PainEntryData> list)
 	{
@@ -234,7 +255,7 @@ public class PainDataOperation
 				}
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT))		//If filtered by pain kinds
 				{
-					String painKinds = list.get(i).getPainKindAsString();
+					String painKinds = list.get(i).getDataMap().get(PainDataIdentifier.PAIN_KIND).toString();
 					for (int a=0; a<painKinds.length(); a++)
 					{
 						for (int b=a+1; b<=painKinds.length(); b++)
@@ -251,7 +272,8 @@ public class PainDataOperation
 				}
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT))		//If filtered by intensities
 				{
-					String intensities = list.get(i).getIntensitiesAsString();
+		//			String intensities = list.get(i).getIntensitiesAsString();
+					String intensities = list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString();
 					for (int a=0; a<intensities.length(); a++)
 					{
 						for (int b=a+1; b<=intensities.length(); b++)
@@ -268,7 +290,7 @@ public class PainDataOperation
 				}
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT))		//If filtered by durations
 				{
-					String durations = list.get(i).getDurationsAsString();
+					String durations = list.get(i).getDataMap().get(PainDataIdentifier.DURATION).toString();
 					for (int a=0; a<durations.length(); a++)
 					{
 						for (int b=a+1; b<=durations.length(); b++)

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>04</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>12</time_hour>
+     <time_minute>04</time_minute>
+     <time_seconds>04</time_seconds>
+     <pain_location_custom pain_loc_id="0">235,205</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">575,520</pain_location_custom>
+     <pain_location_custom pain_loc_id="2">195,500</pain_location_custom>
+     <pain_location_custom pain_loc_id="3">190,505</pain_location_custom>
+     <pain_location_custom pain_loc_id="4">185,510</pain_location_custom>
+     <pain_location_custom pain_loc_id="5">180,520</pain_location_custom>
+     <pain_location_custom pain_loc_id="6">175,530</pain_location_custom>
+     <pain_location_custom pain_loc_id="7">170,535</pain_location_custom>
+     <pain_location_custom pain_loc_id="8">170,545</pain_location_custom>
+     <pain_location_custom pain_loc_id="9">160,555</pain_location_custom>
+     <pain_location_custom pain_loc_id="10">155,565</pain_location_custom>
+     <pain_location_custom pain_loc_id="11">155,575</pain_location_custom>
+     <pain_location_custom pain_loc_id="12">150,575</pain_location_custom>
+     <pain_location_preset pain_loc_id="0"/>
+     <pain_kind>default pain kind throbbing</pain_kind>
+     <intensity>4</intensity>
+     <duration>3</duration>
+     <activity>default activities physical activity</activity>
+     <activity_details/>
+     <recent_medication>Panadol</recent_medication>
+     <comments/>
+</Entry>

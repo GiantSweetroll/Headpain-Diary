@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import diary.constants.XMLIdentifier;
+import diary.data.CustomPainLocation;
 import diary.methods.Methods;
 
 public class PainLocationCustomSelectionPanel extends JPanel implements ActionListener
@@ -78,6 +82,26 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 		//Add to panel
 		this.panelDirection.add(this.labLeft);
 		this.panelDirection.add(this.labRight);
+	}
+	public List<CustomPainLocation> getLocations()
+	{
+		List<CustomPainLocation> list = new ArrayList<CustomPainLocation>();
+		for (Point point : this.image.getCoordinates())
+		{
+			list.add(new CustomPainLocation(this.image.convertPointToOriginalImage(point)));
+		}
+		
+		return list;
+	}
+	public void setLocations(List<CustomPainLocation> positions)
+	{
+		List<Point> coordinates = new ArrayList<Point>();
+		for (CustomPainLocation pos : positions)
+		{
+			coordinates.add(pos.getLocationCoordinate());
+		}
+		
+		this.image.setCoordinates(coordinates, false);
 	}
 	
 	//Overriden Methods

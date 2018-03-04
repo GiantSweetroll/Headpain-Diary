@@ -20,6 +20,8 @@ public final class PainDataIdentifier
 	public static final String PAIN_LOCATIONS = "pain_locations";
 	public static final String PAIN_LOCATION = "pain_location";
 	public static final String PAIN_LOCATION_ID = "pain_loc_id";
+	public static final String PAIN_LOCATION_PRESET = "pain_location_preset";
+	public static final String PAIN_LOCATION_CUSTOM = "pain_location_custom";
 	
 	//Date
 	public static final String DATE_DAY = "date_day";

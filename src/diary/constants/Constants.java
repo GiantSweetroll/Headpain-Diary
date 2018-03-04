@@ -47,7 +47,7 @@ public final class Constants
 	public static final Color COLOR_MAIN_MENU_BUTTONS = new Color(23, 74, 211);
 	public static final Color COLOR_MAIN_MENU_BACKGROUND = new Color(0, 187, 212);
 	public static final Color COLOR_TRANSPARENT = new Color (0, 0, 0, 0);
-	public static final Color COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT = new Color (16, 255, 22, 150);
+	public static final Color COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT = new Color (16, 255, 22, 60);
 	
 	//Fonts
 	private static final String FONT_TYPE_GENERAL = "century gothic";
@@ -116,7 +116,7 @@ public final class Constants
 	}
 
 	//Arrays
-	public static final String[] GRAPH_CATEGORIES = {Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT),
+	public static final String[] GRAPH_CATEGORIES = {//Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT),

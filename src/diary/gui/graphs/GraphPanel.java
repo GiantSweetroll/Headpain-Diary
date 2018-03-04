@@ -18,10 +18,10 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import diary.ImagePanel;
-import diary.PainEntryData;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
+import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
@@ -224,7 +224,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{
-			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
+	//		this.graph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
@@ -232,19 +232,19 @@ public class GraphPanel extends JPanel implements ActionListener
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT)))
 		{
-			this.graph = new LineGraphPanel(PainDataOperation.getIntensityAverageVSTime(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
 		{
-			this.graph = new LineGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
+	//		this.graph = new LineGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
 		{
-			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+//			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
 		{
-			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainLocations(list));
+//			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainLocations(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
 		{
@@ -273,7 +273,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{
-			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
+	//		this.graph = new BarGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
@@ -281,19 +281,19 @@ public class GraphPanel extends JPanel implements ActionListener
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT)))
 		{
-			this.graph = new BarGraphPanel(PainDataOperation.getIntensityAverageVSTime(list));
+	//		this.graph = new BarGraphPanel(PainDataOperation.getIntensityAverageVSTime(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
 		{
-			this.graph = new BarGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
+	//		this.graph = new BarGraphPanel(PainDataOperation.getDurationAverageVSTime(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
 		{
-			this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+	//		this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
 		{
-			this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainLocations(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
 		{

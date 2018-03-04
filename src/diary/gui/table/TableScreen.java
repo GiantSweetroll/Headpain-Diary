@@ -25,12 +25,12 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import diary.ImagePanel;
-import diary.PainEntryData;
-import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.data.PainEntryData;
+import diary.data.Settings;
 import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;

@@ -19,13 +19,13 @@ import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
 import diary.ImagePanel;
-import diary.PainEntryData;
-import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.ImageConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
+import diary.data.PainEntryData;
+import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.gui.graphs.GraphPanel;
 import diary.gui.table.TableScreen;
@@ -571,6 +571,116 @@ public class Methods
 					continue;
 				}
 			}
+		}
+	}
+	
+	public static String convertPainKindLanguageToID(String text)
+	{
+		if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_PULSATING)))
+		{
+			return XMLIdentifier.DEFAULT_PAIN_KIND_PULSATING;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_RADIATING)))
+		{
+			return XMLIdentifier.DEFAULT_PAIN_KIND_RADIATING;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING)))
+		{
+			return XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND)))
+		{
+			return XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
+		{
+			return XMLIdentifier.OTHER_TEXT;
+		}
+		else
+		{
+			return "";
+		}
+	}
+	public static String convertPainKindIDToLanguage(String id)
+	{
+		if (id.equals(XMLIdentifier.DEFAULT_PAIN_KIND_PULSATING))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_PULSATING);
+		}
+		else if (id.equals(XMLIdentifier.DEFAULT_PAIN_KIND_RADIATING))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_RADIATING);
+		}
+		else if (id.equals(XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING);
+		}
+		else if (id.equals(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND);
+		}
+		else if (id.equals(XMLIdentifier.OTHER_TEXT))
+		{
+			return Methods.getLanguageText(XMLIdentifier.OTHER_TEXT);
+		}
+		else
+		{
+			return "";
+		}
+	}
+
+	public static String convertActivityLanguageToID(String text)
+	{
+		if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT)))
+		{
+			return XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP)))
+		{
+			return XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY)))
+		{
+			return XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR)))
+		{
+			return XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR;
+		}
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
+		{
+			return XMLIdentifier.OTHER_TEXT;
+		}
+		else
+		{
+			return "";
+		}
+	}
+	public static String convertActivityIDToLanguage(String id)
+	{
+		if (id.equals(XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT);
+		}
+		else if (id.equals(XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP);
+		}
+		else if (id.equals(XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY);
+		}
+		else if (id.equals(XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR))
+		{
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR);
+		}
+		else if (id.equals(XMLIdentifier.OTHER_TEXT))
+		{
+			return Methods.getLanguageText(XMLIdentifier.OTHER_TEXT);
+		}
+		else
+		{
+			return "";
 		}
 	}
 }

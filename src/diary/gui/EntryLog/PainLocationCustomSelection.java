@@ -8,6 +8,8 @@ import java.awt.PointerInfo;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -18,6 +20,7 @@ import diary.constants.ImageConstants;
 import diary.gui.MainFrame;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
+import giantsweetroll.numbers.GNumbers;
 
 public class PainLocationCustomSelection extends JLabel implements MouseListener, MouseMotionListener
 {
@@ -27,17 +30,19 @@ public class PainLocationCustomSelection extends JLabel implements MouseListener
 	 */
 	private static final long serialVersionUID = -6306460492486489780L;
 	
-	private Point coordinates;
+	private List<Point> coordinates;
 	
 	//Constants
 	private final int COORDINATE_POINT_RADIUS = 6;
+	public final int SCALE_FROM_ORIGINAL = 20;
 	
 	//Constructors
 	public PainLocationCustomSelection()
 	{
 		//Initialization
 		ImageIcon icon = ImageManager.getImageIcon(ImageConstants.PAIN_LOCATION_CUSTOM);
-		this.setIcon(Methods.resizeImageByRatio(icon, Methods.getPercentage(icon, Methods.getPercentageValue(MainFrame.frame.getWidth(), 20))));
+		this.coordinates = new ArrayList<Point>();
+		this.setIcon(Methods.resizeImageByRatio(icon, Methods.getPercentage(icon, Methods.getPercentageValue(MainFrame.frame.getWidth(), SCALE_FROM_ORIGINAL))));
 	
 		//Properties
 		this.addMouseListener(this);
@@ -45,13 +50,20 @@ public class PainLocationCustomSelection extends JLabel implements MouseListener
 	}
 	
 	//Methods
-	public Point getCoordinates()
+	public List<Point> getCoordinates()
 	{
 		return this.coordinates;
 	}
+	public Point convertPointToOriginalImage(Point point)
+	{
+		int x = (int)GNumbers.round((((float)point.x)*100f)/((float)this.SCALE_FROM_ORIGINAL), 0);
+		int y = (int)GNumbers.round((((float)point.y)*100f)/((float)this.SCALE_FROM_ORIGINAL), 0);
+		
+		return new Point(x, y);
+	}
 	public void resetCoordinates()
 	{
-		this.coordinates = null;
+		this.coordinates = new ArrayList<Point>();
 		this.repaint();
 	}
 	public void drawCoordinatePoint(Graphics g, Color color, Point coordinate)
@@ -59,24 +71,73 @@ public class PainLocationCustomSelection extends JLabel implements MouseListener
 		g.setColor(color);
 		g.fillOval(coordinate.x - this.COORDINATE_POINT_RADIUS, coordinate.y - this.COORDINATE_POINT_RADIUS, this.COORDINATE_POINT_RADIUS*2, this.COORDINATE_POINT_RADIUS*2);
 	}
-	public void setCoordinate(int x, int y)
+	public void setCoordinate(Point point)
 	{
-		this.coordinates.setLocation(x, y);
+		this.appendCoordinate(point);
+		this.repaint();
+	}
+	public void setCoordinates(List<Point> points, boolean addToExisting)
+	{
+		if (addToExisting)
+		{
+			this.appendCoordinate(points);
+		}
+		else
+		{
+			this.coordinates = points;
+		}
+		
 		this.repaint();
 	}
 	public void setCoordinate(MouseEvent e)
 	{
 		PointerInfo a = MouseInfo.getPointerInfo();
-		this.coordinates = new Point(a.getLocation());
-		SwingUtilities.convertPointFromScreen(this.coordinates, e.getComponent());
-		if (this.coordinates.x < 0 ||
-			this.coordinates.x > this.getWidth() ||
-			this.coordinates.y < 0 ||
-			this.coordinates.y > this.getHeight())
+		Point point = new Point(a.getLocation());
+		SwingUtilities.convertPointFromScreen(point, e.getComponent());
+		if (point.x < 0 ||
+			point.x > this.getWidth() ||
+			point.y < 0 ||
+			point.y > this.getHeight())
 		{
-			this.coordinates = null;
+			point = null;
 		}
+		
+		if (point != null)
+		{
+			this.appendCoordinate(point);
+		}
+		
 		this.repaint();
+	}
+	public void appendCoordinate(Point point)
+	{
+		for (Point pos : this.coordinates)		//Check for existing position
+		{
+			if (pos.x == point.x && pos.y == point.y)
+			{
+				break;		//If found, don't add
+			}
+		}
+		this.coordinates.add(point);
+	}
+	public void appendCoordinate(List<Point> points)
+	{
+		//Check for duplicates
+		for (int i=0; i<this.coordinates.size(); i++)
+		{
+			for (int a=0; a<points.size(); a++)
+			{
+				if (this.coordinates.get(i).x == points.get(a).x &&
+					this.coordinates.get(i).y == points.get(a).y)
+				{
+					points.remove(a);
+					a=-1;
+					continue;
+				}
+			}
+		}
+		
+		this.coordinates.addAll(points);
 	}
 	
 	//Overriden Methods
@@ -89,7 +150,10 @@ public class PainLocationCustomSelection extends JLabel implements MouseListener
 		{
 			try
 			{
-				this.drawCoordinatePoint(g, Constants.COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT, this.coordinates);
+				for (Point point : this.coordinates)
+				{
+					this.drawCoordinatePoint(g, Constants.COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT, point);
+				}
 			}
 			catch(NullPointerException ex){}
 		}

@@ -1,4 +1,4 @@
-package diary;
+package diary.data;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -8,7 +8,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import diary.constants.PainDataIdentifier;
-import diary.constants.PainLocationConstants;
 import giantsweetroll.xml.dom.XMLManager;
 
 public class PainEntryData 
@@ -29,16 +28,11 @@ public class PainEntryData
 		this.dataMap.put(PainDataIdentifier.TIME_MINUTE, "00");
 		this.dataMap.put(PainDataIdentifier.TIME_SECONDS, "00");
 		this.dataMap.put(PainDataIdentifier.PAIN_AMOUNT, "1");
-		List<LinkedHashMap<String, Object>> painLocationsMapList = new ArrayList<LinkedHashMap<String, Object>>();
-		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
-		map.put(PainDataIdentifier.GENERAL_POSITION, PainLocationConstants.HEAD);
-		map.put(PainDataIdentifier.GENERAL_POSITION_2, PainLocationConstants.HEAD_BACK_GENERAL);
-		map.put(PainDataIdentifier.SPECIFIC_LOCATION, PainLocationConstants.HEAD_BACK_BOTTOM_LEFT);
-		map.put(PainDataIdentifier.PAIN_KIND, "");
-		map.put(PainDataIdentifier.INTENSITY, "0");
-		map.put(PainDataIdentifier.DURATION, "0");
-		painLocationsMapList.add(map);
-		this.dataMap.put(PainDataIdentifier.PAIN_LOCATIONS, painLocationsMapList);
+		this.dataMap.put(PainDataIdentifier.PAIN_LOCATION_PRESET, "");
+		this.dataMap.put(PainDataIdentifier.PAIN_LOCATION_CUSTOM, "");
+		this.dataMap.put(PainDataIdentifier.PAIN_KIND, "");
+		this.dataMap.put(PainDataIdentifier.INTENSITY, "0");
+		this.dataMap.put(PainDataIdentifier.DURATION, "0");
 		this.dataMap.put(PainDataIdentifier.ACTIVITY, "");
 		this.dataMap.put(PainDataIdentifier.ACTIVITY_DETAILS, "");
 		this.dataMap.put(PainDataIdentifier.RECENT_MEDICATION, "");
@@ -66,34 +60,26 @@ public class PainEntryData
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.TIME_MINUTE);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.TIME_SECONDS);
 		//Pain
-		appendToMap(this.dataMap, rootElement, PainDataIdentifier.PAIN_AMOUNT);
-		Element painLocations = XMLManager.getElement(rootElement.getElementsByTagName(PainDataIdentifier.PAIN_LOCATIONS), 0);
-		List<Element> painLocationsElementList = XMLManager.getElements(painLocations.getElementsByTagName(PainDataIdentifier.PAIN_LOCATION));
-		List<LinkedHashMap<String, Object>> painLocationsMapList = new ArrayList<LinkedHashMap<String, Object>>();
-		for (int i=0; i<painLocationsElementList.size(); i++)
+		List<String> presetLocations = new ArrayList<String>();
+		for (Element element : XMLManager.getElements(rootElement.getElementsByTagName(PainDataIdentifier.PAIN_LOCATION_PRESET)))
 		{
-			painLocationsMapList.add(this.mapPainLocationData(painLocationsElementList.get(i)));
+			presetLocations.add(element.getTextContent());
 		}
-		this.dataMap.put(PainDataIdentifier.PAIN_LOCATIONS, painLocationsMapList);
+		List<String> customLocations = new ArrayList<String>();
+		for (Element element : XMLManager.getElements(rootElement.getElementsByTagName(PainDataIdentifier.PAIN_LOCATION_CUSTOM)))
+		{
+			customLocations.add(element.getTextContent());
+		}
+		this.dataMap.put(PainDataIdentifier.PAIN_LOCATION_PRESET, presetLocations);
+		this.dataMap.put(PainDataIdentifier.PAIN_LOCATION_CUSTOM, customLocations);
 		//Others
+		appendToMap(this.dataMap, rootElement, PainDataIdentifier.PAIN_KIND);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.ACTIVITY);
+		appendToMap(this.dataMap, rootElement, PainDataIdentifier.INTENSITY);
+		appendToMap(this.dataMap, rootElement, PainDataIdentifier.DURATION);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.ACTIVITY_DETAILS);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.RECENT_MEDICATION);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.COMMENTS);
-	}
-	
-	private LinkedHashMap<String, Object> mapPainLocationData(Element element)
-	{
-		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
-		
-		appendToMap(map, element, PainDataIdentifier.GENERAL_POSITION);
-		appendToMap(map, element, PainDataIdentifier.GENERAL_POSITION_2);
-		appendToMap(map, element, PainDataIdentifier.SPECIFIC_LOCATION);
-		appendToMap(map, element, PainDataIdentifier.PAIN_KIND);
-		appendToMap(map, element, PainDataIdentifier.INTENSITY);
-		appendToMap(map, element, PainDataIdentifier.DURATION);
-		
-		return map;
 	}
 	
 	private void appendToMap(LinkedHashMap<String, Object> map, Element sourceElement, String dataID)
@@ -147,14 +133,23 @@ public class PainEntryData
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
-		for (int i=0; i<list.size(); i++)
+		//Preset
+		List<String> locations = (List<String>)this.dataMap.get(PainDataIdentifier.PAIN_LOCATION_PRESET);
+		for (int a=0; a<locations.size(); a++)
 		{
-			sb.append(list.get(i).get(PainDataIdentifier.GENERAL_POSITION).toString());
-			sb.append(" (" + list.get(i).get(PainDataIdentifier.GENERAL_POSITION_2).toString() + ")");
-			sb.append(" (" + list.get(i).get(PainDataIdentifier.SPECIFIC_LOCATION) + ")");
-			
-			if (list.size()-i!=1)
+			sb.append(locations.get(a));
+			if (locations.size()-a!=1)
+			{
+				sb.append(", ");
+			}
+		}
+		
+		//Custom
+		locations = (List<String>)this.dataMap.get(PainDataIdentifier.PAIN_LOCATION_CUSTOM);
+		for (int a=0; a<locations.size(); a++)
+		{
+			sb.append(locations.get(a));
+			if (locations.size()-a!=1)
 			{
 				sb.append(", ");
 			}
@@ -163,6 +158,7 @@ public class PainEntryData
 		return sb.toString();
 	}
 	
+	/*
 	public String getPainKindAsString()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -181,6 +177,7 @@ public class PainEntryData
 		return sb.toString();
 	}
 	
+	/*
 	public String getIntensitiesAsString()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -216,6 +213,7 @@ public class PainEntryData
 		
 		return sb.toString();
 	}
+	*/
 	
 	public Document getDocumentForm() 
 	{

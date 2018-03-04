@@ -1,4 +1,4 @@
-package diary;
+package diary.data;
 
 import diary.constants.PainDataIdentifier;
 

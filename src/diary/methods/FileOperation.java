@@ -19,12 +19,12 @@ import javax.xml.transform.TransformerException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import diary.PainEntryData;
-import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.data.PainEntryData;
+import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.history.History;
 import diary.patientdata.PatientData;

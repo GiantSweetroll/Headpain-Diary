@@ -10,9 +10,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import diary.Settings;
 import diary.constants.Constants;
 import diary.constants.Globals;
+import diary.data.Settings;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.XMLGenerator;
