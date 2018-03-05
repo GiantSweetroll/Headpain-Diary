@@ -33,6 +33,9 @@ public class GraphSettingsPanel extends JPanel
 		//Properties
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setOpaque(false);
+		this.enableDataValues.setOpaque(false);
+		this.displayDataPoints.setOpaque(false);
+		this.displayVoidData.setOpaque(false);
 		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT)));
 		
 		//add to panel

@@ -48,9 +48,11 @@ public final class Constants
 	public static final Color COLOR_MAIN_MENU_BACKGROUND = new Color(0, 187, 212);
 	public static final Color COLOR_TRANSPARENT = new Color (0, 0, 0, 0);
 	public static final Color COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT = new Color (16, 255, 22, 60);
+	public static final Color COLOR_GRAPH_AXES_MARKER_LABELS = new Color(23, 74, 211);
+	public static final Color COLOR_TABLE_HEADER = new Color (23, 74, 211);
 	
 	//Fonts
-	private static final String FONT_TYPE_GENERAL = "century gothic";
+	public static final String FONT_TYPE_GENERAL = "century gothic";
 	public static final Font FONT_GENERAL = new Font(FONT_TYPE_GENERAL, Font.PLAIN, 15);
 	public static final Font FONT_GENERAL_BOLD = new Font(FONT_TYPE_GENERAL, Font.BOLD, 15);
 	public static final Font FONT_GENERAL_A_BIT_BIGGER = new Font(FONT_TYPE_GENERAL, Font.BOLD, 18);

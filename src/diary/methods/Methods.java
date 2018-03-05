@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.table.JTableHeader;
 
 import diary.ImagePanel;
@@ -681,6 +684,20 @@ public class Methods
 		else
 		{
 			return "";
+		}
+	}
+	
+	public static void setUIFont(FontUIResource f)
+	{
+		Enumeration keys = UIManager.getDefaults().keys();
+		while (keys.hasMoreElements())
+		{
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof FontUIResource)
+			{
+				UIManager.put(key, f);
+			}
 		}
 	}
 }

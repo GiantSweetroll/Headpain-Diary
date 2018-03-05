@@ -9,6 +9,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
+import diary.constants.Constants;
+
 public class Table extends JTable
 {
 
@@ -23,9 +25,13 @@ public class Table extends JTable
 		
 		//Table properties
 //		this.getTableHeader().setBackground(new Color (8, 243, 240));			//Set Header color background
-		this.getTableHeader().setBackground(Color.WHITE);	
+//		this.getTableHeader().setBackground(Color.WHITE);	
+		this.getTableHeader().setBackground(Constants.COLOR_TABLE_HEADER);
 //		this.getTableHeader().setOpaque(false);					//Make the default background of the table transparent (to see background color)
-		this.setAutoCreateRowSorter(true);							//Automatically create Row sorter
+		this.getTableHeader().setFont(Constants.FONT_GENERAL_BOLD);
+		this.getTableHeader().setForeground(Color.WHITE);
+		this.setBackground(Color.WHITE);
+		this.setAutoCreateRowSorter(true);					//Automatically create Row sorter
 		this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);			//Set to manual column size, so it works with the JScrollPane
 		
 		for (int i=0; i<this.getColumnCount(); i++)
@@ -90,6 +96,11 @@ public class Table extends JTable
 		{
 			//c.setBackground(new Color (8, 243, 240));		//Cyan Blue
 			c.setBackground(new Color(77, 72, 72));
+			c.setForeground(Color.WHITE);
+		}
+		else
+		{
+			c.setForeground(Color.BLACK);
 		}
 		
 		return c;

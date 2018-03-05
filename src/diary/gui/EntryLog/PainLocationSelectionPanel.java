@@ -57,6 +57,8 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 		this.preset.setAlignmentX(Component.LEFT_ALIGNMENT);
 		this.radCustom.addItemListener(this);
 		this.radPreset.addItemListener(this);
+		this.radCustom.setOpaque(false);
+		this.radPreset.setOpaque(false);
 		
 		//Add to panel
 		this.add(this.radPreset);

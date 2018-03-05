@@ -1,6 +1,7 @@
 package diary.gui.settings;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -63,7 +64,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		
 		//Properties
 		this.setLayout(new BorderLayout());
-		this.setOpaque(false);
+		this.setBackground(Color.WHITE);
 		
 		//Add to panel
 		this.add(this.panelCenter, BorderLayout.CENTER);
@@ -111,7 +112,9 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.catDatabase.setLayout(new GridBagLayout());
 		this.catDatabase.setOpaque(false);
 		tfDatabasePath.setEditable(false);
+		tfDatabasePath.setOpaque(false);
 		tfUserDatabasePath.setEditable(false);
+		tfUserDatabasePath.setOpaque(false);
 		butBrowseDatabasePath.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -239,6 +242,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.catWindow.setOpaque(false);
 		group.add(radWindowed);
 		group.add(radFullscreen);
+		radWindowed.setOpaque(false);
+		radFullscreen.setOpaque(false);
 		if (chosenWindowState.equals(Settings.FULLSCREEN))
 		{
 			radFullscreen.setSelected(true);
@@ -303,6 +308,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		//Properties
 		this.catProgram.setLayout(new GridBagLayout());
 		this.catProgram.setOpaque(false);
+		comboLanguages.setBackground(Color.WHITE);
 		butRefresh.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)

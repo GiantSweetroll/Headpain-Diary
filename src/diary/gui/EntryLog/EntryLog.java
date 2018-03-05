@@ -112,7 +112,7 @@ public class EntryLog extends JPanel implements ActionListener
 		
 		//properties
 		this.setLayout(new BorderLayout());
-		this.setOpaque(false);
+		this.setBackground(Color.WHITE);
 		
 		//add
 		this.add(this.panelTitle, BorderLayout.NORTH);
@@ -174,15 +174,20 @@ public class EntryLog extends JPanel implements ActionListener
 		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute(), GDateManager.getCurrentSecond());
 		this.panelTime.resetDefault();
+		this.comboPainKind.setBackground(Color.WHITE);
 		this.tfPainKind.setColumns(10);
 		this.tfPainKind.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfPainKind.setEditable(false);
+		this.tfPainKind.setBackground(Color.WHITE);
 		this.tfIntensity.setColumns(5);
 		this.tfIntensity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfDuration.setColumns(5);
 		this.tfDuration.setHorizontalAlignment(SwingConstants.CENTER);
+		this.comboDurationUnit.setBackground(Color.WHITE);
+		this.comboActivity.setBackground(Color.WHITE);
 		this.tfActivity.setEditable(false);
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
+		this.tfActivity.setBackground(Color.WHITE);
 		this.taComments.setBorder(this.tfActivity.getBorder());
 		this.panelDate.setDefaultData(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
 		this.panelDate.resetDefault();
@@ -261,6 +266,7 @@ public class EntryLog extends JPanel implements ActionListener
 		
 		//properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.panelBelowLeft.setOpaque(false);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butBack);
@@ -273,6 +279,7 @@ public class EntryLog extends JPanel implements ActionListener
 		
 		//properties
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.LEFT));
+		this.panelBelowRight.setOpaque(false);
 		
 		//add to panel
 		this.panelBelowRight.add(this.butFinish);
@@ -286,6 +293,8 @@ public class EntryLog extends JPanel implements ActionListener
 		
 		//Properties
 		this.panelBelow.setLayout(new BorderLayout());
+		this.panelBelow.setOpaque(false);
+		this.panelBelow.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		//Add to panel
 		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);

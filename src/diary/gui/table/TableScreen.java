@@ -1,6 +1,7 @@
 package diary.gui.table;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -82,8 +83,8 @@ public class TableScreen extends JPanel implements ActionListener
 		this.initPanelTop();
 		
 		//Properties
-		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
+		this.setBackground(Color.WHITE);
 		
 		this.initTable();
 		
@@ -103,6 +104,7 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butBack.setActionCommand(this.BACK);
 		this.butBack.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_BACK_TEXT));
 		this.butBack.addActionListener(this);
+		this.butBack.setFont(Constants.FONT_GENERAL);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butBack);
@@ -120,9 +122,11 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT));
 		this.butDelete.addActionListener(this);
+		this.butDelete.setFont(Constants.FONT_GENERAL);
 		this.butSave.setActionCommand(this.SAVE);
 		this.butSave.addActionListener(this);
 		this.butSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
+		this.butSave.setFont(Constants.FONT_GENERAL);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butSave);
@@ -140,6 +144,7 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butSelect.setActionCommand(this.SELECT);
 		this.butSelect.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT));
 		this.butSelect.addActionListener(this);
+		this.butSelect.setFont(Constants.FONT_GENERAL);
 		
 		//add to panel
 		this.panelBelowRight.add(this.butSelect);
@@ -176,9 +181,14 @@ public class TableScreen extends JPanel implements ActionListener
 		//Properties
 		this.panelTopLeft.setOpaque(false);
 		this.panelTopLeft.setLayout(new GridBagLayout());
+		this.labFilter.setFont(Constants.FONT_GENERAL);
+		this.labKeyword.setFont(Constants.FONT_GENERAL);
 		this.labGuide.setFont(Constants.FONT_SMALL_NOTE);
 		this.butFilter.addActionListener(this);
 		this.butFilter.setActionCommand(this.FILTER);
+		this.butFilter.setFont(Constants.FONT_GENERAL);
+		this.comboFilter.setBackground(Color.WHITE);
+		this.comboFilter.setFont(Constants.FONT_GENERAL);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);

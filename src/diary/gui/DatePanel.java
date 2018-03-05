@@ -1,11 +1,13 @@
 package diary.gui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -16,7 +18,6 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.methods.DateOperation;
 import giantsweetroll.GDateManager;
-import giantsweetroll.VectorInt;
 import giantsweetroll.gui.swing.Gbm;
 
 public class DatePanel extends JPanel implements ActionListener
@@ -32,7 +33,7 @@ public class DatePanel extends JPanel implements ActionListener
 	private LinkedHashMap<String, String> defaultMap;
 	
 	//Vectors
-	private VectorInt vecDay;
+//	private VectorInt vecDay;
 	
 	//Constants
 	private final String AUTO = "auto";
@@ -85,12 +86,18 @@ public class DatePanel extends JPanel implements ActionListener
 		this.butDefault.addActionListener(this);
 		this.butDefault.setActionCommand(this.DEFAULT);
 		this.butDefault.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT));
+		this.comboDay.setBackground(Color.WHITE);
+		this.comboDay.setFont(Constants.FONT_GENERAL);
+		this.comboMonth.setBackground(Color.WHITE);
+		this.comboMonth.setFont(Constants.FONT_GENERAL);
+		this.comboYear.setBackground(Color.WHITE);
+		this.comboYear.setFont(Constants.FONT_GENERAL);
 		this.setAsDefaultDataThis();
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_GENERAL;
-		this.vecDay = new VectorInt(c.gridx, c.gridy);
+	//	this.vecDay = new VectorInt(c.gridx, c.gridy);
 		this.add(this.comboDay, c);							//Day
 		Gbm.nextGridColumn(c);
 		this.add(this.comboMonth, c);						//Month
@@ -104,6 +111,7 @@ public class DatePanel extends JPanel implements ActionListener
 	
 	private void refreshDayRange()
 	{
+		/*
 		this.remove(this.comboDay);
 //		System.out.println(this.comboYear.getSelectedItem());
 		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
@@ -113,6 +121,11 @@ public class DatePanel extends JPanel implements ActionListener
 		c.gridx = this.vecDay.x;
 		c.gridy = this.vecDay.y;
 		this.add(this.comboDay, c);
+		
+		*/
+		
+		this.comboDay.setModel(new DefaultComboBoxModel<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
+																				Short.parseShort(this.comboYear.getSelectedItem().toString()))));
 		
 		this.revalidate();
 		this.repaint();

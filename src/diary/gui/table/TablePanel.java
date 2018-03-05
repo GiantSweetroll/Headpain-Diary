@@ -1,6 +1,7 @@
 package diary.gui.table;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -31,8 +32,8 @@ public class TablePanel extends JPanel
 		this.scroll = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//Properties
-		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
+		this.setBackground(Color.WHITE);
 		
 		//Add to panel
 		this.add(this.scroll);

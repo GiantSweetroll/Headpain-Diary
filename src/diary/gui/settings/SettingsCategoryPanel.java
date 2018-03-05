@@ -14,5 +14,6 @@ public class SettingsCategoryPanel extends JPanel
 	public SettingsCategoryPanel(String borderText)
 	{
 		this.setBorder(BorderFactory.createTitledBorder(borderText));
+		this.setOpaque(false);
 	}
 }

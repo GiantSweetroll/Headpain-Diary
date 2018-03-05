@@ -1,5 +1,6 @@
 package diary.history;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
@@ -60,8 +61,12 @@ public class HistoryPanel extends JPanel implements ItemListener
 		this.group.add(this.radHistory);
 		this.group.add(this.radNew);
 		this.radHistory.addItemListener(this);
+		this.radHistory.setOpaque(false);
 		this.radNew.addItemListener(this);
 		this.radNew.setSelected(true);
+		this.radNew.setOpaque(false);
+		this.comboHistory.setBackground(Color.WHITE);
+		this.tfHistory.setOpaque(false);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);

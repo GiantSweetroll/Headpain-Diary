@@ -1,6 +1,7 @@
 package diary.gui.graphs;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -71,7 +72,8 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 		//Properties
 		this.setLayout(new BorderLayout());
-		this.setOpaque(false);
+//		this.setOpaque(false);
+		this.setBackground(Color.WHITE);
 		
 		this.initGraph();
 		
@@ -125,6 +127,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		//Properties
 		this.panelTopLeft.setOpaque(false);
 		this.panelTopLeft.setLayout(new GridBagLayout());
+		this.comboCategory.setBackground(Color.WHITE);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);

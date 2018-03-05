@@ -1,5 +1,6 @@
 package diary.patientdata;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.LinkedHashMap;
@@ -66,9 +67,16 @@ public class PatientDataForm extends JPanel
 		//Properties
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
+		this.labDOB.setFont(Constants.FONT_GENERAL);
+		this.labMedID.setFont(Constants.FONT_GENERAL);
+		this.labName.setFont(Constants.FONT_GENERAL);
 		this.tfMedID.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfMedID.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT));
+		this.tfMedID.setBackground(Color.WHITE);
+		this.tfMedID.setFont(Constants.FONT_GENERAL);
 		this.tfName.setHorizontalAlignment(SwingConstants.CENTER);
+		this.tfName.setBackground(Color.WHITE);
+		this.tfName.setFont(Constants.FONT_GENERAL);
 		
 		//add to panel
 		Gbm.goToOrigin(c);

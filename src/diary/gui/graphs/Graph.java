@@ -1,6 +1,7 @@
 package diary.gui.graphs;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+import diary.constants.Constants;
 import diary.methods.Methods;
 import giantsweetroll.numbers.GNumbers;
 
@@ -59,13 +61,17 @@ public abstract class Graph extends JPanel
 			this.xAxisLabels.add(entry.getKey());
 			this.yAxisValues.add(entry.getValue());
 		}
-	};
+		
+		this.setOpaque(false);
+	}
 	
 	//Methods
 	@Override
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		
+		g.setFont(Constants.FONT_GENERAL);
 		
 		this.axesOrigin = new Point(this.AXES_PADDING_WITH_PANEL_EDGE, this.getHeight()-this.AXES_PADDING_WITH_PANEL_EDGE);
 		this.drawAxes(g, Color.BLACK, this.getWidth()-this.AXES_PADDING_WITH_PANEL_EDGE, this.AXES_PADDING_WITH_PANEL_EDGE);
@@ -78,8 +84,9 @@ public abstract class Graph extends JPanel
 
 			this.generateDataPoints(this.yAxisValues);
 			this.drawAxesMarkers(g, Color.BLACK);
-			this.drawXAxisMarkerLabels(g, Color.BLUE);
-			this.drawYAxisMarkerLabels(g, Color.BLUE);
+			this.drawXAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
+			this.drawYAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
+			g.setFont(Constants.FONT_GENERAL);
 			if (this.enableDataValueMarkers)
 			{
 				this.drawDataValues(g, Color.BLACK);
@@ -171,9 +178,10 @@ public abstract class Graph extends JPanel
 			this.yAxisMarkerPoints.add(new Point(x, y));	//Take note of the coordinate position of each Y-Axis markers
 		}
 	}
-	protected void drawYAxisMarkerLabels(Graphics g, Color c)
+	protected void drawYAxisMarkerLabels(Graphics g, Color c, Font font)
 	{
 		g.setColor(c);
+		g.setFont(font);
 		
 		float highestVal = Methods.getHighestValue(this.yAxisValues);		//Get highest value
 		float diff = highestVal/(float)this.MAX_MARKERS_IN_Y_AXIS;			//Get unit increment
@@ -191,9 +199,10 @@ public abstract class Graph extends JPanel
 							this.yAxisMarkerPoints.get((int)i).y + 4);
 		}
 	}
-	protected void drawXAxisMarkerLabels(Graphics g, Color c)
+	protected void drawXAxisMarkerLabels(Graphics g, Color c, Font font)
 	{
 		g.setColor(c);
+		g.setFont(font);
 		
 		int diff = 0;
 		

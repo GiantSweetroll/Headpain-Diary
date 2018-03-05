@@ -1,6 +1,7 @@
 package diary.patientdata;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -79,7 +80,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		
 		//Properties
 		this.setLayout(new BorderLayout());
-		this.setOpaque(false);
+		this.setBackground(Color.WHITE);
 		
 		//Add to panel
 		this.add(this.panelTop, BorderLayout.NORTH);
@@ -108,6 +109,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		this.butNew = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_TEXT));
 	
 		//Properties
+		this.panelBelowRight.setOpaque(false);
 		this.butNew.setActionCommand(this.NEW);
 		this.butNew.addActionListener(this);
 		
@@ -167,6 +169,9 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 		this.panelTopLeft.setLayout(new GridBagLayout());
 		this.panelTopLeft.setOpaque(false);
 		this.setBorder(BorderFactory.createTitledBorder(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT)));
+		this.checkDOB.setOpaque(false);
+		this.checkMedRec.setOpaque(false);
+		this.checkName.setOpaque(false);
 		this.butFilter.setActionCommand(this.FILTER);
 		this.butFilter.addActionListener(this);
 		

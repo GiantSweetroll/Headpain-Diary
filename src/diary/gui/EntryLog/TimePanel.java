@@ -1,5 +1,6 @@
 package diary.gui.EntryLog;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -68,6 +69,9 @@ public class TimePanel extends JPanel implements ActionListener
 		//Properties
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
+		this.comboHour.setBackground(Color.WHITE);
+		this.comboMinute.setBackground(Color.WHITE);
+		this.comboSec.setBackground(Color.WHITE);
 		this.butCurrent.addActionListener(this);
 		this.butCurrent.setActionCommand(this.CURRENT);
 		this.butCurrent.setToolTipText(Methods.getLanguageText(XMLIdentifier.TIME_AUTO_BUTTON_TOOLTIP_TEXT));
