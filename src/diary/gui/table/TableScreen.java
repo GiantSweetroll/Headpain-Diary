@@ -55,7 +55,7 @@ public class TableScreen extends JPanel implements ActionListener
 	private DateRangePanel panelDateRange;
 	private JComboBox<String> comboFilter;
 	private JTextField tfFilter;
-	private JButton butFilter, butBack, butDelete, butSelect, butSave;
+	private JButton butFilter, butBack, butDelete, butSelect, butSave, butRefresh;
 	private JLabel labFilter, labKeyword, labGuide;
 	private List<String> selectedEntryIDs;
 	private List<PainEntryData> entries;
@@ -68,6 +68,7 @@ public class TableScreen extends JPanel implements ActionListener
 	private final String DELETE = "delete";
 	private final String SELECT = "select";
 	private final String SAVE = "save image";
+	private final String REFRESH = "refresh";
 	
 	public TableScreen()
 	{
@@ -104,7 +105,6 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butBack.setActionCommand(this.BACK);
 		this.butBack.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_BACK_TEXT));
 		this.butBack.addActionListener(this);
-		this.butBack.setFont(Constants.FONT_GENERAL);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butBack);
@@ -115,6 +115,7 @@ public class TableScreen extends JPanel implements ActionListener
 		this.panelBelowCenter = new JPanel();
 		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
 		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);
@@ -122,14 +123,15 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT));
 		this.butDelete.addActionListener(this);
-		this.butDelete.setFont(Constants.FONT_GENERAL);
 		this.butSave.setActionCommand(this.SAVE);
 		this.butSave.addActionListener(this);
 		this.butSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
-		this.butSave.setFont(Constants.FONT_GENERAL);
+		this.butRefresh.addActionListener(this);
+		this.butRefresh.setActionCommand(this.REFRESH);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butSave);
+		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butDelete);
 	}
 	private void initPanelBelowRight()
@@ -144,7 +146,6 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butSelect.setActionCommand(this.SELECT);
 		this.butSelect.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT));
 		this.butSelect.addActionListener(this);
-		this.butSelect.setFont(Constants.FONT_GENERAL);
 		
 		//add to panel
 		this.panelBelowRight.add(this.butSelect);
@@ -181,14 +182,10 @@ public class TableScreen extends JPanel implements ActionListener
 		//Properties
 		this.panelTopLeft.setOpaque(false);
 		this.panelTopLeft.setLayout(new GridBagLayout());
-		this.labFilter.setFont(Constants.FONT_GENERAL);
-		this.labKeyword.setFont(Constants.FONT_GENERAL);
 		this.labGuide.setFont(Constants.FONT_SMALL_NOTE);
 		this.butFilter.addActionListener(this);
 		this.butFilter.setActionCommand(this.FILTER);
-		this.butFilter.setFont(Constants.FONT_GENERAL);
 		this.comboFilter.setBackground(Color.WHITE);
-		this.comboFilter.setFont(Constants.FONT_GENERAL);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -397,6 +394,10 @@ public class TableScreen extends JPanel implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case FILTER:
+				this.initTable();
+				break;
+				
+			case REFRESH:
 				this.initTable();
 				break;
 				

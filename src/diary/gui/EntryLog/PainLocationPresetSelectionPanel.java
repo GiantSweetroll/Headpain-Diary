@@ -42,7 +42,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		this.selectedPos = new ArrayList<String>();
 		
 		//Properties
-		this.setLayout(new GridLayout(1,0, 10, 10));
+		this.setLayout(new GridLayout(0,3, 10, 10));
 		this.setOpaque(false);
 		
 		//Add to panel

@@ -87,11 +87,8 @@ public class DatePanel extends JPanel implements ActionListener
 		this.butDefault.setActionCommand(this.DEFAULT);
 		this.butDefault.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT));
 		this.comboDay.setBackground(Color.WHITE);
-		this.comboDay.setFont(Constants.FONT_GENERAL);
 		this.comboMonth.setBackground(Color.WHITE);
-		this.comboMonth.setFont(Constants.FONT_GENERAL);
 		this.comboYear.setBackground(Color.WHITE);
-		this.comboYear.setFont(Constants.FONT_GENERAL);
 		this.setAsDefaultDataThis();
 		
 		//Add to panel

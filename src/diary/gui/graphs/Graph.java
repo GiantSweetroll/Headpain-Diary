@@ -71,7 +71,7 @@ public abstract class Graph extends JPanel
 	{
 		super.paintComponent(g);
 		
-		g.setFont(Constants.FONT_GENERAL);
+	//	g.setFont(Constants.FONT_GENERAL);
 		
 		this.axesOrigin = new Point(this.AXES_PADDING_WITH_PANEL_EDGE, this.getHeight()-this.AXES_PADDING_WITH_PANEL_EDGE);
 		this.drawAxes(g, Color.BLACK, this.getWidth()-this.AXES_PADDING_WITH_PANEL_EDGE, this.AXES_PADDING_WITH_PANEL_EDGE);
@@ -86,7 +86,7 @@ public abstract class Graph extends JPanel
 			this.drawAxesMarkers(g, Color.BLACK);
 			this.drawXAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
 			this.drawYAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
-			g.setFont(Constants.FONT_GENERAL);
+	//		g.setFont(Constants.FONT_GENERAL);
 			if (this.enableDataValueMarkers)
 			{
 				this.drawDataValues(g, Color.BLACK);

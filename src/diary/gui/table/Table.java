@@ -28,7 +28,7 @@ public class Table extends JTable
 //		this.getTableHeader().setBackground(Color.WHITE);	
 		this.getTableHeader().setBackground(Constants.COLOR_TABLE_HEADER);
 //		this.getTableHeader().setOpaque(false);					//Make the default background of the table transparent (to see background color)
-		this.getTableHeader().setFont(Constants.FONT_GENERAL_BOLD);
+	//	this.getTableHeader().setFont(Constants.FONT_GENERAL_BOLD);
 		this.getTableHeader().setForeground(Color.WHITE);
 		this.setBackground(Color.WHITE);
 		this.setAutoCreateRowSorter(true);					//Automatically create Row sorter

@@ -75,13 +75,10 @@ public class ActivePatientPanel extends JPanel implements ItemListener
 		//Properties
 		this.panelCenter.setLayout(new GridBagLayout());
 		this.panelCenter.setOpaque(false);
-		this.labUser.setFont(Constants.FONT_GENERAL);
 		this.radShow.addItemListener(this);
 		this.radShow.setOpaque(false);
-		this.radShow.setFont(Constants.FONT_GENERAL);
 		this.comboUsers.setRenderer(new PatientDataRenderer());
 		this.comboUsers.setBackground(Color.WHITE);
-		this.comboUsers.setFont(Constants.FONT_GENERAL);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);

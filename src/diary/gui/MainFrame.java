@@ -201,7 +201,7 @@ public class MainFrame
 						try
 						{
 				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, 15));
+							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, 12));
 							
 							if(!FileOperation.dataExists(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME))		//If settings file doesn't exists
 							{
