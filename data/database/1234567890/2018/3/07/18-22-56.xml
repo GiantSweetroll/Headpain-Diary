@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>07</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>18</time_hour>
+     <time_minute>22</time_minute>
+     <time_seconds>56</time_seconds>
+     <pain_location_custom pain_loc_id="0">66,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">148,50</pain_location_custom>
+     <pain_kind>default pain kind pulsating</pain_kind>
+     <intensity>7</intensity>
+     <duration>23</duration>
+     <activity>default activities improper diet sleep</activity>
+     <activity_details/>
+     <recent_medication>Panadol</recent_medication>
+     <comments/>
+</Entry>

@@ -18,8 +18,6 @@ import javax.swing.SwingUtilities;
 
 import diary.constants.Constants;
 import diary.constants.ImageConstants;
-import diary.gui.MainFrame;
-import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 import giantsweetroll.numbers.GNumbers;
 
@@ -49,8 +47,9 @@ public class PainLocationCustomSelection extends JLabel implements MouseListener
 		icon = ImageManager.getImageIcon(ImageConstants.PAIN_LOCATION_CUSTOM);
 		this.originalImageSize = new Dimension(icon.getIconWidth(), icon.getIconHeight());
 		this.coordinates = new ArrayList<Point>();
-		this.setIcon(Methods.resizeImageByRatio(icon, Methods.getPercentage(icon, Methods.getPercentageValue(MainFrame.frame.getWidth(), this.imageScale))));
-	
+//		this.setIcon(Methods.resizeImageByRatio(icon, Methods.getPercentage(icon, Methods.getPercentageValue(MainFrame.frame.getWidth(), this.imageScale))));		//Temporarily until issue with saving and rading data from different image scale is fixed
+		this.setIcon(icon);
+		
 		//Properties
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);

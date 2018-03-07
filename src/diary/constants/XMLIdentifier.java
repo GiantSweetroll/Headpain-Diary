@@ -45,6 +45,7 @@ public class XMLIdentifier
 	public static final String YOUR_RIGHT_TEXT = "your right text";
 	public static final String PRESETS_TEXT = "preset text";
 	public static final String CUSTOM_TEXT = "custom text";
+	public static final String OPTIONS_TEXT = "options text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -177,12 +178,14 @@ public class XMLIdentifier
 	
 	//Graph
 	public static final String GRAPH_CATEGORY_LABEL = "graph category label";
-	public static final String GRAPH_CATEGORY_PAIN_VS_DATE_TEXT = "graph category pain vs date text";
+//	public static final String GRAPH_CATEGORY_PAIN_VS_DATE_TEXT = "graph category pain vs date text";
 	public static final String GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT = "graph category entries vs date text";
-	public static final String GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT = "graph category intensity average vs time text";
-	public static final String GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT = "graph category duration average vs time text";
+	public static final String GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT = "graph category intensity average vs date text";
+	public static final String GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT = "graph category duration average vs date text";
+	public static final String GRAPH_CATEGORY_INTENSITY_VS_TIME = "graph category intensity vs time text";
+	public static final String GRAPH_CATEGORY_DURATION_VS_TIME = "graph category duration vs time text";
 	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_DATE = "graph category pain kind vs date";
-	public static final String GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE = "graph category pain location vs date";
+//	public static final String GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE = "graph category pain location vs date";
 	public static final String GRAPH_CATEGORY_ACTIVITY_VS_DATE = "graph category activity vs date";
 	//Graph Settings
 	public static final String GRAPH_SETTINGS_ENABLE_DATA_VALUES = "graph settings enable data values";

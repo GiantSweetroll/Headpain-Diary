@@ -1,5 +1,6 @@
 package diary.gui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -190,7 +192,7 @@ public class MainFrame
 	/**
 	 * The main method.
 	 *
-	 * @param args the argu22ments 
+	 * @param args the arguments 
 	 */
 	public static void main(String[] args) 
 	{
@@ -202,6 +204,8 @@ public class MainFrame
 						{
 				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, 12));
+							UIManager.put("OptionPane.background", Color.WHITE);
+							UIManager.put("Panel.background", Color.white);
 							
 							if(!FileOperation.dataExists(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME))		//If settings file doesn't exists
 							{

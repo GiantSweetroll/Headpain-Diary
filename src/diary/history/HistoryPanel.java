@@ -121,10 +121,12 @@ public class HistoryPanel extends JPanel implements ItemListener
 		{
 			this.tfHistory.setText("");
 			this.tfHistory.setEditable(false);
+			this.comboHistory.setEnabled(true);
 		}
 		else
 		{
 			this.tfHistory.setEditable(true);
+			this.comboHistory.setEnabled(false);
 		}
 	}
 }

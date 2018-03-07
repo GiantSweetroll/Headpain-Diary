@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -21,6 +22,7 @@ import javax.swing.SwingConstants;
 import diary.ImagePanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
+import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
@@ -45,7 +47,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	private Graph graph;
 	private JScrollPane scrollGraph;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butRefresh, butSwitchGraph, buttonSave;
+	private JButton butBack, butRefresh, butSwitchGraph, buttonSave, butOptions;
 	private GraphSettingsPanel panelGraphSettings;
 	private ActivePatientPanel activePatientPanel;
 	
@@ -57,6 +59,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	private final String REFRESH = "refresh";
 	private final String SWITCH_GRAPH = "switch graph";
 	private final String SAVE = "save";
+	private final String OPTIONS = "options";
 	
 	public GraphPanel()
 	{
@@ -176,6 +179,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSwitchGraph = new JButton(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
 		this.buttonSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		this.butOptions = new JButton (Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);
@@ -187,9 +191,12 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.buttonSave.setActionCommand(this.SAVE);
 		this.buttonSave.addActionListener(this);
 		this.buttonSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
+		this.butOptions.setActionCommand(this.OPTIONS);
+		this.butOptions.addActionListener(this);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.buttonSave);
+		this.panelBelowCenter.add(this.butOptions);
 		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butSwitchGraph);
 	}
@@ -208,20 +215,13 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
 		
-		if (this.panelGraphSettings.isDisplayVoidData())
+		if (Globals.GRAPH_FILTER_PANEL.isRecentMedicationSelected())
 		{
-			/*
-			List<PainEntryData> tempList = PainDataOperation.insertEmptyData(list);
-			
-			System.out.println("Size of data with empty data: " + tempList.size());
-			for (int i=0; i<tempList.size(); i++)
-			{
-				System.out.println("Entry Date: " + tempList.get(i).getDataMap().get(PainDataIdentifier.DATE_DAY) + "/"
-													+ tempList.get(i).getDataMap().get(PainDataIdentifier.DATE_MONTH) + "/"
-													+ tempList.get(i).getDataMap().get(PainDataIdentifier.DATE_YEAR));
-			}
-			*/
-			
+			list = PainDataOperation.filter(list, PainDataIdentifier.RECENT_MEDICATION, Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter());
+		}
+		
+		if (this.panelGraphSettings.isDisplayVoidData())
+		{	
 			list = PainDataOperation.insertEmptyData(list);
 		}
 		
@@ -233,26 +233,34 @@ public class GraphPanel extends JPanel implements ActionListener
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getDurationVSTime(list));
 		}
-/*		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT)))
 		{
-//			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageIntensityVSDate(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageDurationVSDate(list));
+		}
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+		}
+/*		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
 		{
 //			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainLocations(list));
-		}
+		}	*/
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfActivity(list));
-		}			*/
+		}
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.graph.displayDataPoint(this.panelGraphSettings.isDisplayDataPoints());
 		this.initGraphScroll(graph);
@@ -282,26 +290,34 @@ public class GraphPanel extends JPanel implements ActionListener
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME)))
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getIntensityVSTime(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME)))
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getDurationVSTime(list));
 		}
-	/*	else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT)))
 		{
-	//		this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+			this.graph = new BarGraphPanel(PainDataOperation.getAverageIntensityVSDate(list));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT)))
+		{
+			this.graph = new BarGraphPanel(PainDataOperation.getAverageDurationVSDate(list));
+		}
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
+		}
+/*		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
-		}
+		}		*/
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfActivity(list));
-		}		*/
+		}
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.initGraphScroll(graph);
 		
@@ -309,7 +325,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.revalidate();
 		this.repaint();
 	}
-	
+
 	private void initGraphScroll(Graph graph)
 	{
 		this.scrollGraph = new JScrollPane(graph, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -361,6 +377,10 @@ public class GraphPanel extends JPanel implements ActionListener
 														new PatientDataForm(this.activePatientPanel.getSelectedPatientData(), false), 
 														new DateRangePanel(this.panelDateRange.getDateRangeMap()));
 				Methods.exportPanelImage(imagePanel, false);
+				break;
+				
+			case OPTIONS:
+				JOptionPane.showMessageDialog(null, Globals.GRAPH_FILTER_PANEL, Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT), JOptionPane.PLAIN_MESSAGE);
 				break;
 		}
 	}

@@ -202,15 +202,18 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.YOUR_RIGHT_TEXT, "Your Right");
 		appendComponentToMap(doc, map, XMLIdentifier.PRESETS_TEXT, "Presets");
 		appendComponentToMap(doc, map, XMLIdentifier.CUSTOM_TEXT, "Custom");
+		appendComponentToMap(doc, map, XMLIdentifier.OPTIONS_TEXT, "Options");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT, "Pain vs Date");
+//		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT, "Pain vs Date");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT, "Entries vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_TIME_TEXT, "Average Intensity vs Time");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_TIME_TEXT, "Average Duration vs Time");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT, "Average Intensity vs Date");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT, "Average Duration vs Date");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME, "Intensity vs Time");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME, "Duration vs Time");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE, "Kinds of Pains vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE, "Pain Locations vs Date");
+//		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE, "Pain Locations vs Date");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE, "Activity vs Date");
 		//Graph Settings
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES, "Show Data Values");

@@ -3,6 +3,7 @@ package diary.methods;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import diary.constants.DateConstants;
 import diary.constants.PainDataIdentifier;
@@ -59,7 +60,7 @@ public class PainDataOperation
 	
 	/*
 	@Deprecated
-	public static LinkedHashMap<String, Float> getIntensityAverageVSTime(List<PainEntryData> list)
+	public static LinkedHashMap<String, Float> getIntensityAverageVSDate(List<PainEntryData> list)
 	{
 		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
 		
@@ -99,6 +100,39 @@ public class PainDataOperation
 		
 		return map;
 	}
+	public static LinkedHashMap<String, Float> getAverageIntensityVSDate(List<PainEntryData> list)
+	{
+		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
+		LinkedHashMap<String, Float> iterationMap = new LinkedHashMap<String, Float>();
+		
+		for (int i=0; i<list.size(); i++)
+		{	
+			try
+			{
+				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + Float.parseFloat(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+			}
+			catch(NullPointerException ex)
+			{
+				map.put(list.get(i).getFullDate(), Float.parseFloat(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+			}
+			
+			try
+			{
+				iterationMap.put(list.get(i).getFullDate(), iterationMap.get(list.get(i).getFullDate()) + 1f);
+			}
+			catch(NullPointerException ex)
+			{
+				iterationMap.put(list.get(i).getFullDate(), 1f);
+			}
+		}
+		
+		//Average data
+		for (Map.Entry<String, Float> entry : iterationMap.entrySet())
+		{
+			map.put(entry.getKey(), map.get(entry.getKey())/entry.getValue());
+		}
+		return map;
+	}
 	
 	public static LinkedHashMap<String, Float> getDurationVSTime(List<PainEntryData> list)
 	{
@@ -109,6 +143,39 @@ public class PainDataOperation
 			map.put(entry.getFullTimeAndDate(), Float.parseFloat(entry.getDataMap().get(PainDataIdentifier.DURATION).toString()));
 		}
 		
+		return map;
+	}
+	public static LinkedHashMap<String, Float> getAverageDurationVSDate(List<PainEntryData> list)
+	{
+		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
+		LinkedHashMap<String, Float> iterationMap = new LinkedHashMap<String, Float>();
+		
+		for (int i=0; i<list.size(); i++)
+		{
+			try
+			{
+				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + Float.parseFloat(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+			}
+			catch(NullPointerException ex)
+			{
+				map.put(list.get(i).getFullDate(), Float.parseFloat(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+			}
+			
+			try
+			{
+				iterationMap.put(list.get(i).getFullDate(), iterationMap.get(list.get(i).getFullDate()) + 1f);
+			}
+			catch(NullPointerException ex)
+			{
+				iterationMap.put(list.get(i).getFullDate(), 1f);
+			}
+		}
+		
+		//Average data
+		for (Map.Entry<String, Float> entry : iterationMap.entrySet())
+		{
+			map.put(entry.getKey(), map.get(entry.getKey())/entry.getValue());
+		}
 		return map;
 	}
 	
@@ -143,11 +210,12 @@ public class PainDataOperation
 	}
 	*/
 
-	/*
+	
 	public static LinkedHashMap<String, Float> getNumberOfDifferentPainKind(List<PainEntryData> list)
 	{
 		LinkedHashMap<String, Float> map = new LinkedHashMap<String, Float>();
 		
+		/*
 		for (int i=0; i<list.size(); i++)
 		{
 			if (list.get(i) instanceof PainEntryDataVoid)
@@ -170,10 +238,31 @@ public class PainDataOperation
 				}
 			}
 		}
+		*/
+		
+		for (PainEntryData entry : list)
+		{
+			if (entry instanceof PainEntryDataVoid)
+			{
+				continue;
+			}
+			
+			String painKind = entry.getDataMap().get(PainDataIdentifier.PAIN_KIND).toString();
+			painKind = Methods.convertPainKindIDToLanguage(painKind);
+			try
+			{
+				map.put(painKind, map.get(painKind) + 1f);
+			}
+			catch(NullPointerException ex)
+			{
+				map.put(painKind, 1f);
+			}
+		}
 		
 		return map;
 	}
 	
+	/*
 	@Deprecated
 	public static LinkedHashMap<String, Float> getNumberOfDifferentPainLocations(List<PainEntryData> list)
 	{
@@ -217,21 +306,23 @@ public class PainDataOperation
 				continue;
 			}
 			
-			String key = list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
+			String activity = list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
+			activity = Methods.convertActivityIDToLanguage(activity);
 			
 			try
 			{
-				map.put(key, map.get(key) + 1f);
+				map.put(activity, map.get(activity) + 1f);
 			}
 			catch(NullPointerException ex)
 			{
-				map.put(key, 1f);
+				map.put(activity, 1f);
 			}
 		}
 		
 		return map;
 	}
 
+	@Deprecated
 	public static List<PainEntryData> getFilteredData(String filterType, String filter, List<PainEntryData> list)
 	{
 		if (!filter.equals(""))			//If filter is not empty
@@ -478,6 +569,21 @@ public class PainDataOperation
 				}
 			}
 			catch(NullPointerException ex) {}
+		}
+		
+		return list;
+	}
+
+	public static List<PainEntryData> filter(List<PainEntryData> source, String filterComponent, String medication)		//filterComponent is the constant from PainDataIdentifier
+	{
+		List<PainEntryData> list = new ArrayList<PainEntryData>();
+		
+		for (PainEntryData entry : source)
+		{
+			if (entry.getDataMap().get(filterComponent).equals(medication))
+			{
+				list.add(entry);
+			}
 		}
 		
 		return list;

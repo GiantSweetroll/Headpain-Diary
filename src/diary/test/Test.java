@@ -17,28 +17,11 @@ public class Test
 
 	public static void main(String[] args)
 	{
-		JButton button = new JButton();
-		button.add(new ImageTextPanel(ImageManager.getImageIcon(ImageConstants.PAIN_LOCATION_EYES_AND_FOREHEAD), "String", 20));
+		int[] array = {1, 2, 3, 4};
 		
-		button.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-					{
-						button.setEnabled(false);
-						for (Component component : button.getComponents())
-						{
-							component.setEnabled(false);
-						}
-					}
-				});
-		
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500, 300);
-		frame.setLayout(new FlowLayout());
-		
-		frame.add(button);
-		
-		frame.setVisible(true);
+		for (int number : array)
+		{
+			System.out.println(number);
+		}
 	}
 }
