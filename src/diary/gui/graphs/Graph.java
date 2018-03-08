@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -94,12 +95,12 @@ public abstract class Graph extends JPanel
 			this.drawAxesMarkers(g, Color.BLACK);
 			this.drawXAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
 			this.drawYAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
+	//		this.drawAxisNames(g, Color.BLACK, Color.black, this.xAxisName, this.yAxisName);
 	//		g.setFont(Constants.FONT_GENERAL);
 			if (this.enableDataValueMarkers)
 			{
 				this.drawDataValues(g, Color.BLACK);
 			}
-			this.drawAxisNames(g, Color.BLACK, Color.black, this.xAxisName, this.yAxisName);
 		}
 		catch(ArithmeticException ex)
 		{
@@ -279,9 +280,11 @@ public abstract class Graph extends JPanel
 		textLength = g.getFontMetrics().stringWidth(y);
 		Graphics2D g2  = (Graphics2D)g;
 		g2.setColor(coly);
-		g2.rotate(Math.toRadians(90));
-		g2.drawString(y, this.axesOrigin.x - this.MARKER_LABEL_PADDING - this.Y_AXIS_NAME_PADDING, this.axesOrigin.y + this.axesLength.y/2);
-		g2.rotate(-Math.toRadians(90));
+	//	g2.drawString(y, this.axesOrigin.x, this.axesOrigin.y - this.axesLength.y/2);
+		AffineTransform at = new AffineTransform();
+		at.setToRotation(Math.toRadians(90));
+		g2.setTransform(at);
+	//	g2.drawString(y, this.axesOrigin.x, this.axesOrigin.y - this.axesLength.y/2);
 	}
 	
 	//Graph Settings
