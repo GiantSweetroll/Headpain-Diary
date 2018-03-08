@@ -203,6 +203,11 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PRESETS_TEXT, "Presets");
 		appendComponentToMap(doc, map, XMLIdentifier.CUSTOM_TEXT, "Custom");
 		appendComponentToMap(doc, map, XMLIdentifier.OPTIONS_TEXT, "Options");
+		appendComponentToMap(doc, map, XMLIdentifier.AMOUNT_OF_ENTRIES_TEXT, "Amount of Entries");
+		appendComponentToMap(doc, map, XMLIdentifier.AVERAGE_TEXT, "Average");
+		appendComponentToMap(doc, map, XMLIdentifier.TIME_TEXT, "Time");
+		appendComponentToMap(doc, map, XMLIdentifier.KINDS_OF_HEADPAINS_TEXT, "Kinds of Headpains");
+		appendComponentToMap(doc, map, XMLIdentifier.AMOUNT_TEXT, "Amount");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

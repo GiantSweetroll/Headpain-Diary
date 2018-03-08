@@ -126,6 +126,11 @@
      <text identifier="preset text">Presets</text>
      <text identifier="custom text">Custom</text>
      <text identifier="options text">Options</text>
+     <text identifier="amount of entries text">Amount of Entries</text>
+     <text identifier="average text">Average</text>
+     <text identifier="time text">Time</text>
+     <text identifier="kinds of headpains text">Kinds of Headpains</text>
+     <text identifier="amount text">Amount</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Date</text>

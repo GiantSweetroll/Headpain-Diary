@@ -3,6 +3,7 @@ package diary.gui.graphs;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -22,6 +23,9 @@ public abstract class Graph extends JPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 4719770210747311133L;
+	
+	private String xAxisName;
+	private String yAxisName;
 	
 	protected Point axesOrigin;
 	protected Point axesLength;
@@ -44,9 +48,13 @@ public abstract class Graph extends JPanel
 	protected final int MAX_MARKERS_IN_X_AXIS = 5;
 	protected final int GENERAL_PADDING = 10;
 	protected final int DECIMAL_PLACES = 1;
+	protected final int X_AXIS_NAME_PADDING = 20;
+	protected final int Y_AXIS_NAME_PADDING = 5;
 	
 	public Graph(LinkedHashMap<String, Float> dataMap) 
 	{
+		this.xAxisName = "";
+		this.yAxisName = "";
 		this.xAxisLabels = new ArrayList<String>();
 		this.yAxisValues = new ArrayList<Float>();
 		this.yAxisMarkerPoints = new ArrayList<Point>();
@@ -91,6 +99,7 @@ public abstract class Graph extends JPanel
 			{
 				this.drawDataValues(g, Color.BLACK);
 			}
+			this.drawAxisNames(g, Color.BLACK, Color.black, this.xAxisName, this.yAxisName);
 		}
 		catch(ArithmeticException ex)
 		{
@@ -100,6 +109,24 @@ public abstract class Graph extends JPanel
 	protected void setMaxMarkersInXAxis(int max)
 	{
 		this.maxMarkersXAxis = max;
+	}
+	protected void setXAxisName(String text)
+	{
+		this.xAxisName = text;
+		this.repaint();
+	}
+	protected void setYAxisName(String text)
+	{
+		this.yAxisName = text;
+		this.repaint();
+	}
+	protected String getXAxisName()
+	{
+		return this.xAxisName;
+	}
+	protected String getYAxisName()
+	{
+		return this.yAxisName;
 	}
 	
 	//Draw Sections
@@ -240,7 +267,23 @@ public abstract class Graph extends JPanel
 			g.drawString(text, this.dataPoints.get(i).x - textWidth/2, this.dataPoints.get(i).y - this.GENERAL_PADDING);
 		}
 	}
-
+	protected void drawAxisNames(Graphics g, Color colx, Color coly, String x, String y)
+	{
+		//Draw X-Axis name
+		g.setColor(colx);
+		
+		int textLength = g.getFontMetrics().stringWidth(x);
+		g.drawString(x, this.axesOrigin.x + (this.axesLength.x/2) - textLength/2, this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.X_AXIS_NAME_PADDING);
+	
+		//Draw Y-Axis Name
+		textLength = g.getFontMetrics().stringWidth(y);
+		Graphics2D g2  = (Graphics2D)g;
+		g2.setColor(coly);
+		g2.rotate(Math.toRadians(90));
+		g2.drawString(y, this.axesOrigin.x - this.MARKER_LABEL_PADDING - this.Y_AXIS_NAME_PADDING, this.axesOrigin.y + this.axesLength.y/2);
+		g2.rotate(-Math.toRadians(90));
+	}
+	
 	//Graph Settings
 	protected void displayDataValues(boolean bool)
 	{

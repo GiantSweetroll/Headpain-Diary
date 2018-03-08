@@ -46,6 +46,11 @@ public class XMLIdentifier
 	public static final String PRESETS_TEXT = "preset text";
 	public static final String CUSTOM_TEXT = "custom text";
 	public static final String OPTIONS_TEXT = "options text";
+	public static final String AMOUNT_OF_ENTRIES_TEXT = "amount of entries text";
+	public static final String AVERAGE_TEXT = "average text";
+	public static final String TIME_TEXT = "time text";
+	public static final String KINDS_OF_HEADPAINS_TEXT = "kinds of headpains text";
+	public static final String AMOUNT_TEXT = "amount text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
