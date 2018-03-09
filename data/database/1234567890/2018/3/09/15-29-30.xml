@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>09</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>15</time_hour>
+     <time_minute>29</time_minute>
+     <time_seconds>30</time_seconds>
+     <pain_location_custom pain_loc_id="0">63,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">35,154</pain_location_custom>
+     <pain_location_custom pain_loc_id="2">170,160</pain_location_custom>
+     <pain_location_custom pain_loc_id="3">160,40</pain_location_custom>
+     <pain_location_custom pain_loc_id="4">160,42</pain_location_custom>
+     <pain_location_custom pain_loc_id="5">160,44</pain_location_custom>
+     <pain_location_custom pain_loc_id="6">160,46</pain_location_custom>
+     <pain_location_custom pain_loc_id="7">160,47</pain_location_custom>
+     <pain_location_custom pain_loc_id="8">160,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="9">160,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="10">159,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="11">159,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="12">158,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="13">156,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="14">155,57</pain_location_custom>
+     <pain_location_custom pain_loc_id="15">155,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="16">154,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="17">153,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="18">152,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="19">150,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="20">149,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="21">148,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="22">147,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="23">146,57</pain_location_custom>
+     <pain_location_custom pain_loc_id="24">144,57</pain_location_custom>
+     <pain_location_custom pain_loc_id="25">142,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="26">141,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="27">141,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="28">140,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="29">139,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="30">139,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="31">139,48</pain_location_custom>
+     <pain_location_custom pain_loc_id="32">138,47</pain_location_custom>
+     <pain_location_custom pain_loc_id="33">137,46</pain_location_custom>
+     <pain_location_custom pain_loc_id="34">137,45</pain_location_custom>
+     <pain_location_custom pain_loc_id="35">137,43</pain_location_custom>
+     <pain_location_custom pain_loc_id="36">137,42</pain_location_custom>
+     <pain_location_custom pain_loc_id="37">137,40</pain_location_custom>
+     <pain_location_custom pain_loc_id="38">137,38</pain_location_custom>
+     <pain_location_custom pain_loc_id="39">137,37</pain_location_custom>
+     <pain_location_custom pain_loc_id="40">137,34</pain_location_custom>
+     <pain_location_custom pain_loc_id="41">137,32</pain_location_custom>
+     <pain_location_custom pain_loc_id="42">137,29</pain_location_custom>
+     <pain_location_custom pain_loc_id="43">137,28</pain_location_custom>
+     <pain_location_custom pain_loc_id="44">138,28</pain_location_custom>
+     <pain_location_custom pain_loc_id="45">143,28</pain_location_custom>
+     <pain_location_custom pain_loc_id="46">143,28</pain_location_custom>
+     <pain_location_custom pain_loc_id="47">145,28</pain_location_custom>
+     <pain_location_custom pain_loc_id="48">147,28</pain_location_custom>
+     <pain_location_custom pain_loc_id="49">148,28</pain_location_custom>
+     <pain_location_custom pain_loc_id="50">150,31</pain_location_custom>
+     <pain_location_custom pain_loc_id="51">150,31</pain_location_custom>
+     <pain_location_custom pain_loc_id="52">152,36</pain_location_custom>
+     <pain_location_custom pain_loc_id="53">152,36</pain_location_custom>
+     <pain_location_custom pain_loc_id="54">153,42</pain_location_custom>
+     <pain_location_custom pain_loc_id="55">153,45</pain_location_custom>
+     <pain_location_custom pain_loc_id="56">153,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="57">153,57</pain_location_custom>
+     <pain_location_custom pain_loc_id="58">153,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="59">152,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="60">151,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="61">147,63</pain_location_custom>
+     <pain_location_custom pain_loc_id="62">144,64</pain_location_custom>
+     <pain_location_custom pain_loc_id="63">143,64</pain_location_custom>
+     <pain_location_custom pain_loc_id="64">141,64</pain_location_custom>
+     <pain_location_custom pain_loc_id="65">140,64</pain_location_custom>
+     <pain_location_custom pain_loc_id="66">138,64</pain_location_custom>
+     <pain_location_custom pain_loc_id="67">136,64</pain_location_custom>
+     <pain_location_custom pain_loc_id="68">136,63</pain_location_custom>
+     <pain_location_custom pain_loc_id="69">136,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="70">136,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="71">138,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="72">141,47</pain_location_custom>
+     <pain_location_custom pain_loc_id="73">145,43</pain_location_custom>
+     <pain_location_custom pain_loc_id="74">145,43</pain_location_custom>
+     <pain_location_custom pain_loc_id="75">147,42</pain_location_custom>
+     <pain_location_custom pain_loc_id="76">152,40</pain_location_custom>
+     <pain_location_custom pain_loc_id="77">156,40</pain_location_custom>
+     <pain_location_custom pain_loc_id="78">157,40</pain_location_custom>
+     <pain_location_custom pain_loc_id="79">160,40</pain_location_custom>
+     <pain_location_custom pain_loc_id="80">160,47</pain_location_custom>
+     <pain_location_custom pain_loc_id="81">160,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="82">160,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="83">159,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="84">158,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="85">157,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="86">155,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="87">154,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="88">152,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="89">151,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="90">149,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="91">148,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="92">148,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="93">148,47</pain_location_custom>
+     <pain_location_custom pain_loc_id="94">149,41</pain_location_custom>
+     <pain_location_custom pain_loc_id="95">153,37</pain_location_custom>
+     <pain_location_custom pain_loc_id="96">154,37</pain_location_custom>
+     <pain_location_custom pain_loc_id="97">146,43</pain_location_custom>
+     <pain_location_custom pain_loc_id="98">146,43</pain_location_custom>
+     <pain_location_custom pain_loc_id="99">149,41</pain_location_custom>
+     <pain_kind>cssd</pain_kind>
+     <intensity>2</intensity>
+     <duration>23</duration>
+     <activity>other text</activity>
+     <activity_details>guigyu</activity_details>
+     <recent_medication>Panadol</recent_medication>
+     <comments>LSakit sekali, menganggu</comments>
+</Entry>

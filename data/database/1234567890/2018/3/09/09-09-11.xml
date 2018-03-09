@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>09</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>09</time_hour>
+     <time_minute>09</time_minute>
+     <time_seconds>11</time_seconds>
+     <pain_location_custom pain_loc_id="0">170,152</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">172,152</pain_location_custom>
+     <pain_location_custom pain_loc_id="2">173,153</pain_location_custom>
+     <pain_location_custom pain_loc_id="3">175,153</pain_location_custom>
+     <pain_location_custom pain_loc_id="4">67,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="5">68,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="6">66,59</pain_location_custom>
+     <pain_kind>Stabbing</pain_kind>
+     <intensity>2</intensity>
+     <duration>9</duration>
+     <activity>default activities physical activity</activity>
+     <activity_details/>
+     <recent_medication>OBH Combi</recent_medication>
+     <comments/>
+</Entry>

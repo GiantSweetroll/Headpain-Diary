@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>09</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>09</time_hour>
+     <time_minute>11</time_minute>
+     <time_seconds>46</time_seconds>
+     <pain_location_preset pain_loc_id="0">eyes and forhead</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">head back</pain_location_preset>
+     <pain_kind>default pain kind tight band</pain_kind>
+     <intensity>6</intensity>
+     <duration>19</duration>
+     <activity>other text</activity>
+     <activity_details>Playing</activity_details>
+     <recent_medication>OBH Combi</recent_medication>
+     <comments/>
+</Entry>

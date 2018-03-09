@@ -158,7 +158,7 @@ public class PainDataOperation
 			}
 			catch(NullPointerException ex)
 			{
-				map.put(list.get(i).getFullDate(), Float.parseFloat(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+				map.put(list.get(i).getFullDate(), Float.parseFloat(list.get(i).getDataMap().get(PainDataIdentifier.DURATION).toString()));
 			}
 			
 			try

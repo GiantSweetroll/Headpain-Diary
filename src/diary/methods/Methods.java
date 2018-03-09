@@ -626,6 +626,10 @@ public class Methods
 		{
 			return Methods.getLanguageText(XMLIdentifier.OTHER_TEXT);
 		}
+		else if (!Methods.isPartOfDefaultPainKind(id))
+		{
+			return Methods.getLanguageText(XMLIdentifier.OTHER_TEXT);
+		}
 		else
 		{
 			return "";
