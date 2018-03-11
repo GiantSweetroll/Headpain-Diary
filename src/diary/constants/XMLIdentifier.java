@@ -51,6 +51,9 @@ public class XMLIdentifier
 	public static final String TIME_TEXT = "time text";
 	public static final String KINDS_OF_HEADPAINS_TEXT = "kinds of headpains text";
 	public static final String AMOUNT_TEXT = "amount text";
+	public static final String DAYS_TEXT = "days text";
+	public static final String AVERAGE_INTENSITY_TEXT = "average intensity text";
+	public static final String AVERAGE_DURATION_TEXT = "average duration text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -124,6 +127,7 @@ public class XMLIdentifier
 	public static final String DURATION_UNIT_SECONDS_TEXT = "duration unit seconds text";
 	public static final String DURATION_UNIT_MINUTES_TEXT = "duration unit minutes text";
 	public static final String DURATION_UNIT_HOURS_TEXT = "duration unit hours text";
+	public static final String DURATION_UNIT_DAYS_TEXT = "duration unit days text";
 	
 	//Pain Locations
 	public static final String GENERAL_POSITION_HEAD_TEXT = "general position head text";
@@ -192,6 +196,8 @@ public class XMLIdentifier
 	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_DATE = "graph category pain kind vs date";
 //	public static final String GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE = "graph category pain location vs date";
 	public static final String GRAPH_CATEGORY_ACTIVITY_VS_DATE = "graph category activity vs date";
+	public static final String GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT = "graph categories intensity average vs month";
+	public static final String GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT = "graph categories duration average vs month";
 	//Graph Settings
 	public static final String GRAPH_SETTINGS_ENABLE_DATA_VALUES = "graph settings enable data values";
 	public static final String GRAPH_SETTINGS_DISPLAY_VOID_DATA = "graph settings display void data";

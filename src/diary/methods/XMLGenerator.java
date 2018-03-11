@@ -89,6 +89,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_SECONDS_TEXT, "Seconds");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_MINUTES_TEXT, "Minutes");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_HOURS_TEXT, "Hours");
+		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_DAYS_TEXT, "Days");
 		appendComponentToMap(doc, map, XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL, "Your Most Painful Area");
 		
 		//Default Activities
@@ -208,6 +209,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.TIME_TEXT, "Time");
 		appendComponentToMap(doc, map, XMLIdentifier.KINDS_OF_HEADPAINS_TEXT, "Kinds of Headpains");
 		appendComponentToMap(doc, map, XMLIdentifier.AMOUNT_TEXT, "Amount");
+		appendComponentToMap(doc, map, XMLIdentifier.DAYS_TEXT, "Days");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -220,6 +222,8 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE, "Kinds of Pains vs Date");
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE, "Pain Locations vs Date");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE, "Activity vs Date");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT, "Average Intensity vs Month");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT, "Average Duration vs Month");
 		//Graph Settings
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES, "Show Data Values");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_SETTINGS_DISPLAY_VOID_DATA, "Display Empty Data");

@@ -12,9 +12,13 @@ public class LineGraphPanel extends Graph
 	 */
 	private static final long serialVersionUID = -224326087999891758L;
 	
-	public LineGraphPanel(LinkedHashMap<String, Float> dataMap)
+	public LineGraphPanel(LinkedHashMap<String, Double> dataMap)
 	{
 		super(dataMap);
+	}
+	public LineGraphPanel(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	{
+		super(dataMap, xAxisName, yAxisName);
 	}
 	
 	

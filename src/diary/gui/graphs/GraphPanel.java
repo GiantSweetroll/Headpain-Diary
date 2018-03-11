@@ -222,7 +222,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 		if (this.panelGraphSettings.isDisplayVoidData())
 		{	
-			list = PainDataOperation.insertEmptyData(list);
+			list = PainDataOperation.insertEmptyData(list, this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO));
 		}
 		
 	/*	if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
@@ -254,6 +254,14 @@ public class GraphPanel extends JPanel implements ActionListener
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAverageDurationVSDate(list));
+		}
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageIntensityVSMonth(list));
+		}
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT)))
+		{
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageDurationVSMonth(list));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
 		{
@@ -287,6 +295,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		}
 		catch(NullPointerException ex) {};
 		
+		/*
 		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
 		String category = this.comboCategory.getSelectedItem().toString();
 		
@@ -294,9 +303,9 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 	/*	if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
 		{
-	//		this.graph = new BarGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
+			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
 		}
-		else */ if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
+		else  if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DATE_LABEL));
@@ -331,12 +340,23 @@ public class GraphPanel extends JPanel implements ActionListener
 /*		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
-		}		*/
+		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfActivity(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
+		}
+		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
+		*/
+		if (this.graph instanceof LineGraphPanel)
+		{
+			this.graph = new BarGraphPanel(this.graph.getDataMap(), this.graph.getXAxisName(), this.graph.getYAxisName());
+		}
+		else
+		{
+			this.graph = new LineGraphPanel(this.graph.getDataMap(), this.graph.getXAxisName(), this.graph.getYAxisName());
+			this.graph.displayDataPoint(this.panelGraphSettings.isDisplayDataPoints());
 		}
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.initGraphScroll(graph);
@@ -349,6 +369,8 @@ public class GraphPanel extends JPanel implements ActionListener
 	private void initGraphScroll(Graph graph)
 	{
 		this.scrollGraph = new JScrollPane(graph, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scrollGraph.getVerticalScrollBar().setUnitIncrement(10);
+		this.scrollGraph.getHorizontalScrollBar().setUnitIncrement(10);
 		this.scrollGraph.setOpaque(false);
 		this.scrollGraph.getViewport().setOpaque(false);
 	}
@@ -380,6 +402,7 @@ public class GraphPanel extends JPanel implements ActionListener
 				break;
 				
 			case SWITCH_GRAPH:
+				/*
 				if(this.graphReversed)
 				{
 					this.graphReversed = false;
@@ -390,6 +413,8 @@ public class GraphPanel extends JPanel implements ActionListener
 					this.graphReversed = true;
 					this.initReverseGraph();
 				}
+				*/
+				this.initReverseGraph();
 				break;
 				
 			case SAVE:

@@ -12,9 +12,15 @@ public class BarGraphPanel extends Graph
 	 */
 	private static final long serialVersionUID = -636744451243862364L;
 	
-	public BarGraphPanel(LinkedHashMap<String, Float> dataMap)
+	//Constructors
+	public BarGraphPanel(LinkedHashMap<String, Double> dataMap)
 	{
 		super(dataMap);
+		super.setMaxMarkersInXAxis(dataMap.size());
+	}
+	public BarGraphPanel(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	{
+		super(dataMap, xAxisName, yAxisName);
 		super.setMaxMarkersInXAxis(dataMap.size());
 	}
 	

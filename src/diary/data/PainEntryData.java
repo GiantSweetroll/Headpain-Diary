@@ -106,6 +106,12 @@ public class PainEntryData
 				+ this.dataMap.get(PainDataIdentifier.DATE_YEAR);
 	}
 	
+	public String getMonthAndYear()
+	{
+		return this.dataMap.get(PainDataIdentifier.DATE_MONTH) + "/"
+				+ this.dataMap.get(PainDataIdentifier.DATE_YEAR);
+	}
+	
 	public String getFullTime()
 	{
 		return this.dataMap.get(PainDataIdentifier.TIME_HOUR) + ":"
@@ -148,7 +154,9 @@ public class PainEntryData
 		locations = (List<String>)this.dataMap.get(PainDataIdentifier.PAIN_LOCATION_CUSTOM);
 		for (int a=0; a<locations.size(); a++)
 		{
+			sb.append("(");
 			sb.append(locations.get(a));
+			sb.append(")");
 			if (locations.size()-a!=1)
 			{
 				sb.append(", ");

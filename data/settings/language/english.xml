@@ -31,6 +31,7 @@
      <text identifier="duration unit seconds text">Seconds</text>
      <text identifier="duration unit minutes text">Minutes</text>
      <text identifier="duration unit hours text">Hours</text>
+     <text identifier="duration unit days text">Days</text>
      <text identifier="your most painful area label">Your Most Painful Area</text>
      <text identifier="default activities sunlight">Sunlight</text>
      <text identifier="default activities improper diet sleep">Improper Diet/Sleep Routine</text>
@@ -131,6 +132,7 @@
      <text identifier="time text">Time</text>
      <text identifier="kinds of headpains text">Kinds of Headpains</text>
      <text identifier="amount text">Amount</text>
+     <text identifier="days text">Days</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Date</text>
@@ -139,6 +141,8 @@
      <text identifier="graph category duration vs time text">Duration vs Time</text>
      <text identifier="graph category pain kind vs date">Kinds of Pains vs Date</text>
      <text identifier="graph category activity vs date">Activity vs Date</text>
+     <text identifier="graph categories intensity average vs month">Average Intensity vs Month</text>
+     <text identifier="graph categories duration average vs month">Average Duration vs Month</text>
      <text identifier="graph settings enable data values">Show Data Values</text>
      <text identifier="graph settings display void data">Display Empty Data</text>
      <text identifier="graph settings display data points">Display Data Points</text>

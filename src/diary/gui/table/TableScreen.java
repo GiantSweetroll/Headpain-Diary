@@ -28,10 +28,8 @@ import javax.swing.event.TableModelListener;
 import diary.ImagePanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
-import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
-import diary.data.Settings;
 import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
@@ -361,10 +359,7 @@ public class TableScreen extends JPanel implements ActionListener
 				//Entry ID is the start time
 				
 				this.activeEntry = entry;
-				this.selectedEntryIDs.add(MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + 
-											entry.getDataMap().get(PainDataIdentifier.DATE_YEAR)+ File.separator +
-											entry.getDataMap().get(PainDataIdentifier.DATE_MONTH)+ File.separator +
-											entry.getDataMap().get(PainDataIdentifier.DATE_DAY)+ File.separator +
+				this.selectedEntryIDs.add(Methods.generatePainDataFolderPathName(this.activePatientPanel.getSelectedPatientData(), entry) + File.separator +
 											key.replaceAll(":", "-") + ".xml");		//Replace ":" to "-" to unify with file name
 				selected++;
 			}

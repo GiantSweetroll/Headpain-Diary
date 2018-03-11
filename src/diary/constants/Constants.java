@@ -122,6 +122,8 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT),
+														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT),
+														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE),
@@ -155,7 +157,8 @@ public final class Constants
 	
 	public static final String[] DURATION_UNITS = {Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT),
 													Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT),
-													Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)};
+													Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT),
+													Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT)};
 	
 	public static final String[] PATIENT_TABLE_HEADERS = {Methods.getLanguageText(XMLIdentifier.SELECT_TEXT),
 															Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL),

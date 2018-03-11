@@ -27,13 +27,17 @@ public abstract class Graph extends JPanel
 	
 	private String xAxisName;
 	private String yAxisName;
+	private LinkedHashMap<String, Double> dataMap;
 	
 	protected Point axesOrigin;
 	protected Point axesLength;
 	protected List<Point> dataPoints;
 	protected List<String> xAxisLabels;
-	protected List<Float> yAxisValues;
+	protected List<Double> yAxisValues;
 	protected List<Point> yAxisMarkerPoints;
+	protected int maxYAxisMarkerLabelLength;
+	protected int maxXAxisMarkerLabelHeight;
+	protected int yAxisNameTextHeight;
 	
 	//Options
 	protected boolean enableDataValueMarkers;
@@ -41,23 +45,27 @@ public abstract class Graph extends JPanel
 	protected int maxMarkersXAxis;
 	
 	//Constants
-	protected final int AXES_PADDING_WITH_PANEL_EDGE = 50;
+	protected int AXES_PADDING_WITH_PANEL_EDGE = 50;
 	protected final int DATA_POINT_WIDTH = 10;
 	protected final int AXES_POINTERS_LENGTH = 10;
 	protected final int MARKER_LABEL_PADDING = 5;
 	protected final int MAX_MARKERS_IN_Y_AXIS = 10;
-	protected final int MAX_MARKERS_IN_X_AXIS = 5;
+	protected final int MAX_MARKERS_IN_X_AXIS = 4;
 	protected final int GENERAL_PADDING = 10;
 	protected final int DECIMAL_PLACES = 1;
 	protected final int X_AXIS_NAME_PADDING = 20;
-	protected final int Y_AXIS_NAME_PADDING = 5;
+	protected final int Y_AXIS_NAME_PADDING = 20;
 	
-	public Graph(LinkedHashMap<String, Float> dataMap) 
+	public Graph(LinkedHashMap<String, Double> dataMap) 
 	{
+		this.dataMap = dataMap;
 		this.xAxisName = "";
 		this.yAxisName = "";
+		this.maxYAxisMarkerLabelLength = 0;
+		this.maxXAxisMarkerLabelHeight = 0;
+		this.yAxisNameTextHeight = 0;
 		this.xAxisLabels = new ArrayList<String>();
-		this.yAxisValues = new ArrayList<Float>();
+		this.yAxisValues = new ArrayList<Double>();
 		this.yAxisMarkerPoints = new ArrayList<Point>();
 		this.dataPoints = new ArrayList<Point>();
 		
@@ -65,13 +73,38 @@ public abstract class Graph extends JPanel
 		this.displayDataPoint = true;
 		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
 		
-		for (Map.Entry<String, Float> entry : dataMap.entrySet())
+		for (Map.Entry<String, Double> entry : dataMap.entrySet())
 		{
 			this.xAxisLabels.add(entry.getKey());
 			this.yAxisValues.add(entry.getValue());
 		}
 		
 		this.setOpaque(false);
+	}
+	public Graph(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	{
+		this.dataMap = dataMap;
+		this.xAxisName = xAxisName;
+		this.yAxisName = yAxisName;
+		this.maxYAxisMarkerLabelLength = 0;
+		this.maxXAxisMarkerLabelHeight = 0;
+		this.yAxisNameTextHeight = 0;
+		this.xAxisLabels = new ArrayList<String>();
+		this.yAxisValues = new ArrayList<Double>();
+		this.yAxisMarkerPoints = new ArrayList<Point>();
+		this.dataPoints = new ArrayList<Point>();
+		
+		this.enableDataValueMarkers = false;
+		this.displayDataPoint = true;
+		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
+		
+		for (Map.Entry<String, Double> entry : dataMap.entrySet())
+		{
+			this.xAxisLabels.add(entry.getKey());
+			this.yAxisValues.add(entry.getValue());
+		}
+		
+		this.setOpaque(false);		
 	}
 	
 	//Methods
@@ -95,11 +128,17 @@ public abstract class Graph extends JPanel
 			this.drawAxesMarkers(g, Color.BLACK);
 			this.drawXAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
 			this.drawYAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
-	//		this.drawAxisNames(g, Color.BLACK, Color.black, this.xAxisName, this.yAxisName);
-	//		g.setFont(Constants.FONT_GENERAL);
+			this.drawAxisNames(g, Color.BLACK, Color.BLACK, this.xAxisName, this.yAxisName);
+			g.setFont(Constants.FONT_GENERAL);
 			if (this.enableDataValueMarkers)
 			{
 				this.drawDataValues(g, Color.BLACK);
+			}
+			
+			if (this.getBehindAxesDifferenceWithPanelEdgeLeft()>0)
+			{
+				this.AXES_PADDING_WITH_PANEL_EDGE += this.getBehindAxesDifferenceWithPanelEdgeLeft();
+				this.repaint();
 			}
 		}
 		catch(ArithmeticException ex)
@@ -129,6 +168,25 @@ public abstract class Graph extends JPanel
 	{
 		return this.yAxisName;
 	}
+	protected LinkedHashMap<String, Double> getDataMap()
+	{
+		return this.dataMap;
+	}
+	protected int getMinWidth()
+	{
+		return this.yAxisNameTextHeight + 
+				this.Y_AXIS_NAME_PADDING + 
+				this.maxYAxisMarkerLabelLength + 
+				this.MARKER_LABEL_PADDING + 
+				this.AXES_POINTERS_LENGTH +
+				this.axesLength.x + 
+				this.AXES_PADDING_WITH_PANEL_EDGE;
+	}
+	private int getBehindAxesDifferenceWithPanelEdgeLeft()
+	{
+		int usage = this.yAxisNameTextHeight + this.Y_AXIS_NAME_PADDING + this.maxYAxisMarkerLabelLength + this.MARKER_LABEL_PADDING + this.AXES_POINTERS_LENGTH;
+		return usage - this.AXES_PADDING_WITH_PANEL_EDGE;
+	}
 	
 	//Draw Sections
 	protected void drawAxes(Graphics g, Color c, int xEnd, int yEnd)
@@ -144,21 +202,21 @@ public abstract class Graph extends JPanel
 		//Get length
 		this.axesLength = new Point(xEnd - this.axesOrigin.x, this.axesOrigin.y - yEnd);
 	}
-	protected void generateDataPoints(List<Float> dataValues)
+	protected void generateDataPoints(List<Double> dataValues)
 	{
 		//Set Distance between each data entry in the x-axis
-		float xDiff = this.axesLength.x/dataValues.size();
+		double xDiff = this.axesLength.x/dataValues.size();
 		//Set distance between each unit increment in the y-axis
-		float yDiff = this.axesLength.y/Methods.getHighestValue(dataValues);
+		double yDiff = this.axesLength.y/Methods.getHighestValue(dataValues);
 		
 		//Translate into coordinate points
 		this.dataPoints = new ArrayList<Point>();
 		int xPos = (int)GNumbers.round(xDiff, 1);
-		for (float i=0; i<dataValues.size(); i++)
+		for (double i=0; i<dataValues.size(); i++)
 		{
-			float roundedDataValue = GNumbers.round(dataValues.get((int)i), this.DECIMAL_PLACES);
-			float floatCoordinate = (float)this.axesOrigin.y - yDiff*roundedDataValue;
-			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(floatCoordinate, this.DECIMAL_PLACES)));
+			Double roundedDataValue = GNumbers.round(dataValues.get((int)i), this.DECIMAL_PLACES);
+			Double DoubleCoordinate = (double)this.axesOrigin.y - yDiff*roundedDataValue;
+			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(DoubleCoordinate, this.DECIMAL_PLACES)));
 			xPos+=xDiff;
 		}
 	}
@@ -211,16 +269,23 @@ public abstract class Graph extends JPanel
 		g.setColor(c);
 		g.setFont(font);
 		
-		float highestVal = Methods.getHighestValue(this.yAxisValues);		//Get highest value
-		float diff = highestVal/(float)this.MAX_MARKERS_IN_Y_AXIS;			//Get unit increment
+		double highestVal = Methods.getHighestValue(this.yAxisValues);		//Get highest value
+		double diff = highestVal/(double)this.MAX_MARKERS_IN_Y_AXIS;			//Get unit increment
 		
-		for (float i = 0; i<this.yAxisMarkerPoints.size(); i++)
+		this.maxYAxisMarkerLabelLength = 0;
+		
+		for (double i = 0; i<this.yAxisMarkerPoints.size(); i++)
 		{
-//			String text = Float.toString(diff*(i+1));
+//			String text = Double.toString(diff*(i+1));
 //			System.out.println(text);
 //			text = text.substring(0, text.indexOf(".") + 2);		//One Decimal Place
-			String text = Float.toString(Methods.round(diff*(i+1), this.DECIMAL_PLACES));		//Rounded to X Decimal Place
+			String text = Double.toString(GNumbers.round(diff*(i+1), this.DECIMAL_PLACES));		//Rounded to X Decimal Place
 			int textWidth = g.getFontMetrics().stringWidth(text);
+			
+			if (textWidth > this.maxYAxisMarkerLabelLength)
+			{
+				this.maxYAxisMarkerLabelLength = textWidth;
+			}
 			
 			g.drawString(text, 
 							this.axesOrigin.x - this.AXES_POINTERS_LENGTH - this.MARKER_LABEL_PADDING - textWidth, 
@@ -233,6 +298,7 @@ public abstract class Graph extends JPanel
 		g.setFont(font);
 		
 		int diff = 0;
+		this.maxXAxisMarkerLabelHeight = 0;
 		
 		if (this.xAxisLabels.size()<=this.maxMarkersXAxis)
 		{
@@ -251,40 +317,57 @@ public abstract class Graph extends JPanel
 		{
 			String text = this.xAxisLabels.get(i);
 			int textWidth = g.getFontMetrics().stringWidth(text);
-			g.drawString(text, 
-							this.dataPoints.get(i).x - textWidth/2, 
-							this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING);
+			int x = this.dataPoints.get(i).x - textWidth/2;
+			int y = this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING;
+			g.drawString(text, x, y);
+			
+			//Get max height
+			if (g.getFontMetrics().getHeight() > this.maxXAxisMarkerLabelHeight)
+			{
+				this.maxXAxisMarkerLabelHeight = g.getFontMetrics().getHeight();
+			}
 		}
 	}
 	protected void drawDataValues(Graphics g, Color c)
 	{
 		g.setColor(c);
 		
+		g.setFont(Constants.FONT_GENERAL_BOLD);
 		for (int i=0; i<this.yAxisValues.size(); i++)
 		{
-			String text = Float.toString(Methods.round(this.yAxisValues.get(i), this.DECIMAL_PLACES));
+			String text = Double.toString(GNumbers.round(this.yAxisValues.get(i), this.DECIMAL_PLACES));
 			int textWidth = g.getFontMetrics().stringWidth(text);
 			
 			g.drawString(text, this.dataPoints.get(i).x - textWidth/2, this.dataPoints.get(i).y - this.GENERAL_PADDING);
 		}
+		g.setFont(Constants.FONT_GENERAL);
 	}
 	protected void drawAxisNames(Graphics g, Color colx, Color coly, String x, String y)
 	{
+		g.setFont(Constants.FONT_GENERAL_A_BIT_BIGGER);
 		//Draw X-Axis name
 		g.setColor(colx);
 		
 		int textLength = g.getFontMetrics().stringWidth(x);
-		g.drawString(x, this.axesOrigin.x + (this.axesLength.x/2) - textLength/2, this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.X_AXIS_NAME_PADDING);
+		g.drawString(x, 
+						this.axesOrigin.x + (this.axesLength.x/2) - textLength/2, 
+						this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.maxXAxisMarkerLabelHeight + this.X_AXIS_NAME_PADDING);
 	
 		//Draw Y-Axis Name
 		textLength = g.getFontMetrics().stringWidth(y);
 		Graphics2D g2  = (Graphics2D)g;
 		g2.setColor(coly);
-	//	g2.drawString(y, this.axesOrigin.x, this.axesOrigin.y - this.axesLength.y/2);
+//		g2.drawString(y, this.axesOrigin.x - this.MARKER_LABEL_PADDING - this.maxYAxisMarkerLabelLength - this.Y_AXIS_NAME_PADDING, this.axesOrigin.y - this.axesLength.y/2 + textLength/2);
+		this.yAxisNameTextHeight = g2.getFontMetrics().getHeight();
 		AffineTransform at = new AffineTransform();
-		at.setToRotation(Math.toRadians(90));
+		AffineTransform defaultAt = g2.getTransform();
+		at.rotate(-Math.toRadians(90));
 		g2.setTransform(at);
-	//	g2.drawString(y, this.axesOrigin.x, this.axesOrigin.y - this.axesLength.y/2);
+	//	g2.drawString(y, (this.axesOrigin.y - this.axesLength.y/2 + textLength/2)*-1, (this.axesLength.y-this.axesLength.y/2+textLength/2)/4 - this.MARKER_LABEL_PADDING - this.maxYAxisMarkerLabelLength*1.8f);
+		g2.drawString(y, 
+						(this.axesOrigin.y - this.axesLength.y/2 + textLength/2)*-1, 
+						this.axesOrigin.x - this.AXES_POINTERS_LENGTH - this.MARKER_LABEL_PADDING - this.maxYAxisMarkerLabelLength - this.Y_AXIS_NAME_PADDING);
+		g2.setTransform(defaultAt);
 	}
 	
 	//Graph Settings

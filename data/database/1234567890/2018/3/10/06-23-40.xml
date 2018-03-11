@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>10</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>06</time_hour>
+     <time_minute>23</time_minute>
+     <time_seconds>40</time_seconds>
+     <pain_location_custom pain_loc_id="0">32,155</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">172,151</pain_location_custom>
+     <pain_location_custom pain_loc_id="2">50,74</pain_location_custom>
+     <pain_kind>default pain kind pulsating</pain_kind>
+     <intensity>5</intensity>
+     <duration>720.0</duration>
+     <activity>default activity stressor</activity>
+     <activity_details/>
+     <recent_medication>OBH Combi</recent_medication>
+     <comments/>
+</Entry>

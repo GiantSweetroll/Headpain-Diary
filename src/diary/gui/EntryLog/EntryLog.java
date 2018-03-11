@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -46,7 +48,7 @@ import giantsweetroll.gui.swing.ScrollPaneManager;
 import giantsweetroll.message.MessageManager;
 import giantsweetroll.xml.dom.XMLManager;
 
-public class EntryLog extends JPanel implements ActionListener
+public class EntryLog extends JPanel implements ActionListener, FocusListener
 {
 	/**
 	 * 
@@ -308,6 +310,7 @@ public class EntryLog extends JPanel implements ActionListener
 		this.butFinish.setActionCommand(this.FINISH);
 		this.comboPainKind.addActionListener(this.painKindListener);
 		this.comboActivity.addActionListener(this.activityListener);
+		this.tfIntensity.addFocusListener(this);
 	}
 	
 	//Methods
@@ -362,7 +365,26 @@ public class EntryLog extends JPanel implements ActionListener
 				this.appendToRootNode(doc, rootElement, PainDataIdentifier.PAIN_KIND, Methods.convertPainKindLanguageToID(this.comboPainKind.getSelectedItem().toString()));
 			}
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.INTENSITY, Methods.getTextData(this.tfIntensity));
-			this.appendToRootNode(doc, rootElement, PainDataIdentifier.DURATION, Methods.getTextData(this.tfDuration));
+			//Duration unit handling
+			String duration = Methods.getTextData(this.tfDuration);
+			double durationValue = Double.parseDouble(duration);
+			String durationUnit = this.comboDurationUnit.getSelectedItem().toString();
+			if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT)))			//Days
+			{
+				durationValue = durationValue*86400d;
+				duration = Double.toString(durationValue);
+			}
+			else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)))	//Hours
+			{
+				durationValue = durationValue*3600d;
+				duration = Double.toString(durationValue);
+			}
+			else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT)))		//Minutes
+			{
+				durationValue = durationValue*60d;
+				duration = Double.toString(durationValue);
+			}
+			this.appendToRootNode(doc, rootElement, PainDataIdentifier.DURATION, duration);
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY, Methods.convertActivityLanguageToID(this.comboActivity.getSelectedItem().toString()));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY_DETAILS, Methods.getTextData(this.tfActivity));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.RECENT_MEDICATION, this.historyRecentMedication.getItem());
@@ -481,7 +503,13 @@ public class EntryLog extends JPanel implements ActionListener
 		String duration = entry.getDataMap().get(PainDataIdentifier.DURATION).toString();
 		double durationValue = Double.parseDouble(duration);
 		String durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT);
-		if (durationValue>=3600d)	//Hours
+		if (durationValue >=86400d)
+		{
+			durationValue = durationValue/86400d;
+			duration = Double.toString(durationValue);
+			durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT);
+		}
+		else if (durationValue>=3600d && durationValue<86400d)	//Hours
 		{
 			durationValue = durationValue/3600d;
 			duration = Double.toString(durationValue);
@@ -529,6 +557,7 @@ public class EntryLog extends JPanel implements ActionListener
 	}
 	
 	//Interfaces
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		switch (e.getActionCommand())
@@ -578,6 +607,29 @@ public class EntryLog extends JPanel implements ActionListener
 		}
 	}
 		
+	@Override
+	public void focusGained(FocusEvent e) {}
+	@Override
+	public void focusLost(FocusEvent e)
+	{
+		try
+		{
+			byte intensity = Byte.parseByte(this.tfIntensity.getText().trim());
+			if (intensity > 10)
+			{
+				this.tfIntensity.setText("10");
+			}
+			else if (intensity < 0)
+			{
+				this.tfIntensity.setText("0");
+			}
+		}
+		catch(NumberFormatException ex)
+		{
+			this.tfIntensity.setText("");
+		}
+	}
+	
 	private ActionListener activityListener = new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)

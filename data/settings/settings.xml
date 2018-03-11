@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <settings>
+     <database_path>F:\Projects 4 - School\Headpain-Diary\data\database</database_path>
+     <database_users_path>F:\Projects 4 - School\Headpain-Diary\data\users</database_users_path>
      <window_mode>windowed</window_mode>
-     <database_path>D:\Gardyan\Programming\Git-Hub Repositories\Headpain-Diary\data\database</database_path>
-     <database_users_path>D:\Gardyan\Programming\Git-Hub Repositories\Headpain-Diary\data\users</database_users_path>
      <language>english</language>
 </settings>

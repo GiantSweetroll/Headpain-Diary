@@ -66,7 +66,7 @@ public class Methods
 				patient.getID() + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_YEAR) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.DATE_MONTH) + File.separator +
-				entry.getDataMap().get(PainDataIdentifier.DATE_DAY);
+				entry.getDataMap().get(PainDataIdentifier.DATE_DAY) + File.separator;
 	}
 	public static String generatePainDataFilePathName(PatientData patient, PainEntryData entry)
 	{
@@ -99,9 +99,9 @@ public class Methods
 	}
 	*/
 	
-	public static float getHighestValue(List<Float> list)
+	public static double getHighestValue(List<Double> list)
 	{
-		float max = 0;
+		double max = 0;
 		for (int i=0; i<list.size(); i++)
 		{
 			if (list.get(i)>max)
