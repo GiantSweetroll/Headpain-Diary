@@ -38,14 +38,17 @@ public abstract class Graph extends JPanel
 	protected int maxYAxisMarkerLabelLength;
 	protected int maxXAxisMarkerLabelHeight;
 	protected int yAxisNameTextHeight;
+	protected int maxMarkersXAxis;
+	protected int axesPaddingWithPanelEdgeSides = 50;
+	protected int axesPaddingWithPanelEdgeBelow = 50;
+	protected int axesPaddingWithPanelEdgeTop = 50;
+	protected int xAxisNameTextHeight;
 	
 	//Options
 	protected boolean enableDataValueMarkers;
 	protected boolean displayDataPoint;
-	protected int maxMarkersXAxis;
 	
 	//Constants
-	protected int AXES_PADDING_WITH_PANEL_EDGE = 50;
 	protected final int DATA_POINT_WIDTH = 10;
 	protected final int AXES_POINTERS_LENGTH = 10;
 	protected final int MARKER_LABEL_PADDING = 5;
@@ -115,8 +118,8 @@ public abstract class Graph extends JPanel
 		
 	//	g.setFont(Constants.FONT_GENERAL);
 		
-		this.axesOrigin = new Point(this.AXES_PADDING_WITH_PANEL_EDGE, this.getHeight()-this.AXES_PADDING_WITH_PANEL_EDGE);
-		this.drawAxes(g, Color.BLACK, this.getWidth()-this.AXES_PADDING_WITH_PANEL_EDGE, this.AXES_PADDING_WITH_PANEL_EDGE);
+		this.axesOrigin = new Point(this.axesPaddingWithPanelEdgeSides, this.getHeight()-this.axesPaddingWithPanelEdgeBelow);
+		this.drawAxes(g, Color.BLACK, this.getWidth()-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
 		try
 		{
 			if (this.displayDataPoint)
@@ -137,7 +140,12 @@ public abstract class Graph extends JPanel
 			
 			if (this.getBehindAxesDifferenceWithPanelEdgeLeft()>0)
 			{
-				this.AXES_PADDING_WITH_PANEL_EDGE += this.getBehindAxesDifferenceWithPanelEdgeLeft();
+				this.axesPaddingWithPanelEdgeSides += this.getBehindAxesDifferenceWithPanelEdgeLeft();
+				this.repaint();
+			}
+			else if (this.getBelowAxesDifferenceWithPanelEdgeBelow()>0)
+			{
+				this.axesPaddingWithPanelEdgeBelow += this.getBelowAxesDifferenceWithPanelEdgeBelow();
 				this.repaint();
 			}
 		}
@@ -180,12 +188,17 @@ public abstract class Graph extends JPanel
 				this.MARKER_LABEL_PADDING + 
 				this.AXES_POINTERS_LENGTH +
 				this.axesLength.x + 
-				this.AXES_PADDING_WITH_PANEL_EDGE;
+				this.axesPaddingWithPanelEdgeSides;
 	}
 	private int getBehindAxesDifferenceWithPanelEdgeLeft()
 	{
 		int usage = this.yAxisNameTextHeight + this.Y_AXIS_NAME_PADDING + this.maxYAxisMarkerLabelLength + this.MARKER_LABEL_PADDING + this.AXES_POINTERS_LENGTH;
-		return usage - this.AXES_PADDING_WITH_PANEL_EDGE;
+		return usage - this.axesPaddingWithPanelEdgeSides;
+	}
+	protected int getBelowAxesDifferenceWithPanelEdgeBelow()
+	{
+		int usage = this.xAxisNameTextHeight + this.X_AXIS_NAME_PADDING + this.maxXAxisMarkerLabelHeight + this.MARKER_LABEL_PADDING + this.AXES_POINTERS_LENGTH;
+		return usage - this.axesPaddingWithPanelEdgeBelow;
 	}
 	
 	//Draw Sections
@@ -345,6 +358,7 @@ public abstract class Graph extends JPanel
 	protected void drawAxisNames(Graphics g, Color colx, Color coly, String x, String y)
 	{
 		g.setFont(Constants.FONT_GENERAL_A_BIT_BIGGER);
+		this.xAxisNameTextHeight = g.getFontMetrics().getHeight();
 		//Draw X-Axis name
 		g.setColor(colx);
 		

@@ -315,6 +315,11 @@ public class Methods
 	public static void makeFullscreen(JFrame frame)
 	{
 		frame.dispose();
+		try
+		{
+			frame.add(MainFrame.jComponent);
+		}
+		catch(NullPointerException ex){}
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -323,6 +328,11 @@ public class Methods
 	public static void makeWindowed(JFrame frame)
 	{
 		frame.dispose();
+		try
+		{
+			frame.add(MainFrame.jComponent);
+		}
+		catch(NullPointerException ex){}
 		frame.setExtendedState(JFrame.NORMAL);
 		frame.setUndecorated(false);
 		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
