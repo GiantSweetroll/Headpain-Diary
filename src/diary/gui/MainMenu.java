@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
@@ -29,7 +30,7 @@ import diary.gui.EntryLog.EntryLog;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 
-public class MainMenu extends JPanel implements ActionListener
+public class MainMenu extends JScrollPane implements ActionListener
 {
 
 	/**
@@ -40,7 +41,7 @@ public class MainMenu extends JPanel implements ActionListener
 	private JLabel labLogo, labCreatedBy, labName, labSupport;
 	private List<JLabel> supportersList;
 	private JButton butNewEntry, butGraph, butTable, butSettings, butExit, butManagePatients;
-	private JPanel panelMainButtons, panelSupport, panelAuthor, panelBelow, panelBelowLeft, panelBelowRight, panelBelowCenter, panelCenter, panelCenterCenter, panelCenterBelow;
+	private JPanel panelMainButtons, panelSupport, panelAuthor, panelBelow, panelBelowLeft, panelBelowRight, panelBelowCenter, panelCenter, panelCenterCenter, panelCenterBelow, panelMain;
 	
 	//Constants
 	private final String NEW_ENTRY = "new entry";
@@ -62,17 +63,25 @@ public class MainMenu extends JPanel implements ActionListener
 	//Methods
 	private void init()
 	{
+		this.initPanelMain();
+		this.setViewportView(this.panelMain);
+		this.getVerticalScrollBar().setUnitIncrement(10);
+		this.getHorizontalScrollBar().setUnitIncrement(10);
+	}
+	private void initPanelMain()
+	{
 		//Initialization
 		this.initPanelCenter();
 		this.initPanelBelow();
+		this.panelMain = new JPanel();
 		
 		//Properties
-		this.setLayout(new BorderLayout());
-		this.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
+		this.panelMain.setLayout(new BorderLayout());
+		this.panelMain.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		
 		//Add to panel
-		this.add(this.panelCenter, BorderLayout.CENTER);
-		this.add(this.panelBelow, BorderLayout.SOUTH);
+		this.panelMain.add(this.panelCenter, BorderLayout.CENTER);
+		this.panelMain.add(this.panelBelow, BorderLayout.SOUTH);
 	}
 	private void initPanelCenter()
 	{
