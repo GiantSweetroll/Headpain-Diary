@@ -10,6 +10,9 @@ import diary.patientdata.PatientDataManagePanel;
 
 public class Globals 
 {
+	//Global Variables
+	public static int GENERAL_FONT_SIZE = 12;
+	
 	//Histories
 	public static final History HISTORY_RECENT_MEDICATION = new History(Constants.HISTORY_RECENT_MEDICATION_NAME);
 	

@@ -56,11 +56,13 @@ public class MainFrame
 		
 		frame.add(jComponent);
 		
+		/*
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		*/
 		
 	//	System.out.println(frame.getSize());
 	}
@@ -82,6 +84,11 @@ public class MainFrame
 			if(component instanceof MainMenu)
 			{
 				MainFrame.checkUsers();
+				if (Globals.MAIN_MENU.getVerticalScrollBar().isVisible())
+				{
+					Globals.GENERAL_FONT_SIZE--;
+					MainFrame.changePanel(component);
+				}
 			}
 			else
 			{
@@ -204,7 +211,7 @@ public class MainFrame
 						try
 						{
 				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, 12));
+							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, Globals.GENERAL_FONT_SIZE));
 							UIManager.put("OptionPane.background", Color.WHITE);
 							UIManager.put("Panel.background", Color.white);
 							
