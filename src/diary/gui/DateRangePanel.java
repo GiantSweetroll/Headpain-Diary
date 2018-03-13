@@ -93,4 +93,9 @@ public class DateRangePanel extends JPanel
 	{
 		this.dateTo.setDate(day, month, year);
 	}
+	
+	public String getDateRangeAsString()
+	{
+		return this.dateFrom.getDateAsString() + " - " + this.dateTo.getDateAsString();
+	}
 }

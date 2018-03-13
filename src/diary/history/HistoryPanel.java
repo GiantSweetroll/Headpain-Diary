@@ -112,7 +112,12 @@ public class HistoryPanel extends JPanel implements ItemListener
 			return Methods.getTextData(this.tfHistory);
 		}
 	}
-
+	public void resetDefaults()
+	{
+		this.radHistory.setSelected(true);
+		this.comboHistory.setSelectedIndex(0);
+	}
+	
 	//Interfaces
 	@Override
 	public void itemStateChanged(ItemEvent e) 

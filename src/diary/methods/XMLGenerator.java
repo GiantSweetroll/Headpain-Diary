@@ -210,6 +210,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.KINDS_OF_HEADPAINS_TEXT, "Kinds of Headpains");
 		appendComponentToMap(doc, map, XMLIdentifier.AMOUNT_TEXT, "Amount");
 		appendComponentToMap(doc, map, XMLIdentifier.DAYS_TEXT, "Days");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_RANGE_TEXT, "Date Range");
 		
 		//Graph
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

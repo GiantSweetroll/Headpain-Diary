@@ -206,6 +206,11 @@ public class DatePanel extends JPanel implements ActionListener
 		}
 	}
 	
+	public String getDateAsString()
+	{
+		return this.getDay() + "/" + this.getMonthValue() + "/" + this.getYear();
+	}
+	
 	//Interfaces
 	private ActionListener yearListener = new ActionListener()
 		{

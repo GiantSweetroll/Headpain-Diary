@@ -36,6 +36,10 @@ public class MainFrame
 	
 	public static JComponent jComponent;
 	
+	public static int GENERAL_FONT_SIZE = 15;
+	
+	public static boolean isFullScreen;
+	
 	/**
 	 * Instantiates a new main frame.
 	 */
@@ -51,6 +55,7 @@ public class MainFrame
 	{
 		//Initialization
 		frame = new JFrame(Constants.PROGRAM_TITLE);
+		MainFrame.isFullScreen = false;
 		MainFrame.refreshSettings();
 	//	jComponent = Globals.MAIN_MENU;
 		
@@ -84,11 +89,14 @@ public class MainFrame
 			if(component instanceof MainMenu)
 			{
 				MainFrame.checkUsers();
-				if (Globals.MAIN_MENU.getVerticalScrollBar().isVisible())
+				
+				/*
+				if (Globals.MAIN_MENU.getVerticalScrollBar().isVisible())		//Experimental
 				{
-					Globals.GENERAL_FONT_SIZE--;
-					MainFrame.changePanel(component);
+					MainFrame.GENERAL_FONT_SIZE--;
+					MainFrame.changePanel(Globals.MAIN_MENU);
 				}
+				*/
 			}
 			else
 			{
@@ -102,6 +110,11 @@ public class MainFrame
 		{
 			ex.printStackTrace();
 		}
+	}
+	
+	public static final boolean isFullScreen()
+	{
+		return MainFrame.isFullScreen;
 	}
 	
 	public static final void refreshSettings()
@@ -211,7 +224,7 @@ public class MainFrame
 						try
 						{
 				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, Globals.GENERAL_FONT_SIZE));
+							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, MainFrame.GENERAL_FONT_SIZE));
 							UIManager.put("OptionPane.background", Color.WHITE);
 							UIManager.put("Panel.background", Color.white);
 							

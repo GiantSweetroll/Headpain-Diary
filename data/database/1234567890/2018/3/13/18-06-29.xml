@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>13</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>18</time_hour>
+     <time_minute>06</time_minute>
+     <time_seconds>29</time_seconds>
+     <pain_location_preset pain_loc_id="0">head back</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">face right and head</pain_location_preset>
+     <pain_location_preset pain_loc_id="2">head full</pain_location_preset>
+     <pain_kind>default pain kind radiating</pain_kind>
+     <intensity>2</intensity>
+     <duration>15</duration>
+     <activity>default activities sunlight</activity>
+     <activity_details/>
+     <recent_medication>OBH Combi</recent_medication>
+     <comments>Tidak bisa berenang</comments>
+</Entry>

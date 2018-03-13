@@ -1,6 +1,7 @@
 package diary.constants;
 
 import diary.gui.MainMenu;
+import diary.gui.EntryLog.EntryLog;
 import diary.gui.graphs.GraphFilterPanel;
 import diary.gui.graphs.GraphPanel;
 import diary.gui.settings.SettingsPanel;
@@ -9,10 +10,7 @@ import diary.history.History;
 import diary.patientdata.PatientDataManagePanel;
 
 public class Globals 
-{
-	//Global Variables
-	public static int GENERAL_FONT_SIZE = 12;
-	
+{	
 	//Histories
 	public static final History HISTORY_RECENT_MEDICATION = new History(Constants.HISTORY_RECENT_MEDICATION_NAME);
 	
@@ -23,4 +21,5 @@ public class Globals
 	public static GraphFilterPanel GRAPH_FILTER_PANEL = new GraphFilterPanel();
 	public static GraphPanel GRAPH_PANEL = new GraphPanel();
 	public static TableScreen PAIN_TABLE = new TableScreen();
+	public static EntryLog ENTRY_LOG = new EntryLog();
 }

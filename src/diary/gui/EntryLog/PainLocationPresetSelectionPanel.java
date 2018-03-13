@@ -19,7 +19,6 @@ import javax.swing.border.Border;
 
 import diary.constants.Constants;
 import diary.gui.ImageTextPanel;
-import diary.gui.MainFrame;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 
@@ -62,7 +61,8 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 			for (Map.Entry<URL, String> subEntry : entry.getValue().entrySet())
 			{
 				ImageIcon image = ImageManager.getImageIcon(subEntry.getKey());
-				ImageTextPanel imagePanel = new ImageTextPanel(image, entry.getKey(), Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 10)));
+				//ImageTextPanel imagePanel = new ImageTextPanel(image, entry.getKey(), Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 10)));
+				ImageTextPanel imagePanel = new ImageTextPanel(image, entry.getKey(), Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 5)));
 				JButton button = new JButton();
 				button.add(imagePanel);
 				button.setActionCommand(subEntry.getValue());
@@ -72,7 +72,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 			}
 		}
 	}
-	private void unmarkAllButtons()
+	public void unmarkAllButtons()
 	{
 		for (JButton button : this.buttons)
 		{

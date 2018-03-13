@@ -104,6 +104,11 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 		this.image.setCoordinates(coordinates, false);
 	}
 	
+	public void resetPosition()
+	{
+		image.resetCoordinates();
+	}
+	
 	//Overriden Methods
 	@Override
 	public void setEnabled(boolean enabled)
@@ -127,6 +132,6 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 	//Interfaces
 	public void actionPerformed(ActionEvent e)
 	{
-		image.resetCoordinates();
+		this.resetPosition();
 	}
 }

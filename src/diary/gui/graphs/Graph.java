@@ -31,6 +31,8 @@ public abstract class Graph extends JPanel
 	
 	protected Point axesOrigin;
 	protected Point axesLength;
+	protected Point xAxisEndCoordinates;
+	protected Point yAxisEndCoordinates;
 	protected List<Point> dataPoints;
 	protected List<String> xAxisLabels;
 	protected List<Double> yAxisValues;
@@ -47,6 +49,8 @@ public abstract class Graph extends JPanel
 	//Options
 	protected boolean enableDataValueMarkers;
 	protected boolean displayDataPoint;
+	protected boolean showGraphLinesOfY;
+	protected boolean showGraphLinesOfX;
 	
 	//Constants
 	protected final int DATA_POINT_WIDTH = 10;
@@ -75,6 +79,8 @@ public abstract class Graph extends JPanel
 		this.enableDataValueMarkers = false;
 		this.displayDataPoint = true;
 		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
+		this.showGraphLinesOfX = true;
+		this.showGraphLinesOfY = true;
 		
 		for (Map.Entry<String, Double> entry : dataMap.entrySet())
 		{
@@ -100,6 +106,8 @@ public abstract class Graph extends JPanel
 		this.enableDataValueMarkers = false;
 		this.displayDataPoint = true;
 		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
+		this.showGraphLinesOfX = true;
+		this.showGraphLinesOfY = true;
 		
 		for (Map.Entry<String, Double> entry : dataMap.entrySet())
 		{
@@ -131,6 +139,7 @@ public abstract class Graph extends JPanel
 			this.drawAxesMarkers(g, Color.BLACK);
 			this.drawXAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
 			this.drawYAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
+			this.drawGraphLines(g, Color.LIGHT_GRAY);
 			this.drawAxisNames(g, Color.BLACK, Color.BLACK, this.xAxisName, this.yAxisName);
 			g.setFont(Constants.FONT_GENERAL);
 			if (this.enableDataValueMarkers)
@@ -214,6 +223,10 @@ public abstract class Graph extends JPanel
 		
 		//Get length
 		this.axesLength = new Point(xEnd - this.axesOrigin.x, this.axesOrigin.y - yEnd);
+		
+		//Get end coordinates
+		this.xAxisEndCoordinates = new Point(xEnd, this.axesOrigin.y);
+		this.yAxisEndCoordinates = new Point(this.axesOrigin.x, yEnd);
 	}
 	protected void generateDataPoints(List<Double> dataValues)
 	{
@@ -383,6 +396,26 @@ public abstract class Graph extends JPanel
 						this.axesOrigin.x - this.AXES_POINTERS_LENGTH - this.MARKER_LABEL_PADDING - this.maxYAxisMarkerLabelLength - this.Y_AXIS_NAME_PADDING);
 		g2.setTransform(defaultAt);
 	}
+	protected void drawGraphLines(Graphics g, Color c)
+	{
+		g.setColor(c);
+		
+		if (this.showGraphLinesOfY)		//Displaying Graph Lines of Y
+		{
+			for (Point marker : this.yAxisMarkerPoints)
+			{
+				g.drawLine(this.axesOrigin.x, marker.y, this.xAxisEndCoordinates.x, marker.y);
+			}
+		}
+		
+		if (this.showGraphLinesOfX)
+		{
+			for (Point marker : this.dataPoints)
+			{
+				g.drawLine(marker.x, this.axesOrigin.y, marker.x, this.yAxisEndCoordinates.y);
+			}
+		}
+	}
 	
 	//Graph Settings
 	protected void displayDataValues(boolean bool)
@@ -393,6 +426,16 @@ public abstract class Graph extends JPanel
 	protected void displayDataPoint(boolean show)
 	{
 		this.displayDataPoint = show;
+		this.repaint();
+	}
+	protected void displayGraphLinesOfY(boolean show)
+	{
+		this.showGraphLinesOfY = show;
+		this.repaint();
+	}
+	protected void displayGraphLinesOfX(boolean show)
+	{
+		this.showGraphLinesOfX = show;
 		this.repaint();
 	}
 }

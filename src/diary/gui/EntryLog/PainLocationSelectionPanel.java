@@ -92,6 +92,11 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 	{
 		return this.radCustom.isSelected();
 	}
+	public void resetDefaults()
+	{
+		this.radPreset.setSelected(true);
+		this.preset.unmarkAllButtons();
+	}
 	public void setSelectedPosition(PainEntryData entry)
 	{
 		List<String> presetLocations = (List<String>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATION_PRESET);
@@ -128,6 +133,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 		if (this.radPreset.isSelected())
 		{
 			this.custom.setEnabled(false);
+			this.custom.resetPosition();
 			this.preset.setEnabled(true);
 		}
 		else

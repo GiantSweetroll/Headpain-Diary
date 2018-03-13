@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import diary.ImagePanel;
+import diary.ImageExportPanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
@@ -34,9 +34,11 @@ import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
-import diary.gui.EntryLog.EntryLog;
+import diary.gui.graphs.TitledGraph;
+import diary.legacy.ImagePanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
+import diary.patientdata.PatientData;
 import diary.patientdata.PatientDataForm;
 import giantsweetroll.gui.swing.Gbm;
 
@@ -199,7 +201,7 @@ public class TableScreen extends JPanel implements ActionListener
 		this.panelTopLeft.add(this.tfFilter, c);			//Search Keyword Text Field;
 		Gbm.newGridLine(c);
 		c.gridwidth = 2;
-		this.panelTopLeft.add(this.labGuide, c);			//Small Note
+//		this.panelTopLeft.add(this.labGuide, c);			//Small Note
 		Gbm.newGridLine(c);
 		c.fill = GridBagConstraints.NONE;
 		c.insets = Constants.INSETS_TOP_COMPONENT;
@@ -238,6 +240,10 @@ public class TableScreen extends JPanel implements ActionListener
 		this.panelTop.add(this.panelTopRight, BorderLayout.EAST);
 	}
 	//Other Methods
+	public void refreshTable()
+	{
+		this.initTable();
+	}
 	public void initTable()
 	{
 		try
@@ -397,10 +403,20 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case SAVE:
+				/*
 				ImagePanel imagePanel = new ImagePanel(this.table.getScrollPane(), 
 														new PatientDataForm(this.activePatientPanel.getSelectedPatientData(), false), 
 														new DateRangePanel(this.panelDateRange.getDateRangeMap()));
 				Methods.exportPanelImage(imagePanel, true);
+				*/
+				
+				PatientData patient = this.activePatientPanel.getSelectedPatientData();
+				ImageExportPanel exportImage = new ImageExportPanel(patient.getName(), 
+																	patient.getID(), 
+																	this.panelDateRange.getDateRangeAsString(), 
+																	Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
+																	this.table);
+				Methods.exportPanelImage(exportImage, true);
 				break;
 				
 			case DELETE:
@@ -415,7 +431,8 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case SELECT:
-				MainFrame.changePanel(new EntryLog(this.activePatientPanel.getSelectedPatientData(), this.activeEntry));
+				Globals.ENTRY_LOG.loadData(this.activePatientPanel.getSelectedPatientData(), this.activeEntry);
+				MainFrame.changePanel(Globals.ENTRY_LOG);
 				break;
 				
 			case BACK:

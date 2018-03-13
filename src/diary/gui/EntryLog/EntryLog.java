@@ -95,12 +95,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	public EntryLog(PatientData patient, PainEntryData entry)
 	{
 		this.createAndShowGUI();
-		this.oldEntry = entry;
-		this.oldPatient = patient;
-		this.fillData(patient, entry);
-		this.revalidate();
-		this.repaint();
-		this.isNewEntry = false;
+		this.loadData(patient, entry);
 	}
 	
 	//Initialization of GUI
@@ -472,6 +467,15 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		}
 	}
 	
+	public void loadData(PatientData patient, PainEntryData entry)
+	{
+		this.oldEntry = entry;
+		this.oldPatient = patient;
+		this.fillData(patient, entry);
+		this.revalidate();
+		this.repaint();
+		this.isNewEntry = false;
+	}
 	private void fillData(PatientData patient, PainEntryData entry)
 	{
 		this.activePatientPanel.setSelectedPatient(patient);
@@ -556,6 +560,22 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		}
 	}
 	
+	public void resetToDefault()
+	{
+		this.panelDate.autoSetDate();
+		this.panelTime.setToCurrentTime();
+		this.painLocation.resetDefaults();
+		this.comboPainKind.setSelectedIndex(0);
+		this.tfPainKind.setText("");
+		this.tfIntensity.setText("");
+		this.tfDuration.setText("");
+		this.comboDurationUnit.setSelectedIndex(0);
+		this.comboActivity.setSelectedIndex(0);
+		this.tfActivity.setText("");
+		this.historyRecentMedication.resetDefaults();
+		this.taComments.setText("");
+	}
+	
 	//Interfaces
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -582,6 +602,8 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
 							FileOperation.exportPainData(patient, entry);
 							MainFrame.changePanel(Globals.MAIN_MENU);
+							Globals.GRAPH_PANEL.refreshGraph();
+							Globals.PAIN_TABLE.refreshTable();
 						}
 					}
 					else
@@ -596,6 +618,8 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 							}
 						}
 						MainFrame.changePanel(Globals.MAIN_MENU);
+						Globals.GRAPH_PANEL.refreshGraph();
+						Globals.PAIN_TABLE.refreshTable();
 					}
 				}
 				else

@@ -26,7 +26,6 @@ import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.ImageConstants;
 import diary.constants.XMLIdentifier;
-import diary.gui.EntryLog.EntryLog;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 
@@ -67,6 +66,7 @@ public class MainMenu extends JScrollPane implements ActionListener
 		this.setViewportView(this.panelMain);
 		this.getVerticalScrollBar().setUnitIncrement(10);
 		this.getHorizontalScrollBar().setUnitIncrement(10);
+		this.setBorder(null);
 	}
 	private void initPanelMain()
 	{
@@ -128,7 +128,8 @@ public class MainMenu extends JScrollPane implements ActionListener
 		this.labLogo = new JLabel(Methods.resizeImageByRatio
 									(image, Methods.getPercentage
 												(image, Methods.getPercentageValue
-															(MainFrame.frame.getWidth(), 48))));
+															//(Constants.SCREENSIZE.width, 48))));
+															(Constants.SCREENSIZE.width, 15))));
 		
 		//Properties
 		this.panelCenterCenter.setLayout(new BoxLayout(this.panelCenterCenter, BoxLayout.Y_AXIS));
@@ -177,15 +178,16 @@ public class MainMenu extends JScrollPane implements ActionListener
 		//Prepare JLabels
 		ImageIcon image = ImageManager.getImageIcon(ImageConstants.FKUI);
 //		image = Methods.resizeImageByRatio(image, 30);
-		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 28)));
+///		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 28)));
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 15)));
 		this.supportersList.add(new JLabel(image));
 		image = ImageManager.getImageIcon(ImageConstants.RSCM);
 //		image = Methods.resizeImageByRatio(image, 10);
-		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 19)));
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 9)));
 		this.supportersList.add(new JLabel(image));
 		image = ImageManager.getImageIcon(ImageConstants.MEDICAL_MEDIA);
 //		image = Methods.resizeImageByRatio(image, 20);
-		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 19)));
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 9)));
 		this.supportersList.add(new JLabel(image));	
 	
 		//Properties
@@ -200,7 +202,8 @@ public class MainMenu extends JScrollPane implements ActionListener
 	}
 	private void initButton(JButton button, ImageIcon image, String text)
 	{
-		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 8)));
+	//	image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 8)));
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 4)));
 		ImageTextPanel panelImage = new ImageTextPanel(image, text);
 		panelImage.getTextLabel().setForeground(Color.WHITE);
 		panelImage.getTextLabel().setFont(Constants.FONT_SUB_TITLE);
@@ -334,7 +337,8 @@ public class MainMenu extends JScrollPane implements ActionListener
 		switch (e.getActionCommand())
 		{
 		case NEW_ENTRY:
-			MainFrame.changePanel(new EntryLog());
+			Globals.ENTRY_LOG.resetToDefault();
+			MainFrame.changePanel(Globals.ENTRY_LOG);
 			break;
 			
 		case VIEW_GRAPH:

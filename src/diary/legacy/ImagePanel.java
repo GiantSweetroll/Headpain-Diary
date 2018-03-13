@@ -1,4 +1,4 @@
-package diary;
+package diary.legacy;
 
 import java.awt.BorderLayout;
 

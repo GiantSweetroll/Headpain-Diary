@@ -54,6 +54,7 @@ public class XMLIdentifier
 	public static final String DAYS_TEXT = "days text";
 	public static final String AVERAGE_INTENSITY_TEXT = "average intensity text";
 	public static final String AVERAGE_DURATION_TEXT = "average duration text";
+	public static final String DATE_RANGE_TEXT = "date range text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";

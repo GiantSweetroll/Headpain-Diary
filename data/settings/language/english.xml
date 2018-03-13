@@ -133,6 +133,7 @@
      <text identifier="kinds of headpains text">Kinds of Headpains</text>
      <text identifier="amount text">Amount</text>
      <text identifier="days text">Days</text>
+     <text identifier="date range text">Date Range</text>
      <text identifier="graph category label">Category</text>
      <text identifier="graph category entries vs date text">Entries vs Date</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Date</text>

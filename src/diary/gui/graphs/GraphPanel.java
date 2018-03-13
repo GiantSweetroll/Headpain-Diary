@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-import diary.ImagePanel;
+import diary.ImageExportPanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
@@ -31,7 +31,7 @@ import diary.gui.MainFrame;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
-import diary.patientdata.PatientDataForm;
+import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 
 public class GraphPanel extends JPanel implements ActionListener
@@ -418,10 +418,19 @@ public class GraphPanel extends JPanel implements ActionListener
 				break;
 				
 			case SAVE:
+				/*
 				ImagePanel imagePanel = new ImagePanel(this.graph, 
 														new PatientDataForm(this.activePatientPanel.getSelectedPatientData(), false), 
 														new DateRangePanel(this.panelDateRange.getDateRangeMap()));
 				Methods.exportPanelImage(imagePanel, false);
+				*/
+				PatientData patient = this.activePatientPanel.getSelectedPatientData();
+				ImageExportPanel exportImage = new ImageExportPanel(patient.getName(), 
+																	patient.getID(), 
+																	this.panelDateRange.getDateRangeAsString(), 
+																	Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
+																	new TitledGraph(this.comboCategory.getSelectedItem().toString(), this.graph));
+				Methods.exportPanelImage(exportImage, true);
 				break;
 				
 			case OPTIONS:

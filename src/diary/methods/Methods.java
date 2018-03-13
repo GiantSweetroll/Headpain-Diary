@@ -21,7 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.JTableHeader;
 
-import diary.ImagePanel;
+import diary.ImageExportPanel;
 import diary.constants.Constants;
 import diary.constants.ImageConstants;
 import diary.constants.PainDataIdentifier;
@@ -32,6 +32,7 @@ import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.gui.graphs.GraphPanel;
 import diary.gui.table.TableScreen;
+import diary.legacy.ImagePanel;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.numbers.GNumbers;
@@ -324,6 +325,7 @@ public class Methods
 		frame.setUndecorated(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		MainFrame.isFullScreen = true;
 	}
 	public static void makeWindowed(JFrame frame)
 	{
@@ -337,9 +339,11 @@ public class Methods
 		frame.setUndecorated(false);
 		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
 	//	frame.pack();
+		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		MainFrame.isFullScreen = false;
 	}
 
 	public static String[] getLanguages()
@@ -435,6 +439,8 @@ public class Methods
 		return image;
 	}
 	
+	/*
+	@Deprecated
 	public static void exportPanelImage(ImagePanel panel, boolean showPreview)
 	{
 		MainFrame.changePanel(panel);
@@ -458,6 +464,32 @@ public class Methods
 		if (!showPreview)
 		{
 			FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.lastComponent));
+		}
+	}
+	*/
+	public static void exportPanelImage(ImageExportPanel panel, boolean showPreview)
+	{
+		MainFrame.changePanel(panel);
+		if (showPreview)
+		{
+			FileOperation.exportImage(Methods.createImage((ImageExportPanel)MainFrame.jComponent));
+		}		
+		MainFrame.changePanel(MainFrame.lastComponent);
+		try
+		{
+			if (MainFrame.jComponent instanceof GraphPanel)
+			{
+				((GraphPanel)MainFrame.jComponent).refreshGraph();		//Redraws graph to its original state
+			}
+			else if (MainFrame.jComponent instanceof TableScreen)
+			{
+				((TableScreen)MainFrame.jComponent).initTable();		//Recreates table to its original state
+			}
+		}
+		catch(ClassCastException ex) {}
+		if (!showPreview)
+		{
+			FileOperation.exportImage(Methods.createImage((GraphPanel)MainFrame.lastComponent));
 		}
 	}
 	
