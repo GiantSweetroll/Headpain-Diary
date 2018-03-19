@@ -68,6 +68,8 @@ public class TablePanel extends JPanel
 			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.RECENT_MEDICATION);//Recent Medication
 			index++;
+			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.MEDICINE_COMPLAINT);//Medicine Complaint
+			index++;
 			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.COMMENTS);		//Comments
 		}
 		

@@ -22,7 +22,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.xml.parsers.ParserConfigurationException;
@@ -119,6 +121,12 @@ public class SettingsPanel extends JPanel implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				LookAndFeel oldLF = UIManager.getLookAndFeel();
+				try
+				{
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				}
+				catch(Exception ex) {}
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				jfc.setDialogTitle(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT));
@@ -128,6 +136,12 @@ public class SettingsPanel extends JPanel implements ActionListener
 				{
 					tfDatabasePath.setText(jfc.getSelectedFile().getAbsolutePath());
 				}
+				
+				try
+				{
+					UIManager.setLookAndFeel(oldLF);
+				}
+				catch(Exception ex) {}
 			}
 		});
 		butDefaultDatabase.addActionListener(new ActionListener()
@@ -164,6 +178,12 @@ public class SettingsPanel extends JPanel implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				LookAndFeel oldLF = UIManager.getLookAndFeel();
+				try
+				{
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				}
+				catch(Exception ex) {}
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				jfc.setDialogTitle(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT));
@@ -173,6 +193,12 @@ public class SettingsPanel extends JPanel implements ActionListener
 				{
 					tfUserDatabasePath.setText(jfc.getSelectedFile().getAbsolutePath());
 				}
+				
+				try
+				{
+					UIManager.setLookAndFeel(oldLF);
+				}
+				catch(Exception ex) {}
 			}
 		});
 		butDefaultUserDatabase.addActionListener(new ActionListener()

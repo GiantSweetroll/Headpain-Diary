@@ -1,5 +1,7 @@
 package diary.gui.graphs;
 
+import java.awt.Color;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;

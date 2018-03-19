@@ -1,6 +1,7 @@
 package diary.history;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import diary.constants.Constants;
@@ -18,10 +19,21 @@ public class History
 	public History(String historyName)
 	{
 		this.name = historyName;
-		this.history = FileOperation.loadTextFile(new File(this.getFilePath()));
+		this.refresh();
 	}
 	
 	//Methods
+	public void refresh()
+	{
+		try
+		{
+			this.history = FileOperation.loadTextFile(new File(this.getFilePath()));
+		}
+		catch(Exception ex)
+		{
+			this.history = new ArrayList<String>();
+		}
+	}
 	public String getName()
 	{
 		return this.name;

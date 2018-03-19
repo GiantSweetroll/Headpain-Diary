@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>18</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>20</time_hour>
+     <time_minute>30</time_minute>
+     <time_seconds>57</time_seconds>
+     <pain_location_preset pain_loc_id="0">head full</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">head full</pain_location_preset>
+     <pain_kind>default pain kind throbbing</pain_kind>
+     <intensity>2</intensity>
+     <duration>32</duration>
+     <activity>default triggers physical activity</activity>
+     <activity_details/>
+     <recent_medication>Panadol</recent_medication>
+     <medicine_complaint>Nose Hurts</medicine_complaint>
+     <comments/>
+</Entry>

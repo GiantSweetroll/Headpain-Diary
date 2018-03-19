@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
@@ -25,7 +27,9 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.Settings;
+import diary.fileFilters.FileTypeFilter;
 import diary.gui.MainFrame;
+import diary.gui.table.Table;
 import diary.history.History;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
@@ -545,8 +549,8 @@ public class FileOperation
 	}
 	public static void updateHistory(History history, String item)
 	{
-		Globals.HISTORY_RECENT_MEDICATION.add(item);
-		FileOperation.saveHistory(Globals.HISTORY_RECENT_MEDICATION);
+		history.add(item);
+		FileOperation.saveHistory(history);
 	}
 	
 	public static List<String> loadTextFile(File file)
@@ -573,6 +577,12 @@ public class FileOperation
 	
 	public static void exportImage(BufferedImage image)
 	{
+		LookAndFeel oldLF = UIManager.getLookAndFeel();
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch(Exception ex) {}
 		JFileChooser jfc = new JFileChooser();
 		jfc.setCurrentDirectory(new File("." + File.separator));
 		
@@ -581,7 +591,13 @@ public class FileOperation
 		{
 			try
 			{
-				ImageIO.write(image, FileOperation.getExtension(jfc.getSelectedFile()), jfc.getSelectedFile());
+				String extension = FileOperation.getExtension(jfc.getSelectedFile());
+				if (!extension.equalsIgnoreCase("jpg") && !extension.equalsIgnoreCase("png"))
+				{
+					extension = "jpg";
+					jfc.setSelectedFile(new File(jfc.getSelectedFile().getAbsolutePath() + "." + extension));
+				}
+				ImageIO.write(image, extension, jfc.getSelectedFile());
 			}
 			catch(IOException ex) 
 			{
@@ -589,6 +605,12 @@ public class FileOperation
 				MessageManager.showErrorDialog(ex);
 			}
 		}
+		
+		try
+		{
+			UIManager.setLookAndFeel(oldLF);
+		}
+		catch(Exception ex) {}
 	}
 	
 	public static String getExtension(File file)
@@ -597,5 +619,73 @@ public class FileOperation
 		int index = filePath.indexOf(".");
 		
 		return filePath.substring(index+1, filePath.length());
+	}
+	
+	public static void exportTableAsExcel(Table table)
+	{
+		//Get Items in Table (ignore boolean cell)
+		List<List<String>> items = new ArrayList<List<String>>();
+		
+		for (int i=0; i<table.getRowCount(); i++)
+		{
+			List<String> subList = new ArrayList<String>();
+			for (int a=1; a<table.getColumnCount(); a++)
+			{
+				subList.add(table.getValueAt(i, a).toString());
+			}
+			items.add(subList);
+		}
+		
+		//Create File Dialog
+		LookAndFeel oldLF = UIManager.getLookAndFeel();
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch(Exception ex) {}
+		
+		JFileChooser jfc = new JFileChooser();
+		jfc.setCurrentDirectory(new File("." + File.separator));
+		jfc.addChoosableFileFilter(new FileTypeFilter(".xls", "Microsoft Excel Documents"));
+		
+		int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		if (response == JFileChooser.APPROVE_OPTION)
+		{
+			//Save File
+			File file = new File(jfc.getSelectedFile().getAbsolutePath());
+			try
+			{
+				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+				
+				//Write table headers
+				for (int i=1; i<Constants.ENTRY_TABLE_HEADERS.length; i++)
+				{
+					bw.write(Constants.ENTRY_TABLE_HEADERS[i]);
+					bw.write("	");
+				}
+				bw.newLine();
+				//Write table cells
+				for (List<String> subArr : items)
+				{
+					for (String item : subArr)
+					{
+						bw.write(item);
+						bw.write("	");
+					}
+					bw.newLine();
+				}
+				bw.close();
+			}
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		try
+		{
+			UIManager.setLookAndFeel(oldLF);
+		}
+		catch(Exception ex) {}
 	}
 }

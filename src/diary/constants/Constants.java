@@ -30,7 +30,7 @@ public final class Constants
 	public static final String LANGUAGE_FOLDER_PATH = "data" + File.separator + "settings" + File.separator + "language" + File.separator;
 	public static final Language LANGUAGE = new Language();
 	
-	public static final String REQUIRED_IDENTIFIER = "* ";
+	public static final String REQUIRED_IDENTIFIER = "*";
 	
 	public static final String DATABASE_DEFAULT_PATH = "data" + File.separator + "database" + File.separator;
 	public static final String PATIENTS_LIST_DEFAULT_PATH = "data" + File.separator + "users" + File.separator;
@@ -40,6 +40,7 @@ public final class Constants
 	
 	public static final String HISTORY_FOLDER_PATH = "data" + File.separator + "history" + File.separator;
 	public static final String HISTORY_RECENT_MEDICATION_NAME = "recent_medication";
+	public static final String HISTORY_MEDICINE_COMPLAINT_NAME = "medicine_complaint";
 	
 	//Text Field Formats
 	public static final NumberFormat AMOUNT_FORMAT = NumberFormat.getNumberInstance();
@@ -130,14 +131,14 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE),
 									//					Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE),
-														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)};
+														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_DATE)};
 	
 	public static final String[] TABLE_FILTER_OPTIONS = {//Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT),
-															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT),
+															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_TRIGGER_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)};
 	
 	public static final String[] ENTRY_TABLE_HEADERS = {Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_SELECT_TEXT),
@@ -148,9 +149,10 @@ public final class Constants
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_KINDS_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_INTENSITIES_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT),
-													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_ACTIVITY_TEXT),
-													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_ACTIVITY_DETAILS_TEXT),
+													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_TEXT),
+													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_DETAILS_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_RECENT_MEDICATION_TEXT),
+													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_MEDICINE_COMPLAINT_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_COMMENTS_TEXT)};
 	
 	public static final Object[] OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS = {Methods.getLanguageText(XMLIdentifier.YES_TEXT),
@@ -167,10 +169,10 @@ public final class Constants
 															Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL),
 															Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL)};
 	
-	public static final String[] DEFAULT_ACTIVITIES = {Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY),
-														Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR),
-														Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT),
-														Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP),
+	public static final String[] DEFAULT_ACTIVITIES = {Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY),
+														Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR),
+														Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT),
+														Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP),
 														Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
 	
 	public static final String[] DEFAULT_PAIN_KIND = {Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING),

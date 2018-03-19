@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>18</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>20</time_hour>
+     <time_minute>37</time_minute>
+     <time_seconds>57</time_seconds>
+     <pain_location_custom pain_loc_id="0">61,59</pain_location_custom>
+     <pain_kind>default pain kind radiating</pain_kind>
+     <intensity>3</intensity>
+     <duration>12</duration>
+     <activity>default triggers sunlight</activity>
+     <activity_details/>
+     <recent_medication>Obat A</recent_medication>
+     <medicine_complaint>Headache</medicine_complaint>
+     <comments/>
+</Entry>

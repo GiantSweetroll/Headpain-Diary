@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
+import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.numbers.GNumbers;
 
@@ -54,7 +56,7 @@ public abstract class Graph extends JPanel
 	
 	//Constants
 	protected final int DATA_POINT_WIDTH = 10;
-	protected final int AXES_POINTERS_LENGTH = 10;
+	protected final int AXES_POINTERS_LENGTH = 15;
 	protected final int MARKER_LABEL_PADDING = 5;
 	protected final int MAX_MARKERS_IN_Y_AXIS = 10;
 	protected final int MAX_MARKERS_IN_X_AXIS = 4;
@@ -141,6 +143,7 @@ public abstract class Graph extends JPanel
 			this.drawYAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
 			this.drawGraphLines(g, Color.LIGHT_GRAY);
 			this.drawAxisNames(g, Color.BLACK, Color.BLACK, this.xAxisName, this.yAxisName);
+			this.drawRecentMedicationText(g, Color.BLACK);
 			g.setFont(Constants.FONT_GENERAL);
 			if (this.enableDataValueMarkers)
 			{
@@ -415,6 +418,14 @@ public abstract class Graph extends JPanel
 				g.drawLine(marker.x, this.axesOrigin.y, marker.x, this.yAxisEndCoordinates.y);
 			}
 		}
+	}
+	protected void drawRecentMedicationText(Graphics g, Color c)
+	{
+		g.setColor(c);
+		
+		g.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL) + ": " + Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
+						this.axesOrigin.x, 
+						this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.maxXAxisMarkerLabelHeight + this.X_AXIS_NAME_PADDING);
 	}
 	
 	//Graph Settings

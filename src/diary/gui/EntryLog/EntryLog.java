@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -37,6 +39,7 @@ import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DatePanel;
 import diary.gui.MainFrame;
+import diary.gui.WrappableJLabel;
 import diary.history.HistoryPanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -62,18 +65,19 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	
 	private JScrollPane scrollCenter, scrollComments;
 	
-	private JLabel labTitle, labDate, labStartTime, labActivity, labRecentMedication, labComments, labPainKind, labIntensity, labIntensityDesc, labDuration;
+	private JLabel labTitle, labDate, labStartTime, labActivity, labRecentMedication, labMedicineComplaint, labPainKind, labIntensity, labIntensityDesc, labDuration;
 	
 	private PainLocationSelectionPanel painLocation;
 	private DatePanel panelDate;
 	private TimePanel panelTime;
 	private ActivePatientPanel activePatientPanel;
-	private HistoryPanel historyRecentMedication;
+	private HistoryPanel historyRecentMedication, historyMedicineComplaint;
 	
 	private JFormattedTextField tfIntensity, tfDuration;
 	private JTextField tfActivity, tfPainKind;
 	private JComboBox<String> comboActivity, comboPainKind, comboDurationUnit;
 	private JTextArea taComments;
+	private WrappableJLabel taCommentsLabel;
 	private JButton butBack, butFinish;
 		
 	private GridBagConstraints c;
@@ -142,26 +146,29 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.panelCenter = new JPanel();
 		this.c = new GridBagConstraints();
 		this.activePatientPanel = new ActivePatientPanel();
-		this.labDate = new JLabel(Methods.getLanguageText(XMLIdentifier.DATE_LABEL), SwingConstants.RIGHT);
+		this.labDate = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.DATE_LABEL)), SwingConstants.RIGHT);
 		this.panelDate = new DatePanel(true);
-		this.labStartTime = new JLabel(Methods.getLanguageText(XMLIdentifier.START_TIME_LABEL), SwingConstants.RIGHT);
+		this.labStartTime = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.START_TIME_LABEL)), SwingConstants.RIGHT);
 		this.panelTime = new TimePanel(true);
 		this.painLocation = new PainLocationSelectionPanel();
-		this.labPainKind = new JLabel(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), SwingConstants.RIGHT);
+		this.labPainKind = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL)), SwingConstants.RIGHT);
 		this.comboPainKind = new JComboBox<String>(Constants.DEFAULT_PAIN_KIND);
 		this.tfPainKind = new JTextField(10);
-		this.labIntensity = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), SwingConstants.RIGHT);
+		this.labIntensity = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL)), SwingConstants.RIGHT);
 		this.tfIntensity = new JFormattedTextField(Constants.AMOUNT_FORMAT);
 		this.labIntensityDesc = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
-		this.labDuration = new JLabel(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL), SwingConstants.RIGHT);
+		this.labDuration = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL)), SwingConstants.RIGHT);
 		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
 		this.comboDurationUnit = new JComboBox<String>(Constants.DURATION_UNITS);
-		this.labActivity = new JLabel(Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL), SwingConstants.RIGHT);
+		this.labActivity = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT)), SwingConstants.RIGHT);
 		this.comboActivity = new JComboBox<String>(Constants.DEFAULT_ACTIVITIES);
 		this.tfActivity = new JTextField("", 10);
 		this.labRecentMedication = new JLabel(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL), SwingConstants.RIGHT);
 		this.historyRecentMedication = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION);
-		this.labComments = new JLabel(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL), SwingConstants.RIGHT);
+		this.labMedicineComplaint = new JLabel(Methods.getLanguageText(XMLIdentifier.MEDICINE_COMPLAINT_LABEL), SwingConstants.RIGHT);
+		this.historyMedicineComplaint = new HistoryPanel(Globals.HISTORY_MEDICINE_COMPLAINT);
+	//	this.labComments = new JLabel(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL), SwingConstants.RIGHT);
+		this.taCommentsLabel = new WrappableJLabel(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL_LONG));
 		this.taComments = new JTextArea(10, 35);
 		this.scrollComments = ScrollPaneManager.generateDefaultScrollPane(this.taComments, 10, 10);
 		
@@ -176,6 +183,44 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.tfPainKind.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfPainKind.setEditable(false);
 		this.tfPainKind.setBackground(Color.WHITE);
+		this.tfPainKind.addMouseListener(new MouseListener()
+				{
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) 
+					{
+						if (!tfPainKind.isEditable())
+						{
+							comboPainKind.setSelectedItem(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT));
+							tfPainKind.setEditable(true);
+						}
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+				});
 		this.tfIntensity.setColumns(5);
 		this.tfIntensity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfDuration.setColumns(5);
@@ -185,6 +230,44 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.tfActivity.setEditable(false);
 		this.tfActivity.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfActivity.setBackground(Color.WHITE);
+		this.tfActivity.addMouseListener(new MouseListener()
+				{
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e)
+					{
+						if (!tfActivity.isEditable())
+						{
+							comboActivity.setSelectedItem(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT));
+							tfActivity.setEditable(true);
+						}
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+			
+				});
 		this.taComments.setBorder(this.tfActivity.getBorder());
 		this.panelDate.setDefaultData(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
 		this.panelDate.resetDefault();
@@ -241,11 +324,18 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		c.gridwidth = 1;
 		this.panelCenter.add(this.labRecentMedication, c);	//Recent Medication
 		Gbm.nextGridColumn(c);
-		this.panelCenter.add(this.historyRecentMedication, c);	//Recent Medication Historu Panel
+		this.panelCenter.add(this.historyRecentMedication, c);	//Recent Medication History Panel
 		Gbm.newGridLine(c);
-		this.panelCenter.add(this.labComments, c);			//Comments
+		this.panelCenter.add(this.labMedicineComplaint, c);		//Medicine Complaint
 		Gbm.nextGridColumn(c);
-		c.gridwidth = 3;
+		this.panelCenter.add(this.historyMedicineComplaint, c);	//Medicine Complaint History Panel
+		Gbm.newGridLine(c);
+//		this.panelCenter.add(this.labComments, c);			//Comments
+		c.gridwidth = 4;
+		this.panelCenter.add(this.taCommentsLabel, c);		//Comments Label (Text Area)
+//		Gbm.nextGridColumn(c);
+//		c.gridwidth = 3;
+		Gbm.newGridLine(c);
 		this.panelCenter.add(this.scrollComments, c);		//Comments Text Area
 		
 //		this.getNyeriAmount();
@@ -383,6 +473,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY, Methods.convertActivityLanguageToID(this.comboActivity.getSelectedItem().toString()));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.ACTIVITY_DETAILS, Methods.getTextData(this.tfActivity));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.RECENT_MEDICATION, this.historyRecentMedication.getItem());
+			this.appendToRootNode(doc, rootElement, PainDataIdentifier.MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.COMMENTS, this.taComments.getText());
 			
 			doc.appendChild(rootElement);
@@ -469,6 +560,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	
 	public void loadData(PatientData patient, PainEntryData entry)
 	{
+		this.resetToDefault();
 		this.oldEntry = entry;
 		this.oldPatient = patient;
 		this.fillData(patient, entry);
@@ -545,6 +637,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		}
 		catch(NullPointerException ex) {}
 		this.historyRecentMedication.setActiveItem(entry.getDataMap().get(PainDataIdentifier.RECENT_MEDICATION).toString());
+		this.historyMedicineComplaint.setActiveItem(entry.getDataMap().get(PainDataIdentifier.MEDICINE_COMPLAINT).toString());
 		this.taComments.setText(entry.getDataMap().get(PainDataIdentifier.COMMENTS).toString());
 	}
 	
@@ -572,7 +665,10 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.comboDurationUnit.setSelectedIndex(0);
 		this.comboActivity.setSelectedIndex(0);
 		this.tfActivity.setText("");
+		this.historyRecentMedication.refresh();
 		this.historyRecentMedication.resetDefaults();
+		this.historyMedicineComplaint.refresh();
+		this.historyMedicineComplaint.resetDefaults();
 		this.taComments.setText("");
 	}
 	
@@ -600,15 +696,20 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 						if (response == JOptionPane.YES_OPTION)
 						{
 							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
+							FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
 							FileOperation.exportPainData(patient, entry);
 							MainFrame.changePanel(Globals.MAIN_MENU);
 							Globals.GRAPH_PANEL.refreshGraph();
 							Globals.PAIN_TABLE.refreshTable();
+							Globals.HISTORY_RECENT_MEDICATION.refresh();
+							Globals.HISTORY_MEDICINE_COMPLAINT.refresh();
+							Globals.GRAPH_FILTER_PANEL.refresh();
 						}
 					}
 					else
 					{
 						FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
+						FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
 						FileOperation.exportPainData(patient, entry);
 						if (!this.isNewEntry)
 						{
@@ -620,6 +721,9 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 						MainFrame.changePanel(Globals.MAIN_MENU);
 						Globals.GRAPH_PANEL.refreshGraph();
 						Globals.PAIN_TABLE.refreshTable();
+						Globals.HISTORY_RECENT_MEDICATION.refresh();
+						Globals.HISTORY_MEDICINE_COMPLAINT.refresh();
+						Globals.GRAPH_FILTER_PANEL.refresh();
 					}
 				}
 				else

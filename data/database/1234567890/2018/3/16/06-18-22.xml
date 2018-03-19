@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>16</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>06</time_hour>
+     <time_minute>18</time_minute>
+     <time_seconds>22</time_seconds>
+     <pain_location_preset pain_loc_id="0">face right and head</pain_location_preset>
+     <pain_kind>default pain kind tight band</pain_kind>
+     <intensity>2</intensity>
+     <duration>1</duration>
+     <activity>default triggers sunlight</activity>
+     <activity_details/>
+     <recent_medication>Obat C</recent_medication>
+     <comments/>
+</Entry>

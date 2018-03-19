@@ -25,7 +25,6 @@ import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import diary.ImageExportPanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
@@ -34,12 +33,8 @@ import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
-import diary.gui.graphs.TitledGraph;
-import diary.legacy.ImagePanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
-import diary.patientdata.PatientData;
-import diary.patientdata.PatientDataForm;
 import giantsweetroll.gui.swing.Gbm;
 
 public class TableScreen extends JPanel implements ActionListener
@@ -114,7 +109,7 @@ public class TableScreen extends JPanel implements ActionListener
 		//Initialization
 		this.panelBelowCenter = new JPanel();
 		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
-		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
 		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		
 		//Properties
@@ -130,7 +125,7 @@ public class TableScreen extends JPanel implements ActionListener
 		this.butRefresh.setActionCommand(this.REFRESH);
 		
 		//add to panel
-		this.panelBelowCenter.add(this.butSave);
+//		this.panelBelowCenter.add(this.butSave);
 		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butDelete);
 	}
@@ -333,9 +328,9 @@ public class TableScreen extends JPanel implements ActionListener
 		{
 			filterType = XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT;
 		}
-		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT)))
+		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_TRIGGER_TEXT)))
 		{
-			filterType = XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT;
+			filterType = XMLIdentifier.TABLE_FILTER_TYPE_TRIGGER_TEXT;
 		}
 		else if (filterType.equals(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)))
 		{
@@ -409,7 +404,7 @@ public class TableScreen extends JPanel implements ActionListener
 														new DateRangePanel(this.panelDateRange.getDateRangeMap()));
 				Methods.exportPanelImage(imagePanel, true);
 				*/
-				
+				/*
 				PatientData patient = this.activePatientPanel.getSelectedPatientData();
 				ImageExportPanel exportImage = new ImageExportPanel(patient.getName(), 
 																	patient.getID(), 
@@ -417,6 +412,8 @@ public class TableScreen extends JPanel implements ActionListener
 																	Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
 																	this.table);
 				Methods.exportPanelImage(exportImage, true);
+				*/
+				FileOperation.exportTableAsExcel(this.table.getTable());
 				break;
 				
 			case DELETE:

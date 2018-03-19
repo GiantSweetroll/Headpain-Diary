@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -66,7 +68,84 @@ public class HistoryPanel extends JPanel implements ItemListener
 		this.radNew.setSelected(true);
 		this.radNew.setOpaque(false);
 		this.comboHistory.setBackground(Color.WHITE);
+		this.radHistory.setEnabled(this.hasHistory());
 		this.tfHistory.setOpaque(false);
+		this.tfHistory.addMouseListener(new MouseListener()
+				{
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) 
+					{
+						if (!tfHistory.isEditable())
+						{
+							tfHistory.setEditable(true);
+							radNew.setSelected(true);
+						}
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+			
+				});
+		this.comboHistory.addMouseListener(new MouseListener()
+				{
+
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent e) 
+					{
+						if (hasHistory() && !comboHistory.isEnabled())
+						{
+							comboHistory.setEnabled(true);
+							radHistory.setSelected(true);
+						}
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+			
+				});
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -114,8 +193,42 @@ public class HistoryPanel extends JPanel implements ItemListener
 	}
 	public void resetDefaults()
 	{
-		this.radHistory.setSelected(true);
-		this.comboHistory.setSelectedIndex(0);
+		if(this.hasHistory())
+		{
+			this.radHistory.setSelected(true);
+		}
+		else
+		{
+			this.radNew.setSelected(true);
+		}
+		try
+		{
+			this.comboHistory.setSelectedIndex(0);
+		}
+		catch(IllegalArgumentException ex) {}
+	}
+	public void refresh()
+	{
+		this.comboHistory.setModel(new DefaultComboBoxModel(history.getHistory().toArray(new String[history.getHistory().size()])));
+		this.radHistory.setEnabled(this.hasHistory());
+		this.revalidate();
+		this.repaint();
+	}
+	public boolean hasHistory()
+	{
+		return this.comboHistory.getItemCount()!=0;
+	}
+	
+	//Overriden Methods
+	@Override
+	public void setEnabled(boolean enabled)
+	{
+		super.setEnabled(enabled);
+		
+		this.radHistory.setEnabled(enabled);
+		this.radNew.setEnabled(enabled);
+		this.comboHistory.setEnabled(enabled);
+		this.tfHistory.setEnabled(enabled);
 	}
 	
 	//Interfaces

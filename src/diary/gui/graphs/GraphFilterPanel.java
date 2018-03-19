@@ -2,6 +2,8 @@ package diary.gui.graphs;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
@@ -13,7 +15,7 @@ import diary.history.HistoryPanel;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 
-public class GraphFilterPanel extends JPanel
+public class GraphFilterPanel extends JPanel implements ItemListener
 {
 
 	/**
@@ -36,6 +38,8 @@ public class GraphFilterPanel extends JPanel
 		this.setOpaque(false);
 		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
 		this.checkRecMed.setOpaque(false);
+		this.checkRecMed.addItemListener(this);
+		this.medHistory.setEnabled(false);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -46,13 +50,41 @@ public class GraphFilterPanel extends JPanel
 	}
 	
 	//Methods
+	public void refresh()
+	{
+		this.medHistory.refresh();
+	}
 	public boolean isRecentMedicationSelected()
 	{
 		return this.checkRecMed.isSelected();
 	}
-
+	public void setRecentMedicationSelected(boolean select)
+	{
+		this.checkRecMed.setSelected(select);
+	}
 	public String getRecentMedicationFilter()
 	{
-		return this.medHistory.getItem();
+		if(this.isRecentMedicationSelected()) 
+		{
+			return this.medHistory.getItem();
+		}
+		else
+		{
+			return "";
+		}
+	}
+
+	//Interface
+	@Override
+	public void itemStateChanged(ItemEvent e)
+	{
+		if (this.checkRecMed.isSelected())
+		{
+			this.medHistory.setEnabled(true);
+		}
+		else
+		{
+			this.medHistory.setEnabled(false);
+		}
 	}
 }

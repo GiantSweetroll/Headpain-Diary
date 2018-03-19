@@ -35,8 +35,8 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 	public PainLocationSelectionPanel()
 	{
 		//Initialization
-		this.radCustom = new JRadioButton(Methods.getLanguageText(XMLIdentifier.CUSTOM_TEXT));
-		this.radPreset = new JRadioButton(Methods.getLanguageText(XMLIdentifier.PRESETS_TEXT));
+		this.radCustom = new JRadioButton(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_CUSTOM_LABEL));
+		this.radPreset = new JRadioButton(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_PRESETS_LABEL));
 		this.preset = new PainLocationPresetSelectionPanel();
 		this.custom = new PainLocationCustomSelectionPanel(new PainLocationCustomSelection(20));
 		this.group = new ButtonGroup();

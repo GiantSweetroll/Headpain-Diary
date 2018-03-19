@@ -178,7 +178,7 @@ public class GraphPanel extends JPanel implements ActionListener
 		this.panelBelowCenter = new JPanel();
 		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSwitchGraph = new JButton(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
-		this.buttonSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		this.buttonSave = new JButton(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
 		this.butOptions = new JButton (Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT));
 		
 		//Properties
@@ -225,43 +225,47 @@ public class GraphPanel extends JPanel implements ActionListener
 			list = PainDataOperation.insertEmptyData(list, this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO));
 		}
 		
-	/*	if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
-		{
-			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
-		}
-		else */ if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
+		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DATE_LABEL));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DAY_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_OF_ENTRIES_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.TIME_TEXT));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.EPISODE_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getDurationVSTime(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.TIME_TEXT));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.EPISODE_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAverageIntensityVSDate(list));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DAY_TEXT));
+			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_INTENSITY_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAverageDurationVSDate(list));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DAY_TEXT));
+			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_DURATION_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAverageIntensityVSMonth(list));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.MONTH_TEXT));
+			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_INTENSITY_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT)))
 		{
 			this.graph = new LineGraphPanel(PainDataOperation.getAverageDurationVSMonth(list));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.MONTH_TEXT));
+			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_DURATION_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
 		{
@@ -269,14 +273,10 @@ public class GraphPanel extends JPanel implements ActionListener
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.KINDS_OF_HEADPAINS_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
 		}
-/*		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
-		{
-//			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainLocations(list));
-		}	*/
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_DATE)))
 		{
 			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfActivity(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL));
+			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
 		}
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
@@ -295,60 +295,6 @@ public class GraphPanel extends JPanel implements ActionListener
 		}
 		catch(NullPointerException ex) {};
 		
-		/*
-		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
-		String category = this.comboCategory.getSelectedItem().toString();
-		
-		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
-		
-	/*	if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT)))
-		{
-			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfHeadPainsVSDate(list));
-		}
-		else  if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
-		{
-			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DATE_LABEL));
-			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_OF_ENTRIES_TEXT));
-		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME)))
-		{
-			this.graph = new BarGraphPanel(PainDataOperation.getIntensityVSTime(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.TIME_TEXT));
-			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL));
-		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME)))
-		{
-			this.graph = new BarGraphPanel(PainDataOperation.getDurationVSTime(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.TIME_TEXT));
-			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL));
-		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT)))
-		{
-			this.graph = new BarGraphPanel(PainDataOperation.getAverageIntensityVSDate(list));
-		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT)))
-		{
-			this.graph = new BarGraphPanel(PainDataOperation.getAverageDurationVSDate(list));
-		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
-		{
-			this.graph = new LineGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.KINDS_OF_HEADPAINS_TEXT));
-			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
-		}
-/*		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE)))
-		{
-			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
-		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE)))
-		{
-			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfActivity(list));
-			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.ACTIVITY_LABEL));
-			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
-		}
-		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
-		*/
 		if (this.graph instanceof LineGraphPanel)
 		{
 			this.graph = new BarGraphPanel(this.graph.getDataMap(), this.graph.getXAxisName(), this.graph.getYAxisName());

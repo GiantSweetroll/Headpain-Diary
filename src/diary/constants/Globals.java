@@ -13,6 +13,7 @@ public class Globals
 {	
 	//Histories
 	public static final History HISTORY_RECENT_MEDICATION = new History(Constants.HISTORY_RECENT_MEDICATION_NAME);
+	public static final History HISTORY_MEDICINE_COMPLAINT = new History(Constants.HISTORY_MEDICINE_COMPLAINT_NAME);
 	
 	//Panels
 	public static MainMenu MAIN_MENU = new MainMenu();

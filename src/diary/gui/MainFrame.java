@@ -184,6 +184,7 @@ public class MainFrame
 			{
 				jComponent = Globals.MAIN_MENU;
 				MainFrame.frame.add(jComponent);
+	//			MainFrame.changePanel(Globals.MAIN_MENU);
 			}
 		}
 		catch(NullPointerException ex)

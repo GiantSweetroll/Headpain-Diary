@@ -11,8 +11,8 @@
      <pain_kind>default pain kind pulsating</pain_kind>
      <intensity>7</intensity>
      <duration>23</duration>
-     <activity>default activities improper diet sleep</activity>
-     <activity_details/>
+     <activity>other text</activity>
+     <activity_details>Sleeping</activity_details>
      <recent_medication>Panadol</recent_medication>
      <comments/>
 </Entry>

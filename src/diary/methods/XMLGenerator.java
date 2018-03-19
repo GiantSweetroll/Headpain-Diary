@@ -77,6 +77,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL, "Amount of Headpain Location(s)");
 		appendComponentToMap(doc, map, XMLIdentifier.ACTIVITY_LABEL, "Activity");
 		appendComponentToMap(doc, map, XMLIdentifier.RECENT_MEDICATION_LABEL, "Recent Medication");
+		appendComponentToMap(doc, map, XMLIdentifier.MEDICINE_COMPLAINT_LABEL, "Suspected Side Effects of Medicines");
 		appendComponentToMap(doc, map, XMLIdentifier.COMMENTS_LABEL, "Comments");
 //		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_LABEL, "General Position");
 		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_LABEL, "Your Most Painful Location");
@@ -91,12 +92,15 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_HOURS_TEXT, "Hours");
 		appendComponentToMap(doc, map, XMLIdentifier.DURATION_UNIT_DAYS_TEXT, "Days");
 		appendComponentToMap(doc, map, XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL, "Your Most Painful Area");
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_PRESETS_LABEL, "Common Area");
+		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_CUSTOM_LABEL, "Others");
+		appendComponentToMap(doc, map, XMLIdentifier.COMMENTS_LABEL_LONG, "Comments (including what activity that cannot be done during pain strike, etc.)");
 		
 		//Default Activities
-		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT, "Sunlight");
-		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP, "Improper Diet/Sleep Routine");
-		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY, "Physical Activity");
-		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR, "Stressor");
+		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT, "Sunlight");
+		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP, "Improper Diet/Sleep Routine");
+		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY, "Physical Activity");
+		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR, "Stressor");
 		
 		//Default Pain Kind
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_PAIN_KIND_PULSATING, "Pulsating");
@@ -204,25 +208,35 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PRESETS_TEXT, "Presets");
 		appendComponentToMap(doc, map, XMLIdentifier.CUSTOM_TEXT, "Custom");
 		appendComponentToMap(doc, map, XMLIdentifier.OPTIONS_TEXT, "Options");
-		appendComponentToMap(doc, map, XMLIdentifier.AMOUNT_OF_ENTRIES_TEXT, "Amount of Entries");
+		appendComponentToMap(doc, map, XMLIdentifier.AMOUNT_OF_ENTRIES_TEXT, "Frequency");
 		appendComponentToMap(doc, map, XMLIdentifier.AVERAGE_TEXT, "Average");
 		appendComponentToMap(doc, map, XMLIdentifier.TIME_TEXT, "Time");
 		appendComponentToMap(doc, map, XMLIdentifier.KINDS_OF_HEADPAINS_TEXT, "Kinds of Headpains");
 		appendComponentToMap(doc, map, XMLIdentifier.AMOUNT_TEXT, "Amount");
+		appendComponentToMap(doc, map, XMLIdentifier.AVERAGE_INTENSITY_TEXT, "Average Intensity");
+		appendComponentToMap(doc, map, XMLIdentifier.AVERAGE_DURATION_TEXT, "Average Duration");
 		appendComponentToMap(doc, map, XMLIdentifier.DAYS_TEXT, "Days");
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_RANGE_TEXT, "Date Range");
+		appendComponentToMap(doc, map, XMLIdentifier.EXPORT_TEXT, "Export");
+		appendComponentToMap(doc, map, XMLIdentifier.DETAILS_TEXT, "Details");
+		appendComponentToMap(doc, map, XMLIdentifier.DAY_TEXT, "Day");
+		appendComponentToMap(doc, map, XMLIdentifier.MONTH_TEXT, "Month");
+		appendComponentToMap(doc, map, XMLIdentifier.YEAR_TEXT, "Year");
+		appendComponentToMap(doc, map, XMLIdentifier.EPISODE_TEXT, "Episode");
+		appendComponentToMap(doc, map, XMLIdentifier.TRIGGER_TEXT, "Trigger");
 		
 		//Graph
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
+//		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Show");
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT, "Pain vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT, "Entries vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT, "Average Intensity vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT, "Average Duration vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME, "Intensity vs Time");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME, "Duration vs Time");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE, "Kinds of Pains vs Date");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT, "Frequency vs Day");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT, "Average Intensity vs Day");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT, "Average Duration vs Day");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME, "Intensity vs Episode");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME, "Duration vs Episode");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE, "Kinds of Pains vs Day");
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE, "Pain Locations vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_ACTIVITY_VS_DATE, "Activity vs Date");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_DATE, "Trigger vs Day");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT, "Average Intensity vs Month");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT, "Average Duration vs Month");
 		//Graph Settings
@@ -238,7 +252,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT, "Comments");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT, "Duration");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT, "Intensity");
-		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT, "Activity");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_TRIGGER_TEXT, "Trigger");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT, "Pain Kind");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT, "Pain Position");
 		//Table Usage Guide
@@ -248,8 +262,8 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT, "Delete the selected entries (cannot be undone)");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT, "Open the Entry Log of the selected entry (only one at a time)");
 		//Table Headers
-		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_ACTIVITY_TEXT, "Activity");
-		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_ACTIVITY_DETAILS_TEXT, "Activity Details");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_TRIGGER_TEXT, "Trigger");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_TRIGGER_DETAILS_TEXT, "Trigger Details");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_COMMENTS_TEXT, "Comments");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_DATE_TEXT, "Date");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT, "Duration");
@@ -260,6 +274,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_SELECT_TEXT, "Select");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT, "Start Time");
 		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_RECENT_MEDICATION_TEXT, "Recent Medication");
+		appendComponentToMap(doc, map, XMLIdentifier.TABLE_HEADERS_MEDICINE_COMPLAINT_TEXT, "Suspected Side Effects of Medicines");
 		
 		//Program Settings
 		appendComponentToMap(doc, map, XMLIdentifier.SETTINGS_WINDOW_TITLE, "Window");

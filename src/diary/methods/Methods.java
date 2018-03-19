@@ -1,5 +1,6 @@
 package diary.methods;
 
+
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -32,7 +33,6 @@ import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.gui.graphs.GraphPanel;
 import diary.gui.table.TableScreen;
-import diary.legacy.ImagePanel;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.numbers.GNumbers;
@@ -680,21 +680,21 @@ public class Methods
 
 	public static String convertActivityLanguageToID(String text)
 	{
-		if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT)))
+		if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT)))
 		{
-			return XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT;
+			return XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT;
 		}
-		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP)))
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP)))
 		{
-			return XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP;
+			return XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP;
 		}
-		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY)))
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY)))
 		{
-			return XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY;
+			return XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY;
 		}
-		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR)))
+		else if (text.equals(Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR)))
 		{
-			return XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR;
+			return XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR;
 		}
 		else if (text.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
 		{
@@ -707,21 +707,21 @@ public class Methods
 	}
 	public static String convertActivityIDToLanguage(String id)
 	{
-		if (id.equals(XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT))
+		if (id.equals(XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT))
 		{
-			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITES_SUNLIGHT);
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT);
 		}
-		else if (id.equals(XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP))
+		else if (id.equals(XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP))
 		{
-			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP);
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP);
 		}
-		else if (id.equals(XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY))
+		else if (id.equals(XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY))
 		{
-			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY);
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY);
 		}
-		else if (id.equals(XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR))
+		else if (id.equals(XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR))
 		{
-			return Methods.getLanguageText(XMLIdentifier.DEFAULT_ACTIVITIES_STRESSOR);
+			return Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR);
 		}
 		else if (id.equals(XMLIdentifier.OTHER_TEXT))
 		{
@@ -745,5 +745,10 @@ public class Methods
 				UIManager.put(key, f);
 			}
 		}
+	}
+	
+	public static final String createTextWithRequiredIdentifier(String text)
+	{
+		return "<html>" + text + "<font color='red'>" + Constants.REQUIRED_IDENTIFIER + "</font></html>";
 	}
 }

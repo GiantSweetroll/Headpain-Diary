@@ -36,6 +36,7 @@ public class PainEntryData
 		this.dataMap.put(PainDataIdentifier.ACTIVITY, "");
 		this.dataMap.put(PainDataIdentifier.ACTIVITY_DETAILS, "");
 		this.dataMap.put(PainDataIdentifier.RECENT_MEDICATION, "");
+		this.dataMap.put(PainDataIdentifier.MEDICINE_COMPLAINT, "");
 		this.dataMap.put(PainDataIdentifier.COMMENTS, "");
 	}
 	
@@ -79,6 +80,7 @@ public class PainEntryData
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.DURATION);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.ACTIVITY_DETAILS);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.RECENT_MEDICATION);
+		appendToMap(this.dataMap, rootElement, PainDataIdentifier.MEDICINE_COMPLAINT);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.COMMENTS);
 	}
 	

@@ -6,7 +6,16 @@
      <time_hour>16</time_hour>
      <time_minute>22</time_minute>
      <time_seconds>10</time_seconds>
-     <pain_location_custom pain_loc_id="0">190,305</pain_location_custom>
+     <pain_location_custom pain_loc_id="0">69,156</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">69,157</pain_location_custom>
+     <pain_location_custom pain_loc_id="2">69,158</pain_location_custom>
+     <pain_location_custom pain_loc_id="3">69,159</pain_location_custom>
+     <pain_location_custom pain_loc_id="4">69,160</pain_location_custom>
+     <pain_location_custom pain_loc_id="5">69,161</pain_location_custom>
+     <pain_location_custom pain_loc_id="6">69,162</pain_location_custom>
+     <pain_location_custom pain_loc_id="7">68,164</pain_location_custom>
+     <pain_location_custom pain_loc_id="8">68,164</pain_location_custom>
+     <pain_location_custom pain_loc_id="9">68,165</pain_location_custom>
      <pain_kind>default pain kind throbbing</pain_kind>
      <intensity>5</intensity>
      <duration>12</duration>

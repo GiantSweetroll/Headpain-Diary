@@ -215,31 +215,6 @@ public class PainDataOperation
 	{
 		LinkedHashMap<String, Double> map = new LinkedHashMap<String, Double>();
 		
-		/*
-		for (int i=0; i<list.size(); i++)
-		{
-			if (list.get(i) instanceof PainEntryDataVoid)
-			{
-				continue;
-			}
-			
-			List<LinkedHashMap<String, Object>> painLocations = (List<LinkedHashMap<String, Object>>)list.get(i).getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
-			for (int a=0; a<painLocations.size(); a++)
-			{
-				String key = painLocations.get(a).get(PainDataIdentifier.PAIN_KIND).toString();
-				
-				try
-				{
-					map.put(key, map.get(key) + 1d);
-				}
-				catch(NullPointerException ex)
-				{
-					map.put(key, 1d);
-				}
-			}
-		}
-		*/
-		
 		for (PainEntryData entry : list)
 		{
 			if (entry instanceof PainEntryDataVoid)
@@ -477,7 +452,7 @@ public class PainDataOperation
 					i=-1;
 					continue loop;
 				}
-				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_ACTIVITY_TEXT))		//If filtered by activity
+				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_TRIGGER_TEXT))		//If filtered by activity
 				{
 					String activity = list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
 					for (int a=0; a<activity.length(); a++)

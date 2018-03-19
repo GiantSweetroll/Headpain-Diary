@@ -55,6 +55,13 @@ public class XMLIdentifier
 	public static final String AVERAGE_INTENSITY_TEXT = "average intensity text";
 	public static final String AVERAGE_DURATION_TEXT = "average duration text";
 	public static final String DATE_RANGE_TEXT = "date range text";
+	public static final String EXPORT_TEXT = "export text";
+	public static final String DETAILS_TEXT = "details text";
+	public static final String DAY_TEXT = "day text";
+	public static final String MONTH_TEXT = "month text";
+	public static final String YEAR_TEXT = "year text";
+	public static final String EPISODE_TEXT = "episode text";
+	public static final String TRIGGER_TEXT = "trigger text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -79,14 +86,18 @@ public class XMLIdentifier
 	public static final String HEADPAIN_LOCATION_AMOUNT_LABEL = "headpain location amount label";
 	public static final String ACTIVITY_LABEL = "activity label";
 	public static final String RECENT_MEDICATION_LABEL = "recent medication label";
+	public static final String MEDICINE_COMPLAINT_LABEL = "medicine complaint label";
 	public static final String COMMENTS_LABEL = "comments label";
 	public static final String YOUR_MOST_PAINFUL_AREA_LABEL = "your most painful area label";
+	public static final String PAIN_LOCATION_PRESETS_LABEL = "pain location presets label";
+	public static final String PAIN_LOCATION_CUSTOM_LABEL = "pain location custom label";
+	public static final String COMMENTS_LABEL_LONG = "comments label long";
 	
 	//Default Activities
-	public static final String DEFAULT_ACTIVITIES_PHYSICAL_ACTIVITY = "default activities physical activity";
-	public static final String DEFAULT_ACTIVITIES_STRESSOR = "default activity stressor";
-	public static final String DEFAULT_ACTIVITES_SUNLIGHT = "default activities sunlight";
-	public static final String DEFAULT_ACTIVITIES_IMPROPER_DIET_SLEEP = "default activities improper diet sleep";
+	public static final String DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY = "default triggers physical activity";
+	public static final String DEFAULT_TRIGGERS_STRESSOR = "default triggers stressor";
+	public static final String DEFAULT_TRIGGERS_SUNLIGHT = "default triggers sunlight";
+	public static final String DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP = "default triggers improper diet sleep";
 	
 	//Default Pain Kind
 	public static final String DEFAULT_PAIN_KIND_THROBBING = "default pain kind throbbing";
@@ -196,7 +207,7 @@ public class XMLIdentifier
 	public static final String GRAPH_CATEGORY_DURATION_VS_TIME = "graph category duration vs time text";
 	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_DATE = "graph category pain kind vs date";
 //	public static final String GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE = "graph category pain location vs date";
-	public static final String GRAPH_CATEGORY_ACTIVITY_VS_DATE = "graph category activity vs date";
+	public static final String GRAPH_CATEGORY_TRIGGER_VS_DATE = "graph category trigger vs date";
 	public static final String GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT = "graph categories intensity average vs month";
 	public static final String GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT = "graph categories duration average vs month";
 	//Graph Settings
@@ -213,7 +224,7 @@ public class XMLIdentifier
 	public static final String TABLE_FILTER_TYPE_PAIN_KINDS_TEXT = "table filter type pain kinds text";
 	public static final String TABLE_FILTER_TYPE_INTENSITIES_TEXT = "table filter type intensities text";
 	public static final String TABLE_FILTER_TYPE_DURATIONS_TEXT = "table filter type durations text";
-	public static final String TABLE_FILTER_TYPE_ACTIVITY_TEXT = "table filter type activity text";
+	public static final String TABLE_FILTER_TYPE_TRIGGER_TEXT = "table filter type trigger text";
 	public static final String TABLE_FILTER_TYPE_COMMENTS_TEXT = "table filter type comments text";
 	//Table Usage Guide Notes
 	public static final String TABLE_FILTER_GUIDE_USAGE_TEXT = "table filter guide usage text";
@@ -230,9 +241,10 @@ public class XMLIdentifier
 	public static final String TABLE_HEADERS_PAIN_KINDS_TEXT = "table headers pain kinds text";
 	public static final String TABLE_HEADERS_INTENSITIES_TEXT = "table headers intensities text";
 	public static final String TABLE_HEADERS_DURATIONS_TEXT = "table headers durations text";
-	public static final String TABLE_HEADERS_ACTIVITY_TEXT = "table headers acitivity text";
-	public static final String TABLE_HEADERS_ACTIVITY_DETAILS_TEXT = "table headers activity details text";
+	public static final String TABLE_HEADERS_TRIGGER_TEXT = "table headers trigger text";
+	public static final String TABLE_HEADERS_TRIGGER_DETAILS_TEXT = "table headers trigger details text";
 	public static final String TABLE_HEADERS_RECENT_MEDICATION_TEXT = "table headers recent medication text";
+	public static final String TABLE_HEADERS_MEDICINE_COMPLAINT_TEXT = "table headers medicine complaint text";
 	public static final String TABLE_HEADERS_COMMENTS_TEXT = "table headers comments text";
 	
 	//Program Settings
