@@ -483,7 +483,7 @@ public class Methods
 			}
 			else if (MainFrame.jComponent instanceof TableScreen)
 			{
-				((TableScreen)MainFrame.jComponent).initTable();		//Recreates table to its original state
+				((TableScreen)MainFrame.jComponent).refreshTable();		//Recreates table to its original state
 			}
 		}
 		catch(ClassCastException ex) {}

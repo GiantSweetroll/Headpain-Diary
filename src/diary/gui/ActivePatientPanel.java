@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -127,7 +128,31 @@ public class ActivePatientPanel extends JPanel implements ItemListener
 			ex.printStackTrace();
 		}
 	}
-
+	public void refresh()
+	{
+		PatientData active = this.getSelectedPatientData();
+		List<PatientData> list = FileOperation.getListOfPatients();
+		this.comboUsers.setModel(new DefaultComboBoxModel<PatientData>(list.toArray(new PatientData[list.size()])));
+		try
+		{
+			for (int i=0; i<this.comboUsers.getItemCount(); i++)
+			{
+				if (this.comboUsers.getItemAt(i).getNameAndID().equals(active.getNameAndID()))
+				{
+					this.comboUsers.setSelectedIndex(i);
+					break;
+				}
+				System.out.println();
+			}
+		}
+		catch(NullPointerException ex) 
+		{
+			ex.printStackTrace();
+		}
+		this.revalidate();
+		this.repaint();
+	}
+	
 	//Interfaces
 	@Override
 	public void itemStateChanged(ItemEvent e)

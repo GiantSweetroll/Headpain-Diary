@@ -323,6 +323,7 @@ public class GraphPanel extends JPanel implements ActionListener
 	
 	public void refreshGraph()
 	{
+		this.activePatientPanel.refresh();
 		if (this.graphReversed)
 		{
 			this.initReverseGraph();

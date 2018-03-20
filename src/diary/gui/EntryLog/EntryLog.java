@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -655,6 +656,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	
 	public void resetToDefault()
 	{
+		this.activePatientPanel.refresh();
 		this.panelDate.autoSetDate();
 		this.panelTime.setToCurrentTime();
 		this.painLocation.resetDefaults();
@@ -670,6 +672,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.historyMedicineComplaint.refresh();
 		this.historyMedicineComplaint.resetDefaults();
 		this.taComments.setText("");
+		this.scrollCenter.getViewport().setViewPosition(new Point(0,0));			//Returns Vertical Scrollbar to top
 	}
 	
 	//Interfaces

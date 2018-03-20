@@ -237,9 +237,10 @@ public class TableScreen extends JPanel implements ActionListener
 	//Other Methods
 	public void refreshTable()
 	{
+		this.activePatientPanel.refresh();
 		this.initTable();
 	}
-	public void initTable()
+	private void initTable()
 	{
 		try
 		{

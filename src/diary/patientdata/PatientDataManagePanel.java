@@ -47,7 +47,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 	private JCheckBox checkMedRec, checkName, checkDOB;
 	private JTextField tfMedRec, tfName;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butNew, butDelete, butSelect, butFilter;
+	private JButton butBack, butNew, butDelete, butSelect, butFilter, butRefresh;
 	private Table table;
 	private List<PatientData> patients;
 	private List<String> selectedPatientIDs;
@@ -120,19 +120,23 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 	{
 		//Initializations
 		this.panelBelowCenter = new JPanel();
-		this.butDelete = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DELETE_TEXT));
-		this.butSelect = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SELECT_TEXT));
+		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
+		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butSelect = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.panelBelowCenter.setOpaque(false);
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.addActionListener(this);
+		this.butRefresh.setActionCommand(this.FILTER);
+		this.butRefresh.addActionListener(this);
 		this.butSelect.setActionCommand(this.SELECT);
 		this.butSelect.addActionListener(this);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butDelete);
+		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butSelect);
 	}
 	private void initPanelBelow()
@@ -366,12 +370,21 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 //		System.out.println("Size of list after filter: " + this.patients.size());
 	}
 	
+	public void refresh()
+	{
+		this.initTable();
+		this.revalidate();
+		this.repaint();
+	}
+	
 	//Interfaces
 	public void actionPerformed(ActionEvent e)
 	{
 		switch(e.getActionCommand())
 		{
 			case BACK:
+				Globals.GRAPH_PANEL.refreshGraph();
+				Globals.PAIN_TABLE.refreshTable();
 				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 				
@@ -380,9 +393,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener
 				break;
 				
 			case FILTER:
-				this.initTable();
-				this.revalidate();
-				this.repaint();
+				this.refresh();
 				break;
 				
 			case DELETE:
