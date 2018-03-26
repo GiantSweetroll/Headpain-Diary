@@ -73,9 +73,9 @@ public class Methods
 	{
 		return 	generatePainDataFolderPathName(patient, entry) + File.separator +
 				entry.getDataMap().get(PainDataIdentifier.TIME_HOUR) + "-" +
-				entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE) + "-" +
-				entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS) +
-				".xml";
+				entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE)/* + "-" +
+				entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS)*/ +
+				Constants.PAIN_DATA_ENTRY_FILE_EXTENSION;
 	}
 	/*
 	public static String generatePainDataFolderPathName(Document doc)
@@ -750,5 +750,20 @@ public class Methods
 	public static final String createTextWithRequiredIdentifier(String text)
 	{
 		return "<html>" + text + "<font color='red'>" + Constants.REQUIRED_IDENTIFIER + "</font></html>";
+	}
+	
+	public static void removeDuplicatesFromStringList(List<String> list)
+	{
+		for (int i=0; i<list.size()-1; i++)
+		{
+			for (int a=i+1; a<list.size(); a++)
+			{
+				if (list.get(i).equals(list.get(a)))
+				{
+					list.remove(a);
+					a=i;
+				}
+			}
+		}
 	}
 }

@@ -199,6 +199,8 @@
      <text identifier="settings language text">Language</text>
      <text identifier="unfilled required fields dialog text">Please fill all required fields (marked with *)</text>
      <text identifier="unfilled required fields dialog title">Fill in all required fields</text>
+     <text identifier="error no patients selected text">Please select a patient</text>
+     <text identifier="error no patients selected title">No patients selected</text>
      <text identifier="message delete confirm text">Are you sure you want to delete the following entries?</text>
      <text identifier="message delete confirm title">Confirm delete?</text>
      <text identifier="message overwrite confirm text">Another entry of the same start time already exists. Overwrite?</text>

@@ -13,12 +13,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -36,6 +38,7 @@ import diary.gui.MainFrame;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.gui.swing.ScrollPaneManager;
 
 public class TableScreen extends JPanel implements ActionListener
 {
@@ -77,15 +80,18 @@ public class TableScreen extends JPanel implements ActionListener
 		//Initialization
 		this.initPanelBelow();
 		this.initPanelTop();
+		JScrollPane scroll = ScrollPaneManager.generateDefaultScrollPane(this.panelTop, 10, 10);
 		
 		//Properties
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
+	//	scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		this.initTable();
 		
 		//Add to panel
-		this.add(this.panelTop, BorderLayout.NORTH);
+		this.add(scroll, BorderLayout.NORTH);
 		this.add(this.panelBelow, BorderLayout.SOUTH);
 	}
 	private void initPanelBelowLeft()
@@ -362,7 +368,7 @@ public class TableScreen extends JPanel implements ActionListener
 				
 				this.activeEntry = entry;
 				this.selectedEntryIDs.add(Methods.generatePainDataFolderPathName(this.activePatientPanel.getSelectedPatientData(), entry) + File.separator +
-											key.replaceAll(":", "-") + ".xml");		//Replace ":" to "-" to unify with file name
+											key.replaceAll(":", "-") + Constants.PAIN_DATA_ENTRY_FILE_EXTENSION);		//Replace ":" to "-" to unify with file name
 				selected++;
 			}
 		}

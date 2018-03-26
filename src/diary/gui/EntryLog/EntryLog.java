@@ -177,7 +177,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.panelCenter.setLayout(new GridBagLayout());
 		this.panelCenter.setOpaque(false);
 		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute(), GDateManager.getCurrentSecond());
+		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute());
 		this.panelTime.resetDefault();
 		this.comboPainKind.setBackground(Color.WHITE);
 		this.tfPainKind.setColumns(10);
@@ -420,7 +420,6 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 			//Time
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.TIME_HOUR, mapTime.get(PainDataIdentifier.TIME_HOUR));
 			this.appendToRootNode(doc, rootElement, PainDataIdentifier.TIME_MINUTE, mapTime.get(PainDataIdentifier.TIME_MINUTE));
-			this.appendToRootNode(doc, rootElement, PainDataIdentifier.TIME_SECONDS, mapTime.get(PainDataIdentifier.TIME_SECONDS));
 			
 			//Pain Location
 			List<String> locations = this.painLocation.getSelectedPositions();
@@ -535,7 +534,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	
 	private boolean allRequiredFieldsFilled()
 	{
-		if (!this.activityFilled() || Methods.isEmpty(this.tfIntensity) || Methods.isEmpty(this.tfDuration))
+		if (!this.activityFilled() || Methods.isEmpty(this.tfIntensity) || Methods.isEmpty(this.tfDuration) || !this.painLocation.isPainLocationSelected())
 		{
 			return false;
 		}
@@ -578,8 +577,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.panelDate.setAsDefaultDataThis();
 		
 		this.panelTime.setTime(entry.getDataMap().get(PainDataIdentifier.TIME_HOUR).toString(),
-								entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE).toString(),
-								entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS).toString());
+								entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE).toString());
 		this.panelTime.setAsDefaultTimeThis();
 		
 		this.painLocation.setSelectedPosition(entry);
@@ -688,19 +686,41 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 			case FINISH:
 				if (this.allRequiredFieldsFilled())
 				{
-					PainEntryData entry = new PainEntryData(this.createDataXMLDocument());
-					PatientData patient = this.activePatientPanel.getSelectedPatientData();
-					
-					if (FileOperation.entryExists(patient, entry) && this.isNewEntry)
+					if (this.activePatientPanel.isPatientSelected())
 					{
-						int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
-																	Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
+						PainEntryData entry = new PainEntryData(this.createDataXMLDocument());
+						PatientData patient = this.activePatientPanel.getSelectedPatientData();
 						
-						if (response == JOptionPane.YES_OPTION)
+						if (FileOperation.entryExists(patient, entry) && this.isNewEntry)
+						{
+							int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
+																		Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
+							
+							if (response == JOptionPane.YES_OPTION)
+							{
+								FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
+								FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
+								FileOperation.exportPainData(patient, entry);
+								MainFrame.changePanel(Globals.MAIN_MENU);
+								Globals.GRAPH_PANEL.refreshGraph();
+								Globals.PAIN_TABLE.refreshTable();
+								Globals.HISTORY_RECENT_MEDICATION.refresh();
+								Globals.HISTORY_MEDICINE_COMPLAINT.refresh();
+								Globals.GRAPH_FILTER_PANEL.refresh();
+							}
+						}
+						else
 						{
 							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
 							FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
 							FileOperation.exportPainData(patient, entry);
+							if (!this.isNewEntry)
+							{
+								if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
+								{
+									FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
+								}
+							}
 							MainFrame.changePanel(Globals.MAIN_MENU);
 							Globals.GRAPH_PANEL.refreshGraph();
 							Globals.PAIN_TABLE.refreshTable();
@@ -711,22 +731,8 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 					}
 					else
 					{
-						FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
-						FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
-						FileOperation.exportPainData(patient, entry);
-						if (!this.isNewEntry)
-						{
-							if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
-							{
-								FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
-							}
-						}
-						MainFrame.changePanel(Globals.MAIN_MENU);
-						Globals.GRAPH_PANEL.refreshGraph();
-						Globals.PAIN_TABLE.refreshTable();
-						Globals.HISTORY_RECENT_MEDICATION.refresh();
-						Globals.HISTORY_MEDICINE_COMPLAINT.refresh();
-						Globals.GRAPH_FILTER_PANEL.refresh();
+						MessageManager.showErrorDialog(Methods.getLanguageText(XMLIdentifier.ERROR_NO_PATIENTS_SELECTED_TEXT),
+														Methods.getLanguageText(XMLIdentifier.ERROR_NO_PATIENTS_SELECTED_TITLE));
 					}
 				}
 				else

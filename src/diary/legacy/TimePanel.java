@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.legacy;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -28,7 +28,7 @@ public class TimePanel extends JPanel implements ActionListener
 	 * 
 	 */
 	private static final long serialVersionUID = 5455616933083251455L;
-	private JComboBox<String> comboHour, comboMinute;
+	private JComboBox<String> comboHour, comboMinute, comboSec;
 	private JButton butReset, butCurrent;
 	private GridBagConstraints c;
 	private Map<String, String> defaultMap;
@@ -38,6 +38,7 @@ public class TimePanel extends JPanel implements ActionListener
 	private final String CURRENT = "current";
 	private final String HOUR = "hour";
 	private final String MINUTE = "minute";
+	private final String SECONDS = "seconds";
 	private final String TIME_DIVIDER = ":";
 	
 	protected TimePanel(boolean enable)
@@ -47,6 +48,7 @@ public class TimePanel extends JPanel implements ActionListener
 		{
 			this.comboHour.setEnabled(false);
 			this.comboMinute.setEnabled(false);
+			this.comboSec.setEnabled(false);
 			this.butCurrent.setEnabled(false);
 			this.butReset.setEnabled(false);
 		}
@@ -58,6 +60,7 @@ public class TimePanel extends JPanel implements ActionListener
 		//Initialization
 		this.comboHour = new JComboBox<String>(TimeConstants.HOURS_RANGE);
 		this.comboMinute = new JComboBox<String>(TimeConstants.GENERAL_TIME_RANGE);
+		this.comboSec = new JComboBox<String>(TimeConstants.GENERAL_TIME_RANGE);
 		this.butCurrent = new JButton(Methods.getLanguageText(XMLIdentifier.AUTO_TEXT));
 		this.butReset = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		this.c = new GridBagConstraints();
@@ -68,6 +71,7 @@ public class TimePanel extends JPanel implements ActionListener
 		this.setOpaque(false);
 		this.comboHour.setBackground(Color.WHITE);
 		this.comboMinute.setBackground(Color.WHITE);
+		this.comboSec.setBackground(Color.WHITE);
 		this.butCurrent.addActionListener(this);
 		this.butCurrent.setActionCommand(this.CURRENT);
 		this.butCurrent.setToolTipText(Methods.getLanguageText(XMLIdentifier.TIME_AUTO_BUTTON_TOOLTIP_TEXT));
@@ -84,31 +88,39 @@ public class TimePanel extends JPanel implements ActionListener
 		Gbm.nextGridColumn(c);
 		this.add(this.comboMinute, c);			//Minute
 		Gbm.nextGridColumn(c);
+		this.add(new JLabel(this.TIME_DIVIDER), c);
+		Gbm.nextGridColumn(c);
+		this.add(this.comboSec, c);				//Seconds
+		Gbm.nextGridColumn(c);
 		this.add(this.butReset, c);				//Reset
 		Gbm.nextGridColumn(c);
 		this.add(this.butCurrent, c);			//Current
 	}
 	
-	protected void setTime(String hour, String minute)
+	protected void setTime(String hour, String minute, String second)
 	{
 		this.comboHour.setSelectedItem(hour);
 		this.comboMinute.setSelectedItem(minute);
+		this.comboSec.setSelectedItem(second);
 	}
-	protected void setDefaultTime(String hour, String minute)
+	protected void setDefaultTime(String hour, String minute, String second)
 	{
 		this.defaultMap.put(this.HOUR, hour);
 		this.defaultMap.put(this.MINUTE, minute);
+		this.defaultMap.put(this.SECONDS, second);
 	}
 	protected void setAsDefaultTimeThis()
 	{
 		this.defaultMap.put(this.HOUR, this.comboHour.getSelectedItem().toString());
 		this.defaultMap.put(this.MINUTE, this.comboMinute.getSelectedItem().toString());
+		this.defaultMap.put(this.SECONDS, this.comboSec.getSelectedItem().toString());
 	}
 	
 	protected void resetDefault()
 	{
 		this.comboHour.setSelectedItem(this.defaultMap.get(this.HOUR));
 		this.comboMinute.setSelectedItem(this.defaultMap.get(this.MINUTE));
+		this.comboSec.setSelectedItem(this.defaultMap.get(this.SECONDS));
 	}
 	
 	protected Map<String, String> getDefaultMap()
@@ -120,6 +132,7 @@ public class TimePanel extends JPanel implements ActionListener
 	{
 		this.comboHour.setSelectedItem(GDateManager.getCurrentHour());
 		this.comboMinute.setSelectedItem(GDateManager.getCurrentMinute());
+		this.comboSec.setSelectedItem(GDateManager.getCurrentSecond());
 	}
 	
 	protected LinkedHashMap<String, String> getData()
@@ -128,6 +141,7 @@ public class TimePanel extends JPanel implements ActionListener
 		
 		map.put(PainDataIdentifier.TIME_HOUR, this.comboHour.getSelectedItem().toString());
 		map.put(PainDataIdentifier.TIME_MINUTE, this.comboMinute.getSelectedItem().toString());
+//		map.put(PainDataIdentifier.TIME_SECONDS, this.comboSec.getSelectedItem().toString());
 		
 		return map;
 	}
@@ -136,7 +150,8 @@ public class TimePanel extends JPanel implements ActionListener
 	{
 		LinkedHashMap<String, String> data = this.getData();
 		if (this.defaultMap.get(this.HOUR).equals(data.get(PainDataIdentifier.TIME_HOUR)) && 
-				this.defaultMap.get(this.MINUTE).equals(data.get(PainDataIdentifier.TIME_MINUTE)))
+				this.defaultMap.get(this.MINUTE).equals(data.get(PainDataIdentifier.TIME_MINUTE)) /*&& 
+				this.defaultMap.get(this.SECONDS).equals(data.get(PainDataIdentifier.TIME_SECONDS))*/)
 		{
 			return true;
 		}

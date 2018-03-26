@@ -292,6 +292,8 @@ public class XMLGenerator
 		//Error Handling
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT, "Please fill all required fields (marked with *)");
 		appendComponentToMap(doc, map, XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE, "Fill in all required fields");
+		appendComponentToMap(doc, map, XMLIdentifier.ERROR_NO_PATIENTS_SELECTED_TEXT, "Please select a patient");
+		appendComponentToMap(doc, map, XMLIdentifier.ERROR_NO_PATIENTS_SELECTED_TITLE, "No patients selected");
 		
 		//Message Dialogs
 		appendComponentToMap(doc, map, XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT, "Are you sure you want to delete the following entries?");

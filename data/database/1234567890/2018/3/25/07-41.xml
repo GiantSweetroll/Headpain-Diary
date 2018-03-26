@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>25</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>07</time_hour>
+     <time_minute>41</time_minute>
+     <pain_location_preset pain_loc_id="0">head back</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">head full</pain_location_preset>
+     <pain_kind>default pain kind pulsating</pain_kind>
+     <intensity>3</intensity>
+     <duration>15</duration>
+     <activity>default triggers stressor</activity>
+     <activity_details/>
+     <recent_medication>Panadol</recent_medication>
+     <medicine_complaint/>
+     <comments/>
+</Entry>

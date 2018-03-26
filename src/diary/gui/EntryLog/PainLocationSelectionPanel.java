@@ -44,7 +44,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 		//Properties
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setOpaque(false);
-		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL)));
+		this.setBorder(BorderFactory.createTitledBorder(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL))));
 	//	this.preset.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 	//	this.custom.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		this.radPreset.setSelected(true);
@@ -72,7 +72,9 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 	{
 		if (this.radPreset.isSelected())
 		{
-			return this.preset.getSelectedPosition();
+			List<String> list = this.preset.getSelectedPosition();
+			Methods.removeDuplicatesFromStringList(list);
+			return list;
 		}
 		else
 		{
@@ -81,6 +83,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 			{
 				list.add(loc.getLocationAsString());
 			}
+			Methods.removeDuplicatesFromStringList(list);
 			return list;
 		}
 	}
@@ -124,6 +127,10 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 				this.preset.setSelected(location);
 			}
 		}
+	}
+	public boolean isPainLocationSelected()
+	{
+		return this.getSelectedPositions().size() > 0;
 	}
 	
 	//Interfaces

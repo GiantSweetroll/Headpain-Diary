@@ -32,5 +32,5 @@ public final class PainDataIdentifier
 	//Time
 	public static final String TIME_HOUR = "time_hour";
 	public static final String TIME_MINUTE = "time_minute";
-	public static final String TIME_SECONDS = "time_seconds";
+//	public static final String TIME_SECONDS = "time_seconds";
 }

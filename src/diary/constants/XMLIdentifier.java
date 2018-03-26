@@ -263,6 +263,8 @@ public class XMLIdentifier
 	//Error Handling
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TEXT = "unfilled required fields dialog text";
 	public static final String ERROR_REQUIRED_FIELDS_DIALOG_TITLE = "unfilled required fields dialog title";
+	public static final String ERROR_NO_PATIENTS_SELECTED_TEXT  = "error no patients selected text";
+	public static final String ERROR_NO_PATIENTS_SELECTED_TITLE = "error no patients selected title";
 	
 	//Message Dialogs
 	public static final String MESSAGE_DELETE_CONFIRM_TITLE = "message delete confirm title";

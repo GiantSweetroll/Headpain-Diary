@@ -311,4 +311,29 @@ public class PatientDataOperation
 			}
 		}
 	}
+
+	public static List<PatientData> filter(List<PatientData> source, String filterType, String keyword)			//filterType is constants from PatientData
+	{
+		List<PatientData> list = new ArrayList<PatientData>();
+		
+		loop:
+		for (PatientData patient : source)
+		{
+			String item = patient.getDataMap().get(filterType);
+			
+			for (int i=0; i<item.length(); i++)
+			{
+				for (int a=i+1; a<=item.length(); a++)
+				{
+					if (item.substring(i, a).equalsIgnoreCase(keyword))
+					{
+						list.add(patient);
+						continue loop;
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
 }

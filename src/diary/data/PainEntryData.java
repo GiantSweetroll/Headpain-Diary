@@ -26,7 +26,7 @@ public class PainEntryData
 		this.dataMap.put(PainDataIdentifier.DATE_YEAR, "2016");
 		this.dataMap.put(PainDataIdentifier.TIME_HOUR, "00");
 		this.dataMap.put(PainDataIdentifier.TIME_MINUTE, "00");
-		this.dataMap.put(PainDataIdentifier.TIME_SECONDS, "00");
+	//	this.dataMap.put(PainDataIdentifier.TIME_SECONDS, "00");
 		this.dataMap.put(PainDataIdentifier.PAIN_AMOUNT, "1");
 		this.dataMap.put(PainDataIdentifier.PAIN_LOCATION_PRESET, "");
 		this.dataMap.put(PainDataIdentifier.PAIN_LOCATION_CUSTOM, "");
@@ -59,7 +59,7 @@ public class PainEntryData
 		//Time
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.TIME_HOUR);
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.TIME_MINUTE);
-		appendToMap(this.dataMap, rootElement, PainDataIdentifier.TIME_SECONDS);
+//		appendToMap(this.dataMap, rootElement, PainDataIdentifier.TIME_SECONDS);
 		//Pain
 		List<String> presetLocations = new ArrayList<String>();
 		for (Element element : XMLManager.getElements(rootElement.getElementsByTagName(PainDataIdentifier.PAIN_LOCATION_PRESET)))
@@ -117,8 +117,8 @@ public class PainEntryData
 	public String getFullTime()
 	{
 		return this.dataMap.get(PainDataIdentifier.TIME_HOUR) + ":"
-				+ this.dataMap.get(PainDataIdentifier.TIME_MINUTE) + ":"
-				+ this.dataMap.get(PainDataIdentifier.TIME_SECONDS);
+				+ this.dataMap.get(PainDataIdentifier.TIME_MINUTE)/* + ":"
+				+ this.dataMap.get(PainDataIdentifier.TIME_SECONDS)*/;
 	}
 	
 	public String getFullTimeAndDate()

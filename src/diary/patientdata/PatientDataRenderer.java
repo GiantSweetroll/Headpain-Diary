@@ -42,7 +42,11 @@ public class PatientDataRenderer extends JLabel implements ListCellRenderer
 		
 		
 		//Set text name
-		this.setText(value.toString());
+		try
+		{
+			this.setText(value.toString());
+		}
+		catch(NullPointerException ex) {}
 		
 		return this;
 	}

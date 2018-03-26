@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -33,6 +34,7 @@ import diary.methods.Methods;
 import diary.methods.PainDataOperation;
 import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.gui.swing.ScrollPaneManager;
 
 public class GraphPanel extends JPanel implements ActionListener
 {
@@ -72,11 +74,13 @@ public class GraphPanel extends JPanel implements ActionListener
 		//Initialization
 		this.initPanelTop();
 		this.initPanelBelow();
+		JScrollPane scroll = ScrollPaneManager.generateDefaultScrollPane(this.panelTop, 10, 10);
 		
 		//Properties
 		this.setLayout(new BorderLayout());
 //		this.setOpaque(false);
 		this.setBackground(Color.WHITE);
+		scroll.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		this.initGraph();
 		

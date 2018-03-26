@@ -421,11 +421,14 @@ public abstract class Graph extends JPanel
 	}
 	protected void drawRecentMedicationText(Graphics g, Color c)
 	{
-		g.setColor(c);
-		
-		g.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL) + ": " + Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
-						this.axesOrigin.x, 
-						this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.maxXAxisMarkerLabelHeight + this.X_AXIS_NAME_PADDING);
+		if (Globals.GRAPH_FILTER_PANEL.isRecentMedicationSelected())
+		{
+			g.setColor(c);
+			
+			g.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL) + ": " + Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
+							this.axesOrigin.x, 
+							this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.maxXAxisMarkerLabelHeight + this.X_AXIS_NAME_PADDING);
+		}
 	}
 	
 	//Graph Settings
