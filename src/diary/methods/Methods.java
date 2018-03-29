@@ -24,6 +24,7 @@ import javax.swing.table.JTableHeader;
 
 import diary.ImageExportPanel;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.ImageConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
@@ -765,5 +766,11 @@ public class Methods
 				}
 			}
 		}
+	}
+	
+	public static void refresHistories(PatientData patient)
+	{
+		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(patient);
+		Globals.HISTORY_RECENT_MEDICATION.refresh(patient);
 	}
 }

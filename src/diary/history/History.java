@@ -6,6 +6,7 @@ import java.util.List;
 
 import diary.constants.Constants;
 import diary.methods.FileOperation;
+import diary.patientdata.PatientData;
 
 public class History
 {
@@ -16,23 +17,27 @@ public class History
 	public static final String FILE_EXTENSION_NAME = ".hist";
 	
 	//Constructors
-	public History(String historyName)
+	public History(String historyName, PatientData patient)
 	{
 		this.name = historyName;
-		this.refresh();
+//		this.history = new ArrayList<String>();
+		this.refresh(patient);
 	}
 	
 	//Methods
-	public void refresh()
+	public void refresh(PatientData patient)
 	{
+//		System.out.println(patient.getNameAndID());
 		try
 		{
-			this.history = FileOperation.loadTextFile(new File(this.getFilePath()));
+			this.history = FileOperation.loadTextFile(new File(this.getFilePath(patient)));
 		}
 		catch(Exception ex)
 		{
+		//	ex.printStackTrace();
 			this.history = new ArrayList<String>();
 		}
+//		System.out.println(history);
 	}
 	public String getName()
 	{
@@ -49,9 +54,9 @@ public class History
 		return this.name + History.FILE_EXTENSION_NAME;
 	}
 	
-	public String getFilePath()
+	public String getFilePath(PatientData patient)
 	{
-		return Constants.HISTORY_FOLDER_PATH + this.getFileName();
+		return Constants.HISTORY_FOLDER_PATH + patient.getID() + File.separator + this.getFileName();
 	}
 	
 	public List<String> getHistory()
@@ -59,9 +64,9 @@ public class History
 		return this.history;
 	}
 	
-	public void export()
+	public void export(PatientData patient)
 	{
-		FileOperation.saveHistory(this);
+		FileOperation.saveHistory(this, patient);
 	}
 	
 	public boolean itemExists(String item)

@@ -241,7 +241,8 @@ public class MainFrame
 							
 							new MainFrame();
 							Globals.MAIN_MENU = new MainMenu();
-							
+							Globals.HISTORY_MEDICINE_COMPLAINT.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
+							Globals.HISTORY_RECENT_MEDICATION.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 						}
 						catch(Exception ex)
 						{

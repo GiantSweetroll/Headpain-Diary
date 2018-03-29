@@ -13,6 +13,7 @@ import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.history.HistoryPanel;
 import diary.methods.Methods;
+import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 
 public class GraphFilterPanel extends JPanel implements ItemListener
@@ -50,9 +51,10 @@ public class GraphFilterPanel extends JPanel implements ItemListener
 	}
 	
 	//Methods
-	public void refresh()
+	public void refresh(PatientData patient)
 	{
-		this.medHistory.refresh();
+//		this.medHistory.refresh(Globals.HISTORY_RECENT_MEDICATION);
+		this.medHistory.refresh(Globals.HISTORY_RECENT_MEDICATION, patient);
 	}
 	public boolean isRecentMedicationSelected()
 	{
@@ -78,13 +80,6 @@ public class GraphFilterPanel extends JPanel implements ItemListener
 	@Override
 	public void itemStateChanged(ItemEvent e)
 	{
-		if (this.checkRecMed.isSelected())
-		{
-			this.medHistory.setEnabled(true);
-		}
-		else
-		{
-			this.medHistory.setEnabled(false);
-		}
+		this.medHistory.setEnabled(this.checkRecMed.isSelected());
 	}
 }

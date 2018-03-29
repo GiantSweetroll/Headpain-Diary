@@ -436,6 +436,7 @@ public class TableScreen extends JPanel implements ActionListener
 				
 			case SELECT:
 				Globals.ENTRY_LOG.loadData(this.activePatientPanel.getSelectedPatientData(), this.activeEntry);
+				Globals.ENTRY_LOG.getActivePatientPanel().setSelectedPatient(this.activePatientPanel.getSelectedPatientData());
 				MainFrame.changePanel(Globals.ENTRY_LOG);
 				break;
 				

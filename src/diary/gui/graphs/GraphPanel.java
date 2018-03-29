@@ -337,6 +337,11 @@ public class GraphPanel extends JPanel implements ActionListener
 			this.initGraph();
 		}
 	}
+	
+	public ActivePatientPanel getActivePatientPanel()
+	{
+		return this.activePatientPanel;
+	}
 
 	//Interfaces
 	@Override

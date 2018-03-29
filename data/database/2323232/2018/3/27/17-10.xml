@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>27</date_day>
+     <date_month>3</date_month>
+     <date_year>2018</date_year>
+     <time_hour>17</time_hour>
+     <time_minute>10</time_minute>
+     <pain_location_custom pain_loc_id="0">53,131</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">54,131</pain_location_custom>
+     <pain_location_custom pain_loc_id="2">54,132</pain_location_custom>
+     <pain_location_custom pain_loc_id="3">55,132</pain_location_custom>
+     <pain_location_custom pain_loc_id="4">55,133</pain_location_custom>
+     <pain_location_custom pain_loc_id="5">56,133</pain_location_custom>
+     <pain_location_custom pain_loc_id="6">56,134</pain_location_custom>
+     <pain_location_custom pain_loc_id="7">57,134</pain_location_custom>
+     <pain_location_custom pain_loc_id="8">57,135</pain_location_custom>
+     <pain_location_custom pain_loc_id="9">58,135</pain_location_custom>
+     <pain_location_custom pain_loc_id="10">58,136</pain_location_custom>
+     <pain_location_custom pain_loc_id="11">59,136</pain_location_custom>
+     <pain_location_custom pain_loc_id="12">59,137</pain_location_custom>
+     <pain_location_custom pain_loc_id="13">60,137</pain_location_custom>
+     <pain_location_custom pain_loc_id="14">61,137</pain_location_custom>
+     <pain_location_custom pain_loc_id="15">61,138</pain_location_custom>
+     <pain_location_custom pain_loc_id="16">62,138</pain_location_custom>
+     <pain_location_custom pain_loc_id="17">63,138</pain_location_custom>
+     <pain_kind>default pain kind throbbing</pain_kind>
+     <intensity>6</intensity>
+     <duration>12</duration>
+     <activity>default triggers physical activity</activity>
+     <activity_details/>
+     <recent_medication>Paracetamol</recent_medication>
+     <medicine_complaint>Muscle Aches</medicine_complaint>
+     <comments/>
+</Entry>

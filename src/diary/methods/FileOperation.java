@@ -22,7 +22,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
-import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
@@ -519,15 +518,16 @@ public class FileOperation
 		file.delete();
 	}
 	
-	public static void saveHistory(History history)
+	public static void saveHistory(History history, PatientData patient)
 	{
 		try
 		{
-			File file = new File(Constants.HISTORY_FOLDER_PATH + history.getFileName());
+			File file = new File(Constants.HISTORY_FOLDER_PATH + patient.getID() + File.separator + history.getFileName());
 			
 			if (!file.exists())
 			{
-				file.createNewFile();
+				//file.createNewFile();
+				file.getParentFile().mkdirs();
 			}
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -547,10 +547,10 @@ public class FileOperation
 			ex.printStackTrace();
 		}
 	}
-	public static void updateHistory(History history, String item)
+	public static void updateHistory(History history, PatientData patient, String item)
 	{
 		history.add(item);
-		FileOperation.saveHistory(history);
+		FileOperation.saveHistory(history, patient);
 	}
 	
 	public static List<String> loadTextFile(File file)

@@ -272,6 +272,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.taComments.setBorder(this.tfActivity.getBorder());
 		this.panelDate.setDefaultData(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
 		this.panelDate.resetDefault();
+		this.refreshHistories();
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -665,12 +666,23 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.comboDurationUnit.setSelectedIndex(0);
 		this.comboActivity.setSelectedIndex(0);
 		this.tfActivity.setText("");
-		this.historyRecentMedication.refresh();
+		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION);
 		this.historyRecentMedication.resetDefaults();
-		this.historyMedicineComplaint.refresh();
+		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT);
 		this.historyMedicineComplaint.resetDefaults();
 		this.taComments.setText("");
 		this.scrollCenter.getViewport().setViewPosition(new Point(0,0));			//Returns Vertical Scrollbar to top
+	}
+	public void refreshHistories()
+	{
+		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION);
+		this.historyRecentMedication.resetDefaults();
+		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT);
+		this.historyMedicineComplaint.resetDefaults();
+	}
+	public ActivePatientPanel getActivePatientPanel()
+	{
+		return this.activePatientPanel;
 	}
 	
 	//Interfaces
@@ -698,21 +710,20 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 							
 							if (response == JOptionPane.YES_OPTION)
 							{
-								FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
-								FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
+								FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
+								FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
 								FileOperation.exportPainData(patient, entry);
 								MainFrame.changePanel(Globals.MAIN_MENU);
 								Globals.GRAPH_PANEL.refreshGraph();
 								Globals.PAIN_TABLE.refreshTable();
-								Globals.HISTORY_RECENT_MEDICATION.refresh();
-								Globals.HISTORY_MEDICINE_COMPLAINT.refresh();
-								Globals.GRAPH_FILTER_PANEL.refresh();
+								Methods.refresHistories(this.activePatientPanel.getSelectedPatientData());
+								Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 							}
 						}
 						else
 						{
-							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.historyRecentMedication.getItem());
-							FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.historyMedicineComplaint.getItem());
+							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
+							FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
 							FileOperation.exportPainData(patient, entry);
 							if (!this.isNewEntry)
 							{
@@ -724,9 +735,8 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 							MainFrame.changePanel(Globals.MAIN_MENU);
 							Globals.GRAPH_PANEL.refreshGraph();
 							Globals.PAIN_TABLE.refreshTable();
-							Globals.HISTORY_RECENT_MEDICATION.refresh();
-							Globals.HISTORY_MEDICINE_COMPLAINT.refresh();
-							Globals.GRAPH_FILTER_PANEL.refresh();
+							Methods.refresHistories(this.activePatientPanel.getSelectedPatientData());
+							Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 						}
 					}
 					else

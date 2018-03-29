@@ -7,13 +7,14 @@ import diary.gui.graphs.GraphPanel;
 import diary.gui.settings.SettingsPanel;
 import diary.gui.table.TableScreen;
 import diary.history.History;
+import diary.patientdata.PatientData;
 import diary.patientdata.PatientDataManagePanel;
 
 public class Globals 
 {	
 	//Histories
-	public static final History HISTORY_RECENT_MEDICATION = new History(Constants.HISTORY_RECENT_MEDICATION_NAME);
-	public static final History HISTORY_MEDICINE_COMPLAINT = new History(Constants.HISTORY_MEDICINE_COMPLAINT_NAME);
+	public static final History HISTORY_RECENT_MEDICATION = new History(Constants.HISTORY_RECENT_MEDICATION_NAME, new PatientData());
+	public static final History HISTORY_MEDICINE_COMPLAINT = new History(Constants.HISTORY_MEDICINE_COMPLAINT_NAME, new PatientData());
 	
 	//Panels
 	public static MainMenu MAIN_MENU = new MainMenu();

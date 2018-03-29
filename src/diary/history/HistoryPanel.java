@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import diary.constants.Constants;
 import diary.methods.Methods;
+import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 
 public class HistoryPanel extends JPanel implements ItemListener
@@ -94,7 +95,7 @@ public class HistoryPanel extends JPanel implements ItemListener
 					@Override
 					public void mousePressed(MouseEvent e) 
 					{
-						if (!tfHistory.isEditable())
+						if (!tfHistory.isEditable() && isEnabled())
 						{
 							tfHistory.setEditable(true);
 							radNew.setSelected(true);
@@ -132,7 +133,7 @@ public class HistoryPanel extends JPanel implements ItemListener
 					@Override
 					public void mousePressed(MouseEvent e) 
 					{
-						if (hasHistory() && !comboHistory.isEnabled())
+						if (hasHistory() && !comboHistory.isEnabled() && isEnabled())
 						{
 							comboHistory.setEnabled(true);
 							radHistory.setSelected(true);
@@ -207,10 +208,23 @@ public class HistoryPanel extends JPanel implements ItemListener
 		}
 		catch(IllegalArgumentException ex) {}
 	}
-	public void refresh()
+	@Deprecated
+	public void refresh(History history)
 	{
 		this.comboHistory.setModel(new DefaultComboBoxModel(history.getHistory().toArray(new String[history.getHistory().size()])));
 		this.radHistory.setEnabled(this.hasHistory());
+		this.revalidate();
+		this.repaint();
+	}
+	public void refresh(History history, PatientData patient)
+	{
+		history.refresh(patient);
+		this.comboHistory.setModel(new DefaultComboBoxModel(history.getHistory().toArray(new String[history.getHistory().size()])));
+		this.radHistory.setEnabled(this.hasHistory());
+		if (!this.radHistory.isEnabled())
+		{
+			this.radNew.setEnabled(true);
+		}
 		this.revalidate();
 		this.repaint();
 	}
@@ -229,6 +243,18 @@ public class HistoryPanel extends JPanel implements ItemListener
 		this.radNew.setEnabled(enabled);
 		this.comboHistory.setEnabled(enabled);
 		this.tfHistory.setEnabled(enabled);
+		
+		if(enabled)
+		{
+			if (this.radHistory.isSelected())
+			{
+				this.tfHistory.setEditable(false);
+			}
+			else if (this.radNew.isSelected())
+			{
+				this.comboHistory.setEnabled(false);
+			}
+		}
 	}
 	
 	//Interfaces

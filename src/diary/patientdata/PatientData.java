@@ -40,6 +40,11 @@ public class PatientData
 		}
 	}
 	
+	public PatientData()
+	{
+		this.dataMap = new LinkedHashMap<String, String>();
+	}
+	
 	//Methods
 	public LinkedHashMap<String, String> getDataMap()
 	{

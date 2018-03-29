@@ -342,6 +342,7 @@ public class MainMenu extends JScrollPane implements ActionListener
 			break;
 			
 		case VIEW_GRAPH:
+			Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 			MainFrame.changePanel(Globals.GRAPH_PANEL);
 			break;
 			
