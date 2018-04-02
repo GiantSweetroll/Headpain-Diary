@@ -10,6 +10,7 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.PainEntryDataVoid;
+import giantsweetroll.date.Date;
 
 public class PainDataOperation 
 {	
@@ -676,6 +677,19 @@ public class PainDataOperation
 			{
 				list.add(entry);
 			}
+		}
+		
+		return list;
+	}
+	
+	public static List<PainEntryData> generateDuplicates(PainEntryData entry, Date targetDate)
+	{
+		List<PainEntryData> list = new ArrayList<PainEntryData>();
+		
+		for (int i=entry.getDate().getDay(); i<=Date.getDaysDifference(entry.getDate(), targetDate, true); i++)
+		{
+			PainEntryData duplicate = new PainEntryData(entry);
+			duplicate.setDate(new Date(i, entry.getDate().getMonth(), entry.getDate().getYear()));
 		}
 		
 		return list;

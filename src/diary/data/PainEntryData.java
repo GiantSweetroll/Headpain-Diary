@@ -3,11 +3,14 @@ package diary.data;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import diary.constants.PainDataIdentifier;
+import giantsweetroll.date.Date;
 import giantsweetroll.xml.dom.XMLManager;
 
 public class PainEntryData 
@@ -84,6 +87,11 @@ public class PainEntryData
 		appendToMap(this.dataMap, rootElement, PainDataIdentifier.COMMENTS);
 	}
 	
+	public PainEntryData(PainEntryData entry)
+	{
+		this(entry.getDocumentForm()); 
+	}
+	
 	private void appendToMap(LinkedHashMap<String, Object> map, Element sourceElement, String dataID)
 	{
 		try
@@ -137,6 +145,13 @@ public class PainEntryData
 		return map;
 	}
 	
+	public Date getDate()
+	{
+		return new Date(Integer.parseInt(this.dataMap.get(PainDataIdentifier.DATE_DAY).toString()),
+				Integer.parseInt(this.dataMap.get(PainDataIdentifier.DATE_MONTH).toString()),
+				Integer.parseInt(this.dataMap.get(PainDataIdentifier.DATE_YEAR).toString()));
+	}
+	
 	public String getPainPositionsAsString()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -168,65 +183,46 @@ public class PainEntryData
 		return sb.toString();
 	}
 	
-	/*
-	public String getPainKindAsString()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
-		for (int i=0; i<list.size(); i++)
-		{
-			sb.append(list.get(i).get(PainDataIdentifier.PAIN_KIND).toString());
-			
-			if (list.size()-i!=1)
-			{
-				sb.append(", ");
-			}
-		}
-		
-		return sb.toString();
-	}
-	
-	/*
-	public String getIntensitiesAsString()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
-		for (int i=0; i<list.size(); i++)
-		{
-			sb.append(list.get(i).get(PainDataIdentifier.INTENSITY).toString());
-			
-			if (list.size()-i!=1)
-			{
-				sb.append(", ");
-			}
-		}
-		
-		return sb.toString();
-	}
-	
-	public String getDurationsAsString()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		List<LinkedHashMap<String, Object>> list = (ArrayList<LinkedHashMap<String, Object>>)this.getDataMap().get(PainDataIdentifier.PAIN_LOCATIONS);
-		for (int i=0; i<list.size(); i++)
-		{
-			sb.append(list.get(i).get(PainDataIdentifier.DURATION).toString());
-			
-			if (list.size()-i!=1)
-			{
-				sb.append(", ");
-			}
-		}
-		
-		return sb.toString();
-	}
-	*/
-	
 	public Document getDocumentForm() 
 	{
+		this.synchronizeDocumentWithMap();
 		return this.document;
+	}
+	
+	public void setDate(Date date)
+	{
+		String day = Integer.toString(date.getDay());
+		
+		if (day.length()==1)
+		{
+			day = "0" + day;
+		}
+		
+		this.dataMap.put(PainDataIdentifier.DATE_DAY, day);
+		this.dataMap.put(PainDataIdentifier.DATE_MONTH, Integer.toString(date.getMonth()));
+		this.dataMap.put(PainDataIdentifier.DATE_YEAR, Integer.toString(date.getYear()));
+	}
+	
+	private void synchronizeDocumentWithMap()
+	{
+		for (Map.Entry<String, Object> entry : this.dataMap.entrySet())
+		{
+			if (entry.getValue() instanceof List<?>)
+			{
+				for (int i=0; i<((List<?>)entry.getValue()).size(); i++)
+				{
+					Element element = this.document.createElement(entry.getKey());
+					element.setAttribute(PainDataIdentifier.PAIN_LOCATION_ID, Integer.toString(i));
+					element.setTextContent(((List<?>)entry.getValue()).get(i).toString());
+					this.document.replaceChild(element, XMLManager.getElement(this.document.getElementsByTagName(entry.getKey()), i));
+				}
+			}
+			else
+			{
+				Element element = this.document.createElement(entry.getKey());
+				element.setTextContent(entry.getValue().toString());
+				this.document.replaceChild(element, XMLManager.getElement(this.document.getElementsByTagName(entry.getKey()), 0));
+			}
+		}
 	}
 }

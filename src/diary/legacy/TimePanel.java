@@ -18,7 +18,7 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.TimeConstants;
 import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
-import giantsweetroll.GDateManager;
+import giantsweetroll.date.DateManager;
 import giantsweetroll.gui.swing.Gbm;
 
 public class TimePanel extends JPanel implements ActionListener
@@ -130,9 +130,9 @@ public class TimePanel extends JPanel implements ActionListener
 	
 	protected void setToCurrentTime()
 	{
-		this.comboHour.setSelectedItem(GDateManager.getCurrentHour());
-		this.comboMinute.setSelectedItem(GDateManager.getCurrentMinute());
-		this.comboSec.setSelectedItem(GDateManager.getCurrentSecond());
+		this.comboHour.setSelectedItem(DateManager.getCurrentHour());
+		this.comboMinute.setSelectedItem(DateManager.getCurrentMinute());
+		this.comboSec.setSelectedItem(DateManager.getCurrentSecond());
 	}
 	
 	protected LinkedHashMap<String, String> getData()

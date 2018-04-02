@@ -8,7 +8,7 @@ import java.util.List;
 import diary.constants.Constants;
 import diary.constants.DateConstants;
 import diary.constants.XMLIdentifier;
-import giantsweetroll.GDateManager;
+import giantsweetroll.date.DateManager;
 
 public class DateOperation 
 {
@@ -60,7 +60,7 @@ public class DateOperation
 	public static short[] getYearRange()
 	{
 		short startYear = DateConstants.START_YEAR_RANGE;
-		short maxYear = Short.parseShort(GDateManager.getCurrentYear());
+		short maxYear = Short.parseShort(DateManager.getCurrentYear());
 		
 		short[] years;
 		

@@ -45,8 +45,8 @@ import diary.history.HistoryPanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
-import giantsweetroll.GDateManager;
 import giantsweetroll.Misc;
+import giantsweetroll.date.DateManager;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 import giantsweetroll.message.MessageManager;
@@ -177,7 +177,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.panelCenter.setLayout(new GridBagLayout());
 		this.panelCenter.setOpaque(false);
 		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		this.panelTime.setDefaultTime(GDateManager.getCurrentHour(), GDateManager.getCurrentMinute());
+		this.panelTime.setDefaultTime(DateManager.getCurrentHour(), DateManager.getCurrentMinute());
 		this.panelTime.resetDefault();
 		this.comboPainKind.setBackground(Color.WHITE);
 		this.tfPainKind.setColumns(10);
@@ -270,7 +270,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 			
 				});
 		this.taComments.setBorder(this.tfActivity.getBorder());
-		this.panelDate.setDefaultData(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
+		this.panelDate.setDefaultData(DateManager.getCurrentDay(), DateManager.getCurrentMonth(), DateManager.getCurrentYear());
 		this.panelDate.resetDefault();
 		this.refreshHistories();
 		

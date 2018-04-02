@@ -17,7 +17,7 @@ import diary.constants.DateConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.methods.DateOperation;
-import giantsweetroll.GDateManager;
+import giantsweetroll.date.DateManager;
 import giantsweetroll.gui.swing.Gbm;
 
 public class DatePanel extends JPanel implements ActionListener
@@ -188,7 +188,7 @@ public class DatePanel extends JPanel implements ActionListener
 	
 	public void autoSetDate()
 	{
-		this.setDate(GDateManager.getCurrentDay(), GDateManager.getCurrentMonth(), GDateManager.getCurrentYear());
+		this.setDate(DateManager.getCurrentDay(), DateManager.getCurrentMonth(), DateManager.getCurrentYear());
 	}
 	
 	public boolean sameAsDefault()
