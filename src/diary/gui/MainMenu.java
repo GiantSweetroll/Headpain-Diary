@@ -130,9 +130,11 @@ public class MainMenu extends JScrollPane implements ActionListener
 												(image, Methods.getPercentageValue
 															//(Constants.SCREENSIZE.width, 48))));
 															(Constants.SCREENSIZE.width, 15))));
+//		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
 		this.panelCenterCenter.setLayout(new BoxLayout(this.panelCenterCenter, BoxLayout.Y_AXIS));
+//		this.panelCenterCenter.setLayout(new GridBagLayout());
 		this.panelCenterCenter.setOpaque(false);
 		this.panelMainButtons.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.labLogo.setFont(Constants.FONT_GENERAL);
@@ -140,6 +142,7 @@ public class MainMenu extends JScrollPane implements ActionListener
 		this.labLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Add to panel
+	//	c.gridwidth = GridBagConstraints.REMAINDER;
 		this.panelCenterCenter.add(this.labLogo);
 		this.panelCenterCenter.add(this.panelMainButtons);
 	}
@@ -203,7 +206,7 @@ public class MainMenu extends JScrollPane implements ActionListener
 	private void initButton(JButton button, ImageIcon image, String text)
 	{
 	//	image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 8)));
-		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 4)));
+		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Constants.BUTTON_IMAGE_SIZE_RATIO));
 		ImageTextPanel panelImage = new ImageTextPanel(image, text);
 		panelImage.getTextLabel().setForeground(Color.WHITE);
 		panelImage.getTextLabel().setFont(Constants.FONT_SUB_TITLE);
@@ -237,7 +240,7 @@ public class MainMenu extends JScrollPane implements ActionListener
 		//Properties
 		this.panelMainButtons.setLayout(new GridLayout(1, 0, 20, 20));
 		this.panelMainButtons.setOpaque(false);
-		this.panelMainButtons.setBorder(BorderFactory.createLineBorder(new Color (0, 0, 0, 0), 20));			//Create empty/transparent border, to serve as padding
+		this.panelMainButtons.setBorder(Methods.createTransparentBorder(20));			//Create empty/transparent border, to serve as padding
 		this.butNewEntry.setActionCommand(this.NEW_ENTRY);
 		this.butNewEntry.addActionListener(this);
 		this.butNewEntry.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
@@ -337,8 +340,8 @@ public class MainMenu extends JScrollPane implements ActionListener
 		switch (e.getActionCommand())
 		{
 		case NEW_ENTRY:
-			Globals.ENTRY_LOG.resetToDefault();
-			MainFrame.changePanel(Globals.ENTRY_LOG);
+		//	MainFrame.changePanel(Globals.ENTRY_LOG);
+			MainFrame.changePanel(Globals.ENTRY_LOG_TYPE_SELECTION);
 			break;
 			
 		case VIEW_GRAPH:

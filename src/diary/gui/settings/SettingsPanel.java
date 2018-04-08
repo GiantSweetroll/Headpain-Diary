@@ -21,6 +21,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingConstants;
@@ -39,6 +40,7 @@ import diary.gui.MainFrame;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.gui.swing.ScrollPaneManager;
 
 public class SettingsPanel extends JPanel implements ActionListener
 {
@@ -57,6 +59,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private final String CANCEL = "cancel";
 	private final String SAVE = "save";
 	
+	//Constructors
 	public SettingsPanel()
 	{
 		//Initialization
@@ -67,6 +70,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		//Properties
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
+//		this.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		
 		//Add to panel
 		this.add(this.panelCenter, BorderLayout.CENTER);
@@ -81,6 +85,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.initCatDatabase();
 		this.initCatWindow();
 		this.initCatProgram();
+		JScrollPane scrollDatabase = ScrollPaneManager.generateDefaultScrollPane(this.catDatabase, 10, 10);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -94,7 +99,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 		this.panelCenter.add(this.catProgram, c);					//Program Settings
 		c.insets = Constants.INSETS_GENERAL;
 		this.panelCenter.add(this.catWindow, c);					//Window Settings
-		this.panelCenter.add(this.catDatabase, c);					//Database Settings		
+//		this.panelCenter.add(this.catDatabase, c);					//Database Settings		
+		this.panelCenter.add(scrollDatabase, c);					//Database settings
 	}
 	private void initCatDatabase()
 	{
@@ -112,7 +118,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		
 		//Properties
 		this.catDatabase.setLayout(new GridBagLayout());
-		this.catDatabase.setOpaque(false);
+	//	this.catDatabase.setOpaque(false);
 		tfDatabasePath.setEditable(false);
 		tfDatabasePath.setOpaque(false);
 		tfUserDatabasePath.setEditable(false);

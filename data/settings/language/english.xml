@@ -37,6 +37,9 @@
      <text identifier="pain location presets label">Common Area</text>
      <text identifier="pain location custom label">Others</text>
      <text identifier="comments label long">Comments (including what activity that cannot be done during pain strike, etc.)</text>
+     <text identifier="entry log type selection text">Choose Entry Type</text>
+     <text identifier="entry log type single button text">Single Entry</text>
+     <text identifier="entry log type multi button text">Multiple Entry</text>
      <text identifier="default triggers sunlight">Sunlight</text>
      <text identifier="default triggers improper diet sleep">Improper Diet/Sleep Routine</text>
      <text identifier="default triggers physical activity">Physical Activity</text>

@@ -2,7 +2,9 @@ package diary.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -30,8 +32,8 @@ public class ImageTextPanel extends JPanel
 		this.panel = new JPanel();
 		
 		//Properties
-		this.panel.setLayout(new BorderLayout());
-		this.panel.add(new JLabel(image), BorderLayout.CENTER);
+		this.panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.panel.add(new JLabel(image));
 		this.panel.setOpaque(false);
 		
 		this.createAndShowGUI();
@@ -44,8 +46,24 @@ public class ImageTextPanel extends JPanel
 		
 		//Properties
 		image = Methods.resizeImageByRatio(image, imageSizePercentage);
-		this.panel.setLayout(new BorderLayout());
-		this.panel.add(new JLabel(image), BorderLayout.CENTER);
+		this.panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.panel.add(new JLabel(image));
+		this.panel.setOpaque(false);
+		
+		this.createAndShowGUI();		
+	}
+	public ImageTextPanel(List<ImageIcon> images, String text)
+	{
+		//Initialization
+		this.label = new JLabel(text, SwingConstants.CENTER);
+		this.panel = new JPanel();
+		
+		//Properties
+		this.panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		for (ImageIcon image : images)
+		{
+			this.panel.add(new JLabel(image));
+		}
 		this.panel.setOpaque(false);
 		
 		this.createAndShowGUI();		

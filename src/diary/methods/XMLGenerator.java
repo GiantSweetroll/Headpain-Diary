@@ -95,6 +95,10 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_PRESETS_LABEL, "Common Area");
 		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_CUSTOM_LABEL, "Others");
 		appendComponentToMap(doc, map, XMLIdentifier.COMMENTS_LABEL_LONG, "Comments (including what activity that cannot be done during pain strike, etc.)");
+		//Type Selection
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_SELECTION_TEXT, "Choose Entry Type");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT, "Single Entry");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_MULTI_BUTTON_TEXT, "Multiple Entry");
 		
 		//Default Activities
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT, "Sunlight");

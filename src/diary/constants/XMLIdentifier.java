@@ -92,6 +92,10 @@ public class XMLIdentifier
 	public static final String PAIN_LOCATION_PRESETS_LABEL = "pain location presets label";
 	public static final String PAIN_LOCATION_CUSTOM_LABEL = "pain location custom label";
 	public static final String COMMENTS_LABEL_LONG = "comments label long";
+	//Type Select
+	public static final String ENTRY_LOG_TYPE_SELECTION_TEXT = "entry log type selection text";
+	public static final String ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT = "entry log type single button text";
+	public static final String ENTRY_LOG_TYPE_MULTI_BUTTON_TEXT = "entry log type multi button text";
 	
 	//Default Activities
 	public static final String DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY = "default triggers physical activity";

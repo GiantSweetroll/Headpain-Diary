@@ -1,6 +1,7 @@
 package diary.methods;
 
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@ import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -19,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.JTableHeader;
 
@@ -772,5 +775,10 @@ public class Methods
 	{
 		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(patient);
 		Globals.HISTORY_RECENT_MEDICATION.refresh(patient);
+	}
+	
+	public static Border createTransparentBorder(int thickness)
+	{
+		return BorderFactory.createLineBorder(new Color(0, 0, 0, 0), thickness);
 	}
 }
