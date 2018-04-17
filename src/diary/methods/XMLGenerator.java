@@ -99,6 +99,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_SELECTION_TEXT, "Choose Entry Type");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT, "Single Entry");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_MULTI_BUTTON_TEXT, "Multiple Entry");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MULTI_DATE_RANGE_SELECT_TEXT, "Select Date Range");
 		
 		//Default Activities
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT, "Sunlight");
@@ -228,6 +229,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.YEAR_TEXT, "Year");
 		appendComponentToMap(doc, map, XMLIdentifier.EPISODE_TEXT, "Episode");
 		appendComponentToMap(doc, map, XMLIdentifier.TRIGGER_TEXT, "Trigger");
+		appendComponentToMap(doc, map, XMLIdentifier.NEXT_TEXT, "Next");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

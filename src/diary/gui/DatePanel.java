@@ -17,6 +17,7 @@ import diary.constants.DateConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.methods.DateOperation;
+import giantsweetroll.date.Date;
 import giantsweetroll.date.DateManager;
 import giantsweetroll.gui.swing.Gbm;
 
@@ -31,6 +32,7 @@ public class DatePanel extends JPanel implements ActionListener
 	private JButton butAuto, butDefault;
 	private GridBagConstraints c;
 	private LinkedHashMap<String, String> defaultMap;
+	private Date defaultDate;
 	
 	//Vectors
 //	private VectorInt vecDay;
@@ -134,6 +136,12 @@ public class DatePanel extends JPanel implements ActionListener
 		this.comboMonth.setSelectedItem(DateConstants.MONTH_NAME_LIST.get(Integer.parseInt(month)-1));
 		this.comboDay.setSelectedItem(day);
 	}
+	public void setDate(Date date)
+	{
+		this.comboYear.setSelectedItem(date.getYear());
+		this.comboMonth.setSelectedItem(date.getMonth());
+		this.comboDay.setSelectedItem(date.getDay());
+	}
 	
 	public LinkedHashMap<String, String> getData()
 	{
@@ -175,6 +183,11 @@ public class DatePanel extends JPanel implements ActionListener
 		this.defaultMap.put(this.YEAR, year);
 	}
 	
+	public void setDefaultDate(Date date)
+	{
+		this.defaultDate = date;
+	}
+	
 	public void resetDefault()
 	{
 		try
@@ -209,6 +222,11 @@ public class DatePanel extends JPanel implements ActionListener
 	public String getDateAsString()
 	{
 		return this.getDay() + "/" + this.getMonthValue() + "/" + this.getYear();
+	}
+	
+	public Date getDate()
+	{
+		return new Date(Integer.parseInt(this.getDay()), this.getMonthValue(), Integer.parseInt(this.getYear()));
 	}
 	
 	//Interfaces

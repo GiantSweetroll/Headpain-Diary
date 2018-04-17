@@ -62,6 +62,7 @@ public class XMLIdentifier
 	public static final String YEAR_TEXT = "year text";
 	public static final String EPISODE_TEXT = "episode text";
 	public static final String TRIGGER_TEXT = "trigger text";
+	public static final String NEXT_TEXT = "next text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -96,6 +97,7 @@ public class XMLIdentifier
 	public static final String ENTRY_LOG_TYPE_SELECTION_TEXT = "entry log type selection text";
 	public static final String ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT = "entry log type single button text";
 	public static final String ENTRY_LOG_TYPE_MULTI_BUTTON_TEXT = "entry log type multi button text";
+	public static final String ENTRY_LOG_MULTI_DATE_RANGE_SELECT_TEXT = "entry log multi date range select text";
 	
 	//Default Activities
 	public static final String DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY = "default triggers physical activity";

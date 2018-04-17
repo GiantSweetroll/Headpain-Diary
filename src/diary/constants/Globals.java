@@ -2,6 +2,7 @@ package diary.constants;
 
 import diary.gui.MainMenu;
 import diary.gui.EntryLog.EntryLog;
+import diary.gui.EntryLog.EntryLogMulti;
 import diary.gui.EntryLog.EntryTypeSelectionPanel;
 import diary.gui.graphs.GraphFilterPanel;
 import diary.gui.graphs.GraphPanel;
@@ -26,4 +27,5 @@ public class Globals
 	public static TableScreen PAIN_TABLE = new TableScreen();
 	public static EntryLog ENTRY_LOG = new EntryLog();
 	public static EntryTypeSelectionPanel ENTRY_LOG_TYPE_SELECTION = new EntryTypeSelectionPanel();
+	public static EntryLogMulti ENTRY_LOG_MULTI_DATE_RANGE_SELECT = new EntryLogMulti();
 }

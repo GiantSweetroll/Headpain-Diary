@@ -12,6 +12,7 @@ import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
+import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
 
 public class DateRangePanel extends JPanel
@@ -93,9 +94,33 @@ public class DateRangePanel extends JPanel
 	{
 		this.dateTo.setDate(day, month, year);
 	}
+	public void setFromDate(Date date)
+	{
+		this.dateFrom.setDate(date);
+	}
+	public void setToDate(Date date)
+	{
+		this.dateTo.setDate(date);
+	}
 	
 	public String getDateRangeAsString()
 	{
 		return this.dateFrom.getDateAsString() + " - " + this.dateTo.getDateAsString();
+	}
+	
+	public LinkedHashMap<String, Date> getDateRange()
+	{
+		LinkedHashMap<String, Date> map = new LinkedHashMap<String, Date>();
+		
+		map.put(FROM, this.dateFrom.getDate());
+		map.put(TO, this.dateTo.getDate());
+		
+		return map;
+	}
+
+	public void autoSetDateRanges()
+	{
+		this.setFromDate(new Date());
+		this.setToDate(new Date());
 	}
 }

@@ -40,6 +40,7 @@
      <text identifier="entry log type selection text">Choose Entry Type</text>
      <text identifier="entry log type single button text">Single Entry</text>
      <text identifier="entry log type multi button text">Multiple Entry</text>
+     <text identifier="entry log multi date range select text">Select Date Range</text>
      <text identifier="default triggers sunlight">Sunlight</text>
      <text identifier="default triggers improper diet sleep">Improper Diet/Sleep Routine</text>
      <text identifier="default triggers physical activity">Physical Activity</text>
@@ -150,6 +151,7 @@
      <text identifier="year text">Year</text>
      <text identifier="episode text">Episode</text>
      <text identifier="trigger text">Trigger</text>
+     <text identifier="next text">Next</text>
      <text identifier="graph category label">Show</text>
      <text identifier="graph category entries vs date text">Frequency vs Day</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Day</text>

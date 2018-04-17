@@ -164,6 +164,7 @@ public class EntryTypeSelectionPanel extends JPanel implements ActionListener
 				
 			case MULTI:
 				Globals.ENTRY_LOG.resetToDefault();
+				MainFrame.changePanel(Globals.ENTRY_LOG_MULTI_DATE_RANGE_SELECT);
 				break;
 				
 			case BACK:

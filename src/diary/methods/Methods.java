@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -780,5 +781,11 @@ public class Methods
 	public static Border createTransparentBorder(int thickness)
 	{
 		return BorderFactory.createLineBorder(new Color(0, 0, 0, 0), thickness);
+	}
+	
+	public static void setButtonToFollowMainMenuLayout(JButton button)
+	{
+		button.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		button.setForeground(Color.WHITE);
 	}
 }
