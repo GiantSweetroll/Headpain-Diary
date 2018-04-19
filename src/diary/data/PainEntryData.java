@@ -5,9 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import diary.constants.PainDataIdentifier;
 import giantsweetroll.date.Date;
@@ -42,12 +43,7 @@ public class PainEntryData
 		this.dataMap.put(PainDataIdentifier.MEDICINE_COMPLAINT, "");
 		this.dataMap.put(PainDataIdentifier.COMMENTS, "");
 	}
-	
-	public PainEntryData(LinkedHashMap<String, Object> dataMap)
-	{
-		this.dataMap = dataMap;
-	}
-	
+		
 	public PainEntryData(Document doc)
 	{
 		this.document = doc;
@@ -203,8 +199,19 @@ public class PainEntryData
 		this.dataMap.put(PainDataIdentifier.DATE_YEAR, Integer.toString(date.getYear()));
 	}
 	
+	
 	private void synchronizeDocumentWithMap()
 	{
+		try 
+		{
+			this.document = XMLManager.createDocument();
+			this.document.appendChild(this.document.createElement(PainDataIdentifier.MASTER_NODE));
+		} 
+		catch (ParserConfigurationException e) 
+		{
+			e.printStackTrace();
+		}
+		
 		for (Map.Entry<String, Object> entry : this.dataMap.entrySet())
 		{
 			if (entry.getValue() instanceof List<?>)
@@ -214,14 +221,16 @@ public class PainEntryData
 					Element element = this.document.createElement(entry.getKey());
 					element.setAttribute(PainDataIdentifier.PAIN_LOCATION_ID, Integer.toString(i));
 					element.setTextContent(((List<?>)entry.getValue()).get(i).toString());
-					this.document.replaceChild(element, XMLManager.getElement(this.document.getElementsByTagName(entry.getKey()), i));
+			//		this.document.replaceChild(element, XMLManager.getElement(this.document.getElementsByTagName(entry.getKey()), i));
+					XMLManager.getElement(this.document.getElementsByTagName(PainDataIdentifier.MASTER_NODE), 0).appendChild(element);
 				}
 			}
 			else
 			{
 				Element element = this.document.createElement(entry.getKey());
 				element.setTextContent(entry.getValue().toString());
-				this.document.replaceChild(element, XMLManager.getElement(this.document.getElementsByTagName(entry.getKey()), 0));
+		//		this.document.replaceChild(element, XMLManager.getElement(this.document.getElementsByTagName(entry.getKey()), 0));
+				XMLManager.getElement(this.document.getElementsByTagName(PainDataIdentifier.MASTER_NODE), 0).appendChild(element);
 			}
 		}
 	}

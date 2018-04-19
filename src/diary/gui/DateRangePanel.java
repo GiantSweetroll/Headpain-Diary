@@ -56,6 +56,7 @@ public class DateRangePanel extends JPanel
 		this.labTo = new JLabel (Methods.getLanguageText(XMLIdentifier.DATE_TO_LABEL) + ":", SwingConstants.RIGHT);
 		
 		//Properties
+		this.dateFrom.autoSetDate();
 		this.dateFrom.setAsDefaultDataThis();
 		this.dateTo.autoSetDate();
 		this.dateTo.setAsDefaultDataThis();
@@ -101,6 +102,15 @@ public class DateRangePanel extends JPanel
 	public void setToDate(Date date)
 	{
 		this.dateTo.setDate(date);
+	}
+	
+	public Date getFromDate()
+	{
+		return Date.getEarlierDate(this.dateFrom.getDate(), this.dateTo.getDate());
+	}
+	public Date getToDate()
+	{
+		return Date.getLaterDate(this.dateFrom.getDate(), this.dateTo.getDate());
 	}
 	
 	public String getDateRangeAsString()

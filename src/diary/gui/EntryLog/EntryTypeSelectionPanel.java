@@ -159,6 +159,7 @@ public class EntryTypeSelectionPanel extends JPanel implements ActionListener
 		{
 			case SINGLE:
 				Globals.ENTRY_LOG.resetToDefault();
+				Globals.ENTRY_LOG.setToSingleEntryMode();
 				MainFrame.changePanel(Globals.ENTRY_LOG);
 				break;
 				

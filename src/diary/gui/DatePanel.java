@@ -138,9 +138,9 @@ public class DatePanel extends JPanel implements ActionListener
 	}
 	public void setDate(Date date)
 	{
-		this.comboYear.setSelectedItem(date.getYear());
-		this.comboMonth.setSelectedItem(date.getMonth());
-		this.comboDay.setSelectedItem(date.getDay());
+		this.comboYear.setSelectedItem(Integer.toString(date.getYear()));
+		this.comboMonth.setSelectedIndex(date.getMonth()-1);
+		this.comboDay.setSelectedItem(Integer.toString(date.getDay()));
 	}
 	
 	public LinkedHashMap<String, String> getData()
@@ -227,6 +227,19 @@ public class DatePanel extends JPanel implements ActionListener
 	public Date getDate()
 	{
 		return new Date(Integer.parseInt(this.getDay()), this.getMonthValue(), Integer.parseInt(this.getYear()));
+	}
+	
+	//Overriden Methods
+	@Override
+	public void setEnabled(boolean enable)
+	{
+		super.setEnabled(enable);
+		
+		this.comboDay.setEnabled(enable);
+		this.comboMonth.setEnabled(enable);
+		this.comboYear.setEnabled(enable);
+		this.butAuto.setEnabled(enable);
+		this.butDefault.setEnabled(enable);
 	}
 	
 	//Interfaces

@@ -7,7 +7,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -214,10 +213,9 @@ public class GraphPanel extends JPanel implements ActionListener
 		
 		this.graphReversed = false;
 		
-		LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap = this.panelDateRange.getDateRangeMap();		//Get date range
 		String category = this.comboCategory.getSelectedItem().toString();
 		
-		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), dateRangeMap.get(DateRangePanel.FROM), dateRangeMap.get(DateRangePanel.TO));
+		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
 		
 		if (Globals.GRAPH_FILTER_PANEL.isRecentMedicationSelected())
 		{

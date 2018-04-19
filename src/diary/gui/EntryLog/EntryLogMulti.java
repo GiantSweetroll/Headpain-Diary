@@ -113,8 +113,8 @@ public class EntryLogMulti extends JPanel implements ActionListener
 		switch(e.getActionCommand())
 		{
 			case NEXT:
-				LinkedHashMap<String, Date> map = this.dateRange.getDateRange();
-				System.out.println(Date.getDaysDifference(map.get(DateRangePanel.FROM), map.get(DateRangePanel.TO), true));
+				Globals.ENTRY_LOG.setToMultipleEntryMode(this.dateRange.getFromDate(), this.dateRange.getToDate());
+				MainFrame.changePanel(Globals.ENTRY_LOG);
 				break;
 				
 			case BACK:

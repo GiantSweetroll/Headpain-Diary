@@ -686,10 +686,13 @@ public class PainDataOperation
 	{
 		List<PainEntryData> list = new ArrayList<PainEntryData>();
 		
-		for (int i=entry.getDate().getDay(); i<=Date.getDaysDifference(entry.getDate(), targetDate, true); i++)
+	//	System.out.println("Day difference: " + Date.getDaysDifference(entry.getDate(), targetDate, true));
+		
+		for (int i=entry.getDate().getDay(); i<=Date.getDaysDifference(entry.getDate(), targetDate, true)+entry.getDate().getDay()-1; i++)
 		{
 			PainEntryData duplicate = new PainEntryData(entry);
 			duplicate.setDate(new Date(i, entry.getDate().getMonth(), entry.getDate().getYear()));
+			list.add(duplicate);
 		}
 		
 		return list;

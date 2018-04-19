@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>18</date_day>
+     <date_month>4</date_month>
+     <date_year>2018</date_year>
+     <time_hour>21</time_hour>
+     <time_minute>51</time_minute>
+     <pain_location_preset pain_loc_id="0">eyes and forhead</pain_location_preset>
+     <pain_kind>default pain kind throbbing</pain_kind>
+     <activity>default triggers physical activity</activity>
+     <intensity>3</intensity>
+     <duration>4</duration>
+     <activity_details/>
+     <recent_medication>OBH</recent_medication>
+     <medicine_complaint>Cram</medicine_complaint>
+     <comments/>
+</Entry>

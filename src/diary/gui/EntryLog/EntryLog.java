@@ -44,8 +44,10 @@ import diary.gui.WrappableJLabel;
 import diary.history.HistoryPanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
+import diary.methods.PainDataOperation;
 import diary.patientdata.PatientData;
 import giantsweetroll.Misc;
+import giantsweetroll.date.Date;
 import giantsweetroll.date.DateManager;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
@@ -86,21 +88,28 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	private boolean isNewEntry;
 	private PainEntryData oldEntry;
 	private PatientData oldPatient;
+	private int entryType;
+	private Date targetDateToDuplicate;
 	
 	//Constants
 	private final String BACK = "back";
 	private final String FINISH = "finish";
+	
+	public static final int SINGLE_ENTRY = 0;
+	public static final int MULTI_ENTRY = 1;
 	
 	//Constructors
 	public EntryLog()
 	{
 		this.createAndShowGUI();
 		this.isNewEntry = true;
+		this.entryType = EntryLog.SINGLE_ENTRY;
 	}
 	public EntryLog(PatientData patient, PainEntryData entry)
 	{
 		this.createAndShowGUI();
 		this.loadData(patient, entry);
+		this.entryType = EntryLog.SINGLE_ENTRY;
 	}
 	
 	//Initialization of GUI
@@ -653,6 +662,32 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		}
 	}
 	
+	private void setEntryType(int entryType)
+	{
+		this.entryType = entryType;
+		
+		if (entryType == EntryLog.MULTI_ENTRY)
+		{
+			this.panelDate.setEnabled(false);
+		}
+		else
+		{
+			this.panelDate.setEnabled(true);
+		}
+	}
+	
+	public void setToMultipleEntryMode(Date from, Date to)
+	{
+		this.setEntryType(EntryLog.MULTI_ENTRY);
+		this.panelDate.setDate(from);
+		this.targetDateToDuplicate = to;
+	}
+	public void setToSingleEntryMode()
+	{
+		this.setEntryType(EntryLog.SINGLE_ENTRY);
+		this.targetDateToDuplicate = null;
+	}
+	
 	public void resetToDefault()
 	{
 		this.activePatientPanel.refresh();
@@ -692,7 +727,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		switch (e.getActionCommand())
 		{
 			case BACK:
-				MainFrame.changePanel(Globals.MAIN_MENU);
+				MainFrame.changePanel(Globals.ENTRY_LOG_TYPE_SELECTION);
 				break;
 				
 			case FINISH:
@@ -703,16 +738,37 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 						PainEntryData entry = new PainEntryData(this.createDataXMLDocument());
 						PatientData patient = this.activePatientPanel.getSelectedPatientData();
 						
-						if (FileOperation.entryExists(patient, entry) && this.isNewEntry)
+						if(this.entryType == EntryLog.SINGLE_ENTRY)
 						{
-							int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
-																		Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
-							
-							if (response == JOptionPane.YES_OPTION)
+							if (FileOperation.entryExists(patient, entry) && this.isNewEntry)
+							{
+								int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
+																			Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
+								
+								if (response == JOptionPane.YES_OPTION)
+								{
+									FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
+									FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
+									FileOperation.exportPainData(patient, entry);
+									MainFrame.changePanel(Globals.MAIN_MENU);
+									Globals.GRAPH_PANEL.refreshGraph();
+									Globals.PAIN_TABLE.refreshTable();
+									Methods.refresHistories(this.activePatientPanel.getSelectedPatientData());
+									Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+								}
+							}
+							else
 							{
 								FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
 								FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
 								FileOperation.exportPainData(patient, entry);
+								if (!this.isNewEntry)
+								{
+									if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
+									{
+										FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
+									}
+								}
 								MainFrame.changePanel(Globals.MAIN_MENU);
 								Globals.GRAPH_PANEL.refreshGraph();
 								Globals.PAIN_TABLE.refreshTable();
@@ -720,17 +776,16 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 								Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 							}
 						}
-						else
+						else if (this.entryType == EntryLog.MULTI_ENTRY)
 						{
+							List<PainEntryData> duplicateEntries = PainDataOperation.generateDuplicates(entry, this.targetDateToDuplicate);
+					//		System.out.println(duplicateEntries.size());
+							
 							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
 							FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
-							FileOperation.exportPainData(patient, entry);
-							if (!this.isNewEntry)
+							for (PainEntryData painEntry : duplicateEntries)
 							{
-								if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
-								{
-									FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
-								}
+								FileOperation.exportPainData(patient, painEntry);
 							}
 							MainFrame.changePanel(Globals.MAIN_MENU);
 							Globals.GRAPH_PANEL.refreshGraph();

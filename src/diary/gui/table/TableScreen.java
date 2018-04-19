@@ -260,7 +260,7 @@ public class TableScreen extends JPanel implements ActionListener
 		String filterType = this.getFilterType();
 		
 		String filter = Methods.getTextData(this.tfFilter);
-		this.entries = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO));
+		this.entries = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
 		this.table = new TablePanel(this.entries, filterType, filter);
 		this.add(this.table, BorderLayout.CENTER);
 		
