@@ -727,7 +727,8 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		switch (e.getActionCommand())
 		{
 			case BACK:
-				MainFrame.changePanel(Globals.ENTRY_LOG_TYPE_SELECTION);
+			//	MainFrame.changePanel(Globals.ENTRY_LOG_TYPE_SELECTION);
+				MainFrame.changePanel(Globals.MAIN_MENU);
 				break;
 				
 			case FINISH:
