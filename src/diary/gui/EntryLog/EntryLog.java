@@ -18,7 +18,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.PlainDocument;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
@@ -42,6 +42,7 @@ import diary.gui.DatePanel;
 import diary.gui.MainFrame;
 import diary.gui.WrappableJLabel;
 import diary.history.HistoryPanel;
+import diary.interfaces.GUIFunction;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
@@ -49,12 +50,13 @@ import diary.patientdata.PatientData;
 import giantsweetroll.Misc;
 import giantsweetroll.date.Date;
 import giantsweetroll.date.DateManager;
+import giantsweetroll.filters.IntegerFilter;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 import giantsweetroll.message.MessageManager;
 import giantsweetroll.xml.dom.XMLManager;
 
-public class EntryLog extends JPanel implements ActionListener, FocusListener
+public class EntryLog extends JPanel implements ActionListener, FocusListener, GUIFunction
 {
 	/**
 	 * 
@@ -76,8 +78,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	private ActivePatientPanel activePatientPanel;
 	private HistoryPanel historyRecentMedication, historyMedicineComplaint;
 	
-	private JFormattedTextField tfIntensity, tfDuration;
-	private JTextField tfActivity, tfPainKind;
+	private JTextField tfActivity, tfPainKind, tfIntensity, tfDuration;
 	private JComboBox<String> comboActivity, comboPainKind, comboDurationUnit;
 	private JTextArea taComments;
 	private WrappableJLabel taCommentsLabel;
@@ -150,6 +151,9 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		//add to panel
 		this.panelTitle.add(this.labTitle);
 	}
+	/**
+	 * 
+	 */
 	private void initPanelCenter()
 	{
 		//Initialization
@@ -165,10 +169,10 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		this.comboPainKind = new JComboBox<String>(Constants.DEFAULT_PAIN_KIND);
 		this.tfPainKind = new JTextField(10);
 		this.labIntensity = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL)), SwingConstants.RIGHT);
-		this.tfIntensity = new JFormattedTextField(Constants.AMOUNT_FORMAT);
+		this.tfIntensity = new JTextField("0");
 		this.labIntensityDesc = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
 		this.labDuration = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL)), SwingConstants.RIGHT);
-		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
+		this.tfDuration = new JTextField("1");
 		this.comboDurationUnit = new JComboBox<String>(Constants.DURATION_UNITS);
 		this.labActivity = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT)), SwingConstants.RIGHT);
 		this.comboActivity = new JComboBox<String>(Constants.DEFAULT_ACTIVITIES);
@@ -233,8 +237,10 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 				});
 		this.tfIntensity.setColumns(5);
 		this.tfIntensity.setHorizontalAlignment(SwingConstants.CENTER);
+		((PlainDocument)this.tfIntensity.getDocument()).setDocumentFilter(new IntegerFilter(0, 10));
 		this.tfDuration.setColumns(5);
 		this.tfDuration.setHorizontalAlignment(SwingConstants.CENTER);
+		((PlainDocument)this.tfDuration.getDocument()).setDocumentFilter(new IntegerFilter(1, Integer.MAX_VALUE));
 		this.comboDurationUnit.setBackground(Color.WHITE);
 		this.comboActivity.setBackground(Color.WHITE);
 		this.tfActivity.setEditable(false);
@@ -570,7 +576,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 	
 	public void loadData(PatientData patient, PainEntryData entry)
 	{
-		this.resetToDefault();
+		this.resetDefaults();
 		this.oldEntry = entry;
 		this.oldPatient = patient;
 		this.fillData(patient, entry);
@@ -662,6 +668,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		}
 	}
 	
+	/*
 	private void setEntryType(int entryType)
 	{
 		this.entryType = entryType;
@@ -675,49 +682,53 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 			this.panelDate.setEnabled(true);
 		}
 	}
+	*/
 	
 	public void setToMultipleEntryMode(Date from, Date to)
 	{
-		this.setEntryType(EntryLog.MULTI_ENTRY);
+//		this.setEntryType(EntryLog.MULTI_ENTRY);
+		this.entryType = EntryLog.MULTI_ENTRY;
 		this.panelDate.setDate(from);
 		this.targetDateToDuplicate = to;
 	}
 	public void setToSingleEntryMode()
 	{
-		this.setEntryType(EntryLog.SINGLE_ENTRY);
-		this.targetDateToDuplicate = null;
+//		this.setEntryType(EntryLog.SINGLE_ENTRY);
+		this.entryType = EntryLog.SINGLE_ENTRY;
+		this.targetDateToDuplicate = this.panelDate.getDate();
 	}
 	
-	public void resetToDefault()
-	{
-		this.activePatientPanel.refresh();
-		this.panelDate.autoSetDate();
-		this.panelTime.setToCurrentTime();
-		this.painLocation.resetDefaults();
-		this.comboPainKind.setSelectedIndex(0);
-		this.tfPainKind.setText("");
-		this.tfIntensity.setText("");
-		this.tfDuration.setText("");
-		this.comboDurationUnit.setSelectedIndex(0);
-		this.comboActivity.setSelectedIndex(0);
-		this.tfActivity.setText("");
-		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION);
-		this.historyRecentMedication.resetDefaults();
-		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT);
-		this.historyMedicineComplaint.resetDefaults();
-		this.taComments.setText("");
-		this.scrollCenter.getViewport().setViewPosition(new Point(0,0));			//Returns Vertical Scrollbar to top
-	}
 	public void refreshHistories()
 	{
-		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION);
+//		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION);
+		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData());
 		this.historyRecentMedication.resetDefaults();
-		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT);
+//		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT);
+		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData());
 		this.historyMedicineComplaint.resetDefaults();
 	}
 	public ActivePatientPanel getActivePatientPanel()
 	{
 		return this.activePatientPanel;
+	}
+	
+	private void export(PatientData patient, PainEntryData entry)
+	{
+		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
+		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
+		FileOperation.exportPainData(patient, entry);
+		if (!this.isNewEntry)
+		{
+			if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
+			{
+				FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
+			}
+		}
+		MainFrame.changePanel(Globals.MAIN_MENU);
+		Globals.GRAPH_PANEL.refreshGraph();
+		Globals.PAIN_TABLE.refreshTable();
+		Methods.refresHistories(this.activePatientPanel.getSelectedPatientData());
+		Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 	}
 	
 	//Interfaces
@@ -739,6 +750,15 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 						PainEntryData entry = new PainEntryData(this.createDataXMLDocument());
 						PatientData patient = this.activePatientPanel.getSelectedPatientData();
 						
+						//Check duration
+						if (this.comboDurationUnit.getSelectedItem().toString().equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT)) && Integer.parseInt(Methods.getTextData(this.tfDuration))>1)
+						{
+							Date now = this.panelDate.getDate();
+							//Adding days logic: current day + duration - 1
+							this.setToMultipleEntryMode(now, new Date(now.getDay() + Integer.parseInt(Methods.getTextData(this.tfDuration)) - 1, now.getMonth(), now.getYear()));
+							this.tfDuration.setText("1");
+						}
+						
 						if(this.entryType == EntryLog.SINGLE_ENTRY)
 						{
 							if (FileOperation.entryExists(patient, entry) && this.isNewEntry)
@@ -748,39 +768,17 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 								
 								if (response == JOptionPane.YES_OPTION)
 								{
-									FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
-									FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
-									FileOperation.exportPainData(patient, entry);
-									MainFrame.changePanel(Globals.MAIN_MENU);
-									Globals.GRAPH_PANEL.refreshGraph();
-									Globals.PAIN_TABLE.refreshTable();
-									Methods.refresHistories(this.activePatientPanel.getSelectedPatientData());
-									Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+									this.export(patient, entry);
 								}
 							}
 							else
 							{
-								FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
-								FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
-								FileOperation.exportPainData(patient, entry);
-								if (!this.isNewEntry)
-								{
-									if (!this.panelTime.sameAsDefault() || !this.panelDate.sameAsDefault())		//Check if the start time or date has been altered
-									{
-										FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
-									}
-								}
-								MainFrame.changePanel(Globals.MAIN_MENU);
-								Globals.GRAPH_PANEL.refreshGraph();
-								Globals.PAIN_TABLE.refreshTable();
-								Methods.refresHistories(this.activePatientPanel.getSelectedPatientData());
-								Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+								this.export(patient, entry);
 							}
 						}
 						else if (this.entryType == EntryLog.MULTI_ENTRY)
 						{
 							List<PainEntryData> duplicateEntries = PainDataOperation.generateDuplicates(entry, this.targetDateToDuplicate);
-					//		System.out.println(duplicateEntries.size());
 							
 							FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData(), this.historyRecentMedication.getItem());
 							FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData(), this.historyMedicineComplaint.getItem());
@@ -831,6 +829,30 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener
 		{
 			this.tfIntensity.setText("");
 		}
+	}
+	
+	@Override
+	public void resetDefaults()
+	{
+		this.activePatientPanel.refresh();
+		this.panelDate.autoSetDate();
+		this.panelTime.setToCurrentTime();
+		this.painLocation.resetDefaults();
+		this.comboPainKind.setSelectedIndex(0);
+		this.tfPainKind.setText("");
+		this.tfIntensity.setText("0");
+		this.tfDuration.setText("1");
+		this.comboDurationUnit.setSelectedIndex(0);
+		this.comboActivity.setSelectedIndex(0);
+		this.tfActivity.setText("");
+//		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION);
+		this.historyRecentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION, this.activePatientPanel.getSelectedPatientData());
+		this.historyRecentMedication.resetDefaults();
+//		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT);
+		this.historyMedicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT, this.activePatientPanel.getSelectedPatientData());
+		this.historyMedicineComplaint.resetDefaults();
+		this.taComments.setText("");
+		this.scrollCenter.getViewport().setViewPosition(new Point(0,0));			//Returns Vertical Scrollbar to top
 	}
 	
 	private ActionListener activityListener = new ActionListener()

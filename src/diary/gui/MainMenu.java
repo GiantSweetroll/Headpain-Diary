@@ -340,6 +340,7 @@ public class MainMenu extends JScrollPane implements ActionListener
 		switch (e.getActionCommand())
 		{
 		case NEW_ENTRY:
+			Globals.ENTRY_LOG.resetDefaults();
 			MainFrame.changePanel(Globals.ENTRY_LOG);
 		//	MainFrame.changePanel(Globals.ENTRY_LOG_TYPE_SELECTION);
 			break;

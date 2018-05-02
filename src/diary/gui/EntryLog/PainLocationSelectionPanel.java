@@ -16,9 +16,10 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.CustomPainLocation;
 import diary.data.PainEntryData;
+import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
 
-public class PainLocationSelectionPanel extends JPanel implements ItemListener
+public class PainLocationSelectionPanel extends JPanel implements ItemListener, GUIFunction
 {
 
 	/**
@@ -95,11 +96,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 	{
 		return this.radCustom.isSelected();
 	}
-	public void resetDefaults()
-	{
-		this.radPreset.setSelected(true);
-		this.preset.unmarkAllButtons();
-	}
+	
 	public void setSelectedPosition(PainEntryData entry)
 	{
 		List<String> presetLocations = (List<String>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATION_PRESET);
@@ -148,5 +145,14 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener
 			this.custom.setEnabled(true);
 			this.preset.setEnabled(false);
 		}
+	}
+	
+	@Override
+	public void resetDefaults()
+	{
+		this.preset.resetDefaults();
+		this.custom.resetDefaults();
+		this.radPreset.setSelected(true);
+		this.preset.unmarkAllButtons();
 	}
 }

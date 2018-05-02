@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>25</date_day>
+     <date_month>4</date_month>
+     <date_year>2018</date_year>
+     <time_hour>19</time_hour>
+     <time_minute>35</time_minute>
+     <pain_location_preset pain_loc_id="0">eyes and forhead</pain_location_preset>
+     <pain_kind>default pain kind pulsating</pain_kind>
+     <activity>default triggers stressor</activity>
+     <intensity>3</intensity>
+     <duration>25</duration>
+     <activity_details/>
+     <recent_medication>Paracetamol</recent_medication>
+     <medicine_complaint>Back Pain</medicine_complaint>
+     <comments/>
+</Entry>

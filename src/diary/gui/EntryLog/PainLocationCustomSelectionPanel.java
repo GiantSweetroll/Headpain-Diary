@@ -18,9 +18,10 @@ import javax.swing.SwingConstants;
 
 import diary.constants.XMLIdentifier;
 import diary.data.CustomPainLocation;
+import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
 
-public class PainLocationCustomSelectionPanel extends JPanel implements ActionListener
+public class PainLocationCustomSelectionPanel extends JPanel implements ActionListener, GUIFunction
 {
 
 	/**
@@ -130,8 +131,14 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 	}
 	
 	//Interfaces
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		this.resetPosition();
+	}
+	
+	@Override
+	public void resetDefaults()
+	{
 	}
 }

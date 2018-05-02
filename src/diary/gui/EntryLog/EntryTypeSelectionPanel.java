@@ -158,13 +158,13 @@ public class EntryTypeSelectionPanel extends JPanel implements ActionListener
 		switch(e.getActionCommand())
 		{
 			case SINGLE:
-				Globals.ENTRY_LOG.resetToDefault();
+				Globals.ENTRY_LOG.resetDefaults();
 				Globals.ENTRY_LOG.setToSingleEntryMode();
 				MainFrame.changePanel(Globals.ENTRY_LOG);
 				break;
 				
 			case MULTI:
-				Globals.ENTRY_LOG.resetToDefault();
+				Globals.ENTRY_LOG.resetDefaults();
 				MainFrame.changePanel(Globals.ENTRY_LOG_MULTI_DATE_RANGE_SELECT);
 				break;
 				

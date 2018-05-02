@@ -19,10 +19,11 @@ import javax.swing.border.Border;
 
 import diary.constants.Constants;
 import diary.gui.ImageTextPanel;
+import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 
-public class PainLocationPresetSelectionPanel extends JPanel implements ActionListener
+public class PainLocationPresetSelectionPanel extends JPanel implements ActionListener, GUIFunction
 {
 
 	/**
@@ -163,5 +164,10 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 			this.setMarked(button, true);
 			this.appendLocation(e.getActionCommand());
 		}
+	}
+
+	public void resetDefaults() 
+	{
+		this.selectedPos.clear();
 	}
 }

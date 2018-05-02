@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>26</date_day>
+     <date_month>4</date_month>
+     <date_year>2018</date_year>
+     <time_hour>21</time_hour>
+     <time_minute>22</time_minute>
+     <pain_location_custom pain_loc_id="0">47,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">48,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="2">49,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="3">49,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="4">50,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="5">51,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="6">52,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="7">53,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="8">54,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="9">55,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="10">56,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="11">57,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="12">57,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="13">57,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="14">57,57</pain_location_custom>
+     <pain_location_custom pain_loc_id="15">57,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="16">56,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="17">55,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="18">55,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="19">54,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="20">53,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="21">53,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="22">52,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="23">51,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="24">50,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="25">49,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="26">48,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="27">47,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="28">46,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="29">45,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="30">44,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="31">43,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="32">42,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="33">41,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="34">40,62</pain_location_custom>
+     <pain_location_custom pain_loc_id="35">40,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="36">39,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="37">38,61</pain_location_custom>
+     <pain_location_custom pain_loc_id="38">38,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="39">37,60</pain_location_custom>
+     <pain_location_custom pain_loc_id="40">37,59</pain_location_custom>
+     <pain_location_custom pain_loc_id="41">37,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="42">36,58</pain_location_custom>
+     <pain_location_custom pain_loc_id="43">36,57</pain_location_custom>
+     <pain_location_custom pain_loc_id="44">36,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="45">36,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="46">36,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="47">37,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="48">38,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="49">38,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="50">39,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="51">39,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="52">40,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="53">41,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="54">41,50</pain_location_custom>
+     <pain_location_custom pain_loc_id="55">42,50</pain_location_custom>
+     <pain_location_custom pain_loc_id="56">43,50</pain_location_custom>
+     <pain_location_custom pain_loc_id="57">44,50</pain_location_custom>
+     <pain_location_custom pain_loc_id="58">45,50</pain_location_custom>
+     <pain_location_custom pain_loc_id="59">45,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="60">46,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="61">47,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="62">48,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="63">49,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="64">50,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="65">51,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="66">52,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="67">53,49</pain_location_custom>
+     <pain_location_custom pain_loc_id="68">53,50</pain_location_custom>
+     <pain_location_custom pain_loc_id="69">54,50</pain_location_custom>
+     <pain_location_custom pain_loc_id="70">54,51</pain_location_custom>
+     <pain_location_custom pain_loc_id="71">54,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="72">53,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="73">52,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="74">51,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="75">50,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="76">49,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="77">48,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="78">47,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="79">46,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="80">45,56</pain_location_custom>
+     <pain_location_custom pain_loc_id="81">44,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="82">43,55</pain_location_custom>
+     <pain_location_custom pain_loc_id="83">43,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="84">42,54</pain_location_custom>
+     <pain_location_custom pain_loc_id="85">42,53</pain_location_custom>
+     <pain_location_custom pain_loc_id="86">42,52</pain_location_custom>
+     <pain_location_custom pain_loc_id="87">42,51</pain_location_custom>
+     <pain_kind>default pain kind radiating</pain_kind>
+     <activity>default triggers physical activity</activity>
+     <intensity>2</intensity>
+     <duration>259200.0</duration>
+     <activity_details/>
+     <recent_medication>Paracetamol</recent_medication>
+     <medicine_complaint>Back Pain</medicine_complaint>
+     <comments/>
+</Entry>
