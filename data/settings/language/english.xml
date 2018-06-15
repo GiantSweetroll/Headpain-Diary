@@ -41,6 +41,9 @@
      <text identifier="entry log type single button text">Single Entry</text>
      <text identifier="entry log type multi button text">Multiple Entry</text>
      <text identifier="entry log multi date range select text">Select Date Range</text>
+     <text identifier="entry log element type active user">Select Active Profile</text>
+     <text identifier="entry log element type date time">Select Date and Time</text>
+     <text identifier="entry log element type recent medication">Enter Recent Medication</text>
      <text identifier="default triggers sunlight">Sunlight</text>
      <text identifier="default triggers improper diet sleep">Improper Diet/Sleep Routine</text>
      <text identifier="default triggers physical activity">Physical Activity</text>

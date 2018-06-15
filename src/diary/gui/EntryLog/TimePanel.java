@@ -40,7 +40,7 @@ public class TimePanel extends JPanel implements ActionListener
 	private final String MINUTE = "minute";
 	private final String TIME_DIVIDER = ":";
 	
-	protected TimePanel(boolean enable)
+	public TimePanel(boolean enable)
 	{
 		this.init();
 		if(!enable)
@@ -89,40 +89,40 @@ public class TimePanel extends JPanel implements ActionListener
 		this.add(this.butCurrent, c);			//Current
 	}
 	
-	protected void setTime(String hour, String minute)
+	public void setTime(String hour, String minute)
 	{
 		this.comboHour.setSelectedItem(hour);
 		this.comboMinute.setSelectedItem(minute);
 	}
-	protected void setDefaultTime(String hour, String minute)
+	public void setDefaultTime(String hour, String minute)
 	{
 		this.defaultMap.put(this.HOUR, hour);
 		this.defaultMap.put(this.MINUTE, minute);
 	}
-	protected void setAsDefaultTimeThis()
+	public void setAsDefaultTimeThis()
 	{
 		this.defaultMap.put(this.HOUR, this.comboHour.getSelectedItem().toString());
 		this.defaultMap.put(this.MINUTE, this.comboMinute.getSelectedItem().toString());
 	}
 	
-	protected void resetDefault()
+	public void resetDefault()
 	{
 		this.comboHour.setSelectedItem(this.defaultMap.get(this.HOUR));
 		this.comboMinute.setSelectedItem(this.defaultMap.get(this.MINUTE));
 	}
 	
-	protected Map<String, String> getDefaultMap()
+	public Map<String, String> getDefaultMap()
 	{
 		return this.defaultMap;
 	}
 	
-	protected void setToCurrentTime()
+	public void setToCurrentTime()
 	{
 		this.comboHour.setSelectedItem(DateManager.getCurrentHour());
 		this.comboMinute.setSelectedItem(DateManager.getCurrentMinute());
 	}
 	
-	protected LinkedHashMap<String, String> getData()
+	public LinkedHashMap<String, String> getData()
 	{
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		
@@ -132,7 +132,7 @@ public class TimePanel extends JPanel implements ActionListener
 		return map;
 	}
 	
-	protected boolean sameAsDefault()
+	public boolean sameAsDefault()
 	{
 		LinkedHashMap<String, String> data = this.getData();
 		if (this.defaultMap.get(this.HOUR).equals(data.get(PainDataIdentifier.TIME_HOUR)) && 

@@ -1,6 +1,7 @@
 package diary.methods;
 
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -16,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -418,7 +420,15 @@ public class Methods
 	
 	public static String getLanguageText(String key)
 	{
-		return Constants.LANGUAGE.getTextMap().get(key);
+		try
+		{
+			return Constants.LANGUAGE.getTextMap().get(key);
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			return "";
+		}
 	}
 	
 	public static BufferedImage createImage(JTable table)
@@ -787,5 +797,13 @@ public class Methods
 	{
 		button.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		button.setForeground(Color.WHITE);
+	}
+	
+	public static void changePanel(JComponent component, String keyword)
+	{
+		if (component.getLayout() instanceof CardLayout)
+		{
+			((CardLayout)component.getLayout()).show(component, keyword);
+		}
 	}
 }

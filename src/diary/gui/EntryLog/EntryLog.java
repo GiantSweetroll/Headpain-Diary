@@ -47,7 +47,7 @@ import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
 import diary.patientdata.PatientData;
-import giantsweetroll.Misc;
+import giantsweetroll.GMisc;
 import giantsweetroll.date.Date;
 import giantsweetroll.date.DateManager;
 import giantsweetroll.filters.IntegerFilter;
@@ -556,7 +556,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener, G
 		}
 		else
 		{
-			if (Misc.getItem(this.comboPainKind).toString().equals(XMLIdentifier.OTHER_TEXT))
+			if (GMisc.getItem(this.comboPainKind).toString().equals(XMLIdentifier.OTHER_TEXT))
 			{
 				if (Methods.isEmpty(this.tfPainKind))
 				{
@@ -613,26 +613,27 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener, G
 		//Duration unit handling
 		String duration = entry.getDataMap().get(PainDataIdentifier.DURATION).toString();
 		double durationValue = Double.parseDouble(duration);
+	//	MessageManager.printLine("Duration value: " + durationValue + " seconds");
 		String durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT);
-		if (durationValue >=86400d)
+		if (durationValue >=86400d)								//Days
 		{
 			durationValue = durationValue/86400d;
-			duration = Double.toString(durationValue);
+	//		MessageManager.printLine("Duration unit as String: " + duration + "days");
 			durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT);
 		}
 		else if (durationValue>=3600d && durationValue<86400d)	//Hours
 		{
 			durationValue = durationValue/3600d;
-			duration = Double.toString(durationValue);
 			durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT);
 		}
-		else if (durationValue<3600 && durationValue>=60)		//Minutes
+		else if (durationValue<3600d && durationValue>=60d)		//Minutes
 		{
 			durationValue = durationValue/60d;
-			duration = Double.toString(durationValue);
 			durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT);
 		}
+		duration = Long.toString((long)durationValue);
 		this.tfDuration.setText(duration);
+//		MessageManager.printLine("Duration from text field: " + Methods.getTextData(this.tfDuration));
 		this.comboDurationUnit.setSelectedItem(durationUnit);
 		//Duration Handling End
 		
@@ -855,6 +856,9 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener, G
 		this.scrollCenter.getViewport().setViewPosition(new Point(0,0));			//Returns Vertical Scrollbar to top
 	}
 	
+	@Override
+	public void refresh() {};
+	
 	private ActionListener activityListener = new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
@@ -876,7 +880,7 @@ public class EntryLog extends JPanel implements ActionListener, FocusListener, G
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					String item = Misc.getItem(comboPainKind).toString();
+					String item = GMisc.getItem(comboPainKind).toString();
 					if (item.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
 					{
 						tfPainKind.setEditable(true);

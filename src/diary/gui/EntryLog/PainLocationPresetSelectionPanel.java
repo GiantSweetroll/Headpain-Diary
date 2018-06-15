@@ -149,6 +149,8 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 			this.unmarkAllButtons();
 		}
 	}
+	@Override
+	public void refresh() {};
 	
 	//Interfaces
 	public void actionPerformed(ActionEvent e)

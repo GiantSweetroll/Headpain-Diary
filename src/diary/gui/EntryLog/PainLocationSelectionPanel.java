@@ -155,4 +155,6 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		this.radPreset.setSelected(true);
 		this.preset.unmarkAllButtons();
 	}
+	@Override
+	public void refresh() {};
 }

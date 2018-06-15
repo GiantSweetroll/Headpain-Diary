@@ -100,6 +100,10 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT, "Single Entry");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_MULTI_BUTTON_TEXT, "Multiple Entry");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MULTI_DATE_RANGE_SELECT_TEXT, "Select Date Range");
+		//Form Element Type
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER, "Select Active Profile");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_DATE_TIME, "Select Date and Time");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION, "Enter Recent Medication");
 		
 		//Default Activities
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT, "Sunlight");

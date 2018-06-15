@@ -2,6 +2,6 @@
 <settings>
      <database_path>F:\Projects 4 - School\Headpain-Diary\data\database</database_path>
      <database_users_path>F:\Projects 4 - School\Headpain-Diary\data\users</database_users_path>
-     <window_mode>windowed</window_mode>
+     <window_mode>fullscreen</window_mode>
      <language>english</language>
 </settings>

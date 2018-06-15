@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_day>06</date_day>
+     <date_month>6</date_month>
+     <date_year>2018</date_year>
+     <time_hour>17</time_hour>
+     <time_minute>10</time_minute>
+     <pain_location_preset pain_loc_id="0">head full</pain_location_preset>
+     <pain_kind>Stabbing</pain_kind>
+     <activity>other text</activity>
+     <intensity>5</intensity>
+     <duration>15</duration>
+     <activity_details>Singing</activity_details>
+     <recent_medication>Antacid</recent_medication>
+     <medicine_complaint>Stomach Ache</medicine_complaint>
+     <comments>Almost Unbearable</comments>
+</Entry>

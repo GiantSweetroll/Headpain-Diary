@@ -26,7 +26,7 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
-import giantsweetroll.Misc;
+import giantsweetroll.GMisc;
 import giantsweetroll.VectorInt;
 import giantsweetroll.gui.swing.Gbm;
 
@@ -87,7 +87,7 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 		this.tfDuration = new JFormattedTextField(Constants.AMOUNT_FORMAT);
 	//	this.labDurationUnit = new JLabel (Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_LABEL), SwingConstants.LEFT);
 		this.comboDurationUnit = new JComboBox<String>(Constants.DURATION_UNITS);
-		this.generalPos = new PainLocationSelectionPanel(this.getLocationIdentifier(Misc.getItem(this.comboGeneralPos).toString()));
+		this.generalPos = new PainLocationSelectionPanel(this.getLocationIdentifier(GMisc.getItem(this.comboGeneralPos).toString()));
 		this.scrollGeneral = new JScrollPane(this.generalPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.specificPos = new PainLocationSelectionPanel(this.generalPos.getSelected());
 		this.scrollSpecific = new JScrollPane(this.specificPos, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -314,7 +314,7 @@ public class IndividualPainLocationDataPanel extends JPanel implements FocusList
 	{
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		
-		map.put(PainDataIdentifier.GENERAL_POSITION, Misc.getItem(this.comboGeneralPos).toString());
+		map.put(PainDataIdentifier.GENERAL_POSITION, GMisc.getItem(this.comboGeneralPos).toString());
 		map.put(PainDataIdentifier.GENERAL_POSITION_2, this.generalPos.getSelected());
 		map.put(PainDataIdentifier.SPECIFIC_LOCATION, this.specificPos.getSelected());
 		if (Methods.isLastIndex(this.comboPainKind))

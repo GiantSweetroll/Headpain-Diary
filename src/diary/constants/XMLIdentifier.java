@@ -98,6 +98,10 @@ public class XMLIdentifier
 	public static final String ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT = "entry log type single button text";
 	public static final String ENTRY_LOG_TYPE_MULTI_BUTTON_TEXT = "entry log type multi button text";
 	public static final String ENTRY_LOG_MULTI_DATE_RANGE_SELECT_TEXT = "entry log multi date range select text";
+	//Form Element Type
+	public static final String ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER = "entry log element type active user";
+	public static final String ENTRY_LOG_ELEMENT_TYPE_DATE_TIME = "entry log element type date time";
+	public static final String ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION = "entry log element type recent medication";
 	
 	//Default Activities
 	public static final String DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY = "default triggers physical activity";

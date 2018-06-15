@@ -129,6 +129,8 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 			this.image.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1, true));
 		}
 	}
+	@Override
+	public void refresh() {};
 	
 	//Interfaces
 	@Override
