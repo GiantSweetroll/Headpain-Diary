@@ -1,5 +1,6 @@
 package diary.gui;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
@@ -7,6 +8,7 @@ import java.io.IOException;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
@@ -16,10 +18,17 @@ import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
+import diary.constants.PanelName;
 import diary.data.Settings;
+import diary.gui.EntryLog.EntryLog;
+import diary.gui.graphs.GraphFilterPanel;
+import diary.gui.graphs.GraphPanel;
+import diary.gui.settings.SettingsPanel;
+import diary.gui.table.TableScreen;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.XMLGenerator;
+import diary.patientdata.PatientDataManagePanel;
 import diary.patientdata.PatientDataRegisterationForm;
 
 // TODO: Auto-generated Javadoc
@@ -30,7 +39,7 @@ public class MainFrame
 {
 	
 	/** The frame. */
-	public static JFrame frame;
+	private JFrame frame;
 	public static Settings setting;
 	public static JComponent lastComponent;
 	
@@ -39,6 +48,17 @@ public class MainFrame
 	public static int GENERAL_FONT_SIZE = 15;
 	
 	public static boolean isFullScreen;
+	
+	private JPanel panel;
+	
+	//Panels
+	public final MainMenu MAIN_MENU = new MainMenu();
+	public final SettingsPanel SETTINGS_PANEL = new SettingsPanel();
+	public final PatientDataManagePanel MANAGE_PATIENTS_PANEL = new PatientDataManagePanel();
+	public final GraphFilterPanel GRAPH_FILTER_PANEL = new GraphFilterPanel();
+	public final GraphPanel GRAPH_PANEL = new GraphPanel();
+	public final TableScreen PAIN_TABLE = new TableScreen();
+	public final EntryLog ENTRY_LOG = new EntryLog(this);
 	
 	/**
 	 * Instantiates a new main frame.
@@ -55,11 +75,25 @@ public class MainFrame
 	{
 		//Initialization
 		frame = new JFrame(Constants.PROGRAM_TITLE);
+		this.panel = new JPanel();
+		
+		//Properties
+		this.panel.setLayout(new CardLayout());
 		MainFrame.isFullScreen = false;
-		MainFrame.refreshSettings();
+		this.refreshSettings();
 	//	jComponent = Globals.MAIN_MENU;
 		
-		frame.add(jComponent);
+		//Add to panel
+		this.panel.add(this.MAIN_MENU, PanelName.MAIN_MENU);
+		this.panel.add(this.ENTRY_LOG, PanelName.ENTRY_LOG);
+		this.panel.add(this.GRAPH_FILTER_PANEL, PanelName.GRAPH_FILTER_PANEL);
+		this.panel.add(this.GRAPH_PANEL, PanelName.GRAPH_PANEL);
+		this.panel.add(this.MANAGE_PATIENTS_PANEL, PanelName.MANAGE_PATIENTS_PANEL);
+		this.panel.add(this.SETTINGS_PANEL, PanelName.SETTING_PANEL);
+		this.panel.add(this.PAIN_TABLE, PanelName.PAIN_TABLE);
+		
+		//Add to frame
+		frame.add(panel);
 		
 		/*
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,6 +110,7 @@ public class MainFrame
 	 *
 	 * @param component the component to display
 	 */
+	/*
 	public static final void changePanel(JComponent component)
 	{
 		try
@@ -96,7 +131,7 @@ public class MainFrame
 					MainFrame.GENERAL_FONT_SIZE--;
 					MainFrame.changePanel(Globals.MAIN_MENU);
 				}
-				*/
+				
 			}
 			else
 			{
@@ -111,13 +146,27 @@ public class MainFrame
 			ex.printStackTrace();
 		}
 	}
+	*/
+	public void changePanel(String key)
+	{
+		try
+		{
+			if (key.equals(PanelName.MAIN_MENU))
+			{
+				this.checkUsers();
+			}
+			Methods.changePanel(this.panel, key);
+		}
+		catch(NullPointerException ex) {ex.printStackTrace();}
+	}
+	
 	
 	public static final boolean isFullScreen()
 	{
 		return MainFrame.isFullScreen;
 	}
 	
-	public static final void refreshSettings()
+	public final void refreshSettings()
 	{
 		try 
 		{
@@ -125,11 +174,11 @@ public class MainFrame
 			//Select window mode
 			if(MainFrame.setting.getDataMap().get(Settings.WINDOW_MODE).equals(Settings.WINDOWED))
 			{
-				Methods.makeWindowed(MainFrame.frame);
+				Methods.makeWindowed(frame);
 			}
 			else
 			{
-				Methods.makeFullscreen(MainFrame.frame);
+				Methods.makeFullscreen(frame);
 			}
 			
 			//Selected Language
@@ -148,7 +197,7 @@ public class MainFrame
 				file.mkdirs();
 			}
 			//Check for users
-			MainFrame.checkUsers();
+			this.checkUsers();
 			
 			//If history path is not found
 			file = new File(Constants.HISTORY_FOLDER_PATH);
@@ -163,7 +212,7 @@ public class MainFrame
 		}
 	}
 	
-	public static void checkUsers()
+	public void checkUsers()
 	{
 		try
 		{
@@ -171,9 +220,13 @@ public class MainFrame
 			{
 				try
 				{
+					/*
 					jComponent = Globals.MAIN_MENU;
 					MainFrame.lastComponent = Globals.MAIN_MENU;
 					MainFrame.changePanel(new PatientDataRegisterationForm());
+					*/
+					this.panel.add(new PatientDataRegisterationForm(), PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex)
 				{
@@ -182,21 +235,24 @@ public class MainFrame
 			}
 			else
 			{
-				jComponent = Globals.MAIN_MENU;
-				MainFrame.frame.add(jComponent);
+	//			jComponent = Globals.MAIN_MENU;
+	//			MainFrame.frame.add(jComponent);
 	//			MainFrame.changePanel(Globals.MAIN_MENU);
+				this.changePanel(PanelName.MAIN_MENU);
 			}
 		}
-		catch(NullPointerException ex)
+		catch(NullPointerException ex)			//no Settings file
 		{
 			FileOperation.saveSettings(new Settings());
 			if (!Methods.hasRegisteredUser())
 			{
 				try
 				{
-					jComponent = Globals.MAIN_MENU;
-					MainFrame.lastComponent = Globals.MAIN_MENU;
-					MainFrame.changePanel(new PatientDataRegisterationForm());
+		//			jComponent = Globals.MAIN_MENU;
+		//			MainFrame.lastComponent = Globals.MAIN_MENU;
+		//			MainFrame.changePanel(new PatientDataRegisterationForm());
+					this.panel.add(new PatientDataRegisterationForm(), PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex1)
 				{
@@ -205,8 +261,9 @@ public class MainFrame
 			}
 			else
 			{
-				jComponent = Globals.MAIN_MENU;
-				MainFrame.frame.add(jComponent);
+	//			jComponent = Globals.MAIN_MENU;
+	//			MainFrame.frame.add(jComponent);
+				this.changePanel(PanelName.MAIN_MENU);
 			}
 		}
 	}
@@ -239,10 +296,10 @@ public class MainFrame
 								XMLGenerator.generateXML();
 							}
 							
-							new MainFrame();
-							Globals.MAIN_MENU = new MainMenu();
-							Globals.HISTORY_MEDICINE_COMPLAINT.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
-							Globals.HISTORY_RECENT_MEDICATION.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
+							MainFrame mainFrame = new MainFrame();
+				//			Globals.MAIN_MENU = new MainMenu();
+							Globals.HISTORY_MEDICINE_COMPLAINT.refresh(mainFrame.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
+							Globals.HISTORY_RECENT_MEDICATION.refresh(mainFrame.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 						}
 						catch(Exception ex)
 						{
