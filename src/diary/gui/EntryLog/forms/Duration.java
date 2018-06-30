@@ -27,12 +27,12 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	//Constants
 	private final int SECONDS_MAJOR_TICK_COUNT = 5,
 						SECONDS_MINOR_TICK_COUNT = 10,
-						MINUTES_MAJOR_TICK_COUNT = 6,
-						MINUTES_MINOR_TICK_COUNT = 60,
-						HOURS_MAJOR_TICK_COUNT = 6,
-						HOURS_MINOR_TICK_COUNT = 24,
-						DAYS_MAJOR_TICK_COUNT = 5,
-						DAYS_MINOR_TICK_COUNT = 31;
+						MINUTES_MAJOR_TICK_COUNT = 5,
+						MINUTES_MINOR_TICK_COUNT = 10,
+						HOURS_MAJOR_TICK_COUNT = 2,
+						HOURS_MINOR_TICK_COUNT = 1,
+						DAYS_MAJOR_TICK_COUNT = 2,
+						DAYS_MINOR_TICK_COUNT = 1;
 	
 	
 	public Duration()
