@@ -22,13 +22,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import diary.constants.Constants;
-import diary.constants.Globals;
 import diary.constants.ImageConstants;
+import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
+import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class MainMenu extends JScrollPane implements ActionListener
+public class MainMenu extends MainFramePanel implements ActionListener
 {
 
 	/**
@@ -40,6 +41,7 @@ public class MainMenu extends JScrollPane implements ActionListener
 	private List<JLabel> supportersList;
 	private JButton butNewEntry, butGraph, butTable, butSettings, butExit, butManagePatients;
 	private JPanel panelMainButtons, panelSupport, panelAuthor, panelBelow, panelBelowLeft, panelBelowRight, panelBelowCenter, panelCenter, panelCenterCenter, panelCenterBelow, panelMain;
+	private JScrollPane scroll;
 	
 	//Constants
 	private final String NEW_ENTRY = "new entry";
@@ -53,19 +55,28 @@ public class MainMenu extends JScrollPane implements ActionListener
 //	private final Dimension IMAGE_LOGO_SIZE = new Dimension(320, 280);
 	
 	//Constructors
-	public MainMenu()
+	public MainMenu(MainFrame frame)
 	{
+		super(frame);
 		this.init();
 	}
 	
 	//Methods
 	private void init()
 	{
+		//Initialization
 		this.initPanelMain();
-		this.setViewportView(this.panelMain);
-		this.getVerticalScrollBar().setUnitIncrement(10);
-		this.getHorizontalScrollBar().setUnitIncrement(10);
-		this.setBorder(null);
+		this.scroll = ScrollPaneManager.generateDefaultScrollPane(this.panelMain, 10, 10);
+		
+		//Properties
+		this.setLayout(new BorderLayout());
+		this.setOpaque(false);
+		this.scroll.getVerticalScrollBar().setUnitIncrement(10);
+		this.scroll.getHorizontalScrollBar().setUnitIncrement(10);
+		this.scroll.setBorder(null);
+		
+		//Add to panel
+		this.add(this.scroll, BorderLayout.CENTER);
 	}
 	private void initPanelMain()
 	{
@@ -339,26 +350,35 @@ public class MainMenu extends JScrollPane implements ActionListener
 		switch (e.getActionCommand())
 		{
 		case NEW_ENTRY:
-			Globals.ENTRY_LOG.resetDefaults();
-			MainFrame.changePanel(Globals.ENTRY_LOG);
+	//		this.ENTRY_LOG.resetDefaults();
+	//		MainFrame.changePanel(Globals.ENTRY_LOG);
 		//	MainFrame.changePanel(Globals.ENTRY_LOG_TYPE_SELECTION);
+			
+			this.getMainFrameReference().ENTRY_LOG.resetDefaults();
+			this.getMainFrameReference().changePanel(PanelName.ENTRY_LOG);
 			break;
 			
 		case VIEW_GRAPH:
-			Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
-			MainFrame.changePanel(Globals.GRAPH_PANEL);
+	//		Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+	//		MainFrame.changePanel(Globals.GRAPH_PANEL);
+			
+			this.getMainFrameReference().GRAPH_FILTER_PANEL.refresh(this.getMainFrameReference().GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+			this.getMainFrameReference().changePanel(PanelName.GRAPH_PANEL);
 			break;
 			
 		case VIEW_TABLE:
-			MainFrame.changePanel(Globals.PAIN_TABLE);
+		//	MainFrame.changePanel(Globals.PAIN_TABLE);
+			this.getMainFrameReference().changePanel(PanelName.PAIN_TABLE);
 			break;
 			
 		case MANAGE_PATIENTS:
-			MainFrame.changePanel(Globals.MANAGE_PATIENTS_PANEL);
+		//	MainFrame.changePanel(Globals.MANAGE_PATIENTS_PANEL);
+			this.getMainFrameReference().changePanel(PanelName.MANAGE_PATIENTS_PANEL);
 			break;
 			
 		case SETTINGS:
-			MainFrame.changePanel(Globals.SETTINGS_PANEL);
+	//		MainFrame.changePanel(Globals.SETTINGS_PANEL);
+			this.getMainFrameReference().changePanel(PanelName.SETTING_PANEL);
 			break;
 			
 		case EXIT:

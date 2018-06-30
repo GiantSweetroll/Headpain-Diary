@@ -1,5 +1,6 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -24,8 +25,8 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	private JComboBox<String> units;
 	
 	//Constants
-	private final int SECONDS_MAJOR_TICK_COUNT = 6,
-						SECONDS_MINOR_TICK_COUNT = 60,
+	private final int SECONDS_MAJOR_TICK_COUNT = 5,
+						SECONDS_MINOR_TICK_COUNT = 10,
 						MINUTES_MAJOR_TICK_COUNT = 6,
 						MINUTES_MINOR_TICK_COUNT = 60,
 						HOURS_MAJOR_TICK_COUNT = 6,
@@ -47,11 +48,14 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		this.slider.setMajorTickSpacing(this.SECONDS_MAJOR_TICK_COUNT);
 		this.slider.setMinorTickSpacing(this.SECONDS_MINOR_TICK_COUNT);
 		this.slider.setPaintTicks(true);
+		this.slider.setPaintLabels(true);
+		this.slider.setOpaque(false);
+		this.units.setBackground(Color.WHITE);
 		
 		//Add to panel
 		this.addComponent(this.slider);
 		this.addComponent(this.units);
-	}
+	}	
 	
 	//Overridden Methods
 	@Override
@@ -104,7 +108,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 			{
 				value = value/60;
 				durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT);
-			}		
+			}
 			
 			this.slider.setValue(value);
 			this.units.setSelectedItem(durationUnit);
@@ -153,7 +157,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		String durationUnit = this.units.getSelectedItem().toString();
-		if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT)))			//Days
+		if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT)))			//Seconds
 		{
 			this.slider.setMaximum(60);
 			this.slider.setMajorTickSpacing(this.SECONDS_MAJOR_TICK_COUNT);

@@ -27,8 +27,10 @@ public class Intensity extends FormElement implements KeyListener
 		
 		//Properties
 		this.slider.setMajorTickSpacing(2);
-		this.slider.setMinorTickSpacing(10);
+		this.slider.setMinorTickSpacing(1);
 		this.slider.setPaintTicks(true);
+		this.slider.setPaintLabels(true);
+		this.slider.setOpaque(false);
 		
 		//Add to panel
 		this.addComponent(this.slider);

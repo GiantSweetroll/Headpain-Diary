@@ -1,5 +1,6 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -37,6 +38,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 		
 		//Properties
 		this.combo.addActionListener(this);
+		this.combo.setBackground(Color.WHITE);
 		this.tf.addMouseListener(this);
 		
 		//Add to panel
@@ -67,19 +69,19 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	}
 
 	@Override
-	public void setData(Object obj)
+	public void setData(Object entry)
 	{
-		if (obj instanceof PainEntryData)
+		if (entry instanceof PainEntryData)
 		{
-			String painKind = Methods.convertPainKindIDToLanguage(((PainEntryData)obj).getDataMap().get(PainDataIdentifier.PAIN_KIND).toString());
-			if (Methods.isPartOfDefaultPainKind(painKind))
+			String trigger = Methods.convertPainKindIDToLanguage(((PainEntryData)entry).getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+			if (Methods.isPartOfDefaultActivity(trigger))
 			{
-				this.combo.setSelectedItem(painKind);
+				this.combo.setSelectedItem(trigger);
 			}
 			else
 			{
 				this.combo.setSelectedItem(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT));
-				this.tf.setText(painKind);
+				this.tf.setText(trigger);
 			}
 		}
 	}	

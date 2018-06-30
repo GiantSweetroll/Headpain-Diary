@@ -1,5 +1,6 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -37,6 +38,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 		
 		//Properties
 		this.combo.addActionListener(this);
+		this.combo.setBackground(Color.WHITE);
 		this.tf.addMouseListener(this);
 		
 		//Add to panel

@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.gui.EntryLog.painLocation;
 
 import java.awt.Color;
 import java.awt.Component;

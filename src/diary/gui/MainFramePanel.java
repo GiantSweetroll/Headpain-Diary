@@ -2,7 +2,7 @@ package diary.gui;
 
 import javax.swing.JPanel;
 
-public class MainFramePanel extends JPanel
+public abstract class MainFramePanel extends JPanel
 {
 
 	/**

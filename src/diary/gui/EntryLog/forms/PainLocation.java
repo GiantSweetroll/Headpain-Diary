@@ -4,7 +4,7 @@ import java.util.List;
 
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
-import diary.gui.EntryLog.PainLocationSelectionPanel;
+import diary.gui.EntryLog.painLocation.PainLocationSelectionPanel;
 import diary.methods.Methods;
 
 public class PainLocation extends FormElement
@@ -41,11 +41,11 @@ public class PainLocation extends FormElement
 	}
 
 	@Override
-	public void setData(Object obj) 
+	public void setData(Object entry) 
 	{
-		if (obj instanceof PainEntryData)
+		if (entry instanceof PainEntryData)
 		{
-			this.painLocation.setSelectedPosition((PainEntryData)obj);
+			this.painLocation.setSelectedPosition((PainEntryData)entry);
 		}
 	}
 

@@ -15,9 +15,11 @@ public class ActiveUser extends FormElement
 
 	private ActivePatientPanel patient;
 	
-	public ActiveUser()
+	public ActiveUser(ActivePatientPanel patient)
 	{
 		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER));
+		
+		this.patient = patient;
 		
 		this.addComponent(this.patient);
 	}

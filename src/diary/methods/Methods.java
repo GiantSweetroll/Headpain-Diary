@@ -34,6 +34,7 @@ import diary.constants.Globals;
 import diary.constants.ImageConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
+import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.Settings;
@@ -482,14 +483,16 @@ public class Methods
 		}
 	}
 	*/
-	public static void exportPanelImage(ImageExportPanel panel, boolean showPreview)
+	public static void exportPanelImage(MainFrame mainFrame, ImageExportPanel panel, boolean showPreview)
 	{
-		MainFrame.changePanel(panel);
+	//	MainFrame.changePanel(panel);
+		mainFrame.changePanel(panel, PanelName.IMAGE_EXPORT_PANEL);
 		if (showPreview)
 		{
 			FileOperation.exportImage(Methods.createImage((ImageExportPanel)MainFrame.jComponent));
 		}		
-		MainFrame.changePanel(MainFrame.lastComponent);
+//		MainFrame.changePanel(MainFrame.lastComponent);
+		mainFrame.changePanel(PanelName.GRAPH_PANEL);
 		try
 		{
 			if (MainFrame.jComponent instanceof GraphPanel)
@@ -806,4 +809,12 @@ public class Methods
 			((CardLayout)component.getLayout()).show(component, keyword);
 		}
 	}
+	
+    public static void printArray(Object arr[])
+    {
+        int n = arr.length;
+        for (int i=0; i<n; ++i)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
 }

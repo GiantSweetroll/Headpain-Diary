@@ -2,13 +2,14 @@ package diary.constants;
 
 public class PanelName 
 {
-	public static final String MAIN_MENU = "q",
-								SETTING_PANEL = "w",
-								MANAGE_PATIENTS_PANEL = "e",
-								GRAPH_FILTER_PANEL = "r",
-								GRAPH_PANEL = "t",
-								PAIN_TABLE = "y",
-								ENTRY_LOG = "u",
-								PATIENT_REGISTERATION_FORM = "o";
+	public static final String MAIN_MENU = "qw",
+								SETTING_PANEL = "we",
+								MANAGE_PATIENTS_PANEL = "er",
+								GRAPH_FILTER_PANEL = "rt",
+								GRAPH_PANEL = "ty",
+								PAIN_TABLE = "yu",
+								ENTRY_LOG = "ui",
+								PATIENT_REGISTERATION_FORM = "oo",
+								IMAGE_EXPORT_PANEL = "pp";
 	
 }

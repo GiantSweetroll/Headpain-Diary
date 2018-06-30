@@ -11,15 +11,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JPanel;
-
 import diary.constants.Constants;
-import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
+import diary.gui.MainFrame;
+import diary.gui.MainFramePanel;
 import diary.methods.Methods;
 import giantsweetroll.numbers.GNumbers;
 
-public abstract class Graph extends JPanel
+public abstract class Graph extends MainFramePanel
 {
 
 	/**
@@ -65,8 +64,9 @@ public abstract class Graph extends JPanel
 	protected final int X_AXIS_NAME_PADDING = 20;
 	protected final int Y_AXIS_NAME_PADDING = 20;
 	
-	public Graph(LinkedHashMap<String, Double> dataMap) 
+	public Graph(MainFrame frame, LinkedHashMap<String, Double> dataMap) 
 	{
+		super(frame);
 		this.dataMap = dataMap;
 		this.xAxisName = "";
 		this.yAxisName = "";
@@ -92,8 +92,9 @@ public abstract class Graph extends JPanel
 		
 		this.setOpaque(false);
 	}
-	public Graph(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	public Graph(MainFrame frame, LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
 	{
+		super(frame);
 		this.dataMap = dataMap;
 		this.xAxisName = xAxisName;
 		this.yAxisName = yAxisName;
@@ -421,11 +422,11 @@ public abstract class Graph extends JPanel
 	}
 	protected void drawRecentMedicationText(Graphics g, Color c)
 	{
-		if (Globals.GRAPH_FILTER_PANEL.isRecentMedicationSelected())
+		if (this.getMainFrameReference().GRAPH_FILTER_PANEL.isRecentMedicationSelected())
 		{
 			g.setColor(c);
 			
-			g.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL) + ": " + Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
+			g.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL) + ": " + this.getMainFrameReference().GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
 							this.axesOrigin.x, 
 							this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.maxXAxisMarkerLabelHeight + this.X_AXIS_NAME_PADDING);
 		}

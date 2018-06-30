@@ -27,8 +27,8 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 
 	private JButton button;
 	private JLabel label, labelDirection;
-	private String nextComponentName;
 	private EntryLog entryLog;
+	
 	private boolean buttonType;
 	
 	//Constants
@@ -38,12 +38,11 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 	public static final String LEFT_DIRECTION = "<--";
 	
 	//Constructor
-	public EntryLogButtonControl(MainFrame mainFrame, EntryLog entryLog, boolean next, String componentName, String text)
+	public EntryLogButtonControl(MainFrame mainFrame, EntryLog entryLog, boolean next, String text)
 	{
 		super(mainFrame);
 		//Initialization
 		this.entryLog = entryLog;
-		this.nextComponentName = componentName;
 		this.buttonType = next;
 		if (next)
 		{
@@ -59,6 +58,7 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
+		this.button.addActionListener(this);
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
 		
@@ -83,32 +83,45 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 			this.add(this.label, c);				//Text
 		}
 	}
-
+	
 	//Methods
-	public void setNextComponentName(String name)
+	public void changeEntryLogPanelState()
 	{
-		this.nextComponentName = name;
+		//Change entry log active center panel
+		if (this.buttonType == EntryLogButtonControl.BACK)
+		{	
+			if (this.entryLog.getPanelState() == EntryLog.FIRST_SECTION)
+			{
+				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+			}
+			else
+			{
+				byte state = this.entryLog.getPanelState();
+				state--;
+				this.entryLog.setPanelState(state);
+				((CardLayout)this.entryLog.getPanelCenter().getLayout()).previous(this.entryLog.getPanelCenter());
+			}
+		}
+		else
+		{
+			if (this.entryLog.getPanelState() == EntryLog.LAST_SECTION)
+			{
+				//TODO save entry log data operation
+			}
+			else
+			{
+				byte state = this.entryLog.getPanelState();
+				state++;
+				this.entryLog.setPanelState(state);
+				((CardLayout)this.entryLog.getPanelCenter().getLayout()).next(this.entryLog.getPanelCenter());
+			}
+		}		
 	}
 	
 	//Interface
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		//Change entry log active center panel
-		if (this.nextComponentName.equals(PanelName.MAIN_MENU) || this.nextComponentName.equals(""))
-		{
-			this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
-		}
-		else
-		{
-			if (this.buttonType == EntryLogButtonControl.BACK)
-			{
-				((CardLayout)this.entryLog.getLayout()).previous(this.entryLog.getPanelCenter());
-			}
-			else
-			{
-				((CardLayout)this.entryLog.getLayout()).next(this.entryLog.getPanelCenter());
-			}
-		}
+		this.changeEntryLogPanelState();
 	}
 }

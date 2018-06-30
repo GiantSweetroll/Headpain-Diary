@@ -43,6 +43,11 @@ public class RecentMedication extends FormElement
 	{
 		this.medicineComplaint.setActiveItem(item);
 	}
+	public void setData(String recentMeds, String medComplaint)
+	{
+		this.setRecentMedication(recentMeds);
+		this.setMedicineComplaint(medComplaint);
+	}
 	
 	//Overridden Methods
 	@Override

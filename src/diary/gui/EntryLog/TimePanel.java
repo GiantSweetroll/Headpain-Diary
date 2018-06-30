@@ -74,6 +74,7 @@ public class TimePanel extends JPanel implements ActionListener
 		this.butReset.addActionListener(this);
 		this.butReset.setActionCommand(this.RESET);
 		this.butReset.setToolTipText(Methods.getLanguageText(XMLIdentifier.TIME_RESET_BUTTON_TOOLTIP_TEXT));
+		this.setAsDefaultTimeThis();
 		
 		//Add to panel
 		Gbm.goToOrigin(c);

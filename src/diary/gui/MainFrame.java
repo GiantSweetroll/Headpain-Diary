@@ -40,24 +40,22 @@ public class MainFrame
 	
 	/** The frame. */
 	private JFrame frame;
-	public static Settings setting;
+//	public static Settings setting;
 	public static JComponent lastComponent;
 	
 	public static JComponent jComponent;
-	
-	public static int GENERAL_FONT_SIZE = 15;
 	
 	public static boolean isFullScreen;
 	
 	private JPanel panel;
 	
 	//Panels
-	public final MainMenu MAIN_MENU = new MainMenu();
-	public final SettingsPanel SETTINGS_PANEL = new SettingsPanel();
-	public final PatientDataManagePanel MANAGE_PATIENTS_PANEL = new PatientDataManagePanel();
+	public final MainMenu MAIN_MENU = new MainMenu(this);
+	public final SettingsPanel SETTINGS_PANEL = new SettingsPanel(this);
+	public final PatientDataManagePanel MANAGE_PATIENTS_PANEL = new PatientDataManagePanel(this);
 	public final GraphFilterPanel GRAPH_FILTER_PANEL = new GraphFilterPanel();
-	public final GraphPanel GRAPH_PANEL = new GraphPanel();
-	public final TableScreen PAIN_TABLE = new TableScreen();
+	public final GraphPanel GRAPH_PANEL = new GraphPanel(this);
+	public final TableScreen PAIN_TABLE = new TableScreen(this);
 	public final EntryLog ENTRY_LOG = new EntryLog(this);
 	
 	/**
@@ -151,13 +149,21 @@ public class MainFrame
 	{
 		try
 		{
+			/*
 			if (key.equals(PanelName.MAIN_MENU))
 			{
 				this.checkUsers();
 			}
+			*/
+			
 			Methods.changePanel(this.panel, key);
 		}
 		catch(NullPointerException ex) {ex.printStackTrace();}
+	}
+	public void changePanel(JPanel panel, String key)
+	{
+		this.panel.add(panel, key);
+		this.changePanel(key);
 	}
 	
 	
@@ -170,9 +176,9 @@ public class MainFrame
 	{
 		try 
 		{
-			MainFrame.setting = new Settings(FileOperation.loadSettingsDocument());
+			Globals.setting = new Settings(FileOperation.loadSettingsDocument());
 			//Select window mode
-			if(MainFrame.setting.getDataMap().get(Settings.WINDOW_MODE).equals(Settings.WINDOWED))
+			if(Globals.setting.getDataMap().get(Settings.WINDOW_MODE).equals(Settings.WINDOWED))
 			{
 				Methods.makeWindowed(frame);
 			}
@@ -182,16 +188,16 @@ public class MainFrame
 			}
 			
 			//Selected Language
-			Constants.LANGUAGE.setLanguage(MainFrame.setting.getDataMap().get(Settings.LANGUAGE));
+			Constants.LANGUAGE.setLanguage(Globals.setting.getDataMap().get(Settings.LANGUAGE));
 			
 			//Database path
-			File file = new File(setting.getDataMap().get(Settings.DATABASE_PATH));
+			File file = new File(Globals.setting.getDataMap().get(Settings.DATABASE_PATH));
 			if(!file.exists())
 			{
 				file.mkdirs();
 			}
 			//User Database path
-			file = new File(setting.getDataMap().get(Settings.DATABASE_USERS_PATH));
+			file = new File(Globals.setting.getDataMap().get(Settings.DATABASE_USERS_PATH));
 			if (!file.exists())
 			{
 				file.mkdirs();
@@ -225,8 +231,7 @@ public class MainFrame
 					MainFrame.lastComponent = Globals.MAIN_MENU;
 					MainFrame.changePanel(new PatientDataRegisterationForm());
 					*/
-					this.panel.add(new PatientDataRegisterationForm(), PanelName.PATIENT_REGISTERATION_FORM);
-					this.changePanel(PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(new PatientDataRegisterationForm(this), PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex)
 				{
@@ -251,8 +256,7 @@ public class MainFrame
 		//			jComponent = Globals.MAIN_MENU;
 		//			MainFrame.lastComponent = Globals.MAIN_MENU;
 		//			MainFrame.changePanel(new PatientDataRegisterationForm());
-					this.panel.add(new PatientDataRegisterationForm(), PanelName.PATIENT_REGISTERATION_FORM);
-					this.changePanel(PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(new PatientDataRegisterationForm(this), PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex1)
 				{
@@ -282,7 +286,7 @@ public class MainFrame
 						try
 						{
 				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, MainFrame.GENERAL_FONT_SIZE));
+							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, Constants.FONT_GENERAL_SIZE));
 							UIManager.put("OptionPane.background", Color.WHITE);
 							UIManager.put("Panel.background", Color.white);
 							

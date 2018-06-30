@@ -33,16 +33,17 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
-import diary.constants.Globals;
+import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.Settings;
 import diary.gui.MainFrame;
+import diary.gui.MainFramePanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class SettingsPanel extends JPanel implements ActionListener
+public class SettingsPanel extends MainFramePanel implements ActionListener
 {
 
 	/**
@@ -60,8 +61,9 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private final String SAVE = "save";
 	
 	//Constructors
-	public SettingsPanel()
+	public SettingsPanel(MainFrame mainFrame)
 	{
+		super(mainFrame);
 		//Initialization
 		this.gatherData();
 		this.initPanelBelow();
@@ -345,7 +347,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				comboLanguages.setModel(new DefaultComboBoxModel(Methods.getLanguages()));
+				comboLanguages.setModel(new DefaultComboBoxModel<String>(Methods.getLanguages()));
 				comboLanguages.setSelectedItem(selectedLanguage);
 			}
 		});
@@ -408,13 +410,16 @@ public class SettingsPanel extends JPanel implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case CANCEL:
-				MainFrame.changePanel(Globals.MAIN_MENU);
+		//		MainFrame.changePanel(Globals.MAIN_MENU);
+				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 				break;
 				
 			case SAVE:
 				FileOperation.saveSettings(new Settings(this.dataMap));
-				MainFrame.changePanel(Globals.MAIN_MENU);
-				MainFrame.refreshSettings();
+		//		MainFrame.changePanel(Globals.MAIN_MENU);
+		//		MainFrame.refreshSettings();
+				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+				this.getMainFrameReference().refreshSettings();
 				break;
 		}
 	}

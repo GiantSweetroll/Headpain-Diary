@@ -34,7 +34,7 @@ import diary.patientdata.PatientDataForm;
 import diary.patientdata.PatientDataRenderer;
 import diary.patientdata.PatientDataTextPanel;
 
-public class ActivePatientPanel extends JPanel implements ItemListener, ActionListener
+public class ActivePatientPanel extends MainFramePanel implements ItemListener, ActionListener
 {
 
 	/**
@@ -52,12 +52,14 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 	private JButton buttonFilter;
 	
 	//Constructors
-	public ActivePatientPanel()
+	public ActivePatientPanel(MainFrame frame)
 	{
+		super(frame);
 		this.init();
 	}
-	public ActivePatientPanel(PatientData patient)
+	public ActivePatientPanel(MainFrame frame, PatientData patient)
 	{
+		super(frame);
 		this.init();
 		this.setSelectedPatient(patient);
 	}
@@ -100,11 +102,11 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 						Methods.refresHistories(getSelectedPatientData());
 						if (MainFrame.jComponent instanceof EntryLog)
 						{
-							Globals.ENTRY_LOG.refreshHistories();
+							getMainFrameReference().ENTRY_LOG.refreshHistories();
 						}
 						else if (MainFrame.jComponent instanceof GraphPanel)
 						{
-							Globals.GRAPH_FILTER_PANEL.refresh(getSelectedPatientData());
+							getMainFrameReference().GRAPH_FILTER_PANEL.refresh(getSelectedPatientData());
 						}
 					}
 					
@@ -186,7 +188,7 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 //				System.out.println();
 			}
 			
-			Globals.ENTRY_LOG.refreshHistories();
+			getMainFrameReference().ENTRY_LOG.refreshHistories();
 		}
 		catch(Exception ex)
 		{
@@ -286,7 +288,7 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 		this.displayPatientDetails();
 		Globals.HISTORY_RECENT_MEDICATION.refresh(this.getSelectedPatientData());
 		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(this.getSelectedPatientData());
-		Globals.ENTRY_LOG.refreshHistories();
+		getMainFrameReference().ENTRY_LOG.refreshHistories();
 		this.revalidate();
 		this.repaint();
 	}

@@ -14,13 +14,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
+import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
 import diary.gui.MainFrame;
+import diary.gui.MainFramePanel;
 import diary.methods.FileOperation;
 import giantsweetroll.message.MessageManager;
 
-public class PatientDataRegisterationForm extends JPanel implements ActionListener
+public class PatientDataRegisterationForm extends MainFramePanel implements ActionListener
 {
 
 	/**
@@ -43,14 +45,16 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 	private final String NEW_USER = "new user";
 	private final String EDIT_USER = "edit user";
 	
-	public PatientDataRegisterationForm()
+	public PatientDataRegisterationForm(MainFrame frame)
 	{
+		super(frame);
 		this.createAndShowGUI();
 		this.situation = this.NEW_USER;
 	}
 	
-	public PatientDataRegisterationForm(PatientData patientData)
+	public PatientDataRegisterationForm(MainFrame frame, PatientData patientData)
 	{
+		super(frame);
 		this.createAndShowGUI();
 		this.situation = this.EDIT_USER;
 		this.lastMedID = patientData.getDataMap().get(PatientData.MEDICAL_RECORD_ID);
@@ -160,7 +164,8 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 			case CANCEL:
 				try
 				{
-					MainFrame.changePanel(MainFrame.lastComponent);
+	//				MainFrame.changePanel(MainFrame.lastComponent);
+					this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex) {}
 				break;
@@ -202,13 +207,15 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 							if (response == JOptionPane.YES_OPTION)
 							{
 								FileOperation.savePatientData(patientData);
-								MainFrame.changePanel(MainFrame.lastComponent);
+			//					MainFrame.changePanel(MainFrame.lastComponent);
+								this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
 							}
 						}
 						else
 						{
 							FileOperation.savePatientData(patientData);
-							MainFrame.changePanel(MainFrame.lastComponent);
+			//				MainFrame.changePanel(MainFrame.lastComponent);
+							this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
 						}
 					}
 					else if (this.situation.equals(this.EDIT_USER))
@@ -219,7 +226,8 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 						{
 							FileOperation.deletePatientData(this.lastMedID);
 						}
-						MainFrame.changePanel(MainFrame.lastComponent);
+		//				MainFrame.changePanel(MainFrame.lastComponent);
+						this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
 					}
 				}
 				break;

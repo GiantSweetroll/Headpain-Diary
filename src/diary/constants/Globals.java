@@ -1,15 +1,11 @@
 package diary.constants;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import diary.data.Settings;
-import diary.gui.MainMenu;
-import diary.gui.EntryLog.EntryLog;
-import diary.gui.graphs.GraphFilterPanel;
-import diary.gui.graphs.GraphPanel;
-import diary.gui.settings.SettingsPanel;
-import diary.gui.table.TableScreen;
 import diary.history.History;
 import diary.patientdata.PatientData;
-import diary.patientdata.PatientDataManagePanel;
 
 public class Globals 
 {	
@@ -19,6 +15,9 @@ public class Globals
 	
 	//Settings
 	public static Settings setting = new Settings();
+	
+	//Global Variables
+	public static Set<Character> keysPressed = new HashSet<Character>();
 	
 	//Panels
 	/*

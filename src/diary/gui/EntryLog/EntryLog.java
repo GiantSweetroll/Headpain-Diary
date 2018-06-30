@@ -8,9 +8,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
+import diary.constants.Constants;
+import diary.constants.PainDataIdentifier;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
+import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.MainFrame;
 import diary.gui.MainFramePanel;
@@ -18,13 +22,14 @@ import diary.gui.EntryLog.forms.ActiveUser;
 import diary.gui.EntryLog.forms.Comments;
 import diary.gui.EntryLog.forms.DateTimeSelect;
 import diary.gui.EntryLog.forms.Duration;
-import diary.gui.EntryLog.forms.FormElement;
 import diary.gui.EntryLog.forms.Intensity;
 import diary.gui.EntryLog.forms.PainKind;
 import diary.gui.EntryLog.forms.PainLocation;
 import diary.gui.EntryLog.forms.RecentMedication;
+import diary.gui.EntryLog.forms.Trigger;
 import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
+import diary.patientdata.PatientData;
 
 public class EntryLog extends MainFramePanel implements GUIFunction, ActionListener
 {
@@ -38,11 +43,25 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	private JLabel labTitle;
 	private JButton butCancel;
 	private EntryLogButtonControl butBack, butNext;
-	private FormElement activeUser, comments, dateTime, duration, intensity, painKind, painLoc, recentMeds, trigger;
-
+	private ActiveUser activeUser;
+	private Comments comments;
+	private DateTimeSelect dateTime;
+	private Duration duration;
+	private Intensity intensity;
+	private PainKind painKind;
+	private PainLocation painLoc;
+	private RecentMedication recentMeds;
+	private Trigger trigger;
+	private PainEntryData oldEntry;
+	private PatientData oldPatient;
+	
+	private boolean isNewEntry;
+	private byte panelState;
+	
 	//Constants
-	private final String ACTIVE_PATIENT = "q", COMMENTS="w", DATE_TIME="e", DURATION="r", INTENSITY="t",
-							PAIN_KIND="y", PAIN_LOCATION="u", RECENT_MEDICATION="i", TRIGGER="o";
+	protected final String ACTIVE_PATIENT = "activepatiente", COMMENTS="commente", DATE_TIME="datetimee", DURATION="duratione", INTENSITY="intensitye",
+							PAIN_KIND="poaindkine", PAIN_LOCATION="painloce", RECENT_MEDICATION="recentmede", TRIGGER="triggere";
+	protected static final byte FIRST_SECTION = 0, LAST_SECTION = 8;	//To be used with EntryLogButtonControl
 	
 	//Constructor
 	public EntryLog(MainFrame mainFrame)
@@ -72,7 +91,7 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	{
 		//Initialization
 		this.panelCenter = new JPanel();
-		this.activeUser = new ActiveUser();
+		this.activeUser = new ActiveUser(new ActivePatientPanel(this.getMainFrameReference()));
 		this.comments = new Comments();
 		this.dateTime= new DateTimeSelect();
 		this.duration = new Duration();
@@ -80,11 +99,20 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.painKind = new PainKind();
 		this.painLoc = new PainLocation();
 		this.recentMeds = new RecentMedication();
-		this.trigger= new ActiveUser();
+		this.trigger = new Trigger();
 		
 		//Properties
 		this.panelCenter.setLayout(new CardLayout());
 		this.panelCenter.setOpaque(false);
+		this.activeUser.setName(this.ACTIVE_PATIENT);
+		this.comments.setName(this.COMMENTS);
+		this.dateTime.setName(this.DATE_TIME);
+		this.duration.setName(this.DURATION);
+		this.intensity.setName(this.INTENSITY);
+		this.painKind.setName(this.PAIN_KIND);
+		this.painLoc.setName(this.PAIN_LOCATION);
+		this.recentMeds.setName(this.RECENT_MEDICATION);
+		this.trigger.setName(this.TRIGGER);
 		
 		//Add to panel
 		this.panelCenter.add(this.activeUser, this.ACTIVE_PATIENT);
@@ -101,13 +129,14 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	{
 		//Initialization
 		this.panelTop = new JPanel();
-		this.labTitle = new JLabel(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_TITLE));
+		this.labTitle = new JLabel(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_TITLE), SwingConstants.CENTER);
 		this.butCancel = new JButton(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
 		
 		//Properties
 		this.panelTop.setLayout(new BorderLayout());
 		this.panelTop.setOpaque(false);
 		this.butCancel.addActionListener(this);
+		this.labTitle.setFont(Constants.FONT_SUB_TITLE);
 		
 		//Add to panel
 		this.panelTop.add(this.labTitle, BorderLayout.CENTER);
@@ -117,8 +146,9 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	{
 		//Initialization
 		this.panelBelow = new JPanel();
-		this.butBack = new EntryLogButtonControl(this, EntryLogButtonControl.BACK, PanelName.MAIN_MENU, "");
-		this.butNext = new EntryLogButtonControl(this, EntryLogButtonControl.NEXT, this.ACTIVE_PATIENT, "");
+		this.panelState = EntryLog.FIRST_SECTION;
+		this.butBack = new EntryLogButtonControl(this.getMainFrameReference(), this, EntryLogButtonControl.BACK, "");
+		this.butNext = new EntryLogButtonControl(this.getMainFrameReference(), this, EntryLogButtonControl.NEXT, "");
 		
 		//Properties
 		this.panelBelow.setLayout(new BorderLayout());
@@ -126,6 +156,7 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		
 		//Add to panel
 		this.panelBelow.add(this.butBack, BorderLayout.WEST);
+		this.panelBelow.add(this.butNext, BorderLayout.EAST);
 	}
 	//Methods
 	public void changeActiveSection(String section)
@@ -152,11 +183,44 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	{
 		((RecentMedication)this.recentMeds).refresh();
 	}
+	
+	public void loadData(PatientData patient, PainEntryData entry)
+	{
+		this.resetDefaults();
+		this.oldEntry = entry;
+		this.oldPatient = patient;
+		this.fillData(patient, entry);
+		this.revalidate();
+		this.repaint();
+		this.isNewEntry = false;
+	}
+	private void fillData(PatientData patient, PainEntryData entry)
+	{
+		this.activeUser.setData(patient);
+		this.comments.setData(entry.getDataMap().get(PainDataIdentifier.COMMENTS));
+		this.dateTime.setData(entry);
+		this.duration.setData(entry.getDataMap().get(PainDataIdentifier.DURATION));
+		this.intensity.setData(entry.getDataMap().get(PainDataIdentifier.INTENSITY));
+		this.painKind.setData(entry.getDataMap().get(PainDataIdentifier.PAIN_KIND));
+		this.painLoc.setData(entry);
+		this.recentMeds.setData(entry.getDataMap().get(PainDataIdentifier.RECENT_MEDICATION).toString(), entry.getDataMap().get(PainDataIdentifier.MEDICINE_COMPLAINT).toString());
+		this.trigger.setData(entry);
+	}
 
+	public byte getPanelState()
+	{
+		return this.panelState;
+	}
+	public void setPanelState(byte state)
+	{
+		this.panelState = state;
+	}
+	
 	//Interfaces
 	@Override
 	public void resetDefaults() 
 	{
+		this.panelState = EntryLog.FIRST_SECTION;
 		this.activeUser.resetDefaults();
 		this.comments.resetDefaults();
 		this.dateTime.resetDefaults();
@@ -166,7 +230,7 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.painLoc.resetDefaults();
 		this.recentMeds.resetDefaults();
 		this.trigger.resetDefaults();
-		
+		this.changeActiveSection(this.ACTIVE_PATIENT);
 	}
 	@Override
 	public void refresh() 

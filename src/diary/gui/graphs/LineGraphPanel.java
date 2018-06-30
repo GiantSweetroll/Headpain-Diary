@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedHashMap;
 
+import diary.gui.MainFrame;
+
 public class LineGraphPanel extends Graph
 {
 
@@ -12,13 +14,13 @@ public class LineGraphPanel extends Graph
 	 */
 	private static final long serialVersionUID = -224326087999891758L;
 	
-	public LineGraphPanel(LinkedHashMap<String, Double> dataMap)
+	public LineGraphPanel(MainFrame frame, LinkedHashMap<String, Double> dataMap)
 	{
-		super(dataMap);
+		super(frame, dataMap);
 	}
-	public LineGraphPanel(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	public LineGraphPanel(MainFrame frame, LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
 	{
-		super(dataMap, xAxisName, yAxisName);
+		super(frame, dataMap, xAxisName, yAxisName);
 	}
 	
 	

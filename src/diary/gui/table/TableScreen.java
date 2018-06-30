@@ -28,19 +28,20 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import diary.constants.Constants;
-import diary.constants.Globals;
+import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
+import diary.gui.MainFramePanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class TableScreen extends JPanel implements ActionListener
+public class TableScreen extends MainFramePanel implements ActionListener
 {
 
 	/**
@@ -68,8 +69,9 @@ public class TableScreen extends JPanel implements ActionListener
 	private final String SAVE = "save image";
 	private final String REFRESH = "refresh";
 	
-	public TableScreen()
+	public TableScreen(MainFrame frame)
 	{
+		super(frame);
 		this.init();
 	}
 	
@@ -212,7 +214,7 @@ public class TableScreen extends JPanel implements ActionListener
 	{
 		//Initialization
 		this.panelTopRight = new JPanel();
-		this.activePatientPanel = new ActivePatientPanel();
+		this.activePatientPanel = new ActivePatientPanel(this.getMainFrameReference());
 		this.panelDateRange = new DateRangePanel();
 		
 		//Properties
@@ -435,13 +437,15 @@ public class TableScreen extends JPanel implements ActionListener
 				break;
 				
 			case SELECT:
-				Globals.ENTRY_LOG.loadData(this.activePatientPanel.getSelectedPatientData(), this.activeEntry);
-				Globals.ENTRY_LOG.getActivePatientPanel().setSelectedPatient(this.activePatientPanel.getSelectedPatientData());
-				MainFrame.changePanel(Globals.ENTRY_LOG);
+				this.getMainFrameReference().ENTRY_LOG.loadData(this.activePatientPanel.getSelectedPatientData(), this.activeEntry);
+				this.getMainFrameReference().ENTRY_LOG.getActivePatientPanel().setSelectedPatient(this.activePatientPanel.getSelectedPatientData());
+	//			MainFrame.changePanel(Globals.ENTRY_LOG);
+				this.getMainFrameReference().changePanel(PanelName.ENTRY_LOG);
 				break;
 				
 			case BACK:
-				MainFrame.changePanel(Globals.MAIN_MENU);
+	//			MainFrame.changePanel(Globals.MAIN_MENU);
+				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 				break;
 		}
 	}

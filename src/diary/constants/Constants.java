@@ -12,7 +12,6 @@ import java.util.LinkedHashMap;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import diary.gui.MainFrame;
 import diary.language.Language;
 import diary.methods.Methods;
 import giantsweetroll.GMisc;
@@ -61,12 +60,14 @@ public final class Constants
 	
 	//Fonts
 	public static final String FONT_TYPE_GENERAL = "century gothic";
-	public static final Font FONT_GENERAL = new Font(FONT_TYPE_GENERAL, Font.PLAIN, MainFrame.GENERAL_FONT_SIZE);
-	public static final Font FONT_GENERAL_BOLD = new Font(FONT_TYPE_GENERAL, Font.BOLD, MainFrame.GENERAL_FONT_SIZE);
-	public static final Font FONT_GENERAL_A_BIT_BIGGER = new Font(FONT_TYPE_GENERAL, Font.BOLD, MainFrame.GENERAL_FONT_SIZE+3);
-	public static final Font FONT_SUB_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, MainFrame.GENERAL_FONT_SIZE*2);
-	public static final Font FONT_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, (int)GNumbers.round((float)MainFrame.GENERAL_FONT_SIZE*2.5f, 0));
-	public static final Font FONT_SMALL_NOTE = new Font(FONT_TYPE_GENERAL, Font.ITALIC, (int)GNumbers.round(((float)MainFrame.GENERAL_FONT_SIZE/15f)*8f, 0));
+	public static final int FONT_GENERAL_SIZE = 15;
+	public static final Font FONT_GENERAL = new Font(FONT_TYPE_GENERAL, Font.PLAIN, FONT_GENERAL_SIZE);
+	public static final Font FONT_GENERAL_BOLD = new Font(FONT_TYPE_GENERAL, Font.BOLD, FONT_GENERAL_SIZE);
+	public static final Font FONT_GENERAL_A_BIT_BIGGER = new Font(FONT_TYPE_GENERAL, Font.BOLD, FONT_GENERAL_SIZE+3);
+	public static final Font FONT_SUB_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, FONT_GENERAL_SIZE*2);
+	public static final Font FONT_TITLE = new Font(FONT_TYPE_GENERAL, Font.BOLD, (int)GNumbers.round((float)FONT_GENERAL_SIZE*2.5f, 0));
+	public static final Font FONT_SMALL_NOTE = new Font(FONT_TYPE_GENERAL, Font.ITALIC, (int)GNumbers.round(((float)FONT_GENERAL_SIZE/15f)*8f, 0));
+	public static final Font FONT_HEADER = new Font(FONT_TYPE_GENERAL, Font.BOLD, FONT_GENERAL_SIZE+10);
 	
 	//File Filter for JFileChooser
 	public static final FileNameExtensionFilter FILTER_IMAGE_FILES = new FileNameExtensionFilter(Methods.getLanguageText(XMLIdentifier.IMAGE_FILES_TEXT), 

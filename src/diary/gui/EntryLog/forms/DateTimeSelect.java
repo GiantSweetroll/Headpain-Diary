@@ -29,6 +29,9 @@ public class DateTimeSelect extends FormElement
 		this.date = new DatePanel(true);
 		this.time = new TimePanel(true);
 		
+		this.time.setToCurrentTime();
+		this.time.setAsDefaultTimeThis();
+		
 		this.addComponent(this.date);
 		this.addComponent(this.time);
 	}
@@ -68,17 +71,12 @@ public class DateTimeSelect extends FormElement
 	public void refresh() {};
 
 	@Deprecated
-	@Override
 	public Object getData()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Deprecated
-	@Override
-	public void setData(Object obj) 
-	{
-	}
+	public void setData(Object obj) {}
 
 }

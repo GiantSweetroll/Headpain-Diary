@@ -22,11 +22,11 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.Settings;
 import diary.fileFilters.FileTypeFilter;
-import diary.gui.MainFrame;
 import diary.gui.table.Table;
 import diary.history.History;
 import diary.patientdata.PatientData;
@@ -120,7 +120,7 @@ public class FileOperation
 		try
 		{
 			//Filtering Start
-			String userDatabasePath = MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + patient.getID() + File.separator;
+			String userDatabasePath = Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + patient.getID() + File.separator;
 			//Get year range
 			List<String> legibleYears = new ArrayList<String>();
 			FileManager.getListOfFiles(legibleYears, 
@@ -337,8 +337,8 @@ public class FileOperation
 				for (int b=0; b<entry.getValue().size(); b++)
 				{
 					List<String> legibleDays = new ArrayList<String>();
-					MessageManager.printLine(MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b));
-					FileManager.getListOfFiles(legibleDays, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+					MessageManager.printLine(Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b));
+					FileManager.getListOfFiles(legibleDays, Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 					MessageManager.printLine("Number of days before filter: " + legibleDays.size());
 							
 					if (iteration==0)
@@ -418,7 +418,7 @@ public class FileOperation
 					for (int i=0; i<entry.getValue().size(); i++)
 					{
 						List<String> fileList = new ArrayList<String>();
-						FileManager.getListOfFiles(fileList, MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry2.getKey() + File.separator + entry2.getValue() + File.separator + entry.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+						FileManager.getListOfFiles(fileList, Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry2.getKey() + File.separator + entry2.getValue() + File.separator + entry.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
 						for (int a=0; a<fileList.size(); a++)
 						{
 							filePaths.add(fileList.get(a));
@@ -470,7 +470,7 @@ public class FileOperation
 		List<PatientData> list = new ArrayList<PatientData>();
 		List<String> files = new ArrayList<String>();
 		
-		FileManager.getListOfFiles(files, MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+		FileManager.getListOfFiles(files, Globals.setting.getDataMap().get(Settings.DATABASE_USERS_PATH), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
 		
 		for (int i=0; i<files.size(); i++)
 		{
@@ -491,7 +491,7 @@ public class FileOperation
 	{
 		try
 		{
-			XMLManager.exportXML(patientData.getXMLDocument(), new File(MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + patientData.getDataMap().get(PatientData.MEDICAL_RECORD_ID) + ".xml"), 5);
+			XMLManager.exportXML(patientData.getXMLDocument(), new File(Globals.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + patientData.getDataMap().get(PatientData.MEDICAL_RECORD_ID) + ".xml"), 5);
 		} 
 		catch (TransformerException e) 
 		{
@@ -503,7 +503,7 @@ public class FileOperation
 		List<PatientData> list = new ArrayList<PatientData>();
 		List<String> files = new ArrayList<String>();
 		
-		FileManager.getListOfFiles(files, MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator, false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+		FileManager.getListOfFiles(files, Globals.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator, false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
 		
 		for (int i=0; i<files.size(); i++)
 		{
@@ -520,7 +520,7 @@ public class FileOperation
 	}
 	public static void deletePatientData(String medID)
 	{
-		File file = new File (MainFrame.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + medID + ".xml");
+		File file = new File (Globals.setting.getDataMap().get(Settings.DATABASE_USERS_PATH) + File.separator + medID + ".xml");
 		file.delete();
 	}
 	
