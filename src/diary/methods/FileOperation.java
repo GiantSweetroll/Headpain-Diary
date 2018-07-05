@@ -91,7 +91,7 @@ public class FileOperation
 		file = new File(Methods.generatePainDataFilePathName(patient, entry));
 		try 
 		{
-			XMLManager.exportXML(entry.getDocumentForm(), file, 5);
+			XMLManager.exportXML(entry.getXMLDocument(), file, 5);
 		} 
 		catch (TransformerException e) 
 		{

@@ -39,7 +39,7 @@ public class HistoryPanel extends JPanel implements ItemListener
 	{
 		this.history = history;
 		this.init();
-		this.comboHistory.setModel(new DefaultComboBoxModel(history.getHistory().toArray(new String[history.getHistory().size()])));
+		this.comboHistory.setModel(new DefaultComboBoxModel<String>(history.getHistory().toArray(new String[history.getHistory().size()])));
 		
 		if (history.getHistory().size() > 0)
 		{
@@ -211,7 +211,7 @@ public class HistoryPanel extends JPanel implements ItemListener
 	@Deprecated
 	public void refresh(History history)
 	{
-		this.comboHistory.setModel(new DefaultComboBoxModel(history.getHistory().toArray(new String[history.getHistory().size()])));
+		this.comboHistory.setModel(new DefaultComboBoxModel<String>(history.getHistory().toArray(new String[history.getHistory().size()])));
 		this.radHistory.setEnabled(this.hasHistory());
 		this.revalidate();
 		this.repaint();
@@ -219,7 +219,7 @@ public class HistoryPanel extends JPanel implements ItemListener
 	public void refresh(History history, PatientData patient)
 	{
 		history.refresh(patient);
-		this.comboHistory.setModel(new DefaultComboBoxModel(history.getHistory().toArray(new String[history.getHistory().size()])));
+		this.comboHistory.setModel(new DefaultComboBoxModel<String>(history.getHistory().toArray(new String[history.getHistory().size()])));
 		this.radHistory.setEnabled(this.hasHistory());
 		if (!this.radHistory.isEnabled())
 		{

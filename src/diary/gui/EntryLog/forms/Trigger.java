@@ -1,6 +1,8 @@
 package diary.gui.EntryLog.forms;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -10,11 +12,11 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import diary.constants.Constants;
-import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.methods.Methods;
 import giantsweetroll.GMisc;
+import giantsweetroll.gui.swing.Gbm;
 
 public class Trigger extends FormElement implements ActionListener, MouseListener
 {
@@ -30,20 +32,29 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	//Constructor
 	public Trigger()
 	{
-		super(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT));
+		super(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT), true);
 
 		//Initialization
 		this.combo = new JComboBox<String>(Constants.DEFAULT_ACTIVITIES);
 		this.tf = new JTextField(10);
+		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
+		this.getPanel().setLayout(new GridBagLayout());
 		this.combo.addActionListener(this);
 		this.combo.setBackground(Color.WHITE);
 		this.tf.addMouseListener(this);
 		
 		//Add to panel
-		this.addComponent(this.combo);
-		this.addComponent(this.tf);
+		Gbm.goToOrigin(c);
+		c.gridwidth = 2;
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		this.getPanel().add(this.getFormTitleLabel(), c);
+		c.gridwidth = 1;
+		Gbm.newGridLine(c);
+		this.getPanel().add(this.combo, c);
+		Gbm.nextGridColumn(c);
+		this.getPanel().add(this.tf, c);
 	}
 	
 	//Overriden Methods
@@ -60,11 +71,11 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	public String getData() {
 		if (this.combo.getSelectedIndex() == Constants.DEFAULT_ACTIVITIES.length-1)		//If last index = Other
 		{
-			return GMisc.getItem(this.combo).toString();
+			return this.tf.getText().trim();
 		}
 		else
 		{
-			return this.tf.getText().trim();
+			return GMisc.getItem(this.combo).toString();
 		}
 	}
 
@@ -73,7 +84,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	{
 		if (entry instanceof PainEntryData)
 		{
-			String trigger = Methods.convertPainKindIDToLanguage(((PainEntryData)entry).getDataMap().get(PainDataIdentifier.ACTIVITY).toString());
+			String trigger = Methods.convertPainKindIDToLanguage(((PainEntryData)entry).getTrigger());
 			if (Methods.isPartOfDefaultActivity(trigger))
 			{
 				this.combo.setSelectedItem(trigger);
@@ -126,5 +137,18 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {}
+
+	@Override
+	public boolean allFilled()
+	{
+		if (this.combo.getSelectedIndex() == Constants.DEFAULT_ACTIVITIES.length-1)		//If last index = Other
+		{
+			return !Methods.getTextData(this.tf).equals("");
+		}
+		else
+		{
+			return true;
+		}
+	}
 
 }

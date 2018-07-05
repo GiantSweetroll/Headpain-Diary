@@ -367,7 +367,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		}
 		if (this.checkDOB.isSelected())
 		{
-			this.patients = PatientDataOperation.getFilteredData(this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO), this.patients);
+			this.patients = PatientDataOperation.getFilteredData(this.panelDateRange.getFromDate(), this.panelDateRange.getToDate(), this.patients);
 		}
 //		System.out.println("Size of list after filter: " + this.patients.size());
 	}

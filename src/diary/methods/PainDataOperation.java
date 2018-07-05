@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import diary.constants.DateConstants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
@@ -96,7 +95,7 @@ public class PainDataOperation
 		
 		for (PainEntryData entry : list)
 		{
-			map.put(entry.getFullTimeAndDate(), Double.parseDouble(entry.getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+			map.put(entry.getFullTimeAndDate(), Double.parseDouble(entry.getIntensity()));
 		}
 		
 		return map;
@@ -110,11 +109,11 @@ public class PainDataOperation
 		{	
 			try
 			{
-				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + Double.parseDouble(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + Double.parseDouble(list.get(i).getIntensity()));
 			}
 			catch(NullPointerException ex)
 			{
-				map.put(list.get(i).getFullDate(), Double.parseDouble(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+				map.put(list.get(i).getFullDate(), Double.parseDouble(list.get(i).getIntensity()));
 			}
 			
 			try
@@ -141,7 +140,7 @@ public class PainDataOperation
 		
 		for (PainEntryData entry : list)
 		{
-			map.put(entry.getFullTimeAndDate(), Double.parseDouble(entry.getDataMap().get(PainDataIdentifier.DURATION).toString()));
+			map.put(entry.getFullTimeAndDate(), Double.parseDouble(entry.getDuration()));
 		}
 		
 		return map;
@@ -155,11 +154,11 @@ public class PainDataOperation
 		{
 			try
 			{
-				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + Double.parseDouble(list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+				map.put(list.get(i).getFullDate(), map.get(list.get(i).getFullDate()) + Double.parseDouble(list.get(i).getIntensity()));
 			}
 			catch(NullPointerException ex)
 			{
-				map.put(list.get(i).getFullDate(), Double.parseDouble(list.get(i).getDataMap().get(PainDataIdentifier.DURATION).toString()));
+				map.put(list.get(i).getFullDate(), Double.parseDouble(list.get(i).getDuration()));
 			}
 			
 			try
@@ -223,7 +222,7 @@ public class PainDataOperation
 				continue;
 			}
 			
-			String painKind = entry.getDataMap().get(PainDataIdentifier.PAIN_KIND).toString();
+			String painKind = entry.getPainKind();
 			painKind = Methods.convertPainKindIDToLanguage(painKind);
 			try
 			{
@@ -282,7 +281,7 @@ public class PainDataOperation
 				continue;
 			}
 			
-			String activity = list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
+			String activity = list.get(i).getTrigger();
 			activity = Methods.convertActivityIDToLanguage(activity);
 			
 			try
@@ -307,11 +306,11 @@ public class PainDataOperation
 		{
 			try
 			{
-				map.put(entry.getMonthAndYear(), map.get(entry.getMonthAndYear()) + Double.parseDouble(entry.getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+				map.put(entry.getMonthAndYear(), map.get(entry.getMonthAndYear()) + Double.parseDouble(entry.getIntensity()));
 			}
 			catch(NullPointerException ex)
 			{
-				map.put(entry.getMonthAndYear(), Double.parseDouble(entry.getDataMap().get(PainDataIdentifier.INTENSITY).toString()));
+				map.put(entry.getMonthAndYear(), Double.parseDouble(entry.getIntensity()));
 			}
 			
 			try
@@ -341,11 +340,11 @@ public class PainDataOperation
 		{
 			try
 			{
-				map.put(entry.getMonthAndYear(), map.get(entry.getMonthAndYear()) + Double.parseDouble(entry.getDataMap().get(PainDataIdentifier.DURATION).toString()));
+				map.put(entry.getMonthAndYear(), map.get(entry.getMonthAndYear()) + Double.parseDouble(entry.getDuration()));
 			}
 			catch(NullPointerException ex)
 			{
-				map.put(entry.getMonthAndYear(), Double.parseDouble(entry.getDataMap().get(PainDataIdentifier.DURATION).toString()));
+				map.put(entry.getMonthAndYear(), Double.parseDouble(entry.getDuration()));
 			}
 			
 			try
@@ -403,7 +402,7 @@ public class PainDataOperation
 				}
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT))		//If filtered by pain kinds
 				{
-					String painKinds = list.get(i).getDataMap().get(PainDataIdentifier.PAIN_KIND).toString();
+					String painKinds = list.get(i).getPainKind();
 					for (int a=0; a<painKinds.length(); a++)
 					{
 						for (int b=a+1; b<=painKinds.length(); b++)
@@ -421,7 +420,7 @@ public class PainDataOperation
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT))		//If filtered by intensities
 				{
 		//			String intensities = list.get(i).getIntensitiesAsString();
-					String intensities = list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY).toString();
+					String intensities = list.get(i).getIntensity();
 					for (int a=0; a<intensities.length(); a++)
 					{
 						for (int b=a+1; b<=intensities.length(); b++)
@@ -438,7 +437,7 @@ public class PainDataOperation
 				}
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT))		//If filtered by durations
 				{
-					String durations = list.get(i).getDataMap().get(PainDataIdentifier.DURATION).toString();
+					String durations = list.get(i).getDuration();
 					for (int a=0; a<durations.length(); a++)
 					{
 						for (int b=a+1; b<=durations.length(); b++)
@@ -455,7 +454,7 @@ public class PainDataOperation
 				}
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_TRIGGER_TEXT))		//If filtered by activity
 				{
-					String activity = list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString();
+					String activity = list.get(i).getTrigger();
 					for (int a=0; a<activity.length(); a++)
 					{
 						for (int b=a+1; b<=activity.length(); b++)
@@ -472,7 +471,7 @@ public class PainDataOperation
 				}
 				else if (filterType.equals(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT))		//If filtered by comments
 				{
-					String comment = list.get(i).getDataMap().get(PainDataIdentifier.COMMENTS).toString();
+					String comment = list.get(i).getComments();
 					for (int a=0; a<comment.length(); a++)
 					{
 						for (int b=a+1; b<=comment.length(); b++)
@@ -493,8 +492,9 @@ public class PainDataOperation
 		
 		return list;
 	}
-
-	public static List<PainEntryData> insertEmptyData(List<PainEntryData> source, LinkedHashMap<String, String> dateFrom, LinkedHashMap<String, String> dateTo)
+	
+	
+	public static List<PainEntryData> insertEmptyData(List<PainEntryData> source, Date dateFrom, Date dateTo)
 	{
 		List<PainEntryData> list = new ArrayList<PainEntryData>();
 		LinkedHashMap<Integer, List<PainEntryData>> gaps = new LinkedHashMap<Integer, List<PainEntryData>>();
@@ -502,23 +502,23 @@ public class PainDataOperation
 		//Check if there are no entries in the dateFrom
 		try
 		{
-			if (source.get(0).getDataMap().get(PainDataIdentifier.DATE_YEAR).equals(dateFrom.get(PainDataIdentifier.DATE_YEAR)))
+			if (source.get(0).getDate().getYear() == dateFrom.getYear())
 			{
-				if (source.get(0).getDataMap().get(PainDataIdentifier.DATE_MONTH).equals(dateFrom.get(PainDataIdentifier.DATE_MONTH)))
+				if (source.get(0).getDate().getMonth() == dateFrom.getMonth())
 				{
-					if (!source.get(0).getDataMap().get(PainDataIdentifier.DATE_DAY).equals(dateFrom.get(PainDataIdentifier.DATE_DAY)))
+					if (source.get(0).getDate().getDay() != dateFrom.getDay())
 					{
-						source.add(0, new PainEntryDataVoid(dateFrom.get(PainDataIdentifier.DATE_DAY), dateFrom.get(PainDataIdentifier.DATE_MONTH), dateFrom.get(PainDataIdentifier.DATE_YEAR)));
+						source.add(0, new PainEntryDataVoid(dateFrom));
 					}
 				}
 				else
 				{
-					source.add(0, new PainEntryDataVoid(dateFrom.get(PainDataIdentifier.DATE_DAY), dateFrom.get(PainDataIdentifier.DATE_MONTH), dateFrom.get(PainDataIdentifier.DATE_YEAR)));
+					source.add(0, new PainEntryDataVoid(dateFrom));
 				}
 			}
 			else
 			{
-				source.add(0, new PainEntryDataVoid(dateFrom.get(PainDataIdentifier.DATE_DAY), dateFrom.get(PainDataIdentifier.DATE_MONTH), dateFrom.get(PainDataIdentifier.DATE_YEAR)));
+				source.add(0, new PainEntryDataVoid(dateFrom));
 			}
 		}
 		catch(Exception ex) {}
@@ -526,23 +526,23 @@ public class PainDataOperation
 		//Check if there are no entries in the dateTo
 		try
 		{
-			if (source.get(source.size()-1).getDataMap().get(PainDataIdentifier.DATE_YEAR).equals(dateTo.get(PainDataIdentifier.DATE_YEAR)))
+			if (source.get(source.size()-1).getDate().getYear() == dateTo.getYear())
 			{
-				if (source.get(source.size()-1).getDataMap().get(PainDataIdentifier.DATE_MONTH).equals(dateTo.get(PainDataIdentifier.DATE_MONTH)))
+				if (source.get(source.size()-1).getDate().getMonth() == dateTo.getMonth())
 				{
-					if (!source.get(source.size()-1).getDataMap().get(PainDataIdentifier.DATE_DAY).equals(dateTo.get(PainDataIdentifier.DATE_DAY)))
+					if (source.get(source.size()-1).getDate().getDay() !=dateTo.getDay())
 					{
-						source.add(new PainEntryDataVoid(dateTo.get(PainDataIdentifier.DATE_DAY), dateTo.get(PainDataIdentifier.DATE_MONTH), dateTo.get(PainDataIdentifier.DATE_YEAR)));
+						source.add(new PainEntryDataVoid(dateTo));
 					}
 				}
 				else
 				{
-					source.add(new PainEntryDataVoid(dateTo.get(PainDataIdentifier.DATE_DAY), dateTo.get(PainDataIdentifier.DATE_MONTH), dateTo.get(PainDataIdentifier.DATE_YEAR)));
+					source.add(new PainEntryDataVoid(dateTo));
 				}
 			}
 			else
 			{
-				source.add(new PainEntryDataVoid(dateTo.get(PainDataIdentifier.DATE_DAY), dateTo.get(PainDataIdentifier.DATE_MONTH), dateTo.get(PainDataIdentifier.DATE_YEAR)));
+				source.add(new PainEntryDataVoid(dateTo));
 			}
 		}
 		catch(Exception ex) {}
@@ -551,7 +551,8 @@ public class PainDataOperation
 		{
 			List<PainEntryData> subList = new ArrayList<PainEntryData>();		//Array between 2 dates
 			
-			//Get Min Date
+			/*
+			 * //Get Min Date
 			int yearMin = Integer.parseInt(source.get(i).getDataMap().get(PainDataIdentifier.DATE_YEAR).toString());
 			byte monthMin = Byte.parseByte(source.get(i).getDataMap().get(PainDataIdentifier.DATE_MONTH).toString());
 			byte dayMin = Byte.parseByte(source.get(i).getDataMap().get(PainDataIdentifier.DATE_DAY).toString());
@@ -640,7 +641,20 @@ public class PainDataOperation
 				System.out.println("Entry Date: " + subList.get(a).getDataMap().get(PainDataIdentifier.DATE_DAY) + "/"
 						+ subList.get(a).getDataMap().get(PainDataIdentifier.DATE_MONTH) + "/"
 						+ subList.get(a).getDataMap().get(PainDataIdentifier.DATE_YEAR));
-			} */
+			}*/
+			/*
+			 * 
+			 */
+			
+			Date dateMin = source.get(i).getDate();
+			Date dateMax = source.get(i+1).getDate();
+			
+			while(!dateMin.sameDateAs(dateMax))
+			{
+				dateMin.setDay(dateMin.getDay()+1);
+				subList.add(new PainEntryDataVoid(dateMin));
+			}
+			
 			
 			if (subList.size()>0)
 			{
@@ -690,7 +704,7 @@ public class PainDataOperation
 		
 		for (int i=entry.getDate().getDay(); i<=Date.getDaysDifference(entry.getDate(), targetDate, true)+entry.getDate().getDay()-1; i++)
 		{
-			PainEntryData duplicate = new PainEntryData(entry);
+			PainEntryData duplicate = new PainEntryData(entry.getXMLDocument());
 			duplicate.setDate(new Date(i, entry.getDate().getMonth(), entry.getDate().getYear()));
 			list.add(duplicate);
 		}

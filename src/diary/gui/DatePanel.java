@@ -5,7 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedHashMap;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -13,12 +12,9 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
-import diary.constants.DateConstants;
-import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.methods.DateOperation;
 import giantsweetroll.date.Date;
-import giantsweetroll.date.DateManager;
 import giantsweetroll.gui.swing.Gbm;
 
 public class DatePanel extends JPanel implements ActionListener
@@ -31,7 +27,6 @@ public class DatePanel extends JPanel implements ActionListener
 	private JComboBox<String> comboDay, comboMonth, comboYear;
 	private JButton butAuto, butDefault;
 	private GridBagConstraints c;
-	private LinkedHashMap<String, String> defaultMap;
 	private Date defaultDate;
 	
 	//Vectors
@@ -40,9 +35,6 @@ public class DatePanel extends JPanel implements ActionListener
 	//Constants
 	private final String AUTO = "auto";
 	private final String DEFAULT = "default";
-	private final String YEAR = "year";
-	private final String MONTH = "month";
-	private final String DAY = "day";
 	
 	//Conditional
 	private boolean enable;
@@ -74,7 +66,7 @@ public class DatePanel extends JPanel implements ActionListener
 		this.butAuto = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.AUTO_TEXT));
 		this.butDefault = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
 		this.c = new GridBagConstraints();
-		this.defaultMap = new LinkedHashMap<String, String>();
+		this.defaultDate = new Date();
 		
 		//Properties
 		this.setLayout(new GridBagLayout());
@@ -109,20 +101,7 @@ public class DatePanel extends JPanel implements ActionListener
 	}
 	
 	private void refreshDayRange()
-	{
-		/*
-		this.remove(this.comboDay);
-//		System.out.println(this.comboYear.getSelectedItem());
-		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
-																				Short.parseShort(this.comboYear.getSelectedItem().toString())));
-		this.comboDay.setEnabled(this.enable);
-		
-		c.gridx = this.vecDay.x;
-		c.gridy = this.vecDay.y;
-		this.add(this.comboDay, c);
-		
-		*/
-		
+	{	
 		this.comboDay.setModel(new DefaultComboBoxModel<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
 																				Short.parseShort(this.comboYear.getSelectedItem().toString()))));
 		
@@ -130,39 +109,22 @@ public class DatePanel extends JPanel implements ActionListener
 		this.repaint();
 	}
 	
-	public void setDate(String day, String month, String year)
-	{
-		this.comboYear.setSelectedItem(year);
-		this.comboMonth.setSelectedItem(DateConstants.MONTH_NAME_LIST.get(Integer.parseInt(month)-1));
-		this.comboDay.setSelectedItem(day);
-	}
 	public void setDate(Date date)
 	{
 		this.comboYear.setSelectedItem(Integer.toString(date.getYear()));
 		this.comboMonth.setSelectedIndex(date.getMonth()-1);
-		this.comboDay.setSelectedItem(Integer.toString(date.getDay()));
-	}
-	
-	public LinkedHashMap<String, String> getData()
-	{
-		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-		
-		map.put(PainDataIdentifier.DATE_DAY, this.comboDay.getSelectedItem().toString());
-		map.put(PainDataIdentifier.DATE_MONTH, Integer.toString((this.comboMonth.getSelectedIndex())+1));
-		map.put(PainDataIdentifier.DATE_YEAR, this.comboYear.getSelectedItem().toString());
-		
-		return map;
+		this.comboDay.setSelectedIndex(date.getDay()-1);
 	}
 	
 	public String getDay()
 	{
 		return this.comboDay.getSelectedItem().toString();
 	}
-	public String getMonth()
+	public String getMonth()			//As String
 	{
 		return this.comboMonth.getSelectedItem().toString();
 	}
-	public int getMonthValue()
+	public int getMonthValue()			//In value form
 	{
 		return this.comboMonth.getSelectedIndex() + 1;
 	}
@@ -173,14 +135,7 @@ public class DatePanel extends JPanel implements ActionListener
 	
 	public void setAsDefaultDataThis()
 	{
-		this.setDefaultData(this.getDay(), Integer.toString(this.getMonthValue()), this.getYear());
-	}
-	
-	public void setDefaultData(String day, String month, String year)
-	{
-		this.defaultMap.put(this.DAY, day);
-		this.defaultMap.put(this.MONTH, month);
-		this.defaultMap.put(this.YEAR, year);
+		this.setDefaultDate(new Date(Integer.parseInt(this.getDay()), this.getMonthValue(), Integer.parseInt(this.getYear())));
 	}
 	
 	public void setDefaultDate(Date date)
@@ -192,24 +147,22 @@ public class DatePanel extends JPanel implements ActionListener
 	{
 		try
 		{
-			this.comboYear.setSelectedItem(this.defaultMap.get(this.YEAR));
-			this.comboMonth.setSelectedIndex(Integer.parseInt(this.defaultMap.get(this.MONTH))-1);
-			this.comboDay.setSelectedItem(this.defaultMap.get(this.DAY));
+			this.setDate(this.defaultDate);
 		}
-		catch(NullPointerException ex){}
+		catch(NullPointerException ex){ex.printStackTrace();}
 	}
 	
 	public void autoSetDate()
 	{
-		this.setDate(DateManager.getCurrentDay(), DateManager.getCurrentMonth(), DateManager.getCurrentYear());
+		this.setDate(new Date());
 	}
 	
 	public boolean sameAsDefault()
 	{
-		LinkedHashMap<String, String> data = this.getData();
-		if (this.defaultMap.get(this.YEAR).equals(data.get(PainDataIdentifier.DATE_YEAR)) && 
-				this.defaultMap.get(this.MONTH).equals(data.get(PainDataIdentifier.DATE_MONTH)) && 
-				this.defaultMap.get(this.DAY).equals(data.get(PainDataIdentifier.DATE_DAY)))
+		Date date = this.getDate();
+		if (this.defaultDate.getYear() == date.getYear() && 
+				this.defaultDate.getMonth() == date.getMonth() && 
+				this.defaultDate.getDay() == date.getDay())
 		{
 			return true;
 		}

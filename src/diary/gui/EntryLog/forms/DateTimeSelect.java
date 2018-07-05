@@ -1,8 +1,9 @@
 package diary.gui.EntryLog.forms;
 
-import java.util.LinkedHashMap;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
-import diary.constants.PainDataIdentifier;
+import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.DatePanel;
@@ -24,26 +25,40 @@ public class DateTimeSelect extends FormElement
 	//Constructor
 	public DateTimeSelect()
 	{
-		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_DATE_TIME));
+		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_DATE_TIME), true);
 		
+		//Initialization
 		this.date = new DatePanel(true);
 		this.time = new TimePanel(true);
+		GridBagConstraints c = new GridBagConstraints();
 		
+		//Properties
+		this.getPanel().setLayout(new GridBagLayout());
+		this.date.autoSetDate();
+		this.date.setAsDefaultDataThis();
 		this.time.setToCurrentTime();
 		this.time.setAsDefaultTimeThis();
 		
-		this.addComponent(this.date);
-		this.addComponent(this.time);
+		//add to panel
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		this.getPanel().add(this.getFormTitleLabel(), c);
+		this.getPanel().add(this.date, c);
+		this.getPanel().add(this.time, c);
 	}
 	
-	//Methods
+	//Public Methods
 	public Date getDate()
 	{
 		return this.date.getDate();
 	}
-	public LinkedHashMap<String, String> getTime()
+	public String getTimeHour()
 	{
-		return this.time.getData();
+		return this.time.getHour();
+	}
+	public String getTimeMinutes()
+	{
+		return this.time.getMinutes();
 	}
 	public void setDate(Date date)
 	{
@@ -51,12 +66,20 @@ public class DateTimeSelect extends FormElement
 	}
 	public void setTime(PainEntryData entry)
 	{
-		this.time.setTime(entry.getDataMap().get(PainDataIdentifier.TIME_HOUR).toString(), entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE).toString());
+		this.time.setTime(entry.getTimeHour(), entry.getTimeMinutes());
 	}
 	public void setData(PainEntryData entry)
 	{
 		this.setDate(entry.getDate());
 		this.setTime(entry);
+	}
+	public boolean dateSameAsDefault()
+	{
+		return this.date.sameAsDefault();
+	}
+	public boolean timeSameAsDefault()
+	{
+		return this.time.sameAsDefault();
 	}
 	
 	//Overriden Methods
@@ -65,6 +88,8 @@ public class DateTimeSelect extends FormElement
 	{
 		this.date.resetDefault();
 		this.time.resetDefault();
+		this.time.setToCurrentTime();
+		this.time.setAsDefaultTimeThis();
 	}
 	
 	@Override
@@ -78,5 +103,11 @@ public class DateTimeSelect extends FormElement
 
 	@Deprecated
 	public void setData(Object obj) {}
+
+	@Override
+	public boolean allFilled() 
+	{
+		return true;
+	}
 
 }

@@ -100,6 +100,7 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 					{
 						displayPatientDetails();
 						Methods.refresHistories(getSelectedPatientData());
+						/*
 						if (MainFrame.jComponent instanceof EntryLog)
 						{
 							getMainFrameReference().ENTRY_LOG.refreshHistories();
@@ -108,6 +109,9 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 						{
 							getMainFrameReference().GRAPH_FILTER_PANEL.refresh(getSelectedPatientData());
 						}
+						*/
+						getMainFrameReference().ENTRY_LOG.refreshHistories();
+						getMainFrameReference().GRAPH_FILTER_PANEL.refresh(getSelectedPatientData());
 					}
 					
 				});

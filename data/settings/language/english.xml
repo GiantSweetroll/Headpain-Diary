@@ -161,8 +161,8 @@
      <text identifier="graph category duration average vs date text">Average Duration vs Day</text>
      <text identifier="graph category intensity vs time text">Intensity vs Episode</text>
      <text identifier="graph category duration vs time text">Duration vs Episode</text>
-     <text identifier="graph category pain kind vs date">Kinds of Pains vs Day</text>
-     <text identifier="graph category trigger vs date">Trigger vs Day</text>
+     <text identifier="graph category pain kind vs amount">Kinds of Headpains vs Amount</text>
+     <text identifier="graph category trigger vs amount">Trigger vs Amount</text>
      <text identifier="graph categories intensity average vs month">Average Intensity vs Month</text>
      <text identifier="graph categories duration average vs month">Average Duration vs Month</text>
      <text identifier="graph settings enable data values">Show Data Values</text>

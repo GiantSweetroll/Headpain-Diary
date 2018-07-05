@@ -127,10 +127,19 @@ public class TimePanel extends JPanel implements ActionListener
 	{
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		
-		map.put(PainDataIdentifier.TIME_HOUR, this.comboHour.getSelectedItem().toString());
-		map.put(PainDataIdentifier.TIME_MINUTE, this.comboMinute.getSelectedItem().toString());
+		map.put(PainDataIdentifier.TIME_HOUR, this.getHour());
+		map.put(PainDataIdentifier.TIME_MINUTE, this.getMinutes());
 		
 		return map;
+	}
+	
+	public String getHour()
+	{
+		return this.comboHour.getSelectedItem().toString();
+	}
+	public String getMinutes()
+	{
+		return this.comboMinute.getSelectedItem().toString();
 	}
 	
 	public boolean sameAsDefault()

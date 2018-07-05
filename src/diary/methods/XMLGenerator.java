@@ -244,9 +244,9 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT, "Average Duration vs Day");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME, "Intensity vs Episode");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME, "Duration vs Episode");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE, "Kinds of Pains vs Day");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_AMOUNT, "Kinds of Headpains vs Amount");
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE, "Pain Locations vs Date");
-		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_DATE, "Trigger vs Day");
+		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_AMOUNT, "Trigger vs Amount");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT, "Average Intensity vs Month");
 		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT, "Average Duration vs Month");
 		//Graph Settings

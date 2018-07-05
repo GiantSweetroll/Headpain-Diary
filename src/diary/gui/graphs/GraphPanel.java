@@ -226,7 +226,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		
 		if (this.panelGraphSettings.isDisplayVoidData())
 		{	
-			list = PainDataOperation.insertEmptyData(list, this.panelDateRange.getDateRangeMap().get(DateRangePanel.FROM), this.panelDateRange.getDateRangeMap().get(DateRangePanel.TO));
+			list = PainDataOperation.insertEmptyData(list, this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
 		}
 		
 		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
@@ -271,13 +271,13 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.MONTH_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_DURATION_TEXT));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_AMOUNT)))
 		{
 			this.graph = new BarGraphPanel(this.getMainFrameReference(), PainDataOperation.getNumberOfDifferentPainKind(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.KINDS_OF_HEADPAINS_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
 		}
-		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_DATE)))
+		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_AMOUNT)))
 		{
 			this.graph = new BarGraphPanel(this.getMainFrameReference(), PainDataOperation.getAmountOfActivity(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT));

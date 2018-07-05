@@ -1,21 +1,32 @@
 package diary.gui.EntryLog;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
+import diary.data.PainEntryData;
+import diary.gui.CustomDialog;
 import diary.gui.MainFrame;
 import diary.gui.MainFramePanel;
+import diary.methods.FileOperation;
 import diary.methods.Methods;
+import diary.methods.PainDataOperation;
+import diary.patientdata.PatientData;
+import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.message.MessageManager;
 
 public class EntryLogButtonControl extends MainFramePanel implements ActionListener
 {
@@ -59,6 +70,8 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 		
 		//Properties
 		this.button.addActionListener(this);
+		this.button.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.button.setForeground(Color.white);
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
 		
@@ -106,7 +119,53 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 		{
 			if (this.entryLog.getPanelState() == EntryLog.LAST_SECTION)
 			{
-				//TODO save entry log data operation
+				if (this.entryLog.allRequiredFieldsFilled())
+				{
+					PainEntryData entry = this.entryLog.getData();
+					PatientData patient = this.entryLog.getSelectedPatient();
+					
+					if(entry.isSingleEntry()) 
+					{
+						if (FileOperation.entryExists(patient, entry) && this.entryLog.isNewEntry())
+						{
+							int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
+																		Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
+							
+							if (response == JOptionPane.YES_OPTION)
+							{
+								this.entryLog.export(patient, entry);
+							}
+						}
+						else
+						{
+							this.entryLog.export(patient, entry);
+						}
+					}
+					else
+					{
+						List<PainEntryData> duplicateEntries = PainDataOperation.generateDuplicates(entry, new Date(entry.getDate().getDay() + Methods.secondsToDays(Long.parseLong(entry.getDuration())),
+																													entry.getDate().getMonth(),
+																													entry.getDate().getYear()));
+						
+						FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.entryLog.getSelectedPatient(), entry.getRecentMedication());
+						FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.entryLog.getSelectedPatient(), entry.getMedicineComplaint());
+						for (PainEntryData painEntry : duplicateEntries)
+						{
+							FileOperation.exportPainData(patient, painEntry);
+						}
+						this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+						this.getMainFrameReference().GRAPH_PANEL.refreshGraph();
+						this.getMainFrameReference().PAIN_TABLE.refreshTable();
+						Methods.refresHistories(this.entryLog.getSelectedPatient());
+						this.getMainFrameReference().GRAPH_FILTER_PANEL.refresh(this.getMainFrameReference().GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+						this.entryLog.resetDefaults();
+					}
+				}
+				else
+				{
+					MessageManager.showErrorDialog(Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT),
+							Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE));
+				}
 			}
 			else
 			{

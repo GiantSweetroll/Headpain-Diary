@@ -2,6 +2,7 @@ package diary.gui.EntryLog;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
-import diary.constants.PainDataIdentifier;
+import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
@@ -28,6 +29,7 @@ import diary.gui.EntryLog.forms.PainLocation;
 import diary.gui.EntryLog.forms.RecentMedication;
 import diary.gui.EntryLog.forms.Trigger;
 import diary.interfaces.GUIFunction;
+import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
 
@@ -77,15 +79,18 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.initPanelBelow();
 		this.initPanelCenter();
 		this.initPanelTop();
+		this.setAsNewEntry(true);
 		
 		//Properties
 		this.setLayout(new BorderLayout());
-		this.setOpaque(false);
+		this.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		
 		//Add to panel
 		this.add(this.panelTop, BorderLayout.NORTH);
 		this.add(this.panelBelow, BorderLayout.SOUTH);
 		this.add(this.panelCenter, BorderLayout.CENTER);
+		
+		this.refreshHistories();
 	}
 	private void initPanelCenter()
 	{
@@ -103,7 +108,7 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		
 		//Properties
 		this.panelCenter.setLayout(new CardLayout());
-		this.panelCenter.setOpaque(false);
+		this.panelCenter.setBackground(Color.WHITE);
 		this.activeUser.setName(this.ACTIVE_PATIENT);
 		this.comments.setName(this.COMMENTS);
 		this.dateTime.setName(this.DATE_TIME);
@@ -133,9 +138,12 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.butCancel = new JButton(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
 		
 		//Properties
-		this.panelTop.setLayout(new BorderLayout());
+		this.panelTop.setLayout(new BorderLayout(10, 20));
 		this.panelTop.setOpaque(false);
+		this.panelTop.setBorder(Methods.createTransparentBorder(5));
 		this.butCancel.addActionListener(this);
+		this.butCancel.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butCancel.setForeground(Color.WHITE);
 		this.labTitle.setFont(Constants.FONT_SUB_TITLE);
 		
 		//Add to panel
@@ -181,29 +189,31 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	}
 	public void refreshHistories()
 	{
-		((RecentMedication)this.recentMeds).refresh();
+		this.recentMeds.refreshHistories(this.getSelectedPatient());
 	}
 	
 	public void loadData(PatientData patient, PainEntryData entry)
 	{
 		this.resetDefaults();
-		this.oldEntry = entry;
-		this.oldPatient = patient;
+		this.activeUser.setData(patient);
+		this.setOldEntry(entry);
+		this.setOldPatientData(patient);
 		this.fillData(patient, entry);
 		this.revalidate();
 		this.repaint();
-		this.isNewEntry = false;
+		this.setAsNewEntry(false);
 	}
 	private void fillData(PatientData patient, PainEntryData entry)
-	{
+	{		
 		this.activeUser.setData(patient);
-		this.comments.setData(entry.getDataMap().get(PainDataIdentifier.COMMENTS));
-		this.dateTime.setData(entry);
-		this.duration.setData(entry.getDataMap().get(PainDataIdentifier.DURATION));
-		this.intensity.setData(entry.getDataMap().get(PainDataIdentifier.INTENSITY));
-		this.painKind.setData(entry.getDataMap().get(PainDataIdentifier.PAIN_KIND));
+		this.comments.setData(entry.getComments());
+		this.dateTime.setDate(entry.getDate());
+		this.dateTime.setTime(entry);
+		this.duration.setData(entry.getDuration());
+		this.intensity.setData(entry.getIntensity());
+		this.painKind.setData(entry);
 		this.painLoc.setData(entry);
-		this.recentMeds.setData(entry.getDataMap().get(PainDataIdentifier.RECENT_MEDICATION).toString(), entry.getDataMap().get(PainDataIdentifier.MEDICINE_COMPLAINT).toString());
+		this.recentMeds.setData(entry.getRecentMedication(), entry.getMedicineComplaint());
 		this.trigger.setData(entry);
 	}
 
@@ -214,6 +224,93 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	public void setPanelState(byte state)
 	{
 		this.panelState = state;
+	}
+	
+	public PainEntryData getData()
+	{
+		PainEntryData entry = new PainEntryData();
+		
+		entry.setComments(this.comments.getData());
+		entry.setDate(this.dateTime.getDate());
+		entry.setTime(this.dateTime.getTimeHour(), this.dateTime.getTimeMinutes());
+		entry.setDuration(this.duration.getData());
+		entry.setIntensity(this.intensity.getData());
+		entry.setPainKind(this.painKind.getData());
+		if (this.painLoc.isPresetLocationSelected())
+		{
+			entry.setPresetPainLocations(this.painLoc.getData());
+		}
+		else
+		{
+			entry.setCustomPainLocations(this.painLoc.getData());
+		}
+		entry.setRecentMedicaiton(this.recentMeds.getRecentMedication());
+		entry.setMedicineComplaint(this.recentMeds.getMedicineComplaint());
+		entry.setTrigger(this.trigger.getData());
+		
+		return entry;
+	}
+	
+	public PatientData getSelectedPatient()
+	{
+		return this.activeUser.getActivePatientPanel().getSelectedPatientData();
+	}
+	
+	public boolean allRequiredFieldsFilled()
+	{
+		return this.activeUser.allFilled() &&
+				this.comments.allFilled() &&
+				this.dateTime.allFilled() &&
+				this.duration.allFilled() &&
+				this.intensity.allFilled() &&
+				this.painKind.allFilled() &&
+				this.painLoc.allFilled() &&
+				this.recentMeds.allFilled() &&
+				this.trigger.allFilled();
+	}
+	
+	public void setAsNewEntry(boolean bool)
+	{
+		this.isNewEntry = bool;
+	}
+	public boolean isNewEntry()
+	{
+		return this.isNewEntry;
+	}
+	private void setOldPatientData(PatientData patient)
+	{
+		this.oldPatient = patient;
+	}
+	private void setOldEntry(PainEntryData entry)
+	{
+		this.oldEntry = entry;
+	}
+	public PainEntryData getOldPainEntryData()
+	{
+		return this.oldEntry;
+	}
+	public PatientData getOldPatientData()
+	{
+		return this.oldPatient;
+	}
+	protected void export(PatientData patient, PainEntryData entry)
+	{
+		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.getSelectedPatient(), entry.getRecentMedication());
+		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.getSelectedPatient(), entry.getMedicineComplaint());
+		FileOperation.exportPainData(patient, entry);
+		if (!this.isNewEntry())
+		{
+			if (!this.dateTime.timeSameAsDefault() || !this.dateTime.dateSameAsDefault())		//Check if the start time or date has been altered
+			{
+				FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
+			}
+		}
+		this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+		this.getMainFrameReference().GRAPH_PANEL.refreshGraph();
+		this.getMainFrameReference().PAIN_TABLE.refreshTable();
+		Methods.refresHistories(this.getSelectedPatient());
+		this.getMainFrameReference().GRAPH_FILTER_PANEL.refresh(this.getMainFrameReference().GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+		this.resetDefaults();
 	}
 	
 	//Interfaces
@@ -244,10 +341,12 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.painLoc.refresh();
 		this.recentMeds.refresh();
 		this.trigger.refresh();
+		this.refreshHistories();
 	};
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		this.resetDefaults();
 		this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 	}
 }

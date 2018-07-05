@@ -1,7 +1,11 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import javax.swing.JTextArea;
 
+import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.TextAreaManager;
@@ -18,16 +22,21 @@ public class Comments extends FormElement
 	
 	public Comments()
 	{
-		super(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL));
+		super(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL), false);
 		
 		//Initialization
-		this.ta = new JTextArea(15, 20);
+		this.ta = new JTextArea(15, 30);
+		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
+		this.getPanel().setLayout(new GridBagLayout());
 		TextAreaManager.autoConfigureTextArea(ta, true);
 		
 		//Add to panel
-		this.addComponent(this.ta);
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		this.getPanel().add(this.getFormTitleLabel(), c);
+		this.getPanel().add(this.ta, c);
 	}
 	
 	//Overridden Methods
@@ -38,8 +47,13 @@ public class Comments extends FormElement
 	public void refresh() {};
 	
 	@Override
-	public Object getData() {return this.ta.getText().trim();}
+	public String getData() {return this.ta.getText().trim();}
 
 	@Override
 	public void setData(Object obj) {this.ta.setText(obj.toString());}
+
+	@Override
+	public boolean allFilled() {
+		return true;
+	}
 }

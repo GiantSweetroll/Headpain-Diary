@@ -1,19 +1,28 @@
 package diary.gui.EntryLog.forms;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.gui.SliderPanel;
 import diary.methods.Methods;
+import giantsweetroll.GMisc;
+import giantsweetroll.gui.swing.Gbm;
 
-public class Duration extends FormElement implements KeyListener, ActionListener
+public class Duration extends FormElement implements KeyListener, ActionListener, ChangeListener
 {
 
 	/**
@@ -23,12 +32,16 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 
 	private JSlider slider;
 	private JComboBox<String> units;
+	private JLabel selected;
+	private SliderPanel sliderPanel;
+	
+	private int selectedValue;
 	
 	//Constants
-	private final int SECONDS_MAJOR_TICK_COUNT = 5,
-						SECONDS_MINOR_TICK_COUNT = 10,
-						MINUTES_MAJOR_TICK_COUNT = 5,
-						MINUTES_MINOR_TICK_COUNT = 10,
+	private final int SECONDS_MAJOR_TICK_COUNT = 10,
+						SECONDS_MINOR_TICK_COUNT = 2,
+						MINUTES_MAJOR_TICK_COUNT = SECONDS_MAJOR_TICK_COUNT,
+						MINUTES_MINOR_TICK_COUNT = SECONDS_MINOR_TICK_COUNT,
 						HOURS_MAJOR_TICK_COUNT = 2,
 						HOURS_MINOR_TICK_COUNT = 1,
 						DAYS_MAJOR_TICK_COUNT = 2,
@@ -37,25 +50,68 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	
 	public Duration()
 	{
-		super(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL));
+		super(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL), true);
 		
 		//Initialization
 		this.slider = new JSlider(JSlider.HORIZONTAL, 1, 60, 1);
 		this.units = new JComboBox<String>(Constants.DURATION_UNITS);
+		this.selectedValue = this.slider.getValue();
+		this.selected = new JLabel(this.getSelectedDataInformation());
+		this.sliderPanel = new SliderPanel(this.slider);
+//		SpringLayout spr = new SpringLayout();
+		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
+		//For Spring Layout
+		/*
+		spr.putConstraint(SpringLayout.WEST, this.getFormTitleLabel(), Constants.INSETS_TOP_COMPONENT.left, SpringLayout.WEST, this.getPanel());
+		spr.putConstraint(SpringLayout.NORTH, this.getFormTitleLabel(), Constants.INSETS_TOP_COMPONENT.top, SpringLayout.NORTH, this.getPanel());
+		spr.putConstraint(SpringLayout.NORTH, this.sliderPanel, Constants.INSETS_TOP_COMPONENT.top, SpringLayout.SOUTH, this.getFormTitleLabel());
+		spr.putConstraint(SpringLayout.WEST, this.sliderPanel, Constants.INSETS_TOP_COMPONENT.left, SpringLayout.WEST, this.getPanel());
+		spr.putConstraint(SpringLayout.NORTH, this.units, Constants.INSETS_TOP_COMPONENT.top, SpringLayout.SOUTH, this.sliderPanel);
+		spr.putConstraint(SpringLayout.WEST, this.units, Constants.INSETS_TOP_COMPONENT.left, SpringLayout.WEST, this.getPanel());
+		spr.putConstraint(SpringLayout.NORTH, this.selected, Constants.INSETS_TOP_COMPONENT.top, SpringLayout.SOUTH, this.units);
+		spr.putConstraint(SpringLayout.WEST, this.selected, Constants.INSETS_TOP_COMPONENT.left, SpringLayout.WEST, this.getPanel());
+		this.getPanel().setLayout(spr);		*/
+		//Other
+		this.getPanel().setLayout(new GridBagLayout());
 		this.units.addActionListener(this);
 		this.slider.setMajorTickSpacing(this.SECONDS_MAJOR_TICK_COUNT);
 		this.slider.setMinorTickSpacing(this.SECONDS_MINOR_TICK_COUNT);
 		this.slider.setPaintTicks(true);
 		this.slider.setPaintLabels(true);
 		this.slider.setOpaque(false);
+		this.slider.addChangeListener(this);
+//		this.slider.setUI(Constants.SLIDER_CUSTOM_UI);
 		this.units.setBackground(Color.WHITE);
+		this.sliderPanel.setMinimumSize(new Dimension(this.slider.getSize().width*2, this.slider.getSize().height));
 		
 		//Add to panel
-		this.addComponent(this.slider);
-		this.addComponent(this.units);
+		Gbm.goToOrigin(c);
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		c.gridwidth = 3;
+		this.getPanel().add(this.getFormTitleLabel(), c);
+		Gbm.newGridLine(c);
+		c.gridwidth = 2;
+		this.getPanel().add(this.sliderPanel, c);
+		Gbm.nextGridColumn(c, 2);
+		c.gridwidth = 1;
+		this.getPanel().add(this.selected, c);
+		c.insets = Constants.INSETS_GENERAL;
+		Gbm.newGridLine(c);
+		c.gridwidth = 2;
+		this.getPanel().add(this.units, c);
 	}	
+	
+	//Methods
+	private String getSelectedDataInformation()
+	{
+		return " = " + Integer.toString(this.selectedValue) + " " + GMisc.getItem(this.units).toString();
+	}
+	private void showSelectedData()
+	{
+		this.selected.setText(this.getSelectedDataInformation());
+	}
 	
 	//Overridden Methods
 	@Override
@@ -74,15 +130,15 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		}
 		else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT)))	//Minutes
 		{
-			return Integer.toString(this.slider.getValue()*60);
+			return Integer.toString(Methods.minutesToSeconds(this.slider.getValue()));
 		}
 		else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)))		//Hours
 		{
-			return Integer.toString(this.slider.getValue()*3600);
+			return Integer.toString(Methods.hoursToSeconds(this.slider.getValue()));
 		}
-		else		//Days
+		else																								//Days
 		{
-			return Long.toString(Long.parseLong(Integer.toString(this.slider.getValue())) * 86400L);
+			return Long.toString(Methods.daysToSeconds(this.slider.getValue()));
 		}
 	}
 
@@ -96,17 +152,17 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 			
 			if (value >=86400d)								//Days
 			{
-				value = value/86400;
+				value = Methods.secondsToDays(value);
 				durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT);
 			}
 			else if (value>=3600d && value<86400d)	//Hours
 			{
-				value = value/3600;
+				value = Methods.secondsToHours(value);
 				durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT);
 			}
 			else if (value<3600d && value>=60d)		//Minutes
 			{
-				value = value/60;
+				value = Methods.secondsToMinutes(value);
 				durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT);
 			}
 			
@@ -181,5 +237,21 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 			this.slider.setMajorTickSpacing(this.DAYS_MAJOR_TICK_COUNT);
 			this.slider.setMinorTickSpacing(this.DAYS_MINOR_TICK_COUNT);
 		}
+		
+		this.showSelectedData();
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e)
+	{
+		this.selectedValue = this.slider.getValue();
+		
+		this.showSelectedData();
+	}
+
+	@Override
+	public boolean allFilled()
+	{
+		return true;
 	}
 }

@@ -1,6 +1,9 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.BorderLayout;
 import java.util.List;
+
+import javax.swing.SwingConstants;
 
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
@@ -19,11 +22,32 @@ public class PainLocation extends FormElement
 	
 	public PainLocation()
 	{
-		super(Methods.getLanguageText(XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL));
+		super(Methods.getLanguageText(XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL), true);
 		
+		//Initialization
 		this.painLocation = new PainLocationSelectionPanel();
+//		GridBagConstraints c = new GridBagConstraints();
 		
-		this.addComponent(this.painLocation);
+		//Properties
+//		this.getPanel().setLayout(new GridBagLayout());
+		this.getPanel().setLayout(new BorderLayout());
+		this.getFormTitleLabel().setHorizontalAlignment(SwingConstants.CENTER);
+		
+		//Add to panel
+	//	c.insets = Constants.INSETS_TOP_COMPONENT;
+	//	c.gridwidth = GridBagConstraints.REMAINDER;
+		this.getPanel().add(this.getFormTitleLabel(), BorderLayout.NORTH);
+		this.getPanel().add(this.painLocation, BorderLayout.CENTER);
+	}
+	
+	//Public Methods
+	public boolean isPresetLocationSelected()
+	{
+		return this.painLocation.presetLocationSelected();
+	}
+	public boolean isCustomLocationSelected()
+	{
+		return this.painLocation.customLocationSelected();
 	}
 	
 	//Overriden Methods
@@ -47,6 +71,12 @@ public class PainLocation extends FormElement
 		{
 			this.painLocation.setSelectedPosition((PainEntryData)entry);
 		}
+	}
+
+	@Override
+	public boolean allFilled() 
+	{
+		return this.painLocation.isPainLocationSelected();
 	}
 
 }

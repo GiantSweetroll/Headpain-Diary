@@ -11,10 +11,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
-import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.gui.DatePanel;
 import diary.methods.Methods;
+import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
 
 public class PatientDataForm extends JPanel
@@ -38,11 +38,7 @@ public class PatientDataForm extends JPanel
 	{
 		this.init();
 		
-		LinkedHashMap<String, String> dataMap = patientData.getDataMap();
-		this.tfMedID.setText(dataMap.get(PatientData.MEDICAL_RECORD_ID));
-		this.tfName.setText(dataMap.get(PatientData.NAME));
-		this.panelDOB.setDate(dataMap.get(PatientData.DOB_DAY), dataMap.get(PatientData.DOB_MONTH), dataMap.get(PatientData.DOB_YEAR));
-		this.panelDOB.setAsDefaultDataThis();
+		this.setData(patientData);
 		this.enableComponents(enable);
 	}
 	
@@ -95,10 +91,10 @@ public class PatientDataForm extends JPanel
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		map.put(PatientData.MEDICAL_RECORD_ID, Methods.getTextData(this.tfMedID));
 		map.put(PatientData.NAME, Methods.getTextData(this.tfName));
-		LinkedHashMap<String, String> dobMap = this.panelDOB.getData();
-		map.put(PatientData.DOB_DAY, dobMap.get(PainDataIdentifier.DATE_DAY));
-		map.put(PatientData.DOB_MONTH, dobMap.get(PainDataIdentifier.DATE_MONTH));
-		map.put(PatientData.DOB_YEAR, dobMap.get(PainDataIdentifier.DATE_YEAR));
+		Date dob = this.panelDOB.getDate();
+		map.put(PatientData.DOB_DAY, Integer.toString(dob.getDay()));
+		map.put(PatientData.DOB_MONTH, Integer.toString(dob.getMonth()));
+		map.put(PatientData.DOB_YEAR, Integer.toString(dob.getYear()));
 		
 		return new PatientData(map);
 	}
@@ -129,7 +125,9 @@ public class PatientDataForm extends JPanel
 		LinkedHashMap<String, String> dataMap = patient.getDataMap();
 		this.tfMedID.setText(dataMap.get(PatientData.MEDICAL_RECORD_ID));
 		this.tfName.setText(dataMap.get(PatientData.NAME));
-		this.panelDOB.setDate(dataMap.get(PatientData.DOB_DAY), dataMap.get(PatientData.DOB_MONTH), dataMap.get(PatientData.DOB_YEAR));
+		this.panelDOB.setDate(new Date(Integer.parseInt(dataMap.get(PatientData.DOB_DAY)), 
+										Integer.parseInt(dataMap.get(PatientData.DOB_MONTH)),
+										Integer.parseInt(dataMap.get(PatientData.DOB_YEAR))));
 		this.panelDOB.setAsDefaultDataThis();
 		this.revalidate();
 		this.repaint();

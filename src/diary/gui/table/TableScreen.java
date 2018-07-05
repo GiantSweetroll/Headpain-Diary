@@ -438,13 +438,11 @@ public class TableScreen extends MainFramePanel implements ActionListener
 				
 			case SELECT:
 				this.getMainFrameReference().ENTRY_LOG.loadData(this.activePatientPanel.getSelectedPatientData(), this.activeEntry);
-				this.getMainFrameReference().ENTRY_LOG.getActivePatientPanel().setSelectedPatient(this.activePatientPanel.getSelectedPatientData());
-	//			MainFrame.changePanel(Globals.ENTRY_LOG);
+		//		this.getMainFrameReference().ENTRY_LOG.getActivePatientPanel().setSelectedPatient(this.activePatientPanel.getSelectedPatientData());
 				this.getMainFrameReference().changePanel(PanelName.ENTRY_LOG);
 				break;
 				
 			case BACK:
-	//			MainFrame.changePanel(Globals.MAIN_MENU);
 				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 				break;
 		}

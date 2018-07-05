@@ -1,14 +1,22 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.gui.SliderPanel;
 import diary.methods.Methods;
+import giantsweetroll.gui.swing.Gbm;
 
-public class Intensity extends FormElement implements KeyListener
+public class Intensity extends FormElement implements KeyListener, ChangeListener
 {
 
 	/**
@@ -17,23 +25,53 @@ public class Intensity extends FormElement implements KeyListener
 	private static final long serialVersionUID = -3234503424292394778L;
 
 	private JSlider slider;
+	private SliderPanel sliderPanel;
+	private JLabel painDetail, selected;
 	
 	public Intensity()
 	{
-		super(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
+		super(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), true);
 		
 		//Initialization
 		this.slider = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
+		this.selected = new JLabel(this.getSelectedDataDetails());
+		this.painDetail = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
+		this.sliderPanel = new SliderPanel(slider);
+		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
+		this.getPanel().setLayout(new GridBagLayout());
 		this.slider.setMajorTickSpacing(2);
 		this.slider.setMinorTickSpacing(1);
 		this.slider.setPaintTicks(true);
 		this.slider.setPaintLabels(true);
 		this.slider.setOpaque(false);
+		this.slider.addChangeListener(this);
+//		this.slider.setUI(Constants.SLIDER_CUSTOM_UI);
 		
 		//Add to panel
-		this.addComponent(this.slider);
+		Gbm.goToOrigin(c);
+		c.gridwidth = 2;
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		this.getPanel().add(this.getFormTitleLabel(), c);
+		Gbm.newGridLine(c);
+		c.gridwidth = 1;
+		this.getPanel().add(this.sliderPanel, c);
+		Gbm.nextGridColumn(c);
+		this.getPanel().add(this.selected, c);
+		Gbm.newGridLine(c);
+		c.insets = Constants.INSETS_GENERAL;
+		this.getPanel().add(this.painDetail, c);
+	}
+	
+	//Methods
+	private String getSelectedDataDetails()
+	{
+		return " = " + Integer.toString(this.slider.getValue());
+	}
+	private void showSelectedData()
+	{
+		this.selected.setText(this.getSelectedDataDetails());
 	}
 	
 	//Overridden Methods
@@ -84,15 +122,17 @@ public class Intensity extends FormElement implements KeyListener
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent arg0) {}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent arg0) {}
 
+	@Override
+	public boolean allFilled() {return true;}
+	
+	@Override
+	public void stateChanged(ChangeEvent e)
+	{
+		this.showSelectedData();
+	}
 }

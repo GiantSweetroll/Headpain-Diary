@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import diary.constants.PainDataIdentifier;
 import diary.patientdata.PatientData;
 import diary.patientdata.PatientDataManagePanel;
+import giantsweetroll.date.Date;
 
 public class PatientDataOperation 
 {
@@ -94,7 +94,7 @@ public class PatientDataOperation
 		return list;
 	}
 
-	public static List<PatientData> getFilteredData(LinkedHashMap<String, String> dateFromMap, LinkedHashMap<String, String> dateToMap, List<PatientData> source)
+	public static List<PatientData> getFilteredData(Date dateFrom, Date dateTo, List<PatientData> source)
 	{
 		List<PatientData> list = new ArrayList<PatientData>();
 		
@@ -156,8 +156,8 @@ public class PatientDataOperation
 		//Filter Start
 //		System.out.println("Filtering years...");
 		//Filter Year
-		int yearMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_YEAR));
-		int yearMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_YEAR));
+		int yearMin = dateFrom.getYear();
+		int yearMax = dateTo.getYear();
 		List<String> keysToRemove = new ArrayList<String>();
 		for (Map.Entry<String, LinkedHashMap<String, List<PatientData>>> entry : yearMonthMap.entrySet())
 		{
@@ -191,8 +191,8 @@ public class PatientDataOperation
 			lastYear = iterator.next().getKey();
 	//		System.out.println("last year: " + lastYear);
 		}
-		int monthMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_MONTH));
-		int monthMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_MONTH));
+		int monthMin = dateFrom.getMonth();
+		int monthMax = dateTo.getMonth();
 		for (Map.Entry<String, List<PatientData>> subEntry : firstYearEntry.getValue().entrySet())		//First year
 		{
 			if (Integer.parseInt(subEntry.getKey()) < monthMin)
@@ -234,8 +234,8 @@ public class PatientDataOperation
 		{
 			lastMonth = iterator2.next().getKey();
 		}
-		int dayMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_DAY));
-		int dayMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_DAY));
+		int dayMin = dateFrom.getDay();
+		int dayMax = dateTo.getDay();
 		for (int i=0; i<firstMonthEntry.getValue().size(); i++)
 		{
 			PatientData patient = firstMonthEntry.getValue().get(i);

@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import diary.constants.Constants;
-import diary.constants.PainDataIdentifier;
 import diary.data.PainEntryData;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
@@ -56,21 +55,21 @@ public class TablePanel extends JPanel
 	//		index++;
 			arr[i][index]= list.get(i).getPainPositionsAsString();		//Pain Positions
 			index++;
-			arr[i][index]= Methods.convertPainKindIDToLanguage(list.get(i).getDataMap().get(PainDataIdentifier.PAIN_KIND).toString());			//Pain Kind
+			arr[i][index]= Methods.convertPainKindIDToLanguage(list.get(i).getPainKind());			//Pain Kind
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.INTENSITY);		//Intensity
+			arr[i][index]= list.get(i).getIntensity();		//Intensity
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.DURATION);			//Durations
+			arr[i][index]= list.get(i).getDuration();		//Durations
 			index++;
-			arr[i][index]= Methods.convertActivityIDToLanguage(list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY).toString());		//Activity
+			arr[i][index]= Methods.convertActivityIDToLanguage(list.get(i).getTrigger());		//Trigger
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY_DETAILS);//Activity Details
+	//		arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.ACTIVITY_DETAILS);//Activity Details
+	//		index++;
+			arr[i][index]= list.get(i).getRecentMedication();//Recent Medication
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.RECENT_MEDICATION);//Recent Medication
+			arr[i][index]= list.get(i).getMedicineComplaint();//Medicine Complaint
 			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.MEDICINE_COMPLAINT);//Medicine Complaint
-			index++;
-			arr[i][index]= list.get(i).getDataMap().get(PainDataIdentifier.COMMENTS);		//Comments
+			arr[i][index]= list.get(i).getComments();		//Comments
 		}
 		
 		return arr;

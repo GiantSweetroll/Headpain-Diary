@@ -135,9 +135,9 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME),
-														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_DATE),
+														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_AMOUNT),
 									//					Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE),
-														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_DATE)};
+														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_AMOUNT)};
 	
 	public static final String[] TABLE_FILTER_OPTIONS = {//Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT),
 															Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT),
@@ -156,7 +156,7 @@ public final class Constants
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_INTENSITIES_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_TEXT),
-													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_DETAILS_TEXT),
+//													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_DETAILS_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_RECENT_MEDICATION_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_MEDICINE_COMPLAINT_TEXT),
 													Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_COMMENTS_TEXT)};
@@ -188,4 +188,29 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
 	
 	public static final LinkedHashMap<String, LinkedHashMap<URL, String>> PAIN_LOCATIONS = Methods.generatePainLocationsTextURLMap();
+	
+	//For JSlider
+	/*
+	public static final MetalSliderUI SLIDER_CUSTOM_UI = new MetalSliderUI()
+			{
+				@Override
+				protected void scrollDueToClickInTrack(int direction)
+				{
+					//scrollByBlock(direction);			//Normal behaviour
+					
+					int value = slider.getValue();
+					
+					if (slider.getOrientation() == JSlider.HORIZONTAL)
+					{
+						value = this.valueForXPosition(slider.getMousePosition().x);
+					}
+					else if (slider.getOrientation() == JSlider.VERTICAL)
+					{
+						value = this.valueForYPosition(slider.getMousePosition().y);
+					}
+					
+					slider.setValue(value);
+				}
+			};				//Still needs investigation (somehow connected to 2 different sliders, nullpointerexception at duration slider)
+			*/
 }

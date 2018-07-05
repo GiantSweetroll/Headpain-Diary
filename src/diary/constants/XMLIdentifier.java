@@ -215,9 +215,11 @@ public class XMLIdentifier
 	public static final String GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT = "graph category duration average vs date text";
 	public static final String GRAPH_CATEGORY_INTENSITY_VS_TIME = "graph category intensity vs time text";
 	public static final String GRAPH_CATEGORY_DURATION_VS_TIME = "graph category duration vs time text";
-	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_DATE = "graph category pain kind vs date";
+//	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_DATE = "graph category pain kind vs date";
 //	public static final String GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE = "graph category pain location vs date";
-	public static final String GRAPH_CATEGORY_TRIGGER_VS_DATE = "graph category trigger vs date";
+//	public static final String GRAPH_CATEGORY_TRIGGER_VS_DATE = "graph category trigger vs date";
+	public static final String GRAPH_CATEGORY_PAIN_KIND_VS_AMOUNT = "graph category pain kind vs amount";
+	public static final String GRAPH_CATEGORY_TRIGGER_VS_AMOUNT = "graph category trigger vs amount";
 	public static final String GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT = "graph categories intensity average vs month";
 	public static final String GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT = "graph categories duration average vs month";
 	//Graph Settings

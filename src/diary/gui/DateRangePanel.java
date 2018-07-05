@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
-import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.date.Date;
@@ -35,15 +34,11 @@ public class DateRangePanel extends JPanel
 		this.init();
 	}
 	
-	public DateRangePanel(LinkedHashMap<String, LinkedHashMap<String, String>> dateRangeMap)
+	public DateRangePanel(Date dateFrom, Date dateTo)
 	{
 		this.init();
-		this.setFromDate(dateRangeMap.get(FROM).get(PainDataIdentifier.DATE_DAY),
-							dateRangeMap.get(FROM).get(PainDataIdentifier.DATE_MONTH),
-							dateRangeMap.get(FROM).get(PainDataIdentifier.DATE_YEAR));
-		this.setToDate(dateRangeMap.get(TO).get(PainDataIdentifier.DATE_DAY),
-						dateRangeMap.get(TO).get(PainDataIdentifier.DATE_MONTH),
-						dateRangeMap.get(TO).get(PainDataIdentifier.DATE_YEAR));
+		this.setFromDate(dateFrom);
+		this.setToDate(dateTo);
 	}
 	
 	private void init()
@@ -77,24 +72,6 @@ public class DateRangePanel extends JPanel
 		this.add(this.dateTo, c);		
 	}
 	
-	public LinkedHashMap<String, LinkedHashMap<String, String>> getDateRangeMap()
-	{
-		LinkedHashMap<String, LinkedHashMap<String, String>> map = new LinkedHashMap<String, LinkedHashMap<String, String>>();
-		
-		map.put(FROM, this.dateFrom.getData());
-		map.put(TO, this.dateTo.getData());
-		
-		return map;
-	}
-	
-	public void setFromDate(String day, String month, String year)
-	{
-		this.dateFrom.setDate(day, month, year);
-	}
-	public void setToDate(String day, String month, String year)
-	{
-		this.dateTo.setDate(day, month, year);
-	}
 	public void setFromDate(Date date)
 	{
 		this.dateFrom.setDate(date);

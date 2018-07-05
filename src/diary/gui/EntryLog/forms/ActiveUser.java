@@ -1,5 +1,9 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.ActivePatientPanel;
 import diary.methods.Methods;
@@ -17,11 +21,20 @@ public class ActiveUser extends FormElement
 	
 	public ActiveUser(ActivePatientPanel patient)
 	{
-		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER));
+		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER), false);
 		
+		//Initialization
 		this.patient = patient;
+		GridBagConstraints c = new GridBagConstraints();
 		
-		this.addComponent(this.patient);
+		//Properties
+		this.getPanel().setLayout(new GridBagLayout());
+		
+		//Add to panel
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		this.getPanel().add(this.getFormTitleLabel(), c);
+		this.getPanel().add(this.patient, c);
 	}
 	
 	//Methods
@@ -53,6 +66,12 @@ public class ActiveUser extends FormElement
 		{
 			this.patient.setSelectedPatient((PatientData)obj);
 		}
+	}
+
+	@Override
+	public boolean allFilled()
+	{
+		return this.patient.isPatientSelected();
 	}
 
 }

@@ -28,11 +28,13 @@ import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.JTableHeader;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import diary.ImageExportPanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.ImageConstants;
-import diary.constants.PainDataIdentifier;
 import diary.constants.PainLocationConstants;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
@@ -44,6 +46,7 @@ import diary.gui.table.TableScreen;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.numbers.GNumbers;
+import giantsweetroll.xml.dom.XMLManager;
 
 public class Methods 
 {	
@@ -71,17 +74,17 @@ public class Methods
 	
 	public static String generatePainDataFolderPathName(PatientData patient, PainEntryData entry)
 	{
-		return MainFrame.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator +
+		return Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator +
 				patient.getID() + File.separator +
-				entry.getDataMap().get(PainDataIdentifier.DATE_YEAR) + File.separator +
-				entry.getDataMap().get(PainDataIdentifier.DATE_MONTH) + File.separator +
-				entry.getDataMap().get(PainDataIdentifier.DATE_DAY) + File.separator;
+				Integer.toString(entry.getDate().getYear()) + File.separator +
+				Integer.toString(entry.getDate().getMonth()) + File.separator +
+				Integer.toString(entry.getDate().getDay()) + File.separator;
 	}
 	public static String generatePainDataFilePathName(PatientData patient, PainEntryData entry)
 	{
 		return 	generatePainDataFolderPathName(patient, entry) + File.separator +
-				entry.getDataMap().get(PainDataIdentifier.TIME_HOUR) + "-" +
-				entry.getDataMap().get(PainDataIdentifier.TIME_MINUTE)/* + "-" +
+				entry.getTimeHour() + "-" +
+				entry.getTimeMinutes()/* + "-" +
 				entry.getDataMap().get(PainDataIdentifier.TIME_SECONDS)*/ +
 				Constants.PAIN_DATA_ENTRY_FILE_EXTENSION;
 	}
@@ -128,6 +131,7 @@ public class Methods
 	    return (float) Math.round(value * scale) / scale;
 	}
 	
+	/*
 	public static String convertToLanguageText(String painLocationID)	//Method used to convert Pain Location ID to the language's text
 	{
 		//General
@@ -319,7 +323,7 @@ public class Methods
 		}
 		
 		return "";
-	}
+	}	*/
 	
 	public static void makeFullscreen(JFrame frame)
 	{
@@ -655,13 +659,13 @@ public class Methods
 		{
 			return XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND;
 		}
-		else if (text.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
+/*		else if (text.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
 		{
 			return XMLIdentifier.OTHER_TEXT;
-		}
+		}			*/
 		else
 		{
-			return "";
+			return text;
 		}
 	}
 	public static String convertPainKindIDToLanguage(String id)
@@ -686,13 +690,13 @@ public class Methods
 		{
 			return Methods.getLanguageText(XMLIdentifier.OTHER_TEXT);
 		}
-		else if (!Methods.isPartOfDefaultPainKind(id))
+/*		else if (!Methods.isPartOfDefaultPainKind(id))
 		{
 			return Methods.getLanguageText(XMLIdentifier.OTHER_TEXT);
-		}
+		}		*/
 		else
 		{
-			return "";
+			return id;
 		}
 	}
 
@@ -714,13 +718,13 @@ public class Methods
 		{
 			return XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR;
 		}
-		else if (text.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
+/*		else if (text.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
 		{
 			return XMLIdentifier.OTHER_TEXT;
-		}
+		}			*/
 		else
 		{
-			return "";
+			return text;
 		}
 	}
 	public static String convertActivityIDToLanguage(String id)
@@ -741,13 +745,13 @@ public class Methods
 		{
 			return Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR);
 		}
-		else if (id.equals(XMLIdentifier.OTHER_TEXT))
+/*		else if (id.equals(XMLIdentifier.OTHER_TEXT))
 		{
 			return Methods.getLanguageText(XMLIdentifier.OTHER_TEXT);
-		}
+		}			*/
 		else
 		{
-			return "";
+			return id;
 		}
 	}
 	
@@ -816,5 +820,54 @@ public class Methods
         for (int i=0; i<n; ++i)
             System.out.print(arr[i] + " ");
         System.out.println();
+    }
+    
+    public static String getElementTextContent(Document doc, String key)			//Get text content of element from the selected document (only takes text content from the first NodeList)
+    {
+    	try
+    	{
+    		return XMLManager.getElement(doc.getElementsByTagName(key), 0).getTextContent();
+    	}
+    	catch(NullPointerException ex)
+    	{
+    		return "";
+    	}
+    }
+    
+    public static List<String> getTextContentsFromElements(List<Element> elements)
+    {
+    	List<String> list = new ArrayList<String>();
+    	
+    	for (Element element : elements)
+    	{
+    		list.add(element.getTextContent());
+    	}
+    	
+    	return list;
+    }
+    
+    public static int secondsToMinutes(int sec)
+    {
+    	return sec/60;
+    }
+    public static int secondsToHours(int sec)
+    {
+    	return sec/3600;
+    }
+    public static int secondsToDays(long sec)
+    {
+    	return Integer.parseInt(Long.toString(sec/86400));
+    }
+    public static int minutesToSeconds(int min)
+    {
+    	return min*60;
+    }
+    public static int hoursToSeconds(int hours)
+    {
+    	return hours*3600;
+    }
+    public static long daysToSeconds(int days)
+    {
+    	return days*86400;
     }
 }
