@@ -108,6 +108,8 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		this.butBack.setActionCommand(this.BACK);
 		this.butBack.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_BACK_TEXT));
 		this.butBack.addActionListener(this);
+		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butBack.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butBack);
@@ -126,11 +128,17 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT));
 		this.butDelete.addActionListener(this);
+		this.butDelete.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butDelete.setForeground(Color.white);
 		this.butSave.setActionCommand(this.SAVE);
 		this.butSave.addActionListener(this);
 		this.butSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
+		this.butSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butSave.setForeground(Color.white);
 		this.butRefresh.addActionListener(this);
 		this.butRefresh.setActionCommand(this.REFRESH);
+		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butRefresh.setForeground(Color.white);
 		
 		//add to panel
 //		this.panelBelowCenter.add(this.butSave);
@@ -149,6 +157,8 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		this.butSelect.setActionCommand(this.SELECT);
 		this.butSelect.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT));
 		this.butSelect.addActionListener(this);
+		this.butSelect.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butSelect.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowRight.add(this.butSelect);
@@ -162,7 +172,7 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		this.initPanelBelowRight();
 		
 		//Properties
-		this.panelBelow.setOpaque(false);
+		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelBelow.setLayout(new BorderLayout());
 		
 		//add to panel

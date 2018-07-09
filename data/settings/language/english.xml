@@ -186,7 +186,7 @@
      <text identifier="table headers comments text">Comments</text>
      <text identifier="table headers date text">Date</text>
      <text identifier="table headers durations text">Duration</text>
-     <text identifier="table headers intensities text">Intensities</text>
+     <text identifier="table headers intensities text">Intensity</text>
      <text identifier="table headers pain amount text">Amount of Headpain Location(s)</text>
      <text identifier="table headers pain kinds text">Kinds of Headpain</text>
      <text identifier="table headers pain positions text">Pain Positions</text>

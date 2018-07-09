@@ -2,6 +2,7 @@ package diary.gui.graphs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -97,6 +99,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		this.initPanelTopRight();
 		
 		//Properties
+//		this.panelTop.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelTop.setOpaque(false);
 		this.panelTop.setLayout(new BorderLayout());
 
@@ -118,8 +121,11 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		this.panelDateRange.dateFrom.setAsDefaultDataThis();
 		this.panelDateRange.dateTo.autoSetDate();
 		this.panelDateRange.dateTo.setAsDefaultDataThis();
+		this.activePatientPanel.setOpaque(true);
+		this.activePatientPanel.setBackground(Color.WHITE);
 		
 		//add to panel
+		this.panelTopRight.add(Box.createRigidArea(new Dimension(0, Constants.INSETS_TOP_COMPONENT.top)));
 		this.panelTopRight.add(this.activePatientPanel);
 		this.panelTopRight.add(this.panelDateRange);
 	}
@@ -136,6 +142,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		this.panelTopLeft.setOpaque(false);
 		this.panelTopLeft.setLayout(new GridBagLayout());
 		this.comboCategory.setBackground(Color.WHITE);
+	//	this.labCategory.setForeground(Color.white);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -155,7 +162,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		this.initPanelBelowLeft();
 		
 		//Properties
-		this.panelBelow.setOpaque(false);
+		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelBelow.setLayout(new BorderLayout());
 		
 		//Add to panel
@@ -173,6 +180,8 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.butBack.setActionCommand(this.BACK);
 		this.butBack.addActionListener(this);
+		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butBack.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butBack);
@@ -191,13 +200,21 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.butRefresh.setActionCommand(this.REFRESH);
 		this.butRefresh.addActionListener(this);
+		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butRefresh.setForeground(Color.white);
 		this.butSwitchGraph.setActionCommand(this.SWITCH_GRAPH);
 		this.butSwitchGraph.addActionListener(this);
+		this.butSwitchGraph.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butSwitchGraph.setForeground(Color.white);
 		this.buttonSave.setActionCommand(this.SAVE);
 		this.buttonSave.addActionListener(this);
 		this.buttonSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
+		this.buttonSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.buttonSave.setForeground(Color.white);
 		this.butOptions.setActionCommand(this.OPTIONS);
 		this.butOptions.addActionListener(this);
+		this.butOptions.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butOptions.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.buttonSave);

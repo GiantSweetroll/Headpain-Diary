@@ -100,6 +100,8 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		this.panelBelowLeft.setOpaque(false);
 		this.butBack.setActionCommand(this.BACK);
 		this.butBack.addActionListener(this);
+		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butBack.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butBack);
@@ -114,6 +116,8 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		this.panelBelowRight.setOpaque(false);
 		this.butNew.setActionCommand(this.NEW);
 		this.butNew.addActionListener(this);
+		this.butNew.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butNew.setForeground(Color.white);
 		
 		//Add to panel
 		this.panelBelowRight.add(this.butNew);
@@ -131,10 +135,16 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		this.panelBelowCenter.setOpaque(false);
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.addActionListener(this);
+		this.butDelete.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butDelete.setForeground(Color.white);
 		this.butRefresh.setActionCommand(this.FILTER);
 		this.butRefresh.addActionListener(this);
+		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butRefresh.setForeground(Color.white);
 		this.butSelect.setActionCommand(this.SELECT);
 		this.butSelect.addActionListener(this);
+		this.butSelect.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butSelect.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butDelete);
@@ -151,7 +161,8 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		
 		//Properties
 		this.panelBelow.setLayout(new BorderLayout());
-		this.panelBelow.setOpaque(false);
+	//	this.panelBelow.setOpaque(false);
+		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		
 		//add to panel
 		this.panelBelow.add(this.panelBelowCenter, BorderLayout.CENTER);
@@ -174,7 +185,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		//Properties
 		this.panelTopLeft.setLayout(new GridBagLayout());
 		this.panelTopLeft.setOpaque(false);
-		this.setBorder(BorderFactory.createTitledBorder(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT)));
+//		this.setBorder(BorderFactory.createTitledBorder(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT)));
 		this.checkDOB.setOpaque(false);
 		this.checkMedRec.setOpaque(false);
 		this.checkName.setOpaque(false);
