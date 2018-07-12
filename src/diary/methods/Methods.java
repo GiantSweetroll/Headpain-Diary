@@ -42,7 +42,6 @@ import diary.data.PainEntryData;
 import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.gui.graphs.GraphPanel;
-import diary.gui.table.TableScreen;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.numbers.GNumbers;
@@ -325,36 +324,36 @@ public class Methods
 		return "";
 	}	*/
 	
-	public static void makeFullscreen(JFrame frame)
+	public static void makeFullscreen(MainFrame mainFrame)
 	{
-		frame.dispose();
+		mainFrame.getFrameInstance().dispose();
 		try
 		{
-			frame.add(MainFrame.jComponent);
+			mainFrame.getFrameInstance().add(mainFrame.getPanelCanvas());
 		}
 		catch(NullPointerException ex){}
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setUndecorated(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		mainFrame.getFrameInstance().setExtendedState(JFrame.MAXIMIZED_BOTH);
+		mainFrame.getFrameInstance().setUndecorated(true);
+		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.getFrameInstance().setVisible(true);
 		MainFrame.isFullScreen = true;
 	}
-	public static void makeWindowed(JFrame frame)
+	public static void makeWindowed(MainFrame mainFrame)
 	{
-		frame.dispose();
+		mainFrame.getFrameInstance().dispose();
 		try
 		{
-			frame.add(MainFrame.jComponent);
+			mainFrame.getFrameInstance().add(mainFrame.getPanelCanvas());
 		}
 		catch(NullPointerException ex){}
-		frame.setExtendedState(JFrame.NORMAL);
-		frame.setUndecorated(false);
-		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
-	//	frame.pack();
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+		mainFrame.getFrameInstance().setExtendedState(JFrame.NORMAL);
+		mainFrame.getFrameInstance().setUndecorated(false);
+		mainFrame.getFrameInstance().setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
+	//	mainFrame.getFrameInstance().pack();
+		mainFrame.getFrameInstance().setResizable(false);
+		mainFrame.getFrameInstance().setLocationRelativeTo(null);
+		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.getFrameInstance().setVisible(true);
 		MainFrame.isFullScreen = false;
 	}
 
@@ -466,18 +465,18 @@ public class Methods
 		MainFrame.changePanel(panel);
 		if (showPreview)
 		{
-			FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.jComponent));
+			FileOperation.exportImage(Methods.createImage((ImagePanel)mainFrame.getPanelCanvas()));
 		}		
 		MainFrame.changePanel(MainFrame.lastComponent);
 		try
 		{
-			if (MainFrame.jComponent instanceof GraphPanel)
+			if (mainFrame.getPanelCanvas() instanceof GraphPanel)
 			{
-				((GraphPanel)MainFrame.jComponent).refreshGraph();		//Redraws graph to its original state
+				((GraphPanel)mainFrame.getPanelCanvas()).refreshGraph();		//Redraws graph to its original state
 			}
-			else if (MainFrame.jComponent instanceof TableScreen)
+			else if (mainFrame.getPanelCanvas() instanceof TableScreen)
 			{
-				((TableScreen)MainFrame.jComponent).initTable();		//Recreates table to its original state
+				((TableScreen)mainFrame.getPanelCanvas()).initTable();		//Recreates table to its original state
 			}
 		}
 		catch(ClassCastException ex) {}
@@ -493,25 +492,30 @@ public class Methods
 		mainFrame.changePanel(panel, PanelName.IMAGE_EXPORT_PANEL);
 		if (showPreview)
 		{
-			FileOperation.exportImage(Methods.createImage((ImageExportPanel)MainFrame.jComponent));
+			FileOperation.exportImage(Methods.createImage(panel));
 		}		
 //		MainFrame.changePanel(MainFrame.lastComponent);
 		mainFrame.changePanel(PanelName.GRAPH_PANEL);
 		try
 		{
-			if (MainFrame.jComponent instanceof GraphPanel)
+			/*
+			if (mainFrame.getPanelCanvas() instanceof GraphPanel)
 			{
-				((GraphPanel)MainFrame.jComponent).refreshGraph();		//Redraws graph to its original state
+				((GraphPanel)mainFrame.getPanelCanvas()).refreshGraph();		//Redraws graph to its original state
 			}
-			else if (MainFrame.jComponent instanceof TableScreen)
+			else if (mainFrame.getPanelCanvas() instanceof TableScreen)
 			{
-				((TableScreen)MainFrame.jComponent).refreshTable();		//Recreates table to its original state
+				((TableScreen)mainFrame.getPanelCanvas()).refreshTable();		//Recreates table to its original state
 			}
+			*/
+			mainFrame.GRAPH_PANEL.refreshGraph();
+			mainFrame.PAIN_TABLE.refreshTable();
 		}
 		catch(ClassCastException ex) {}
 		if (!showPreview)
 		{
-			FileOperation.exportImage(Methods.createImage((GraphPanel)MainFrame.lastComponent));
+			((CardLayout)mainFrame.getPanelCanvas().getLayout()).previous(mainFrame.getPanelCanvas());
+			FileOperation.exportImage(Methods.createImage((GraphPanel)mainFrame.getPanelCanvas()));
 		}
 	}
 	

@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -41,9 +40,6 @@ public class MainFrame
 	/** The frame. */
 	private JFrame frame;
 //	public static Settings setting;
-	public static JComponent lastComponent;
-	
-	public static JComponent jComponent;
 	
 	public static boolean isFullScreen;
 	
@@ -84,7 +80,7 @@ public class MainFrame
 		//Add to panel
 		this.panel.add(this.MAIN_MENU, PanelName.MAIN_MENU);
 		this.panel.add(this.ENTRY_LOG, PanelName.ENTRY_LOG);
-		this.panel.add(this.GRAPH_FILTER_PANEL, PanelName.GRAPH_FILTER_PANEL);
+//		this.panel.add(this.GRAPH_FILTER_PANEL, PanelName.GRAPH_FILTER_PANEL);
 		this.panel.add(this.GRAPH_PANEL, PanelName.GRAPH_PANEL);
 		this.panel.add(this.MANAGE_PATIENTS_PANEL, PanelName.MANAGE_PATIENTS_PANEL);
 		this.panel.add(this.SETTINGS_PANEL, PanelName.SETTING_PANEL);
@@ -166,6 +162,14 @@ public class MainFrame
 		this.changePanel(key);
 	}
 	
+	public JPanel getPanelCanvas()
+	{
+		return this.panel;
+	}
+	public JFrame getFrameInstance()
+	{
+		return this.frame;
+	}
 	
 	public static final boolean isFullScreen()
 	{
@@ -180,11 +184,11 @@ public class MainFrame
 			//Select window mode
 			if(Globals.setting.getDataMap().get(Settings.WINDOW_MODE).equals(Settings.WINDOWED))
 			{
-				Methods.makeWindowed(frame);
+				Methods.makeWindowed(this);
 			}
 			else
 			{
-				Methods.makeFullscreen(frame);
+				Methods.makeFullscreen(this);
 			}
 			
 			//Selected Language

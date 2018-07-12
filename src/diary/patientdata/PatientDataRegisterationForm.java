@@ -208,14 +208,14 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 							{
 								FileOperation.savePatientData(patientData);
 			//					MainFrame.changePanel(MainFrame.lastComponent);
-								this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
+								this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 							}
 						}
 						else
 						{
 							FileOperation.savePatientData(patientData);
 			//				MainFrame.changePanel(MainFrame.lastComponent);
-							this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
+							this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 						}
 					}
 					else if (this.situation.equals(this.EDIT_USER))
@@ -229,6 +229,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 		//				MainFrame.changePanel(MainFrame.lastComponent);
 						this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
 					}
+					this.getMainFrameReference().MANAGE_PATIENTS_PANEL.refresh();
 				}
 				break;
 		}

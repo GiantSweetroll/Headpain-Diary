@@ -12,7 +12,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -72,7 +71,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		this.init();
 	}
 	
-	//Methods
+	//Create GUI
 	private void init()
 	{
 		//Initialization
@@ -239,6 +238,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		this.panelTable.add(this.scrollTable, BorderLayout.CENTER);
 	}
 	
+	//Methods
 	private void initTable()
 	{
 		try
