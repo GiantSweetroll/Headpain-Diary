@@ -2,7 +2,7 @@
 <patient>
      <medical_record_id>5545454546</medical_record_id>
      <patient_name>Phil</patient_name>
-     <patient_dob_day>01</patient_dob_day>
+     <patient_dob_day>1</patient_dob_day>
      <patient_dob_month>6</patient_dob_month>
      <patient_dob_year>2015</patient_dob_year>
 </patient>

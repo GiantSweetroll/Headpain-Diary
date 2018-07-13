@@ -289,6 +289,7 @@ public class XMLIdentifier
 	public static final String PATIENT_DATA_FORM_NAME_LABEL = "patient data form name label";
 	public static final String PATIENT_DATA_FORM_DOB_LABEL = "patient data form dob label";
 	public static final String PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT = "patient data form medical record id tooltip text";
+	public static final String PATIENT_DATA_FORM_PREVIOUS_HEADPAIN_LABEL = "patient data form previous headpain label";
 	
 	//Patient Data Registration From
 	public static final String PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL = "patient data registeration form title label";

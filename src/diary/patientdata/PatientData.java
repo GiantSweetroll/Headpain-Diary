@@ -19,6 +19,7 @@ public class PatientData
 	public static final String DOB_DAY = "patient_dob_day";
 	public static final String DOB_MONTH = "patient_dob_month";
 	public static final String DOB_YEAR = "patient_dob_year";
+	public static final String PREVIOUS_HEADPAINS = "previous_headpains";
 	public static final String ROOT_NODE = "patient";
 	
 	private LinkedHashMap<String, String> dataMap;
@@ -98,6 +99,10 @@ public class PatientData
 	public String getIDAndName()
 	{
 		return this.dataMap.get(PatientData.MEDICAL_RECORD_ID) + " - " + this.dataMap.get(PatientData.NAME);
+	}
+	public String getPreviousHeadpains()
+	{
+		return this.dataMap.get(PatientData.PREVIOUS_HEADPAINS).toString();
 	}
 	
 	//Override Methods

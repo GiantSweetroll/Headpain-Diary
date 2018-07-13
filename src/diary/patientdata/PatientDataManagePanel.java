@@ -404,7 +404,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 				
 			case NEW:
 			//	MainFrame.changePanel(new PatientDataRegisterationForm());
-				this.getMainFrameReference().changePanel(new PatientDataRegisterationForm(this.getMainFrameReference()), PanelName.PATIENT_REGISTERATION_FORM);
+				this.getMainFrameReference().changePanel(new PatientDataRegisterationForm(this.getMainFrameReference(), true), PanelName.PATIENT_REGISTERATION_FORM);
 				break;
 				
 			case FILTER:

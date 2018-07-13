@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -16,6 +17,7 @@ import diary.gui.DatePanel;
 import diary.methods.Methods;
 import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.gui.swing.TextAreaManager;
 
 public class PatientDataForm extends JPanel
 {
@@ -25,9 +27,10 @@ public class PatientDataForm extends JPanel
 	 */
 	private static final long serialVersionUID = -2197578997400146750L;
 	
-	private JLabel labMedID, labName, labDOB;
+	private JLabel labMedID, labName, labDOB, labPrevHeadpain;
 	private JTextField tfMedID, tfName;
 	private DatePanel panelDOB;
+	private JTextArea taPrevHeadpain;
 	
 	public PatientDataForm(boolean enable)
 	{
@@ -48,6 +51,7 @@ public class PatientDataForm extends JPanel
 		this.tfMedID.setEditable(enable);
 		this.tfName.setEditable(enable);
 		this.panelDOB.enableComponents(enable);
+		this.taPrevHeadpain.setEditable(false);
 	}
 	private void init()
 	{
@@ -58,6 +62,7 @@ public class PatientDataForm extends JPanel
 		this.tfName = new JTextField (10);
 		this.labDOB = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL), SwingConstants.RIGHT);
 		this.panelDOB = new DatePanel(true);
+		this.taPrevHeadpain = new JTextArea(15, 30);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -68,6 +73,7 @@ public class PatientDataForm extends JPanel
 		this.tfMedID.setBackground(Color.WHITE);
 		this.tfName.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfName.setBackground(Color.WHITE);
+		TextAreaManager.autoConfigureTextArea(this.taPrevHeadpain, true);
 		
 		//add to panel
 		Gbm.goToOrigin(c);
@@ -85,6 +91,8 @@ public class PatientDataForm extends JPanel
 		this.add(this.labDOB, c);					//DOB
 		Gbm.nextGridColumn(c);
 		this.add(this.panelDOB, c);					//DOB Panel
+//		Gbm.newGridLine(c);
+//		this.add(this.taPrevHeadpain, c);			//Previous Headpains
 	}
 	public PatientData getData()
 	{

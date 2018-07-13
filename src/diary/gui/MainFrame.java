@@ -235,7 +235,7 @@ public class MainFrame
 					MainFrame.lastComponent = Globals.MAIN_MENU;
 					MainFrame.changePanel(new PatientDataRegisterationForm());
 					*/
-					this.changePanel(new PatientDataRegisterationForm(this), PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(new PatientDataRegisterationForm(this, false), PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex)
 				{
@@ -260,7 +260,7 @@ public class MainFrame
 		//			jComponent = Globals.MAIN_MENU;
 		//			MainFrame.lastComponent = Globals.MAIN_MENU;
 		//			MainFrame.changePanel(new PatientDataRegisterationForm());
-					this.changePanel(new PatientDataRegisterationForm(this), PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(new PatientDataRegisterationForm(this, false), PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex1)
 				{

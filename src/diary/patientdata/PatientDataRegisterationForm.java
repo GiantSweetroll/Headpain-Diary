@@ -38,6 +38,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 	//Conditioning
 	private String situation;
 	private String lastMedID;
+	private boolean canCancel;
 	
 	//Constants
 	private final String CANCEL = "cancel";
@@ -45,9 +46,10 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 	private final String NEW_USER = "new user";
 	private final String EDIT_USER = "edit user";
 	
-	public PatientDataRegisterationForm(MainFrame frame)
+	public PatientDataRegisterationForm(MainFrame frame, boolean allowCancel)
 	{
 		super(frame);
+		this.canCancel = allowCancel;
 		this.createAndShowGUI();
 		this.situation = this.NEW_USER;
 	}
@@ -162,12 +164,15 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 		switch(e.getActionCommand())
 		{
 			case CANCEL:
-				try
+				if (this.canCancel)
 				{
-	//				MainFrame.changePanel(MainFrame.lastComponent);
-					this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
+					try
+					{
+		//				MainFrame.changePanel(MainFrame.lastComponent);
+						this.getMainFrameReference().changePanel(PanelName.MANAGE_PATIENTS_PANEL);
+					}
+					catch(NullPointerException ex) {ex.printStackTrace();}
 				}
-				catch(NullPointerException ex) {}
 				break;
 				
 			case SAVE:
@@ -227,7 +232,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 							FileOperation.deletePatientData(this.lastMedID);
 						}
 		//				MainFrame.changePanel(MainFrame.lastComponent);
-						this.getMainFrameReference().changePanel(PanelName.PATIENT_REGISTERATION_FORM);
+						this.getMainFrameReference().changePanel(PanelName.MANAGE_PATIENTS_PANEL);
 					}
 					this.getMainFrameReference().MANAGE_PATIENTS_PANEL.refresh();
 				}
