@@ -25,6 +25,6 @@ public class PatientDataTextPanel extends JPanel
 		//Add components
 		this.add(new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL) + ": " + patient.getName()));
 		this.add(new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL) + ": " + patient.getID()));
-		this.add(new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL) + ": " + patient.getDOB()));
+		this.add(new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL) + ": " + patient.getDOBString()));
 	}
 }

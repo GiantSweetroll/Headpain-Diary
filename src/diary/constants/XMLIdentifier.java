@@ -63,6 +63,7 @@ public class XMLIdentifier
 	public static final String EPISODE_TEXT = "episode text";
 	public static final String TRIGGER_TEXT = "trigger text";
 	public static final String NEXT_TEXT = "next text";
+	public static final String CHOOSE_NONE_TEXT = "choose none text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";

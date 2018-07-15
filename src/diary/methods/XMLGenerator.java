@@ -140,46 +140,6 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.TIME_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the time to that of local time");
 		appendComponentToMap(doc, map, XMLIdentifier.TIME_RESET_BUTTON_TOOLTIP_TEXT, "Resets time changes to it's orginal values");
 		
-		//Pain Location
-		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_HEAD_TEXT, "Head");
-		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_CHEEKS_TEXT, "Cheeks");
-		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_EARS_TEXT, "Ears");
-		appendComponentToMap(doc, map, XMLIdentifier.GENERAL_POSITION_EYES_TEXT, "Eyes");
-		//Head
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_HEAD_BACK_TEXT, "Back Side");
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_HEAD_FRONT_TEXT, "Front Side");
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_HEAD_LEFT_TEXT, "Left Side");
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_HEAD_RIGHT_TEXT, "Right Side");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_BOTTOM_LEFT_TEXT, "Bottom Left");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_BOTTOM_RIGHT_TEXT, "Bottom Right");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_CENTER_TEXT, "Center");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_TOP_LEFT_TEXT, "Top Left");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_BACK_TOP_RIGHT_TEXT, "Top Right");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_BACK_TEXT, "Back Side");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_CENTER_TEXT, "Center");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_SIDE_FRONT_TEXT, "Frontal Side");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_FRONT_CENTER_TEXT, "Center");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_FRONT_LEFT_TEXT, "Left Side");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_HEAD_FRONT_RIGHT_TEXT, "Front Side");
-		//Cheeks
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_CHEEKS_LEFT_TEXT, "Left");
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_CHEEKS_RIGHT_TEXT, "Right");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_CHEEKS_LOWER_TEXT, "Lower Side");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_CHEEKS_UPPER_TEXT, "Upper Side");
-		//Ears
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_EARS_LEFT_TEXT, "Left");
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_EARS_RIGHT_TEXT, "Right");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_HOLE_TEXT, "Hole");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_LOWER_TEXT, "Lower Leaf Half");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EARS_UPPER_TEXT, "Upper Leaf Half");
-		//Eyes
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_EYES_LEFT_TEXT, "Left");
-		appendComponentToMap(doc, map, XMLIdentifier.SPECIFIC_POSITION_EYES_RIGHT_TEXT, "Right");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_BEHIND_TEXT, "Behind Eyeballs");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_EYEBALL_TEXT, "Eyeball");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_EYEBROW_TEXT, "Eyebrow");
-		appendComponentToMap(doc, map, XMLIdentifier.VERY_SPECIFIC_POSITION_EYES_SOCKET_TEXT, "Socket");
-		
 		//Pain Location New
 		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_EYE_AND_FOREHEAD_TEXT, "Eye Area And Forehead");
 		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_FACE_LEFT_AND_HEAD_TEXT, "Left-Side Face and Head");
@@ -234,6 +194,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.EPISODE_TEXT, "Episode");
 		appendComponentToMap(doc, map, XMLIdentifier.TRIGGER_TEXT, "Trigger");
 		appendComponentToMap(doc, map, XMLIdentifier.NEXT_TEXT, "Next");
+		appendComponentToMap(doc, map, XMLIdentifier.CHOOSE_NONE_TEXT, "None");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -316,6 +277,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL, "Name");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL, "Date of Birth");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT, "Medical Record (If for personal use only, just enter anything)");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_PREVIOUS_HEADPAIN_LABEL, "Has Headpains Since");
 		
 		//Patient Data Registration Form
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL, "Patient Data Registeration Form");

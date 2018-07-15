@@ -51,17 +51,18 @@ public class PatientDataForm extends JPanel
 		this.tfMedID.setEditable(enable);
 		this.tfName.setEditable(enable);
 		this.panelDOB.enableComponents(enable);
-		this.taPrevHeadpain.setEditable(false);
+		this.taPrevHeadpain.setEditable(enable);
 	}
 	private void init()
 	{
 		//Initialization
-		this.labMedID = new JLabel(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL), SwingConstants.RIGHT);
+		this.labMedID = new JLabel(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL), SwingConstants.RIGHT);
 		this.tfMedID = new JTextField(10);
-		this.labName = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL), SwingConstants.RIGHT);
+		this.labName = new JLabel (Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL), SwingConstants.RIGHT);
 		this.tfName = new JTextField (10);
-		this.labDOB = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL), SwingConstants.RIGHT);
+		this.labDOB = new JLabel (Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL), SwingConstants.RIGHT);
 		this.panelDOB = new DatePanel(true);
+		this.labPrevHeadpain = new JLabel (Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_PREVIOUS_HEADPAIN_LABEL), SwingConstants.RIGHT);
 		this.taPrevHeadpain = new JTextArea(15, 30);
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -69,7 +70,7 @@ public class PatientDataForm extends JPanel
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
 		this.tfMedID.setHorizontalAlignment(SwingConstants.CENTER);
-		this.tfMedID.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT));
+		this.tfMedID.setToolTipText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT));
 		this.tfMedID.setBackground(Color.WHITE);
 		this.tfName.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfName.setBackground(Color.WHITE);
@@ -91,8 +92,10 @@ public class PatientDataForm extends JPanel
 		this.add(this.labDOB, c);					//DOB
 		Gbm.nextGridColumn(c);
 		this.add(this.panelDOB, c);					//DOB Panel
-//		Gbm.newGridLine(c);
-//		this.add(this.taPrevHeadpain, c);			//Previous Headpains
+		Gbm.newGridLine(c);
+		this.add(this.labPrevHeadpain, c);			//Previous Headpain Label
+		Gbm.nextGridColumn(c);
+		this.add(this.taPrevHeadpain, c);			//Previous Headpains
 	}
 	public PatientData getData()
 	{
@@ -103,6 +106,7 @@ public class PatientDataForm extends JPanel
 		map.put(PatientData.DOB_DAY, Integer.toString(dob.getDay()));
 		map.put(PatientData.DOB_MONTH, Integer.toString(dob.getMonth()));
 		map.put(PatientData.DOB_YEAR, Integer.toString(dob.getYear()));
+		map.put(PatientData.PREVIOUS_HEADPAINS, this.taPrevHeadpain.getText());
 		
 		return new PatientData(map);
 	}
@@ -130,13 +134,11 @@ public class PatientDataForm extends JPanel
 	}
 	public void setData(PatientData patient)
 	{
-		LinkedHashMap<String, String> dataMap = patient.getDataMap();
-		this.tfMedID.setText(dataMap.get(PatientData.MEDICAL_RECORD_ID));
-		this.tfName.setText(dataMap.get(PatientData.NAME));
-		this.panelDOB.setDate(new Date(Integer.parseInt(dataMap.get(PatientData.DOB_DAY)), 
-										Integer.parseInt(dataMap.get(PatientData.DOB_MONTH)),
-										Integer.parseInt(dataMap.get(PatientData.DOB_YEAR))));
+		this.tfMedID.setText(patient.getID());
+		this.tfName.setText(patient.getName());
+		this.panelDOB.setDate(patient.getDOB());
 		this.panelDOB.setAsDefaultDataThis();
+		this.taPrevHeadpain.setText(patient.getPreviousHeadpains());
 		this.revalidate();
 		this.repaint();
 	}

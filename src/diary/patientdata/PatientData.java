@@ -9,6 +9,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import giantsweetroll.date.Date;
 import giantsweetroll.xml.dom.XMLManager;
 
 public class PatientData 
@@ -87,9 +88,16 @@ public class PatientData
 		return this.dataMap.get(PatientData.NAME);
 	}
 	
-	public String getDOB()
+	public String getDOBString()
 	{
 		return this.dataMap.get(PatientData.DOB_DAY) + "-" + this.dataMap.get(PatientData.DOB_MONTH) + "-" + this.dataMap.get(PatientData.DOB_YEAR);
+	}
+	
+	public Date getDOB()
+	{
+		return new Date(Integer.parseInt(this.dataMap.get(PatientData.DOB_DAY)),
+						Integer.parseInt(this.dataMap.get(PatientData.DOB_MONTH)),
+						Integer.parseInt(this.dataMap.get(PatientData.DOB_YEAR)));
 	}
 	
 	public String getNameAndID()
@@ -102,7 +110,14 @@ public class PatientData
 	}
 	public String getPreviousHeadpains()
 	{
-		return this.dataMap.get(PatientData.PREVIOUS_HEADPAINS).toString();
+		try
+		{
+			return this.dataMap.get(PatientData.PREVIOUS_HEADPAINS).toString();
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
 	}
 	
 	//Override Methods

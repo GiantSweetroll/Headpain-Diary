@@ -315,7 +315,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 			index++;
 			obj[i][index] = list.get(i).getName();
 			index++;
-			obj[i][index] = list.get(i).getDOB();
+			obj[i][index] = list.get(i).getDOBString();
 		}
 		
 		return obj;

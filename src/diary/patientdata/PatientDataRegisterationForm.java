@@ -60,6 +60,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 		this.createAndShowGUI();
 		this.situation = this.EDIT_USER;
 		this.lastMedID = patientData.getDataMap().get(PatientData.MEDICAL_RECORD_ID);
+		this.canCancel = true;
 		this.patientForm.setData(patientData);
 	}
 	
