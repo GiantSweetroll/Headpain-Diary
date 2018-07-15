@@ -171,7 +171,8 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		}
 		catch(NumberFormatException ex)
 		{
-			long value = Long.parseLong(obj.toString());
+			double val = Double.parseDouble(obj.toString());
+			long value = (long)val;
 			value = value/86400;
 			String durationUnit = Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT);
 			

@@ -187,6 +187,10 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND),
 														Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
 	
+	public static final String[] DEFAULT_RECENT_MEDICATION = {Methods.getLanguageText(XMLIdentifier.DEFAULT_RECENT_MEDICATION_PRESCRIBED_MIX_CAPSULE)};
+	
+	public static final String[] EMPTY_STRING_ARRAY = {};
+	
 	public static final LinkedHashMap<String, LinkedHashMap<URL, String>> PAIN_LOCATIONS = Methods.generatePainLocationsTextURLMap();
 	
 	//For JSlider

@@ -3,24 +3,23 @@ package diary.history;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import diary.constants.Constants;
+import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
+import giantsweetroll.GMisc;
 import giantsweetroll.gui.swing.Gbm;
 
-public class HistoryPanel extends JPanel implements ItemListener
+public class HistoryPanel extends JPanel implements GUIFunction, ActionListener
 {
 
 	/**
@@ -28,48 +27,33 @@ public class HistoryPanel extends JPanel implements ItemListener
 	 */
 	private static final long serialVersionUID = -2435079856803345604L;
 
-	private JRadioButton radHistory, radNew;
-	private ButtonGroup group;
-	private JComboBox<String> comboHistory;
+	private HistoryComboBox comboHistory;
 	private JTextField tfHistory;
 	private History history;
+	private String historyKey;
 	
 	//Constructors
-	public HistoryPanel(History history)
+	public HistoryPanel(History history, String patientDataConstant, String[] defaultOptions)		//patientDataConstant are constants from PatientData class used for the recent selected options
 	{
+		this.historyKey = patientDataConstant;
 		this.history = history;
-		this.init();
+		this.init(defaultOptions);
 		this.comboHistory.setModel(new DefaultComboBoxModel<String>(history.getHistory().toArray(new String[history.getHistory().size()])));
-		
-		if (history.getHistory().size() > 0)
-		{
-			this.radHistory.setSelected(true);
-		}
 	}
 	
 	//Methods
-	private void init()
+	private void init(String[] defaultOptions)
 	{
 		//Initialization
-		this.radHistory = new JRadioButton();
-		this.radNew =  new JRadioButton();
-		this.comboHistory = new JComboBox<String>();
+		this.comboHistory = new HistoryComboBox(this.history, defaultOptions);
 		this.tfHistory = new JTextField(10);
-		this.group = new ButtonGroup();
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
-		this.group.add(this.radHistory);
-		this.group.add(this.radNew);
-		this.radHistory.addItemListener(this);
-		this.radHistory.setOpaque(false);
-		this.radNew.addItemListener(this);
-		this.radNew.setSelected(true);
-		this.radNew.setOpaque(false);
 		this.comboHistory.setBackground(Color.WHITE);
-		this.radHistory.setEnabled(this.hasHistory());
+		this.comboHistory.addActionListener(this);
 		this.tfHistory.setOpaque(false);
 		this.tfHistory.addMouseListener(new MouseListener()
 				{
@@ -95,10 +79,10 @@ public class HistoryPanel extends JPanel implements ItemListener
 					@Override
 					public void mousePressed(MouseEvent e) 
 					{
-						if (!tfHistory.isEditable() && isEnabled())
+						if (!tfHistory.isEditable())
 						{
+							comboHistory.setSelectedToOther();
 							tfHistory.setEditable(true);
-							radNew.setSelected(true);
 						}
 					}
 
@@ -109,122 +93,48 @@ public class HistoryPanel extends JPanel implements ItemListener
 					}
 			
 				});
-		this.comboHistory.addMouseListener(new MouseListener()
-				{
-
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseExited(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mousePressed(MouseEvent e) 
-					{
-						if (hasHistory() && !comboHistory.isEnabled() && isEnabled())
-						{
-							comboHistory.setEnabled(true);
-							radHistory.setSelected(true);
-						}
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-			
-				});
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
-		this.add(this.radHistory, c);			//History Radio Button
+		this.add(this.comboHistory, c);					//History Combo Box
 		Gbm.nextGridColumn(c);
-		this.add(this.comboHistory, c);			//History Options
-		Gbm.newGridLine(c);
-		c.insets = Constants.INSETS_GENERAL;
-		this.add(this.radNew, c);				//New History Radio Button
-		Gbm.nextGridColumn(c);
-		this.add(this.tfHistory, c);			//New History Text Field
+		this.add(this.tfHistory, c);					//History Text Field
 	}
 	public void setActiveItem(String item)
 	{
 		if (this.history.itemExists(item))
 		{
-			this.radHistory.setSelected(true);
 			this.comboHistory.setSelectedItem(item);
 		}
 		else
 		{
-			this.radNew.setSelected(true);
+			this.comboHistory.setSelectedToOther();
 			this.tfHistory.setText(item);
 		}
 	}
 	public String getItem()
 	{
-		if (this.radHistory.isSelected())
-		{
-			try
-			{
-				return this.comboHistory.getSelectedItem().toString();
-			}
-			catch(NullPointerException ex)
-			{
-				return Methods.getTextData(this.tfHistory);
-			}
-		}
-		else
+		if (this.comboHistory.otherOptionSelected())
 		{
 			return Methods.getTextData(this.tfHistory);
 		}
-	}
-	public void resetDefaults()
-	{
-		if(this.hasHistory())
+		else if (this.comboHistory.noneOptionSelected())
 		{
-			this.radHistory.setSelected(true);
+			return "";
 		}
 		else
 		{
-			this.radNew.setSelected(true);
+			return GMisc.getItem(this.comboHistory).toString();
 		}
-		try
-		{
-			this.comboHistory.setSelectedIndex(0);
-		}
-		catch(IllegalArgumentException ex) {}
-	}
-	@Deprecated
-	public void refresh(History history)
-	{
-		this.comboHistory.setModel(new DefaultComboBoxModel<String>(history.getHistory().toArray(new String[history.getHistory().size()])));
-		this.radHistory.setEnabled(this.hasHistory());
-		this.revalidate();
-		this.repaint();
 	}
 	public void refresh(History history, PatientData patient)
 	{
 		history.refresh(patient);
-		this.comboHistory.setModel(new DefaultComboBoxModel<String>(history.getHistory().toArray(new String[history.getHistory().size()])));
-		this.radHistory.setEnabled(this.hasHistory());
-		if (!this.radHistory.isEnabled())
-		{
-			this.radNew.setEnabled(true);
-		}
+		this.comboHistory.setHistory(history);
+		this.comboHistory.refresh();
+		this.comboHistory.setDefaultSelection(patient.getRecentSelectedOption(this.historyKey));
 		this.revalidate();
 		this.repaint();
 	}
@@ -233,44 +143,40 @@ public class HistoryPanel extends JPanel implements ItemListener
 		return this.comboHistory.getItemCount()!=0;
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void setEnabled(boolean enabled)
 	{
 		super.setEnabled(enabled);
 		
-		this.radHistory.setEnabled(enabled);
-		this.radNew.setEnabled(enabled);
 		this.comboHistory.setEnabled(enabled);
 		this.tfHistory.setEnabled(enabled);
-		
-		if(enabled)
-		{
-			if (this.radHistory.isSelected())
-			{
-				this.tfHistory.setEditable(false);
-			}
-			else if (this.radNew.isSelected())
-			{
-				this.comboHistory.setEnabled(false);
-			}
-		}
 	}
 	
 	//Interfaces
 	@Override
-	public void itemStateChanged(ItemEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
-		if (this.radHistory.isSelected())
+		if (this.comboHistory.otherOptionSelected())
 		{
-			this.tfHistory.setText("");
-			this.tfHistory.setEditable(false);
-			this.comboHistory.setEnabled(true);
+			this.tfHistory.setEditable(true);
 		}
 		else
 		{
-			this.tfHistory.setEditable(true);
-			this.comboHistory.setEnabled(false);
+			this.tfHistory.setText("");
+			this.tfHistory.setEditable(false);
 		}
+	}
+	
+	@Override
+	public void resetDefaults()
+	{
+		this.comboHistory.resetDefaults();
+	}
+
+	@Override
+	public void refresh() 
+	{
+		this.comboHistory.refresh();
 	}
 }

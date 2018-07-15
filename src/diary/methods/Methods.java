@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
@@ -873,5 +874,15 @@ public class Methods
     public static long daysToSeconds(int days)
     {
     	return days*86400;
+    }
+    
+    public static String frameStringWithDashes(String text)
+    {
+    	return "-- " + text + " --";
+    }
+    
+    public static Insets getInsetsWithNoHorizontalSpcaing(Insets base)
+    {
+    	return new Insets(base.top, 0, base.bottom, 0);
     }
 }

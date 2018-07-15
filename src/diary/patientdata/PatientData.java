@@ -1,5 +1,6 @@
 package diary.patientdata;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,11 +22,13 @@ public class PatientData
 	public static final String DOB_MONTH = "patient_dob_month";
 	public static final String DOB_YEAR = "patient_dob_year";
 	public static final String PREVIOUS_HEADPAINS = "previous_headpains";
+	public static final String LAST_RECENT_MEDS = "recent_meds";
+	public static final String LAST_MEDICINE_COMPLAINT = "recent_med_complaint";
 	public static final String ROOT_NODE = "patient";
 	
-	private LinkedHashMap<String, String> dataMap;
+	private HashMap<String, String> dataMap;
 	
-	public PatientData(LinkedHashMap<String, String> dataMap)
+	public PatientData(HashMap<String, String> dataMap)
 	{
 		this.dataMap = dataMap;
 	}
@@ -48,7 +51,7 @@ public class PatientData
 	}
 	
 	//Methods
-	public LinkedHashMap<String, String> getDataMap()
+	public HashMap<String, String> getDataMap()
 	{
 		return this.dataMap;
 	}
@@ -113,6 +116,48 @@ public class PatientData
 		try
 		{
 			return this.dataMap.get(PatientData.PREVIOUS_HEADPAINS).toString();
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getLastRecentMeds()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.LAST_RECENT_MEDS).toString();
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public void setLastRecentMeds(String meds)
+	{
+		this.dataMap.put(PatientData.LAST_RECENT_MEDS, meds);
+	}
+	public String getLastMedicineComplaint()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.LAST_MEDICINE_COMPLAINT);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public void setLastMedicineComplaint(String compl)
+	{
+		this.dataMap.put(PatientData.LAST_MEDICINE_COMPLAINT, compl);
+	}
+	
+	public String getRecentSelectedOption(String key)
+	{
+		try
+		{
+			return this.dataMap.get(key);
 		}
 		catch(NullPointerException ex)
 		{

@@ -29,8 +29,8 @@ public class RecentMedication extends FormElement
 		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION), false);
 		
 		//Initialization
-		this.recentMedication = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION);
-		this.medicineComplaint = new HistoryPanel(Globals.HISTORY_MEDICINE_COMPLAINT);
+		this.recentMedication = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION, PatientData.LAST_RECENT_MEDS, Constants.DEFAULT_RECENT_MEDICATION);
+		this.medicineComplaint = new HistoryPanel(Globals.HISTORY_MEDICINE_COMPLAINT, PatientData.LAST_MEDICINE_COMPLAINT, Constants.EMPTY_STRING_ARRAY);
 		this.labRecentMeds = new JLabel(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL));
 		this.labMedecineComplaint = new JLabel(Methods.getLanguageText(XMLIdentifier.MEDICINE_COMPLAINT_LABEL));
 		GridBagConstraints c = new GridBagConstraints();

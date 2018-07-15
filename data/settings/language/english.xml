@@ -52,6 +52,7 @@
      <text identifier="default pain kind radiating">Radiating</text>
      <text identifier="default pain kind throbbing">Throbbing</text>
      <text identifier="default pain kind tight band">Tight Band</text>
+     <text identifier="default recent medication prescribed mix capsule">Prescribed Mix Capsule</text>
      <text identifier="date auto button tooltip text">Automatically set the date to that of local time</text>
      <text identifier="date reselt button tooltip text">Resets date changes to it's orginal status</text>
      <text identifier="date from label">From</text>

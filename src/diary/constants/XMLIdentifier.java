@@ -116,6 +116,9 @@ public class XMLIdentifier
 	public static final String DEFAULT_PAIN_KIND_RADIATING = "default pain kind radiating";
 	public static final String DEFAULT_PAIN_KIND_TIGHT_BAND = "default pain kind tight band";
 	
+	//Default Recent Medication
+	public static final String DEFAULT_RECENT_MEDICATION_PRESCRIBED_MIX_CAPSULE = "default recent medication prescribed mix capsule";
+	
 	//Date
 	public static final String DATE_AUTO_BUTTON_TOOLTIP_TEXT = "date auto button tooltip text";
 	public static final String DATE_RESET_BUTTON_TOOLTIP_TEXT = "date reselt button tooltip text";

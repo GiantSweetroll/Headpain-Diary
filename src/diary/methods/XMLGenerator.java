@@ -117,6 +117,9 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING, "Throbbing");
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND, "Tight Band");
 		
+		//Default Recent Medication
+		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_RECENT_MEDICATION_PRESCRIBED_MIX_CAPSULE, "Prescribed Mix Capsule");
+		
 		//Date
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the date to that of local time");
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT, "Resets date changes to it's orginal status");
