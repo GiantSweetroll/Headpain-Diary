@@ -2,7 +2,6 @@ package diary.gui.graphs;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,14 +10,13 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import diary.ImageExportPanel;
@@ -45,7 +43,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 	 * 
 	 */
 	private static final long serialVersionUID = 5865211789435235389L;
-	private JPanel panelTop, panelTopLeft, panelTopRight, panelBelow, panelBelowLeft, panelBelowCenter;
+	private JPanel panelTop, panelTopLeft, panelBelow, panelBelowLeft, panelBelowCenter;
 	private JLabel labCategory;
 	private JComboBox<String> comboCategory;
 	private Graph graph;
@@ -54,6 +52,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 	private JButton butBack, butRefresh, butSwitchGraph, buttonSave, butOptions;
 	private GraphSettingsPanel panelGraphSettings;
 	private ActivePatientPanel activePatientPanel;
+	private JTabbedPane graphConfig;
 	
 	//Condition storing
 	private boolean graphReversed;
@@ -96,38 +95,26 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		//Initialization
 		this.panelTop = new JPanel();
 		this.initPanelTopLeft();
-		this.initPanelTopRight();
+		this.activePatientPanel = new ActivePatientPanel(this.getMainFrameReference());
+		this.panelDateRange = new DateRangePanel();
+		this.graphConfig = new JTabbedPane();
 		
 		//Properties
 //		this.panelTop.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelTop.setOpaque(false);
 		this.panelTop.setLayout(new BorderLayout());
-
-		//Add to panel
-		this.panelTop.add(this.panelTopLeft, BorderLayout.WEST);
-		this.panelTop.add(this.panelTopRight, BorderLayout.EAST);
-	}
-	private void initPanelTopRight()
-	{
-		//Initialization
-		this.panelTopRight = new JPanel();
-		this.activePatientPanel = new ActivePatientPanel(this.getMainFrameReference());
-		this.panelDateRange = new DateRangePanel();
-		
-		//Properties
-		this.panelTopRight.setLayout(new BoxLayout(this.panelTopRight, BoxLayout.Y_AXIS));
-		this.panelTopRight.setOpaque(false);
 		this.panelDateRange.dateFrom.autoSetDate();
 		this.panelDateRange.dateFrom.setAsDefaultDataThis();
 		this.panelDateRange.dateTo.autoSetDate();
 		this.panelDateRange.dateTo.setAsDefaultDataThis();
 		this.activePatientPanel.setOpaque(true);
 		this.activePatientPanel.setBackground(Color.WHITE);
-		
-		//add to panel
-		this.panelTopRight.add(Box.createRigidArea(new Dimension(0, Constants.INSETS_TOP_COMPONENT.top)));
-		this.panelTopRight.add(this.activePatientPanel);
-		this.panelTopRight.add(this.panelDateRange);
+		this.graphConfig.addTab("1", this.panelTopLeft);
+		this.graphConfig.addTab("2", this.activePatientPanel);
+		this.graphConfig.addTab("3", this.panelDateRange);
+
+		//Add to panel
+		this.panelTop.add(this.graphConfig, BorderLayout.CENTER);
 	}
 	private void initPanelTopLeft()
 	{
@@ -139,7 +126,8 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
-		this.panelTopLeft.setOpaque(false);
+//		this.panelTopLeft.setOpaque(false);
+		this.panelTopLeft.setBackground(Color.white);
 		this.panelTopLeft.setLayout(new GridBagLayout());
 		this.comboCategory.setBackground(Color.WHITE);
 	//	this.labCategory.setForeground(Color.white);

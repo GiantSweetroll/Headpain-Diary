@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -49,7 +49,7 @@ public class TableScreen extends MainFramePanel implements ActionListener
 	 */
 	private static final long serialVersionUID = -6429132267457024269L;
 	
-	private JPanel panelTop, panelTopLeft, panelTopRight, panelBelowLeft, panelBelowCenter, panelBelowRight, panelBelow;
+	private JPanel panelTop, panelTopLeft, panelBelowLeft, panelBelowCenter, panelBelowRight, panelBelow;
 	private TablePanel table;
 	private DateRangePanel panelDateRange;
 	private JComboBox<String> comboFilter;
@@ -60,6 +60,7 @@ public class TableScreen extends MainFramePanel implements ActionListener
 	private List<PainEntryData> entries;
 	private PainEntryData activeEntry;
 	private ActivePatientPanel activePatientPanel;
+	private JTabbedPane tableConfig;
 	
 	//Constants
 	private final String FILTER = "filter";
@@ -193,7 +194,8 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
-		this.panelTopLeft.setOpaque(false);
+//		this.panelTopLeft.setOpaque(false);
+		this.panelTopLeft.setBackground(Color.WHITE);
 		this.panelTopLeft.setLayout(new GridBagLayout());
 		this.labGuide.setFont(Constants.FONT_SMALL_NOTE);
 		this.butFilter.addActionListener(this);
@@ -220,37 +222,27 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		this.panelTopLeft.add(this.butFilter, c);			//Filter Button
 	}
-	private void initPanelTopRight()
-	{
-		//Initialization
-		this.panelTopRight = new JPanel();
-		this.activePatientPanel = new ActivePatientPanel(this.getMainFrameReference());
-		this.panelDateRange = new DateRangePanel();
-		
-		//Properties
-		this.panelTopRight.setLayout(new BoxLayout(this.panelTopRight, BoxLayout.Y_AXIS));
-		this.panelTopRight.setOpaque(false);
-		this.panelDateRange.dateFrom.autoSetDate();
-		this.panelDateRange.dateTo.autoSetDate();
-		
-		//Add to panel
-		this.panelTopRight.add(this.activePatientPanel);
-		this.panelTopRight.add(this.panelDateRange);
-	}
 	private void initPanelTop()
 	{
 		//Initialization
 		this.panelTop = new JPanel();
 		this.initPanelTopLeft();
-		this.initPanelTopRight();
+		this.activePatientPanel = new ActivePatientPanel(this.getMainFrameReference());
+		this.panelDateRange = new DateRangePanel();
+		this.tableConfig = new JTabbedPane();
 		
 		//Properties
 		this.panelTop.setOpaque(false);
 		this.panelTop.setLayout(new BorderLayout());
+		this.panelDateRange.dateFrom.autoSetDate();
+		this.panelDateRange.dateTo.autoSetDate();
+		this.activePatientPanel.setOpaque(true);
+		this.tableConfig.addTab("1", this.panelTopLeft);
+		this.tableConfig.addTab("2", this.activePatientPanel);
+		this.tableConfig.addTab("3", this.panelDateRange);
 		
 		//Add to panel
-		this.panelTop.add(this.panelTopLeft, BorderLayout.WEST);
-		this.panelTop.add(this.panelTopRight, BorderLayout.EAST);
+		this.panelTop.add(this.tableConfig, BorderLayout.CENTER);
 	}
 	//Other Methods
 	public void refreshTable()
