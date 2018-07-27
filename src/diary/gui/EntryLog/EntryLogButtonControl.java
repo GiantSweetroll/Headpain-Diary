@@ -140,6 +140,7 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 						{
 							this.entryLog.export(patient, entry);
 						}
+						this.entryLog.refresh();
 					}
 					else
 					{
@@ -158,6 +159,7 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 						this.getMainFrameReference().PAIN_TABLE.refreshTable();
 						Methods.refresHistories(this.entryLog.getSelectedPatient());
 						this.getMainFrameReference().GRAPH_FILTER_PANEL.refresh(this.getMainFrameReference().GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+						this.entryLog.refresh();
 						this.entryLog.resetDefaults();
 					}
 				}
