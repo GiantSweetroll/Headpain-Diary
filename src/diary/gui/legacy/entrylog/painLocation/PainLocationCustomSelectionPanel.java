@@ -1,4 +1,4 @@
-package diary.gui.EntryLog.painLocation;
+package diary.gui.legacy.entrylog.painLocation;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -110,7 +110,7 @@ public class PainLocationCustomSelectionPanel extends JPanel implements ActionLi
 		image.resetCoordinates();
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void setEnabled(boolean enabled)
 	{

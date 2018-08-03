@@ -1,4 +1,4 @@
-package diary.gui.EntryLog.painLocation;
+package diary.gui.legacy.entrylog.painLocation;
 
 import java.awt.Component;
 import java.awt.event.ItemEvent;
@@ -14,7 +14,9 @@ import javax.swing.JRadioButton;
 
 import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
+import diary.data.CustomPainLocation;
 import diary.data.PainEntryData;
+import diary.gui.EntryLog.painLocation.PainLocationPresetSelectionPanel;
 import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
 
@@ -28,7 +30,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 	
 	private JRadioButton radPreset, radCustom;
 	private PainLocationPresetSelectionPanel preset;
-	private PainLocationCustomSelection custom;
+	private PainLocationCustomSelectionPanel custom;
 	private ButtonGroup group;
 	
 	//Constructors
@@ -38,7 +40,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		this.radCustom = new JRadioButton(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_CUSTOM_LABEL));
 		this.radPreset = new JRadioButton(Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_PRESETS_LABEL));
 		this.preset = new PainLocationPresetSelectionPanel();
-		this.custom = new PainLocationCustomSelection();
+		this.custom = new PainLocationCustomSelectionPanel(new PainLocationCustomSelection(20));
 		this.group = new ButtonGroup();
 		
 		//Properties
@@ -79,9 +81,9 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		else
 		{
 			List<String> list = new ArrayList<String>();
-			for (String loc : this.custom.getLocations())
+			for (CustomPainLocation loc : this.custom.getLocations())
 			{
-				list.add(loc);
+				list.add(loc.getLocationAsString());
 			}
 			Methods.removeDuplicatesFromStringList(list);
 			return list;
@@ -104,12 +106,12 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		if (presetLocations.size() == 0)
 		{
 			this.radCustom.setSelected(true);
-			List<String> list = new ArrayList<String>();
+			List<CustomPainLocation> list = new ArrayList<CustomPainLocation>();
 			for (String location : customLocations)
 			{
 				try
 				{
-					list.add(location);
+					list.add(new CustomPainLocation(location));
 				}
 				catch(Exception ex) {}
 			}
@@ -136,7 +138,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		if (this.radPreset.isSelected())
 		{
 			this.custom.setEnabled(false);
-			this.custom.resetDefaults();
+			this.custom.resetPosition();
 			this.preset.setEnabled(true);
 		}
 		else

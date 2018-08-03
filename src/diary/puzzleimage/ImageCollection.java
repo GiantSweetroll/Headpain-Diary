@@ -1,6 +1,7 @@
 package diary.puzzleimage;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
+import diary.constants.Constants;
 import giantsweetroll.gui.swing.Gbm;
 
 public class ImageCollection extends JPanel implements MouseListener
@@ -73,14 +75,22 @@ public class ImageCollection extends JPanel implements MouseListener
 	private void initImages()
 	{
 		Gbm.goToOrigin(c);
-		for (int i=0; i<this.images.size(); i++)
+		for (int i=0; i<this.images.size(); i++)		//array counter
 		{
-			for (int x=0; x<4; x++, i++)
+			for (c.gridx=0; c.gridx<4; c.gridx++, i++)			//gridx counter
 			{
 				this.add(this.images.get(i), c);
 			}
+			c.gridy++;
 			i--;
 		}
+	}
+	
+	//Overridden Methods
+	@Override
+	public Dimension getMinimumSize()
+	{	
+		return Constants.CUSTOM_PAIN_LOCATION_IMAGE_SIZE;
 	}
 	
 	//Interface

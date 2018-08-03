@@ -15,6 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import diary.language.Language;
 import diary.methods.Methods;
 import giantsweetroll.GMisc;
+import giantsweetroll.ImageManager;
 import giantsweetroll.numbers.GNumbers;
 
 public final class Constants 
@@ -42,6 +43,10 @@ public final class Constants
 	public static final String HISTORY_MEDICINE_COMPLAINT_NAME = "medicine_complaint";
 	
 	public static final String PAIN_DATA_ENTRY_FILE_EXTENSION = ".xml";
+	
+	//Dimensions
+	public static final Dimension CUSTOM_PAIN_LOCATION_IMAGE_SIZE = new Dimension((ImageManager.getImageIcon(PainLocationPath.CUSTOM_PAIN_BACK_1).getIconWidth()),
+																					(ImageManager.getImageIcon(PainLocationPath.CUSTOM_PAIN_BACK_1).getIconHeight()));
 	
 	//Ratios
 	public static final int BUTTON_IMAGE_SIZE_RATIO = Methods.getPercentageValue(Constants.SCREENSIZE.width, 4);

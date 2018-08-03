@@ -1,202 +1,141 @@
 package diary.gui.EntryLog.painLocation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
-import diary.constants.Constants;
-import diary.constants.ImageConstants;
-import giantsweetroll.ImageManager;
-import giantsweetroll.numbers.GNumbers;
+import diary.constants.XMLIdentifier;
+import diary.interfaces.GUIFunction;
+import diary.methods.Methods;
+import diary.methods.PainLocationMethods;
+import diary.puzzleimage.ImageCollection;
 
-public class PainLocationCustomSelection extends JLabel implements MouseListener, MouseMotionListener
+public class PainLocationCustomSelection extends JPanel implements GUIFunction, ActionListener
 {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6306460492486489780L;
-	
-	private List<Point> coordinates;
-	private ImageIcon icon;
-	private Dimension originalImageSize;
-	
-	//Constants
-	private final int COORDINATE_POINT_RADIUS = 6;
-	
-	//Conditionals
-	private int imageScale;
+	private static final long serialVersionUID = 4593583360580989292L;
+
+	private ImageCollection back, front, right, left;
+	private List<ImageCollection> imageCollection;
+	private JPanel panelImages, panelBelow;
+	private JButton butReset;
+	private JLabel labRight, labLeft;
 	
 	//Constructors
-	public PainLocationCustomSelection(int scaleFromOriginal)
+	public PainLocationCustomSelection()
 	{
 		//Initialization
-		this.imageScale = scaleFromOriginal;
-		icon = ImageManager.getImageIcon(ImageConstants.PAIN_LOCATION_CUSTOM);
-		this.originalImageSize = new Dimension(icon.getIconWidth(), icon.getIconHeight());
-		this.coordinates = new ArrayList<Point>();
-//		this.setIcon(Methods.resizeImageByRatio(icon, Methods.getPercentage(icon, Methods.getPercentageValue(MainFrame.frame.getWidth(), this.imageScale))));		//Temporarily until issue with saving and rading data from different image scale is fixed
-		this.setIcon(icon);
+		this.initPanelBelow();
+		this.initPanelImages();
+		this.imageCollection = new ArrayList<ImageCollection>();
 		
 		//Properties
-		this.addMouseListener(this);
-		this.addMouseMotionListener(this);
+		this.setLayout(new BorderLayout());
+		this.setBackground(Color.white);
+		
+		//Add to panel
+		this.add(this.panelImages, BorderLayout.CENTER);
+		this.add(this.panelBelow, BorderLayout.SOUTH);
+		
+		//Add to image collection
+		this.imageCollection.add(this.front);
+		this.imageCollection.add(this.back);
+		this.imageCollection.add(this.right);
+		this.imageCollection.add(this.left);
+	}
+	//Create GUI
+	private void initPanelBelow()
+	{
+		//Initialization
+		this.panelBelow = new JPanel();
+		this.butReset = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		
+		//Properties
+		this.panelBelow.setLayout(new FlowLayout(FlowLayout.CENTER));
+		this.panelBelow.setOpaque(false);
+		this.butReset.addActionListener(this);
+		
+		//Add to panel
+		this.panelBelow.add(this.butReset);
+	}
+	private void initPanelImages()
+	{
+		//Initialization
+		this.panelImages = new JPanel();
+		this.back = new ImageCollection(PainLocationMethods.getPainLocationBack());
+		this.front = new ImageCollection(PainLocationMethods.getPainLocationFront());
+		this.right = new ImageCollection(PainLocationMethods.getPainLocationRight());
+		this.left = new ImageCollection(PainLocationMethods.getPainLocationLeft());
+		this.labRight = new JLabel(Methods.getLanguageText(XMLIdentifier.YOUR_RIGHT_TEXT), SwingConstants.CENTER);
+		this.labLeft = new JLabel(Methods.getLanguageText(XMLIdentifier.YOUR_LEFT_TEXT), SwingConstants.CENTER);
+		
+		//Properties
+		this.panelImages.setLayout(new GridLayout(0, 2));
+		this.panelImages.setOpaque(false);
+		
+		//Add to panel
+		this.panelImages.add(this.front);
+		this.panelImages.add(this.back);
+		this.panelImages.add(this.left);
+		this.panelImages.add(this.right);
+		this.panelImages.add(this.labLeft);
+		this.panelImages.add(this.labRight);
 	}
 	
 	//Methods
-	public List<Point> getCoordinates()
+	public List<String> getLocations()
 	{
-		return this.coordinates;
-	}
-	public Point convertPointToOriginalImage(Point point)
-	{
-		int x = (int)GNumbers.round((((float)point.x)*((float)originalImageSize.getWidth()))/((float)this.icon.getIconWidth()), 0);
-		int y = (int)GNumbers.round((((float)point.y)*((float)originalImageSize.getHeight()))/((float)this.icon.getIconHeight()), 0);
+		List<String> list = new ArrayList<String>();
 		
-		return new Point(x, y);
-	}
-	public Point convertPointFromOriginalImage(Point point)
-	{
-		int x = (int)GNumbers.round((((float)point.x)*((float)this.icon.getIconWidth()))/((float)originalImageSize.getWidth()), 0);
-		int y = (int)GNumbers.round((((float)point.y)*((float)this.icon.getIconHeight()))/((float)originalImageSize.getHeight()), 0);
+		list.addAll(this.back.getSelectedImagesNames());
+		list.addAll(this.front.getSelectedImagesNames());
+		list.addAll(this.right.getSelectedImagesNames());
+		list.addAll(this.left.getSelectedImagesNames());
 		
-		return new Point(x, y);
+		return list;
 	}
-	public void resetCoordinates()
+	public void setLocations(List<String> locations)
 	{
-		this.coordinates = new ArrayList<Point>();
-		this.repaint();
-	}
-	public void drawCoordinatePoint(Graphics g, Color color, Point coordinate)
-	{
-		g.setColor(color);
-		g.fillOval(coordinate.x - this.COORDINATE_POINT_RADIUS, coordinate.y - this.COORDINATE_POINT_RADIUS, this.COORDINATE_POINT_RADIUS*2, this.COORDINATE_POINT_RADIUS*2);
-	}
-	public void setCoordinate(Point point)
-	{
-		this.appendCoordinate(point);
-		this.repaint();
-	}
-	public void setCoordinates(List<Point> points, boolean addToExisting)
-	{
-		if (addToExisting)
-		{
-			this.appendCoordinate(points);
-		}
-		else
-		{
-			this.coordinates = points;
-		}
+		Set<String> set = new HashSet<String>();
+		set.addAll(locations);
 		
-		this.repaint();
-	}
-	public void setCoordinate(MouseEvent e)
-	{
-		PointerInfo a = MouseInfo.getPointerInfo();
-		Point point = new Point(a.getLocation());
-		SwingUtilities.convertPointFromScreen(point, e.getComponent());
-		if (point.x < 0 ||
-			point.x > this.getWidth() ||
-			point.y < 0 ||
-			point.y > this.getHeight())
+		for (ImageCollection collection : this.imageCollection)
 		{
-			point = null;
-		}
-		
-		if (point != null)
-		{
-			this.appendCoordinate(point);
-		}
-		
-		this.repaint();
-	}
-	public void appendCoordinate(Point point)
-	{
-		for (Point pos : this.coordinates)		//Check for existing position
-		{
-			if (pos.x == point.x && pos.y == point.y)
-			{
-				break;		//If found, don't add
-			}
-		}
-		this.coordinates.add(point);
-	}
-	public void appendCoordinate(List<Point> points)
-	{
-		//Check for duplicates
-		for (int i=0; i<this.coordinates.size(); i++)
-		{
-			for (int a=0; a<points.size(); a++)
-			{
-				if (this.coordinates.get(i).x == points.get(a).x &&
-					this.coordinates.get(i).y == points.get(a).y)
-				{
-					points.remove(a);
-					a=-1;
-					continue;
-				}
-			}
-		}
-		
-		this.coordinates.addAll(points);
-	}
-	
-	//Overriden Methods
-	@Override
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		
-		if (this.isEnabled())
-		{
-			try
-			{
-				for (Point point : this.coordinates)
-				{
-					this.drawCoordinatePoint(g, Constants.COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT, point);
-				}
-			}
-			catch(NullPointerException ex){}
+			collection.setSelection(set);
 		}
 	}
 	
 	//Interfaces
 	@Override
-	public void mouseClicked(MouseEvent e) 
+	public void actionPerformed(ActionEvent e) 
 	{
-		this.setCoordinate(e);
+		this.resetDefaults();
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {}
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-
-	@Override
-	public void mouseDragged(MouseEvent e) 
+	public void resetDefaults() 
 	{
-		this.setCoordinate(e);
+		this.back.resetSelection();
+		this.front.resetSelection();
+		this.right.resetSelection();
+		this.left.resetSelection();
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e) {}
+	public void refresh(){}
 }

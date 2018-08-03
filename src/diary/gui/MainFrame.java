@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
+import diary.constants.PainLocationPath;
 import diary.constants.PanelName;
 import diary.data.Settings;
 import diary.gui.EntryLog.EntryLog;
@@ -286,7 +287,7 @@ public class MainFrame
 		SwingUtilities.invokeLater(new Runnable()
 				{
 					public void run()
-					{
+					{	
 						try
 						{
 				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
