@@ -57,6 +57,6 @@ public class Test
 	
 	public static void main(String args[])
 	{
-		JOptionPane.showMessageDialog(null, new ImagePiece(PainLocationPath.CUSTOM_PAIN_BACK_1, "Sfrv"));
+		JOptionPane.showMessageDialog(null, new ImagePiece(PainLocationPath.CUSTOM_PAIN_BACK_1, "Sfrv", true));
 	}
 }

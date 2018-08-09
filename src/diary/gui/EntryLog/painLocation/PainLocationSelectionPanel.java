@@ -67,7 +67,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		this.add(this.custom);
 	}
 	
-	//Methods
+	//Public Methods
 	public List<String> getSelectedPositions()
 	{
 		if (this.radPreset.isSelected())
@@ -129,9 +129,8 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		return this.getSelectedPositions().size() > 0;
 	}
 	
-	//Interfaces
-	@Override
-	public void itemStateChanged(ItemEvent e) 
+	//Private Methods
+	public void changeSelection()
 	{
 		if (this.radPreset.isSelected())
 		{
@@ -144,6 +143,13 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 			this.custom.setEnabled(true);
 			this.preset.setEnabled(false);
 		}
+	}
+	
+	//Interfaces
+	@Override
+	public void itemStateChanged(ItemEvent e) 
+	{
+		this.changeSelection();
 	}
 	
 	@Override

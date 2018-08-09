@@ -18,6 +18,7 @@ public class Globals
 	
 	//Global Variables
 	public static Set<Character> keysPressed = new HashSet<Character>();
+	public static boolean mouseDown = false;
 	
 	//Panels
 	/*

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
@@ -46,7 +47,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 		
 		//Properties
 		this.setLayout(new BorderLayout());
-		this.setBackground(Color.white);
+		this.setBackground(Constants.COLOR_DISABLED_COMPONENT);
 		
 		//Add to panel
 		this.add(this.panelImages, BorderLayout.CENTER);
@@ -125,6 +126,8 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 	public void actionPerformed(ActionEvent e) 
 	{
 		this.resetDefaults();
+		this.revalidate();
+		this.repaint();
 	}
 
 	@Override
@@ -138,4 +141,22 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 
 	@Override
 	public void refresh(){}
+
+	@Override
+	public void setEnabled(boolean enabled)
+	{
+		for (ImageCollection collection : this.imageCollection)
+		{
+			collection.setEnabled(enabled);
+		}
+		
+		if (!enabled)
+		{
+			this.setBackground(Constants.COLOR_DISABLED_COMPONENT);
+		}
+		else
+		{
+			this.setBackground(Color.WHITE);
+		}
+	}
 }

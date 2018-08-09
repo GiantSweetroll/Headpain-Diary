@@ -4,18 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
 import giantsweetroll.gui.swing.Gbm;
 
-public class ImageCollection extends JPanel implements MouseListener
+public class ImageCollection extends JPanel
 {
 
 	/**
@@ -37,6 +36,7 @@ public class ImageCollection extends JPanel implements MouseListener
 		//Properties
 		this.setLayout(new GridBagLayout());
 		this.setBackground(Color.WHITE);
+		this.setBorder(BorderFactory.createLineBorder(Constants.COLOR_TRANSPARENT, 10));		//Transparent Border for spacing
 		
 		//Add to panel
 		this.initImages();
@@ -45,6 +45,14 @@ public class ImageCollection extends JPanel implements MouseListener
 	//Public Methods
 	public Set<String> getSelectedImagesNames()
 	{
+		for (ImagePiece piece : this.images)
+		{
+			if (piece.isColored())
+			{
+				this.selectedImages.add(piece.getName());
+			}
+		}
+		
 		return this.selectedImages;
 	}
 	public void resetSelection()
@@ -93,40 +101,12 @@ public class ImageCollection extends JPanel implements MouseListener
 		return Constants.CUSTOM_PAIN_LOCATION_IMAGE_SIZE;
 	}
 	
-	//Interface
 	@Override
-	public void mouseClicked(MouseEvent e)
+	public void setEnabled(boolean enabled)
 	{
-		for (ImagePiece piece : this.images)
+		for (ImagePiece image : this.images)
 		{
-			if (piece.isColored())
-			{
-				this.selectedImages.add(piece.getName());
-			}
+			image.setEnabled(enabled);
 		}
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

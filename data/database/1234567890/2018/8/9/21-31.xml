@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments/>
+     <date_month>8</date_month>
+     <time_minute>31</time_minute>
+     <activity>Stressor</activity>
+     <recent_medication>Antacid</recent_medication>
+     <date_day>9</date_day>
+     <medicine_complaint>Weakness</medicine_complaint>
+     <pain_location_custom pain_loc_id="0">dpn15</pain_location_custom>
+     <pain_location_custom pain_loc_id="1">dpn11</pain_location_custom>
+     <pain_kind>Pulsating</pain_kind>
+     <duration>14</duration>
+     <intensity>4</intensity>
+     <time_hour>21</time_hour>
+</Entry>

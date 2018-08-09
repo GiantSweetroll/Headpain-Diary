@@ -8,6 +8,7 @@ import java.net.URL;
 import javax.swing.JLabel;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 
@@ -22,16 +23,19 @@ public class ImagePiece extends JLabel implements MouseListener
 	private boolean isColored;
 	
 	//Constructors
-	public ImagePiece(URL url, String name)
+	public ImagePiece(URL url, String name, boolean canColor)
 	{
 		super(Methods.resizeImageByRatio(ImageManager.getImageIcon(url), 25));
 		this.isColored = false;
 		this.setName(name);
-		this.addMouseListener(this);
+		if (canColor)
+		{
+			this.addMouseListener(this);
+		}
 	}
 	
 	//Methods
-	public void color(boolean color)
+	public void color(boolean color)		//Set component to color or not
 	{
 		this.isColored = color;
 	}
@@ -43,46 +47,65 @@ public class ImagePiece extends JLabel implements MouseListener
 	{
 		return this.isColored;
 	}
+	public void color()					//Color the component
+	{
+		if (this.isEnabled()) 
+		{
+			this.color(!this.isColored());
+			this.repaint();
+		}
+	}
 	
 	//Overridden Methods
 	@Override
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		if (this.isColored)
+		if (this.isColored())
 		{
+//			System.out.println("Toodles");
 			g.setColor(Constants.COLOR_CUSTOM_PAIN_LOCATION_HIGHLIGHT);
-			g.drawRect(0, 0, this.getWidth(), this.getHeight());
+			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		this.color(true);
+		//TODO
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseEntered(MouseEvent e) 
+	{
+		if (Globals.mouseDown)
+		{
+			this.color();
+		}
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseExited(MouseEvent e) 
+	{
+		//TODO
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mousePressed(MouseEvent e) 
+	{
+		if (e.getButton() == MouseEvent.BUTTON1)
+		{
+			Globals.mouseDown = true;
+			this.color();
+		}
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseReleased(MouseEvent e)
+	{
+		if (e.getButton() == MouseEvent.BUTTON1)
+		{
+			Globals.mouseDown = false;
+		}
 	}
 }
