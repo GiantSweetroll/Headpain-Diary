@@ -528,7 +528,10 @@ public class Methods
 	public static ImageIcon resizeImageByRatio(ImageIcon image, int percentage)
 	{
 		Image img = image.getImage();
-		img = img.getScaledInstance((image.getIconWidth()/100)*percentage, (image.getIconHeight()/100)*percentage, Image.SCALE_SMOOTH);
+//		img = img.getScaledInstance((image.getIconWidth()/100)*percentage, (image.getIconHeight()/100)*percentage, Image.SCALE_SMOOTH);
+		double widthNew = (image.getIconWidth()/100d)*percentage;
+		double heightNew = (image.getIconHeight()/100d)*percentage;
+		img = img.getScaledInstance((int)GNumbers.round(widthNew, 0), (int)GNumbers.round(heightNew, 0), Image.SCALE_SMOOTH);
 		return new ImageIcon(img);
 	}
 	
@@ -884,5 +887,10 @@ public class Methods
     public static Insets getInsetsWithNoHorizontalSpcaing(Insets base)
     {
     	return new Insets(base.top, 0, base.bottom, 0);
+    }
+    
+    public static int getMiddle(int value)
+    {
+    	return value/2;
     }
 }

@@ -85,7 +85,7 @@ public class XMLIdentifier
 	public static final String ENTRY_LOG_TITLE = "entry log title";
 	public static final String DATE_LABEL = "date label";
 	public static final String START_TIME_LABEL = "start time label";
-	public static final String HEADPAIN_LOCATION_AMOUNT_LABEL = "headpain location amount label";
+//	public static final String HEADPAIN_LOCATION_AMOUNT_LABEL = "headpain location amount label";
 	public static final String ACTIVITY_LABEL = "activity label";
 	public static final String RECENT_MEDICATION_LABEL = "recent medication label";
 	public static final String MEDICINE_COMPLAINT_LABEL = "medicine complaint label";

@@ -74,7 +74,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TITLE, "Input Your Data Here");
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_LABEL, "Date");
 		appendComponentToMap(doc, map, XMLIdentifier.START_TIME_LABEL, "Start Time");
-		appendComponentToMap(doc, map, XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL, "Amount of Headpain Location(s)");
+//		appendComponentToMap(doc, map, XMLIdentifier.HEADPAIN_LOCATION_AMOUNT_LABEL, "Amount of Headpain Location(s)");
 		appendComponentToMap(doc, map, XMLIdentifier.ACTIVITY_LABEL, "Activity");
 		appendComponentToMap(doc, map, XMLIdentifier.RECENT_MEDICATION_LABEL, "Recent Medication");
 		appendComponentToMap(doc, map, XMLIdentifier.MEDICINE_COMPLAINT_LABEL, "Suspected Side Effects of Medicines");
@@ -122,7 +122,7 @@ public class XMLGenerator
 		
 		//Date
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the date to that of local time");
-		appendComponentToMap(doc, map, XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT, "Resets date changes to it's orginal status");
+		appendComponentToMap(doc, map, XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT, "Resets date changes to its orginal status");
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_FROM_LABEL, "From");
 		appendComponentToMap(doc, map, XMLIdentifier.DATE_TO_LABEL, "To");
 		//Month Names
@@ -141,7 +141,7 @@ public class XMLGenerator
 		
 		//Time
 		appendComponentToMap(doc, map, XMLIdentifier.TIME_AUTO_BUTTON_TOOLTIP_TEXT, "Automatically set the time to that of local time");
-		appendComponentToMap(doc, map, XMLIdentifier.TIME_RESET_BUTTON_TOOLTIP_TEXT, "Resets time changes to it's orginal values");
+		appendComponentToMap(doc, map, XMLIdentifier.TIME_RESET_BUTTON_TOOLTIP_TEXT, "Resets time changes to its original values");
 		
 		//Pain Location New
 		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_EYE_AND_FOREHEAD_TEXT, "Eye Area And Forehead");

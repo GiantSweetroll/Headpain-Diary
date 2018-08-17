@@ -17,7 +17,6 @@
      <text identifier="entry log title">Input Your Data Here</text>
      <text identifier="date label">Date</text>
      <text identifier="start time label">Start Time</text>
-     <text identifier="headpain location amount label">Amount of Headpain Location(s)</text>
      <text identifier="activity label">Activity</text>
      <text identifier="recent medication label">Recent Medication</text>
      <text identifier="medicine complaint label">Suspected Side Effects of Medicines</text>

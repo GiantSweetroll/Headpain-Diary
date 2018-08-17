@@ -3,6 +3,8 @@ package diary.gui.EntryLog.painLocation;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +24,7 @@ import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
 import diary.methods.PainLocationMethods;
 import diary.puzzleimage.ImageCollection;
+import giantsweetroll.gui.swing.Gbm;
 
 public class PainLocationCustomSelection extends JPanel implements GUIFunction, ActionListener
 {
@@ -33,7 +36,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 
 	private ImageCollection back, front, right, left;
 	private List<ImageCollection> imageCollection;
-	private JPanel panelImages, panelBelow;
+	private JPanel panelImages, panelBelow, panelCenter, panelDirection;
 	private JButton butReset;
 	private JLabel labRight, labLeft;
 	
@@ -42,7 +45,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 	{
 		//Initialization
 		this.initPanelBelow();
-		this.initPanelImages();
+		this.initPanelCenter();
 		this.imageCollection = new ArrayList<ImageCollection>();
 		
 		//Properties
@@ -50,7 +53,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 		this.setBackground(Constants.COLOR_DISABLED_COMPONENT);
 		
 		//Add to panel
-		this.add(this.panelImages, BorderLayout.CENTER);
+		this.add(this.panelCenter, BorderLayout.CENTER);
 		this.add(this.panelBelow, BorderLayout.SOUTH);
 		
 		//Add to image collection
@@ -82,20 +85,80 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 		this.front = new ImageCollection(PainLocationMethods.getPainLocationFront());
 		this.right = new ImageCollection(PainLocationMethods.getPainLocationRight());
 		this.left = new ImageCollection(PainLocationMethods.getPainLocationLeft());
-		this.labRight = new JLabel(Methods.getLanguageText(XMLIdentifier.YOUR_RIGHT_TEXT), SwingConstants.CENTER);
-		this.labLeft = new JLabel(Methods.getLanguageText(XMLIdentifier.YOUR_LEFT_TEXT), SwingConstants.CENTER);
-		
+		/*
+		SpringLayout layout = new SpringLayout();
+		this.panelImages = new JPanel()
+				{
+					private static final long serialVersionUID = 1060528737853563125L;
+
+					@Override
+					public Dimension getMinimumSize()
+					{
+						return new Dimension(super.getMinimumSize().width, back.getMinimumSize().height +
+																			left.getMinimumSize().height +
+																			labRight.getMinimumSize().height);
+					}
+				};
+		*/
 		//Properties
+//		this.panelImages.setLayout(layout);
 		this.panelImages.setLayout(new GridLayout(0, 2));
-		this.panelImages.setOpaque(false);
+//		this.panelImages.setOpaque(false);
+		/*
+		layout.putConstraint(SpringLayout.EAST, this.front, Constants.INSETS_BASE, SpringLayout.HORIZONTAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.SOUTH, this.front, Constants.INSETS_BASE, SpringLayout.VERTICAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.WEST, this.back, Constants.INSETS_BASE, SpringLayout.HORIZONTAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.SOUTH, this.back, Constants.INSETS_BASE, SpringLayout.VERTICAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.NORTH, this.left, Constants.INSETS_BASE, SpringLayout.VERTICAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.EAST, this.left, Constants.INSETS_BASE, SpringLayout.HORIZONTAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.WEST, this.right, Constants.INSETS_BASE, SpringLayout.HORIZONTAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.NORTH, this.right, Constants.INSETS_BASE, SpringLayout.VERTICAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.NORTH, this.labLeft, Constants.INSETS_BASE, SpringLayout.SOUTH, this.left);
+		layout.putConstraint(SpringLayout.EAST, this.labLeft, Constants.INSETS_BASE, SpringLayout.HORIZONTAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.WEST, this.labRight, Constants.INSETS_BASE, SpringLayout.HORIZONTAL_CENTER, this.panelImages);
+		layout.putConstraint(SpringLayout.NORTH, this.labRight, Constants.INSETS_BASE, SpringLayout.SOUTH, this.panelImages);
+		*/
 		
 		//Add to panel
 		this.panelImages.add(this.front);
 		this.panelImages.add(this.back);
 		this.panelImages.add(this.left);
 		this.panelImages.add(this.right);
-		this.panelImages.add(this.labLeft);
-		this.panelImages.add(this.labRight);
+	}
+	private void initPanelCenter()
+	{
+		//Initialization
+		this.panelCenter = new JPanel();
+		this.initPanelImages();
+		this.initPanelDirection();
+		GridBagConstraints c = new GridBagConstraints ();
+		
+		//Properties
+		this.panelCenter.setLayout(new GridBagLayout());
+//		this.setOpaque(false);
+		
+		//Add to panel
+		Gbm.goToOrigin(c);
+		c.insets = Constants.INSETS_GENERAL;
+		c.fill = GridBagConstraints.BOTH;
+		this.panelCenter.add(this.panelImages, c);
+		Gbm.newGridLine(c);
+		this.panelCenter.add(this.panelDirection, c);
+	}
+	private void initPanelDirection()
+	{
+		//Initialization
+		this.panelDirection = new JPanel();
+		this.labRight = new JLabel(Methods.getLanguageText(XMLIdentifier.YOUR_RIGHT_TEXT), SwingConstants.CENTER);
+		this.labLeft = new JLabel(Methods.getLanguageText(XMLIdentifier.YOUR_LEFT_TEXT), SwingConstants.CENTER);
+		
+		//Properties
+		this.panelDirection.setLayout(new GridLayout(0, 2));
+		this.panelDirection.setOpaque(false);
+		
+		//Add to panel
+		this.panelDirection.add(this.labLeft);
+		this.panelDirection.add(this.labRight);
 	}
 	
 	//Methods
@@ -142,6 +205,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 	@Override
 	public void refresh(){}
 
+	//Overidden Methods
 	@Override
 	public void setEnabled(boolean enabled)
 	{
@@ -153,10 +217,15 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 		if (!enabled)
 		{
 			this.setBackground(Constants.COLOR_DISABLED_COMPONENT);
+			this.panelImages.setBackground(Constants.COLOR_DISABLED_COMPONENT);
+			this.panelCenter.setBackground(Constants.COLOR_DISABLED_COMPONENT);
 		}
 		else
 		{
 			this.setBackground(Color.WHITE);
+			this.panelImages.setBackground(Color.WHITE);
+			this.panelCenter.setBackground(Color.WHITE);
 		}
+		this.butReset.setEnabled(enabled);
 	}
 }

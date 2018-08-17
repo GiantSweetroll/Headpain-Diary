@@ -6,7 +6,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -44,7 +43,7 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		//Properties
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setOpaque(false);
-		this.setBorder(BorderFactory.createTitledBorder(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL))));
+//		this.setBorder(BorderFactory.createTitledBorder(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.YOUR_MOST_PAINFUL_AREA_LABEL))));
 	//	this.preset.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 	//	this.custom.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
 		this.radPreset.setSelected(true);

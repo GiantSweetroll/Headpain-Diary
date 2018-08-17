@@ -98,7 +98,8 @@ public class ImageCollection extends JPanel
 	@Override
 	public Dimension getMinimumSize()
 	{	
-		return Constants.CUSTOM_PAIN_LOCATION_IMAGE_SIZE;
+//		return Constants.CUSTOM_PAIN_LOCATION_IMAGE_SIZE;
+		return this.getPreferredSize();
 	}
 	
 	@Override
@@ -107,6 +108,15 @@ public class ImageCollection extends JPanel
 		for (ImagePiece image : this.images)
 		{
 			image.setEnabled(enabled);
+		}
+		
+		if(enabled)
+		{
+			this.setBackground(Color.white);
+		}
+		else
+		{
+			this.setBackground(Constants.COLOR_DISABLED_COMPONENT);
 		}
 	}
 }

@@ -25,7 +25,8 @@ public class ImagePiece extends JLabel implements MouseListener
 	//Constructors
 	public ImagePiece(URL url, String name, boolean canColor)
 	{
-		super(Methods.resizeImageByRatio(ImageManager.getImageIcon(url), 25));
+		super(Methods.resizeImageByRatio(ImageManager.getImageIcon(url), 20));
+//		super(ImageManager.getImageIcon(url));
 		this.isColored = false;
 		this.setName(name);
 		if (canColor)
