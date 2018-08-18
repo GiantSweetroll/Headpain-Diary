@@ -79,4 +79,11 @@ public class PainLocation extends FormElement
 		return this.painLocation.isPainLocationSelected();
 	}
 
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.SELECT_LOCATION_LABEL));
+		this.painLocation.revalidateLanguage();
+	}
+
 }

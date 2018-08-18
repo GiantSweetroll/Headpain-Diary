@@ -349,4 +349,21 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.resetDefaults();
 		this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.labTitle.setText(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_TITLE));
+		this.butBack.revalidateLanguage();
+		this.butNext.revalidateLanguage();
+		this.activeUser.revalidateLanguage();
+		this.dateTime.revalidateLanguage();
+		this.comments.revalidateLanguage();
+		this.duration.revalidateLanguage();
+		this.intensity.revalidateLanguage();
+		this.painKind.revalidateLanguage();
+		this.painLoc.revalidateLanguage();
+		this.recentMeds.revalidateLanguage();
+		this.trigger.revalidateLanguage();
+	}
 }

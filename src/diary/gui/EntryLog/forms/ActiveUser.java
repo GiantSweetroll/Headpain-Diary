@@ -74,4 +74,11 @@ public class ActiveUser extends FormElement
 		return this.patient.isPatientSelected();
 	}
 
+	@Override
+	public void revalidateLanguage()
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER));
+		this.patient.revalidateLanguage();
+	}
+
 }

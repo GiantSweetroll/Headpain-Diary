@@ -14,12 +14,13 @@ import javax.swing.SwingConstants;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.DatePanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.TextAreaManager;
 
-public class PatientDataForm extends JPanel
+public class PatientDataForm extends JPanel implements LanguageListener
 {
 
 	/**
@@ -141,5 +142,14 @@ public class PatientDataForm extends JPanel
 		this.taPrevHeadpain.setText(patient.getPreviousHeadpains());
 		this.revalidate();
 		this.repaint();
+	}
+	
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.labMedID.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
+		this.labName.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
+		this.labDOB.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL));
+		this.labPrevHeadpain.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_PREVIOUS_HEADPAIN_LABEL));
 	}
 }

@@ -6,9 +6,10 @@ import javax.swing.JScrollPane;
 
 import diary.constants.Constants;
 import diary.interfaces.GUIFunction;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 
-public abstract class FormElement extends JScrollPane implements GUIFunction
+public abstract class FormElement extends JScrollPane implements GUIFunction, LanguageListener
 {
 
 	/**
@@ -41,6 +42,17 @@ public abstract class FormElement extends JScrollPane implements GUIFunction
 		this.getHorizontalScrollBar().setUnitIncrement(10);
 		this.getViewport().setOpaque(false);
 		this.setOpaque(false);
+		this.setFormTitle(name);
+		this.labName.setFont(Constants.FONT_HEADER);
+	}
+
+	//Methods
+	public JLabel getFormTitleLabel()
+	{
+		return this.labName;
+	}
+	public void setFormTitle(String name)
+	{
 		if(this.isRequired())
 		{
 			this.labName.setText(Methods.createTextWithRequiredIdentifier(name));
@@ -49,13 +61,10 @@ public abstract class FormElement extends JScrollPane implements GUIFunction
 		{
 			this.labName.setText(name);
 		}
-		this.labName.setFont(Constants.FONT_HEADER);
 	}
-
-	//Methods
-	public JLabel getFormTitleLabel()
+	public void setRequired(boolean required)
 	{
-		return this.labName;
+		this.required = required;
 	}
 	public JPanel getPanel()
 	{

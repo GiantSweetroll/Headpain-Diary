@@ -1,4 +1,4 @@
-package diary.gui.EntryLog;
+package diary.gui;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -17,11 +17,12 @@ import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.constants.TimeConstants;
 import diary.constants.XMLIdentifier;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.date.DateManager;
 import giantsweetroll.gui.swing.Gbm;
 
-public class TimePanel extends JPanel implements ActionListener
+public class TimePanel extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -170,5 +171,12 @@ public class TimePanel extends JPanel implements ActionListener
 				this.setToCurrentTime();
 				break;
 		}
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.butReset.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butCurrent.setText(Methods.getLanguageText(XMLIdentifier.AUTO_TEXT));
 	}
 }

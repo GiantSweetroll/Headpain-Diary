@@ -12,10 +12,11 @@ import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 
-public class PatientDataFilterPanel extends JPanel implements ItemListener
+public class PatientDataFilterPanel extends JPanel implements ItemListener, LanguageListener
 {
 
 	/**
@@ -108,5 +109,12 @@ public class PatientDataFilterPanel extends JPanel implements ItemListener
 	{
 		this.tfName.setEditable(this.checkName.isSelected());
 		this.tfID.setEditable(this.checkID.isSelected());
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.checkName.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
+		this.checkID.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
 	}
 }

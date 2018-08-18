@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -149,6 +150,15 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 		{
 			return true;
 		}
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL));
+		this.combo.setModel(new DefaultComboBoxModel<String>(Constants.DEFAULT_PAIN_KIND));
+		this.revalidate();
+		this.repaint();
 	}
 
 }

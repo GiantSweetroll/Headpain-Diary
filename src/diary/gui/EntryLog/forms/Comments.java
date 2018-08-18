@@ -56,4 +56,10 @@ public class Comments extends FormElement
 	public boolean allFilled() {
 		return true;
 	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL));
+	}
 }

@@ -23,8 +23,6 @@ import javax.swing.SwingConstants;
 
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
-import diary.gui.EntryLog.EntryLog;
-import diary.gui.graphs.GraphPanel;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PatientDataOperation;
@@ -146,7 +144,6 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 		this.panelShow.setOpaque(false);
 		this.radShow.addItemListener(this);
 		this.radShow.setOpaque(false);
-		
 		
 		//Add to panel
 		this.panelShow.add(this.radShow);
@@ -295,5 +292,15 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 		getMainFrameReference().ENTRY_LOG.refreshHistories();
 		this.revalidate();
 		this.repaint();
+	}
+	
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.labUser.setText(Methods.getLanguageText(XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT));
+		this.radShow.setText(Methods.getLanguageText(XMLIdentifier.DETAILS_TEXT));
+		this.panelFilter.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
+		this.patientFilter.revalidateLanguage();this.dataText.revalidateLanguage();
+		this.buttonFilter.setText(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 	}
 }

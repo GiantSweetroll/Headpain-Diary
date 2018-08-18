@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -55,6 +56,10 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 	private SettingsCategoryPanel catDatabase, catWindow, catProgram;
 	private JButton butCancel, butSave;
 	private LinkedHashMap<String, String> dataMap;
+	
+	//Program Category
+	JLabel labWindowMode;
+	JRadioButton radFullscreen, radWindowed;
 	
 	//Constants
 	private final String CANCEL = "cancel";
@@ -264,9 +269,9 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 	{
 		//Initialization
 		this.catWindow = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_TITLE));
-		JLabel labWindowMode = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT));
-		JRadioButton radFullscreen = new JRadioButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT));
-		JRadioButton radWindowed = new JRadioButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT));
+		this.labWindowMode = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT));
+		this.radFullscreen = new JRadioButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT));
+		this.radWindowed = new JRadioButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT));
 		ButtonGroup group = new ButtonGroup();
 		GridBagConstraints c = new GridBagConstraints();
 		String chosenWindowState = this.dataMap.get(Settings.WINDOW_MODE);
@@ -422,5 +427,13 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 				this.getMainFrameReference().refreshSettings();
 				break;
 		}
+	}
+
+	@Override
+	public void revalidateLanguage()
+	{
+		this.catProgram.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_PROGRAM_TITLE)));
+		this.catWindow.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_TITLE)));
+		this.catDatabase.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_TITLE)));
 	}
 }

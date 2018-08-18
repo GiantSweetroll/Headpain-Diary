@@ -43,6 +43,7 @@ import diary.data.PainEntryData;
 import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.gui.graphs.GraphPanel;
+import diary.interfaces.LanguageListener;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.numbers.GNumbers;
@@ -892,5 +893,23 @@ public class Methods
     public static int getMiddle(int value)
     {
     	return value/2;
+    }
+    
+    public static void addLanguageListener(LanguageListener listener)
+    {
+    	Globals.LANGUAGE_COMPONENTS.add(listener);
+    }
+    
+    public static void removeLanguageListener(LanguageListener listener)
+    {
+    	Globals.LANGUAGE_COMPONENTS.remove(listener);
+    }
+    
+    public static void revalidateLanguage()
+    {
+    	for (LanguageListener listener : Globals.LANGUAGE_COMPONENTS)
+    	{
+    		listener.revalidateLanguage();
+    	}
     }
 }

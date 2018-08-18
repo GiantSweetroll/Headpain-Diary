@@ -9,8 +9,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import diary.constants.PainLocationPath;
-import diary.puzzleimage.ImagePiece;
+import diary.ImageTextButton;
+import diary.constants.ImageConstants;
+import giantsweetroll.ImageManager;
 
 public class Test
 {	
@@ -54,9 +55,9 @@ public class Test
 		
 		JOptionPane.showMessageDialog(null, "Done");
 	}
-	
+
 	public static void main(String args[])
 	{
-		JOptionPane.showMessageDialog(null, new ImagePiece(PainLocationPath.CUSTOM_PAIN_BACK_1, "Sfrv", true));
+		JOptionPane.showMessageDialog(null, new ImageTextButton(ImageManager.getImageIcon(ImageConstants.NEW_ENTRY), "New Entry"));
 	}
 }

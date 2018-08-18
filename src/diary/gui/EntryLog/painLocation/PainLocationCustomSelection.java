@@ -21,12 +21,13 @@ import javax.swing.SwingConstants;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.interfaces.GUIFunction;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import diary.methods.PainLocationMethods;
 import diary.puzzleimage.ImageCollection;
 import giantsweetroll.gui.swing.Gbm;
 
-public class PainLocationCustomSelection extends JPanel implements GUIFunction, ActionListener
+public class PainLocationCustomSelection extends JPanel implements GUIFunction, ActionListener, LanguageListener
 {
 
 	/**
@@ -205,7 +206,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 	@Override
 	public void refresh(){}
 
-	//Overidden Methods
+	//Overridden Methods
 	@Override
 	public void setEnabled(boolean enabled)
 	{
@@ -227,5 +228,11 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 			this.panelCenter.setBackground(Color.WHITE);
 		}
 		this.butReset.setEnabled(enabled);
+	}
+	
+	@Override
+	public void revalidateLanguage()
+	{
+		this.butReset.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 	}
 }

@@ -7,7 +7,7 @@ import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.DatePanel;
-import diary.gui.EntryLog.TimePanel;
+import diary.gui.TimePanel;
 import diary.methods.Methods;
 import giantsweetroll.date.Date;
 
@@ -108,6 +108,14 @@ public class DateTimeSelect extends FormElement
 	public boolean allFilled() 
 	{
 		return true;
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_DATE_TIME));
+		this.date.revalidateLanguage();
+		this.time.revalidateLanguage();
 	}
 
 }

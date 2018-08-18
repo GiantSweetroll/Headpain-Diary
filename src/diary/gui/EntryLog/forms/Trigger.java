@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -149,6 +150,15 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 		{
 			return true;
 		}
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT));
+		this.combo.setModel(new DefaultComboBoxModel<String>(Constants.DEFAULT_ACTIVITIES));
+		this.revalidate();
+		this.repaint();
 	}
 
 }

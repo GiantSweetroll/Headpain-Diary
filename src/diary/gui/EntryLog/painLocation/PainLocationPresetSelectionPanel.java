@@ -17,8 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import diary.ImageTextPanel;
 import diary.constants.Constants;
-import diary.gui.ImageTextPanel;
 import diary.interfaces.GUIFunction;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;

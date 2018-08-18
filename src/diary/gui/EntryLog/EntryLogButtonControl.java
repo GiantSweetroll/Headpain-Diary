@@ -185,4 +185,17 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 	{
 		this.changeEntryLogPanelState();
 	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		if(this.buttonType == EntryLogButtonControl.NEXT)
+		{
+			this.button.setText(Methods.getLanguageText(XMLIdentifier.NEXT_TEXT));
+		}
+		else
+		{
+			this.button.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+		}
+	}
 }

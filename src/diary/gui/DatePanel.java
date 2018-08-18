@@ -13,11 +13,13 @@ import javax.swing.JPanel;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.interfaces.LanguageListener;
 import diary.methods.DateOperation;
+import diary.methods.Methods;
 import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
 
-public class DatePanel extends JPanel implements ActionListener
+public class DatePanel extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -225,5 +227,15 @@ public class DatePanel extends JPanel implements ActionListener
 				this.resetDefault();
 				break;
 		}
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.comboMonth.setModel(new DefaultComboBoxModel<String>(DateOperation.getMonthNameList().toArray(new String[12])));
+		this.butAuto.setText(Methods.getLanguageText(XMLIdentifier.AUTO_TEXT));
+		this.butDefault.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.revalidate();
+		this.repaint();
 	}
 }

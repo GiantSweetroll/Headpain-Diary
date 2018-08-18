@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import diary.ImageTextButton;
 import diary.constants.Constants;
 import diary.constants.ImageConstants;
 import diary.constants.PanelName;
@@ -39,7 +40,8 @@ public class MainMenu extends MainFramePanel implements ActionListener
 
 	private JLabel labLogo, labCreatedBy, labName, labSupport;
 	private List<JLabel> supportersList;
-	private JButton butNewEntry, butGraph, butTable, butSettings, butExit, butManagePatients;
+	private JButton butSettings, butExit, butManagePatients;
+	private ImageTextButton butNewEntry, butGraph, butTable;
 	private JPanel panelMainButtons, panelSupport, panelAuthor, panelBelow, panelBelowLeft, panelBelowRight, panelBelowCenter, panelCenter, panelCenterCenter, panelCenterBelow, panelMain;
 	private JScrollPane scroll;
 	
@@ -213,7 +215,7 @@ public class MainMenu extends MainFramePanel implements ActionListener
 			this.panelSupport.add(label);
 		}
 	}
-	private void initButton(JButton button, ImageIcon image, String text)
+/*	private void initButton(JButton button, ImageIcon image, String text)
 	{
 	//	image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 8)));
 		image = Methods.resizeImageByRatio(image, Methods.getPercentage(image, Constants.BUTTON_IMAGE_SIZE_RATIO));
@@ -221,7 +223,7 @@ public class MainMenu extends MainFramePanel implements ActionListener
 		panelImage.getTextLabel().setForeground(Color.WHITE);
 		panelImage.getTextLabel().setFont(Constants.FONT_SUB_TITLE);
 		button.add(panelImage);
-	}
+	}		*/
 	private void initPanelMainButtons()
 	{
 		//Initialization
@@ -240,12 +242,21 @@ public class MainMenu extends MainFramePanel implements ActionListener
 						return new Dimension(original.width, super.getPreferredSize().height);
 					}
 				};
-		this.butNewEntry = new JButton();
-		this.initButton(this.butNewEntry, ImageManager.getImageIcon(ImageConstants.NEW_ENTRY), Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT));
-		this.butGraph = new JButton();
-		this.initButton(this.butGraph, ImageManager.getImageIcon(ImageConstants.VIEW_GRAPH), Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT));
-		this.butTable = new JButton();
-		this.initButton(this.butTable, ImageManager.getImageIcon(ImageConstants.VIEW_TABLE), Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT));
+		ImageIcon image = ImageManager.getImageIcon(ImageConstants.NEW_ENTRY);
+		this.butNewEntry = new ImageTextButton(Methods.resizeImageByRatio(image, Methods.getPercentage(image, Constants.BUTTON_IMAGE_SIZE_RATIO)),
+												Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT),
+												Constants.FONT_SUB_TITLE,
+												Color.WHITE);
+		image = ImageManager.getImageIcon(ImageConstants.VIEW_GRAPH);
+		this.butGraph = new ImageTextButton(Methods.resizeImageByRatio(image, Methods.getPercentage(image, Constants.BUTTON_IMAGE_SIZE_RATIO)),
+												Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT),
+												Constants.FONT_SUB_TITLE,
+												Color.WHITE);
+		image = ImageManager.getImageIcon(ImageConstants.VIEW_TABLE);
+		this.butTable = new ImageTextButton(Methods.resizeImageByRatio(image, Methods.getPercentage(image, Constants.BUTTON_IMAGE_SIZE_RATIO)),
+												Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT),
+												Constants.FONT_SUB_TITLE,
+												Color.WHITE);
 		
 		//Properties
 		this.panelMainButtons.setLayout(new GridLayout(1, 0, 20, 20));
@@ -385,5 +396,23 @@ public class MainMenu extends MainFramePanel implements ActionListener
 			System.exit(0);
 			break;		
 		}
+	}
+	
+	@Override
+	public void revalidateLanguage()
+	{
+		this.butNewEntry.setText(Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TEXT));
+		this.butNewEntry.setToolTipText(Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
+		this.butGraph.setText(Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TEXT));
+		this.butGraph.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP));
+		this.butTable.setText(Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TEXT));
+		this.butTable.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP));
+		this.labCreatedBy.setText(Methods.getLanguageText(XMLIdentifier.AUTHOR_TEXT));
+		this.labSupport.setText(Methods.getLanguageText(XMLIdentifier.SUPPORTED_BY_TEXT));
+		this.butSettings.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT));
+		this.butSettings.setToolTipText(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TOOLTIP));
+		this.butManagePatients.setText(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT));
+		this.butManagePatients.setToolTipText(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP));
+		this.butExit.setText(Methods.getLanguageText(XMLIdentifier.EXIT_BUTTON_TEXT));
 	}
 }

@@ -2,7 +2,9 @@ package diary.gui;
 
 import javax.swing.JPanel;
 
-public abstract class MainFramePanel extends JPanel
+import diary.interfaces.LanguageListener;
+
+public abstract class MainFramePanel extends JPanel implements LanguageListener
 {
 
 	/**

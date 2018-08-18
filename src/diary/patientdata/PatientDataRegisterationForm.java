@@ -20,6 +20,7 @@ import diary.gui.CustomDialog;
 import diary.gui.MainFrame;
 import diary.gui.MainFramePanel;
 import diary.methods.FileOperation;
+import diary.methods.Methods;
 import giantsweetroll.message.MessageManager;
 
 public class PatientDataRegisterationForm extends MainFramePanel implements ActionListener
@@ -239,5 +240,12 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 				}
 				break;
 		}
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.labTitle.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL));
+		this.patientForm.revalidateLanguage();
 	}
 }

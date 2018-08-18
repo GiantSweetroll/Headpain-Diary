@@ -15,9 +15,10 @@ import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.interfaces.GUIFunction;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 
-public class PainLocationSelectionPanel extends JPanel implements ItemListener, GUIFunction
+public class PainLocationSelectionPanel extends JPanel implements ItemListener, GUIFunction, LanguageListener
 {
 
 	/**
@@ -161,4 +162,12 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 	}
 	@Override
 	public void refresh() {};
+	
+	@Override
+	public void revalidateLanguage()
+	{
+		this.radPreset.setText(Methods.getLanguageText(XMLIdentifier.PRESETS_TEXT));
+		this.radCustom.setText(Methods.getLanguageText(XMLIdentifier.CUSTOM_TEXT));
+		this.custom.revalidateLanguage();
+	}
 }

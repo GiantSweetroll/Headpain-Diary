@@ -431,4 +431,21 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 				break;
 		}
 	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.checkMedRec.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
+		this.checkName.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
+		this.checkDOB.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL));
+		this.butFilter.setText(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
+		this.initTable();
+		this.butBack.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+		this.butDelete.setText(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
+		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.revalidate();
+		this.repaint();
+	}
 }

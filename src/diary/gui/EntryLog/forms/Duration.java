@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
@@ -254,5 +255,14 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	public boolean allFilled()
 	{
 		return true;
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL));
+		this.units.setModel(new DefaultComboBoxModel<String>(Constants.DURATION_UNITS));
+		this.revalidate();
+		this.repaint();
 	}
 }

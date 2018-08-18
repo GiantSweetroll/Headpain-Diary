@@ -135,4 +135,11 @@ public class Intensity extends FormElement implements KeyListener, ChangeListene
 	{
 		this.showSelectedData();
 	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL));
+		this.painDetail.setText(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
+	}
 }

@@ -1,4 +1,4 @@
-package diary.gui;
+package diary;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -89,7 +89,7 @@ public class ImageTextPanel extends JPanel
 		this.add(this.label);
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void setEnabled(boolean enabled)
 	{
