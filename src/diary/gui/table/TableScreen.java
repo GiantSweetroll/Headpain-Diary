@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -448,5 +449,23 @@ public class TableScreen extends MainFramePanel implements ActionListener
 				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
 				break;
 		}
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.activePatientPanel.revalidateLanguage();
+		this.panelDateRange.revalidateLanguage();
+		this.labFilter.setText(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_BY_LABEL));
+		this.labKeyword.setText(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_KEYWORD_LABEL));
+		this.comboFilter.setModel(new DefaultComboBoxModel<String>(Constants.TABLE_FILTER_OPTIONS));
+		this.butFilter.setText(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
+		this.butBack.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butDelete.setText(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
+		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.initTable();
+		this.revalidate();
+		this.repaint();
 	}
 }

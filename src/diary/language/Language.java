@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.methods.Methods;
 import diary.methods.XMLGenerator;
 import giantsweetroll.message.MessageManager;
 import giantsweetroll.xml.dom.XMLManager;
@@ -53,7 +54,7 @@ public class Language
 			
 			//Getting the texts
 			this.map = this.createTextMap(rootElement);
-			
+			Methods.revalidateLanguage();
 		}
 		catch (ParserConfigurationException | SAXException | IOException e) 
 		{

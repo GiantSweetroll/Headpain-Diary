@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.interfaces.LanguageListener;
 import diary.methods.DateOperation;
@@ -65,8 +66,8 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 	//	this.comboYear = new JComboBox<String>(DateOperation.getYearRangeString());
 		this.comboMonth = new JComboBox<String>(DateOperation.getMonthNameList().toArray(new String[12]));
 		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), Short.parseShort(this.comboYear.getSelectedItem().toString())));
-		this.butAuto = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.AUTO_TEXT));
-		this.butDefault = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
+		this.butAuto = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.AUTO_TEXT));
+		this.butDefault = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
 		this.c = new GridBagConstraints();
 		this.defaultDate = new Date();
 		
@@ -78,10 +79,10 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 		this.comboDay.setEnabled(this.enable);
 		this.butAuto.addActionListener(this);
 		this.butAuto.setActionCommand(this.AUTO);
-		this.butAuto.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT));
+		this.butAuto.setToolTipText(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_AUTO_BUTTON_TOOLTIP_TEXT));
 		this.butDefault.addActionListener(this);
 		this.butDefault.setActionCommand(this.DEFAULT);
-		this.butDefault.setToolTipText(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT));
+		this.butDefault.setToolTipText(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_RESET_BUTTON_TOOLTIP_TEXT));
 		this.comboDay.setBackground(Color.WHITE);
 		this.comboMonth.setBackground(Color.WHITE);
 		this.comboYear.setBackground(Color.WHITE);

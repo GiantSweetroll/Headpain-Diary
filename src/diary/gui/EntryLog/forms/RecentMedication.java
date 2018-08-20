@@ -109,5 +109,7 @@ public class RecentMedication extends FormElement
 	{
 		this.labRecentMeds.setText(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL));
 		this.labMedecineComplaint.setText(Methods.getLanguageText(XMLIdentifier.MEDICINE_COMPLAINT_LABEL));
+		this.recentMedication.revalidateLanguage();
+		this.medicineComplaint.revalidateLanguage();
 	}
 }

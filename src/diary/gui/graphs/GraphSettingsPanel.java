@@ -1,16 +1,15 @@
 package diary.gui.graphs;
 
-import java.awt.Color;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import diary.constants.XMLIdentifier;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 
-public class GraphSettingsPanel extends JPanel
+public class GraphSettingsPanel extends JPanel implements LanguageListener
 {
 
 	/**
@@ -59,5 +58,14 @@ public class GraphSettingsPanel extends JPanel
 	protected boolean isDisplayDataPoints()
 	{
 		return this.displayDataPoints.isSelected();
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT)));
+		this.displayDataPoints.setText(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_DISPLAY_DATA_POINTS));
+		this.enableDataValues.setText(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES));
+		this.displayVoidData.setText(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_DISPLAY_VOID_DATA));
 	}
 }

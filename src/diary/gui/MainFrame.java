@@ -75,6 +75,13 @@ public class MainFrame
 		this.panel.setLayout(new CardLayout());
 		MainFrame.isFullScreen = false;
 		this.refreshSettings();
+		Methods.addLanguageListener(this.MAIN_MENU);
+		Methods.addLanguageListener(this.SETTINGS_PANEL);
+		Methods.addLanguageListener(this.MANAGE_PATIENTS_PANEL);
+		Methods.addLanguageListener(this.GRAPH_FILTER_PANEL);
+		Methods.addLanguageListener(this.GRAPH_PANEL);
+		Methods.addLanguageListener(this.PAIN_TABLE);
+		Methods.addLanguageListener(this.ENTRY_LOG);
 	//	jComponent = Globals.MAIN_MENU;
 		
 		//Add to panel
@@ -192,7 +199,7 @@ public class MainFrame
 			}
 			
 			//Selected Language
-			Constants.LANGUAGE.setLanguage(Globals.setting.getDataMap().get(Settings.LANGUAGE));
+			Globals.LANGUAGE.setLanguage(Globals.setting.getDataMap().get(Settings.LANGUAGE));
 			
 			//Database path
 			File file = new File(Globals.setting.getDataMap().get(Settings.DATABASE_PATH));

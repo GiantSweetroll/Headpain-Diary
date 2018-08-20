@@ -59,4 +59,6 @@ public class LineGraphPanel extends Graph
 			g.fillOval(this.dataPoints.get(i).x - width/2, this.dataPoints.get(i).y - width/2, width, width);
 		}
 	}
+	@Override
+	public void revalidateLanguage() {}
 }

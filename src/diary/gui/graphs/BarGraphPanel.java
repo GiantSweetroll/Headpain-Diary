@@ -154,4 +154,9 @@ public class BarGraphPanel extends Graph
 			g2.setTransform(defaultAt);
 		}
 	}
+	@Override
+	public void revalidateLanguage() 
+	{
+		
+	}
 }

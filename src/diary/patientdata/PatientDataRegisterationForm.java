@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
@@ -85,7 +86,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 	{
 		//Initialization
 		this.panelTitle = new JPanel();
-		this.labTitle = new JLabel (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL));
+		this.labTitle = new JLabel (Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL));
 		
 		//Properties
 		this.panelTitle.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -99,7 +100,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butCancel = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.CANCEL_TEXT));
+		this.butCancel = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.CANCEL_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -114,7 +115,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butSave = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.SAVE_TEXT));
+		this.butSave = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.SAVE_TEXT));
 		
 		//Properties
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -180,13 +181,13 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 			case SAVE:
 				if(this.patientForm.isEmptyID())
 				{
-					MessageManager.showErrorDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE),
-													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE_TITLE));
+					MessageManager.showErrorDialog(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE),
+													Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_ID_MESSAGE_TITLE));
 				}
 				else if (this.patientForm.isEmptyName())
 				{
-					MessageManager.showErrorDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE),
-													Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE_TITLE));
+					MessageManager.showErrorDialog(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE),
+													Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE_TITLE));
 				}
 				else
 				{
@@ -208,8 +209,8 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 						
 						if(!unique)
 						{
-							int response = CustomDialog.showConfirmDialog(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TITLE),
-															Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TEXT));
+							int response = CustomDialog.showConfirmDialog(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TITLE),
+															Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TEXT));
 							
 							if (response == JOptionPane.YES_OPTION)
 							{

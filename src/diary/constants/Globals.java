@@ -6,6 +6,7 @@ import java.util.Set;
 import diary.data.Settings;
 import diary.history.History;
 import diary.interfaces.LanguageListener;
+import diary.language.Language;
 import diary.patientdata.PatientData;
 
 public class Globals 
@@ -21,6 +22,7 @@ public class Globals
 	public static Set<Character> keysPressed = new HashSet<Character>();
 	public static boolean mouseDown = false;
 	public static final Set<LanguageListener> LANGUAGE_COMPONENTS = new HashSet<LanguageListener>();
+	public static final Language LANGUAGE = new Language();
 	
 	//Panels
 	/*

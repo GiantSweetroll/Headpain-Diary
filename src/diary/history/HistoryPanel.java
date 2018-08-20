@@ -14,12 +14,13 @@ import javax.swing.JTextField;
 
 import diary.constants.Constants;
 import diary.interfaces.GUIFunction;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
 import giantsweetroll.GMisc;
 import giantsweetroll.gui.swing.Gbm;
 
-public class HistoryPanel extends JPanel implements GUIFunction, ActionListener
+public class HistoryPanel extends JPanel implements GUIFunction, ActionListener, LanguageListener
 {
 
 	/**
@@ -178,5 +179,11 @@ public class HistoryPanel extends JPanel implements GUIFunction, ActionListener
 	public void refresh() 
 	{
 		this.comboHistory.refresh();
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.refresh();
 	}
 }

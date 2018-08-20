@@ -300,7 +300,12 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 		this.labUser.setText(Methods.getLanguageText(XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT));
 		this.radShow.setText(Methods.getLanguageText(XMLIdentifier.DETAILS_TEXT));
 		this.panelFilter.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
-		this.patientFilter.revalidateLanguage();this.dataText.revalidateLanguage();
+		this.patientFilter.revalidateLanguage();
+		try
+		{
+			this.dataText.revalidateLanguage();
+		}
+		catch(NullPointerException ex){}
 		this.buttonFilter.setText(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 	}
 }

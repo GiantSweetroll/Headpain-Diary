@@ -428,7 +428,7 @@ public class Methods
 	{
 		try
 		{
-			return Constants.LANGUAGE.getTextMap().get(key);
+			return Globals.LANGUAGE.getTextMap().get(key);
 		}
 		catch(Exception ex)
 		{

@@ -57,9 +57,17 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 	private JButton butCancel, butSave;
 	private LinkedHashMap<String, String> dataMap;
 	
+	//Window Category
+	private JLabel labWindowMode;
+	private JRadioButton radFullscreen, radWindowed;
 	//Program Category
-	JLabel labWindowMode;
-	JRadioButton radFullscreen, radWindowed;
+	private JLabel labLanguage;
+	private JComboBox<String> comboLanguages;
+	private JButton butLanguageRefresh;
+	//Database Category
+	private JLabel labDatabasePath, labUserDatabasePath;
+	private JTextField tfDatabasePath, tfUserDatabasePath;
+	private JButton butBrowseUserDatabasePath, butDefaultUserDatabase, butBrowseDatabasePath, butDefaultDatabase;
 	
 	//Constants
 	private final String CANCEL = "cancel";
@@ -113,14 +121,14 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 	{
 		//Initialization
 		this.catDatabase = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_TITLE));
-		JLabel labDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT), SwingConstants.RIGHT);
-		JTextField tfDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_PATH), 30);
-		JButton butBrowseDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
-		JButton butDefaultDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
-		JLabel labUserDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
-		JTextField tfUserDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_USERS_PATH), 30);
-		JButton butBrowseUserDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
-		JButton butDefaultUserDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.labDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT), SwingConstants.RIGHT);
+		this.tfDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_PATH), 30);
+		this.butBrowseDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		this.butDefaultDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.labUserDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
+		this.tfUserDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_USERS_PATH), 30);
+		this.butBrowseUserDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		this.butDefaultUserDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -338,9 +346,9 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 	{
 		//Initialization
 		this.catProgram = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_PROGRAM_TITLE));
-		JLabel labLanguage = new JLabel(Methods.getLanguageText(XMLIdentifier.SETTINGS_LANGUAGE_TEXT));
-		JComboBox<String> comboLanguages = new JComboBox<String>(Methods.getLanguages());
-		JButton butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.labLanguage = new JLabel(Methods.getLanguageText(XMLIdentifier.SETTINGS_LANGUAGE_TEXT));
+		this.comboLanguages = new JComboBox<String>(Methods.getLanguages());
+		this.butLanguageRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		String selectedLanguage = this.dataMap.get(Settings.LANGUAGE);
 		
@@ -348,7 +356,7 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 		this.catProgram.setLayout(new GridBagLayout());
 		this.catProgram.setOpaque(false);
 		comboLanguages.setBackground(Color.WHITE);
-		butRefresh.addActionListener(new ActionListener()
+		butLanguageRefresh.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -373,7 +381,7 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 		Gbm.nextGridColumn(c);
 		this.catProgram.add(comboLanguages, c);			//Language Options
 		Gbm.nextGridColumn(c);
-		this.catProgram.add(butRefresh, c);				//Refresh Language Button
+		this.catProgram.add(butLanguageRefresh, c);				//Refresh Language Button
 	}
 	private void initPanelBelow()
 	{
@@ -435,5 +443,18 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 		this.catProgram.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_PROGRAM_TITLE)));
 		this.catWindow.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_TITLE)));
 		this.catDatabase.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_TITLE)));
+		this.labWindowMode.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT));
+		this.radWindowed.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT));
+		this.radFullscreen.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT));
+		this.labLanguage.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_LANGUAGE_TEXT));
+		this.butLanguageRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.labDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT));
+		this.labUserDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
+		this.tfDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT));
+		this.tfUserDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT));
+		this.butBrowseDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		this.butBrowseUserDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		this.butDefaultDatabase.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butDefaultUserDatabase.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 	}
 }

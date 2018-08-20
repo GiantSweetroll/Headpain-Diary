@@ -13,11 +13,12 @@ import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.history.HistoryPanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 
-public class GraphFilterPanel extends JPanel implements ItemListener
+public class GraphFilterPanel extends JPanel implements ItemListener, LanguageListener
 {
 
 	/**
@@ -82,5 +83,13 @@ public class GraphFilterPanel extends JPanel implements ItemListener
 	public void itemStateChanged(ItemEvent e)
 	{
 		this.medHistory.setEnabled(this.checkRecMed.isSelected());
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.checkRecMed.setText(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL));
+		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
+		this.medHistory.revalidateLanguage();
 	}
 }

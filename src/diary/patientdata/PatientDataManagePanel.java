@@ -23,6 +23,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
@@ -92,7 +93,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 	{
 		//Initializations
 		this.panelBelowLeft = new JPanel();
-		this.butBack = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
+		this.butBack = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -109,7 +110,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butNew = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_TEXT));
+		this.butNew = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_TEXT));
 	
 		//Properties
 		this.panelBelowRight.setOpaque(false);
@@ -172,13 +173,13 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 	{
 		//Initialization
 		this.panelTopLeft = new JPanel();
-		this.checkMedRec = new JCheckBox (Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
+		this.checkMedRec = new JCheckBox (Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
 		this.tfMedRec = new JTextField("", 10);
-		this.checkName = new JCheckBox(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
+		this.checkName = new JCheckBox(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
 		this.tfName = new JTextField("", 20);
-		this.checkDOB = new JCheckBox(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL));
+		this.checkDOB = new JCheckBox(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL));
 		this.panelDateRange = new DateRangePanel();
-		this.butFilter = new JButton(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT));
+		this.butFilter = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties

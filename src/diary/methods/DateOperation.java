@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import diary.constants.Constants;
 import diary.constants.DateConstants;
+import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import giantsweetroll.date.DateManager;
 
@@ -175,18 +175,18 @@ public class DateOperation
 	{
 		List<String> list = new ArrayList<String>();
 		
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JANUARY));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_FEBRUARY));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_MARCH));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_APRIL));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_MAY));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JUNE));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JULY));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_AUGUST));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_SEPTEMBER));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_OCTOBER));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_NOVEMBER));
-		list.add(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_DECEMBER));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JANUARY));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_FEBRUARY));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_MARCH));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_APRIL));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_MAY));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JUNE));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_JULY));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_AUGUST));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_SEPTEMBER));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_OCTOBER));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_NOVEMBER));
+		list.add(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.DATE_MONTH_DECEMBER));
 		
 		return list;
 	}

@@ -10,11 +10,12 @@ import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
 
-public class DateRangePanel extends JPanel
+public class DateRangePanel extends JPanel implements LanguageListener
 {
 
 	/**
@@ -109,5 +110,14 @@ public class DateRangePanel extends JPanel
 	{
 		this.setFromDate(new Date());
 		this.setToDate(new Date());
+	}
+
+	@Override
+	public void revalidateLanguage()
+	{
+		this.labFrom.setText(Methods.getLanguageText(XMLIdentifier.DATE_FROM_LABEL));
+		this.labTo.setText(Methods.getLanguageText(XMLIdentifier.DATE_TO_LABEL));
+		this.dateFrom.revalidateLanguage();
+		this.dateTo.revalidateLanguage();
 	}
 }

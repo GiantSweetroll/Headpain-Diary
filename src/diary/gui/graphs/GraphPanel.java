@@ -400,4 +400,19 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 				break;
 		}
 	}
+
+	@Override
+	public void revalidateLanguage()
+	{
+		this.labCategory.setText(Methods.getLanguageText(XMLIdentifier.SHOW_TEXT));
+		this.activePatientPanel.revalidateLanguage();this.panelDateRange.revalidateLanguage();
+		this.butBack.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+		this.buttonSave.setText(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
+		this.butOptions.setText(Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT));
+		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butSwitchGraph.setText(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
+		this.refreshGraph();
+		this.revalidate();
+		this.repaint();
+	}
 }

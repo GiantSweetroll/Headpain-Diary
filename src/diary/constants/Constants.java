@@ -12,7 +12,6 @@ import java.util.LinkedHashMap;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import diary.language.Language;
 import diary.methods.Methods;
 import giantsweetroll.GMisc;
 import giantsweetroll.ImageManager;
@@ -28,8 +27,6 @@ public final class Constants
 //	public static final Dimension IMAGE_SIZE = new Dimension(200, 180);
 	
 	public static final String LANGUAGE_FOLDER_PATH = "data" + File.separator + "settings" + File.separator + "language" + File.separator;
-	public static final Language LANGUAGE = new Language();
-	
 	public static final String REQUIRED_IDENTIFIER = "*";
 	
 	public static final String DATABASE_DEFAULT_PATH = "data" + File.separator + "database" + File.separator;
