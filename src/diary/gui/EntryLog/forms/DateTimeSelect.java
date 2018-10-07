@@ -81,8 +81,21 @@ public class DateTimeSelect extends FormElement
 	{
 		return this.time.sameAsDefault();
 	}
+	public void setAsDefaultThis()
+	{
+		this.setDefaultDateAsThis();
+		this.setDefaultTimeAsThis();
+	}
+	public void setDefaultDateAsThis()
+	{
+		this.date.setAsDefaultDataThis();
+	}
+	public void setDefaultTimeAsThis()
+	{
+		this.time.setAsDefaultTimeThis();
+	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void resetDefaults() 
 	{

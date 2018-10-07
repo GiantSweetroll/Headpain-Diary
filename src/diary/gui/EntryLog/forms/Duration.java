@@ -47,6 +47,10 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 						HOURS_MINOR_TICK_COUNT = 1,
 						DAYS_MAJOR_TICK_COUNT = 2,
 						DAYS_MINOR_TICK_COUNT = 1;
+	private final int SECONDS_INDEX = 0,
+						MINUTES_INDEX = 1,
+						HOURS_INDEX = 2,
+						DAYS_INDEX = 3;
 	
 	
 	public Duration()
@@ -124,6 +128,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	@Override
 	public String getData() 
 	{
+		/*
 		String durationUnit = this.units.getSelectedItem().toString();
 		if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT)))			//Days
 		{
@@ -141,6 +146,24 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		{
 			return Long.toString(Methods.daysToSeconds(this.slider.getValue()));
 		}
+		*/
+		
+		if (this.units.getSelectedIndex() == this.SECONDS_INDEX)		//Seconds
+		{
+			return Integer.toString(this.slider.getValue());
+		}
+		else if (this.units.getSelectedIndex() == this.MINUTES_INDEX)	//Minutes
+		{
+			return Integer.toString(Methods.minutesToSeconds(this.slider.getValue()));
+		}
+		else if (this.units.getSelectedIndex() == this.HOURS_INDEX)		//Hours
+		{
+			return Integer.toString(Methods.hoursToSeconds(this.slider.getValue()));
+		}
+		else															//Days
+		{
+			return Long.toString(Methods.daysToSeconds(this.slider.getValue()));
+		}		
 	}
 
 	@Override

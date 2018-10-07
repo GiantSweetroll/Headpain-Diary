@@ -224,6 +224,8 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		
 		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
 		
+		System.out.println("Before: " + list.size());
+		
 		if (this.getMainFrameReference().GRAPH_FILTER_PANEL.isRecentMedicationSelected())
 		{
 			list = PainDataOperation.filter(list, PainDataIdentifier.RECENT_MEDICATION, this.getMainFrameReference().GRAPH_FILTER_PANEL.getRecentMedicationFilter());
@@ -233,6 +235,8 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		{	
 			list = PainDataOperation.insertEmptyData(list, this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
 		}
+		
+		System.out.println("After: " + list.size());
 		
 		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{

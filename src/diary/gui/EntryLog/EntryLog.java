@@ -199,9 +199,9 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.setOldEntry(entry);
 		this.setOldPatientData(patient);
 		this.fillData(patient, entry);
+		this.setAsNewEntry(false);
 		this.revalidate();
 		this.repaint();
-		this.setAsNewEntry(false);
 	}
 	private void fillData(PatientData patient, PainEntryData entry)
 	{		
@@ -209,6 +209,7 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.comments.setData(entry.getComments());
 		this.dateTime.setDate(entry.getDate());
 		this.dateTime.setTime(entry);
+		this.dateTime.setAsDefaultThis();
 		this.duration.setData(entry.getDuration());
 		this.intensity.setData(entry.getIntensity());
 		this.painKind.setData(entry);

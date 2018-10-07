@@ -83,6 +83,7 @@ public class FileOperation
 	public static final void exportPainData(PatientData patient, PainEntryData entry)
 	{
 		File file = new File(Methods.generatePainDataFolderPathName(patient, entry));
+		System.out.println(entry.toString());
 		if (!file.exists())				//Check if the folder directory exists, if not make it
 		{
 			file.mkdirs();

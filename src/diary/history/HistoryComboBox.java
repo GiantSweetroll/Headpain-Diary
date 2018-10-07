@@ -90,7 +90,8 @@ public class HistoryComboBox extends JComboBox<String> implements GUIFunction
 	}
 	public int getLastIndex()
 	{
-		return this.history.getHistory().size()+1;
+//		return this.history.getHistory().size()+1;
+		return this.getItemCount()-1;
 	}
 	public boolean lastIndexSelected()
 	{
