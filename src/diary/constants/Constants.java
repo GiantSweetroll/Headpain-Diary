@@ -130,6 +130,7 @@ public final class Constants
 	}
 
 	//Arrays
+	/*
 	public static final String[] GRAPH_CATEGORIES = {//Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT),
 														Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT),
@@ -191,10 +192,10 @@ public final class Constants
 														Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
 	
 	public static final String[] DEFAULT_RECENT_MEDICATION = {Methods.getLanguageText(XMLIdentifier.DEFAULT_RECENT_MEDICATION_PRESCRIBED_MIX_CAPSULE)};
-	
+	*/
 	public static final String[] EMPTY_STRING_ARRAY = {};
 	
-	public static final LinkedHashMap<String, LinkedHashMap<URL, String>> PAIN_LOCATIONS = Methods.generatePainLocationsTextURLMap();
+//	public static final LinkedHashMap<String, LinkedHashMap<URL, String>> PAIN_LOCATIONS = Methods.generatePainLocationsTextURLMap();
 	
 	//For JSlider
 	/*

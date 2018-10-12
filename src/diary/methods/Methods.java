@@ -399,9 +399,9 @@ public class Methods
 		}
 	}
 	
-	public static boolean isPartOfDefaultActivity(String activity)
+	public static boolean isPartOfDefaultTrigger(String activity)
 	{
-		for (String def : Constants.DEFAULT_ACTIVITIES)
+		for (String def : Methods.getDefaultTriggers())
 		{
 			if (activity.equals(def))
 			{
@@ -413,7 +413,7 @@ public class Methods
 	
 	public static boolean isPartOfDefaultPainKind(String pain)
 	{
-		for (String def : Constants.DEFAULT_PAIN_KIND)
+		for (String def : Methods.getDefaultPainKinds())
 		{
 			if (pain.equals(def))
 			{
@@ -911,5 +911,102 @@ public class Methods
     	{
     		listener.revalidateLanguage();
     	}
+    }
+    
+    public static String[] getGraphCategories()
+    {
+    	String[] categories = {//Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_VS_DATE_TEXT),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_AMOUNT),
+//    							Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_LOCATION_VS_DATE),
+				    			Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_AMOUNT)};
+    	
+    	return categories;
+    }
+    
+    public static String[] getTableFilterOptions()
+    {
+    	String[] filters = {//Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_AMOUNT_TEXT),
+								Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_POSITIONS_TEXT),
+								Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_PAIN_KINDS_TEXT),
+								Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_INTENSITIES_TEXT),
+								Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_DURATIONS_TEXT),
+								Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_TRIGGER_TEXT),
+								Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_TYPE_COMMENTS_TEXT)};
+    	
+    	return filters;
+    }
+    public static String[] getTableHeaders()
+    {
+    	String[] headers = {Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_SELECT_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_DATE_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT),
+			//				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_POSITIONS_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_KINDS_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_INTENSITIES_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_TEXT),
+			//				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_DETAILS_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_RECENT_MEDICATION_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_MEDICINE_COMPLAINT_TEXT),
+							Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_COMMENTS_TEXT)};
+
+    	return headers;
+    }
+    public static String[] getOptionPaneYesNoCancelButtonTexts()
+    {
+    	String[] arr = {Methods.getLanguageText(XMLIdentifier.YES_TEXT),
+				Methods.getLanguageText(XMLIdentifier.NO_TEXT),
+				Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT)};
+
+    	return arr;
+    }
+    public static String[] getDurationUnits()
+    {
+    	String[] units = {Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT),
+							Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT),
+							Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT),
+							Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT)};
+
+    	return units;
+    }
+    public static String[] getPatientTableHeaders()
+    {
+    	String[] headers = {Methods.getLanguageText(XMLIdentifier.SELECT_TEXT),
+							Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL),
+							Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL),
+							Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL)};
+
+    	return headers;
+    }
+    public static String[] getDefaultTriggers()
+    {
+    	String[] triggers = {Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY),
+							Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR),
+							Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT),
+							Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP),
+							Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
+    	return triggers;
+    }
+    public static String[] getDefaultPainKinds()
+    {
+    	String kinds[] = {Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING),
+				Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_PULSATING),
+				Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_RADIATING),
+				Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND),
+				Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
+    	return kinds;
+    }
+    public static String[] getDefaultRecentMedications()
+    {
+    	String[] medications = {Methods.getLanguageText(XMLIdentifier.DEFAULT_RECENT_MEDICATION_PRESCRIBED_MIX_CAPSULE)};
+    	return medications;
     }
 }

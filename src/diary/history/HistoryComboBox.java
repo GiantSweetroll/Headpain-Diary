@@ -118,6 +118,11 @@ public class HistoryComboBox extends JComboBox<String> implements GUIFunction
 			return false;
 		}
 	}
+	public void revalidateLanguage(String[] defaultOptions)
+	{
+		this.setDefaultOptions(defaultOptions);
+		this.refresh();
+	}
 
 	//Interfaces
 	@Override

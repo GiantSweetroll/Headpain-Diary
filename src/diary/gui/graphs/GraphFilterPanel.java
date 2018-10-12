@@ -9,7 +9,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
-import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.history.HistoryPanel;
@@ -33,7 +32,7 @@ public class GraphFilterPanel extends JPanel implements ItemListener, LanguageLi
 	{
 		//Initialization
 		this.checkRecMed = new JCheckBox(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL));
-		this.medHistory = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION, PatientData.LAST_RECENT_MEDS, Constants.DEFAULT_RECENT_MEDICATION);
+		this.medHistory = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION, PatientData.LAST_RECENT_MEDS, Methods.getDefaultRecentMedications());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties

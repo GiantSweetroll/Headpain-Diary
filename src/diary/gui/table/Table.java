@@ -7,11 +7,15 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 import diary.constants.Constants;
+import diary.interfaces.LanguageListener;
+import diary.methods.Methods;
 
-public class Table extends JTable
+public class Table extends JTable implements LanguageListener
 {
 
 	/**
@@ -51,6 +55,18 @@ public class Table extends JTable
 		{
 			this.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 		}
+	}
+	public void changeTableHeaders(String[] headers)
+	{
+		JTableHeader header = this.getTableHeader();
+		TableColumnModel colMod = header.getColumnModel();
+		
+		for (int i=0; i<headers.length; i++)
+		{
+			colMod.getColumn(i).setHeaderValue(headers[i]);
+		}
+		
+		header.repaint();
 	}
 
 	//Override Methods
@@ -110,5 +126,11 @@ public class Table extends JTable
 	public boolean getScrollableTracksViewportWidth()			//Resizes the table cells width to its preferred size or the viewport size, whichever is greater
 	{
 		return getPreferredSize().width < getParent().getWidth();
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.changeTableHeaders(Methods.getTableHeaders());
 	}
 }

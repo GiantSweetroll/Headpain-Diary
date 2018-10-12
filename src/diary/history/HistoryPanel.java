@@ -143,6 +143,10 @@ public class HistoryPanel extends JPanel implements GUIFunction, ActionListener,
 	{
 		return this.comboHistory.getItemCount()!=0;
 	}
+	public void revalidateLanguage(String[] options)
+	{
+		this.comboHistory.revalidateLanguage(options);
+	}
 	
 	//Overridden Methods
 	@Override

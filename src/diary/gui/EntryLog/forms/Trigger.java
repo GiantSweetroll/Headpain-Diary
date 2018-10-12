@@ -36,7 +36,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 		super(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT), true);
 
 		//Initialization
-		this.combo = new JComboBox<String>(Constants.DEFAULT_ACTIVITIES);
+		this.combo = new JComboBox<String>(Methods.getDefaultTriggers());
 		this.tf = new JTextField(10);
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -70,7 +70,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 
 	@Override
 	public String getData() {
-		if (this.combo.getSelectedIndex() == Constants.DEFAULT_ACTIVITIES.length-1)		//If last index = Other
+		if (this.combo.getSelectedIndex() == Methods.getDefaultTriggers().length-1)		//If last index = Other
 		{
 			return this.tf.getText().trim();
 		}
@@ -86,7 +86,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 		if (entry instanceof PainEntryData)
 		{
 			String trigger = Methods.convertPainKindIDToLanguage(((PainEntryData)entry).getTrigger());
-			if (Methods.isPartOfDefaultActivity(trigger))
+			if (Methods.isPartOfDefaultTrigger(trigger))
 			{
 				this.combo.setSelectedItem(trigger);
 			}
@@ -116,7 +116,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	public void mouseClicked(MouseEvent arg0) {
 		if (!tf.isEditable())
 		{
-			combo.setSelectedIndex(Constants.DEFAULT_ACTIVITIES.length-1);
+			combo.setSelectedIndex(Methods.getDefaultTriggers().length-1);
 			tf.setEditable(true);
 		}
 	}
@@ -131,7 +131,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	public void mousePressed(MouseEvent arg0) {
 		if (!tf.isEditable())
 		{
-			combo.setSelectedIndex(Constants.DEFAULT_ACTIVITIES.length-1);
+			combo.setSelectedIndex(Methods.getDefaultTriggers().length-1);
 			tf.setEditable(true);
 		}
 	}
@@ -142,7 +142,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	@Override
 	public boolean allFilled()
 	{
-		if (this.combo.getSelectedIndex() == Constants.DEFAULT_ACTIVITIES.length-1)		//If last index = Other
+		if (this.combo.getSelectedIndex() == Methods.getDefaultTriggers().length-1)		//If last index = Other
 		{
 			return !Methods.getTextData(this.tf).equals("");
 		}
@@ -156,7 +156,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	public void revalidateLanguage() 
 	{
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT));
-		this.combo.setModel(new DefaultComboBoxModel<String>(Constants.DEFAULT_ACTIVITIES));
+		this.combo.setModel(new DefaultComboBoxModel<String>(Methods.getDefaultTriggers()));
 		this.revalidate();
 		this.repaint();
 	}

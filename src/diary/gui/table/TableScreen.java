@@ -189,7 +189,7 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		this.labFilter = new JLabel(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_BY_LABEL), SwingConstants.RIGHT);
 		this.labKeyword = new JLabel(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_KEYWORD_LABEL), SwingConstants.RIGHT);
 		this.tfFilter = new JTextField("", 20);
-		this.comboFilter = new JComboBox<String>(Constants.TABLE_FILTER_OPTIONS);
+		this.comboFilter = new JComboBox<String>(Methods.getTableFilterOptions());
 		this.butFilter = new JButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 		this.labGuide = new JLabel ("<html> " + Methods.getLanguageText(XMLIdentifier.NOTE_TEXT) + ": " + "<br/>" + Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_GUIDE_USAGE_TEXT) + "</html>");
 		GridBagConstraints c = new GridBagConstraints();
@@ -458,13 +458,14 @@ public class TableScreen extends MainFramePanel implements ActionListener
 		this.panelDateRange.revalidateLanguage();
 		this.labFilter.setText(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_BY_LABEL));
 		this.labKeyword.setText(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_KEYWORD_LABEL));
-		this.comboFilter.setModel(new DefaultComboBoxModel<String>(Constants.TABLE_FILTER_OPTIONS));
+		this.comboFilter.setModel(new DefaultComboBoxModel<String>(Methods.getTableFilterOptions()));
 		this.butFilter.setText(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 		this.butBack.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butDelete.setText(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
 		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		this.initTable();
+		this.table.revalidateLanguage();
 		this.revalidate();
 		this.repaint();
 	}

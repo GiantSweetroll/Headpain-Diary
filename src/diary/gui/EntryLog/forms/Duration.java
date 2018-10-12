@@ -59,7 +59,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		
 		//Initialization
 		this.slider = new JSlider(JSlider.HORIZONTAL, 1, 60, 1);
-		this.units = new JComboBox<String>(Constants.DURATION_UNITS);
+		this.units = new JComboBox<String>(Methods.getDurationUnits());
 		this.selectedValue = this.slider.getValue();
 		this.selected = new JLabel(this.getSelectedDataInformation());
 		this.sliderPanel = new SliderPanel(this.slider);
@@ -284,7 +284,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	public void revalidateLanguage() 
 	{
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL));
-		this.units.setModel(new DefaultComboBoxModel<String>(Constants.DURATION_UNITS));
+		this.units.setModel(new DefaultComboBoxModel<String>(Methods.getDurationUnits()));
 		this.revalidate();
 		this.repaint();
 	}

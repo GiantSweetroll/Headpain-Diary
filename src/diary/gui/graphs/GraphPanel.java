@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
 import diary.gui.MainFrame;
 import diary.gui.MainFramePanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
@@ -36,7 +38,7 @@ import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class GraphPanel extends MainFramePanel implements ActionListener
+public class GraphPanel extends MainFramePanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -121,7 +123,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		//Initialization
 		this.panelTopLeft = new JPanel();
 		this.labCategory = new JLabel(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_LABEL), SwingConstants.RIGHT);
-		this.comboCategory = new JComboBox<String>(Constants.GRAPH_CATEGORIES);
+		this.comboCategory = new JComboBox<String>(Methods.getGraphCategories());
 		this.panelGraphSettings = new GraphSettingsPanel();
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -224,7 +226,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		
 		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
 		
-		System.out.println("Before: " + list.size());
+//		System.out.println("Before: " + list.size());
 		
 		if (this.getMainFrameReference().GRAPH_FILTER_PANEL.isRecentMedicationSelected())
 		{
@@ -236,7 +238,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 			list = PainDataOperation.insertEmptyData(list, this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
 		}
 		
-		System.out.println("After: " + list.size());
+//		System.out.println("After: " + list.size());
 		
 		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
@@ -409,6 +411,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 	public void revalidateLanguage()
 	{
 		this.labCategory.setText(Methods.getLanguageText(XMLIdentifier.SHOW_TEXT));
+		this.comboCategory.setModel(new DefaultComboBoxModel<String>(Methods.getGraphCategories()));
 		this.activePatientPanel.revalidateLanguage();this.panelDateRange.revalidateLanguage();
 		this.butBack.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		this.buttonSave.setText(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
@@ -416,6 +419,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSwitchGraph.setText(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
 		this.refreshGraph();
+		this.panelGraphSettings.revalidateLanguage();
 		this.revalidate();
 		this.repaint();
 	}

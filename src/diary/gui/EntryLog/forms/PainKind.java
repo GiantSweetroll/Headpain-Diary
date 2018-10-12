@@ -36,7 +36,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 		super(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), true);
 		
 		//Initialization
-		this.combo = new JComboBox<String>(Constants.DEFAULT_PAIN_KIND);
+		this.combo = new JComboBox<String>(Methods.getDefaultPainKinds());
 		this.tf = new JTextField(10);
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -70,7 +70,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 
 	@Override
 	public String getData() {
-		if (this.combo.getSelectedIndex() == Constants.DEFAULT_PAIN_KIND.length-1)		//If last index = Other
+		if (this.combo.getSelectedIndex() == Methods.getDefaultPainKinds().length-1)		//If last index = Other
 		{
 			return this.tf.getText().trim();
 		}
@@ -116,7 +116,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 	public void mouseClicked(MouseEvent arg0) {
 		if (!tf.isEditable())
 		{
-			combo.setSelectedIndex(Constants.DEFAULT_PAIN_KIND.length-1);
+			combo.setSelectedIndex(Methods.getDefaultPainKinds().length-1);
 			tf.setEditable(true);
 		}
 	}
@@ -131,7 +131,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 	public void mousePressed(MouseEvent arg0) {
 		if (!tf.isEditable())
 		{
-			combo.setSelectedIndex(Constants.DEFAULT_PAIN_KIND.length-1);
+			combo.setSelectedIndex(Methods.getDefaultPainKinds().length-1);
 			tf.setEditable(true);
 		}
 	}
@@ -142,7 +142,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 	@Override
 	public boolean allFilled() 
 	{
-		if (this.combo.getSelectedIndex() == Constants.DEFAULT_PAIN_KIND.length-1)		//If last index = Other
+		if (this.combo.getSelectedIndex() == Methods.getDefaultPainKinds().length-1)		//If last index = Other
 		{
 			return !Methods.getTextData(this.tf).equals("");
 		}
@@ -156,7 +156,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 	public void revalidateLanguage() 
 	{
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL));
-		this.combo.setModel(new DefaultComboBoxModel<String>(Constants.DEFAULT_PAIN_KIND));
+		this.combo.setModel(new DefaultComboBoxModel<String>(Methods.getDefaultPainKinds()));
 		this.revalidate();
 		this.repaint();
 	}

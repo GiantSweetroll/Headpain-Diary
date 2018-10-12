@@ -2,7 +2,7 @@ package diary.gui;
 
 import javax.swing.JOptionPane;
 
-import diary.constants.Constants;
+import diary.methods.Methods;
 
 public class CustomDialog 
 {
@@ -13,7 +13,7 @@ public class CustomDialog
 											title, 
 											JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,
 											null, 
-											Constants.OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS, 
-											Constants.OPTION_PANE_YES_NO_CANCEL_BUTTON_TEXTS[2]);
+											Methods.getOptionPaneYesNoCancelButtonTexts(), 
+											Methods.getOptionPaneYesNoCancelButtonTexts()[2]);
 	}
 }

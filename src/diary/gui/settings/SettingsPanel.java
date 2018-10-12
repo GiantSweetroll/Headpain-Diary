@@ -450,11 +450,11 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 		this.butLanguageRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.labDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT));
 		this.labUserDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
-		this.tfDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT));
-		this.tfUserDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT));
 		this.butBrowseDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
 		this.butBrowseUserDatabasePath.setText(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
 		this.butDefaultDatabase.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		this.butDefaultUserDatabase.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butSave.setText(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		this.butCancel.setText(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
 	}
 }

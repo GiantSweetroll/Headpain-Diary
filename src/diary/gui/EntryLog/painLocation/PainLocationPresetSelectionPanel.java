@@ -20,10 +20,11 @@ import javax.swing.border.Border;
 import diary.ImageTextPanel;
 import diary.constants.Constants;
 import diary.interfaces.GUIFunction;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 
-public class PainLocationPresetSelectionPanel extends JPanel implements ActionListener, GUIFunction
+public class PainLocationPresetSelectionPanel extends JPanel implements ActionListener, GUIFunction, LanguageListener
 {
 
 	/**
@@ -55,9 +56,16 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	//Methods
 	private void initButtons()
 	{
-		this.buttons = new ArrayList<JButton>();
+		try
+		{
+			this.buttons.clear();
+		}
+		catch(NullPointerException ex)
+		{
+			this.buttons = new ArrayList<JButton>();
+		}
 		
-		for(Map.Entry<String, LinkedHashMap<URL, String>> entry : Constants.PAIN_LOCATIONS.entrySet())
+		for(Map.Entry<String, LinkedHashMap<URL, String>> entry : Methods.generatePainLocationsTextURLMap().entrySet())
 		{
 			for (Map.Entry<URL, String> subEntry : entry.getValue().entrySet())
 			{
@@ -137,7 +145,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		}
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void setEnabled(boolean enabled)
 	{
@@ -171,5 +179,23 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	public void resetDefaults() 
 	{
 		this.selectedPos.clear();
+	}
+
+	@Override
+	public void revalidateLanguage() 
+	{
+		for (JButton button : this.buttons)
+		{
+			this.remove(button);
+		}
+		
+		this.initButtons();
+		
+		for (JButton button: this.buttons)
+		{
+			this.add(button);
+		}
+		this.revalidate();
+		this.refresh();
 	}
 }

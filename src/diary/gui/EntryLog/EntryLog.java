@@ -366,5 +366,6 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		this.painLoc.revalidateLanguage();
 		this.recentMeds.revalidateLanguage();
 		this.trigger.revalidateLanguage();
+		this.butCancel.setText(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
 	}
 }

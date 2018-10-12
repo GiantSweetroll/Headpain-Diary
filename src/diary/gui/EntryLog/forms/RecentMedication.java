@@ -9,11 +9,12 @@ import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.history.HistoryPanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 
-public class RecentMedication extends FormElement
+public class RecentMedication extends FormElement implements LanguageListener
 {
 
 	/**
@@ -29,7 +30,7 @@ public class RecentMedication extends FormElement
 		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION), false);
 		
 		//Initialization
-		this.recentMedication = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION, PatientData.LAST_RECENT_MEDS, Constants.DEFAULT_RECENT_MEDICATION);
+		this.recentMedication = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION, PatientData.LAST_RECENT_MEDS, Methods.getDefaultRecentMedications());
 		this.medicineComplaint = new HistoryPanel(Globals.HISTORY_MEDICINE_COMPLAINT, PatientData.LAST_MEDICINE_COMPLAINT, Constants.EMPTY_STRING_ARRAY);
 		this.labRecentMeds = new JLabel(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL));
 		this.labMedecineComplaint = new JLabel(Methods.getLanguageText(XMLIdentifier.MEDICINE_COMPLAINT_LABEL));
@@ -109,7 +110,7 @@ public class RecentMedication extends FormElement
 	{
 		this.labRecentMeds.setText(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL));
 		this.labMedecineComplaint.setText(Methods.getLanguageText(XMLIdentifier.MEDICINE_COMPLAINT_LABEL));
-		this.recentMedication.revalidateLanguage();
+		this.recentMedication.revalidateLanguage(Methods.getDefaultRecentMedications());
 		this.medicineComplaint.revalidateLanguage();
 	}
 }

@@ -169,5 +169,6 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 		this.radPreset.setText(Methods.getLanguageText(XMLIdentifier.PRESETS_TEXT));
 		this.radCustom.setText(Methods.getLanguageText(XMLIdentifier.CUSTOM_TEXT));
 		this.custom.revalidateLanguage();
+		this.preset.revalidateLanguage();
 	}
 }

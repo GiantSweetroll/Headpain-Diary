@@ -7,12 +7,12 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import diary.constants.Constants;
 import diary.data.PainEntryData;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
 
-public class TablePanel extends JPanel
+public class TablePanel extends JPanel implements LanguageListener
 {
 
 	/**
@@ -27,7 +27,7 @@ public class TablePanel extends JPanel
 		//Initialization
 		list = PainDataOperation.getFilteredData(filterType, filter, list);
 		Object[][] objects = this.convertToTableDataArray(list);
-		this.table = new Table(objects, Constants.ENTRY_TABLE_HEADERS);
+		this.table = new Table(objects, Methods.getTableHeaders());
 		this.scroll = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		//Properties
@@ -83,5 +83,12 @@ public class TablePanel extends JPanel
 	public JScrollPane getScrollPane()
 	{
 		return this.scroll;
+	}
+	
+	//Interfaces
+	@Override
+	public void revalidateLanguage() 
+	{
+		this.table.revalidateLanguage();
 	}
 }

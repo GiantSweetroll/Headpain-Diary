@@ -253,7 +253,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		
 		this.patients = FileOperation.getListOfPatients();
 		this.filterPatients();
-		this.table = new Table(convertToTableArray(this.patients), Constants.PATIENT_TABLE_HEADERS);
+		this.table = new Table(convertToTableArray(this.patients), Methods.getPatientTableHeaders());
 		this.scrollTable = new JScrollPane(this.table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.panelTable.add(this.scrollTable, BorderLayout.CENTER);
 		
@@ -446,6 +446,8 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.table.changeTableHeaders(Methods.getPatientTableHeaders());
+		this.panelDateRange.revalidateLanguage();
 		this.revalidate();
 		this.repaint();
 	}

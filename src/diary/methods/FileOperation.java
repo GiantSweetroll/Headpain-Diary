@@ -660,14 +660,15 @@ public class FileOperation
 		{
 			//Save File
 			File file = new File(jfc.getSelectedFile().getAbsolutePath());
+			String[] headers = Methods.getTableHeaders();
 			try
 			{
 				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 				
 				//Write table headers
-				for (int i=1; i<Constants.ENTRY_TABLE_HEADERS.length; i++)
+				for (int i=1; i<headers.length; i++)
 				{
-					bw.write(Constants.ENTRY_TABLE_HEADERS[i]);
+					bw.write(headers[i]);
 					bw.write("	");
 				}
 				bw.newLine();
