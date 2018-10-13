@@ -74,7 +74,7 @@ public class MainFrame
 		//Properties
 		this.panel.setLayout(new CardLayout());
 		MainFrame.isFullScreen = false;
-		this.refreshSettings();
+	//	this.refreshSettings();
 		Methods.addLanguageListener(this.MAIN_MENU);
 		Methods.addLanguageListener(this.SETTINGS_PANEL);
 		Methods.addLanguageListener(this.MANAGE_PATIENTS_PANEL);
@@ -95,6 +95,7 @@ public class MainFrame
 		
 		//Add to frame
 		frame.add(panel);
+		this.refreshSettings();
 		
 		/*
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
