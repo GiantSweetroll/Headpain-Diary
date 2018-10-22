@@ -410,9 +410,12 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 	@Override
 	public void revalidateLanguage()
 	{
+		int categoryIndex = this.comboCategory.getSelectedIndex();
+		
 		this.labCategory.setText(Methods.getLanguageText(XMLIdentifier.SHOW_TEXT));
 		this.comboCategory.setModel(new DefaultComboBoxModel<String>(Methods.getGraphCategories()));
-		this.activePatientPanel.revalidateLanguage();this.panelDateRange.revalidateLanguage();
+		this.activePatientPanel.revalidateLanguage();
+		this.panelDateRange.revalidateLanguage();
 		this.butBack.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		this.buttonSave.setText(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
 		this.butOptions.setText(Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT));
@@ -420,6 +423,9 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 		this.butSwitchGraph.setText(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
 		this.refreshGraph();
 		this.panelGraphSettings.revalidateLanguage();
+		
+		this.comboCategory.setSelectedIndex(categoryIndex);
+		
 		this.revalidate();
 		this.repaint();
 	}
