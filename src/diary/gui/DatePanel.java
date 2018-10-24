@@ -233,9 +233,13 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 	@Override
 	public void revalidateLanguage() 
 	{
+		int index = this.comboMonth.getSelectedIndex();
+		int indexDay = this.comboDay.getSelectedIndex();
 		this.comboMonth.setModel(new DefaultComboBoxModel<String>(DateOperation.getMonthNameList().toArray(new String[12])));
 		this.butAuto.setText(Methods.getLanguageText(XMLIdentifier.AUTO_TEXT));
 		this.butDefault.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.comboMonth.setSelectedIndex(index);
+		this.comboDay.setSelectedIndex(indexDay);
 		this.revalidate();
 		this.repaint();
 	}

@@ -330,68 +330,6 @@ public class FileOperation
 				legibleDaysMap.put(entry.getKey(), monthDayMap);
 			}
 			
-			/*
-			for (Map.Entry<String, List<String>> entry : legibleMonthsMap.entrySet())
-			{
-				LinkedHashMap<String, String> yearMonthMap = new LinkedHashMap<String, String>();
-				int iteration = 0;
-				for (int b=0; b<entry.getValue().size(); b++)
-				{
-					List<String> legibleDays = new ArrayList<String>();
-					MessageManager.printLine(Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b));
-					FileManager.getListOfFiles(legibleDays, Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry.getKey() + File.separator + entry.getValue().get(b), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
-					MessageManager.printLine("Number of days before filter: " + legibleDays.size());
-							
-					if (iteration==0)
-					{
-						for (int a=0; a<legibleDays.size(); a++)
-						{
-							try
-							{
-								int dayNow = Integer.parseInt(legibleDays.get(a));
-								int dayMin = Integer.parseInt(dateFromMap.get(PainDataIdentifier.DATE_DAY));
-								if (dayNow < dayMin)
-								{
-									legibleDays.remove(a);
-									a = -1;
-								}
-							}
-							catch (NumberFormatException ex)
-							{
-								legibleDays.remove(a);
-								a = -1;
-							}
-						}
-					}
-					
-					if (iteration==legibleMonthsMap.size()-1)
-					{
-						for (int a=0; a<legibleDays.size(); a++)
-						{
-							try
-							{
-								int dayNow = Integer.parseInt(legibleDays.get(a));
-								int dayMax = Integer.parseInt(dateToMap.get(PainDataIdentifier.DATE_DAY));
-								if (dayNow > dayMax)
-								{
-									legibleDays.remove(a);
-									a = -1;
-								}
-							}
-							catch (NumberFormatException ex)
-							{
-								legibleDays.remove(a);
-								a = -1;
-							}
-						}
-					}
-					yearMonthMap.put(entry.getKey(), entry.getValue().get(b));
-					legibleDaysMap.put(yearMonthMap, legibleDays);
-					iteration++;
-					MessageManager.printLine("Number of legible days after filter: " + legibleDays.size());
-				}
-			}
-			*/
 			//Filtering end
 			
 			//Gather list of files from each folder
@@ -411,23 +349,7 @@ public class FileOperation
 					}
 				}
 			}
-			/*
-			for (Map.Entry<LinkedHashMap<String, String>, List<String>> entry : legibleDaysMap.entrySet())
-			{
-				for (Map.Entry<String, String> entry2 : entry.getKey().entrySet())
-				{
-					for (int i=0; i<entry.getValue().size(); i++)
-					{
-						List<String> fileList = new ArrayList<String>();
-						FileManager.getListOfFiles(fileList, Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator + entry2.getKey() + File.separator + entry2.getValue() + File.separator + entry.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
-						for (int a=0; a<fileList.size(); a++)
-						{
-							filePaths.add(fileList.get(a));
-						}
-					}
-				}
-			}
-			*/
+			
 			//Parse into PainEntryData
 			for (int i=0; i<filePaths.size(); i++)
 			{

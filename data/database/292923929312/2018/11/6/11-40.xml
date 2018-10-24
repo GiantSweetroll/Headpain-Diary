@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments/>
+     <date_month>11</date_month>
+     <time_minute>40</time_minute>
+     <activity>Teaching ITGS</activity>
+     <recent_medication>Kapsul Racik</recent_medication>
+     <date_day>6</date_day>
+     <medicine_complaint/>
+     <pain_kind>Memancar</pain_kind>
+     <duration>2678400</duration>
+     <intensity>10</intensity>
+     <pain_location_preset pain_loc_id="0">eyes and forhead</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">head full</pain_location_preset>
+     <pain_location_preset pain_loc_id="2">head back</pain_location_preset>
+     <pain_location_preset pain_loc_id="3">face left and head</pain_location_preset>
+     <pain_location_preset pain_loc_id="4">face right and head</pain_location_preset>
+     <pain_location_preset pain_loc_id="5">head front</pain_location_preset>
+     <time_hour>11</time_hour>
+</Entry>
