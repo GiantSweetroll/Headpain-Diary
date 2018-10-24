@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments>NOT TEST DATA</comments>
+     <date_month>10</date_month>
+     <time_minute>45</time_minute>
+     <activity>Sitting</activity>
+     <recent_medication>Sulcolon</recent_medication>
+     <date_day>18</date_day>
+     <medicine_complaint/>
+     <pain_location_custom pain_loc_id="0">dpn2</pain_location_custom>
+     <pain_kind>Stabbing</pain_kind>
+     <duration>3</duration>
+     <intensity>2</intensity>
+     <time_hour>19</time_hour>
+</Entry>
