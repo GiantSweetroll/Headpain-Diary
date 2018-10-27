@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,9 +156,16 @@ public class FileOperation
 	//		MessageManager.printLine("Size of eligible months before: " + legibleMonthsMap.size());
 			if (legibleYears.size() == 1)
 			{
-				List<String> legibleMonths = new ArrayList<String>();
+				ArrayList<String> legibleMonths = new ArrayList<String>();
 				FileManager.getListOfFiles(legibleMonths, userDatabasePath + legibleYears.get(0), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 		//		MessageManager.printLine("Number of months: " + legibleMonths.size());
+				Collections.sort(legibleMonths);
+				
+				for (String str : legibleMonths)
+				{
+					System.out.println(str);
+				}
+				
 				if (legibleYears.get(0).equals(Integer.toString(from.getYear())))			//If the first legible year is the same as the min year
 				{
 					for (int i=0; i<legibleMonths.size(); i++)
@@ -350,6 +358,11 @@ public class FileOperation
 				}
 			}
 			
+			for (String str : filePaths)
+			{
+				System.out.println(str);
+			}
+			
 			//Parse into PainEntryData
 			for (int i=0; i<filePaths.size(); i++)
 			{
@@ -393,19 +406,23 @@ public class FileOperation
 		List<PatientData> list = new ArrayList<PatientData>();
 		List<String> files = new ArrayList<String>();
 		
-		FileManager.getListOfFiles(files, Globals.setting.getDataMap().get(Settings.DATABASE_USERS_PATH), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
-		
-		for (int i=0; i<files.size(); i++)
+		try
 		{
-			try 
+			FileManager.getListOfFiles(files, Globals.setting.getDataMap().get(Settings.DATABASE_USERS_PATH), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+			
+			for (int i=0; i<files.size(); i++)
 			{
-				list.add(new PatientData(XMLManager.createDocument(files.get(i), false)));
-			} 
-			catch (ParserConfigurationException | SAXException | IOException e) 
-			{
-				e.printStackTrace();
+				try 
+				{
+					list.add(new PatientData(XMLManager.createDocument(files.get(i), false)));
+				} 
+				catch (ParserConfigurationException | SAXException | IOException e) 
+				{
+					e.printStackTrace();
+				}
 			}
 		}
+		catch(NullPointerException ex) {};
 		
 		return list;
 	}

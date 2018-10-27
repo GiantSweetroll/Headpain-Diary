@@ -53,7 +53,7 @@
      <text identifier="default pain kind tight band">Tight Band</text>
      <text identifier="default recent medication prescribed mix capsule">Prescribed Mix Capsule</text>
      <text identifier="date auto button tooltip text">Automatically set the date to that of local time</text>
-     <text identifier="date reselt button tooltip text">Resets date changes to it's orginal status</text>
+     <text identifier="date reselt button tooltip text">Resets date changes to its orginal status</text>
      <text identifier="date from label">From</text>
      <text identifier="date to label">To</text>
      <text identifier="date month january">January</text>
@@ -69,7 +69,7 @@
      <text identifier="date month november">November</text>
      <text identifier="date month december">December</text>
      <text identifier="time auto button tooltip text">Automatically set the time to that of local time</text>
-     <text identifier="time reselt button tooltip text">Resets time changes to it's orginal values</text>
+     <text identifier="time reselt button tooltip text">Resets time changes to its original values</text>
      <text identifier="pain location eye and forhead text">Eye Area And Forehead</text>
      <text identifier="pain location face left and head text">Left-Side Face and Head</text>
      <text identifier="pain location face right and head text">Right-Side Face And Head</text>

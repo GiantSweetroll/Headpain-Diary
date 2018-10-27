@@ -36,7 +36,7 @@ import diary.patientdata.PatientDataRegisterationForm;
  */
 public class MainFrame
 {
-	
+	 
 	/** The frame. */
 	private JFrame frame;
 //	public static Settings setting;

@@ -135,7 +135,11 @@ public class HistoryPanel extends JPanel implements GUIFunction, ActionListener,
 		history.refresh(patient);
 		this.comboHistory.setHistory(history);
 		this.comboHistory.refresh();
-		this.comboHistory.setDefaultSelection(patient.getRecentSelectedOption(this.historyKey));
+		try
+		{
+			this.comboHistory.setDefaultSelection(patient.getRecentSelectedOption(this.historyKey));
+		}
+		catch(NullPointerException ex) {}
 		this.revalidate();
 		this.repaint();
 	}

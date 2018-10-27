@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <patient>
      <medical_record_id>1234567890</medical_record_id>
-     <patient_name>Gardyan</patient_name>
-     <patient_dob_day>8</patient_dob_day>
+     <patient_name>Test Data</patient_name>
+     <patient_dob_day>1</patient_dob_day>
      <patient_dob_month>1</patient_dob_month>
-     <patient_dob_year>2000</patient_dob_year>
-     <previous_headpains>March 2016</previous_headpains>
+     <patient_dob_year>1859</patient_dob_year>
+     <previous_headpains/>
 </patient>

@@ -551,105 +551,10 @@ public class PainDataOperation
 		{
 			List<PainEntryData> subList = new ArrayList<PainEntryData>();		//Array between 2 dates
 			
-			/*
-			 * //Get Min Date
-			int yearMin = Integer.parseInt(source.get(i).getDataMap().get(PainDataIdentifier.DATE_YEAR).toString());
-			byte monthMin = Byte.parseByte(source.get(i).getDataMap().get(PainDataIdentifier.DATE_MONTH).toString());
-			byte dayMin = Byte.parseByte(source.get(i).getDataMap().get(PainDataIdentifier.DATE_DAY).toString());
-			
-			//Get Max Date
-			int yearMax = Integer.parseInt(source.get(i+1).getDataMap().get(PainDataIdentifier.DATE_YEAR).toString());
-			byte monthMax = Byte.parseByte(source.get(i+1).getDataMap().get(PainDataIdentifier.DATE_MONTH).toString());
-			byte dayMax = Byte.parseByte(source.get(i+1).getDataMap().get(PainDataIdentifier.DATE_DAY).toString());
-			
-			boolean done = false;
-			byte day = dayMin;
-			byte month = monthMin;
-			int year = yearMin;
-			while(!done)
-			{
-				//Check if the current day, month, and year is exactly the same as the max
-				if (day==dayMax && month==monthMax && year==yearMax)
-				{
-					done = true;
-					break;
-				}
-				
-				//Keep adding by 1 day
-				day++;
-				//Check if day is greater than the available days in that month, if so, change day to 1, add 1 to month
-				if (DateOperation.is30Days(month))			//If month is 30 days
-				{
-					if (day>30)
-					{
-						day = 1;
-						month++;
-					}
-				}
-				else if (DateOperation.is31Days(month))		//If month is 31 days
-				{
-					if (day>31)
-					{
-						day = 1;
-						month++;
-					}
-				}
-				else if (month == DateConstants.FEBRUARY)	//If month is february
-				{
-					if (DateOperation.isLeapYear(year))		//If it is a leap year
-					{
-						if (day>29)
-						{
-							day = 1;
-							month++;
-						}
-					}
-					else
-					{
-						if (day>28)
-						{
-							day = 1;
-							month++;
-						}
-					}
-				}
-				//System.out.println("Day: " + day);
-				//Check if month is greater than 12, if so set month to 1, add 1 to year
-				if (month > 12)
-				{
-					month = 1;
-					year++;
-				}
-				//System.out.println("Month: " + month);
-				//System.out.println("Year: " + year);
-				//System.out.println();
-				//Check if the current day, month, and year is exactly the same as the max
-				if (day==dayMax && month==monthMax && year==yearMax)
-				{
-					done = true;
-					break;
-				}
-				
-				PainEntryData voidEntry = new PainEntryDataVoid(Integer.toString(day), Integer.toString(month), Integer.toString(year));
-				subList.add(voidEntry);
-			}
-			
-			//System.out.println("subList size: " + subList.size());
-			/*
-			for (int a = 0; a<subList.size(); a++)
-			{
-				System.out.println("Entry Date: " + subList.get(a).getDataMap().get(PainDataIdentifier.DATE_DAY) + "/"
-						+ subList.get(a).getDataMap().get(PainDataIdentifier.DATE_MONTH) + "/"
-						+ subList.get(a).getDataMap().get(PainDataIdentifier.DATE_YEAR));
-			}*/
-			/*
-			 * 
-			 */
-			
 			Date dateMin = source.get(i).getDate();
 			Date dateMax = source.get(i+1).getDate();
 			
-			while(!dateMin.sameDateAs(dateMax))
+			while(!Date.areSameDate(dateMin, dateMax))
 			{
 				dateMin.setDay(dateMin.getDay()+1);
 				subList.add(new PainEntryDataVoid(dateMin));
