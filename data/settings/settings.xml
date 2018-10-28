@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <settings>
-<<<<<<< HEAD
+     <window_mode>windowed</window_mode>
      <database_path>D:\Programming\Projects 4 - School\Headpain-Diary\data\database</database_path>
      <database_users_path>D:\Programming\Projects 4 - School\Headpain-Diary\data\users</database_users_path>
-     <window_mode>fullscreen</window_mode>
-=======
-     <window_mode>windowed</window_mode>
-     <database_path>F:\Projects 4 - School\Headpain-Diary\data\database</database_path>
-     <database_users_path>F:\Projects 4 - School\Headpain-Diary\data\users</database_users_path>
->>>>>>> a8c205177412544f38cf0401920ff7a0c7e96ef9
      <language>english</language>
 </settings>
