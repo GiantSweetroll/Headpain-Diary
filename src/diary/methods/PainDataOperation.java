@@ -557,7 +557,10 @@ public class PainDataOperation
 			while(!Date.areSameDate(dateMin, dateMax))
 			{
 				dateMin.setDay(dateMin.getDay()+1);
-				subList.add(new PainEntryDataVoid(dateMin));
+				if (!Date.areSameDate(dateMin, dateMax))
+				{
+					subList.add(new PainEntryDataVoid(dateMin));
+				}
 			}
 			
 			
