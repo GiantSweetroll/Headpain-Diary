@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -159,12 +158,6 @@ public class FileOperation
 				ArrayList<String> legibleMonths = new ArrayList<String>();
 				FileManager.getListOfFiles(legibleMonths, userDatabasePath + legibleYears.get(0), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 		//		MessageManager.printLine("Number of months: " + legibleMonths.size());
-				Collections.sort(legibleMonths);
-				
-				for (String str : legibleMonths)
-				{
-					System.out.println(str);
-				}
 				
 				if (legibleYears.get(0).equals(Integer.toString(from.getYear())))			//If the first legible year is the same as the min year
 				{
@@ -356,11 +349,6 @@ public class FileOperation
 						}
 					}
 				}
-			}
-			
-			for (String str : filePaths)
-			{
-				System.out.println(str);
 			}
 			
 			//Parse into PainEntryData
