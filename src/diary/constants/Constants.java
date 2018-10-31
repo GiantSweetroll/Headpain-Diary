@@ -5,10 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.io.File;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.util.LinkedHashMap;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
