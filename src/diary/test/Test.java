@@ -9,9 +9,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import diary.ImageTextButton;
-import diary.constants.ImageConstants;
-import giantsweetroll.ImageManager;
 import giantsweetroll.numbers.GNumbers;
 
 public class Test
