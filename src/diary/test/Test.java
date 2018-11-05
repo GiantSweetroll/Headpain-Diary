@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import diary.ImageTextButton;
 import diary.constants.ImageConstants;
 import giantsweetroll.ImageManager;
+import giantsweetroll.numbers.GNumbers;
 
 public class Test
 {	
@@ -58,6 +59,18 @@ public class Test
 
 	public static void main(String args[])
 	{
-		JOptionPane.showMessageDialog(null, new ImageTextButton(ImageManager.getImageIcon(ImageConstants.NEW_ENTRY), "New Entry"));
+		double initial = 50000d;
+		double owed = initial;
+		double interest = 1.1d;
+		
+		int i=1;
+		
+		while (owed>=0)
+		{
+			System.out.print("Money owed in year " + i + ": ");
+			owed = GNumbers.round(owed * interest - 6000, 2);
+			System.out.println(owed);
+			i++;
+		}
 	}
 }
