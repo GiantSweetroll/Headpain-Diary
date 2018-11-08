@@ -16,7 +16,7 @@ import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.methods.Methods;
-import giantsweetroll.GMisc;
+import giantsweetroll.GGUtilities;
 import giantsweetroll.gui.swing.Gbm;
 
 public class Trigger extends FormElement implements ActionListener, MouseListener
@@ -76,7 +76,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 		}
 		else
 		{
-			return GMisc.getItem(this.combo).toString();
+			return GGUtilities.getItem(this.combo).toString();
 		}
 	}
 
@@ -100,7 +100,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	
 	public void actionPerformed(ActionEvent e)
 	{
-		String item = GMisc.getItem(combo).toString();
+		String item = GGUtilities.getItem(combo).toString();
 		if (item.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
 		{
 			tf.setEditable(true);

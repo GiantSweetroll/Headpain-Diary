@@ -17,7 +17,7 @@ import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
-import giantsweetroll.GMisc;
+import giantsweetroll.GGUtilities;
 import giantsweetroll.gui.swing.Gbm;
 
 public class HistoryPanel extends JPanel implements GUIFunction, ActionListener, LanguageListener
@@ -127,7 +127,7 @@ public class HistoryPanel extends JPanel implements GUIFunction, ActionListener,
 		}
 		else
 		{
-			return GMisc.getItem(this.comboHistory).toString();
+			return GGUtilities.getItem(this.comboHistory).toString();
 		}
 	}
 	public void refresh(History history, PatientData patient)

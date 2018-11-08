@@ -20,7 +20,7 @@ import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.SliderPanel;
 import diary.methods.Methods;
-import giantsweetroll.GMisc;
+import giantsweetroll.GGUtilities;
 import giantsweetroll.gui.swing.Gbm;
 
 public class Duration extends FormElement implements KeyListener, ActionListener, ChangeListener
@@ -111,7 +111,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	//Methods
 	private String getSelectedDataInformation()
 	{
-		return " = " + Integer.toString(this.selectedValue) + " " + GMisc.getItem(this.units).toString();
+		return " = " + Integer.toString(this.selectedValue) + " " + GGUtilities.getItem(this.units).toString();
 	}
 	private void showSelectedData()
 	{
