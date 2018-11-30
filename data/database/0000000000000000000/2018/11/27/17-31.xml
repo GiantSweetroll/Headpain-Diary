@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments>NOT TEST DATA 
+
+Pain location: below eye socket</comments>
+     <date_month>11</date_month>
+     <time_minute>31</time_minute>
+     <activity>Watching</activity>
+     <recent_medication>Sulcolon</recent_medication>
+     <date_day>27</date_day>
+     <medicine_complaint/>
+     <pain_location_custom pain_loc_id="0">dpn10</pain_location_custom>
+     <pain_kind>Tearing</pain_kind>
+     <duration>1</duration>
+     <intensity>1</intensity>
+     <time_hour>17</time_hour>
+</Entry>
