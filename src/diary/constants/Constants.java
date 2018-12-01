@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.util.Comparator;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -219,4 +220,14 @@ public final class Constants
 				}
 			};				//Still needs investigation (somehow connected to 2 different sliders, nullpointerexception at duration slider)
 			*/
+
+	public static final Comparator<String> STRING_COMPARATOR = new Comparator<String>()
+	{
+
+		@Override
+		public int compare(String str1, String str2) 
+		{
+			return str1.compareTo(str2);
+		}
+	};
 }
