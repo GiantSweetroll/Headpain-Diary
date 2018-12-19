@@ -10,6 +10,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -338,7 +340,19 @@ public class FileOperation
 			for (Map.Entry<String, LinkedHashMap<String, List<String>>> entryYear : legibleDaysMap.entrySet())
 			{
 				for (Map.Entry<String, List<String>> entryMonth : entryYear.getValue().entrySet())
-				{
+				{	
+					//Sort days first
+					SortedSet<Integer> set = new TreeSet<Integer>();
+					for (String str : entryMonth.getValue())
+					{
+						set.add(Integer.parseInt(str));
+					}
+					entryMonth.getValue().clear();
+					for (Integer num : set)
+					{
+						entryMonth.getValue().add(Integer.toString(num));
+					}
+					
 					for (int i=0; i<entryMonth.getValue().size(); i++)
 					{
 						List<String> fileList = new ArrayList<String>();
@@ -363,6 +377,8 @@ public class FileOperation
 					ex.printStackTrace();
 				}
 			}
+			
+	//		Collections.sort(list, new SortByDate());
 			
 //			MessageManager.printLine("Size of entries: " + list.size());
 		}
