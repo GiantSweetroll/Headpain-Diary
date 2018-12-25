@@ -40,6 +40,8 @@ public final class Constants
 	
 	public static final String PAIN_DATA_ENTRY_FILE_EXTENSION = ".xml";
 	
+	public static final String PAIN_ENTRY_DATE_SEPARATOR = "/";
+	
 	//Dimensions
 	public static final Dimension CUSTOM_PAIN_LOCATION_IMAGE_SIZE = new Dimension((ImageManager.getImageIcon(PainLocationPath.CUSTOM_PAIN_BACK_1).getIconWidth()),
 																					(ImageManager.getImageIcon(PainLocationPath.CUSTOM_PAIN_BACK_1).getIconHeight()));

@@ -6,12 +6,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -150,6 +149,10 @@ public class FileOperation
 					i = -1;			//Reset index to loop from beginning of array (it's -1 because at the end of loop will be added by 1 = 0)
 				}
 			}
+			
+			//Add leading zeroes to String, then sort
+			Methods.addZeroesToList(legibleYears);
+			Collections.sort(legibleYears);
 	//		MessageManager.printLine("Size of elligible years: " + legibleYears.size());
 			
 			//Get month range
@@ -256,6 +259,11 @@ public class FileOperation
 							}
 						}
 					}
+					
+					//Add leading zeroes to String, then sort
+					Methods.addZeroesToList(legibleMonths);
+					Collections.sort(legibleMonths);
+					
 					legibleMonthsMap.put(legibleYears.get(i), legibleMonths);
 				}
 			}
@@ -328,35 +336,48 @@ public class FileOperation
 						}
 					}
 					
+					//Add leading zeroes to String, then sort
+					Methods.addZeroesToList(legibleDays);
+					Collections.sort(legibleDays);
+					
 					monthDayMap.put(entry.getValue().get(i), legibleDays);
 				}
 				legibleDaysMap.put(entry.getKey(), monthDayMap);
 			}
-			
 			//Filtering end
 			
 			//Gather list of files from each folder
 			List<String> filePaths = new ArrayList<String>();
 			for (Map.Entry<String, LinkedHashMap<String, List<String>>> entryYear : legibleDaysMap.entrySet())
 			{
+				//Remove leading zeroes
+				String year = entryYear.getKey();
+				if (year.substring(0, 1).equals("0"))
+				{
+					year = year.substring(1);
+				}
+				
 				for (Map.Entry<String, List<String>> entryMonth : entryYear.getValue().entrySet())
 				{	
-					//Sort days first
-					SortedSet<Integer> set = new TreeSet<Integer>();
-					for (String str : entryMonth.getValue())
+					//Remove leading zeroes
+					String month = entryMonth.getKey();
+					if (month.substring(0, 1).equals("0"))
 					{
-						set.add(Integer.parseInt(str));
-					}
-					entryMonth.getValue().clear();
-					for (Integer num : set)
-					{
-						entryMonth.getValue().add(Integer.toString(num));
+						month = month.substring(1);
 					}
 					
 					for (int i=0; i<entryMonth.getValue().size(); i++)
 					{
+						//Remove leading zeroes
+						String day = entryMonth.getValue().get(i);
+						if (day.substring(0, 1).equals("0"))
+						{
+							day = day.substring(1);
+						}
+						
 						List<String> fileList = new ArrayList<String>();
-						FileManager.getListOfFiles(fileList, userDatabasePath + entryYear.getKey() + File.separator + entryMonth.getKey() + File.separator + entryMonth.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+//						FileManager.getListOfFiles(fileList, userDatabasePath + entryYear.getKey() + File.separator + entryMonth.getKey() + File.separator + entryMonth.getValue().get(i), false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
+						FileManager.getListOfFiles(fileList, userDatabasePath + year + File.separator + month + File.separator + day, false, FileManager.FILE_ONLY, FileManager.ABSOLUTE_PATH);
 						for (int a=0; a<fileList.size(); a++)
 						{
 							filePaths.add(fileList.get(a));

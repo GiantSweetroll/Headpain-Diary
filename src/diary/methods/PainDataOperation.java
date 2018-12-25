@@ -365,7 +365,7 @@ public class PainDataOperation
 		
 		return map;
 	}	
-
+	
 	@Deprecated
 	public static List<PainEntryData> getFilteredData(String filterType, String filter, List<PainEntryData> list)
 	{

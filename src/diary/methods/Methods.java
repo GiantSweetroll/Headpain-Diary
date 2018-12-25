@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -1008,5 +1010,32 @@ public class Methods
     {
     	String[] medications = {Methods.getLanguageText(XMLIdentifier.DEFAULT_RECENT_MEDICATION_PRESCRIBED_MIX_CAPSULE)};
     	return medications;
+    }
+    
+    public static void sortIntegerListByConversion(List<String> list)
+    {
+    	SortedSet<Integer> set = new TreeSet<Integer>();
+		for (String str : list)
+		{
+			set.add(Integer.parseInt(str));
+		}
+		list.clear();
+		for (Integer num : set)
+		{
+			list.add(Integer.toString(num));
+		}
+    }
+    
+    public static void addZeroesToList(List<String> list)
+    {
+    	for (int i=0; i<list.size(); i++)
+    	{
+    		String str = list.get(i);
+    		if (str.length()==1)
+    		{
+    			str = "0" + str;
+    			list.set(i, str);
+    		}
+    	}
     }
 }

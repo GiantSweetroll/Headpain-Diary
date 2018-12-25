@@ -8,6 +8,7 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.date.Date;
@@ -182,14 +183,14 @@ public class PainEntryData
 	}
 	public String getFullDate()
 	{
-		return this.dataMap.get(PainDataIdentifier.DATE_DAY) + "/"
-				+ this.dataMap.get(PainDataIdentifier.DATE_MONTH) + "/"
+		return this.dataMap.get(PainDataIdentifier.DATE_DAY) + Constants.PAIN_ENTRY_DATE_SEPARATOR
+				+ this.dataMap.get(PainDataIdentifier.DATE_MONTH) + Constants.PAIN_ENTRY_DATE_SEPARATOR
 				+ this.dataMap.get(PainDataIdentifier.DATE_YEAR);
 	}
 	
 	public String getMonthAndYear()
 	{
-		return this.dataMap.get(PainDataIdentifier.DATE_MONTH) + "/"
+		return this.dataMap.get(PainDataIdentifier.DATE_MONTH) + Constants.PAIN_ENTRY_DATE_SEPARATOR
 				+ this.dataMap.get(PainDataIdentifier.DATE_YEAR);
 	}
 	
