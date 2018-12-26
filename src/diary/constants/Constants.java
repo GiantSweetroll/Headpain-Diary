@@ -74,10 +74,7 @@ public final class Constants
 	public static final Font FONT_HEADER = new Font(FONT_TYPE_GENERAL, Font.BOLD, FONT_GENERAL_SIZE+10);
 	
 	//File Filter for JFileChooser
-	public static final FileNameExtensionFilter FILTER_IMAGE_FILES = new FileNameExtensionFilter(Methods.getLanguageText(XMLIdentifier.IMAGE_FILES_TEXT), 
-																									"jpg",
-																									"png",
-																									"jpeg");
+	public static FileNameExtensionFilter FILTER_IMAGE_FILES;
 	
 	
 	//Insets

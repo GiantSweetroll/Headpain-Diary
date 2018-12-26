@@ -4,10 +4,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 import diary.data.Settings;
+import diary.gui.MainFrame;
+import diary.gui.MainMenu;
+import diary.gui.EntryLog.EntryLog;
+import diary.gui.graphs.GraphFilterPanel;
+import diary.gui.graphs.GraphPanel;
+import diary.gui.settings.SettingsPanel;
+import diary.gui.table.TableScreen;
 import diary.history.History;
 import diary.interfaces.LanguageListener;
 import diary.language.Language;
 import diary.patientdata.PatientData;
+import diary.patientdata.PatientDataManagePanel;
 
 public class Globals 
 {	
@@ -21,8 +29,8 @@ public class Globals
 	//Global Variables
 	public static Set<Character> keysPressed = new HashSet<Character>();
 	public static boolean mouseDown = false;
-	public static final Set<LanguageListener> LANGUAGE_COMPONENTS = new HashSet<LanguageListener>();
-	public static final Language LANGUAGE = new Language();
+	public static Set<LanguageListener> LANGUAGE_COMPONENTS;
+	public static Language LANGUAGE;
 	
 	//Panels
 	/*
@@ -35,4 +43,12 @@ public class Globals
 	public static EntryLog ENTRY_LOG = new EntryLog();			*/
 //	public static EntryTypeSelectionPanel ENTRY_LOG_TYPE_SELECTION = new EntryTypeSelectionPanel();
 //	public static EntryLogMulti ENTRY_LOG_MULTI_DATE_RANGE_SELECT = new EntryLogMulti();
+	public static MainFrame MAIN_FRAME;
+	public static MainMenu MAIN_MENU;
+	public static SettingsPanel SETTINGS_PANEL;
+	public static PatientDataManagePanel MANAGE_PATIENTS_PANEL;
+	public static GraphFilterPanel GRAPH_FILTER_PANEL;
+	public static GraphPanel GRAPH_PANEL;
+	public static TableScreen PAIN_TABLE;
+	public static EntryLog ENTRY_LOG;
 }

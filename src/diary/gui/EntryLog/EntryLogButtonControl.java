@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
@@ -18,8 +19,7 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.CustomDialog;
-import diary.gui.MainFrame;
-import diary.gui.MainFramePanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PainDataOperation;
@@ -28,7 +28,7 @@ import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.message.MessageManager;
 
-public class EntryLogButtonControl extends MainFramePanel implements ActionListener
+public class EntryLogButtonControl extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -49,9 +49,8 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 	public static final String LEFT_DIRECTION = "<--";
 	
 	//Constructor
-	public EntryLogButtonControl(MainFrame mainFrame, EntryLog entryLog, boolean next, String text)
+	public EntryLogButtonControl(EntryLog entryLog, boolean next, String text)
 	{
-		super(mainFrame);
 		//Initialization
 		this.entryLog = entryLog;
 		this.buttonType = next;
@@ -105,7 +104,7 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 		{	
 			if (this.entryLog.getPanelState() == EntryLog.FIRST_SECTION)
 			{
-				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 			}
 			else
 			{
@@ -154,11 +153,11 @@ public class EntryLogButtonControl extends MainFramePanel implements ActionListe
 						{
 							FileOperation.exportPainData(patient, painEntry);
 						}
-						this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
-						this.getMainFrameReference().GRAPH_PANEL.refreshGraph();
-						this.getMainFrameReference().PAIN_TABLE.refreshTable();
+						Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
+						Globals.GRAPH_PANEL.refreshGraph();
+						Globals.PAIN_TABLE.refreshTable();
 						Methods.refresHistories(this.entryLog.getSelectedPatient());
-						this.getMainFrameReference().GRAPH_FILTER_PANEL.refresh(this.getMainFrameReference().GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+						Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 						this.entryLog.refresh();
 						this.entryLog.resetDefaults();
 					}

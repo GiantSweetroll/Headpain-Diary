@@ -1,16 +1,11 @@
 package diary.gui;
 
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.plaf.FontUIResource;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -19,15 +14,8 @@ import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.data.Settings;
-import diary.gui.EntryLog.EntryLog;
-import diary.gui.graphs.GraphFilterPanel;
-import diary.gui.graphs.GraphPanel;
-import diary.gui.settings.SettingsPanel;
-import diary.gui.table.TableScreen;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
-import diary.methods.XMLGenerator;
-import diary.patientdata.PatientDataManagePanel;
 import diary.patientdata.PatientDataRegisterationForm;
 
 // TODO: Auto-generated Javadoc
@@ -44,15 +32,6 @@ public class MainFrame
 	public static boolean isFullScreen;
 	
 	private JPanel panel;
-	
-	//Panels
-	public final MainMenu MAIN_MENU = new MainMenu(this);
-	public final SettingsPanel SETTINGS_PANEL = new SettingsPanel(this);
-	public final PatientDataManagePanel MANAGE_PATIENTS_PANEL = new PatientDataManagePanel(this);
-	public final GraphFilterPanel GRAPH_FILTER_PANEL = new GraphFilterPanel();
-	public final GraphPanel GRAPH_PANEL = new GraphPanel(this);
-	public final TableScreen PAIN_TABLE = new TableScreen(this);
-	public final EntryLog ENTRY_LOG = new EntryLog(this);
 	
 	/**
 	 * Instantiates a new main frame.
@@ -75,23 +54,23 @@ public class MainFrame
 		this.panel.setLayout(new CardLayout());
 		MainFrame.isFullScreen = false;
 	//	this.refreshSettings();
-		Methods.addLanguageListener(this.MAIN_MENU);
-		Methods.addLanguageListener(this.SETTINGS_PANEL);
-		Methods.addLanguageListener(this.MANAGE_PATIENTS_PANEL);
-		Methods.addLanguageListener(this.GRAPH_FILTER_PANEL);
-		Methods.addLanguageListener(this.GRAPH_PANEL);
-		Methods.addLanguageListener(this.PAIN_TABLE);
-		Methods.addLanguageListener(this.ENTRY_LOG);
+		Methods.addLanguageListener(Globals.MAIN_MENU);
+		Methods.addLanguageListener(Globals.SETTINGS_PANEL);
+		Methods.addLanguageListener(Globals.MANAGE_PATIENTS_PANEL);
+		Methods.addLanguageListener(Globals.GRAPH_FILTER_PANEL);
+		Methods.addLanguageListener(Globals.GRAPH_PANEL);
+		Methods.addLanguageListener(Globals.PAIN_TABLE);
+		Methods.addLanguageListener(Globals.ENTRY_LOG);
 	//	jComponent = Globals.MAIN_MENU;
 		
 		//Add to panel
-		this.panel.add(this.MAIN_MENU, PanelName.MAIN_MENU);
-		this.panel.add(this.ENTRY_LOG, PanelName.ENTRY_LOG);
+		this.panel.add(Globals.MAIN_MENU, PanelName.MAIN_MENU);
+		this.panel.add(Globals.ENTRY_LOG, PanelName.ENTRY_LOG);
 //		this.panel.add(this.GRAPH_FILTER_PANEL, PanelName.GRAPH_FILTER_PANEL);
-		this.panel.add(this.GRAPH_PANEL, PanelName.GRAPH_PANEL);
-		this.panel.add(this.MANAGE_PATIENTS_PANEL, PanelName.MANAGE_PATIENTS_PANEL);
-		this.panel.add(this.SETTINGS_PANEL, PanelName.SETTING_PANEL);
-		this.panel.add(this.PAIN_TABLE, PanelName.PAIN_TABLE);
+		this.panel.add(Globals.GRAPH_PANEL, PanelName.GRAPH_PANEL);
+		this.panel.add(Globals.MANAGE_PATIENTS_PANEL, PanelName.MANAGE_PATIENTS_PANEL);
+		this.panel.add(Globals.SETTINGS_PANEL, PanelName.SETTING_PANEL);
+		this.panel.add(Globals.PAIN_TABLE, PanelName.PAIN_TABLE);
 		
 		//Add to frame
 		frame.add(panel);
@@ -243,7 +222,7 @@ public class MainFrame
 					MainFrame.lastComponent = Globals.MAIN_MENU;
 					MainFrame.changePanel(new PatientDataRegisterationForm());
 					*/
-					this.changePanel(new PatientDataRegisterationForm(this, false), PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(new PatientDataRegisterationForm(false), PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex)
 				{
@@ -268,7 +247,7 @@ public class MainFrame
 		//			jComponent = Globals.MAIN_MENU;
 		//			MainFrame.lastComponent = Globals.MAIN_MENU;
 		//			MainFrame.changePanel(new PatientDataRegisterationForm());
-					this.changePanel(new PatientDataRegisterationForm(this, false), PanelName.PATIENT_REGISTERATION_FORM);
+					this.changePanel(new PatientDataRegisterationForm(false), PanelName.PATIENT_REGISTERATION_FORM);
 				}
 				catch(NullPointerException ex1)
 				{
@@ -283,47 +262,4 @@ public class MainFrame
 			}
 		}
 	}
-
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments 
-	 */
-	public static void main(String[] args) 
-	{
-		SwingUtilities.invokeLater(new Runnable()
-				{
-					public void run()
-					{	
-						try
-						{
-				//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, Constants.FONT_GENERAL_SIZE));
-							UIManager.put("OptionPane.background", Color.WHITE);
-							UIManager.put("Panel.background", Color.white);
-							
-							if(!FileOperation.dataExists(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME))		//If settings file doesn't exists
-							{
-								FileOperation.saveSettings(new Settings());
-							}
-							
-							if (!FileOperation.defaultLanguageExists())		//If default language (english) doesn't exist
-							{
-								XMLGenerator.generateXML();
-							}
-							
-							MainFrame mainFrame = new MainFrame();
-				//			Globals.MAIN_MENU = new MainMenu();
-							Globals.HISTORY_MEDICINE_COMPLAINT.refresh(mainFrame.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
-							Globals.HISTORY_RECENT_MEDICATION.refresh(mainFrame.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
-						}
-						catch(Exception ex)
-						{
-							ex.printStackTrace();
-						}
-					}
-				}
-				);
-	}
-
 }

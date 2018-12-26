@@ -23,21 +23,22 @@ import javax.swing.JScrollPane;
 
 import diary.ImageTextButton;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.ImageConstants;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class MainMenu extends MainFramePanel implements ActionListener
+public class MainMenu extends JPanel implements ActionListener, LanguageListener
 {
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2572196485419295746L;
-
+	private static final long serialVersionUID = -3475768587288928741L;
+	
 	private JLabel labLogo, labCreatedBy, labName, labSupport;
 	private List<JLabel> supportersList;
 	private JButton butSettings, butExit, butManagePatients;
@@ -57,9 +58,8 @@ public class MainMenu extends MainFramePanel implements ActionListener
 //	private final Dimension IMAGE_LOGO_SIZE = new Dimension(320, 280);
 	
 	//Constructors
-	public MainMenu(MainFrame frame)
+	public MainMenu()
 	{
-		super(frame);
 		this.init();
 	}
 	
@@ -365,31 +365,31 @@ public class MainMenu extends MainFramePanel implements ActionListener
 	//		MainFrame.changePanel(Globals.ENTRY_LOG);
 		//	MainFrame.changePanel(Globals.ENTRY_LOG_TYPE_SELECTION);
 			
-			this.getMainFrameReference().ENTRY_LOG.resetDefaults();
-			this.getMainFrameReference().changePanel(PanelName.ENTRY_LOG);
+			Globals.ENTRY_LOG.resetDefaults();
+			Globals.MAIN_FRAME.changePanel(PanelName.ENTRY_LOG);
 			break;
 			
 		case VIEW_GRAPH:
 	//		Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 	//		MainFrame.changePanel(Globals.GRAPH_PANEL);
 			
-			this.getMainFrameReference().GRAPH_FILTER_PANEL.refresh(this.getMainFrameReference().GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
-			this.getMainFrameReference().changePanel(PanelName.GRAPH_PANEL);
+			Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+			Globals.MAIN_FRAME.changePanel(PanelName.GRAPH_PANEL);
 			break;
 			
 		case VIEW_TABLE:
 		//	MainFrame.changePanel(Globals.PAIN_TABLE);
-			this.getMainFrameReference().changePanel(PanelName.PAIN_TABLE);
+			Globals.MAIN_FRAME.changePanel(PanelName.PAIN_TABLE);
 			break;
 			
 		case MANAGE_PATIENTS:
 		//	MainFrame.changePanel(Globals.MANAGE_PATIENTS_PANEL);
-			this.getMainFrameReference().changePanel(PanelName.MANAGE_PATIENTS_PANEL);
+			Globals.MAIN_FRAME.changePanel(PanelName.MANAGE_PATIENTS_PANEL);
 			break;
 			
 		case SETTINGS:
 	//		MainFrame.changePanel(Globals.SETTINGS_PANEL);
-			this.getMainFrameReference().changePanel(PanelName.SETTING_PANEL);
+		Globals.MAIN_FRAME.changePanel(PanelName.SETTING_PANEL);
 			break;
 			
 		case EXIT:

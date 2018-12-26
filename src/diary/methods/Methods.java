@@ -490,16 +490,16 @@ public class Methods
 		}
 	}
 	*/
-	public static void exportPanelImage(MainFrame mainFrame, ImageExportPanel panel, boolean showPreview)
+	public static void exportPanelImage(ImageExportPanel panel, boolean showPreview)
 	{
 	//	MainFrame.changePanel(panel);
-		mainFrame.changePanel(panel, PanelName.IMAGE_EXPORT_PANEL);
+		Globals.MAIN_FRAME.changePanel(panel, PanelName.IMAGE_EXPORT_PANEL);
 		if (showPreview)
 		{
 			FileOperation.exportImage(Methods.createImage(panel));
 		}		
 //		MainFrame.changePanel(MainFrame.lastComponent);
-		mainFrame.changePanel(PanelName.GRAPH_PANEL);
+		Globals.MAIN_FRAME.changePanel(PanelName.GRAPH_PANEL);
 		try
 		{
 			/*
@@ -512,14 +512,14 @@ public class Methods
 				((TableScreen)mainFrame.getPanelCanvas()).refreshTable();		//Recreates table to its original state
 			}
 			*/
-			mainFrame.GRAPH_PANEL.refreshGraph();
-			mainFrame.PAIN_TABLE.refreshTable();
+			Globals.GRAPH_PANEL.refreshGraph();
+			Globals.PAIN_TABLE.refreshTable();
 		}
 		catch(ClassCastException ex) {}
 		if (!showPreview)
 		{
-			((CardLayout)mainFrame.getPanelCanvas().getLayout()).previous(mainFrame.getPanelCanvas());
-			FileOperation.exportImage(Methods.createImage((GraphPanel)mainFrame.getPanelCanvas()));
+			((CardLayout)Globals.MAIN_FRAME.getPanelCanvas().getLayout()).previous(Globals.MAIN_FRAME.getPanelCanvas());
+			FileOperation.exportImage(Methods.createImage((GraphPanel)Globals.MAIN_FRAME.getPanelCanvas()));
 		}
 	}
 	

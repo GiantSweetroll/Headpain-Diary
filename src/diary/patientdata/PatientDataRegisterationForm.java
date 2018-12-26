@@ -18,13 +18,12 @@ import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
-import diary.gui.MainFrame;
-import diary.gui.MainFramePanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.message.MessageManager;
 
-public class PatientDataRegisterationForm extends MainFramePanel implements ActionListener
+public class PatientDataRegisterationForm extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -48,17 +47,15 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 	private final String NEW_USER = "new user";
 	private final String EDIT_USER = "edit user";
 	
-	public PatientDataRegisterationForm(MainFrame frame, boolean allowCancel)
+	public PatientDataRegisterationForm(boolean allowCancel)
 	{
-		super(frame);
 		this.canCancel = allowCancel;
 		this.createAndShowGUI();
 		this.situation = this.NEW_USER;
 	}
 	
-	public PatientDataRegisterationForm(MainFrame frame, PatientData patientData)
+	public PatientDataRegisterationForm(PatientData patientData)
 	{
-		super(frame);
 		this.createAndShowGUI();
 		this.situation = this.EDIT_USER;
 		this.lastMedID = patientData.getDataMap().get(PatientData.MEDICAL_RECORD_ID);
@@ -172,7 +169,7 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 					try
 					{
 		//				MainFrame.changePanel(MainFrame.lastComponent);
-						this.getMainFrameReference().changePanel(PanelName.MANAGE_PATIENTS_PANEL);
+						Globals.MAIN_FRAME.changePanel(PanelName.MANAGE_PATIENTS_PANEL);
 					}
 					catch(NullPointerException ex) {ex.printStackTrace();}
 				}
@@ -216,14 +213,14 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 							{
 								FileOperation.savePatientData(patientData);
 			//					MainFrame.changePanel(MainFrame.lastComponent);
-								this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+								Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 							}
 						}
 						else
 						{
 							FileOperation.savePatientData(patientData);
 			//				MainFrame.changePanel(MainFrame.lastComponent);
-							this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+							Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 						}
 					}
 					else if (this.situation.equals(this.EDIT_USER))
@@ -235,9 +232,9 @@ public class PatientDataRegisterationForm extends MainFramePanel implements Acti
 							FileOperation.deletePatientData(this.lastMedID);
 						}
 		//				MainFrame.changePanel(MainFrame.lastComponent);
-						this.getMainFrameReference().changePanel(PanelName.MANAGE_PATIENTS_PANEL);
+						Globals.MAIN_FRAME.changePanel(PanelName.MANAGE_PATIENTS_PANEL);
 					}
-					this.getMainFrameReference().MANAGE_PATIENTS_PANEL.refresh();
+					Globals.MANAGE_PATIENTS_PANEL.refresh();
 				}
 				break;
 		}

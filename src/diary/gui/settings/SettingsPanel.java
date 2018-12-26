@@ -34,17 +34,17 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.Settings;
-import diary.gui.MainFrame;
-import diary.gui.MainFramePanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class SettingsPanel extends MainFramePanel implements ActionListener
+public class SettingsPanel extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -74,9 +74,8 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 	private final String SAVE = "save";
 	
 	//Constructors
-	public SettingsPanel(MainFrame mainFrame)
+	public SettingsPanel()
 	{
-		super(mainFrame);
 		//Initialization
 		this.gatherData();
 		this.initPanelBelow();
@@ -424,15 +423,15 @@ public class SettingsPanel extends MainFramePanel implements ActionListener
 		{
 			case CANCEL:
 		//		MainFrame.changePanel(Globals.MAIN_MENU);
-				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 				break;
 				
 			case SAVE:
 				FileOperation.saveSettings(new Settings(this.dataMap));
 		//		MainFrame.changePanel(Globals.MAIN_MENU);
 		//		MainFrame.refreshSettings();
-				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
-				this.getMainFrameReference().refreshSettings();
+				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
+				Globals.MAIN_FRAME.refreshSettings();
 				break;
 		}
 	}

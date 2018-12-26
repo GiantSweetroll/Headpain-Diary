@@ -17,8 +17,6 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
-import diary.gui.MainFrame;
-import diary.gui.MainFramePanel;
 import diary.gui.EntryLog.forms.ActiveUser;
 import diary.gui.EntryLog.forms.Comments;
 import diary.gui.EntryLog.forms.DateTimeSelect;
@@ -29,11 +27,12 @@ import diary.gui.EntryLog.forms.PainLocation;
 import diary.gui.EntryLog.forms.RecentMedication;
 import diary.gui.EntryLog.forms.Trigger;
 import diary.interfaces.GUIFunction;
+import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
 
-public class EntryLog extends MainFramePanel implements GUIFunction, ActionListener
+public class EntryLog extends JPanel implements GUIFunction, ActionListener, LanguageListener
 {
 
 	/**
@@ -66,9 +65,8 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	protected static final byte FIRST_SECTION = 0, LAST_SECTION = 8;	//To be used with EntryLogButtonControl
 	
 	//Constructor
-	public EntryLog(MainFrame mainFrame)
+	public EntryLog()
 	{
-		super(mainFrame);
 		this.init();
 	}
 	
@@ -96,7 +94,7 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	{
 		//Initialization
 		this.panelCenter = new JPanel();
-		this.activeUser = new ActiveUser(new ActivePatientPanel(this.getMainFrameReference()));
+		this.activeUser = new ActiveUser(new ActivePatientPanel());
 		this.comments = new Comments();
 		this.dateTime= new DateTimeSelect();
 		this.duration = new Duration();
@@ -155,8 +153,8 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 		//Initialization
 		this.panelBelow = new JPanel();
 		this.panelState = EntryLog.FIRST_SECTION;
-		this.butBack = new EntryLogButtonControl(this.getMainFrameReference(), this, EntryLogButtonControl.BACK, "");
-		this.butNext = new EntryLogButtonControl(this.getMainFrameReference(), this, EntryLogButtonControl.NEXT, "");
+		this.butBack = new EntryLogButtonControl(this, EntryLogButtonControl.BACK, "");
+		this.butNext = new EntryLogButtonControl(this, EntryLogButtonControl.NEXT, "");
 		
 		//Properties
 		this.panelBelow.setLayout(new BorderLayout());
@@ -306,11 +304,11 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 				FileOperation.deleteEntry(Methods.generatePainDataFilePathName(this.oldPatient, this.oldEntry));
 			}
 		}
-		this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
-		this.getMainFrameReference().GRAPH_PANEL.refreshGraph();
-		this.getMainFrameReference().PAIN_TABLE.refreshTable();
+		Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
+		Globals.GRAPH_PANEL.refreshGraph();
+		Globals.PAIN_TABLE.refreshTable();
 		Methods.refresHistories(this.getSelectedPatient());
-		this.getMainFrameReference().GRAPH_FILTER_PANEL.refresh(this.getMainFrameReference().GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+		Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 		this.resetDefaults();
 	}
 	
@@ -348,7 +346,7 @@ public class EntryLog extends MainFramePanel implements GUIFunction, ActionListe
 	public void actionPerformed(ActionEvent e)
 	{
 		this.resetDefaults();
-		this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+		Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 	}
 
 	@Override

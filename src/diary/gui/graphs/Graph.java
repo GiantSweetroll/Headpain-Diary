@@ -11,14 +11,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JPanel;
+
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
-import diary.gui.MainFrame;
-import diary.gui.MainFramePanel;
+import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.numbers.GNumbers;
 
-public abstract class Graph extends MainFramePanel
+public abstract class Graph extends JPanel implements LanguageListener
 {
 
 	/**
@@ -58,15 +60,15 @@ public abstract class Graph extends MainFramePanel
 	protected final int AXES_POINTERS_LENGTH = 15;
 	protected final int MARKER_LABEL_PADDING = 5;
 	protected final int MAX_MARKERS_IN_Y_AXIS = 10;
-	protected final int MAX_MARKERS_IN_X_AXIS = 4;
+	protected final int MAX_MARKERS_IN_X_AXIS = 4;	
 	protected final int GENERAL_PADDING = 10;
 	protected final int DECIMAL_PLACES = 1;
 	protected final int X_AXIS_NAME_PADDING = 20;
 	protected final int Y_AXIS_NAME_PADDING = 20;
 	
-	public Graph(MainFrame frame, LinkedHashMap<String, Double> dataMap) 
+	//Constructors
+	public Graph(LinkedHashMap<String, Double> dataMap) 
 	{
-		super(frame);
 		this.dataMap = dataMap;
 		this.xAxisName = "";
 		this.yAxisName = "";
@@ -92,9 +94,8 @@ public abstract class Graph extends MainFramePanel
 		
 		this.setOpaque(false);
 	}
-	public Graph(MainFrame frame, LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	public Graph(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
 	{
-		super(frame);
 		this.dataMap = dataMap;
 		this.xAxisName = xAxisName;
 		this.yAxisName = yAxisName;
@@ -117,6 +118,62 @@ public abstract class Graph extends MainFramePanel
 			this.xAxisLabels.add(entry.getKey());
 			this.yAxisValues.add(entry.getValue());
 		}
+		
+		this.setOpaque(false);		
+	}
+	public Graph(String xAxisName, String yAxisName)
+	{
+	//	this.dataMap = dataMap;
+		this.xAxisName = xAxisName;
+		this.yAxisName = yAxisName;
+		this.maxYAxisMarkerLabelLength = 0;
+		this.maxXAxisMarkerLabelHeight = 0;
+		this.yAxisNameTextHeight = 0;
+		this.xAxisLabels = new ArrayList<String>();
+		this.yAxisValues = new ArrayList<Double>();
+		this.yAxisMarkerPoints = new ArrayList<Point>();
+		this.dataPoints = new ArrayList<Point>();
+		
+		this.enableDataValueMarkers = false;
+		this.displayDataPoint = true;
+		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
+		this.showGraphLinesOfX = true;
+		this.showGraphLinesOfY = true;
+		
+		/*
+		for (Map.Entry<String, Double> entry : dataMap.entrySet())
+		{
+			this.xAxisLabels.add(entry.getKey());
+			this.yAxisValues.add(entry.getValue());
+		}		*/
+		
+		this.setOpaque(false);
+	}
+	public Graph()
+	{
+	//	this.dataMap = dataMap;
+		this.xAxisName = "";
+		this.yAxisName = "";
+		this.maxYAxisMarkerLabelLength = 0;
+		this.maxXAxisMarkerLabelHeight = 0;
+		this.yAxisNameTextHeight = 0;
+		this.xAxisLabels = new ArrayList<String>();
+		this.yAxisValues = new ArrayList<Double>();
+		this.yAxisMarkerPoints = new ArrayList<Point>();
+		this.dataPoints = new ArrayList<Point>();
+		
+		this.enableDataValueMarkers = false;
+		this.displayDataPoint = true;
+		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
+		this.showGraphLinesOfX = true;
+		this.showGraphLinesOfY = true;
+		
+		/*
+		for (Map.Entry<String, Double> entry : dataMap.entrySet())
+		{
+			this.xAxisLabels.add(entry.getKey());
+			this.yAxisValues.add(entry.getValue());
+		}		*/
 		
 		this.setOpaque(false);		
 	}
@@ -203,7 +260,7 @@ public abstract class Graph extends MainFramePanel
 				this.axesLength.x + 
 				this.axesPaddingWithPanelEdgeSides;
 	}
-	private int getBehindAxesDifferenceWithPanelEdgeLeft()
+	protected int getBehindAxesDifferenceWithPanelEdgeLeft()
 	{
 		int usage = this.yAxisNameTextHeight + this.Y_AXIS_NAME_PADDING + this.maxYAxisMarkerLabelLength + this.MARKER_LABEL_PADDING + this.AXES_POINTERS_LENGTH;
 		return usage - this.axesPaddingWithPanelEdgeSides;
@@ -212,6 +269,10 @@ public abstract class Graph extends MainFramePanel
 	{
 		int usage = this.xAxisNameTextHeight + this.X_AXIS_NAME_PADDING + this.maxXAxisMarkerLabelHeight + this.MARKER_LABEL_PADDING + this.AXES_POINTERS_LENGTH;
 		return usage - this.axesPaddingWithPanelEdgeBelow;
+	}
+	protected void setXAxisLabels(List<String> labels)
+	{
+		this.xAxisLabels = labels;
 	}
 	
 	//Draw Sections
@@ -247,7 +308,7 @@ public abstract class Graph extends MainFramePanel
 			Double roundedDataValue = GNumbers.round(dataValues.get((int)i), this.DECIMAL_PLACES);
 			Double DoubleCoordinate = (double)this.axesOrigin.y - yDiff*roundedDataValue;
 			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(DoubleCoordinate, this.DECIMAL_PLACES)));
-			xPos+=xDiff;
+			xPos+=xDiff; 
 		}
 	}
 	protected abstract void drawDataPoints(Graphics g, Color c, int width);
@@ -422,11 +483,11 @@ public abstract class Graph extends MainFramePanel
 	}
 	protected void drawRecentMedicationText(Graphics g, Color c)
 	{
-		if (this.getMainFrameReference().GRAPH_FILTER_PANEL.isRecentMedicationSelected())
+		if (Globals.GRAPH_FILTER_PANEL.isRecentMedicationSelected())
 		{
 			g.setColor(c);
 			
-			g.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL) + ": " + this.getMainFrameReference().GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
+			g.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL) + ": " + Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
 							this.axesOrigin.x, 
 							this.axesOrigin.y + this.AXES_POINTERS_LENGTH + this.MARKER_LABEL_PADDING + this.maxXAxisMarkerLabelHeight + this.X_AXIS_NAME_PADDING);
 		}

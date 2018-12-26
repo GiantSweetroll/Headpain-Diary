@@ -28,15 +28,14 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
-import diary.gui.MainFrame;
-import diary.gui.MainFramePanel;
 import diary.gui.table.Table;
+import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PatientDataOperation;
 import giantsweetroll.gui.swing.Gbm;
 
-public class PatientDataManagePanel extends MainFramePanel implements ActionListener
+public class PatientDataManagePanel extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -66,9 +65,8 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 	public static final String FILTER_DOB = "filter dob";
 	
 	//Constructors
-	public PatientDataManagePanel(MainFrame mainFrame)
+	public PatientDataManagePanel()
 	{
-		super(mainFrame);
 		this.init();
 	}
 	
@@ -397,15 +395,15 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 		switch(e.getActionCommand())
 		{
 			case BACK:
-				this.getMainFrameReference().GRAPH_PANEL.refreshGraph();
-				this.getMainFrameReference().PAIN_TABLE.refreshTable();
+				Globals.GRAPH_PANEL.refreshGraph();
+				Globals.PAIN_TABLE.refreshTable();
 			//	MainFrame.changePanel(Globals.MAIN_MENU);
-				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 				break;
 				
 			case NEW:
 			//	MainFrame.changePanel(new PatientDataRegisterationForm());
-				this.getMainFrameReference().changePanel(new PatientDataRegisterationForm(this.getMainFrameReference(), true), PanelName.PATIENT_REGISTERATION_FORM);
+				Globals.MAIN_FRAME.changePanel(new PatientDataRegisterationForm(true), PanelName.PATIENT_REGISTERATION_FORM);
 				break;
 				
 			case FILTER:
@@ -428,7 +426,7 @@ public class PatientDataManagePanel extends MainFramePanel implements ActionList
 				
 			case SELECT:
 	//			MainFrame.changePanel(new PatientDataRegisterationForm(this.activePatient));
-				this.getMainFrameReference().changePanel(new PatientDataRegisterationForm(this.getMainFrameReference(), this.activePatient), PanelName.PATIENT_REGISTERATION_FORM);
+				Globals.MAIN_FRAME.changePanel(new PatientDataRegisterationForm(this.activePatient), PanelName.PATIENT_REGISTERATION_FORM);
 				break;
 		}
 	}

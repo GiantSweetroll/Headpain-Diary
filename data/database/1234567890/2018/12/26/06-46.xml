@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments/>
+     <date_month>12</date_month>
+     <time_minute>46</time_minute>
+     <activity>Sunlight</activity>
+     <recent_medication>Paracetamol</recent_medication>
+     <date_day>26</date_day>
+     <medicine_complaint>Mules</medicine_complaint>
+     <pain_kind>Radiating</pain_kind>
+     <duration>3</duration>
+     <intensity>3</intensity>
+     <pain_location_preset pain_loc_id="0">head full</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">head front</pain_location_preset>
+     <time_hour>06</time_hour>
+</Entry>

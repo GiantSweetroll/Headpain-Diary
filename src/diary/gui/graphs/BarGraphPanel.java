@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.LinkedHashMap;
 
-import diary.gui.MainFrame;
 import giantsweetroll.numbers.GNumbers;
 
 public class BarGraphPanel extends Graph
@@ -19,14 +18,13 @@ public class BarGraphPanel extends Graph
 	private static final long serialVersionUID = -636744451243862364L;
 	
 	//Constructors
-	public BarGraphPanel(MainFrame frame, LinkedHashMap<String, Double> dataMap)
+	public BarGraphPanel(LinkedHashMap<String, Double> dataMap)
 	{
-		super(frame, dataMap);
 		super.setMaxMarkersInXAxis(dataMap.size());
 	}
-	public BarGraphPanel(MainFrame frame, LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	public BarGraphPanel(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
 	{
-		super(frame, dataMap, xAxisName, yAxisName);
+		super(dataMap, xAxisName, yAxisName);
 		super.setMaxMarkersInXAxis(dataMap.size());
 	}
 	

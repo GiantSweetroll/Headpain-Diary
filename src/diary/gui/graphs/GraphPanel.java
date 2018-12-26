@@ -22,14 +22,13 @@ import javax.swing.SwingConstants;
 
 import diary.ImageExportPanel;
 import diary.constants.Constants;
+import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
-import diary.gui.MainFrame;
-import diary.gui.MainFramePanel;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -38,7 +37,7 @@ import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class GraphPanel extends MainFramePanel implements ActionListener, LanguageListener
+public class GraphPanel extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -66,9 +65,8 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 	private final String SAVE = "save";
 	private final String OPTIONS = "options";
 	
-	public GraphPanel(MainFrame mainFrame)
+	public GraphPanel()
 	{
-		super(mainFrame);
 		this.init();
 	}
 	
@@ -97,7 +95,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 		//Initialization
 		this.panelTop = new JPanel();
 		this.initPanelTopLeft();
-		this.activePatientPanel = new ActivePatientPanel(this.getMainFrameReference());
+		this.activePatientPanel = new ActivePatientPanel();
 		this.panelDateRange = new DateRangePanel();
 		this.graphConfig = new JTabbedPane();
 		
@@ -228,9 +226,9 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 		
 //		System.out.println("Before: " + list.size());
 		
-		if (this.getMainFrameReference().GRAPH_FILTER_PANEL.isRecentMedicationSelected())
+		if (Globals.GRAPH_FILTER_PANEL.isRecentMedicationSelected())
 		{
-			list = PainDataOperation.filter(list, PainDataIdentifier.RECENT_MEDICATION, this.getMainFrameReference().GRAPH_FILTER_PANEL.getRecentMedicationFilter());
+			list = PainDataOperation.filter(list, PainDataIdentifier.RECENT_MEDICATION, Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter());
 		}
 		
 		if (this.panelGraphSettings.isDisplayVoidData())
@@ -242,55 +240,55 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 		
 		if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_ENTRIES_VS_DATE_TEXT)))
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), PainDataOperation.getAmountOfEntriesVSDate(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getAmountOfEntriesVSDate(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DAY_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_OF_ENTRIES_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_VS_TIME)))
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), PainDataOperation.getIntensityVSTime(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getIntensityVSTime(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.EPISODE_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_VS_TIME)))
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), PainDataOperation.getDurationVSTime(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getDurationVSTime(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.EPISODE_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_INTENSITY_AVERAGE_VS_DATE_TEXT)))
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), PainDataOperation.getAverageIntensityVSDate(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageIntensityVSDate(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DAY_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_INTENSITY_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_DURATION_AVERAGE_VS_DATE_TEXT)))
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), PainDataOperation.getAverageDurationVSDate(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageDurationVSDate(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.DAY_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_DURATION_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_INTENSITY_AVERAGE_VS_MONTH_TEXT)))
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), PainDataOperation.getAverageIntensityVSMonth(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageIntensityVSMonth(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.MONTH_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_INTENSITY_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORIES_DURATION_AVERAGE_VS_MONTH_TEXT)))
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), PainDataOperation.getAverageDurationVSMonth(list));
+			this.graph = new LineGraphPanel(PainDataOperation.getAverageDurationVSMonth(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.MONTH_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AVERAGE_DURATION_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_PAIN_KIND_VS_AMOUNT)))
 		{
-			this.graph = new BarGraphPanel(this.getMainFrameReference(), PainDataOperation.getNumberOfDifferentPainKind(list));
+			this.graph = new BarGraphPanel(PainDataOperation.getNumberOfDifferentPainKind(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.KINDS_OF_HEADPAINS_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
 		}
 		else if (category.equals(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_TRIGGER_VS_AMOUNT)))
 		{
-			this.graph = new BarGraphPanel(this.getMainFrameReference(), PainDataOperation.getAmountOfActivity(list));
+			this.graph = new BarGraphPanel(PainDataOperation.getAmountOfActivity(list));
 			this.graph.setXAxisName(Methods.getLanguageText(XMLIdentifier.TRIGGER_TEXT));
 			this.graph.setYAxisName(Methods.getLanguageText(XMLIdentifier.AMOUNT_TEXT));
 		}
@@ -312,11 +310,11 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 		
 		if (this.graph instanceof LineGraphPanel)
 		{
-			this.graph = new BarGraphPanel(this.getMainFrameReference(), this.graph.getDataMap(), this.graph.getXAxisName(), this.graph.getYAxisName());
+			this.graph = new BarGraphPanel(this.graph.getDataMap(), this.graph.getXAxisName(), this.graph.getYAxisName());
 		}
 		else
 		{
-			this.graph = new LineGraphPanel(this.getMainFrameReference(), this.graph.getDataMap(), this.graph.getXAxisName(), this.graph.getYAxisName());
+			this.graph = new LineGraphPanel(this.graph.getDataMap(), this.graph.getXAxisName(), this.graph.getYAxisName());
 			this.graph.displayDataPoint(this.panelGraphSettings.isDisplayDataPoints());
 		}
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
@@ -362,7 +360,7 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 			{
 			case BACK:
 		//		MainFrame.changePanel(Globals.MAIN_MENU);
-				this.getMainFrameReference().changePanel(PanelName.MAIN_MENU);
+				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 				break;
 				
 			case REFRESH:
@@ -396,13 +394,13 @@ public class GraphPanel extends MainFramePanel implements ActionListener, Langua
 				ImageExportPanel exportImage = new ImageExportPanel(patient.getName(), 
 																	patient.getID(), 
 																	this.panelDateRange.getDateRangeAsString(), 
-																	this.getMainFrameReference().GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
+																	Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
 																	new TitledGraph(this.comboCategory.getSelectedItem().toString(), this.graph));
-				Methods.exportPanelImage(this.getMainFrameReference(), exportImage, true);
+				Methods.exportPanelImage(exportImage, true);
 				break;
 				
 			case OPTIONS:
-				JOptionPane.showMessageDialog(null, this.getMainFrameReference().GRAPH_FILTER_PANEL, Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT), JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, Globals.GRAPH_FILTER_PANEL, Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT), JOptionPane.PLAIN_MESSAGE);
 				break;
 		}
 	}

@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
+import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PatientDataOperation;
@@ -32,7 +33,7 @@ import diary.patientdata.PatientDataForm;
 import diary.patientdata.PatientDataRenderer;
 import diary.patientdata.PatientDataTextPanel;
 
-public class ActivePatientPanel extends MainFramePanel implements ItemListener, ActionListener
+public class ActivePatientPanel extends JPanel implements ItemListener, ActionListener, LanguageListener
 {
 
 	/**
@@ -50,14 +51,12 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 	private JButton buttonFilter;
 	
 	//Constructors
-	public ActivePatientPanel(MainFrame frame)
+	public ActivePatientPanel()
 	{
-		super(frame);
 		this.init();
 	}
-	public ActivePatientPanel(MainFrame frame, PatientData patient)
+	public ActivePatientPanel(PatientData patient)
 	{
-		super(frame);
 		this.init();
 		this.setSelectedPatient(patient);
 	}
@@ -108,8 +107,8 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 							getMainFrameReference().GRAPH_FILTER_PANEL.refresh(getSelectedPatientData());
 						}
 						*/
-						getMainFrameReference().ENTRY_LOG.refreshHistories();
-						getMainFrameReference().GRAPH_FILTER_PANEL.refresh(getSelectedPatientData());
+						Globals.ENTRY_LOG.refreshHistories();
+						Globals.GRAPH_FILTER_PANEL.refresh(getSelectedPatientData());
 					}
 					
 				});
@@ -189,7 +188,7 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 //				System.out.println();
 			}
 			
-			getMainFrameReference().ENTRY_LOG.refreshHistories();
+			Globals.ENTRY_LOG.refreshHistories();
 		}
 		catch(Exception ex)
 		{
@@ -289,7 +288,7 @@ public class ActivePatientPanel extends MainFramePanel implements ItemListener, 
 		this.displayPatientDetails();
 		Globals.HISTORY_RECENT_MEDICATION.refresh(this.getSelectedPatientData());
 		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(this.getSelectedPatientData());
-		getMainFrameReference().ENTRY_LOG.refreshHistories();
+		Globals.ENTRY_LOG.refreshHistories();
 		this.revalidate();
 		this.repaint();
 	}
