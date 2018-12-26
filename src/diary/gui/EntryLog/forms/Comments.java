@@ -10,7 +10,7 @@ import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.TextAreaManager;
 
-public class Comments extends FormElement
+public class Comments extends FormElement<String>
 {
 
 	/**
@@ -50,7 +50,7 @@ public class Comments extends FormElement
 	public String getData() {return this.ta.getText().trim();}
 
 	@Override
-	public void setData(Object obj) {this.ta.setText(obj.toString());}
+	public void setData(String obj) {this.ta.setText(obj);}
 
 	@Override
 	public boolean allFilled() {

@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
@@ -38,11 +39,17 @@ public class RecentMedication extends FormElement implements LanguageListener
 		
 		//Properties
 		this.getPanel().setLayout(new GridBagLayout());
+		this.getFormTitleLabel().setHorizontalAlignment(SwingConstants.CENTER);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
-		c.insets = Constants.INSETS_TOP_COMPONENT;
+		c.insets = Constants.INSETS_TITLE;
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = 100;
+		this.getPanel().add(this.getFormTitleLabel(), c);
+		Gbm.newGridLine(c);
+		c.gridwidth = 1;
+		c.insets = Constants.INSETS_TOP_COMPONENT;
 		this.getPanel().add(this.labRecentMeds, c);
 		Gbm.nextGridColumn(c);
 		this.getPanel().add(this.recentMedication, c);
@@ -112,5 +119,6 @@ public class RecentMedication extends FormElement implements LanguageListener
 		this.labMedecineComplaint.setText(Methods.getLanguageText(XMLIdentifier.MEDICINE_COMPLAINT_LABEL));
 		this.recentMedication.revalidateLanguage(Methods.getDefaultRecentMedications());
 		this.medicineComplaint.revalidateLanguage();
+		this.getFormTitleLabel().setText(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION));
 	}
 }

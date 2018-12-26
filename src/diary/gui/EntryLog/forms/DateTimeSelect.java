@@ -130,5 +130,4 @@ public class DateTimeSelect extends FormElement
 		this.date.revalidateLanguage();
 		this.time.revalidateLanguage();
 	}
-
 }

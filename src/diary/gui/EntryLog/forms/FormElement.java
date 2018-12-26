@@ -1,5 +1,7 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.event.FocusListener;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,7 +11,7 @@ import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 
-public abstract class FormElement extends JScrollPane implements GUIFunction, LanguageListener
+public abstract class FormElement<T> extends JScrollPane implements GUIFunction, LanguageListener
 {
 
 	/**
@@ -77,7 +79,7 @@ public abstract class FormElement extends JScrollPane implements GUIFunction, La
 	}
 	
 	//Abstract Methods
-	public abstract Object getData();
-	public abstract void setData(Object obj);
+	public abstract T getData();
+	public abstract void setData(T obj);
 	public abstract boolean allFilled();
 }

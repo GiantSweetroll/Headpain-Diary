@@ -95,6 +95,16 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_PRESETS_LABEL, "Common Area");
 		appendComponentToMap(doc, map, XMLIdentifier.PAIN_LOCATION_CUSTOM_LABEL, "Others");
 		appendComponentToMap(doc, map, XMLIdentifier.COMMENTS_LABEL_LONG, "Comments (including what activity that cannot be done during pain strike, etc.)");
+		//Entry Log Map Button Texts
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PROFILE_TEXT, "Profile");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DATE_TIME_TEXT, "Date and Time");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DURATION_TEXT, "Duration");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_LOCATION_TEXT, "Pain Location");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_KIND_TEXT, "Pain Kind");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_INTENSITY_TEXT, "Intensity");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT, "Trigger");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_RECENT_MEDICATION_TEXT, "Recent Medication");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MAP_BUTTON_COMMENTS_TEXT, "Comments");
 		//Type Selection
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_SELECTION_TEXT, "Choose Entry Type");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT, "Single Entry");
@@ -104,6 +114,10 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER, "Select Active Profile");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_DATE_TIME, "Select Date and Time");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION, "Enter Recent Medication");
+		//Misc Labels
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MISC_DAYS_ACTIVITY_DISTURBED_LABEL, "In the last month, how many days does your daily activities gets disrupted due to head pains?");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MISC_FREQUENCY_PAIN_LAST_MONTH_LABEL, "Frequency of head pains in the last month");
+		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MISC_PREVIOUS_HEAD_PAIN_HISTORY_LABEL, "Previous head pain history");
 		
 		//Default Activities
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT, "Sunlight");
@@ -198,6 +212,9 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.TRIGGER_TEXT, "Trigger");
 		appendComponentToMap(doc, map, XMLIdentifier.NEXT_TEXT, "Next");
 		appendComponentToMap(doc, map, XMLIdentifier.CHOOSE_NONE_TEXT, "None");
+		appendComponentToMap(doc, map, XMLIdentifier.MISC_TEXT, "Misc");
+		appendComponentToMap(doc, map, XMLIdentifier.TIMES_PER_MONTH_TEXT, "times/month");
+		appendComponentToMap(doc, map, XMLIdentifier.DAYS_PER_MONTH_TEXT, "days/month");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

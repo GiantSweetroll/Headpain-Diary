@@ -50,7 +50,7 @@ public class PainLocation extends FormElement
 		return this.painLocation.customLocationSelected();
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void resetDefaults() {
 		this.painLocation.resetDefaults();
@@ -85,5 +85,4 @@ public class PainLocation extends FormElement
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.SELECT_LOCATION_LABEL));
 		this.painLocation.revalidateLanguage();
 	}
-
 }

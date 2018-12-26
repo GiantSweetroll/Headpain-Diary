@@ -58,7 +58,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 		this.getPanel().add(this.tf, c);
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void resetDefaults() {
 		this.combo.setSelectedIndex(0);
@@ -160,5 +160,4 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 		this.revalidate();
 		this.repaint();
 	}
-
 }

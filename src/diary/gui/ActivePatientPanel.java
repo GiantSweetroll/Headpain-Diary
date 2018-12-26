@@ -263,6 +263,10 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 		}
 		catch(NullPointerException ex) {return false;}
 	}
+	public void setDropDownMenuFocus()
+	{
+		this.comboUsers.requestFocus();
+	}
 	
 	//Interfaces
 	@Override

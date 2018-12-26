@@ -58,7 +58,7 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 		this.getPanel().add(this.tf, c);
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void resetDefaults() {
 		this.combo.setSelectedIndex(0);
@@ -160,5 +160,4 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 		this.revalidate();
 		this.repaint();
 	}
-
 }

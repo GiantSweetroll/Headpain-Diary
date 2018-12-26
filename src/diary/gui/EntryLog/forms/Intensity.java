@@ -16,7 +16,7 @@ import diary.gui.SliderPanel;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 
-public class Intensity extends FormElement implements KeyListener, ChangeListener
+public class Intensity extends FormElement<Integer> implements KeyListener, ChangeListener
 {
 
 	/**
@@ -41,8 +41,8 @@ public class Intensity extends FormElement implements KeyListener, ChangeListene
 		
 		//Properties
 		this.getPanel().setLayout(new GridBagLayout());
-		this.slider.setMajorTickSpacing(2);
-		this.slider.setMinorTickSpacing(1);
+		this.slider.setMajorTickSpacing(1);
+	//	this.slider.setMinorTickSpacing(1);
 		this.slider.setPaintTicks(true);
 		this.slider.setPaintLabels(true);
 		this.slider.setOpaque(false);
@@ -84,16 +84,16 @@ public class Intensity extends FormElement implements KeyListener, ChangeListene
 	public void refresh() {};
 
 	@Override
-	public String getData() {
-		return Integer.toString(this.slider.getValue());
+	public Integer getData() {
+		return this.slider.getValue();
 	}
 
 	@Override
-	public void setData(Object obj) 
+	public void setData(Integer obj) 
 	{
 		try
 		{
-			this.slider.setValue(Integer.parseInt(obj.toString()));
+			this.slider.setValue(obj);
 		}
 		catch(NumberFormatException ex){ex.printStackTrace();}
 	}

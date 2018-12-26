@@ -64,6 +64,9 @@ public class XMLIdentifier
 	public static final String TRIGGER_TEXT = "trigger text";
 	public static final String NEXT_TEXT = "next text";
 	public static final String CHOOSE_NONE_TEXT = "choose none text";
+	public static final String MISC_TEXT = "misc text";
+	public static final String TIMES_PER_MONTH_TEXT = "times per month text";
+	public static final String DAYS_PER_MONTH_TEXT = "days per month text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -94,6 +97,16 @@ public class XMLIdentifier
 	public static final String PAIN_LOCATION_PRESETS_LABEL = "pain location presets label";
 	public static final String PAIN_LOCATION_CUSTOM_LABEL = "pain location custom label";
 	public static final String COMMENTS_LABEL_LONG = "comments label long";
+	//Map Button Texts
+	public static final String ENTRY_LOG_MAP_BUTTON_PROFILE_TEXT = "entry log map button profile text";
+	public static final String ENTRY_LOG_MAP_BUTTON_DATE_TIME_TEXT = "entry log map button date time text";
+	public static final String ENTRY_LOG_MAP_BUTTON_DURATION_TEXT = "entry log map button duration text";
+	public static final String ENTRY_LOG_MAP_BUTTON_PAIN_LOCATION_TEXT = "entry log map button pain location text";
+	public static final String ENTRY_LOG_MAP_BUTTON_PAIN_KIND_TEXT = "entry log map button pain kind text";
+	public static final String ENTRY_LOG_MAP_BUTTON_INTENSITY_TEXT = "entry log map button intensity text";
+	public static final String ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT = "entry log map button trigger text";
+	public static final String ENTRY_LOG_MAP_BUTTON_RECENT_MEDICATION_TEXT = "entry log map button recent medication text";
+	public static final String ENTRY_LOG_MAP_BUTTON_COMMENTS_TEXT = "entry log map button comments text";
 	//Type Select
 	public static final String ENTRY_LOG_TYPE_SELECTION_TEXT = "entry log type selection text";
 	public static final String ENTRY_LOG_TYPE_SINGLE_BUTTON_TEXT = "entry log type single button text";
@@ -103,6 +116,10 @@ public class XMLIdentifier
 	public static final String ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER = "entry log element type active user";
 	public static final String ENTRY_LOG_ELEMENT_TYPE_DATE_TIME = "entry log element type date time";
 	public static final String ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION = "entry log element type recent medication";
+	//Misc Forms
+	public static final String ENTRY_LOG_MISC_PREVIOUS_HEAD_PAIN_HISTORY_LABEL = "entry log misc previous head pain history label";
+	public static final String ENTRY_LOG_MISC_FREQUENCY_PAIN_LAST_MONTH_LABEL = "entry log misc frequency pain last month head pain history label";
+	public static final String ENTRY_LOG_MISC_DAYS_ACTIVITY_DISTURBED_LABEL = "entry log misc days activity distubred label";
 	
 	//Default Activities
 	public static final String DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY = "default triggers physical activity";

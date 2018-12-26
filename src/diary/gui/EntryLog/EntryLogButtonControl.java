@@ -102,7 +102,7 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 		//Change entry log active center panel
 		if (this.buttonType == EntryLogButtonControl.BACK)
 		{	
-			if (this.entryLog.getPanelState() == EntryLog.FIRST_SECTION)
+			if (this.entryLog.getPanelState() == EntryLog.PROFILE_SELECTION)
 			{
 				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 			}
@@ -111,12 +111,12 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 				byte state = this.entryLog.getPanelState();
 				state--;
 				this.entryLog.setPanelState(state);
-				((CardLayout)this.entryLog.getPanelCenter().getLayout()).previous(this.entryLog.getPanelCenter());
+				((CardLayout)this.entryLog.getPanelInput().getLayout()).previous(this.entryLog.getPanelInput());
 			}
 		}
 		else
 		{
-			if (this.entryLog.getPanelState() == EntryLog.LAST_SECTION)
+			if (this.entryLog.getPanelState() == EntryLog.MISC_SELECTION)
 			{
 				if (this.entryLog.allRequiredFieldsFilled())
 				{
@@ -173,7 +173,7 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 				byte state = this.entryLog.getPanelState();
 				state++;
 				this.entryLog.setPanelState(state);
-				((CardLayout)this.entryLog.getPanelCenter().getLayout()).next(this.entryLog.getPanelCenter());
+				((CardLayout)this.entryLog.getPanelInput().getLayout()).next(this.entryLog.getPanelInput());
 			}
 		}		
 	}

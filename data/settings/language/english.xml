@@ -36,6 +36,15 @@
      <text identifier="pain location presets label">Common Area</text>
      <text identifier="pain location custom label">Others</text>
      <text identifier="comments label long">Comments (including what activity that cannot be done during pain strike, etc.)</text>
+     <text identifier="entry log map button profile text">Profile</text>
+     <text identifier="entry log map button date time text">Date and Time</text>
+     <text identifier="entry log map button duration text">Duration</text>
+     <text identifier="entry log map button pain location text">Pain Location</text>
+     <text identifier="entry log map button pain kind text">Pain Kind</text>
+     <text identifier="entry log map button intensity text">Intensity</text>
+     <text identifier="entry log map button trigger text">Trigger</text>
+     <text identifier="entry log map button recent medication text">Recent Medication</text>
+     <text identifier="entry log map button comments text">Comments</text>
      <text identifier="entry log type selection text">Choose Entry Type</text>
      <text identifier="entry log type single button text">Single Entry</text>
      <text identifier="entry log type multi button text">Multiple Entry</text>
@@ -43,6 +52,9 @@
      <text identifier="entry log element type active user">Select Active Profile</text>
      <text identifier="entry log element type date time">Select Date and Time</text>
      <text identifier="entry log element type recent medication">Enter Recent Medication</text>
+     <text identifier="entry log misc days activity distubred label">In the last month, how many days does your daily activities gets disrupted due to head pains?</text>
+     <text identifier="entry log misc frequency pain last month head pain history label">Frequency of head pains in the last month</text>
+     <text identifier="entry log misc previous head pain history label">Previous head pain history</text>
      <text identifier="default triggers sunlight">Sunlight</text>
      <text identifier="default triggers improper diet sleep">Improper Diet/Sleep Routine</text>
      <text identifier="default triggers physical activity">Physical Activity</text>
@@ -122,6 +134,9 @@
      <text identifier="trigger text">Trigger</text>
      <text identifier="next text">Next</text>
      <text identifier="choose none text">None</text>
+     <text identifier="misc text">Misc</text>
+     <text identifier="times per month text">times/month</text>
+     <text identifier="days per month text">days/month</text>
      <text identifier="graph category label">Show</text>
      <text identifier="graph category entries vs date text">Frequency vs Day</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Day</text>

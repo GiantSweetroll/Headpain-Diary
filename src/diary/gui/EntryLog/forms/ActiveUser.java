@@ -9,7 +9,7 @@ import diary.gui.ActivePatientPanel;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
 
-public class ActiveUser extends FormElement
+public class ActiveUser extends FormElement<PatientData>
 {
 
 	/**
@@ -43,7 +43,7 @@ public class ActiveUser extends FormElement
 		return this.patient;
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void resetDefaults() 
 	{
@@ -54,17 +54,17 @@ public class ActiveUser extends FormElement
 	public void refresh() {};
 
 	@Override
-	public Object getData()
+	public PatientData getData()
 	{
 		return this.patient.getSelectedPatientData();
 	}
 
 	@Override
-	public void setData(Object obj) 
+	public void setData(PatientData obj) 
 	{
 		if (obj instanceof PatientData)
 		{
-			this.patient.setSelectedPatient((PatientData)obj);
+			this.patient.setSelectedPatient(obj);
 		}
 	}
 
@@ -80,5 +80,4 @@ public class ActiveUser extends FormElement
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER));
 		this.patient.revalidateLanguage();
 	}
-
 }
