@@ -234,5 +234,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 	public void revalidateLanguage()
 	{
 		this.butReset.setText(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.labLeft.setText(Methods.getLanguageText(XMLIdentifier.YOUR_LEFT_TEXT));
+		this.labRight.setText(Methods.getLanguageText(XMLIdentifier.YOUR_RIGHT_TEXT));
 	}
 }

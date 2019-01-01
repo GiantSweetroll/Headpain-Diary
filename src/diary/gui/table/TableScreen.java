@@ -133,7 +133,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.butDelete.setForeground(Color.white);
 		this.butSave.setActionCommand(this.SAVE);
 		this.butSave.addActionListener(this);
-		this.butSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
+//		this.butSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
 		this.butSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butSave.setForeground(Color.white);
 		this.butRefresh.addActionListener(this);
@@ -142,7 +142,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.butRefresh.setForeground(Color.white);
 		
 		//add to panel
-//		this.panelBelowCenter.add(this.butSave);
+		this.panelBelowCenter.add(this.butSave);
 		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butDelete);
 	}
@@ -237,9 +237,9 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.panelDateRange.dateFrom.autoSetDate();
 		this.panelDateRange.dateTo.autoSetDate();
 		this.activePatientPanel.setOpaque(true);
-		this.tableConfig.addTab("1", this.panelTopLeft);
-		this.tableConfig.addTab("2", this.activePatientPanel);
-		this.tableConfig.addTab("3", this.panelDateRange);
+		this.tableConfig.addTab(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT), this.panelTopLeft);
+		this.tableConfig.addTab(Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT), this.activePatientPanel);
+		this.tableConfig.addTab(Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT), this.panelDateRange);
 		
 		//Add to panel
 		this.panelTop.add(this.tableConfig, BorderLayout.CENTER);
@@ -424,7 +424,9 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 																	this.table);
 				Methods.exportPanelImage(exportImage, true);
 				*/
-				FileOperation.exportTableAsExcel(this.table.getTable());
+	//			FileOperation.exportTableAsExcel(this.table.getTable());
+				
+				FileOperation.exportPainEntriesAsTxt(this.activePatientPanel.getSelectedPatientData(), this.entries);
 				break;
 				
 			case DELETE:
@@ -463,6 +465,10 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butDelete.setText(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
 		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.butSave.setText(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
+		this.tableConfig.setTitleAt(0, Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
+		this.tableConfig.setTitleAt(1, Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT));
+		this.tableConfig.setTitleAt(2, Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT));
 		this.initTable();
 		this.table.revalidateLanguage();
 		this.revalidate();

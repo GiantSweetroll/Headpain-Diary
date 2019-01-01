@@ -1012,6 +1012,11 @@ public class Methods
     	return medications;
     }
     
+    public static String[] getHeadPainSinceOptions()
+    {
+    	return new String[] {Methods.getLanguageText(XMLIdentifier.MONTH_TEXT), Methods.getLanguageText(XMLIdentifier.YEAR_TEXT)};
+    }
+    
     public static void sortIntegerListByConversion(List<String> list)
     {
     	SortedSet<Integer> set = new TreeSet<Integer>();
@@ -1037,5 +1042,12 @@ public class Methods
     			list.set(i, str);
     		}
     	}
+    }
+    
+    public static String[] getExportTableHeaders()
+    {
+    	String[] arr = Methods.getTableHeaders();
+    	arr[0] = Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT);
+    	return arr;
     }
 }

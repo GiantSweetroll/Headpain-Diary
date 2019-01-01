@@ -66,9 +66,16 @@ public class FileOperation
 	
 	public static final void saveSettings(Settings setting)
 	{
+		File file = new File(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME);
+		
+		if (!file.getParentFile().exists())
+		{
+			file.getParentFile().mkdirs();
+		}
+		
 		try 
 		{
-			XMLManager.exportXML(setting.getXMLDocument(), new File(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME), 5);
+			XMLManager.exportXML(setting.getXMLDocument(), file, 5);
 		} 
 		catch (TransformerException | ParserConfigurationException e) 
 		{
@@ -651,6 +658,88 @@ public class FileOperation
 			catch (IOException e) 
 			{
 				e.printStackTrace();
+			}
+		}
+		
+		try
+		{
+			UIManager.setLookAndFeel(oldLF);
+		}
+		catch(Exception ex) {}
+	}
+	
+	public static void exportPainEntriesAsTxt(PatientData patient, List<PainEntryData> entries)
+	{
+		LookAndFeel oldLF = UIManager.getLookAndFeel();
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch(Exception ex) {}
+		
+		JFileChooser jfc = new JFileChooser();
+		jfc.setCurrentDirectory(new File("." + File.separator));
+		
+		int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		if (response == JFileChooser.APPROVE_OPTION)
+		{
+			BufferedWriter bw = null;
+			try
+			{
+				String extension = FileOperation.getExtension(jfc.getSelectedFile());
+				if (!extension.equalsIgnoreCase("csv"))
+				{
+					extension = "csv";
+					jfc.setSelectedFile(new File(jfc.getSelectedFile().getAbsolutePath() + "." + extension));
+				}
+				
+				//Export
+				bw = new BufferedWriter(new FileWriter(jfc.getSelectedFile()));
+				//Write Headers
+				String arr[] = Methods.getExportTableHeaders();
+				for (String str : arr)
+				{
+					bw.write(str);
+					bw.write("\t");
+				}
+				bw.newLine();
+				//Convert entries
+				String arr2[][] = new String[entries.size()][];
+				for (int i=0; i<entries.size(); i++)
+				{
+					arr2[i] = entries.get(i).getDataAsStringArray();
+				}
+				//Write to file
+				for (String[] subArr : arr2)
+				{
+					bw.write(patient.toString());
+					bw.write("\t");
+					for(String str : subArr)
+					{
+						bw.write(str);
+						bw.write("\t");
+					}
+					bw.newLine();
+				}
+			}
+			catch(IOException ex) 
+			{
+				ex.printStackTrace();
+				MessageManager.showErrorDialog(ex);
+			}
+			finally
+			{
+				if(bw!=null)
+				{
+					try
+					{
+						bw.flush();
+						bw.close();
+					} catch (IOException e) 
+					{
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 		

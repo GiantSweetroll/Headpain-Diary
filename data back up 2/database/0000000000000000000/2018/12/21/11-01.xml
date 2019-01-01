@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments>NOT TEST DATA</comments>
+     <date_month>12</date_month>
+     <time_minute>01</time_minute>
+     <activity>Doing Math IA</activity>
+     <recent_medication>Sulcolon</recent_medication>
+     <date_day>21</date_day>
+     <medicine_complaint/>
+     <pain_location_custom pain_loc_id="0">kan7</pain_location_custom>
+     <pain_kind>Tearing</pain_kind>
+     <duration>3</duration>
+     <intensity>3</intensity>
+     <time_hour>11</time_hour>
+</Entry>

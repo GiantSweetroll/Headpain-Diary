@@ -2,11 +2,13 @@ package diary.gui.EntryLog.forms;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -32,6 +34,12 @@ public class Intensity extends FormElement<Integer> implements KeyListener, Chan
 	{
 		super(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL), true);
 		
+		this.init2();
+	}
+	
+	//Create GUI
+	private void init()
+	{
 		//Initialization
 		this.slider = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
 		this.selected = new JLabel(this.getSelectedDataDetails());
@@ -61,13 +69,42 @@ public class Intensity extends FormElement<Integer> implements KeyListener, Chan
 		this.getPanel().add(this.selected, c);
 		Gbm.newGridLine(c);
 		c.insets = Constants.INSETS_GENERAL;
-		this.getPanel().add(this.painDetail, c);
+		this.getPanel().add(this.painDetail, c);		
+	}
+	private void init2()
+	{
+		//Initialization
+		this.slider = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
+		this.selected = new JLabel(this.getSelectedDataDetails(), SwingConstants.CENTER);
+		this.painDetail = new JLabel(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL), SwingConstants.CENTER);
+		this.sliderPanel = new SliderPanel(slider, 50, 50);
+		
+		//Properties
+		this.getPanel().setLayout(new GridLayout(0, 1));
+		this.slider.setMajorTickSpacing(1);
+	//	this.slider.setMinorTickSpacing(1);
+		this.slider.setPaintTicks(true);
+		this.slider.setPaintLabels(true);
+		this.slider.setOpaque(false);
+		this.slider.addChangeListener(this);
+		this.getFormTitleLabel().setHorizontalAlignment(SwingConstants.CENTER);
+		this.getFormTitleLabel().setVerticalAlignment(SwingConstants.BOTTOM);
+		this.painDetail.setVerticalAlignment(SwingConstants.TOP);
+		this.selected.setVerticalAlignment(SwingConstants.BOTTOM);
+		this.selected.setFont(Constants.FONT_HEADER);
+//		this.slider.setUI(Constants.SLIDER_CUSTOM_UI);	
+		
+		//Add to panel
+		this.getPanel().add(this.getFormTitleLabel());
+		this.getPanel().add(this.selected);
+		this.getPanel().add(this.sliderPanel);
+		this.getPanel().add(this.painDetail);
 	}
 	
 	//Methods
 	private String getSelectedDataDetails()
 	{
-		return " = " + Integer.toString(this.slider.getValue());
+		return Integer.toString(this.slider.getValue());
 	}
 	private void showSelectedData()
 	{

@@ -67,6 +67,9 @@ public class XMLIdentifier
 	public static final String MISC_TEXT = "misc text";
 	public static final String TIMES_PER_MONTH_TEXT = "times per month text";
 	public static final String DAYS_PER_MONTH_TEXT = "days per month text";
+	public static final String AGO_TEXT = "ago text";
+	public static final String NOTES_TEXT = "notes text";
+	public static final String PROFILE_TEXT = "profile text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -116,10 +119,7 @@ public class XMLIdentifier
 	public static final String ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER = "entry log element type active user";
 	public static final String ENTRY_LOG_ELEMENT_TYPE_DATE_TIME = "entry log element type date time";
 	public static final String ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION = "entry log element type recent medication";
-	//Misc Forms
-	public static final String ENTRY_LOG_MISC_PREVIOUS_HEAD_PAIN_HISTORY_LABEL = "entry log misc previous head pain history label";
-	public static final String ENTRY_LOG_MISC_FREQUENCY_PAIN_LAST_MONTH_LABEL = "entry log misc frequency pain last month head pain history label";
-	public static final String ENTRY_LOG_MISC_DAYS_ACTIVITY_DISTURBED_LABEL = "entry log misc days activity distubred label";
+	
 	
 	//Default Activities
 	public static final String DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY = "default triggers physical activity";
@@ -311,6 +311,10 @@ public class XMLIdentifier
 	public static final String PATIENT_DATA_FORM_DOB_LABEL = "patient data form dob label";
 	public static final String PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT = "patient data form medical record id tooltip text";
 	public static final String PATIENT_DATA_FORM_PREVIOUS_HEADPAIN_LABEL = "patient data form previous headpain label";
+	public static final String PATIENT_DATA_FORM_HAS_PREVIOUS_HEAD_PAIN_HISTORY_LABEL = "patient data form has previous head pain history label";
+	public static final String PATIENT_DATA_FORM_FREQUENCY_PAIN_LAST_MONTH_LABEL = "patient data form frequency pain last month head pain history label";
+	public static final String PATIENT_DATA_FORM_DAYS_ACTIVITY_DISTURBED_LABEL = "patient data form days activity distubred label";
+	
 	
 	//Patient Data Registration From
 	public static final String PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL = "patient data registeration form title label";

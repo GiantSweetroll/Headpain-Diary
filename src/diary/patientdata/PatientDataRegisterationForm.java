@@ -1,17 +1,19 @@
 package diary.patientdata;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
@@ -21,6 +23,7 @@ import diary.gui.CustomDialog;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
+import giantsweetroll.gui.swing.ScrollPaneManager;
 import giantsweetroll.message.MessageManager;
 
 public class PatientDataRegisterationForm extends JPanel implements ActionListener, LanguageListener
@@ -31,10 +34,11 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 	 */
 	private static final long serialVersionUID = 4531072921811000380L;
 	
-	private JPanel panelTitle, panelCenter, panelBelow, panelBelowLeft, panelBelowRight;
+	private JPanel panelBelow, panelBelowLeft, panelBelowRight;
 	private PatientDataForm patientForm;
 	private JLabel labTitle;
 	private JButton butCancel, butSave;
+	private JScrollPane scroll;
 	
 	//Conditioning
 	private String situation;
@@ -47,13 +51,13 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 	private final String NEW_USER = "new user";
 	private final String EDIT_USER = "edit user";
 	
+	//Constructors
 	public PatientDataRegisterationForm(boolean allowCancel)
 	{
 		this.canCancel = allowCancel;
 		this.createAndShowGUI();
 		this.situation = this.NEW_USER;
 	}
-	
 	public PatientDataRegisterationForm(PatientData patientData)
 	{
 		this.createAndShowGUI();
@@ -68,30 +72,23 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 	private void createAndShowGUI()
 	{
 		//Initialization
+		this.labTitle = new JLabel (Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL), SwingConstants.CENTER);
 		this.initPanelBelow();
-		this.initPanelCenter();
+		this.patientForm = new PatientDataForm(true);
+		this.scroll = ScrollPaneManager.generateDefaultScrollPane(this.patientForm, 10, 10);
 		
 		//properties
 		this.setLayout(new BorderLayout());
 		this.setOpaque(false);
-		
-		//add to panel
-		this.add(this.panelCenter, BorderLayout.CENTER);
-		this.add(this.panelBelow, BorderLayout.SOUTH);
-	}
-	private void initPanelTitle()
-	{
-		//Initialization
-		this.panelTitle = new JPanel();
-		this.labTitle = new JLabel (Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL));
-		
-		//Properties
-		this.panelTitle.setLayout(new FlowLayout(FlowLayout.CENTER));
-		this.panelTitle.setOpaque(false);
 		this.labTitle.setFont(Constants.FONT_SUB_TITLE);
+		this.labTitle.setOpaque(true);
+		this.labTitle.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		
 		//add to panel
-		this.panelTitle.add(this.labTitle);
+//		this.add(this.panelCenter, BorderLayout.CENTER);
+		this.add(this.labTitle, BorderLayout.NORTH);
+		this.add(this.scroll, BorderLayout.CENTER);
+		this.add(this.panelBelow, BorderLayout.SOUTH);
 	}
 	private void initPanelBelowLeft()
 	{
@@ -104,6 +101,8 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		this.panelBelowLeft.setOpaque(false);
 		this.butCancel.setActionCommand(this.CANCEL);
 		this.butCancel.addActionListener(this);
+		this.butCancel.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butCancel.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butCancel);
@@ -119,6 +118,8 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		this.panelBelowRight.setOpaque(false);
 		this.butSave.setActionCommand(this.SAVE);
 		this.butSave.addActionListener(this);
+		this.butSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butSave.setForeground(Color.white);
 		
 		//Add to panel
 		this.panelBelowRight.add(this.butSave);
@@ -132,30 +133,13 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		
 		//Properties
 		this.panelBelow.setLayout(new BorderLayout());
-		this.panelBelow.setOpaque(false);
+//		this.panelBelow.setOpaque(false);
+		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
+		this.panelBelow.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		
 		//add to panel
 		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);
 		this.panelBelow.add(this.panelBelowRight, BorderLayout.EAST);
-	}
-	private void initPanelCenter()
-	{
-		//Initialization
-		this.panelCenter = new JPanel();
-		this.initPanelTitle();
-		this.patientForm = new PatientDataForm(true);
-		GridBagConstraints c = new GridBagConstraints();
-		
-		//Properties
-		this.panelCenter.setLayout(new GridBagLayout());
-		this.panelCenter.setOpaque(false);
-		
-		//add to panel
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.insets = Constants.INSETS_TITLE;
-		this.panelCenter.add(this.panelTitle, c);			//Title
-		c.insets = Constants.INSETS_GENERAL;
-		this.panelCenter.add(this.patientForm, c);			//Patient Data Form
 	}
 	
 	//Interfaces

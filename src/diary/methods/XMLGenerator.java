@@ -114,10 +114,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER, "Select Active Profile");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_DATE_TIME, "Select Date and Time");
 		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION, "Enter Recent Medication");
-		//Misc Labels
-		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MISC_DAYS_ACTIVITY_DISTURBED_LABEL, "In the last month, how many days does your daily activities gets disrupted due to head pains?");
-		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MISC_FREQUENCY_PAIN_LAST_MONTH_LABEL, "Frequency of head pains in the last month");
-		appendComponentToMap(doc, map, XMLIdentifier.ENTRY_LOG_MISC_PREVIOUS_HEAD_PAIN_HISTORY_LABEL, "Previous head pain history");
+		
 		
 		//Default Activities
 		appendComponentToMap(doc, map, XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT, "Sunlight");
@@ -215,6 +212,9 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.MISC_TEXT, "Misc");
 		appendComponentToMap(doc, map, XMLIdentifier.TIMES_PER_MONTH_TEXT, "times/month");
 		appendComponentToMap(doc, map, XMLIdentifier.DAYS_PER_MONTH_TEXT, "days/month");
+		appendComponentToMap(doc, map, XMLIdentifier.AGO_TEXT, "Ago");
+		appendComponentToMap(doc, map, XMLIdentifier.NOTES_TEXT, "Notes");
+		appendComponentToMap(doc, map, XMLIdentifier.PROFILE_TEXT, "Profile");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -298,6 +298,10 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL, "Date of Birth");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_MED_ID_TOOLTIP_TEXT, "Medical Record (If for personal use only, just enter anything)");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_PREVIOUS_HEADPAIN_LABEL, "Has Headpains Since");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DAYS_ACTIVITY_DISTURBED_LABEL, "In the last month, how many days does your daily activities gets disrupted due to head pains?");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_FREQUENCY_PAIN_LAST_MONTH_LABEL, "Frequency of head pains in the last month");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_HAS_PREVIOUS_HEAD_PAIN_HISTORY_LABEL, "Do you have a history with head pains?");
+		
 		
 		//Patient Data Registration Form
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL, "Patient Data Registeration Form");

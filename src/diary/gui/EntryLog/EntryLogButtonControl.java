@@ -112,11 +112,12 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 				state--;
 				this.entryLog.setPanelState(state);
 				((CardLayout)this.entryLog.getPanelInput().getLayout()).previous(this.entryLog.getPanelInput());
+				Globals.ENTRY_LOG.getFormSelectionMapPanel().updateSelection();
 			}
 		}
 		else
 		{
-			if (this.entryLog.getPanelState() == EntryLog.MISC_SELECTION)
+			if (this.entryLog.getPanelState() == EntryLog.COMMENTS_SELECTION)
 			{
 				if (this.entryLog.allRequiredFieldsFilled())
 				{
@@ -174,6 +175,7 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 				state++;
 				this.entryLog.setPanelState(state);
 				((CardLayout)this.entryLog.getPanelInput().getLayout()).next(this.entryLog.getPanelInput());
+				Globals.ENTRY_LOG.getFormSelectionMapPanel().updateSelection();
 			}
 		}		
 	}

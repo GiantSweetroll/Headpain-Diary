@@ -10,6 +10,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import diary.constants.XMLIdentifier;
+import diary.methods.Methods;
 import giantsweetroll.date.Date;
 import giantsweetroll.xml.dom.XMLManager;
 
@@ -21,10 +23,18 @@ public class PatientData
 	public static final String DOB_DAY = "patient_dob_day";
 	public static final String DOB_MONTH = "patient_dob_month";
 	public static final String DOB_YEAR = "patient_dob_year";
-	public static final String PREVIOUS_HEADPAINS = "previous_headpains";
 	public static final String LAST_RECENT_MEDS = "recent_meds";
 	public static final String LAST_MEDICINE_COMPLAINT = "recent_med_complaint";
 	public static final String ROOT_NODE = "patient";
+	public static final String HAS_HEAD_PAIN_HISTORY = "has_head_pain_history";
+	public static final String HEAD_PAINS_SINCE = "head_pains_since";
+	public static final String FREQUENCY_HEAD_PAINS_LAST_MONTH = "freq_head_pains_last_month";
+	public static final String DAYS_ACTIVITIES_DISTURBED = "days_activities_disturbed";
+	public static final String HEAD_PAINS_SINCE_UNIT = "head_pains_since_unit";
+	public static final String NOTES = "notes";
+	
+	public static final String HEAD_PAINS_SINCE_UNIT_MONTH = "%%sinceMonth",
+								HEAD_PAINS_SINCE_UNIT_YEAR = "%%sinceYear";
 	
 	private HashMap<String, String> dataMap;
 	
@@ -111,11 +121,75 @@ public class PatientData
 	{
 		return this.dataMap.get(PatientData.MEDICAL_RECORD_ID) + " - " + this.dataMap.get(PatientData.NAME);
 	}
-	public String getPreviousHeadpains()
+	public boolean hasHeadPainsHistory()
 	{
 		try
 		{
-			return this.dataMap.get(PatientData.PREVIOUS_HEADPAINS).toString();
+			String item = this.dataMap.get(PatientData.HAS_HEAD_PAIN_HISTORY);
+			try
+			{
+				return Boolean.parseBoolean(item);
+			}
+			catch(Exception ex)
+			{
+				return false;
+			}
+		}
+		catch(NullPointerException ex)
+		{
+			return false;
+		}
+	}
+	public String getHeadPainsSince()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.HEAD_PAINS_SINCE);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getHeadPainsSinceUnit()
+	{
+		try
+		{
+			String item = this.dataMap.get(PatientData.HEAD_PAINS_SINCE_UNIT);
+			if (item.equals(PatientData.HEAD_PAINS_SINCE_UNIT_MONTH))
+			{
+				return Methods.getLanguageText(XMLIdentifier.MONTH_TEXT);
+			}
+			else if (item.equals(PatientData.HEAD_PAINS_SINCE_UNIT_YEAR))
+			{
+				return Methods.getLanguageText(XMLIdentifier.YEAR_TEXT);
+			}
+			else
+			{
+				return "";
+			}
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getPainFrequencyLastMonth()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.FREQUENCY_HEAD_PAINS_LAST_MONTH);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getDaysActivitiesDisturbedLastMonth()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.DAYS_ACTIVITIES_DISTURBED);
 		}
 		catch(NullPointerException ex)
 		{
@@ -151,6 +225,17 @@ public class PatientData
 	public void setLastMedicineComplaint(String compl)
 	{
 		this.dataMap.put(PatientData.LAST_MEDICINE_COMPLAINT, compl);
+	}
+	public String getNotes()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.NOTES);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
 	}
 	
 	public String getRecentSelectedOption(String key)

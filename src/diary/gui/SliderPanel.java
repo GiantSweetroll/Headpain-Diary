@@ -23,6 +23,16 @@ public class SliderPanel extends JPanel
 		this.add(slider, BorderLayout.CENTER);
 	}
 	
+	public SliderPanel(JSlider slider, int xPad, int yPad)
+	{
+		this.setLayout(new BorderLayout(xPad, yPad));
+		this.setOpaque(false);
+		
+		this.add(new JPanel(), BorderLayout.EAST);
+		this.add(slider, BorderLayout.CENTER);
+		this.add(new JPanel(), BorderLayout.WEST);
+	}
+	
 	public JSlider getSlider()
 	{
 		return this.slider;

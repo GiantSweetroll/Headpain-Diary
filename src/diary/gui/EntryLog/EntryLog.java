@@ -23,7 +23,6 @@ import diary.gui.EntryLog.forms.Comments;
 import diary.gui.EntryLog.forms.DateTimeSelect;
 import diary.gui.EntryLog.forms.Duration;
 import diary.gui.EntryLog.forms.Intensity;
-import diary.gui.EntryLog.forms.Misc;
 import diary.gui.EntryLog.forms.PainKind;
 import diary.gui.EntryLog.forms.PainLocation;
 import diary.gui.EntryLog.forms.RecentMedication;
@@ -59,7 +58,6 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	private Trigger trigger;
 	private PainEntryData oldEntry;
 	private PatientData oldPatient;
-	private Misc misc;
 	
 	private boolean isNewEntry;
 	private byte panelState;
@@ -73,8 +71,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 									PAIN_KIND="poaindkine", 
 									PAIN_LOCATION="painloce", 
 									RECENT_MEDICATION="recentmede", 
-									TRIGGER="triggere",
-									MISC = "misce";
+									TRIGGER="triggere";
 	protected static final byte PROFILE_SELECTION = 0,
 								DATE_TIME_SELECTION = PROFILE_SELECTION+1,
 								DURATION_SELECTION = DATE_TIME_SELECTION+1,
@@ -83,8 +80,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 								INTENSITY_SELECTION = PAIN_KIND_SELECTION+1,
 								TRIGGER_SELECTION = INTENSITY_SELECTION+1,
 								RECENT_MEDICAITON_SELECTION = TRIGGER_SELECTION+1,
-								COMMENTS_SELECTION = RECENT_MEDICAITON_SELECTION+1,
-								MISC_SELECTION = COMMENTS_SELECTION+1;				//To be used with EntryLogButtonControl
+								COMMENTS_SELECTION = RECENT_MEDICAITON_SELECTION+1;		//To be used with EntryLogButtonControl
 	
 	//Constructor
 	public EntryLog()
@@ -125,7 +121,6 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.painLoc = new PainLocation();
 		this.recentMeds = new RecentMedication();
 		this.trigger = new Trigger();
-		this.misc = new Misc();
 		
 		//Properties
 		this.panelInput.setLayout(new CardLayout());
@@ -139,7 +134,6 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.painLoc.setName(EntryLog.PAIN_LOCATION);
 		this.recentMeds.setName(EntryLog.RECENT_MEDICATION);
 		this.trigger.setName(EntryLog.TRIGGER);
-		this.misc.setName(EntryLog.MISC);
 		
 		//Add to panel
 		this.panelInput.add(this.activeUser, EntryLog.ACTIVE_PATIENT);
@@ -151,7 +145,6 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.panelInput.add(this.trigger, EntryLog.TRIGGER);
 		this.panelInput.add(this.recentMeds, EntryLog.RECENT_MEDICATION);
 		this.panelInput.add(this.comments, EntryLog.COMMENTS);
-		this.panelInput.add(this.misc, EntryLog.MISC);
 	}
 	private void initPanelTop()
 	{
@@ -252,6 +245,10 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.painLoc.setData(entry);
 		this.recentMeds.setData(entry.getRecentMedication(), entry.getMedicineComplaint());
 		this.trigger.setData(entry);
+	}
+	public EntryLogMapPanel getFormSelectionMapPanel()
+	{
+		return this.panelEntryLogMap;
 	}
 
 	public byte getPanelState()
@@ -404,7 +401,6 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.recentMeds.revalidateLanguage();
 		this.trigger.revalidateLanguage();
 		this.butCancel.setText(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
-		this.misc.revalidateLanguage();
 		this.panelEntryLogMap.revalidateLanguage();
 	}
 }

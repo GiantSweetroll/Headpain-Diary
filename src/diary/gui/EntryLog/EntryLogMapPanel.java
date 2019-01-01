@@ -36,8 +36,7 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 								bIntensity, 
 								bTrigger,
 								bRecMeds,
-								bComments,
-								bMisc;
+								bComments;
 	
 	private List<EntryLogMapButton> buttons;
 	
@@ -52,8 +51,7 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 							INTENSITY = "int",
 							TRIGGER = "trig",
 							RECENT_MEDICATION = "rm",
-							COMMENTS = "com",
-							MISC = "misc";
+							COMMENTS = "com";
 	
 	//Constructor
 	public EntryLogMapPanel()
@@ -68,7 +66,6 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 		this.bTrigger = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT));
 		this.bRecMeds = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_RECENT_MEDICATION_TEXT));
 		this.bComments = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_COMMENTS_TEXT));
-		this.bMisc = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.MISC_TEXT));
 		this.buttons = new ArrayList<EntryLogMapButton>();
 		this.lastButtonPress = 0;
 		
@@ -94,8 +91,6 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 	//	this.bRecMeds.addActionListener(this);
 		this.bComments.setActionCommand(this.COMMENTS);
 	//	this.bComments.addActionListener(this);
-		this.bMisc.setActionCommand(this.MISC);
-	//	this.bMisc.addActionListener(this);
 		
 		//Add to array
 		this.buttons.add(this.bProfile);
@@ -107,7 +102,6 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 		this.buttons.add(this.bTrigger);
 		this.buttons.add(this.bRecMeds);
 		this.buttons.add(this.bComments);
-		this.buttons.add(this.bMisc);
 		
 		//Button properties
 		for (EntryLogMapButton but : buttons)
@@ -128,7 +122,14 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 		this.add(this.bTrigger);
 		this.add(this.bRecMeds);
 		this.add(this.bComments);
-		this.add(this.bMisc);
+	}
+	
+	//Public Methods
+	public void updateSelection()
+	{
+		this.buttons.get(this.lastButtonPress).setToHighlightedColor(false);
+		this.lastButtonPress = Globals.ENTRY_LOG.getPanelState();
+		this.buttons.get(this.lastButtonPress).setToHighlightedColor(true);
 	}
 	
 	//Interfaces
@@ -144,7 +145,6 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 		this.bTrigger.setText(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT));
 		this.bRecMeds.setText(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_RECENT_MEDICATION_TEXT));
 		this.bComments.setText(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_COMMENTS_TEXT));
-		this.bMisc.setText(Methods.getLanguageText(XMLIdentifier.MISC_TEXT));
 	}
 
 	@Override
@@ -196,23 +196,17 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 				Globals.ENTRY_LOG.changeActiveSection(EntryLog.COMMENTS);
 				Globals.ENTRY_LOG.setPanelState(EntryLog.COMMENTS_SELECTION);
 				break;
-				
-			case MISC:
-				Globals.ENTRY_LOG.changeActiveSection(EntryLog.MISC);
-				Globals.ENTRY_LOG.setPanelState(EntryLog.MISC_SELECTION);
-				break;
 		}
 		
-		this.buttons.get(this.lastButtonPress).setToHighlightedColor(false);
-		this.lastButtonPress = Globals.ENTRY_LOG.getPanelState();
-		this.buttons.get(this.lastButtonPress).setToHighlightedColor(true);
+		this.updateSelection();
 	}
 
 	@Override
 	public void resetDefaults() 
 	{
+		this.buttons.get(this.lastButtonPress).setToHighlightedColor(false);
 		this.lastButtonPress = 0;
-		this.bProfile.setToHighlightedColor(true);
+		this.buttons.get(this.lastButtonPress).setToHighlightedColor(true);
 	}
 
 	@Override

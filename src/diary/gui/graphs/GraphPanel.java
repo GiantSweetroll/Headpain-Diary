@@ -109,9 +109,9 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.panelDateRange.dateTo.setAsDefaultDataThis();
 		this.activePatientPanel.setOpaque(true);
 		this.activePatientPanel.setBackground(Color.WHITE);
-		this.graphConfig.addTab("1", this.panelTopLeft);
-		this.graphConfig.addTab("2", this.activePatientPanel);
-		this.graphConfig.addTab("3", this.panelDateRange);
+		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT), this.panelTopLeft);
+		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT), this.activePatientPanel);
+		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT), this.panelDateRange);
 
 		//Add to panel
 		this.panelTop.add(this.graphConfig, BorderLayout.CENTER);
@@ -421,6 +421,9 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.butSwitchGraph.setText(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
 		this.refreshGraph();
 		this.panelGraphSettings.revalidateLanguage();
+		this.graphConfig.setTitleAt(0, Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT));
+		this.graphConfig.setTitleAt(1, Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT));
+		this.graphConfig.setTitleAt(2, Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT));
 		
 		this.comboCategory.setSelectedIndex(categoryIndex);
 		

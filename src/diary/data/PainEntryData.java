@@ -17,7 +17,7 @@ import giantsweetroll.xml.dom.XMLManager;
 public class PainEntryData 
 {
 	private HashMap<String, Object> dataMap;
-	
+
 	//Constructors
 	public PainEntryData()
 	{
@@ -299,5 +299,23 @@ public class PainEntryData
 	public boolean isSingleEntry()
 	{
 		return Methods.secondsToDays(Long.parseLong(this.getDuration())) <= 1;
+	}
+
+	public String[] getDataAsStringArray()
+	{
+		List<String> arr = new ArrayList<String>();
+		
+		arr.add(this.getFullDate());
+		arr.add(this.getFullTime());
+		arr.add(this.getPainPositionsAsString());
+		arr.add(Methods.convertPainKindLanguageToID(this.getPainKind()));
+		arr.add(this.getIntensity());
+		arr.add(this.getDuration());
+		arr.add(Methods.convertActivityIDToLanguage(this.getTrigger()));
+		arr.add(this.getRecentMedication());
+		arr.add(this.getMedicineComplaint());
+		arr.add(this.getComments());
+		
+		return arr.toArray(new String[arr.size()]);
 	}
 }

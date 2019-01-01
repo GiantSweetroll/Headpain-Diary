@@ -2,8 +2,10 @@ package diary.gui.EntryLog.forms;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,7 +14,9 @@ import java.awt.event.KeyListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -35,12 +39,13 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	private JComboBox<String> units;
 	private JLabel selected;
 	private SliderPanel sliderPanel;
+	private JPanel panelUnit;
 	
 	private int selectedValue;
 	
 	//Constants
-	private final int SECONDS_MAJOR_TICK_COUNT = 10,
-						SECONDS_MINOR_TICK_COUNT = 2,
+	private final int SECONDS_MAJOR_TICK_COUNT = 3,
+						SECONDS_MINOR_TICK_COUNT = 1,
 						MINUTES_MAJOR_TICK_COUNT = SECONDS_MAJOR_TICK_COUNT,
 						MINUTES_MINOR_TICK_COUNT = SECONDS_MINOR_TICK_COUNT,
 						HOURS_MAJOR_TICK_COUNT = 2,
@@ -57,6 +62,12 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	{
 		super(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL), true);
 		
+		this.init2();
+	}	
+	
+	//Create GUI
+	private void init()
+	{
 		//Initialization
 		this.slider = new JSlider(JSlider.HORIZONTAL, 1, 60, 1);
 		this.units = new JComboBox<String>(Methods.getDurationUnits());
@@ -105,13 +116,55 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		c.insets = Constants.INSETS_GENERAL;
 		Gbm.newGridLine(c);
 		c.gridwidth = 2;
-		this.getPanel().add(this.units, c);
-	}	
+		this.getPanel().add(this.units, c);		
+	}
+	private void init2()
+	{
+		//Initialization
+		this.slider = new JSlider(JSlider.HORIZONTAL, 1, 60, 1);
+		this.initPanelUnit();
+		this.selectedValue = this.slider.getValue();
+		this.selected = new JLabel(this.getSelectedDataInformation(), SwingConstants.CENTER);
+		this.sliderPanel = new SliderPanel(this.slider, 50, 50);
+		
+		//Properties
+		this.getPanel().setLayout(new GridLayout(0, 1));
+		this.getFormTitleLabel().setHorizontalAlignment(SwingConstants.CENTER);
+		this.getFormTitleLabel().setVerticalAlignment(SwingConstants.BOTTOM);
+		this.slider.setMajorTickSpacing(this.SECONDS_MAJOR_TICK_COUNT);
+		this.slider.setMinorTickSpacing(this.SECONDS_MINOR_TICK_COUNT);
+		this.slider.setPaintTicks(true);
+		this.slider.setPaintLabels(true);
+		this.slider.setOpaque(false);
+		this.slider.addChangeListener(this);
+		this.selected.setVerticalAlignment(SwingConstants.BOTTOM);
+		this.selected.setFont(Constants.FONT_HEADER);
+		
+		//Add to panel
+		this.getPanel().add(this.getFormTitleLabel());
+		this.getPanel().add(this.selected);
+		this.getPanel().add(this.sliderPanel);
+		this.getPanel().add(this.panelUnit);
+	}
+	private void initPanelUnit()
+	{
+		//Initialization
+		this.panelUnit = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		this.units = new JComboBox<String>(Methods.getDurationUnits());
+		
+		//Properties
+		this.units.setBackground(Color.WHITE);
+		this.units.addActionListener(this);
+		this.panelUnit.setOpaque(false);
+		
+		//Add to panel
+		this.panelUnit.add(units);
+	}
 	
 	//Methods
 	private String getSelectedDataInformation()
 	{
-		return " = " + Integer.toString(this.selectedValue) + " " + GGUtilities.getItem(this.units).toString();
+		return Integer.toString(this.selectedValue) + " " + GGUtilities.getItem(this.units).toString();
 	}
 	private void showSelectedData()
 	{
@@ -241,24 +294,28 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_SECONDS_TEXT)))			//Seconds
 		{
 			this.slider.setMaximum(60);
+			this.slider.setLabelTable(null);
 			this.slider.setMajorTickSpacing(this.SECONDS_MAJOR_TICK_COUNT);
 			this.slider.setMinorTickSpacing(this.SECONDS_MINOR_TICK_COUNT);
 		}
 		else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_MINUTES_TEXT)))	//Minutes
 		{
 			this.slider.setMaximum(60);
+			this.slider.setLabelTable(null);
 			this.slider.setMajorTickSpacing(this.MINUTES_MAJOR_TICK_COUNT);
 			this.slider.setMinorTickSpacing(this.MINUTES_MINOR_TICK_COUNT);
 		}
 		else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_HOURS_TEXT)))		//Hours
 		{
 			this.slider.setMaximum(24);
+			this.slider.setLabelTable(null);
 			this.slider.setMajorTickSpacing(this.HOURS_MAJOR_TICK_COUNT);
 			this.slider.setMinorTickSpacing(this.HOURS_MINOR_TICK_COUNT);
 		}
 		else if (durationUnit.equals(Methods.getLanguageText(XMLIdentifier.DURATION_UNIT_DAYS_TEXT)))		//Days
 		{
 			this.slider.setMaximum(31);
+			this.slider.setLabelTable(null);
 			this.slider.setMajorTickSpacing(this.DAYS_MAJOR_TICK_COUNT);
 			this.slider.setMinorTickSpacing(this.DAYS_MINOR_TICK_COUNT);
 		}
