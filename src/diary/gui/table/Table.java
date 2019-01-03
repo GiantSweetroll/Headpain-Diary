@@ -111,7 +111,7 @@ public class Table extends JTable implements LanguageListener
 		if (super.isCellSelected(row, column))
 		{
 			//c.setBackground(new Color (8, 243, 240));		//Cyan Blue
-			c.setBackground(new Color(77, 72, 72));
+			c.setBackground(new Color(77, 72, 72));			//Grey
 			c.setForeground(Color.WHITE);
 		}
 		else
