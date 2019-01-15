@@ -84,7 +84,7 @@ public class Settings
 		}
 		catch (NullPointerException ex)
 		{
-			this.map.put(Settings.LANGUAGE, "english");
+			this.map.put(Settings.LANGUAGE, Constants.DEFAULT_LANGUAGE);
 		}
 	}
 	
@@ -97,7 +97,7 @@ public class Settings
 		 this.map.put(Settings.DATABASE_PATH, file.getAbsolutePath());
 		 file = new File(Constants.PATIENTS_LIST_DEFAULT_PATH);
 		 this.map.put(Settings.DATABASE_USERS_PATH, file.getAbsolutePath());
-		 this.map.put(Settings.LANGUAGE, "english");
+		 this.map.put(Settings.LANGUAGE, Constants.DEFAULT_LANGUAGE);
 	}
 	
 	//Public methods

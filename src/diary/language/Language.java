@@ -25,7 +25,7 @@ public class Language
 	
 	public Language()
 	{
-		this.setLanguage("english");
+		this.setLanguage(Constants.DEFAULT_LANGUAGE);
 	}
 	
 	public Language(String language)
