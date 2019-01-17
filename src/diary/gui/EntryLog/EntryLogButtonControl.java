@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -57,11 +58,13 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 		if (next)
 		{
 			this.button = new JButton(Methods.getLanguageText(XMLIdentifier.NEXT_TEXT));
+			this.button.setMnemonic(KeyEvent.VK_RIGHT);
 			this.labelDirection = new JLabel(RIGHT_DIRECTION);
 		}
 		else
 		{
 			this.button = new JButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+			this.button.setMnemonic(KeyEvent.VK_LEFT);
 			this.labelDirection = new JLabel(LEFT_DIRECTION);
 		}
 		this.label = new JLabel(text);

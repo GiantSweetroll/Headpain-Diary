@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -161,6 +162,8 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 //		this.butCancel.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butCancel.setBackground(new Color(225, 29, 29));
 		this.butCancel.setForeground(Color.WHITE);
+		this.butCancel.setMnemonic(KeyEvent.VK_X);
+		this.butCancel.setToolTipText("alt+x");
 		this.labTitle.setFont(Constants.FONT_SUB_TITLE);
 		
 		//Add to panel

@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -100,6 +101,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butBack.addActionListener(this);
 		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butBack.setForeground(Color.white);
+		this.butBack.setMnemonic(KeyEvent.VK_B);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butBack);
@@ -116,6 +118,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butNew.addActionListener(this);
 		this.butNew.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butNew.setForeground(Color.white);
+		this.butNew.setMnemonic(KeyEvent.VK_N);
 		
 		//Add to panel
 		this.panelBelowRight.add(this.butNew);
@@ -135,14 +138,17 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butDelete.addActionListener(this);
 		this.butDelete.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butDelete.setForeground(Color.white);
+		this.butDelete.setMnemonic(KeyEvent.VK_D);
 		this.butRefresh.setActionCommand(this.FILTER);
 		this.butRefresh.addActionListener(this);
 		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butRefresh.setForeground(Color.white);
+		this.butRefresh.setMnemonic(KeyEvent.VK_R);
 		this.butSelect.setActionCommand(this.SELECT);
 		this.butSelect.addActionListener(this);
 		this.butSelect.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butSelect.setForeground(Color.white);
+		this.butSelect.setMnemonic(KeyEvent.VK_S);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butDelete);
@@ -445,6 +451,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butNew.setText(Methods.getLanguageText(XMLIdentifier.NEW_TEXT));
 		this.table.changeTableHeaders(Methods.getPatientTableHeaders());
 		this.panelDateRange.revalidateLanguage();
 		this.revalidate();

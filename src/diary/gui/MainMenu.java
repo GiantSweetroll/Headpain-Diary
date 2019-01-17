@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -266,14 +267,17 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.butNewEntry.addActionListener(this);
 		this.butNewEntry.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butNewEntry.setToolTipText(Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
+		this.butNewEntry.setMnemonic(KeyEvent.VK_N);
 		this.butGraph.setActionCommand(this.VIEW_GRAPH);
 		this.butGraph.addActionListener(this);
 		this.butGraph.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butGraph.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP));
+		this.butGraph.setMnemonic(KeyEvent.VK_G);
 		this.butTable.setActionCommand(this.VIEW_TABLE);
 		this.butTable.addActionListener(this);
 		this.butTable.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butTable.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP));
+		this.butTable.setMnemonic(KeyEvent.VK_T);
 		
 		//Add to panel
 		this.panelMainButtons.add(this.butNewEntry);
@@ -295,6 +299,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.butSettings.setFont(Constants.FONT_GENERAL);
 		this.butSettings.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butSettings.setForeground(Color.WHITE);
+		this.butSettings.setMnemonic(KeyEvent.VK_S);
 		
 		//Add to panel
 		this.panelBelowLeft.add(this.butSettings);
@@ -313,6 +318,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.butExit.addActionListener(this);
 		this.butExit.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butExit.setForeground(Color.WHITE);
+		this.butExit.setMnemonic(KeyEvent.VK_E);
 		
 		//Add to panel
 		this.panelBelowRight.add(this.butExit);
@@ -332,6 +338,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.butManagePatients.setFont(Constants.FONT_GENERAL);
 		this.butManagePatients.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butManagePatients.setForeground(Color.WHITE);
+		this.butManagePatients.setMnemonic(KeyEvent.VK_M);
 		
 		//Add to panel
 		this.panelBelowCenter.add(this.butManagePatients);	

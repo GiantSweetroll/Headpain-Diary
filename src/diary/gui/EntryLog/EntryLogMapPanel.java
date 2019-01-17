@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,22 +75,31 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		this.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.bProfile.setActionCommand(this.PROFILE);
+		this.bProfile.setMnemonic(KeyEvent.VK_1);
 	//	this.bProfile.addActionListener(this);
 		this.bDateTime.setActionCommand(this.DATE_TIME);
+		this.bDateTime.setMnemonic(KeyEvent.VK_2);
 	//	this.bDateTime.addActionListener(this);
 		this.bDuration.setActionCommand(this.DURATION);
+		this.bDuration.setMnemonic(KeyEvent.VK_3);
 	//	this.bDuration.addActionListener(this);
 		this.bPainLoc.setActionCommand(this.PAIN_LOCATION);
+		this.bPainLoc.setMnemonic(KeyEvent.VK_4);
 	//	this.bPainLoc.addActionListener(this);
 		this.bPainKind.setActionCommand(this.PAIN_KIND);
+		this.bPainKind.setMnemonic(KeyEvent.VK_5);
 	//	this.bPainKind.addActionListener(this);
 		this.bIntensity.setActionCommand(this.INTENSITY);
+		this.bIntensity.setMnemonic(KeyEvent.VK_6);
 	//	this.bIntensity.addActionListener(this);
 		this.bTrigger.setActionCommand(this.TRIGGER);
+		this.bTrigger.setMnemonic(KeyEvent.VK_7);
 	//	this.bTrigger.addActionListener(this);
 		this.bRecMeds.setActionCommand(this.RECENT_MEDICATION);
+		this.bRecMeds.setMnemonic(KeyEvent.VK_8);
 	//	this.bRecMeds.addActionListener(this);
 		this.bComments.setActionCommand(this.COMMENTS);
+		this.bComments.setMnemonic(KeyEvent.VK_9);
 	//	this.bComments.addActionListener(this);
 		
 		//Add to array

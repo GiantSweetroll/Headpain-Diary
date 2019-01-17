@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -394,8 +395,10 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		this.panelBelow.setOpaque(false);
 		this.butCancel.setActionCommand(this.CANCEL);
 		this.butCancel.addActionListener(this);
+		this.butCancel.setMnemonic(KeyEvent.VK_C);
 		this.butSave.setActionCommand(this.SAVE);
 		this.butSave.addActionListener(this);
+		this.butSave.setMnemonic(KeyEvent.VK_S);
 		
 		//Add to panel
 		this.panelBelow.add(this.butCancel);
