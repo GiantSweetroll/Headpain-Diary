@@ -1,10 +1,7 @@
 package diary.gui.EntryLog.forms;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +22,6 @@ import diary.constants.XMLIdentifier;
 import diary.gui.SliderPanel;
 import diary.methods.Methods;
 import giantsweetroll.GGUtilities;
-import giantsweetroll.gui.swing.Gbm;
 
 public class Duration extends FormElement implements KeyListener, ActionListener, ChangeListener
 {
@@ -66,6 +62,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	}	
 	
 	//Create GUI
+	/*
 	private void init()
 	{
 		//Initialization
@@ -88,7 +85,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		spr.putConstraint(SpringLayout.WEST, this.units, Constants.INSETS_TOP_COMPONENT.left, SpringLayout.WEST, this.getPanel());
 		spr.putConstraint(SpringLayout.NORTH, this.selected, Constants.INSETS_TOP_COMPONENT.top, SpringLayout.SOUTH, this.units);
 		spr.putConstraint(SpringLayout.WEST, this.selected, Constants.INSETS_TOP_COMPONENT.left, SpringLayout.WEST, this.getPanel());
-		this.getPanel().setLayout(spr);		*/
+		this.getPanel().setLayout(spr);		
 		//Other
 		this.getPanel().setLayout(new GridBagLayout());
 		this.units.addActionListener(this);
@@ -117,7 +114,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		Gbm.newGridLine(c);
 		c.gridwidth = 2;
 		this.getPanel().add(this.units, c);		
-	}
+	}	*/
 	private void init2()
 	{
 		//Initialization
@@ -342,6 +339,7 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	{
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.DURATION_LABEL));
 		this.units.setModel(new DefaultComboBoxModel<String>(Methods.getDurationUnits()));
+		this.showSelectedData();
 		this.revalidate();
 		this.repaint();
 	}
