@@ -98,8 +98,8 @@ public class PainLocationSelectionPanel extends JPanel implements ItemListener, 
 	
 	public void setSelectedPosition(PainEntryData entry)
 	{
-		List<String> presetLocations = (List<String>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATION_PRESET);
-		List<String> customLocations = (List<String>)entry.getDataMap().get(PainDataIdentifier.PAIN_LOCATION_CUSTOM);
+		List<String> presetLocations = entry.getPresetPainLocations();
+		List<String> customLocations = entry.getCustomPainLocations();
 	
 		if (presetLocations.size() == 0)
 		{

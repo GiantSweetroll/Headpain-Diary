@@ -2,14 +2,16 @@ package diary.test;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.swing.JOptionPane;
-
-import giantsweetroll.numbers.GNumbers;
 
 public class Test
 {	
@@ -53,21 +55,29 @@ public class Test
 		
 		JOptionPane.showMessageDialog(null, "Done");
 	}
-
+	
+	public static void zipFile(File inputFile, String outputPath)
+	{
+		try
+		{
+			FileOutputStream fileOutputStream = new FileOutputStream(outputPath);
+			ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
+			
+			ZipEntry zipEntry = new ZipEntry(inputFile.getName());
+			zipOutputStream.putNextEntry(zipEntry);
+			
+			FileInputStream fileInputStream = new FileInputStream(inputFile);
+			byte[] buf = new byte[1024];
+			int bytesRead;
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String args[])
 	{
-		double initial = 50000d;
-		double owed = initial;
-		double interest = 1.1d;
 		
-		int i=1;
-		
-		while (owed>=0)
-		{
-			System.out.print("Money owed in year " + i + ": ");
-			owed = GNumbers.round(owed * interest - 6000, 2);
-			System.out.println(owed);
-			i++;
-		}
 	}
 }

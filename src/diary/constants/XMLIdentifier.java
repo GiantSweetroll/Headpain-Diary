@@ -70,6 +70,8 @@ public class XMLIdentifier
 	public static final String AGO_TEXT = "ago text";
 	public static final String NOTES_TEXT = "notes text";
 	public static final String PROFILE_TEXT = "profile text";
+	public static final String MALE_TEXT = "male text";
+	public static final String FEMALE_TEXT = "female text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -314,7 +316,9 @@ public class XMLIdentifier
 	public static final String PATIENT_DATA_FORM_HAS_PREVIOUS_HEAD_PAIN_HISTORY_LABEL = "patient data form has previous head pain history label";
 	public static final String PATIENT_DATA_FORM_FREQUENCY_PAIN_LAST_MONTH_LABEL = "patient data form frequency pain last month head pain history label";
 	public static final String PATIENT_DATA_FORM_DAYS_ACTIVITY_DISTURBED_LABEL = "patient data form days activity distubred label";
-	
+	public static final String PATIENT_DATA_FORM_SEX_LABEL = "patient data form sex label";
+	public static final String PATIENT_DATA_FORM_OCCUPATION_LABEL = "patient data form occupation label";
+	public static final String PATIENT_DATA_FORM_CITY_LABEL = "patient data form city label";
 	
 	//Patient Data Registration From
 	public static final String PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL = "patient data registeration form title label";
@@ -324,6 +328,8 @@ public class XMLIdentifier
 	public static final String PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE_TITLE = "patient data registeration form empty name message title";
 	public static final String PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TITLE = "patient data registeration form overwrite message title";
 	public static final String PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TEXT = "patient data registeration form overwrite message text";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE = "patient data registeration form sex not selected message";
+	public static final String PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE_TITLE = "patient data registeration form sex not selected message title ";
 	
 	//Active Patient Panel
 	public static final String ACTIVE_PATIENT_PANEL_PATIENT_TEXT = "active patient panel patient text";

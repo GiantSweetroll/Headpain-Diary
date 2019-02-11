@@ -13,6 +13,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -167,6 +168,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.panelBelow.setLayout(new BorderLayout());
 	//	this.panelBelow.setOpaque(false);
 		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
+		this.panelBelow.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//add to panel
 		this.panelBelow.add(this.panelBelowCenter, BorderLayout.CENTER);

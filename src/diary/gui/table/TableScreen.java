@@ -175,6 +175,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		//Properties
 		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelBelow.setLayout(new BorderLayout());
+		this.panelBelow.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//add to panel
 		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -83,6 +84,7 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		this.labTitle.setFont(Constants.FONT_SUB_TITLE);
 		this.labTitle.setOpaque(true);
 		this.labTitle.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
+		this.labTitle.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//add to panel
 //		this.add(this.panelCenter, BorderLayout.CENTER);
@@ -103,6 +105,7 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		this.butCancel.addActionListener(this);
 		this.butCancel.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butCancel.setForeground(Color.white);
+		this.butCancel.setMnemonic(KeyEvent.VK_C);
 		
 		//add to panel
 		this.panelBelowLeft.add(this.butCancel);
@@ -120,6 +123,7 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		this.butSave.addActionListener(this);
 		this.butSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butSave.setForeground(Color.white);
+		this.butSave.setMnemonic(KeyEvent.VK_S);
 		
 		//Add to panel
 		this.panelBelowRight.add(this.butSave);
@@ -135,7 +139,8 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 		this.panelBelow.setLayout(new BorderLayout());
 //		this.panelBelow.setOpaque(false);
 		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
-		this.panelBelow.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+//		this.panelBelow.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+		this.panelBelow.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//add to panel
 		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);
@@ -169,6 +174,11 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 				{
 					MessageManager.showErrorDialog(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE),
 													Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE_TITLE));
+				}
+				else if (!this.patientForm.sexSelected())
+				{
+					MessageManager.showErrorDialog(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE),
+							Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE_TITLE));
 				}
 				else
 				{

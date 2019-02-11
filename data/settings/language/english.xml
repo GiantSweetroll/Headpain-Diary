@@ -137,6 +137,8 @@
      <text identifier="ago text">Ago</text>
      <text identifier="notes text">Notes</text>
      <text identifier="profile text">Profile</text>
+     <text identifier="male text">Male</text>
+     <text identifier="female text">Female</text>
      <text identifier="graph category label">Show</text>
      <text identifier="graph category entries vs date text">Frequency vs Day</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Day</text>
@@ -203,6 +205,9 @@
      <text identifier="patient data form days activity distubred label">In the last month, how many days does your daily activities gets disrupted due to head pains?</text>
      <text identifier="patient data form frequency pain last month head pain history label">Frequency of head pains in the last month</text>
      <text identifier="patient data form has previous head pain history label">Do you have a history with head pains?</text>
+     <text identifier="patient data form sex label">Sex</text>
+     <text identifier="patient data form occupation label">Occupation</text>
+     <text identifier="patient data form city label">City</text>
      <text identifier="patient data registeration form title label">Patient Data Registeration Form</text>
      <text identifier="patient data registeration form empty id message">Medical ID cannot be empty!</text>
      <text identifier="patient data registeration form empty name message">Name cannot be empty!</text>
@@ -210,5 +215,7 @@
      <text identifier="patient data registeration form empty name message title">Empty Name</text>
      <text identifier="patient data registeration form overwrite message title">Confirm Overwrite</text>
      <text identifier="patient data registeration form overwrite message text">Another data of the same ID already exists, do you want to overwrite?</text>
+     <text identifier="patient data registeration form sex not selected message">Please specify sex!</text>
+     <text identifier="patient data registeration form sex not selected message title ">Sex not yet been specified</text>
      <text identifier="active patient panel patient text">User</text>
 </language>

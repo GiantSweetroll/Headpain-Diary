@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -59,6 +60,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	private Trigger trigger;
 	private PainEntryData oldEntry;
 	private PatientData oldPatient;
+	private JScrollPane scrollCenter;
 	
 	private boolean isNewEntry;
 	private byte panelState;
@@ -157,7 +159,8 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		//Properties
 		this.panelTop.setLayout(new BorderLayout(10, 20));
 		this.panelTop.setOpaque(false);
-		this.panelTop.setBorder(Methods.createTransparentBorder(5));
+//		this.panelTop.setBorder(Methods.createTransparentBorder(5));
+		this.panelTop.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		this.butCancel.addActionListener(this);
 //		this.butCancel.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butCancel.setBackground(new Color(225, 29, 29));
@@ -192,10 +195,13 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.panelCenter = new JPanel(new BorderLayout());
 		this.panelEntryLogMap = new EntryLogMapPanel();
 		this.initPanelInput();
-		JScrollPane scroll = ScrollPaneManager.generateDefaultScrollPane(this.panelEntryLogMap, 10, 10);
+		this.scrollCenter = ScrollPaneManager.generateDefaultScrollPane(this.panelEntryLogMap, 10, 10);
+		
+		//Properties
+		this.panelEntryLogMap.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//Add to panel
-		this.panelCenter.add(scroll, BorderLayout.WEST);
+		this.panelCenter.add(scrollCenter, BorderLayout.WEST);
 		this.panelCenter.add(this.panelInput, BorderLayout.CENTER);
 	}
 	//Methods
@@ -366,6 +372,8 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.trigger.resetDefaults();
 		this.changeActiveSection(EntryLog.ACTIVE_PATIENT);
 		this.panelEntryLogMap.resetDefaults();
+		this.scrollCenter.getVerticalScrollBar().setValue(0);
+		this.scrollCenter.getHorizontalScrollBar().setValue(0);
 	}
 	@Override
 	public void refresh() 

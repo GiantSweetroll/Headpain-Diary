@@ -59,7 +59,7 @@
      <text identifier="default triggers stressor">Stressor</text>
      <text identifier="default pain kind pulsating">Berdenyut</text>
      <text identifier="default pain kind radiating">Memancar</text>
-     <text identifier="default pain kind throbbing">Denyutan</text>
+     <text identifier="default pain kind throbbing">Bertusuk-tusuk</text>
      <text identifier="default pain kind tight band">Tight Band</text>
      <text identifier="default recent medication prescribed mix capsule">Kapsul Racik</text>
      <text identifier="date auto button tooltip text">Secara otomatis mengatur tanggal kepada tanggal sekarang</text>
@@ -83,9 +83,9 @@
      <text identifier="pain location eye and forhead text">Area Mata dan Dahi</text>
      <text identifier="pain location face left and head text">Wajah dan Kepala Sisi Kiri</text>
      <text identifier="pain location face right and head text">Wajah dan Kepala Sisi Kanan</text>
-     <text identifier="pain location head all text">Kepala Penuh</text>
+     <text identifier="pain location head all text">Seluruh Kepala</text>
      <text identifier="pain location head back text">Belakang Kepala</text>
-     <text identifier="pain location head front text">Depan Kepala</text>
+     <text identifier="pain location head front text">Dahi</text>
      <text identifier="back text">Kembali</text>
      <text identifier="finish text">Selesai</text>
      <text identifier="reset">Setel Ulang</text>
@@ -137,6 +137,8 @@
      <text identifier="days per month text">hari/bulan</text>
 	 <text identifier="ago text">Yang lalu</text>
 	 <text identifier="notes text">Catatan</text>
+     <text identifier="male text">Laki-laki</text>
+     <text identifier="female text">Perempuan</text>	 
 	 <text identifier="profile text">Profil</text>
      <text identifier="graph category label">Tampilkan</text>
      <text identifier="graph category entries vs date text">Frekuensi vs Hari</text>
@@ -171,7 +173,7 @@
      <text identifier="table headers durations text">Durasi</text>
      <text identifier="table headers intensities text">Intensitas</text>
      <text identifier="table headers pain amount text">Jumlah Lokasi Sakit Kepala</text>
-     <text identifier="table headers pain kinds text">Kinds of Headpain</text>
+     <text identifier="table headers pain kinds text">Jenis Sakit Kepala</text>
      <text identifier="table headers pain positions text">Posisi Sakit Kepala</text>
      <text identifier="table headers select text">Pilih</text>
      <text identifier="table headers start time text">Waktu Mulai</text>
@@ -204,6 +206,9 @@
 	 <text identifier="patient data form days activity distubred label">Dalam 1 bulan terakhir, berapa hari Anda terganggu aktivitas sehari-hari karena nyeri kepala?</text>
      <text identifier="patient data form frequency pain last month head pain history label">Frekuensi nyeri dalam 1 bulan terakhir</text>
      <text identifier="patient data form has previous head pain history label">Apakah Anda memiliki riwayat sakit kepala?</text>
+	 <text identifier="patient data form sex label">Jenis Kelamin</text>
+     <text identifier="patient data form occupation label">Pekerjaan</text>
+     <text identifier="patient data form city label">Kota</text>
      <text identifier="patient data registeration form title label">Formulir Pendaftaran Data Pasien</text>
      <text identifier="patient data registeration form empty id message">ID medis tidak boleh kosong!</text>
      <text identifier="patient data registeration form empty name message">Nama tidak boleh kosong!</text>
@@ -211,5 +216,7 @@
      <text identifier="patient data registeration form empty name message title">Nama Kosong</text>
      <text identifier="patient data registeration form overwrite message title">Konfirmasi Timpa</text>
      <text identifier="patient data registeration form overwrite message text">Data lain dari ID yang sama sudah ada, apakah Anda ingin menimpa?</text>
+     <text identifier="patient data registeration form sex not selected message">Silahkan sebutkan jenis kelamin!</text>
+     <text identifier="patient data registeration form sex not selected message title ">Jenis kelamin belum ditentukan</text>	 
      <text identifier="active patient panel patient text">Pasien</text>
 </language>

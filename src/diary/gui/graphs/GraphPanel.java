@@ -152,6 +152,7 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		//Properties
 		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelBelow.setLayout(new BorderLayout());
+		this.panelBelow.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//Add to panel
 		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);

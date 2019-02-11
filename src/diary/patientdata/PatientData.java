@@ -32,6 +32,11 @@ public class PatientData
 	public static final String DAYS_ACTIVITIES_DISTURBED = "days_activities_disturbed";
 	public static final String HEAD_PAINS_SINCE_UNIT = "head_pains_since_unit";
 	public static final String NOTES = "notes";
+	public static final String SEX = "sex";
+	public static final String JOB = "job";
+	public static final String MALE = "$$male$$";
+	public static final String FEMALE = "$$female$$";
+	public static final String CITY = "city";
 	
 	public static final String HEAD_PAINS_SINCE_UNIT_MONTH = "%%sinceMonth",
 								HEAD_PAINS_SINCE_UNIT_YEAR = "%%sinceYear";
@@ -231,6 +236,63 @@ public class PatientData
 		try
 		{
 			return this.dataMap.get(PatientData.NOTES);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getSex()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.SEX);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public boolean isMale()
+	{
+		try
+		{
+			return this.getSex().equals(PatientData.MALE);
+
+		}
+		catch(NullPointerException ex)
+		{
+			return false;
+		}
+	}
+	public boolean isFemale()
+	{
+		try
+		{
+			return this.getSex().equals(PatientData.FEMALE);
+
+		}
+		catch(NullPointerException ex)
+		{
+			return false;
+		}
+	}
+	public String getOccupation()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.JOB);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getCity()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.CITY);
 		}
 		catch(NullPointerException ex)
 		{

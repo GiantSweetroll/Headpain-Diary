@@ -291,7 +291,13 @@ public class FileOperation
 				for (int i=0; i<entry.getValue().size(); i++)
 				{
 					List<String> legibleDays = new ArrayList<String>();
-					FileManager.getListOfFiles(legibleDays, userDatabasePath + entry.getKey() + File.separator + entry.getValue().get(i), false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
+					String path = entry.getValue().get(i);
+			//		System.out.println(path);
+					path = Methods.removeFirstZeroFromString(path);		//Remove first trailing zero (that was previously added for sorting)
+			//		System.out.println(path);
+					path = userDatabasePath + entry.getKey() + File.separator + path;
+			//		System.out.println(path);
+					FileManager.getListOfFiles(legibleDays, path, false, FileManager.FOLDER_ONLY, FileManager.NAME_ONLY);
 		//			MessageManager.printLine("Amount of legible days from month " + entry.getValue().get(i) + "before filter: " + legibleDays.size());
 					
 					if (entry.getKey().equals(Integer.toString(from.getYear())))		//if the first eligible year is equal to the min year
@@ -707,7 +713,7 @@ public class FileOperation
 				String arr2[][] = new String[entries.size()][];
 				for (int i=0; i<entries.size(); i++)
 				{
-					arr2[i] = entries.get(i).getDataAsStringArray();
+					arr2[i] = entries.get(i).getDataAsStringArrayForTableExport();
 				}
 				//Write to file
 				for (String[] subArr : arr2)
