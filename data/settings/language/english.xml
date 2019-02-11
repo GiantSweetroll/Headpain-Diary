@@ -139,6 +139,7 @@
      <text identifier="profile text">Profile</text>
      <text identifier="male text">Male</text>
      <text identifier="female text">Female</text>
+     <text identifier="all data text">All Data</text>
      <text identifier="graph category label">Show</text>
      <text identifier="graph category entries vs date text">Frequency vs Day</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Day</text>
@@ -208,6 +209,7 @@
      <text identifier="patient data form sex label">Sex</text>
      <text identifier="patient data form occupation label">Occupation</text>
      <text identifier="patient data form city label">City</text>
+     <text identifier="patient manage panel copy data label">Copy Data</text>
      <text identifier="patient data registeration form title label">Patient Data Registeration Form</text>
      <text identifier="patient data registeration form empty id message">Medical ID cannot be empty!</text>
      <text identifier="patient data registeration form empty name message">Name cannot be empty!</text>

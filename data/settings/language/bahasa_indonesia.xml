@@ -138,7 +138,8 @@
 	 <text identifier="ago text">Yang lalu</text>
 	 <text identifier="notes text">Catatan</text>
      <text identifier="male text">Laki-laki</text>
-     <text identifier="female text">Perempuan</text>	 
+     <text identifier="female text">Perempuan</text>
+	 <text identifier="all data text">Semua Data</text>
 	 <text identifier="profile text">Profil</text>
      <text identifier="graph category label">Tampilkan</text>
      <text identifier="graph category entries vs date text">Frekuensi vs Hari</text>
@@ -209,6 +210,7 @@
 	 <text identifier="patient data form sex label">Jenis Kelamin</text>
      <text identifier="patient data form occupation label">Pekerjaan</text>
      <text identifier="patient data form city label">Kota</text>
+	 <text identifier="patient manage panel copy data label">Salin Data</text>
      <text identifier="patient data registeration form title label">Formulir Pendaftaran Data Pasien</text>
      <text identifier="patient data registeration form empty id message">ID medis tidak boleh kosong!</text>
      <text identifier="patient data registeration form empty name message">Nama tidak boleh kosong!</text>

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -754,5 +755,10 @@ public class FileOperation
 			UIManager.setLookAndFeel(oldLF);
 		}
 		catch(Exception ex) {}
+	}
+	
+	public static void exportPatientDataAsZip(String filePath, Collection<PatientData> patients)
+	{
+		
 	}
 }

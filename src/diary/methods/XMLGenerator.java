@@ -217,6 +217,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PROFILE_TEXT, "Profile");
 		appendComponentToMap(doc, map, XMLIdentifier.MALE_TEXT, "Male");
 		appendComponentToMap(doc, map, XMLIdentifier.FEMALE_TEXT, "Female");
+		appendComponentToMap(doc, map, XMLIdentifier.ALL_DATA_TEXT, "All Data");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -306,6 +307,9 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL, "Sex");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL, "Occupation");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL, "City");
+		
+		//Patient Manage Panel
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL, "Copy Data");
 		
 		//Patient Data Registration Form
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL, "Patient Data Registeration Form");

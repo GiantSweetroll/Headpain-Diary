@@ -72,6 +72,7 @@ public class XMLIdentifier
 	public static final String PROFILE_TEXT = "profile text";
 	public static final String MALE_TEXT = "male text";
 	public static final String FEMALE_TEXT = "female text";
+	public static final String ALL_DATA_TEXT = "all data text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
@@ -330,6 +331,9 @@ public class XMLIdentifier
 	public static final String PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TEXT = "patient data registeration form overwrite message text";
 	public static final String PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE = "patient data registeration form sex not selected message";
 	public static final String PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE_TITLE = "patient data registeration form sex not selected message title ";
+	
+	//Patient Manage Panel
+	public static final String PATIENT_MANAGE_PANEL_COPY_DATA_LABEL = "patient manage panel copy data label";
 	
 	//Active Patient Panel
 	public static final String ACTIVE_PATIENT_PANEL_PATIENT_TEXT = "active patient panel patient text";
