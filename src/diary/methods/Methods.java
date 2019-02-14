@@ -512,8 +512,8 @@ public class Methods
 				((TableScreen)mainFrame.getPanelCanvas()).refreshTable();		//Recreates table to its original state
 			}
 			*/
-			Globals.GRAPH_PANEL.refreshGraph();
-			Globals.PAIN_TABLE.refreshTable();
+			Globals.GRAPH_PANEL.refresh();
+			Globals.PAIN_TABLE.refresh();
 		}
 		catch(ClassCastException ex) {}
 		if (!showPreview)

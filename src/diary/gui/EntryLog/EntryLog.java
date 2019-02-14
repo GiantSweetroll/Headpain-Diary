@@ -349,8 +349,8 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 			}
 		}
 		Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
-		Globals.GRAPH_PANEL.refreshGraph();
-		Globals.PAIN_TABLE.refreshTable();
+		Globals.GRAPH_PANEL.refresh();
+		Globals.PAIN_TABLE.refresh();
 		Methods.refresHistories(this.getSelectedPatient());
 		Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 		this.resetDefaults();

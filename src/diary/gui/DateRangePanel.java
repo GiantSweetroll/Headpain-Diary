@@ -120,4 +120,12 @@ public class DateRangePanel extends JPanel implements LanguageListener
 		this.dateFrom.revalidateLanguage();
 		this.dateTo.revalidateLanguage();
 	}
+	
+	@Override
+	public void setEnabled(boolean b)
+	{
+		super.setEnabled(b);
+		this.dateFrom.setEnabled(b);
+		this.dateTo.setEnabled(b);
+	}
 }

@@ -73,6 +73,7 @@ public class XMLIdentifier
 	public static final String MALE_TEXT = "male text";
 	public static final String FEMALE_TEXT = "female text";
 	public static final String ALL_DATA_TEXT = "all data text";
+	public static final String EXPORT_TO_TEXT = "export to text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";

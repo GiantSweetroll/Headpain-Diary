@@ -218,6 +218,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.MALE_TEXT, "Male");
 		appendComponentToMap(doc, map, XMLIdentifier.FEMALE_TEXT, "Female");
 		appendComponentToMap(doc, map, XMLIdentifier.ALL_DATA_TEXT, "All Data");
+		appendComponentToMap(doc, map, XMLIdentifier.EXPORT_TO_TEXT, "Export To");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

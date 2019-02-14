@@ -312,6 +312,11 @@ public class PatientData
 		}
 	}
 	
+	public String getFileName()
+	{
+		return this.getDataMap().get(PatientData.MEDICAL_RECORD_ID) + ".xml";
+	}
+	
 	//Override Methods
 	@Override
 	public String toString()

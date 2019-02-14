@@ -140,6 +140,7 @@
      <text identifier="male text">Male</text>
      <text identifier="female text">Female</text>
      <text identifier="all data text">All Data</text>
+     <text identifier="export to text">Export To</text>
      <text identifier="graph category label">Show</text>
      <text identifier="graph category entries vs date text">Frequency vs Day</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Day</text>

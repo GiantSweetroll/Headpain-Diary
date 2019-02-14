@@ -36,13 +36,14 @@ import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
+import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class TableScreen extends JPanel implements ActionListener, LanguageListener
+public class TableScreen extends JPanel implements ActionListener, LanguageListener, GUIFunction
 {
 
 	/**
@@ -246,11 +247,6 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.panelTop.add(this.tableConfig, BorderLayout.CENTER);
 	}
 	//Other Methods
-	public void refreshTable()
-	{
-		this.activePatientPanel.refresh();
-		this.initTable();
-	}
 	private void initTable()
 	{
 		try
@@ -265,7 +261,15 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		String filterType = this.getFilterType();
 		
 		String filter = Methods.getTextData(this.tfFilter);
-		this.entries = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
+		this.entries = null;
+		try
+		{
+			this.entries = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData().getID(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
+		}
+		catch(NullPointerException ex)
+		{
+			this.entries = new ArrayList<PainEntryData>();
+		}
 		this.table = new TablePanel(this.entries, filterType, filter);
 		this.add(this.table, BorderLayout.CENTER);
 		
@@ -474,5 +478,16 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.table.revalidateLanguage();
 		this.revalidate();
 		this.repaint();
+	}
+
+	@Override
+	public void resetDefaults() 
+	{}
+
+	@Override
+	public void refresh() 
+	{
+		this.activePatientPanel.refresh();
+		this.initTable();
 	}
 }

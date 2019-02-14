@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PatientDataOperation;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.message.MessageManager;
 
 public class PatientDataManagePanel extends JPanel implements ActionListener, LanguageListener
 {
@@ -416,8 +418,9 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		switch(e.getActionCommand())
 		{
 			case BACK:
-				Globals.GRAPH_PANEL.refreshGraph();
-				Globals.PAIN_TABLE.refreshTable();
+				Globals.MAIN_FRAME.checkUsers();
+				Globals.GRAPH_PANEL.refresh();
+				Globals.PAIN_TABLE.refresh();
 			//	MainFrame.changePanel(Globals.MAIN_MENU);
 				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 				break;
@@ -433,7 +436,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 				
 			case DELETE:
 				int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
-						Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
+																Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
 
 				if (response == JOptionPane.YES_OPTION)
 				{
@@ -452,13 +455,29 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 				
 			case COPY_DATA:
 				CopyPatientDataPanel copy = new CopyPatientDataPanel();
-				if(copy.allDataSelected())
+				
+				int response2 = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL), 
+																copy);
+				
+				if (response2 == JOptionPane.YES_OPTION)
 				{
-					
-				}
-				else if (copy.specificDateRangeSelected())
-				{
-					DateRangePanel date = copy.getDateRangePanel();
+					try
+					{
+						if(copy.allDataSelected())
+						{
+							FileOperation.exportPatientDataAsZip(copy.getZipPath(), this.selectedPatientIDs);
+						}
+						else if (copy.specificDateRangeSelected())
+						{
+							DateRangePanel date = copy.getDateRangePanel();
+							FileOperation.exportPatientDataAsZip(copy.getZipPath(), this.selectedPatientIDs, date.getFromDate(), date.getToDate());
+						}
+					}
+					catch(IOException ex)
+					{
+						ex.printStackTrace();
+						MessageManager.showErrorDialog(ex);
+					}
 				}
 				break;
 		}
