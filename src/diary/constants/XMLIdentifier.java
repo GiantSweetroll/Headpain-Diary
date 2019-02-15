@@ -74,6 +74,8 @@ public class XMLIdentifier
 	public static final String FEMALE_TEXT = "female text";
 	public static final String ALL_DATA_TEXT = "all data text";
 	public static final String EXPORT_TO_TEXT = "export to text";
+	public static final String SELECT_ALL_TEXT = "select all text";
+	public static final String DISSELECT_ALL_TEXT = "disselect all text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";

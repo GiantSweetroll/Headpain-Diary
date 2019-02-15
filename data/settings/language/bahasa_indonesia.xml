@@ -141,6 +141,8 @@
      <text identifier="female text">Perempuan</text>
 	 <text identifier="all data text">Semua Data</text>
 	 <text identifier="export to text">Ekspor ke</text>
+     <text identifier="select all text">Pilih Semua</text>
+     <text identifier="disselect all text">Disselect All</text>	 
 	 <text identifier="profile text">Profil</text>
      <text identifier="graph category label">Tampilkan</text>
      <text identifier="graph category entries vs date text">Frekuensi vs Hari</text>
