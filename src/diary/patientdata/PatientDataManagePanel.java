@@ -51,7 +51,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	private JCheckBox checkMedRec, checkName, checkDOB;
 	private JTextField tfMedRec, tfName;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butNew, butDelete, butSelect, butFilter, butRefresh, butCopyData;
+	private JButton butBack, butNew, butDelete, butSelect, butFilter, butRefresh, butCopyData, butSelectAll, butDeselectAll;
 	private Table table;
 	private List<PatientData> patients;
 	private List<String> selectedPatientIDs;
@@ -65,6 +65,8 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	private final String SELECT = "select";
 	private final String FILTER = "filter";
 	private final String COPY_DATA = "copyData";
+	private final String SELECT_ALL = "selectAll";
+	private final String DESELECT_ALL = "deselectAll";
 	public static final String FILTER_MED_REC = "filter med rec";
 	public static final String FILTER_NAME = "name";
 	public static final String FILTER_DOB = "filter dob";
@@ -135,6 +137,8 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSelect = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		this.butCopyData = new JButton(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL));
+		this.butSelectAll = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
+		this.butDeselectAll = new JButton(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -159,8 +163,18 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butCopyData.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butCopyData.setForeground(Color.white);
 		this.butCopyData.setMnemonic(KeyEvent.VK_C);
+		this.butSelectAll.setActionCommand(this.SELECT_ALL);
+		this.butSelectAll.addActionListener(this);
+		this.butSelectAll.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butSelectAll.setForeground(Color.white);
+		this.butDeselectAll.setActionCommand(this.DESELECT_ALL);
+		this.butDeselectAll.addActionListener(this);
+		this.butDeselectAll.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butDeselectAll.setForeground(Color.white);
 		
 		//add to panel
+		this.panelBelowCenter.add(this.butSelectAll);
+		this.panelBelowCenter.add(this.butDeselectAll);
 		this.panelBelowCenter.add(this.butDelete);
 		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butCopyData);
@@ -480,6 +494,20 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 					}
 				}
 				break;
+				
+			case SELECT_ALL:
+				for (int i=0; i<this.table.getRowCount(); i++)
+				{
+					this.table.setValueAt(true, i, 0);
+				}
+				break;
+				
+			case DESELECT_ALL:
+				for (int i=0; i<this.table.getRowCount(); i++)
+				{
+					this.table.setValueAt(false, i, 0);
+				}
+				break;
 		}
 	}
 
@@ -497,6 +525,8 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butNew.setText(Methods.getLanguageText(XMLIdentifier.NEW_TEXT));
+		this.butSelectAll.setText(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
+		this.butDeselectAll.setText(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
 		this.table.changeTableHeaders(Methods.getPatientTableHeaders());
 		this.panelDateRange.revalidateLanguage();
 		this.revalidate();
