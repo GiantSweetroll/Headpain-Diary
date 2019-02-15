@@ -4,8 +4,12 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedHashMap;
 
 import javax.swing.ButtonGroup;
@@ -26,13 +30,14 @@ import diary.gui.DatePanel;
 import diary.gui.WrappableJLabel;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
+import giantsweetroll.GGUtilities;
 import giantsweetroll.date.Date;
 import giantsweetroll.filters.IntegerFilter;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 import giantsweetroll.gui.swing.TextAreaManager;
 
-public class PatientDataForm extends JPanel implements LanguageListener, ItemListener
+public class PatientDataForm extends JPanel implements LanguageListener, ItemListener, MouseListener, ActionListener
 {
 
 	/**
@@ -40,13 +45,31 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 	 */
 	private static final long serialVersionUID = -2197578997400146750L;
 	
-	private JLabel labMedID, labName, labDOB, labPrevHeadpain, labFreqPainLastMonthUnit, labDaysActivityDisturbedUnit, labAgo, labNotes;
-	private WrappableJLabel labFreqPainLastMonth, labDaysActivityDisturbed, labHasHeadpainHistory;
-	private JTextField tfMedID, tfName, tfFreqPainLastMonth, tfDaysActivityDisturbed, tfHeadPainSince;
+	private JLabel labMedID, 
+					labName, 
+					labDOB, 
+					labPrevHeadpain, 
+					labFreqPainLastMonthUnit, 
+					labDaysActivityDisturbedUnit, 
+					labAgo,
+					labNotes,
+					labSex,
+					labJob,
+					labCity;
+	private WrappableJLabel labFreqPainLastMonth, 
+							labDaysActivityDisturbed, 
+							labHasHeadpainHistory;
+	private JTextField tfMedID, 
+						tfName, 
+						tfFreqPainLastMonth, 
+						tfDaysActivityDisturbed,
+						tfHeadPainSince, 
+						tfJob,
+						tfCity;
 	private DatePanel panelDOB;
-	private JRadioButton radYes, radNo;
-	private ButtonGroup groupHasPrevHeadPain;
-	private JComboBox<String> comboHeadPainSince;
+	private JRadioButton radYes, radNo, radMale, radFemale;
+	private ButtonGroup groupHasPrevHeadPain, groupSex;
+	private JComboBox<String> comboHeadPainSince, comboCity;
 	private JTextArea taNotes;
 	private JScrollPane scrollNotes;
 	
@@ -87,6 +110,15 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.tfName = new JTextField (10);
 		this.labDOB = new JLabel (Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL), SwingConstants.RIGHT);
 		this.panelDOB = new DatePanel(true);
+		this.labSex = new JLabel(Methods.createTextWithRequiredIdentifier(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL)), SwingConstants.RIGHT);
+		this.radMale = new JRadioButton(Methods.getLanguageText(XMLIdentifier.MALE_TEXT));
+		this.radFemale = new JRadioButton(Methods.getLanguageText(XMLIdentifier.FEMALE_TEXT));
+		this.groupSex = new ButtonGroup();
+		this.labJob = new JLabel(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL), SwingConstants.RIGHT);
+		this.tfJob = new JTextField(10);
+		this.labCity = new JLabel(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL), SwingConstants.RIGHT);
+		this.comboCity = new JComboBox<String>(Methods.getCityOptions());
+		this.tfCity = new JTextField(10);
 		this.labPrevHeadpain = new JLabel (Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_PREVIOUS_HEADPAIN_LABEL), SwingConstants.RIGHT);
 		this.radYes = new JRadioButton(Methods.getLanguageText(XMLIdentifier.YES_TEXT));
 		this.radNo = new JRadioButton(Methods.getLanguageText(XMLIdentifier.NO_TEXT));
@@ -114,6 +146,18 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.tfMedID.setBackground(Color.WHITE);
 		this.tfName.setHorizontalAlignment(SwingConstants.CENTER);
 		this.tfName.setBackground(Color.WHITE);
+		this.groupSex.add(this.radMale);
+		this.groupSex.add(this.radFemale);
+		this.radMale.setOpaque(false);
+		this.radFemale.setOpaque(false);
+		this.tfJob.setBackground(Color.WHITE);
+		this.tfJob.setHorizontalAlignment(SwingConstants.CENTER);
+		this.comboCity.addActionListener(this);
+		this.comboCity.setBackground(Color.white);
+		this.tfCity.setBackground(Color.WHITE);
+		this.tfCity.setHorizontalAlignment(SwingConstants.CENTER);
+		this.tfCity.setEditable(false);
+		this.tfCity.addMouseListener(this);
 		this.groupHasPrevHeadPain.add(this.radYes);
 		this.groupHasPrevHeadPain.add(this.radNo);
 		this.radYes.addItemListener(this);
@@ -151,6 +195,26 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		Gbm.nextGridColumn(c);
 		c.gridwidth = 3;
 		this.add(this.panelDOB, c);					//DOB Panel
+		Gbm.newGridLine(c);
+		c.gridwidth = 1;
+		this.add(this.labSex, c);					//Sex label
+		Gbm.nextGridColumn(c);
+		this.add(this.radMale, c);					//Male radio button
+		Gbm.nextGridColumn(c);
+		this.add(this.radFemale, c);				//Female radio button
+		Gbm.newGridLine(c);
+		this.add(this.labJob, c);					//Job label
+		Gbm.nextGridColumn(c);
+		c.gridwidth = 2;
+		this.add(this.tfJob, c);					//Job Text Field
+		Gbm.newGridLine(c);
+		c.gridwidth = 1;
+		this.add(this.labCity, c);					//City
+		Gbm.nextGridColumn(c);
+		this.add(this.comboCity, c);				//City Combo Box
+		Gbm.nextGridColumn(c);
+		c.gridwidth = 2;
+		this.add(this.tfCity, c);					//City Text Field
 		Gbm.newGridLine(c);
 		c.gridwidth = 1;
 		this.add(this.labHasHeadpainHistory, c);	//Has Previous Headpain Label
@@ -221,8 +285,29 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		map.put(PatientData.FREQUENCY_HEAD_PAINS_LAST_MONTH, this.tfFreqPainLastMonth.getText().trim());
 		map.put(PatientData.DAYS_ACTIVITIES_DISTURBED, this.tfDaysActivityDisturbed.getText().trim());
 		map.put(PatientData.NOTES, this.taNotes.getText().trim());
+		if (this.radMale.isSelected())
+		{
+			map.put(PatientData.SEX, PatientData.MALE);
+		}
+		else if (this.radFemale.isSelected())
+		{
+			map.put(PatientData.SEX, PatientData.FEMALE);
+		}
+		map.put(PatientData.JOB, this.tfJob.getText().trim());
+		if (this.comboCity.getSelectedIndex() == Methods.getCityOptions().length-1)	//Last index (other)
+		{
+			map.put(PatientData.CITY, this.tfCity.getText().trim());
+		}
+		else
+		{
+			map.put(PatientData.CITY, this.comboCity.getSelectedItem().toString());
+		}
 		
 		return new PatientData(map);
+	}
+	public boolean sexSelected()
+	{
+		return (this.radMale.isSelected()) || (this.radFemale.isSelected());
 	}
 	public boolean isEmptyID()
 	{
@@ -252,6 +337,33 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.tfName.setText(patient.getName());
 		this.panelDOB.setDate(patient.getDOB());
 		this.panelDOB.setAsDefaultDataThis();
+		if (patient.isMale())
+		{
+			this.radMale.setSelected(true);
+		}
+		else if (patient.isFemale())
+		{
+			this.radFemale.setSelected(true);
+		}
+		this.tfJob.setText(patient.getOccupation());
+		boolean b = Methods.isDefaultCity(patient.getCity());
+		if (b)
+		{
+			this.comboCity.setSelectedItem(patient.getCity());
+		}
+		else
+		{
+			try
+			{
+				String str = patient.getCity();
+				if (!str.equals(""))
+				{
+					this.tfCity.setText(str);
+					comboCity.setSelectedIndex(Methods.getCityOptions().length-1);
+				}
+			}
+			catch(NullPointerException ex) {}
+		}
 		boolean hasHeadPainHistory = patient.hasHeadPainsHistory();
 		if (hasHeadPainHistory)
 		{
@@ -270,6 +382,7 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.repaint();
 	}
 	
+	//Interfaces
 	@Override
 	public void revalidateLanguage() 
 	{
@@ -306,6 +419,47 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 			this.tfDaysActivityDisturbed.setEditable(false);
 			this.tfDaysActivityDisturbed.setText("");
 			this.comboHeadPainSince.setEnabled(false);
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		if (!this.tfCity.isEditable())
+		{
+			comboCity.setSelectedIndex(Methods.getCityOptions().length-1);
+			tfCity.setEditable(true);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		if (!this.tfCity.isEditable())
+		{
+			comboCity.setSelectedIndex(Methods.getCityOptions().length-1);
+			tfCity.setEditable(true);
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		String item = GGUtilities.getItem(comboCity).toString();
+		if (item.equals(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)))
+		{
+			tfCity.setEditable(true);
+		}
+		else
+		{
+			tfCity.setEditable(false);
+			tfCity.setText("");
 		}
 	}
 }

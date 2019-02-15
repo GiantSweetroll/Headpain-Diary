@@ -1,6 +1,7 @@
 package diary.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.w3c.dom.Element;
 
 import diary.constants.Constants;
 import diary.constants.PainDataIdentifier;
+import diary.constants.XMLIdentifier;
 import diary.methods.Methods;
 import giantsweetroll.date.Date;
 import giantsweetroll.xml.dom.XMLManager;
@@ -315,6 +317,71 @@ public class PainEntryData
 		arr.add(this.getRecentMedication());
 		arr.add(this.getMedicineComplaint());
 		arr.add(this.getComments());
+		
+		return arr.toArray(new String[arr.size()]);
+	}
+	public String[] getDataAsStringArrayNoComments()
+	{
+		List<String> arr = new ArrayList<String>();
+		
+		arr.add(this.getFullDate());
+		arr.add(this.getFullTime());
+		arr.add(this.getPainPositionsAsString());
+		arr.add(Methods.convertPainKindLanguageToID(this.getPainKind()));
+		arr.add(this.getIntensity());
+		arr.add(this.getDuration());
+		arr.add(Methods.convertActivityIDToLanguage(this.getTrigger()));
+		arr.add(this.getRecentMedication());
+		arr.add(this.getMedicineComplaint());
+		
+		return arr.toArray(new String[arr.size()]);
+	}
+	public String[] getDataAsStringArrayForTableExport()
+	{
+		List<String> arr = new ArrayList<String>();
+		
+		arr.add(this.getFullDate());
+		arr.add(this.getFullTime());
+		
+		//Pain position setting
+		StringBuilder sb = new StringBuilder();
+		List<String> painLoc = this.getPresetPainLocations();
+		if (painLoc.size() > 0)
+		{
+			//Convert to language
+			for (int i=0; i<painLoc.size(); i++)
+			{
+				painLoc.set(i, Methods.convertPresetPainLocationToLanguage(painLoc.get(i)));
+			}
+			Collections.sort(painLoc);		//Sort
+			
+			for (String str : painLoc)
+			{
+				sb.append(str + ", ");
+			}
+			sb.delete(sb.length()-2, sb.length());		//Delete last comma and space
+		}
+		else
+		{
+			painLoc = this.getCustomPainLocations();
+			Collections.sort(painLoc);		//Sort
+			
+			sb.append(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT) + " (");
+			for (String str : painLoc)
+			{
+				sb.append(str + ", ");
+			}
+			sb.delete(sb.length()-2, sb.length());		//Delete last comma and space
+			sb.append(")");
+		}
+		arr.add(sb.toString());			//Add pain location details
+		
+		arr.add(Methods.convertPainKindLanguageToID(this.getPainKind()));
+		arr.add(this.getIntensity());
+		arr.add(this.getDuration());
+		arr.add(Methods.convertActivityIDToLanguage(this.getTrigger()));
+		arr.add(this.getRecentMedication());
+		arr.add(this.getMedicineComplaint());
 		
 		return arr.toArray(new String[arr.size()]);
 	}

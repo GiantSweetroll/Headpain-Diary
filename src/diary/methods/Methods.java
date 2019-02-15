@@ -512,8 +512,8 @@ public class Methods
 				((TableScreen)mainFrame.getPanelCanvas()).refreshTable();		//Recreates table to its original state
 			}
 			*/
-			Globals.GRAPH_PANEL.refreshGraph();
-			Globals.PAIN_TABLE.refreshTable();
+			Globals.GRAPH_PANEL.refresh();
+			Globals.PAIN_TABLE.refresh();
 		}
 		catch(ClassCastException ex) {}
 		if (!showPreview)
@@ -962,6 +962,23 @@ public class Methods
 
     	return headers;
     }
+    public static String[] getTableHeadersNoComments()
+    {
+    	String[] headers = {Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_SELECT_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_DATE_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_START_TIME_TEXT),
+//				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_AMOUNT_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_POSITIONS_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_PAIN_KINDS_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_INTENSITIES_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_DURATIONS_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_TEXT),
+//				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_TRIGGER_DETAILS_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_RECENT_MEDICATION_TEXT),
+				Methods.getLanguageText(XMLIdentifier.TABLE_HEADERS_MEDICINE_COMPLAINT_TEXT)};
+
+    	return headers;  	
+    }
     public static String[] getOptionPaneYesNoCancelButtonTexts()
     {
     	String[] arr = {Methods.getLanguageText(XMLIdentifier.YES_TEXT),
@@ -1012,6 +1029,47 @@ public class Methods
     	return medications;
     }
     
+    public static String[] getCityOptions()
+    {
+    	String[] arr = new String[] {"Aceh",
+								"Bali",
+								"Bandung",
+								"Jakarta",
+								"Makassar",
+								"Malang",
+								"Manado",
+								"Medan",
+								"Padang",
+								"Palembang",
+								"Semarang",
+								"Surabaya",
+								"Surakarta",
+								"Yogyakarta",
+								Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
+    	
+    	return arr;
+    }
+    
+    public static boolean isDefaultCity(String city)
+    {
+    	try
+    	{
+    		String[] arr = Methods.getCityOptions();
+        	for (int i=0; i<arr.length-1; i++)				//Ignore last index
+        	{
+        		if (city.equals(arr[i]))
+        		{
+        			return true;
+        		}
+        	}
+        	return false;
+    	}
+    	catch(NullPointerException ex)
+    	{
+    		return false;
+    	}
+    }
+    
     public static String[] getHeadPainSinceOptions()
     {
     	return new String[] {Methods.getLanguageText(XMLIdentifier.MONTH_TEXT), Methods.getLanguageText(XMLIdentifier.YEAR_TEXT)};
@@ -1043,11 +1101,92 @@ public class Methods
     		}
     	}
     }
+    public static String removeFirstZeroFromString(String str)
+    {
+    	if (str.length()>=2)
+    	{
+    		if (str.substring(0, 1).equals("0"))
+    		{
+    			str = str.substring(1);
+    		}
+    	}
+    	
+    	return str;
+    }
     
     public static String[] getExportTableHeaders()
     {
-    	String[] arr = Methods.getTableHeaders();
+    	String[] arr = Methods.getTableHeadersNoComments();
     	arr[0] = Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT);
     	return arr;
+    }
+    
+    public static boolean isPresetPainLocation(String painLoc)
+    {
+    	if (painLoc.equals(PainLocationConstants.EYES_AND_FOREHEAD) ||
+    			painLoc.equals(PainLocationConstants.FACE_LEFT_AND_HEAD) ||
+    			painLoc.equals(PainLocationConstants.FACE_RIGHT_AND_HEAD) ||
+    			painLoc.equals(PainLocationConstants.HEAD_BACK) ||
+    			painLoc.equals(PainLocationConstants.HEAD_FRONT) ||
+    			painLoc.equals(PainLocationConstants.HEAD_FULL))
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+    public static String convertPresetPainLocationToLanguage(String painLoc)
+    {
+		String str = painLoc;
+		if (painLoc.equals(PainLocationConstants.EYES_AND_FOREHEAD))
+		{
+			str = Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_EYE_AND_FOREHEAD_TEXT);
+		}
+		else if (painLoc.equals(PainLocationConstants.FACE_LEFT_AND_HEAD))
+		{
+			str = Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_FACE_LEFT_AND_HEAD_TEXT);
+		}
+		else if (painLoc.equals(PainLocationConstants.FACE_RIGHT_AND_HEAD))
+		{
+			str = Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_FACE_RIGHT_AND_HEAD_TEXT);
+		}
+		else if (painLoc.equals(PainLocationConstants.HEAD_FULL))
+		{
+			str = Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_HEAD_ALL_TEXT);
+		}
+		else if (painLoc.equals(PainLocationConstants.HEAD_BACK))
+		{
+			str = Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_HEAD_BACK_TEXT);
+		}
+		else if (painLoc.equals(PainLocationConstants.HEAD_FRONT))
+		{
+			str = Methods.getLanguageText(XMLIdentifier.PAIN_LOCATION_HEAD_FRONT_TEXT);
+		}
+		return str;
+    }
+    
+    public static String convertSexToLanguage(String sex)
+    {
+    	try
+    	{
+    		if (sex.equals(PatientData.MALE))
+        	{
+        		return Methods.getLanguageText(XMLIdentifier.MALE_TEXT);
+        	}
+        	else if (sex.equals(PatientData.FEMALE))
+        	{
+        		return Methods.getLanguageText(XMLIdentifier.FEMALE_TEXT);
+        	}
+        	else
+        	{
+        		return "";
+        	}
+    	}
+    	catch(NullPointerException ex)
+    	{
+    		return "";
+    	}
     }
 }

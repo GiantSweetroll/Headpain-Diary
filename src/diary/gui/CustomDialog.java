@@ -16,4 +16,15 @@ public class CustomDialog
 											Methods.getOptionPaneYesNoCancelButtonTexts(), 
 											Methods.getOptionPaneYesNoCancelButtonTexts()[2]);
 	}
+	public static int showConfirmDialog(String title, Object message)
+	{
+		return JOptionPane.showOptionDialog(null, 
+											message, 
+											title, 
+											JOptionPane.YES_NO_CANCEL_OPTION, 
+											JOptionPane.PLAIN_MESSAGE,
+											null, 
+											Methods.getOptionPaneYesNoCancelButtonTexts(), 
+											Methods.getOptionPaneYesNoCancelButtonTexts()[2]);
+	}
 }

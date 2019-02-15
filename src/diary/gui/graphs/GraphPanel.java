@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -29,6 +30,7 @@ import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
+import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -37,7 +39,7 @@ import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 import giantsweetroll.gui.swing.ScrollPaneManager;
 
-public class GraphPanel extends JPanel implements ActionListener, LanguageListener
+public class GraphPanel extends JPanel implements ActionListener, LanguageListener, GUIFunction
 {
 
 	/**
@@ -152,6 +154,7 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		//Properties
 		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelBelow.setLayout(new BorderLayout());
+		this.panelBelow.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//Add to panel
 		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);
@@ -222,7 +225,15 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		
 		String category = this.comboCategory.getSelectedItem().toString();
 		
-		List<PainEntryData> list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
+		List<PainEntryData> list = null;
+		try
+		{
+			list = FileOperation.getListOfEntries(this.activePatientPanel.getSelectedPatientData().getID(), this.panelDateRange.getFromDate(), this.panelDateRange.getToDate());
+		}
+		catch(NullPointerException ex)
+		{
+			list = new ArrayList<PainEntryData>();
+		}
 		
 //		System.out.println("Before: " + list.size());
 		
@@ -429,5 +440,16 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		
 		this.revalidate();
 		this.repaint();
+	}
+
+	@Override
+	public void resetDefaults()
+	{}
+
+	@Override
+	public void refresh() 
+	{
+		this.activePatientPanel.refresh();
+		this.refreshGraph();
 	}
 }

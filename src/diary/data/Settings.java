@@ -140,4 +140,22 @@ public class Settings
 		
 		return doc;
 	}
+	public String getUserDatabasePath()
+	{
+		return this.getDataMap().get(Settings.DATABASE_USERS_PATH);
+	}
+	public String getEntriesDatabasePath()
+	{
+		return this.getDataMap().get(Settings.DATABASE_PATH);
+	}
+	public String getUserDatabaseFolderName()
+	{
+		File file = new File(this.getUserDatabasePath());
+		return file.getName();
+	}
+	public String getEntriesDatawbaseFolderName()
+	{
+		File file = new File(this.getEntriesDatabasePath());
+		return file.getName();
+	}
 }

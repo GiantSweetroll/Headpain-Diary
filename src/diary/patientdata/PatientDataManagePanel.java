@@ -10,9 +10,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -35,6 +37,7 @@ import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PatientDataOperation;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.message.MessageManager;
 
 public class PatientDataManagePanel extends JPanel implements ActionListener, LanguageListener
 {
@@ -48,7 +51,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	private JCheckBox checkMedRec, checkName, checkDOB;
 	private JTextField tfMedRec, tfName;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butNew, butDelete, butSelect, butFilter, butRefresh;
+	private JButton butBack, butNew, butDelete, butSelect, butFilter, butRefresh, butCopyData;
 	private Table table;
 	private List<PatientData> patients;
 	private List<String> selectedPatientIDs;
@@ -61,6 +64,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	private final String DELETE = "delete";
 	private final String SELECT = "select";
 	private final String FILTER = "filter";
+	private final String COPY_DATA = "copyData";
 	public static final String FILTER_MED_REC = "filter med rec";
 	public static final String FILTER_NAME = "name";
 	public static final String FILTER_DOB = "filter dob";
@@ -130,6 +134,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
 		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butSelect = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.butCopyData = new JButton(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL));
 		
 		//Properties
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -149,10 +154,16 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butSelect.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butSelect.setForeground(Color.white);
 		this.butSelect.setMnemonic(KeyEvent.VK_S);
+		this.butCopyData.setActionCommand(this.COPY_DATA);
+		this.butCopyData.addActionListener(this);
+		this.butCopyData.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butCopyData.setForeground(Color.white);
+		this.butCopyData.setMnemonic(KeyEvent.VK_C);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butDelete);
 		this.panelBelowCenter.add(this.butRefresh);
+		this.panelBelowCenter.add(this.butCopyData);
 		this.panelBelowCenter.add(this.butSelect);
 	}
 	private void initPanelBelow()
@@ -167,6 +178,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.panelBelow.setLayout(new BorderLayout());
 	//	this.panelBelow.setOpaque(false);
 		this.panelBelow.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
+		this.panelBelow.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 		//add to panel
 		this.panelBelow.add(this.panelBelowCenter, BorderLayout.CENTER);
@@ -254,6 +266,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	
 		this.butSelect.setEnabled(false);
 		this.butDelete.setEnabled(false);
+		this.butCopyData.setEnabled(false);
 		
 		this.patients = FileOperation.getListOfPatients();
 		this.filterPatients();
@@ -356,16 +369,19 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 			{
 				this.butSelect.setEnabled(true);
 				this.butDelete.setEnabled(true);
+				this.butCopyData.setEnabled(true);
 			}
 			else if (selected > 1)
 			{
 				this.butSelect.setEnabled(false);
 				this.butDelete.setEnabled(true);;
+				this.butCopyData.setEnabled(true);
 			}
 			else
 			{
 				this.butDelete.setEnabled(false);
 				this.butSelect.setEnabled(false);
+				this.butCopyData.setEnabled(false);
 			}
 		}
 	}
@@ -402,8 +418,9 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		switch(e.getActionCommand())
 		{
 			case BACK:
-				Globals.GRAPH_PANEL.refreshGraph();
-				Globals.PAIN_TABLE.refreshTable();
+				Globals.MAIN_FRAME.checkUsers();
+				Globals.GRAPH_PANEL.refresh();
+				Globals.PAIN_TABLE.refresh();
 			//	MainFrame.changePanel(Globals.MAIN_MENU);
 				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 				break;
@@ -419,7 +436,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 				
 			case DELETE:
 				int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TEXT), 
-						Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
+																Methods.getLanguageText(XMLIdentifier.MESSAGE_DELETE_CONFIRM_TITLE));
 
 				if (response == JOptionPane.YES_OPTION)
 				{
@@ -434,6 +451,34 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 			case SELECT:
 	//			MainFrame.changePanel(new PatientDataRegisterationForm(this.activePatient));
 				Globals.MAIN_FRAME.changePanel(new PatientDataRegisterationForm(this.activePatient), PanelName.PATIENT_REGISTERATION_FORM);
+				break;
+				
+			case COPY_DATA:
+				CopyPatientDataPanel copy = new CopyPatientDataPanel();
+				
+				int response2 = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL), 
+																copy);
+				
+				if (response2 == JOptionPane.YES_OPTION)
+				{
+					try
+					{
+						if(copy.allDataSelected())
+						{
+							FileOperation.exportPatientDataAsZip(copy.getZipPath(), this.selectedPatientIDs);
+						}
+						else if (copy.specificDateRangeSelected())
+						{
+							DateRangePanel date = copy.getDateRangePanel();
+							FileOperation.exportPatientDataAsZip(copy.getZipPath(), this.selectedPatientIDs, date.getFromDate(), date.getToDate());
+						}
+					}
+					catch(IOException ex)
+					{
+						ex.printStackTrace();
+						MessageManager.showErrorDialog(ex);
+					}
+				}
 				break;
 		}
 	}

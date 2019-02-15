@@ -215,6 +215,10 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.AGO_TEXT, "Ago");
 		appendComponentToMap(doc, map, XMLIdentifier.NOTES_TEXT, "Notes");
 		appendComponentToMap(doc, map, XMLIdentifier.PROFILE_TEXT, "Profile");
+		appendComponentToMap(doc, map, XMLIdentifier.MALE_TEXT, "Male");
+		appendComponentToMap(doc, map, XMLIdentifier.FEMALE_TEXT, "Female");
+		appendComponentToMap(doc, map, XMLIdentifier.ALL_DATA_TEXT, "All Data");
+		appendComponentToMap(doc, map, XMLIdentifier.EXPORT_TO_TEXT, "Export To");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");
@@ -301,7 +305,12 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DAYS_ACTIVITY_DISTURBED_LABEL, "In the last month, how many days does your daily activities gets disrupted due to head pains?");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_FREQUENCY_PAIN_LAST_MONTH_LABEL, "Frequency of head pains in the last month");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_HAS_PREVIOUS_HEAD_PAIN_HISTORY_LABEL, "Do you have a history with head pains?");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL, "Sex");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL, "Occupation");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL, "City");
 		
+		//Patient Manage Panel
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL, "Copy Data");
 		
 		//Patient Data Registration Form
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL, "Patient Data Registeration Form");
@@ -311,6 +320,8 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_EMPTY_NAME_MESSAGE_TITLE, "Empty Name");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TITLE, "Confirm Overwrite");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_OVERWRITE_MESSAGE_TEXT, "Another data of the same ID already exists, do you want to overwrite?");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE, "Please specify sex!");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_REGISTERATION_FORM_SEX_NOT_SELECTED_MESSAGE_TITLE, "Sex not yet been specified");
 		
 		//Active Patient Panel
 		appendComponentToMap(doc, map, XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT, "User");
