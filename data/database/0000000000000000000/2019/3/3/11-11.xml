@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2019</date_year>
+     <comments>NOT TEST DATA</comments>
+     <date_month>3</date_month>
+     <time_minute>11</time_minute>
+     <activity>Lagi mijet</activity>
+     <recent_medication>Sulcolon, Paramex</recent_medication>
+     <date_day>3</date_day>
+     <medicine_complaint/>
+     <pain_location_custom pain_loc_id="0">kan7</pain_location_custom>
+     <pain_kind>Stabbing</pain_kind>
+     <duration>1</duration>
+     <intensity>3</intensity>
+     <time_hour>11</time_hour>
+</Entry>
