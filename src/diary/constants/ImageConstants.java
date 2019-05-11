@@ -25,4 +25,6 @@ public class ImageConstants
 	
 	//Other Images
 	public static final URL LOGO = ImageConstants.class.getResource("/logo_icon/logo-guardian.png");
+	public static final URL LOGO_MINI = ImageConstants.class.getResource("/logo_icon/logo-simple-blue-bg.png");
+	public static final URL LOGO_MINI_DARK = ImageConstants.class.getResource("/logo_icon/logo-simple-dark.png");
 }

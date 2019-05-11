@@ -310,6 +310,11 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL, "Sex");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL, "Occupation");
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL, "City");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DIAG_TEXT_SECONDARY_HEADACHE, "Secondary Headache");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DIAG_TEXT_TENSION_TYPE_HEADACHE, "Tension Type Headache");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_DIAG_TEXT_MIGRAINE, "Migraine");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_PREV_DIAG_LABEL, "Initial Diagnosis");
+		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_DATA_FORM_AFTER_DIAG_LABEL, "Final Diagnosis");
 		
 		//Patient Manage Panel
 		appendComponentToMap(doc, map, XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL, "Copy Data");

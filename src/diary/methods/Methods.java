@@ -1189,4 +1189,16 @@ public class Methods
     		return "";
     	}
     }
+    
+    public static String[] generatePatientDataFormDiagnosisOptions()
+    {
+    	String[] arr = new String[4];
+    	
+    	arr[0] = Methods.getLanguageText(XMLIdentifier.CHOOSE_NONE_TEXT);
+    	arr[1] = Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DIAG_TEXT_MIGRAINE);
+    	arr[2] = Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DIAG_TEXT_TENSION_TYPE_HEADACHE);
+    	arr[3] = Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DIAG_TEXT_SECONDARY_HEADACHE);
+    	
+    	return arr;
+    }
 }

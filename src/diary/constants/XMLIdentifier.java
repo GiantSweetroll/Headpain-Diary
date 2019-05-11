@@ -323,6 +323,11 @@ public class XMLIdentifier
 	public static final String PATIENT_DATA_FORM_SEX_LABEL = "patient data form sex label";
 	public static final String PATIENT_DATA_FORM_OCCUPATION_LABEL = "patient data form occupation label";
 	public static final String PATIENT_DATA_FORM_CITY_LABEL = "patient data form city label";
+	public static final String PATIENT_DATA_FORM_DIAG_TEXT_SECONDARY_HEADACHE = "patient data form diagnosis text secondary headache";
+	public static final String PATIENT_DATA_FORM_DIAG_TEXT_MIGRAINE = "patient data form diagnosis text migraine";
+	public static final String PATIENT_DATA_FORM_DIAG_TEXT_TENSION_TYPE_HEADACHE = "patient data form diagnosis text tension type headache";
+	public static final String PATIENT_DATA_FORM_PREV_DIAG_LABEL = "patient data form previous diagnosis label";
+	public static final String PATIENT_DATA_FORM_AFTER_DIAG_LABEL = "patient data form after diagnosis label";
 	
 	//Patient Data Registration From
 	public static final String PATIENT_DATA_REGISTERATION_FORM_TITLE_LABEL = "patient data registeration form title label";

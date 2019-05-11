@@ -55,7 +55,9 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 					labNotes,
 					labSex,
 					labJob,
-					labCity;
+					labCity,
+					labPrevDiag,
+					labAfterDiag;
 	private WrappableJLabel labFreqPainLastMonth, 
 							labDaysActivityDisturbed, 
 							labHasHeadpainHistory;
@@ -69,7 +71,10 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 	private DatePanel panelDOB;
 	private JRadioButton radYes, radNo, radMale, radFemale;
 	private ButtonGroup groupHasPrevHeadPain, groupSex;
-	private JComboBox<String> comboHeadPainSince, comboCity;
+	private JComboBox<String> comboHeadPainSince, 
+								comboCity,
+								comboPrevDiag,
+								comboAfterDiag;
 	private JTextArea taNotes;
 	private JScrollPane scrollNotes;
 	
@@ -133,6 +138,10 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.labHasHeadpainHistory = new WrappableJLabel(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_HAS_PREVIOUS_HEAD_PAIN_HISTORY_LABEL));
 		this.labAgo = new JLabel(Methods.getLanguageText(XMLIdentifier.AGO_TEXT));
 		this.comboHeadPainSince = new JComboBox<String>(Methods.getHeadPainSinceOptions());
+		this.labPrevDiag = new JLabel(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_PREV_DIAG_LABEL));
+		this.comboPrevDiag = new JComboBox<String>(Methods.generatePatientDataFormDiagnosisOptions());
+		this.labAfterDiag = new JLabel(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_AFTER_DIAG_LABEL));
+		this.comboAfterDiag = new JComboBox<String>(Methods.generatePatientDataFormDiagnosisOptions());
 		this.labNotes = new JLabel(Methods.getLanguageText(XMLIdentifier.NOTES_TEXT), SwingConstants.RIGHT);
 		this.taNotes = new JTextArea(10, 10);
 		this.scrollNotes = ScrollPaneManager.generateDefaultScrollPane(this.taNotes, 10, 10);
@@ -165,6 +174,8 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.radNo.addItemListener(this);
 		this.radNo.setSelected(true);
 		this.radNo.setOpaque(false);
+		this.comboPrevDiag.setBackground(Color.WHITE);
+		this.comboAfterDiag.setBackground(Color.WHITE);
 		this.tfDaysActivityDisturbed.setHorizontalAlignment(SwingConstants.CENTER);
 		((PlainDocument)this.tfDaysActivityDisturbed.getDocument()).setDocumentFilter(new IntegerFilter(0, 31));
 		this.tfFreqPainLastMonth.setHorizontalAlignment(SwingConstants.CENTER);
@@ -222,6 +233,14 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.add(this.radYes, c);					//Previous Headpains Yes Radio Button
 		Gbm.nextGridColumn(c);
 		this.add(this.radNo, c);					//Previous Headpains No Radio Button
+		Gbm.newGridLine(c);
+		this.add(this.labPrevDiag, c);				//Initial Diagnosis
+		Gbm.nextGridColumn(c);
+		this.add(this.comboPrevDiag, c);			//Initial Diagnosis Options
+		Gbm.newGridLine(c);
+		this.add(this.labAfterDiag, c);				//Final Diagnosis
+		Gbm.nextGridColumn(c);
+		this.add(this.comboAfterDiag, c);			//Final Diagnosis Options
 		Gbm.newGridLine(c);
 		this.add(this.labPrevHeadpain, c);			//Has Head Pains Since
 		Gbm.nextGridColumn(c);
@@ -302,6 +321,40 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		{
 			map.put(PatientData.CITY, this.comboCity.getSelectedItem().toString());
 		}
+		//Setting diagnosis
+		if (this.comboPrevDiag.getSelectedIndex()==1)
+		{
+			map.put(PatientData.INITIAL_DIAGNOSIS, PatientData.MIGRAINE);
+		}
+		else if (this.comboPrevDiag.getSelectedIndex()==2)
+		{
+			map.put(PatientData.INITIAL_DIAGNOSIS, PatientData.TENSION_TYPE_HEADACHE);
+		}
+		else if (this.comboPrevDiag.getSelectedIndex()==3)
+		{
+			map.put(PatientData.INITIAL_DIAGNOSIS, PatientData.SECONDARY_HEADACHE);
+		}
+		else
+		{
+			map.put(PatientData.INITIAL_DIAGNOSIS, "");
+		}
+		
+		if (this.comboAfterDiag.getSelectedIndex()==1)
+		{
+			map.put(PatientData.FINAL_DIAGNOSIS, PatientData.MIGRAINE);
+		}
+		else if (this.comboAfterDiag.getSelectedIndex()==2)
+		{
+			map.put(PatientData.FINAL_DIAGNOSIS, PatientData.TENSION_TYPE_HEADACHE);
+		}
+		else if (this.comboAfterDiag.getSelectedIndex()==3)
+		{
+			map.put(PatientData.FINAL_DIAGNOSIS, PatientData.SECONDARY_HEADACHE);
+		}
+		else
+		{
+			map.put(PatientData.FINAL_DIAGNOSIS, "");
+		}
 		
 		return new PatientData(map);
 	}
@@ -377,6 +430,55 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		{
 			this.radNo.setSelected(true);
 		}
+		//Setting Diagnosis
+		try
+		{
+			if (patient.getInitialDiagnosis().equals(""))
+			{
+				this.comboPrevDiag.setSelectedIndex(0);
+			}
+			else if (patient.getInitialDiagnosis().equals(PatientData.MIGRAINE))
+			{
+				this.comboPrevDiag.setSelectedIndex(1);
+			}
+			else if (patient.getInitialDiagnosis().equals(PatientData.TENSION_TYPE_HEADACHE))
+			{
+				this.comboPrevDiag.setSelectedIndex(2);
+			}
+			else if (patient.getInitialDiagnosis().equals(PatientData.SECONDARY_HEADACHE))
+			{
+				this.comboPrevDiag.setSelectedIndex(3);
+			}
+		}
+		catch(NullPointerException ex)
+		{
+			this.comboPrevDiag.setSelectedIndex(0);
+		}
+		
+		try
+		{
+			if (patient.getFinalDiagnosis().equals(""))
+			{
+				this.comboAfterDiag.setSelectedIndex(0);
+			}
+			else if (patient.getFinalDiagnosis().equals(PatientData.MIGRAINE))
+			{
+				this.comboAfterDiag.setSelectedIndex(1);
+			}
+			else if (patient.getFinalDiagnosis().equals(PatientData.TENSION_TYPE_HEADACHE))
+			{
+				this.comboAfterDiag.setSelectedIndex(2);
+			}
+			else if (patient.getFinalDiagnosis().equals(PatientData.SECONDARY_HEADACHE))
+			{
+				this.comboAfterDiag.setSelectedIndex(3);
+			}
+		}
+		catch(NullPointerException ex)
+		{
+			this.comboAfterDiag.setSelectedIndex(0);
+		}
+		
 		this.taNotes.setText(patient.getNotes());
 		this.revalidate();
 		this.repaint();
@@ -399,6 +501,10 @@ public class PatientDataForm extends JPanel implements LanguageListener, ItemLis
 		this.labDaysActivityDisturbedUnit.setText(Methods.getLanguageText(XMLIdentifier.DAYS_PER_MONTH_TEXT));
 		this.comboHeadPainSince.setModel(new DefaultComboBoxModel<String>(Methods.getHeadPainSinceOptions()));
 		this.labNotes.setText(Methods.getLanguageText(XMLIdentifier.NOTES_TEXT));
+		this.labPrevDiag.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_PREV_DIAG_LABEL));
+		this.comboPrevDiag.setModel(new DefaultComboBoxModel<String>(Methods.generatePatientDataFormDiagnosisOptions()));
+		this.labAfterDiag.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_AFTER_DIAG_LABEL));
+		this.comboAfterDiag.setModel(new DefaultComboBoxModel<String>(Methods.generatePatientDataFormDiagnosisOptions()));
 	}
 	@Override
 	public void itemStateChanged(ItemEvent e) 

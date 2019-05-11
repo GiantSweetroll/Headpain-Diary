@@ -37,9 +37,14 @@ public class PatientData
 	public static final String MALE = "$$male$$";
 	public static final String FEMALE = "$$female$$";
 	public static final String CITY = "city";
+	public static final String INITIAL_DIAGNOSIS = "initial_diagnosis";
+	public static final String FINAL_DIAGNOSIS = "final_diagnosis";
 	
 	public static final String HEAD_PAINS_SINCE_UNIT_MONTH = "%%sinceMonth",
-								HEAD_PAINS_SINCE_UNIT_YEAR = "%%sinceYear";
+								HEAD_PAINS_SINCE_UNIT_YEAR = "%%sinceYear",
+								MIGRAINE = "%%migraine",
+								TENSION_TYPE_HEADACHE = "%%tensiontype",
+								SECONDARY_HEADACHE = "%%secondaryheadache";
 	
 	private HashMap<String, String> dataMap;
 	
@@ -293,6 +298,28 @@ public class PatientData
 		try
 		{
 			return this.dataMap.get(PatientData.CITY);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getInitialDiagnosis()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.INITIAL_DIAGNOSIS);
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
+	public String getFinalDiagnosis()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.FINAL_DIAGNOSIS);
 		}
 		catch(NullPointerException ex)
 		{

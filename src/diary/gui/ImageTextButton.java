@@ -1,4 +1,4 @@
-package diary;
+package diary.gui;
 
 import java.awt.Color;
 import java.awt.Font;

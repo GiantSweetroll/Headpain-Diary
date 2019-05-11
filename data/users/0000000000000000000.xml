@@ -14,4 +14,6 @@
      <sex>$$male$$</sex>
      <job>Student</job>
      <city>Jakarta</city>
+     <initial_diagnosis>%%migraine</initial_diagnosis>
+     <final_diagnosis>%%tensiontype</final_diagnosis>
 </patient>

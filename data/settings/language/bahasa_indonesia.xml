@@ -213,6 +213,11 @@
 	 <text identifier="patient data form sex label">Jenis Kelamin</text>
      <text identifier="patient data form occupation label">Pekerjaan</text>
      <text identifier="patient data form city label">Kota</text>
+	 <text identifier="patient data form diagnosis text secondary headache">Secondary Headache</text>
+     <text identifier="patient data form diagnosis text tension type headache">Tension Type Headache</text>
+     <text identifier="patient data form diagnosis text migraine">Migraine</text>
+     <text identifier="patient data form previous diagnosis label">Diagnosa Awal</text>
+     <text identifier="patient data form after diagnosis label">Diagnosa Akhir</text>
 	 <text identifier="patient manage panel copy data label">Salin Data</text>
      <text identifier="patient data registeration form title label">Formulir Pendaftaran Data Pasien</text>
      <text identifier="patient data registeration form empty id message">ID medis tidak boleh kosong!</text>
