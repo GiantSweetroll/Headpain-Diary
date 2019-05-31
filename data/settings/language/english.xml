@@ -212,6 +212,11 @@
      <text identifier="patient data form sex label">Sex</text>
      <text identifier="patient data form occupation label">Occupation</text>
      <text identifier="patient data form city label">City</text>
+     <text identifier="patient data form diagnosis text secondary headache">Secondary Headache</text>
+     <text identifier="patient data form diagnosis text tension type headache">Tension Type Headache</text>
+     <text identifier="patient data form diagnosis text migraine">Migraine</text>
+     <text identifier="patient data form previous diagnosis label">Initial Diagnosis</text>
+     <text identifier="patient data form after diagnosis label">Final Diagnosis</text>
      <text identifier="patient manage panel copy data label">Copy Data</text>
      <text identifier="patient data registeration form title label">Patient Data Registeration Form</text>
      <text identifier="patient data registeration form empty id message">Medical ID cannot be empty!</text>

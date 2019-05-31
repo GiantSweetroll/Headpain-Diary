@@ -12,11 +12,13 @@ import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
+import diary.constants.ImageConstants;
 import diary.constants.PanelName;
 import diary.data.Settings;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.patientdata.PatientDataRegisterationForm;
+import giantsweetroll.ImageManager;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -53,6 +55,7 @@ public class MainFrame
 		//Properties
 		this.panel.setLayout(new CardLayout());
 		MainFrame.isFullScreen = false;
+		this.frame.setIconImage(ImageManager.getImage(ImageConstants.LOGO_MINI));
 	//	this.refreshSettings();
 		Methods.addLanguageListener(Globals.MAIN_MENU);
 		Methods.addLanguageListener(Globals.SETTINGS_PANEL);

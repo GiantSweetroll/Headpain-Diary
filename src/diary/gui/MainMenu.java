@@ -21,8 +21,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
-import diary.ImageTextButton;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.ImageConstants;
@@ -44,8 +44,20 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	private List<JLabel> supportersList;
 	private JButton butSettings, butExit, butManagePatients;
 	private ImageTextButton butNewEntry, butGraph, butTable;
-	private JPanel panelMainButtons, panelSupport, panelAuthor, panelBelow, panelBelowLeft, panelBelowRight, panelBelowCenter, panelCenter, panelCenterCenter, panelCenterBelow, panelMain;
+	private JPanel panelMainButtons, 
+					panelSupport, 
+					panelAuthor, 
+					panelBelow, 
+					panelBelowLeft, 
+					panelBelowRight, 
+					panelBelowCenter, 
+					panelCenter, 
+					panelCenterCenter, 
+					panelCenterBelow,
+					panelCenterTop,
+					panelMain;
 	private JScrollPane scroll;
+	private JLabel labVersion;
 	
 	//Constants
 	private final String NEW_ENTRY = "new entry";
@@ -137,12 +149,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		//Initialization
 		this.panelCenterCenter = new JPanel();
 		this.initPanelMainButtons();
-		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
-		this.labLogo = new JLabel(Methods.resizeImageByRatio
-									(image, Methods.getPercentage
-												(image, Methods.getPercentageValue
-															//(Constants.SCREENSIZE.width, 48))));
-															(Constants.SCREENSIZE.width, 15))));
+		this.initPanelCenterTop();
 //		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -150,13 +157,11 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 //		this.panelCenterCenter.setLayout(new GridBagLayout());
 		this.panelCenterCenter.setOpaque(false);
 		this.panelMainButtons.setAlignmentX(Component.CENTER_ALIGNMENT);
-		this.labLogo.setFont(Constants.FONT_GENERAL);
-		this.labLogo.setForeground(Color.WHITE);
-		this.labLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.panelCenterTop.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Add to panel
 	//	c.gridwidth = GridBagConstraints.REMAINDER;
-		this.panelCenterCenter.add(this.labLogo);
+		this.panelCenterCenter.add(this.panelCenterTop);
 		this.panelCenterCenter.add(this.panelMainButtons);
 	}
 	private void initPanelAuthor()
@@ -359,6 +364,30 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.panelBelow.add(this.panelBelowLeft, BorderLayout.WEST);
 		this.panelBelow.add(this.panelBelowCenter, BorderLayout.CENTER);
 		this.panelBelow.add(this.panelBelowRight, BorderLayout.EAST);
+	}
+	private void initPanelCenterTop()
+	{
+		//Initialization
+		this.panelCenterTop = new JPanel();
+		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
+		this.labLogo = new JLabel(Methods.resizeImageByRatio
+									(image, Methods.getPercentage
+												(image, Methods.getPercentageValue
+															//(Constants.SCREENSIZE.width, 48))));
+															(Constants.SCREENSIZE.width, 15))));
+		this.labVersion = new JLabel(Constants.VERSION);
+		
+		//Properties
+		this.panelCenterTop.setLayout(new BorderLayout());
+		this.panelCenterTop.setOpaque(false);
+		this.labLogo.setFont(Constants.FONT_GENERAL);
+		this.labLogo.setForeground(Color.WHITE);
+		this.labVersion.setForeground(Color.WHITE);
+		this.labVersion.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		//Add to panel
+		this.panelCenterTop.add(this.labLogo, BorderLayout.CENTER);
+		this.panelCenterTop.add(this.labVersion, BorderLayout.NORTH);
 	}
 	
 	//Interfaces
