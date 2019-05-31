@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <settings>
-     <window_mode>windowed</window_mode>
      <database_path>D:\Programming\Projects 4 - School\Headpain-Diary\data\database</database_path>
      <database_users_path>D:\Programming\Projects 4 - School\Headpain-Diary\data\users</database_users_path>
-     <language>bahasa_indonesia</language>
+     <window_mode>windowed</window_mode>
+     <language>english</language>
 </settings>
