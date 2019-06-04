@@ -340,6 +340,7 @@ public class Methods
 		mainFrame.getFrameInstance().setUndecorated(true);
 		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getFrameInstance().setVisible(true);
+		Globals.MAIN_MENU.setImagesFullscreenMode();
 		MainFrame.isFullScreen = true;
 	}
 	public static void makeWindowed(MainFrame mainFrame)
@@ -353,11 +354,11 @@ public class Methods
 		mainFrame.getFrameInstance().setExtendedState(JFrame.NORMAL);
 		mainFrame.getFrameInstance().setUndecorated(false);
 		mainFrame.getFrameInstance().setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
-	//	mainFrame.getFrameInstance().pack();
 		mainFrame.getFrameInstance().setResizable(false);
 		mainFrame.getFrameInstance().setLocationRelativeTo(null);
 		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getFrameInstance().setVisible(true);
+		Globals.MAIN_MENU.setImagesWindowedMode();
 		MainFrame.isFullScreen = false;
 	}
 

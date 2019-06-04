@@ -52,13 +52,27 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 	 */
 	private static final long serialVersionUID = -6429132267457024269L;
 	
-	private JPanel panelTop, panelTopLeft, panelBelowLeft, panelBelowCenter, panelBelowRight, panelBelow;
+	private JPanel panelTop, 
+					panelTopLeft, 
+					panelBelowLeft, 
+					panelBelowCenter, 
+					panelBelowRight, 
+						panelBelow;
 	private TablePanel table;
 	private DateRangePanel panelDateRange;
 	private JComboBox<String> comboFilter;
 	private JTextField tfFilter;
-	private JButton butFilter, butBack, butDelete, butSelect, butSave, butRefresh, butSelectAll, butDeselectAll;
-	private JLabel labFilter, labKeyword, labGuide;
+	private JButton butFilter, 
+					butBack, 
+					butDelete, 
+					butSelect,
+					butSave, 
+					butRefresh, 
+					butSelectAll, 
+					butDeselectAll;
+	private JLabel labFilter, 
+					labKeyword, 
+					labGuide;
 	private List<String> selectedEntryIDs;
 	private List<PainEntryData> entries;
 	private PainEntryData activeEntry;
@@ -113,8 +127,8 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.butBack.setActionCommand(this.BACK);
 		this.butBack.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_BACK_TEXT));
 		this.butBack.addActionListener(this);
-		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butBack.setForeground(Color.white);
+//		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butBack.setForeground(Color.white);
 		this.butBack.setMnemonic(KeyEvent.VK_B);
 		
 		//add to panel
@@ -136,28 +150,28 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.butDelete.setActionCommand(this.DELETE);
 		this.butDelete.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_DELETE_TEXT));
 		this.butDelete.addActionListener(this);
-		this.butDelete.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butDelete.setForeground(Color.white);
+//		this.butDelete.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butDelete.setForeground(Color.white);
 		this.butDelete.setMnemonic(KeyEvent.VK_D);
 		this.butSave.setActionCommand(this.SAVE);
 		this.butSave.addActionListener(this);
 //		this.butSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
-		this.butSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butSave.setForeground(Color.white);
+//		this.butSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butSave.setForeground(Color.white);
 		this.butSave.setMnemonic(KeyEvent.VK_E);
 		this.butRefresh.addActionListener(this);
 		this.butRefresh.setActionCommand(this.REFRESH);
-		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butRefresh.setForeground(Color.white);
+//		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butRefresh.setForeground(Color.white);
 		this.butRefresh.setMnemonic(KeyEvent.VK_R);
 		this.butSelectAll.addActionListener(this);
 		this.butSelectAll.setActionCommand(this.SELECT_ALL);
-		this.butSelectAll.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butSelectAll.setForeground(Color.white);
+//		this.butSelectAll.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butSelectAll.setForeground(Color.white);
 		this.butDeselectAll.addActionListener(this);
 		this.butDeselectAll.setActionCommand(this.DESELECT_ALL);
-		this.butDeselectAll.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butDeselectAll.setForeground(Color.white);
+//		this.butDeselectAll.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butDeselectAll.setForeground(Color.white);
 		
 		//add to panel
 		this.panelBelowCenter.add(this.butSelectAll);
@@ -178,8 +192,8 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.butSelect.setActionCommand(this.SELECT);
 		this.butSelect.setToolTipText(Methods.getLanguageText(XMLIdentifier.TABLE_TOOLTIPS_BUTTON_SELECT_TEXT));
 		this.butSelect.addActionListener(this);
-		this.butSelect.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butSelect.setForeground(Color.white);
+//		this.butSelect.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butSelect.setForeground(Color.white);
 		this.butSelect.setMnemonic(KeyEvent.VK_S);
 		
 		//add to panel

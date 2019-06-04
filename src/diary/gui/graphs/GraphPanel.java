@@ -53,7 +53,11 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	private Graph graph;
 	private JScrollPane scrollGraph;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butRefresh, butSwitchGraph, buttonSave, butOptions;
+	private JButton butBack, 
+					butRefresh, 
+					butSwitchGraph, 
+					buttonSave, 
+					butOptions;
 	private GraphSettingsPanel panelGraphSettings;
 	private ActivePatientPanel activePatientPanel;
 	private JTabbedPane graphConfig;
@@ -174,8 +178,8 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.butBack.setActionCommand(this.BACK);
 		this.butBack.addActionListener(this);
-		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butBack.setForeground(Color.white);
+//		this.butBack.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butBack.setForeground(Color.white);
 		this.butBack.setMnemonic(KeyEvent.VK_B);
 		
 		//add to panel
@@ -195,24 +199,24 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.butRefresh.setActionCommand(this.REFRESH);
 		this.butRefresh.addActionListener(this);
-		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butRefresh.setForeground(Color.white);
+	//	this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.butRefresh.setForeground(Color.white);
 		this.butRefresh.setMnemonic(KeyEvent.VK_R);
 		this.butSwitchGraph.setActionCommand(this.SWITCH_GRAPH);
 		this.butSwitchGraph.addActionListener(this);
-		this.butSwitchGraph.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butSwitchGraph.setForeground(Color.white);
+	//	this.butSwitchGraph.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.butSwitchGraph.setForeground(Color.white);
 		this.butSwitchGraph.setMnemonic(KeyEvent.VK_S);
 		this.buttonSave.setActionCommand(this.SAVE);
 		this.buttonSave.addActionListener(this);
 		this.buttonSave.setToolTipText(Methods.getLanguageText(XMLIdentifier.SAVE_IMAGE_TOOLIP_TEXT));
-		this.buttonSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.buttonSave.setForeground(Color.white);
+	//	this.buttonSave.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.buttonSave.setForeground(Color.white);
 		this.buttonSave.setMnemonic(KeyEvent.VK_E);
 		this.butOptions.setActionCommand(this.OPTIONS);
 		this.butOptions.addActionListener(this);
-		this.butOptions.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butOptions.setForeground(Color.white);
+	//	this.butOptions.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.butOptions.setForeground(Color.white);
 		this.butOptions.setMnemonic(KeyEvent.VK_O);
 		
 		//add to panel

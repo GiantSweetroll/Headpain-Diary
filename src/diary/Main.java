@@ -47,6 +47,9 @@ public class Main
 							Methods.setUIFont(new FontUIResource(Constants.FONT_TYPE_GENERAL, Font.PLAIN, Constants.FONT_GENERAL_SIZE));
 							UIManager.put("OptionPane.background", Color.WHITE);
 							UIManager.put("Panel.background", Color.white);
+							UIManager.put("Button.background", Constants.COLOR_MAIN_MENU_BUTTONS);
+							UIManager.put("Button.foreground", Color.WHITE);
+							UIManager.put("Button.font", Constants.FONT_GENERAL);
 							
 							if(!FileOperation.dataExists(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME))		//If settings file doesn't exists
 							{

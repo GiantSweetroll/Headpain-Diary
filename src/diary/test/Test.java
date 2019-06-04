@@ -11,7 +11,11 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import diary.constants.ImageConstants;
 
 public class Test
 {	
@@ -76,8 +80,33 @@ public class Test
 		}
 	}
 	
+	public static void labelUpdateIcon()
+	{
+		JLabel label = new JLabel();
+		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
+		label.setIcon(icon);
+		ImageIcon icon2 = new ImageIcon(ImageConstants.FKUI);
+		label.setIcon(icon2);
+		JOptionPane.showMessageDialog(null, label);
+		ImageIcon icon3 = new ImageIcon(ImageConstants.MEDICAL_MEDIA);
+		label.setIcon(icon3);
+		JOptionPane.showMessageDialog(null, label);
+	}
+	public static void labelUpdateIcon2()
+	{
+		JLabel label = new JLabel();
+		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
+		label.setIcon(icon);
+		icon = new ImageIcon(ImageConstants.FKUI);
+		label.setIcon(icon);
+		JOptionPane.showMessageDialog(null, label);
+		icon = new ImageIcon(ImageConstants.MEDICAL_MEDIA);
+		label.setIcon(icon);
+		JOptionPane.showMessageDialog(null, label);
+	}
+	
 	public static void main(String args[])
 	{
-		
+		labelUpdateIcon2();
 	}
 }

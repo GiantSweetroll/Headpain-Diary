@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<patient>
+     <medical_record_id>000000000000000</medical_record_id>
+     <patient_name>Gardyan</patient_name>
+     <patient_dob_day>8</patient_dob_day>
+     <patient_dob_month>1</patient_dob_month>
+     <patient_dob_year>2000</patient_dob_year>
+     <has_head_pain_history>true</has_head_pain_history>
+     <head_pains_since/>
+     <head_pains_since_unit>%%sinceMonth</head_pains_since_unit>
+     <freq_head_pains_last_month/>
+     <days_activities_disturbed/>
+     <notes>Head pains since 2016</notes>
+     <sex>$$male$$</sex>
+     <job>Pelajar</job>
+     <city>Jakarta</city>
+     <initial_diagnosis/>
+     <final_diagnosis/>
+</patient>

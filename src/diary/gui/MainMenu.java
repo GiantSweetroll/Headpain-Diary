@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
@@ -32,6 +33,7 @@ import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 import giantsweetroll.gui.swing.ScrollPaneManager;
+import giantsweetroll.message.MessageManager;
 
 public class MainMenu extends JPanel implements ActionListener, LanguageListener
 {
@@ -76,7 +78,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.init();
 	}
 	
-	//Methods
+	//Initialization Methods
 	private void init()
 	{
 		//Initialization
@@ -114,6 +116,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.panelCenter = new JPanel();
 		this.initPanelCenterCenter();
 		this.initPanelCenterBelow();
+		this.initPanelCenterTop();
 		
 		//Properties
 		this.panelCenter.setLayout(new BorderLayout());
@@ -121,6 +124,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		
 		//Add to panel
 		this.panelCenter.add(this.panelCenterCenter, BorderLayout.CENTER);
+		this.panelCenter.add(this.panelCenterTop, BorderLayout.NORTH);
 		this.panelCenter.add(this.panelCenterBelow, BorderLayout.SOUTH);
 	}
 	private void initPanelCenterBelow()
@@ -163,6 +167,47 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	//	c.gridwidth = GridBagConstraints.REMAINDER;
 		this.panelCenterCenter.add(this.panelCenterTop);
 		this.panelCenterCenter.add(this.panelMainButtons);
+	}
+	private void initPanelCenterTop()
+	{
+		//Initialization
+		this.panelCenterTop = new JPanel();
+		this.labLogo = new JLabel();
+		/*
+		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
+		this.labLogo = new JLabel(Methods.resizeImageByRatio
+									(image, Methods.getPercentage
+												(image, Methods.getPercentageValue
+															//(Constants.SCREENSIZE.width, 48))));
+															(Constants.SCREENSIZE.width, 15))));		*/
+		this.labVersion = new JLabel(Constants.VERSION);
+		SpringLayout spr = new SpringLayout();
+		
+		//Properties
+//		this.panelCenterTop.setLayout(new BorderLayout());
+		this.panelCenterTop.setLayout(spr);
+		this.panelCenterTop.setOpaque(false);
+//		this.labLogo.setFont(Constants.FONT_GENERAL);
+		this.labLogo.setForeground(Color.WHITE);
+		this.labVersion.setForeground(Color.WHITE);
+		this.labVersion.setHorizontalAlignment(SwingConstants.RIGHT);
+		if (MainFrame.isFullScreen)
+		{
+			this.setImagesFullscreenMode();
+		}
+		else
+		{
+			this.setImagesWindowedMode();
+		}
+		
+		//Add to panel
+		spr.putConstraint(SpringLayout.EAST, this.labLogo, 0, SpringLayout.EAST, this.panelCenterTop);
+		spr.putConstraint(SpringLayout.WEST, this.labLogo, 0, SpringLayout.WEST, this.panelCenterTop);
+		spr.putConstraint(SpringLayout.EAST, this.labVersion, Constants.INSETS_BASE*-1, SpringLayout.EAST, this.panelCenterTop);
+		this.panelCenterTop.add(this.labLogo);
+		this.panelCenterTop.add(this.labVersion);
+//		this.panelCenterTop.add(this.labLogo, BorderLayout.CENTER);
+//		this.panelCenterTop.add(this.labVersion, BorderLayout.NORTH);
 	}
 	private void initPanelAuthor()
 	{
@@ -270,17 +315,17 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.panelMainButtons.setBorder(Methods.createTransparentBorder(20));			//Create empty/transparent border, to serve as padding
 		this.butNewEntry.setActionCommand(this.NEW_ENTRY);
 		this.butNewEntry.addActionListener(this);
-		this.butNewEntry.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.butNewEntry.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butNewEntry.setToolTipText(Methods.getLanguageText(XMLIdentifier.NEW_ENTRY_BUTTON_TOOLTIP));
 		this.butNewEntry.setMnemonic(KeyEvent.VK_N);
 		this.butGraph.setActionCommand(this.VIEW_GRAPH);
 		this.butGraph.addActionListener(this);
-		this.butGraph.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.butGraph.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butGraph.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_GRAPH_BUTTON_TOOLTIP));
 		this.butGraph.setMnemonic(KeyEvent.VK_G);
 		this.butTable.setActionCommand(this.VIEW_TABLE);
 		this.butTable.addActionListener(this);
-		this.butTable.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.butTable.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butTable.setToolTipText(Methods.getLanguageText(XMLIdentifier.VIEW_TABLE_BUTTON_TOOLTIP));
 		this.butTable.setMnemonic(KeyEvent.VK_T);
 		
@@ -301,9 +346,9 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.butSettings.setToolTipText(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TOOLTIP));
 		this.butSettings.setActionCommand(this.SETTINGS);
 		this.butSettings.addActionListener(this);
-		this.butSettings.setFont(Constants.FONT_GENERAL);
-		this.butSettings.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butSettings.setForeground(Color.WHITE);
+	//	this.butSettings.setFont(Constants.FONT_GENERAL);
+	//	this.butSettings.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+	//	this.butSettings.setForeground(Color.WHITE);
 		this.butSettings.setMnemonic(KeyEvent.VK_S);
 		
 		//Add to panel
@@ -318,11 +363,11 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		//Properties
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		this.panelBelowRight.setOpaque(false);
-		this.butExit.setFont(Constants.FONT_GENERAL);
+//		this.butExit.setFont(Constants.FONT_GENERAL);
 		this.butExit.setActionCommand(this.EXIT);
 		this.butExit.addActionListener(this);
-		this.butExit.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butExit.setForeground(Color.WHITE);
+//		this.butExit.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butExit.setForeground(Color.WHITE);
 		this.butExit.setMnemonic(KeyEvent.VK_E);
 		
 		//Add to panel
@@ -340,9 +385,9 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.butManagePatients.setToolTipText(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP));
 		this.butManagePatients.setActionCommand(this.MANAGE_PATIENTS);
 		this.butManagePatients.addActionListener(this);
-		this.butManagePatients.setFont(Constants.FONT_GENERAL);
-		this.butManagePatients.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butManagePatients.setForeground(Color.WHITE);
+//		this.butManagePatients.setFont(Constants.FONT_GENERAL);
+//		this.butManagePatients.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.butManagePatients.setForeground(Color.WHITE);
 		this.butManagePatients.setMnemonic(KeyEvent.VK_M);
 		
 		//Add to panel
@@ -365,29 +410,28 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.panelBelow.add(this.panelBelowCenter, BorderLayout.CENTER);
 		this.panelBelow.add(this.panelBelowRight, BorderLayout.EAST);
 	}
-	private void initPanelCenterTop()
+	
+	//Other Methods
+	public void setImagesFullscreenMode()
 	{
-		//Initialization
-		this.panelCenterTop = new JPanel();
 		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
-		this.labLogo = new JLabel(Methods.resizeImageByRatio
+		this.labLogo.setIcon(Methods.resizeImageByRatio
 									(image, Methods.getPercentage
-												(image, Methods.getPercentageValue
-															//(Constants.SCREENSIZE.width, 48))));
-															(Constants.SCREENSIZE.width, 15))));
-		this.labVersion = new JLabel(Constants.VERSION);
-		
-		//Properties
-		this.panelCenterTop.setLayout(new BorderLayout());
-		this.panelCenterTop.setOpaque(false);
-		this.labLogo.setFont(Constants.FONT_GENERAL);
-		this.labLogo.setForeground(Color.WHITE);
-		this.labVersion.setForeground(Color.WHITE);
-		this.labVersion.setHorizontalAlignment(SwingConstants.RIGHT);
-		
-		//Add to panel
-		this.panelCenterTop.add(this.labLogo, BorderLayout.CENTER);
-		this.panelCenterTop.add(this.labVersion, BorderLayout.NORTH);
+												(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 35))));
+		this.labLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		MessageManager.showDialog("Fullscreen");
+		this.panelCenterTop.revalidate();
+		this.panelCenterTop.repaint();
+	}
+	public void setImagesWindowedMode()
+	{
+		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
+		this.labLogo.setIcon(Methods.resizeImageByRatio
+									(image, Methods.getPercentage
+												(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 15))));
+		this.labLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		this.panelCenterTop.revalidate();
+		this.panelCenterTop.repaint();
 	}
 	
 	//Interfaces

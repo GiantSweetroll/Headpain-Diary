@@ -53,22 +53,33 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 	 */
 	private static final long serialVersionUID = -8823949814661108143L;	
 	
-	private JPanel panelCenter, panelBelow;
-	private SettingsCategoryPanel catDatabase, catWindow, catProgram;
-	private JButton butCancel, butSave;
+	private JPanel panelCenter, 
+					panelBelow;
+	private SettingsCategoryPanel catDatabase, 
+									catWindow, 
+									catProgram;
+	private JButton butCancel, 
+					butSave;
 	private LinkedHashMap<String, String> dataMap;
+	private JScrollPane scroll;
 	
 	//Window Category
 	private JLabel labWindowMode;
-	private JRadioButton radFullscreen, radWindowed;
+	private JRadioButton radFullscreen, 
+						radWindowed;
 	//Program Category
 	private JLabel labLanguage;
 	private JComboBox<String> comboLanguages;
 	private JButton butLanguageRefresh;
 	//Database Category
-	private JLabel labDatabasePath, labUserDatabasePath;
-	private JTextField tfDatabasePath, tfUserDatabasePath;
-	private JButton butBrowseUserDatabasePath, butDefaultUserDatabase, butBrowseDatabasePath, butDefaultDatabase;
+	private JLabel labDatabasePath, 
+					labUserDatabasePath;
+	private JTextField tfDatabasePath, 
+						tfUserDatabasePath;
+	private JButton butBrowseUserDatabasePath, 
+					butDefaultUserDatabase, 
+					butBrowseDatabasePath, 
+					butDefaultDatabase;
 	
 	//Constants
 	private final String CANCEL = "cancel";
@@ -81,14 +92,15 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		this.gatherData();
 		this.initPanelBelow();
 		this.initPanelCenter();
+		this.scroll = ScrollPaneManager.generateDefaultScrollPane(this.panelCenter, 10, 10);
 		
 		//Properties
 		this.setLayout(new BorderLayout());
-		this.setBackground(Color.WHITE);
+//		this.setBackground(Color.WHITE);
 //		this.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		
 		//Add to panel
-		this.add(this.panelCenter, BorderLayout.CENTER);
+		this.add(this.scroll, BorderLayout.CENTER);
 		this.add(this.panelBelow, BorderLayout.SOUTH);
 	}
 	
@@ -100,7 +112,6 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		this.initCatDatabase();
 		this.initCatWindow();
 		this.initCatProgram();
-		JScrollPane scrollDatabase = ScrollPaneManager.generateDefaultScrollPane(this.catDatabase, 10, 10);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -114,8 +125,8 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		this.panelCenter.add(this.catProgram, c);					//Program Settings
 		c.insets = Constants.INSETS_GENERAL;
 		this.panelCenter.add(this.catWindow, c);					//Window Settings
-//		this.panelCenter.add(this.catDatabase, c);					//Database Settings		
-		this.panelCenter.add(scrollDatabase, c);					//Database settings
+		this.panelCenter.add(this.catDatabase, c);					//Database Settings		
+//		this.panelCenter.add(scrollDatabase, c);					//Database settings
 	}
 	private void initCatDatabase()
 	{

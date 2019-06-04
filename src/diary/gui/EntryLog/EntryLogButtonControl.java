@@ -72,8 +72,8 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 		
 		//Properties
 		this.button.addActionListener(this);
-		this.button.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.button.setForeground(Color.white);
+//		this.button.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+//		this.button.setForeground(Color.white);
 		this.setLayout(new GridBagLayout());
 		this.setOpaque(false);
 		
