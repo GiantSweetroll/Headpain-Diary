@@ -1,25 +1,19 @@
 package diary.gui.EntryLog.forms;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
 import diary.constants.Constants;
+import diary.constants.Globals;
+import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
+import diary.history.HistoryPanel;
 import diary.methods.Methods;
-import giantsweetroll.GGUtilities;
+import diary.patientdata.PatientData;
 import giantsweetroll.gui.swing.Gbm;
 
-public class PainKind extends FormElement implements ActionListener, MouseListener
+public class PainKind extends FormElement
 {
 
 	/**
@@ -27,8 +21,9 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 	 */
 	private static final long serialVersionUID = 3663163509782789403L;
 	
-	private JComboBox<String> combo;
-	private JTextField tf;
+//	private JComboBox<String> combo;
+//	private JTextField tf;
+	private HistoryPanel painKind;
 	
 	//Constructor
 	public PainKind()
@@ -36,15 +31,16 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 		super(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL), true);
 		
 		//Initialization
-		this.combo = new JComboBox<String>(Methods.getDefaultPainKinds());
-		this.tf = new JTextField(10);
+//		this.combo = new JComboBox<String>(Methods.getDefaultPainKinds());
+//		this.tf = new JTextField(10);
+		this.painKind = new HistoryPanel(Globals.HISTORY_PAIN_KIND, PatientData.LAST_PAIN_KIND, Methods.getDefaultPainKinds(), false, false);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
 		this.getPanel().setLayout(new GridBagLayout());
-		this.combo.addActionListener(this);
-		this.combo.setBackground(Color.WHITE);
-		this.tf.addMouseListener(this);
+//		this.combo.addActionListener(this);
+//		this.combo.setBackground(Color.WHITE);
+//		this.tf.addMouseListener(this);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
@@ -53,30 +49,78 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 		this.getPanel().add(this.getFormTitleLabel(), c);
 		c.gridwidth = 1;
 		Gbm.newGridLine(c);
-		this.getPanel().add(this.combo, c);
-		Gbm.nextGridColumn(c);
-		this.getPanel().add(this.tf, c);
+		this.getPanel().add(this.painKind, c);
+//		this.getPanel().add(this.combo, c);
+//		Gbm.nextGridColumn(c);
+//		this.getPanel().add(this.tf, c);
+	}
+	
+	//Methods
+	public void setPainKind(String painKind)
+	{
+		if (painKind.equals(PainDataIdentifier.THROBBING) || painKind.equals(""))
+		{
+			this.painKind.setSelectedIndex(0);
+		}
+		else if (painKind.equals(PainDataIdentifier.PULSATING))
+		{
+			this.painKind.setSelectedIndex(1);
+		}
+		else if (painKind.equals(PainDataIdentifier.RADIATING))
+		{
+			this.painKind.setSelectedIndex(2);
+		}
+		else if (painKind.equals(PainDataIdentifier.TIGHT_BAND))
+		{
+			this.painKind.setSelectedIndex(3);
+		}
+		else
+		{
+//			this.combo.setSelectedItem(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT));
+//			this.tf.setText(painKind);
+			this.painKind.setActiveItem(painKind);
+		}
+	}
+	public void refreshHistory(PatientData patient)
+	{
+		this.painKind.refresh(Globals.HISTORY_PAIN_KIND, patient);
+		this.painKind.setActiveItem(patient.getLastPainKind());
 	}
 	
 	//Overridden Methods
 	@Override
 	public void resetDefaults() {
-		this.combo.setSelectedIndex(0);
-		this.tf.setText("");
+//		this.combo.setSelectedIndex(0);
+//		this.tf.setText("");
+		this.painKind.resetDefaults();
 	}
 	
 	@Override
 	public void refresh() {};
 
 	@Override
-	public String getData() {
-		if (this.combo.getSelectedIndex() == Methods.getDefaultPainKinds().length-1)		//If last index = Other
+	public String getData() 
+	{
+		int index = this.painKind.getSelectedIndex();
+		if (index == 0)
 		{
-			return this.tf.getText().trim();
+			return PainDataIdentifier.THROBBING;
+		}
+		else if (index == 1)
+		{
+			return PainDataIdentifier.PULSATING;
+		}
+		else if (index == 2)
+		{
+			return PainDataIdentifier.RADIATING;
+		}
+		else if (index == 3)
+		{
+			return PainDataIdentifier.TIGHT_BAND;
 		}
 		else
 		{
-			return GGUtilities.getItem(this.combo).toString();
+			return this.painKind.getItem();
 		}
 	}
 
@@ -85,6 +129,7 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 	{
 		if (obj instanceof PainEntryData)
 		{
+			/*
 			String painKind = Methods.convertPainKindIDToLanguage(((PainEntryData)obj).getPainKind());
 			if (Methods.isPartOfDefaultPainKind(painKind))
 			{
@@ -95,9 +140,13 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 				this.combo.setSelectedItem(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT));
 				this.tf.setText(painKind);
 			}
+			*/
+			String painKind = ((PainEntryData)obj).getPainKind();
+			this.setPainKind(painKind);
 		}
 	}	
 	
+	/*
 	public void actionPerformed(ActionEvent e)
 	{
 		String item = GGUtilities.getItem(combo).toString();
@@ -138,13 +187,15 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {}
-
+	*/
+	
 	@Override
 	public boolean allFilled() 
 	{
-		if (this.combo.getSelectedIndex() == Methods.getDefaultPainKinds().length-1)		//If last index = Other
+		if (this.painKind.getSelectedIndex() == Methods.getDefaultPainKinds().length)		//If last index = Other
 		{
-			return !Methods.getTextData(this.tf).equals("");
+//			return !Methods.getTextData(this.tf).equals("");
+			return !this.painKind.getItem().equals("");
 		}
 		else
 		{
@@ -156,7 +207,8 @@ public class PainKind extends FormElement implements ActionListener, MouseListen
 	public void revalidateLanguage() 
 	{
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.KIND_OF_HEADPAIN_LABEL));
-		this.combo.setModel(new DefaultComboBoxModel<String>(Methods.getDefaultPainKinds()));
+//		this.combo.setModel(new DefaultComboBoxModel<String>(Methods.getDefaultPainKinds()));
+		this.painKind.revalidateLanguage(Methods.getDefaultPainKinds());
 		this.revalidate();
 		this.repaint();
 	}

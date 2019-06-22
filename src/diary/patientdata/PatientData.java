@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -39,6 +40,10 @@ public class PatientData
 	public static final String CITY = "city";
 	public static final String INITIAL_DIAGNOSIS = "initial_diagnosis";
 	public static final String FINAL_DIAGNOSIS = "final_diagnosis";
+	public static final String PAIN_LOCATIONS = "pain_locations";			//Not yet used
+	public static final String PAIN_LOCATION_SUB = "pain_location";			//Not yet used
+	public static final String PAIN_LOCATION_NODE = "pain_location_node";	//Not yet used
+	public static final String LAST_PAIN_KIND = "last_pain_kind";
 	
 	public static final String HEAD_PAINS_SINCE_UNIT_MONTH = "%%sinceMonth",
 								HEAD_PAINS_SINCE_UNIT_YEAR = "%%sinceYear",
@@ -71,6 +76,7 @@ public class PatientData
 	}
 	
 	//Methods
+	//Getters
 	public HashMap<String, String> getDataMap()
 	{
 		return this.dataMap;
@@ -86,9 +92,13 @@ public class PatientData
 			
 			for (Map.Entry<String, String> entry : this.dataMap.entrySet())
 			{
-				Element element = doc.createElement(entry.getKey());
-				element.setTextContent(entry.getValue());
-				rootElement.appendChild(element);
+				try
+				{
+					Element element = doc.createElement(entry.getKey());
+					element.setTextContent(entry.getValue());
+					rootElement.appendChild(element);
+				}
+				catch(DOMException ex) {}
 			}
 			
 			doc.appendChild(rootElement);
@@ -217,10 +227,6 @@ public class PatientData
 			return "";
 		}
 	}
-	public void setLastRecentMeds(String meds)
-	{
-		this.dataMap.put(PatientData.LAST_RECENT_MEDS, meds);
-	}
 	public String getLastMedicineComplaint()
 	{
 		try
@@ -231,10 +237,6 @@ public class PatientData
 		{
 			return "";
 		}
-	}
-	public void setLastMedicineComplaint(String compl)
-	{
-		this.dataMap.put(PatientData.LAST_MEDICINE_COMPLAINT, compl);
 	}
 	public String getNotes()
 	{
@@ -326,7 +328,17 @@ public class PatientData
 			return "";
 		}
 	}
-	
+	public String getLastPainKind()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.LAST_PAIN_KIND).toString();
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}
+	}
 	public String getRecentSelectedOption(String key)
 	{
 		try
@@ -342,6 +354,20 @@ public class PatientData
 	public String getFileName()
 	{
 		return this.getDataMap().get(PatientData.MEDICAL_RECORD_ID) + ".xml";
+	}
+	
+	//Setters
+	public void setLastPainKind(String painKind)
+	{
+		this.dataMap.put(PatientData.LAST_PAIN_KIND, painKind);
+	}
+	public void setLastMedicineComplaint(String compl)
+	{
+		this.dataMap.put(PatientData.LAST_MEDICINE_COMPLAINT, compl);
+	}
+	public void setLastRecentMeds(String meds)
+	{
+		this.dataMap.put(PatientData.LAST_RECENT_MEDS, meds);
 	}
 	
 	//Override Methods

@@ -32,7 +32,7 @@ public class GraphFilterPanel extends JPanel implements ItemListener, LanguageLi
 	{
 		//Initialization
 		this.checkRecMed = new JCheckBox(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL));
-		this.medHistory = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION, PatientData.LAST_RECENT_MEDS, Methods.getDefaultRecentMedications());
+		this.medHistory = new HistoryPanel(Globals.HISTORY_RECENT_MEDICATION, PatientData.LAST_RECENT_MEDS, Methods.getDefaultRecentMedications(), true, true);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties

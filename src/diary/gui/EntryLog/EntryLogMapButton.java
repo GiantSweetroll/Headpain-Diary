@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JButton;
 
+import diary.constants.Constants;
 import diary.interfaces.GUIFunction;
 
 public class EntryLogMapButton extends JButton implements GUIFunction
@@ -36,7 +37,7 @@ public class EntryLogMapButton extends JButton implements GUIFunction
 		if (b)
 		{
 			this.setForeground(Color.white);
-			this.setBackground(new Color(28, 203, 15));
+			this.setBackground(Constants.COLOR_HIGHLIGHT_BUTTON);
 		}
 		else
 		{

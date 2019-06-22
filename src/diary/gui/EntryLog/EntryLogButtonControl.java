@@ -1,7 +1,6 @@
 package diary.gui.EntryLog;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -151,12 +150,27 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 																													entry.getDate().getMonth(),
 																													entry.getDate().getYear()));
 						
+						if(!entryLog.lastPainKindSame(patient, entry))
+						{
+							patient.setLastPainKind(entry.getPainKind());
+						}
+						if(!entryLog.lastRecentMedsSame(patient, entry))
+						{
+							patient.setLastRecentMeds(entry.getRecentMedication());
+						}
+						if(!entryLog.lastMedicineComplaintSame(patient, entry))
+						{
+							patient.setLastMedicineComplaint(entry.getMedicineComplaint());
+						}
+						FileOperation.savePatientData(patient);
 						FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.entryLog.getSelectedPatient(), entry.getRecentMedication());
 						FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.entryLog.getSelectedPatient(), entry.getMedicineComplaint());
+						FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, this.entryLog.getSelectedPatient(), entry.getPainKind());
 						for (PainEntryData painEntry : duplicateEntries)
 						{
 							FileOperation.exportPainData(patient, painEntry);
 						}
+						
 						Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
 						Globals.GRAPH_PANEL.refresh();
 						Globals.PAIN_TABLE.refresh();

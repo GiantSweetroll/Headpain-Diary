@@ -19,7 +19,7 @@ import giantsweetroll.numbers.GNumbers;
 public final class Constants 
 {
 	public static final String PROGRAM_TITLE = "My Headpain Diary";
-	public static final String VERSION = "0.1b";
+	public static final String VERSION = "0.2b";
 	
 	public static final Dimension SCREENSIZE = GGUtilities.getScreenSize();
 	public static final Dimension IMAGE_SIZE = new Dimension(150, 130);
@@ -38,6 +38,7 @@ public final class Constants
 	public static final String HISTORY_FOLDER_PATH = "data" + File.separator + "history" + File.separator;
 	public static final String HISTORY_RECENT_MEDICATION_NAME = "recent_medication";
 	public static final String HISTORY_MEDICINE_COMPLAINT_NAME = "medicine_complaint";
+	public static final String HISTORY_PAIN_KIND_NAME = "pain_kind";
 	
 	public static final String PAIN_DATA_ENTRY_FILE_EXTENSION = ".xml";
 	
@@ -62,6 +63,7 @@ public final class Constants
 	public static final Color COLOR_GRAPH_AXES_MARKER_LABELS = new Color(23, 74, 211);
 	public static final Color COLOR_TABLE_HEADER = new Color (23, 74, 211);
 	public static final Color COLOR_DISABLED_COMPONENT = new Color(224, 224, 224);
+	public static final Color COLOR_HIGHLIGHT_BUTTON = new Color(28, 203, 15);
 	
 	//Fonts
 	public static final String FONT_TYPE_GENERAL = "century gothic";

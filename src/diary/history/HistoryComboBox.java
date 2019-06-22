@@ -24,13 +24,16 @@ public class HistoryComboBox extends JComboBox<String> implements GUIFunction
 	private History history;
 	private String defaultSelection;
 	private String[] defaultOptions;
+	private boolean sorted, haveNone;
 	
 	//Constants
 	private final String NO_DEFAULTS = "";
 
-	public HistoryComboBox(History history, String[] defaults)
+	public HistoryComboBox(History history, String[] defaults, boolean sorted, boolean haveNone)
 	{
 		super();
+		this.sorted = sorted;
+		this.haveNone = haveNone;
 		this.setDefaultOptions(defaults);
 		this.setDefaultSelection(this.NO_DEFAULTS);
 		this.setHistory(history);
@@ -57,9 +60,15 @@ public class HistoryComboBox extends JComboBox<String> implements GUIFunction
 		{
 			subList.add(str);
 		}
-		Collections.sort(subList);
+		if (this.sorted)
+		{
+			Collections.sort(subList);
+		}
 		
-		list.add(Methods.frameStringWithDashes(Methods.getLanguageText(XMLIdentifier.CHOOSE_NONE_TEXT)));
+		if (this.haveNone)
+		{
+			list.add(Methods.frameStringWithDashes(Methods.getLanguageText(XMLIdentifier.CHOOSE_NONE_TEXT)));
+		}
 		list.addAll(subList);
 		list.add(Methods.frameStringWithDashes(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)));
 		
@@ -86,7 +95,14 @@ public class HistoryComboBox extends JComboBox<String> implements GUIFunction
 	}
 	public void setSelectedToNone()
 	{
-		this.setSelectedIndex(0);
+		if(this.haveNone)
+		{
+			this.setSelectedIndex(0);
+		}
+		else
+		{
+			this.setSelectedToOther();
+		}
 	}
 	public int getLastIndex()
 	{
@@ -103,7 +119,14 @@ public class HistoryComboBox extends JComboBox<String> implements GUIFunction
 	}
 	public boolean noneOptionSelected()
 	{
-		return this.getSelectedIndex() == 0;
+		if (this.haveNone)
+		{
+			return this.getSelectedIndex() == 0;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	//Private Methods

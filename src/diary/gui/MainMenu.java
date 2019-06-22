@@ -47,13 +47,13 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	private JButton butSettings, butExit, butManagePatients;
 	private ImageTextButton butNewEntry, butGraph, butTable;
 	private JPanel panelMainButtons, 
-					panelSupport, 
-					panelAuthor, 
-					panelBelow, 
+					panelSupport,
+					panelAuthor,
+					panelBelow,
 					panelBelowLeft, 
 					panelBelowRight, 
 					panelBelowCenter, 
-					panelCenter, 
+					panelCenter,
 					panelCenterCenter, 
 					panelCenterBelow,
 					panelCenterTop,

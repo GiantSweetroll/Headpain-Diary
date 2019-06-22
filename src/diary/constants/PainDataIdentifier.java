@@ -33,4 +33,11 @@ public final class PainDataIdentifier
 	public static final String TIME_HOUR = "time_hour";
 	public static final String TIME_MINUTE = "time_minute";
 //	public static final String TIME_SECONDS = "time_seconds";
+	
+	//Default items identifiers
+	public static final String THROBBING = "%%throbbing",
+								PULSATING = "%%pulsating",
+								RADIATING = "%%radiating",
+								TIGHT_BAND = "%%tightband",
+								NONE = "%%none";
 }

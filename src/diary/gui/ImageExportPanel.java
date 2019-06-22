@@ -1,4 +1,4 @@
-package diary;
+package diary.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

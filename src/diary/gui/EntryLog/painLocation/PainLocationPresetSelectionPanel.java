@@ -76,6 +76,8 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 				button.add(imagePanel);
 				button.setActionCommand(subEntry.getValue());
 				button.addActionListener(this);
+				button.setBackground(Constants.COLOR_HIGHLIGHT_BUTTON);
+				button.setOpaque(false);
 				this.defaultBorder = button.getBorder();
 				this.buttons.add(button);
 			}
@@ -93,10 +95,12 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		if (mark)
 		{
 			button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+			button.setOpaque(true);
 		}
 		else
 		{
 			button.setBorder(this.defaultBorder);
+			button.setOpaque(false);
 		}
 	}
 	public List<String> getSelectedPosition()

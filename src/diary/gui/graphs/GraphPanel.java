@@ -22,7 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
-import diary.ImageExportPanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.PainDataIdentifier;
@@ -31,6 +30,7 @@ import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
+import diary.gui.ImageExportPanel;
 import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;

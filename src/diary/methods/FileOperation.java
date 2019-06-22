@@ -423,7 +423,7 @@ public class FileOperation
 		}
 		catch(Exception ex)
 		{
-			ex.printStackTrace();
+//			ex.printStackTrace();
 		}
 		
 		return list;

@@ -336,11 +336,60 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	{
 		return this.oldPatient;
 	}
+	protected boolean lastPainKindSame(PatientData patient, PainEntryData entry)
+	{
+		try
+		{
+			return patient.getLastPainKind().equals(entry.getPainKind());
+		}
+		catch(NullPointerException ex) 
+		{
+			return false;
+		}
+	}
+	protected boolean lastRecentMedsSame(PatientData patient, PainEntryData entry)
+	{
+		try
+		{
+			return patient.getLastRecentMeds().equals(entry.getRecentMedication());
+		}
+		catch(NullPointerException ex) 
+		{
+			return false;
+		}
+	}
+	protected boolean lastMedicineComplaintSame(PatientData patient, PainEntryData entry)
+	{
+		try
+		{
+			return patient.getLastMedicineComplaint().equals(entry.getMedicineComplaint());
+		}
+		catch(NullPointerException ex) 
+		{
+			return false;
+		}
+	}
+	
 	protected void export(PatientData patient, PainEntryData entry)
 	{
+		if(!this.lastPainKindSame(patient, entry))
+		{
+			patient.setLastPainKind(entry.getPainKind());
+		}
+		if(!this.lastRecentMedsSame(patient, entry))
+		{
+			patient.setLastRecentMeds(entry.getRecentMedication());
+		}
+		if(!this.lastMedicineComplaintSame(patient, entry))
+		{
+			patient.setLastMedicineComplaint(entry.getMedicineComplaint());
+		}
+		FileOperation.savePatientData(patient);
 		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.getSelectedPatient(), entry.getRecentMedication());
 		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.getSelectedPatient(), entry.getMedicineComplaint());
+		FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, this.getSelectedPatient(), entry.getPainKind());
 		FileOperation.exportPainData(patient, entry);
+		
 		if (!this.isNewEntry())
 		{
 			if (!this.dateTime.timeSameAsDefault() || !this.dateTime.dateSameAsDefault())		//Check if the start time or date has been altered
@@ -369,6 +418,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.painKind.resetDefaults();
 		this.painLoc.resetDefaults();
 		this.recentMeds.resetDefaults();
+		this.refreshHistories();
 		this.trigger.resetDefaults();
 		this.changeActiveSection(EntryLog.ACTIVE_PATIENT);
 		this.panelEntryLogMap.resetDefaults();

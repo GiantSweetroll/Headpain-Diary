@@ -34,7 +34,6 @@ import javax.swing.table.JTableHeader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import diary.ImageExportPanel;
 import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.ImageConstants;
@@ -43,6 +42,7 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.Settings;
+import diary.gui.ImageExportPanel;
 import diary.gui.MainFrame;
 import diary.gui.graphs.GraphPanel;
 import diary.interfaces.LanguageListener;
@@ -805,6 +805,7 @@ public class Methods
 	{
 		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(patient);
 		Globals.HISTORY_RECENT_MEDICATION.refresh(patient);
+		Globals.HISTORY_PAIN_KIND.refresh(patient);
 	}
 	
 	public static Border createTransparentBorder(int thickness)
@@ -1020,8 +1021,7 @@ public class Methods
     	String kinds[] = {Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_THROBBING),
 				Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_PULSATING),
 				Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_RADIATING),
-				Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND),
-				Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
+				Methods.getLanguageText(XMLIdentifier.DEFAULT_PAIN_KIND_TIGHT_BAND)};
     	return kinds;
     }
     public static String[] getDefaultRecentMedications()

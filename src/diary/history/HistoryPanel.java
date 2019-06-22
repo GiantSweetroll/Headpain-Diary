@@ -34,19 +34,19 @@ public class HistoryPanel extends JPanel implements GUIFunction, ActionListener,
 	private String historyKey;
 	
 	//Constructors
-	public HistoryPanel(History history, String patientDataConstant, String[] defaultOptions)		//patientDataConstant are constants from PatientData class used for the recent selected options
+	public HistoryPanel(History history, String patientDataConstant, String[] defaultOptions, boolean sorted, boolean haveNone)		//patientDataConstant are constants from PatientData class used for the recent selected options
 	{
 		this.historyKey = patientDataConstant;
 		this.history = history;
-		this.init(defaultOptions);
+		this.init(defaultOptions, sorted, haveNone);
 		this.comboHistory.setModel(new DefaultComboBoxModel<String>(history.getHistory().toArray(new String[history.getHistory().size()])));
 	}
 	
 	//Methods
-	private void init(String[] defaultOptions)
+	private void init(String[] defaultOptions, boolean sorted, boolean haveNone)
 	{
 		//Initialization
-		this.comboHistory = new HistoryComboBox(this.history, defaultOptions);
+		this.comboHistory = new HistoryComboBox(this.history, defaultOptions, sorted, haveNone);
 		this.tfHistory = new JTextField(10);
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -150,6 +150,14 @@ public class HistoryPanel extends JPanel implements GUIFunction, ActionListener,
 	public void revalidateLanguage(String[] options)
 	{
 		this.comboHistory.revalidateLanguage(options);
+	}
+	public int getSelectedIndex()
+	{
+		return this.comboHistory.getSelectedIndex();
+	}
+	public void setSelectedIndex(int i)
+	{
+		this.comboHistory.setSelectedIndex(i);
 	}
 	
 	//Overridden Methods

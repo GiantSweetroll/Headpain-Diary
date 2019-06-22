@@ -78,6 +78,7 @@ public class Main
 									"jpeg");
 							Globals.HISTORY_MEDICINE_COMPLAINT.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 							Globals.HISTORY_RECENT_MEDICATION.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
+							Globals.HISTORY_PAIN_KIND.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 						}
 						catch(Exception ex)
 						{

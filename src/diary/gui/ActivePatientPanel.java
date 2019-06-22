@@ -292,6 +292,7 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 		this.displayPatientDetails();
 		Globals.HISTORY_RECENT_MEDICATION.refresh(this.getSelectedPatientData());
 		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(this.getSelectedPatientData());
+		Globals.HISTORY_PAIN_KIND.refresh(this.getSelectedPatientData());
 		Globals.ENTRY_LOG.refreshHistories();
 		this.revalidate();
 		this.repaint();

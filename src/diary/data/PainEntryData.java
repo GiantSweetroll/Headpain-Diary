@@ -17,7 +17,7 @@ import giantsweetroll.date.Date;
 import giantsweetroll.xml.dom.XMLManager;
 
 public class PainEntryData 
-{
+{	
 	private HashMap<String, Object> dataMap;
 
 	//Constructors
