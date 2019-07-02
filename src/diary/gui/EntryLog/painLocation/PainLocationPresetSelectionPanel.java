@@ -88,6 +88,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		for (JButton button : this.buttons)
 		{
 			button.setBorder(this.defaultBorder);
+			button.setOpaque(false);
 		}
 	}
 	private void setMarked(JButton button, boolean mark)
