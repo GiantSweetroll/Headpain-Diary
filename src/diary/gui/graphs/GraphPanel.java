@@ -93,12 +93,12 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.setLayout(new BorderLayout());
 //		this.setOpaque(false);
 		this.setBackground(Color.WHITE);
-		scroll.setBorder(BorderFactory.createLineBorder(Color.black));
+//		scroll.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		this.initGraph();
 		
 		//add to panel
-		this.add(this.panelTop, BorderLayout.NORTH);
+		this.add(scroll, BorderLayout.NORTH);
 		this.add(this.panelBelow, BorderLayout.SOUTH);
 	}
 	private void initPanelTop()
