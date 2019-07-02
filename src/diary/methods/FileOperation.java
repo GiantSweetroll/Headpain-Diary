@@ -1,5 +1,6 @@
 package diary.methods;
 
+import java.awt.CardLayout;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,10 +30,13 @@ import org.xml.sax.SAXException;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
+import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.Settings;
 import diary.fileFilters.FileTypeFilter;
+import diary.gui.ImageExportPanel;
+import diary.gui.graphs.GraphPanel;
 import diary.gui.table.Table;
 import diary.history.History;
 import diary.patientdata.PatientData;
@@ -1141,5 +1145,66 @@ public class FileOperation
 	public static File getRootFile()
 	{
 		return new File("");
+	}
+
+	/*
+	@Deprecated
+	public static void exportPanelImage(ImagePanel panel, boolean showPreview)
+	{
+		MainFrame.changePanel(panel);
+		if (showPreview)
+		{
+			FileOperation.exportImage(Methods.createImage((ImagePanel)mainFrame.getPanelCanvas()));
+		}		
+		MainFrame.changePanel(MainFrame.lastComponent);
+		try
+		{
+			if (mainFrame.getPanelCanvas() instanceof GraphPanel)
+			{
+				((GraphPanel)mainFrame.getPanelCanvas()).refreshGraph();		//Redraws graph to its original state
+			}
+			else if (mainFrame.getPanelCanvas() instanceof TableScreen)
+			{
+				((TableScreen)mainFrame.getPanelCanvas()).initTable();		//Recreates table to its original state
+			}
+		}
+		catch(ClassCastException ex) {}
+		if (!showPreview)
+		{
+			FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.lastComponent));
+		}
+	}
+	*/	
+	public static void exportPanelImage(ImageExportPanel panel, boolean showPreview)
+	{
+	//	MainFrame.changePanel(panel);
+		Globals.MAIN_FRAME.changePanel(panel, PanelName.IMAGE_EXPORT_PANEL);
+		if (showPreview)
+		{
+			exportImage(Methods.createImage(panel));
+		}		
+//		MainFrame.changePanel(MainFrame.lastComponent);
+		Globals.MAIN_FRAME.changePanel(PanelName.GRAPH_PANEL);
+		try
+		{
+			/*
+			if (mainFrame.getPanelCanvas() instanceof GraphPanel)
+			{
+				((GraphPanel)mainFrame.getPanelCanvas()).refreshGraph();		//Redraws graph to its original state
+			}
+			else if (mainFrame.getPanelCanvas() instanceof TableScreen)
+			{
+				((TableScreen)mainFrame.getPanelCanvas()).refreshTable();		//Recreates table to its original state
+			}
+			*/
+			Globals.GRAPH_PANEL.refresh();
+			Globals.PAIN_TABLE.refresh();
+		}
+		catch(ClassCastException ex) {}
+		if (!showPreview)
+		{
+			((CardLayout)Globals.MAIN_FRAME.getPanelCanvas().getLayout()).previous(Globals.MAIN_FRAME.getPanelCanvas());
+			exportImage(Methods.createImage((GraphPanel)Globals.MAIN_FRAME.getPanelCanvas()));
+		}
 	}
 }

@@ -38,13 +38,10 @@ import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.ImageConstants;
 import diary.constants.PainLocationConstants;
-import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.Settings;
-import diary.gui.ImageExportPanel;
 import diary.gui.MainFrame;
-import diary.gui.graphs.GraphPanel;
 import diary.interfaces.LanguageListener;
 import diary.patientdata.PatientData;
 import giantsweetroll.files.FileManager;
@@ -461,67 +458,6 @@ public class Methods
 		panel.paint(g2);
 		
 		return image;
-	}
-	
-	/*
-	@Deprecated
-	public static void exportPanelImage(ImagePanel panel, boolean showPreview)
-	{
-		MainFrame.changePanel(panel);
-		if (showPreview)
-		{
-			FileOperation.exportImage(Methods.createImage((ImagePanel)mainFrame.getPanelCanvas()));
-		}		
-		MainFrame.changePanel(MainFrame.lastComponent);
-		try
-		{
-			if (mainFrame.getPanelCanvas() instanceof GraphPanel)
-			{
-				((GraphPanel)mainFrame.getPanelCanvas()).refreshGraph();		//Redraws graph to its original state
-			}
-			else if (mainFrame.getPanelCanvas() instanceof TableScreen)
-			{
-				((TableScreen)mainFrame.getPanelCanvas()).initTable();		//Recreates table to its original state
-			}
-		}
-		catch(ClassCastException ex) {}
-		if (!showPreview)
-		{
-			FileOperation.exportImage(Methods.createImage((ImagePanel)MainFrame.lastComponent));
-		}
-	}
-	*/
-	public static void exportPanelImage(ImageExportPanel panel, boolean showPreview)
-	{
-	//	MainFrame.changePanel(panel);
-		Globals.MAIN_FRAME.changePanel(panel, PanelName.IMAGE_EXPORT_PANEL);
-		if (showPreview)
-		{
-			FileOperation.exportImage(Methods.createImage(panel));
-		}		
-//		MainFrame.changePanel(MainFrame.lastComponent);
-		Globals.MAIN_FRAME.changePanel(PanelName.GRAPH_PANEL);
-		try
-		{
-			/*
-			if (mainFrame.getPanelCanvas() instanceof GraphPanel)
-			{
-				((GraphPanel)mainFrame.getPanelCanvas()).refreshGraph();		//Redraws graph to its original state
-			}
-			else if (mainFrame.getPanelCanvas() instanceof TableScreen)
-			{
-				((TableScreen)mainFrame.getPanelCanvas()).refreshTable();		//Recreates table to its original state
-			}
-			*/
-			Globals.GRAPH_PANEL.refresh();
-			Globals.PAIN_TABLE.refresh();
-		}
-		catch(ClassCastException ex) {}
-		if (!showPreview)
-		{
-			((CardLayout)Globals.MAIN_FRAME.getPanelCanvas().getLayout()).previous(Globals.MAIN_FRAME.getPanelCanvas());
-			FileOperation.exportImage(Methods.createImage((GraphPanel)Globals.MAIN_FRAME.getPanelCanvas()));
-		}
 	}
 	
 	public static boolean isLastIndex(JComboBox<?> combo)
