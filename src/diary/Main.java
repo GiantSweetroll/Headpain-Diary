@@ -2,6 +2,7 @@ package diary;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.util.HashSet;
 
 import javax.swing.SwingUtilities;
@@ -50,6 +51,11 @@ public class Main
 							UIManager.put("Button.background", Constants.COLOR_MAIN_MENU_BUTTONS);
 							UIManager.put("Button.foreground", Color.WHITE);
 							UIManager.put("Button.font", Constants.FONT_GENERAL);
+							UIManager.put("TabbedPane.selected", Constants.COLOR_HIGHLIGHT_BUTTON);
+							UIManager.put("TabbedPane.background", Constants.COLOR_MAIN_MENU_BUTTONS);
+							UIManager.put("TabbedPane.foreground", Color.WHITE);
+							UIManager.put("TabbedPane.contentBorderInsets", new Insets(0, 0, 0, 0));
+							UIManager.put("TitledBorder.font", Constants.FONT_GENERAL_BOLD);
 							
 							if(!FileOperation.dataExists(Constants.SETTINGS_FOLDER_PATH + Constants.SETTINGS_FILE_NAME))		//If settings file doesn't exists
 							{

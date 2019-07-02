@@ -107,7 +107,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
 	//	scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	//	scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		this.initTable();
 		
@@ -231,7 +231,6 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		
 		//Properties
 //		this.panelTopLeft.setOpaque(false);
-		this.panelTopLeft.setBackground(Color.WHITE);
 		this.panelTopLeft.setLayout(new GridBagLayout());
 		this.labGuide.setFont(Constants.FONT_SMALL_NOTE);
 		this.butFilter.addActionListener(this);
@@ -268,12 +267,15 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.tableConfig = new JTabbedPane();
 		
 		//Properties
-		this.panelTop.setOpaque(false);
+//		this.panelTop.setOpaque(false);
+		this.panelTop.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		this.panelTop.setLayout(new BorderLayout());
+		this.panelTopLeft.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.panelDateRange.dateFrom.autoSetDate();
 		this.panelDateRange.dateTo.autoSetDate();
 		this.panelDateRange.setOpaque(true);
 		this.panelDateRange.setBackground(Color.WHITE);
+		this.panelDateRange.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.activePatientPanel.setOpaque(true);
 		this.tableConfig.addTab(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT), this.panelTopLeft);
 		this.tableConfig.addTab(Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT), this.activePatientPanel);

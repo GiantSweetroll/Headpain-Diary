@@ -47,7 +47,11 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	 * 
 	 */
 	private static final long serialVersionUID = 5865211789435235389L;
-	private JPanel panelTop, panelTopLeft, panelBelow, panelBelowLeft, panelBelowCenter;
+	private JPanel panelTop, 
+					panelTopLeft, 
+					panelBelow, 
+					panelBelowLeft, 
+					panelBelowCenter;
 	private JLabel labCategory;
 	private JComboBox<String> comboCategory;
 	private Graph graph;
@@ -107,17 +111,20 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.graphConfig = new JTabbedPane();
 		
 		//Properties
-//		this.panelTop.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
-		this.panelTop.setOpaque(false);
+		this.panelTop.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
+//		this.panelTop.setOpaque(false);
 		this.panelTop.setLayout(new BorderLayout());
+		this.panelTopLeft.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.panelDateRange.dateFrom.autoSetDate();
 		this.panelDateRange.dateFrom.setAsDefaultDataThis();
 		this.panelDateRange.dateTo.autoSetDate();
 		this.panelDateRange.dateTo.setAsDefaultDataThis();
 		this.panelDateRange.setOpaque(true);
 		this.panelDateRange.setBackground(Color.white);
+		this.panelDateRange.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.activePatientPanel.setOpaque(true);
 		this.activePatientPanel.setBackground(Color.WHITE);
+		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT), this.panelTopLeft);
 		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT), this.activePatientPanel);
 		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT), this.panelDateRange);
@@ -419,7 +426,7 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 																	this.panelDateRange.getDateRangeAsString(), 
 																	Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
 																	new TitledGraph(this.comboCategory.getSelectedItem().toString(), this.graph));
-				Methods.exportPanelImage(exportImage, true);
+				FileOperation.exportPanelImage(exportImage, true);
 				break;
 				
 			case OPTIONS:

@@ -1,4 +1,4 @@
-package diary.gui.settings;
+	package diary.gui.settings;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -96,6 +95,7 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		
 		//Properties
 		this.setLayout(new BorderLayout());
+		this.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 //		this.setBackground(Color.WHITE);
 //		this.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
 		
@@ -143,7 +143,7 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
-		this.catDatabase.setLayout(new GridBagLayout());
+		this.catDatabase.getPanelCanvas().setLayout(new GridBagLayout());
 	//	this.catDatabase.setOpaque(false);
 		tfDatabasePath.setEditable(false);
 		tfDatabasePath.setOpaque(false);
@@ -268,21 +268,21 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
-		this.catDatabase.add(labDatabasePath, c);			//Database Path
+		this.catDatabase.getPanelCanvas().add(labDatabasePath, c);			//Database Path
 		Gbm.nextGridColumn(c);
-		this.catDatabase.add(tfDatabasePath, c);			//Database Path Text Field
+		this.catDatabase.getPanelCanvas().add(tfDatabasePath, c);			//Database Path Text Field
 		Gbm.nextGridColumn(c);
-		this.catDatabase.add(butBrowseDatabasePath , c);	//Browse database Path button
+		this.catDatabase.getPanelCanvas().add(butBrowseDatabasePath , c);	//Browse database Path button
 		Gbm.nextGridColumn(c);
-		this.catDatabase.add(butDefaultDatabase , c);		//Reset Database button
+		this.catDatabase.getPanelCanvas().add(butDefaultDatabase , c);		//Reset Database button
 		Gbm.newGridLine(c);
-		this.catDatabase.add(labUserDatabasePath, c);		//User Database path
+		this.catDatabase.getPanelCanvas().add(labUserDatabasePath, c);		//User Database path
 		Gbm.nextGridColumn(c);
-		this.catDatabase.add(tfUserDatabasePath, c);		//User Database path Text Field
+		this.catDatabase.getPanelCanvas().add(tfUserDatabasePath, c);		//User Database path Text Field
 		Gbm.nextGridColumn(c);
-		this.catDatabase.add(butBrowseUserDatabasePath, c);	//Browse User Database Path Button
+		this.catDatabase.getPanelCanvas().add(butBrowseUserDatabasePath, c);	//Browse User Database Path Button
 		Gbm.nextGridColumn(c);
-		this.catDatabase.add(butDefaultUserDatabase, c);	//Reset User Database Path Button
+		this.catDatabase.getPanelCanvas().add(butDefaultUserDatabase, c);	//Reset User Database Path Button
 	}
 	private void initCatWindow()
 	{
@@ -296,8 +296,8 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		String chosenWindowState = this.dataMap.get(Settings.WINDOW_MODE);
 		
 		//Properties
-		this.catWindow.setLayout(new GridBagLayout());
-		this.catWindow.setOpaque(false);
+		this.catWindow.getPanelCanvas().setLayout(new GridBagLayout());
+//		this.catWindow.setOpaque(false);
 		group.add(radWindowed);
 		group.add(radFullscreen);
 		radWindowed.setOpaque(false);
@@ -347,11 +347,11 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
-		this.catWindow.add(labWindowMode, c);			//Window Mode
+		this.catWindow.getPanelCanvas().add(labWindowMode, c);			//Window Mode
 		Gbm.nextGridColumn(c);
-		this.catWindow.add(radFullscreen, c);			//Fullscreen radio Button
+		this.catWindow.getPanelCanvas().add(radFullscreen, c);			//Fullscreen radio Button
 		Gbm.nextGridColumn(c);
-		this.catWindow.add(radWindowed, c);				//Windowed radio button
+		this.catWindow.getPanelCanvas().add(radWindowed, c);				//Windowed radio button
 	}
 	private void initCatProgram()
 	{
@@ -364,8 +364,8 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		String selectedLanguage = this.dataMap.get(Settings.LANGUAGE);
 		
 		//Properties
-		this.catProgram.setLayout(new GridBagLayout());
-		this.catProgram.setOpaque(false);
+		this.catProgram.getPanelCanvas().setLayout(new GridBagLayout());
+//		this.catProgram.setOpaque(false);
 		comboLanguages.setBackground(Color.WHITE);
 		butLanguageRefresh.addActionListener(new ActionListener()
 		{
@@ -388,11 +388,11 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
 		c.fill = GridBagConstraints.BOTH;
-		this.catProgram.add(labLanguage, c);			//Language
+		this.catProgram.getPanelCanvas().add(labLanguage, c);			//Language
 		Gbm.nextGridColumn(c);
-		this.catProgram.add(comboLanguages, c);			//Language Options
+		this.catProgram.getPanelCanvas().add(comboLanguages, c);			//Language Options
 		Gbm.nextGridColumn(c);
-		this.catProgram.add(butLanguageRefresh, c);				//Refresh Language Button
+		this.catProgram.getPanelCanvas().add(butLanguageRefresh, c);				//Refresh Language Button
 	}
 	private void initPanelBelow()
 	{
@@ -453,9 +453,9 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 	@Override
 	public void revalidateLanguage()
 	{
-		this.catProgram.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_PROGRAM_TITLE)));
-		this.catWindow.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_TITLE)));
-		this.catDatabase.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_TITLE)));
+		this.catProgram.setBorderText(Methods.getLanguageText(XMLIdentifier.SETTINGS_PROGRAM_TITLE));
+		this.catWindow.setBorderText(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_TITLE));
+		this.catDatabase.setBorderText(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_TITLE));
 		this.labWindowMode.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_TEXT));
 		this.radWindowed.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_WINDOWED_TEXT));
 		this.radFullscreen.setText(Methods.getLanguageText(XMLIdentifier.SETTINGS_WINDOW_MODE_FULLSCREEN_TEXT));
