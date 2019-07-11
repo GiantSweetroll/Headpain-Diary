@@ -58,6 +58,7 @@ public class PainKind extends FormElement
 	//Methods
 	public void setPainKind(String painKind)
 	{
+		System.out.println("pain kind:" + painKind);
 		if (painKind.equals(PainDataIdentifier.THROBBING) || painKind.equals(""))
 		{
 			this.painKind.setSelectedIndex(0);
@@ -129,6 +130,7 @@ public class PainKind extends FormElement
 	{
 		if (obj instanceof PainEntryData)
 		{
+			System.out.println("Hello");
 			/*
 			String painKind = Methods.convertPainKindIDToLanguage(((PainEntryData)obj).getPainKind());
 			if (Methods.isPartOfDefaultPainKind(painKind))
@@ -143,6 +145,10 @@ public class PainKind extends FormElement
 			*/
 			String painKind = ((PainEntryData)obj).getPainKind();
 			this.setPainKind(painKind);
+		}
+		else
+		{
+			System.out.println("There");
 		}
 	}	
 	
