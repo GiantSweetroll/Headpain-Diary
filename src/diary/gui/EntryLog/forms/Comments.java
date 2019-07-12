@@ -41,7 +41,11 @@ public class Comments extends FormElement<String>
 	
 	//Overridden Methods
 	@Override
-	public void resetDefaults() {this.ta.setText("");}
+	public void resetDefaults() 
+	{
+		super.resetDefaults();
+		this.ta.setText("");
+	}
 
 	@Override
 	public void refresh() {};

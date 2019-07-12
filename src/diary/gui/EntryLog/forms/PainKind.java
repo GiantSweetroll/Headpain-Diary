@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
-import diary.constants.PainDataIdentifier;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.history.HistoryPanel;
@@ -33,7 +32,7 @@ public class PainKind extends FormElement
 		//Initialization
 //		this.combo = new JComboBox<String>(Methods.getDefaultPainKinds());
 //		this.tf = new JTextField(10);
-		this.painKind = new HistoryPanel(Globals.HISTORY_PAIN_KIND, PatientData.LAST_PAIN_KIND, Methods.getDefaultPainKinds(), false, false);
+		this.painKind = new HistoryPanel(Globals.HISTORY_PAIN_KIND, PatientData.LAST_PAIN_KIND, Methods.getDefaultPainKinds(), true, false);
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -58,6 +57,7 @@ public class PainKind extends FormElement
 	//Methods
 	public void setPainKind(String painKind)
 	{
+		/*
 		System.out.println("pain kind:" + painKind);
 		if (painKind.equals(PainDataIdentifier.THROBBING) || painKind.equals(""))
 		{
@@ -80,7 +80,8 @@ public class PainKind extends FormElement
 //			this.combo.setSelectedItem(Methods.getLanguageText(XMLIdentifier.OTHER_TEXT));
 //			this.tf.setText(painKind);
 			this.painKind.setActiveItem(painKind);
-		}
+		}		*/
+		this.painKind.setActiveItem(painKind);
 	}
 	public void refreshHistory(PatientData patient)
 	{
@@ -90,9 +91,11 @@ public class PainKind extends FormElement
 	
 	//Overridden Methods
 	@Override
-	public void resetDefaults() {
+	public void resetDefaults() 
+	{
 //		this.combo.setSelectedIndex(0);
 //		this.tf.setText("");
+		super.resetDefaults();
 		this.painKind.resetDefaults();
 	}
 	
@@ -102,6 +105,7 @@ public class PainKind extends FormElement
 	@Override
 	public String getData() 
 	{
+		/*
 		int index = this.painKind.getSelectedIndex();
 		if (index == 0)
 		{
@@ -123,6 +127,8 @@ public class PainKind extends FormElement
 		{
 			return this.painKind.getItem();
 		}
+		*/
+		return this.painKind.getItem();
 	}
 
 	@Override
@@ -130,7 +136,7 @@ public class PainKind extends FormElement
 	{
 		if (obj instanceof PainEntryData)
 		{
-			System.out.println("Hello");
+//			System.out.println("Hello");
 			/*
 			String painKind = Methods.convertPainKindIDToLanguage(((PainEntryData)obj).getPainKind());
 			if (Methods.isPartOfDefaultPainKind(painKind))
@@ -145,10 +151,6 @@ public class PainKind extends FormElement
 			*/
 			String painKind = ((PainEntryData)obj).getPainKind();
 			this.setPainKind(painKind);
-		}
-		else
-		{
-			System.out.println("There");
 		}
 	}	
 	

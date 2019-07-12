@@ -3,13 +3,16 @@ package diary.gui.EntryLog;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -20,6 +23,7 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
+import diary.gui.CustomDialog;
 import diary.gui.EntryLog.forms.ActiveUser;
 import diary.gui.EntryLog.forms.Comments;
 import diary.gui.EntryLog.forms.DateTimeSelect;
@@ -33,8 +37,11 @@ import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
+import diary.methods.PainDataOperation;
 import diary.patientdata.PatientData;
+import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.ScrollPaneManager;
+import giantsweetroll.message.MessageManager;
 
 public class EntryLog extends JPanel implements GUIFunction, ActionListener, LanguageListener
 {
@@ -47,7 +54,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	private JPanel panelTop, panelInput, panelBelow, panelCenter;
 	private EntryLogMapPanel panelEntryLogMap;
 	private JLabel labTitle;
-	private JButton butCancel;
+	private JButton butCancel, butSave;
 	private EntryLogButtonControl butBack, butNext;
 	private ActiveUser activeUser;
 	private Comments comments;
@@ -66,6 +73,8 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	private byte panelState;
 	
 	//Constants
+	private final String CANCEL = "cancele",
+							SAVE = "savee";
 	protected static final String ACTIVE_PATIENT = "activepatiente", 
 									COMMENTS="commente", 
 									DATE_TIME="datetimee",
@@ -167,6 +176,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.butCancel.setForeground(Color.WHITE);
 		this.butCancel.setMnemonic(KeyEvent.VK_X);
 		this.butCancel.setToolTipText("alt+x");
+		this.butCancel.setActionCommand(this.CANCEL);
 		this.labTitle.setFont(Constants.FONT_SUB_TITLE);
 		
 		//Add to panel
@@ -180,14 +190,24 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.panelState = EntryLog.PROFILE_SELECTION;
 		this.butBack = new EntryLogButtonControl(this, EntryLogButtonControl.BACK, "");
 		this.butNext = new EntryLogButtonControl(this, EntryLogButtonControl.NEXT, "");
+		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		JPanel panel = new JPanel();
 		
 		//Properties
 		this.panelBelow.setLayout(new BorderLayout());
 		this.panelBelow.setOpaque(false);
+		this.butSave.addActionListener(this);
+		this.butSave.setActionCommand(this.SAVE);
+		this.butSave.setMnemonic(KeyEvent.VK_S);
+		this.butSave.setToolTipText("Alt + S");
+		panel.setOpaque(false);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		//Add to panel
+		panel.add(this.butSave);
 		this.panelBelow.add(this.butBack, BorderLayout.WEST);
 		this.panelBelow.add(this.butNext, BorderLayout.EAST);
+		this.panelBelow.add(panel, BorderLayout.CENTER);
 	}
 	private void initPanelCenter()
 	{
@@ -228,6 +248,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	public void refreshHistories()
 	{
 		this.recentMeds.refreshHistories(this.getSelectedPatient());
+		this.painKind.refreshHistory(this.getSelectedPatient());
 	}
 	
 	public void loadData(PatientData patient, PainEntryData entry)
@@ -370,7 +391,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		}
 	}
 	
-	protected void export(PatientData patient, PainEntryData entry)
+	protected void exportSingle(PatientData patient, PainEntryData entry)
 	{
 		if(!this.lastPainKindSame(patient, entry))
 		{
@@ -403,6 +424,74 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		Methods.refresHistories(this.getSelectedPatient());
 		Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
 		this.resetDefaults();
+	}
+	protected void exportMultiple(PatientData patient, PainEntryData entry)
+	{
+		List<PainEntryData> duplicateEntries = PainDataOperation.generateDuplicates(entry, new Date(entry.getDate().getDay() + Methods.secondsToDays(Long.parseLong(entry.getDuration())),
+				entry.getDate().getMonth(),
+				entry.getDate().getYear()));
+
+		if(!this.lastPainKindSame(patient, entry))
+		{
+		patient.setLastPainKind(entry.getPainKind());
+		}
+		if(!this.lastRecentMedsSame(patient, entry))
+		{
+		patient.setLastRecentMeds(entry.getRecentMedication());
+		}
+		if(!this.lastMedicineComplaintSame(patient, entry))
+		{
+		patient.setLastMedicineComplaint(entry.getMedicineComplaint());
+		}
+		FileOperation.savePatientData(patient);
+		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.getSelectedPatient(), entry.getRecentMedication());
+		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.getSelectedPatient(), entry.getMedicineComplaint());
+		FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, this.getSelectedPatient(), entry.getPainKind());
+		for (PainEntryData painEntry : duplicateEntries)
+		{
+		FileOperation.exportPainData(patient, painEntry);
+		}
+		
+		Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
+		Globals.GRAPH_PANEL.refresh();
+		Globals.PAIN_TABLE.refresh();
+		Methods.refresHistories(this.getSelectedPatient());
+		Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
+		this.refresh();
+		this.resetDefaults();		
+	}
+	protected void export(PatientData patient, PainEntryData entry)
+	{
+		if (this.allRequiredFieldsFilled())
+		{
+			if(entry.isSingleEntry()) 
+			{
+				if (FileOperation.entryExists(patient, entry) && this.isNewEntry())
+				{
+					int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
+																Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
+					
+					if (response == JOptionPane.YES_OPTION)
+					{
+						this.exportSingle(patient, entry);
+					}
+				}
+				else
+				{
+					this.exportSingle(patient, entry);
+				}
+				this.refresh();
+			}
+			else
+			{
+				this.exportMultiple(patient, entry);
+			}
+		}
+		else
+		{
+			MessageManager.showErrorDialog(Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT),
+											Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE));
+		}		
 	}
 	
 	//Interfaces
@@ -442,8 +531,16 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		this.resetDefaults();
-		Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
+		String acm = e.getActionCommand();
+		if (acm.equals(this.CANCEL))
+		{
+			this.resetDefaults();
+			Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
+		}
+		else if (acm.equals(this.SAVE))
+		{
+			this.export(this.getSelectedPatient(), this.getData());
+		}
 	}
 
 	@Override
@@ -452,6 +549,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.labTitle.setText(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_TITLE));
 		this.butBack.revalidateLanguage();
 		this.butNext.revalidateLanguage();
+		this.butSave.setText(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
 		this.activeUser.revalidateLanguage();
 		this.dateTime.revalidateLanguage();
 		this.comments.revalidateLanguage();

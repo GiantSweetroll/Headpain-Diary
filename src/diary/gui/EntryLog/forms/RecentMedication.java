@@ -123,6 +123,7 @@ public class RecentMedication extends FormElement
 	@Override
 	public void resetDefaults() 
 	{
+		super.resetDefaults();
 		this.recentMedication.resetDefaults();
 		this.medicineComplaint.resetDefaults();
 	}

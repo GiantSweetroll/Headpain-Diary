@@ -1,7 +1,5 @@
 package diary.gui.EntryLog.forms;
 
-import java.awt.event.FocusListener;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -76,6 +74,14 @@ public abstract class FormElement<T> extends JScrollPane implements GUIFunction,
 	public boolean isRequired()
 	{
 		return this.required;
+	}
+	
+	//Overridden Methods
+	@Override
+	public void resetDefaults()
+	{
+		this.getVerticalScrollBar().setValue(0);
+		this.getHorizontalScrollBar().setValue(0);
 	}
 	
 	//Abstract Methods

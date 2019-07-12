@@ -113,7 +113,9 @@ public class Intensity extends FormElement<Integer> implements KeyListener, Chan
 	
 	//Overridden Methods
 	@Override
-	public void resetDefaults() {
+	public void resetDefaults() 
+	{
+		super.resetDefaults();
 		this.slider.setValue(0);
 	}
 	

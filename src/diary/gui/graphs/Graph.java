@@ -306,8 +306,8 @@ public abstract class Graph extends JPanel implements LanguageListener
 		for (double i=0; i<dataValues.size(); i++)
 		{
 			Double roundedDataValue = GNumbers.round(dataValues.get((int)i), this.DECIMAL_PLACES);
-			Double DoubleCoordinate = (double)this.axesOrigin.y - yDiff*roundedDataValue;
-			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(DoubleCoordinate, this.DECIMAL_PLACES)));
+			Double doubleCoordinate = (double)this.axesOrigin.y - yDiff*roundedDataValue;
+			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(doubleCoordinate, this.DECIMAL_PLACES)));
 			xPos+=xDiff; 
 		}
 	}

@@ -121,70 +121,10 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 		{
 			if (this.entryLog.getPanelState() == EntryLog.COMMENTS_SELECTION)
 			{
-				if (this.entryLog.allRequiredFieldsFilled())
-				{
-					PainEntryData entry = this.entryLog.getData();
-					PatientData patient = this.entryLog.getSelectedPatient();
-					
-					if(entry.isSingleEntry()) 
-					{
-						if (FileOperation.entryExists(patient, entry) && this.entryLog.isNewEntry())
-						{
-							int response = CustomDialog.showConfirmDialog(Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TITLE), 
-																		Methods.getLanguageText(XMLIdentifier.MESSAGE_OVERWRITE_CONFIRM_TEXT));
-							
-							if (response == JOptionPane.YES_OPTION)
-							{
-								this.entryLog.export(patient, entry);
-							}
-						}
-						else
-						{
-							this.entryLog.export(patient, entry);
-						}
-						this.entryLog.refresh();
-					}
-					else
-					{
-						List<PainEntryData> duplicateEntries = PainDataOperation.generateDuplicates(entry, new Date(entry.getDate().getDay() + Methods.secondsToDays(Long.parseLong(entry.getDuration())),
-																													entry.getDate().getMonth(),
-																													entry.getDate().getYear()));
-						
-						if(!entryLog.lastPainKindSame(patient, entry))
-						{
-							patient.setLastPainKind(entry.getPainKind());
-						}
-						if(!entryLog.lastRecentMedsSame(patient, entry))
-						{
-							patient.setLastRecentMeds(entry.getRecentMedication());
-						}
-						if(!entryLog.lastMedicineComplaintSame(patient, entry))
-						{
-							patient.setLastMedicineComplaint(entry.getMedicineComplaint());
-						}
-						FileOperation.savePatientData(patient);
-						FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.entryLog.getSelectedPatient(), entry.getRecentMedication());
-						FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.entryLog.getSelectedPatient(), entry.getMedicineComplaint());
-						FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, this.entryLog.getSelectedPatient(), entry.getPainKind());
-						for (PainEntryData painEntry : duplicateEntries)
-						{
-							FileOperation.exportPainData(patient, painEntry);
-						}
-						
-						Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
-						Globals.GRAPH_PANEL.refresh();
-						Globals.PAIN_TABLE.refresh();
-						Methods.refresHistories(this.entryLog.getSelectedPatient());
-						Globals.GRAPH_FILTER_PANEL.refresh(Globals.GRAPH_PANEL.getActivePatientPanel().getSelectedPatientData());
-						this.entryLog.refresh();
-						this.entryLog.resetDefaults();
-					}
-				}
-				else
-				{
-					MessageManager.showErrorDialog(Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT),
-							Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE));
-				}
+				PainEntryData entry = this.entryLog.getData();
+				PatientData patient = this.entryLog.getSelectedPatient();
+				
+				this.entryLog.export(patient, entry);
 			}
 			else
 			{

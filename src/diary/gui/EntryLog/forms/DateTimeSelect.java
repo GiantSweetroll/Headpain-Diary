@@ -99,6 +99,7 @@ public class DateTimeSelect extends FormElement
 	@Override
 	public void resetDefaults() 
 	{
+		super.resetDefaults();
 		this.date.resetDefault();
 		this.time.resetDefault();
 		this.time.setToCurrentTime();

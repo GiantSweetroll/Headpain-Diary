@@ -49,7 +49,7 @@ public class LineGraphPanel extends Graph
 
 
 	@Override
-	protected void drawDataPoints(Graphics g, Color c, int width) 
+	protected void drawDataPoints(Graphics g, Color c, int width) 	
 	{
 		g.setColor(c);
 		for (int i=0; i<this.dataPoints.size(); i++)

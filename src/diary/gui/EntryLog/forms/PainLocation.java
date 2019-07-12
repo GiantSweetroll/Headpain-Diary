@@ -52,7 +52,9 @@ public class PainLocation extends FormElement
 	
 	//Overridden Methods
 	@Override
-	public void resetDefaults() {
+	public void resetDefaults()
+	{
+		super.resetDefaults();
 		this.painLocation.resetDefaults();
 	}
 	

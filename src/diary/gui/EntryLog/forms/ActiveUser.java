@@ -47,6 +47,7 @@ public class ActiveUser extends FormElement<PatientData>
 	@Override
 	public void resetDefaults() 
 	{
+		super.resetDefaults();
 		this.patient.refresh();
 	}
 	

@@ -170,7 +170,11 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	
 	//Overridden Methods
 	@Override
-	public void resetDefaults() {this.slider.setValue(0);}
+	public void resetDefaults() 
+	{
+		super.resetDefaults();
+		this.slider.setValue(0);
+	}
 
 	@Override
 	public void refresh() {};

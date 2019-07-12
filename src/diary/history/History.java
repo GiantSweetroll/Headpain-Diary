@@ -20,7 +20,6 @@ public class History
 	public History(String historyName, PatientData patient)
 	{
 		this.name = historyName;
-//		this.history = new ArrayList<String>();
 		this.refresh(patient);
 	}
 	

@@ -60,7 +60,9 @@ public class Trigger extends FormElement implements ActionListener, MouseListene
 	
 	//Overridden Methods
 	@Override
-	public void resetDefaults() {
+	public void resetDefaults() 
+	{
+		super.resetDefaults();
 		this.combo.setSelectedIndex(0);
 		this.tf.setText("");
 	}
