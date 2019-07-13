@@ -249,6 +249,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	{
 		this.recentMeds.refreshHistories(this.getSelectedPatient());
 		this.painKind.refreshHistory(this.getSelectedPatient());
+		this.trigger.refreshHistory(this.getSelectedPatient());
 	}
 	
 	public void loadData(PatientData patient, PainEntryData entry)
@@ -390,8 +391,18 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 			return false;
 		}
 	}
-	
-	protected void exportSingle(PatientData patient, PainEntryData entry)
+	protected boolean lastTriggerSame(PatientData patient, PainEntryData entry)
+	{
+		try
+		{
+			return patient.getLastTrigger().equals(entry.getTrigger());
+		}
+		catch(NullPointerException ex) 
+		{
+			return false;
+		}
+	}
+	protected void updateLastSelection(PatientData patient, PainEntryData entry)
 	{
 		if(!this.lastPainKindSame(patient, entry))
 		{
@@ -404,11 +415,21 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		if(!this.lastMedicineComplaintSame(patient, entry))
 		{
 			patient.setLastMedicineComplaint(entry.getMedicineComplaint());
-		}
+		}	
+		if(!this.lastTriggerSame(patient, entry))
+		{
+			patient.setLastTrigger(entry.getTrigger());
+		}	
+	}
+	
+	protected void exportSingle(PatientData patient, PainEntryData entry)
+	{
+		this.updateLastSelection(patient, entry);
 		FileOperation.savePatientData(patient);
 		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.getSelectedPatient(), entry.getRecentMedication());
 		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.getSelectedPatient(), entry.getMedicineComplaint());
 		FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, this.getSelectedPatient(), entry.getPainKind());
+		FileOperation.updateHistory(Globals.HISTORY_TRIGGER, this.getSelectedPatient(), entry.getTrigger());
 		FileOperation.exportPainData(patient, entry);
 		
 		if (!this.isNewEntry())
@@ -431,22 +452,12 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 				entry.getDate().getMonth(),
 				entry.getDate().getYear()));
 
-		if(!this.lastPainKindSame(patient, entry))
-		{
-		patient.setLastPainKind(entry.getPainKind());
-		}
-		if(!this.lastRecentMedsSame(patient, entry))
-		{
-		patient.setLastRecentMeds(entry.getRecentMedication());
-		}
-		if(!this.lastMedicineComplaintSame(patient, entry))
-		{
-		patient.setLastMedicineComplaint(entry.getMedicineComplaint());
-		}
+		this.updateLastSelection(patient, entry);
 		FileOperation.savePatientData(patient);
 		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.getSelectedPatient(), entry.getRecentMedication());
 		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.getSelectedPatient(), entry.getMedicineComplaint());
 		FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, this.getSelectedPatient(), entry.getPainKind());
+		FileOperation.updateHistory(Globals.HISTORY_TRIGGER, this.getSelectedPatient(), entry.getTrigger());
 		for (PainEntryData painEntry : duplicateEntries)
 		{
 		FileOperation.exportPainData(patient, painEntry);

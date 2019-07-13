@@ -85,6 +85,7 @@ public class Main
 							Globals.HISTORY_MEDICINE_COMPLAINT.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 							Globals.HISTORY_RECENT_MEDICATION.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 							Globals.HISTORY_PAIN_KIND.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
+							Globals.HISTORY_TRIGGER.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 						}
 						catch(Exception ex)
 						{

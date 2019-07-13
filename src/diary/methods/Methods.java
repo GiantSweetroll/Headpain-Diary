@@ -742,6 +742,7 @@ public class Methods
 		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(patient);
 		Globals.HISTORY_RECENT_MEDICATION.refresh(patient);
 		Globals.HISTORY_PAIN_KIND.refresh(patient);
+		Globals.HISTORY_TRIGGER.refresh(patient);
 	}
 	
 	public static Border createTransparentBorder(int thickness)
@@ -948,8 +949,7 @@ public class Methods
     	String[] triggers = {Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY),
 							Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_STRESSOR),
 							Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_SUNLIGHT),
-							Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP),
-							Methods.getLanguageText(XMLIdentifier.OTHER_TEXT)};
+							Methods.getLanguageText(XMLIdentifier.DEFAULT_TRIGGERS_IMPROPER_DIET_SLEEP)};
     	return triggers;
     }
     public static String[] getDefaultPainKinds()

@@ -44,6 +44,7 @@ public class PatientData
 	public static final String PAIN_LOCATION_SUB = "pain_location";			//Not yet used
 	public static final String PAIN_LOCATION_NODE = "pain_location_node";	//Not yet used
 	public static final String LAST_PAIN_KIND = "last_pain_kind";
+	public static final String LAST_TRIGGER = "last_trigger";
 	
 	public static final String HEAD_PAINS_SINCE_UNIT_MONTH = "%%sinceMonth",
 								HEAD_PAINS_SINCE_UNIT_YEAR = "%%sinceYear",
@@ -339,6 +340,17 @@ public class PatientData
 			return "";
 		}
 	}
+	public String getLastTrigger()
+	{
+		try
+		{
+			return this.dataMap.get(PatientData.LAST_TRIGGER).toString();
+		}
+		catch(NullPointerException ex)
+		{
+			return "";
+		}		
+	}
 	public String getRecentSelectedOption(String key)
 	{
 		try
@@ -350,6 +362,7 @@ public class PatientData
 			return "";
 		}
 	}
+	
 	
 	public String getFileName()
 	{
@@ -368,6 +381,10 @@ public class PatientData
 	public void setLastRecentMeds(String meds)
 	{
 		this.dataMap.put(PatientData.LAST_RECENT_MEDS, meds);
+	}
+	public void setLastTrigger(String trigger)
+	{
+		this.dataMap.put(PatientData.LAST_TRIGGER, trigger);
 	}
 	
 	//Override Methods
