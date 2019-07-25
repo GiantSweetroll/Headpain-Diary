@@ -13,13 +13,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
+import diary.gui.GButton;
 import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
@@ -38,7 +38,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 	private ImageCollection back, front, right, left;
 	private List<ImageCollection> imageCollection;
 	private JPanel panelImages, panelBelow, panelCenter, panelDirection;
-	private JButton butReset;
+	private GButton butReset;
 	private JLabel labRight, labLeft;
 	
 	//Constructors
@@ -68,7 +68,7 @@ public class PainLocationCustomSelection extends JPanel implements GUIFunction, 
 	{
 		//Initialization
 		this.panelBelow = new JPanel();
-		this.butReset = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butReset = new GButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		
 		//Properties
 		this.panelBelow.setLayout(new FlowLayout(FlowLayout.CENTER));

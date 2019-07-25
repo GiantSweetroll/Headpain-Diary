@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,6 +30,7 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
+import diary.gui.GButton;
 import diary.gui.table.Table;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
@@ -51,7 +51,15 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	private JCheckBox checkMedRec, checkName, checkDOB;
 	private JTextField tfMedRec, tfName;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, butNew, butDelete, butSelect, butFilter, butRefresh, butCopyData, butSelectAll, butDeselectAll;
+	private GButton butBack, 
+					butNew, 
+					butDelete, 
+					butSelect, 
+					butFilter, 
+					butRefresh, 
+					butCopyData, 
+					butSelectAll, 
+					butDeselectAll;
 	private Table table;
 	private List<PatientData> patients;
 	private List<String> selectedPatientIDs;
@@ -98,7 +106,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	{
 		//Initializations
 		this.panelBelowLeft = new JPanel();
-		this.butBack = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
+		this.butBack = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.BACK_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -116,7 +124,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butNew = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_TEXT));
+		this.butNew = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.NEW_TEXT));
 	
 		//Properties
 		this.panelBelowRight.setOpaque(false);
@@ -133,12 +141,12 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	{
 		//Initializations
 		this.panelBelowCenter = new JPanel();
-		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
-		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
-		this.butSelect = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
-		this.butCopyData = new JButton(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL));
-		this.butSelectAll = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
-		this.butDeselectAll = new JButton(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
+		this.butDelete = new GButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
+		this.butRefresh = new GButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butSelect = new GButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.butCopyData = new GButton(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL));
+		this.butSelectAll = new GButton(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
+		this.butDeselectAll = new GButton(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -209,7 +217,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.tfName = new JTextField("", 20);
 		this.checkDOB = new JCheckBox(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL));
 		this.panelDateRange = new DateRangePanel();
-		this.butFilter = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT));
+		this.butFilter = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties

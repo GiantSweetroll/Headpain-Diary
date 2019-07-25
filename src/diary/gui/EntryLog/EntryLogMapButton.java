@@ -2,12 +2,11 @@ package diary.gui.EntryLog;
 
 import java.awt.Color;
 
-import javax.swing.JButton;
-
 import diary.constants.Constants;
+import diary.gui.GButton;
 import diary.interfaces.GUIFunction;
 
-public class EntryLogMapButton extends JButton implements GUIFunction
+public class EntryLogMapButton extends GButton implements GUIFunction
 {
 
 	/**

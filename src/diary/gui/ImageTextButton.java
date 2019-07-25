@@ -5,9 +5,8 @@ import java.awt.Font;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
-public class ImageTextButton extends JButton
+public class ImageTextButton extends GButton
 {
 
 	/**

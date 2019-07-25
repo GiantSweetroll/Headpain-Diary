@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -28,7 +27,7 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 	 */
 	private static final long serialVersionUID = -1315020675324622006L;
 	private JComboBox<String> comboDay, comboMonth, comboYear;
-	private JButton butAuto, butDefault;
+	private GButton butAuto, butDefault;
 	private GridBagConstraints c;
 	private Date defaultDate;
 	
@@ -66,8 +65,8 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 	//	this.comboYear = new JComboBox<String>(DateOperation.getYearRangeString());
 		this.comboMonth = new JComboBox<String>(DateOperation.getMonthNameList().toArray(new String[12]));
 		this.comboDay = new JComboBox<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), Short.parseShort(this.comboYear.getSelectedItem().toString())));
-		this.butAuto = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.AUTO_TEXT));
-		this.butDefault = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
+		this.butAuto = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.AUTO_TEXT));
+		this.butDefault = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.RESET_TEXT));
 		this.c = new GridBagConstraints();
 		this.defaultDate = new Date();
 		

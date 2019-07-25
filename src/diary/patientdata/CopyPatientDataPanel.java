@@ -10,7 +10,6 @@ import java.awt.event.ItemListener;
 import java.io.File;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +21,7 @@ import javax.swing.UIManager;
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.gui.DateRangePanel;
+import diary.gui.GButton;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
 import giantsweetroll.gui.swing.Gbm;
@@ -39,7 +39,7 @@ public class CopyPatientDataPanel extends JPanel implements ItemListener, Action
 	private DateRangePanel dateRangePanel;
 	private JLabel labExportTo;
 	private JTextField tfExportTo;
-	private JButton butBrowse, butReset;
+	private GButton butBrowse, butReset;
 	private JPanel panelDate;
 	
 	//Constants
@@ -62,8 +62,8 @@ public class CopyPatientDataPanel extends JPanel implements ItemListener, Action
 		this.group = new ButtonGroup();
 		this.labExportTo = new JLabel(Methods.getLanguageText(XMLIdentifier.EXPORT_TO_TEXT));
 		this.tfExportTo = new JTextField(this.EXPORT_PATH_DEFAULT, 20);
-		this.butBrowse = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
-		this.butReset = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butBrowse = new GButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		this.butReset = new GButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties

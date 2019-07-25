@@ -16,7 +16,6 @@ import java.util.LinkedHashMap;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -38,6 +37,7 @@ import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.Settings;
+import diary.gui.GButton;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -57,7 +57,7 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 	private SettingsCategoryPanel catDatabase, 
 									catWindow, 
 									catProgram;
-	private JButton butCancel, 
+	private GButton butCancel, 
 					butSave;
 	private LinkedHashMap<String, String> dataMap;
 	private JScrollPane scroll;
@@ -69,13 +69,13 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 	//Program Category
 	private JLabel labLanguage;
 	private JComboBox<String> comboLanguages;
-	private JButton butLanguageRefresh;
+	private GButton butLanguageRefresh;
 	//Database Category
 	private JLabel labDatabasePath, 
 					labUserDatabasePath;
 	private JTextField tfDatabasePath, 
 						tfUserDatabasePath;
-	private JButton butBrowseUserDatabasePath, 
+	private GButton butBrowseUserDatabasePath, 
 					butDefaultUserDatabase, 
 					butBrowseDatabasePath, 
 					butDefaultDatabase;
@@ -134,12 +134,12 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		this.catDatabase = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_TITLE));
 		this.labDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_TEXT), SwingConstants.RIGHT);
 		this.tfDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_PATH), 30);
-		this.butBrowseDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
-		this.butDefaultDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butBrowseDatabasePath = new GButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		this.butDefaultDatabase = new GButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		this.labUserDatabasePath = new JLabel (Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_PATH_TEXT));
 		this.tfUserDatabasePath = new JTextField(this.dataMap.get(Settings.DATABASE_USERS_PATH), 30);
-		this.butBrowseUserDatabasePath = new JButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
-		this.butDefaultUserDatabase = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butBrowseUserDatabasePath = new GButton(Methods.getLanguageText(XMLIdentifier.BROWSE_TEXT));
+		this.butDefaultUserDatabase = new GButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
@@ -359,7 +359,7 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		this.catProgram = new SettingsCategoryPanel(Methods.getLanguageText(XMLIdentifier.SETTINGS_PROGRAM_TITLE));
 		this.labLanguage = new JLabel(Methods.getLanguageText(XMLIdentifier.SETTINGS_LANGUAGE_TEXT));
 		this.comboLanguages = new JComboBox<String>(Methods.getLanguages());
-		this.butLanguageRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butLanguageRefresh = new GButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		String selectedLanguage = this.dataMap.get(Settings.LANGUAGE);
 		
@@ -398,8 +398,8 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 	{
 		//Initialization
 		this.panelBelow = new JPanel();
-		this.butCancel = new JButton(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
-		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		this.butCancel = new GButton(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
+		this.butSave = new GButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
 		
 		//Properties
 		this.panelBelow.setLayout(new FlowLayout(FlowLayout.CENTER));

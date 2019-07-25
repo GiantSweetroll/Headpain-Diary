@@ -13,11 +13,11 @@ import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import diary.constants.Constants;
+import diary.gui.GButton;
 import diary.gui.ImageTextPanel;
 import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
@@ -31,7 +31,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	 * 
 	 */
 	private static final long serialVersionUID = 4086464692168288860L;
-	private List<JButton> buttons;
+	private List<GButton> buttons;
 	private List<String> selectedPos;
 	private Border defaultBorder;
 	
@@ -47,7 +47,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		this.setOpaque(false);
 		
 		//Add to panel
-		for(JButton button : this.buttons)
+		for(GButton button : this.buttons)
 		{
 			this.add(button);
 		}
@@ -62,7 +62,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 		}
 		catch(NullPointerException ex)
 		{
-			this.buttons = new ArrayList<JButton>();
+			this.buttons = new ArrayList<GButton>();
 		}
 		
 		for(Map.Entry<String, LinkedHashMap<URL, String>> entry : Methods.generatePainLocationsTextURLMap().entrySet())
@@ -72,7 +72,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 				ImageIcon image = ImageManager.getImageIcon(subEntry.getKey());
 				//ImageTextPanel imagePanel = new ImageTextPanel(image, entry.getKey(), Methods.getPercentage(image, Methods.getPercentageValue(MainFrame.frame.getWidth(), 10)));
 				ImageTextPanel imagePanel = new ImageTextPanel(image, entry.getKey(), Methods.getPercentage(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 5)));
-				JButton button = new JButton();
+				GButton button = new GButton();
 				button.add(imagePanel);
 				button.setActionCommand(subEntry.getValue());
 				button.addActionListener(this);
@@ -85,13 +85,13 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	}
 	public void unmarkAllButtons()
 	{
-		for (JButton button : this.buttons)
+		for (GButton button : this.buttons)
 		{
 			button.setBorder(this.defaultBorder);
 			button.setOpaque(false);
 		}
 	}
-	private void setMarked(JButton button, boolean mark)
+	private void setMarked(GButton button, boolean mark)
 	{
 		if (mark)
 		{
@@ -108,7 +108,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	{
 		return this.selectedPos;
 	}
-	public boolean isMarked(JButton button)
+	public boolean isMarked(GButton button)
 	{
 		if (button.getBorder() == this.defaultBorder)
 		{
@@ -121,7 +121,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	}
 	public void enableButtons(boolean enable)
 	{
-		for (JButton button : this.buttons)
+		for (GButton button : this.buttons)
 		{
 			button.setEnabled(enable);
 			for(Component component : button.getComponents())
@@ -132,7 +132,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	}
 	public void setSelected(String painLocationConstant)		//Parameter is String from PainLocationConstants
 	{
-		for (JButton button : this.buttons)
+		for (GButton button : this.buttons)
 		{
 			if (button.getActionCommand().equals(painLocationConstant))
 			{
@@ -168,7 +168,7 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	//Interfaces
 	public void actionPerformed(ActionEvent e)
 	{
-		JButton button = (JButton)e.getSource();
+		GButton button = (GButton)e.getSource();
 		if (this.isMarked(button))
 		{
 			this.setMarked(button, false);
@@ -189,14 +189,14 @@ public class PainLocationPresetSelectionPanel extends JPanel implements ActionLi
 	@Override
 	public void revalidateLanguage() 
 	{
-		for (JButton button : this.buttons)
+		for (GButton button : this.buttons)
 		{
 			this.remove(button);
 		}
 		
 		this.initButtons();
 		
-		for (JButton button: this.buttons)
+		for (GButton button: this.buttons)
 		{
 			this.add(button);
 		}

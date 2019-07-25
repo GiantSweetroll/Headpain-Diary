@@ -17,7 +17,6 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -44,7 +43,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	
 	private JLabel labLogo, labCreatedBy, labName, labSupport;
 	private List<JLabel> supportersList;
-	private JButton butSettings, butExit, butManagePatients;
+	private GButton butSettings, butExit, butManagePatients;
 	private ImageTextButton butNewEntry, butGraph, butTable;
 	private JPanel panelMainButtons, 
 					panelSupport,
@@ -338,7 +337,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butSettings = new JButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT));
+		this.butSettings = new GButton(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -358,7 +357,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butExit = new JButton(Methods.getLanguageText(XMLIdentifier.EXIT_BUTTON_TEXT));
+		this.butExit = new GButton(Methods.getLanguageText(XMLIdentifier.EXIT_BUTTON_TEXT));
 		
 		//Properties
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -377,7 +376,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	{
 		//Initialization
 		this.panelBelowCenter = new JPanel();
-		this.butManagePatients = new JButton(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT));
+		this.butManagePatients = new GButton(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setLayout(new FlowLayout(FlowLayout.CENTER));

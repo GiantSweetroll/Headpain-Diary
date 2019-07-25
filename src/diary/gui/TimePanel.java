@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,7 +29,7 @@ public class TimePanel extends JPanel implements ActionListener, LanguageListene
 	 */
 	private static final long serialVersionUID = 5455616933083251455L;
 	private JComboBox<String> comboHour, comboMinute;
-	private JButton butReset, butCurrent;
+	private GButton butReset, butCurrent;
 	private GridBagConstraints c;
 	private Map<String, String> defaultMap;
 	
@@ -59,8 +58,8 @@ public class TimePanel extends JPanel implements ActionListener, LanguageListene
 		//Initialization
 		this.comboHour = new JComboBox<String>(TimeConstants.HOURS_RANGE);
 		this.comboMinute = new JComboBox<String>(TimeConstants.GENERAL_TIME_RANGE);
-		this.butCurrent = new JButton(Methods.getLanguageText(XMLIdentifier.AUTO_TEXT));
-		this.butReset = new JButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
+		this.butCurrent = new GButton(Methods.getLanguageText(XMLIdentifier.AUTO_TEXT));
+		this.butReset = new GButton(Methods.getLanguageText(XMLIdentifier.RESET_TEXT));
 		this.c = new GridBagConstraints();
 		this.defaultMap = new LinkedHashMap<String, String>();
 		

@@ -14,7 +14,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -48,7 +47,7 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 	private PatientDataTextPanel dataText;
 	private JPanel panelCenter, panelSelection, panelShow, panelFilter;
 	private PatientDataFilterPanel patientFilter;
-	private JButton buttonFilter;
+	private GButton buttonFilter;
 	
 	//Constructors
 	public ActivePatientPanel()
@@ -152,7 +151,7 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 		//Initialization
 		this.panelFilter = new JPanel();
 		this.patientFilter = new PatientDataFilterPanel();
-		this.buttonFilter = new JButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
+		this.buttonFilter = new GButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 		
 		//Properties
 		this.panelFilter.setLayout(new BoxLayout(this.panelFilter, BoxLayout.Y_AXIS));

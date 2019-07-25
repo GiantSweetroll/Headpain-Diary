@@ -16,7 +16,6 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,6 +36,7 @@ import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
 import diary.gui.DateRangePanel;
+import diary.gui.GButton;
 import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
@@ -62,7 +62,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 	private DateRangePanel panelDateRange;
 	private JComboBox<String> comboFilter;
 	private JTextField tfFilter;
-	private JButton butFilter, 
+	private GButton butFilter, 
 					butBack, 
 					butDelete, 
 					butSelect,
@@ -119,7 +119,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butBack = new JButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+		this.butBack = new GButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setOpaque(false);
@@ -138,11 +138,11 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 	{
 		//Initialization
 		this.panelBelowCenter = new JPanel();
-		this.butDelete = new JButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
-		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
-		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
-		this.butSelectAll = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
-		this.butDeselectAll = new JButton(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
+		this.butDelete = new GButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
+		this.butSave = new GButton(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
+		this.butRefresh = new GButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butSelectAll = new GButton(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
+		this.butDeselectAll = new GButton(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);
@@ -184,7 +184,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butSelect = new JButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.butSelect = new GButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
 		
 		//Properties
 		this.panelBelowRight.setOpaque(false);
@@ -225,7 +225,7 @@ public class TableScreen extends JPanel implements ActionListener, LanguageListe
 		this.labKeyword = new JLabel(Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_KEYWORD_LABEL), SwingConstants.RIGHT);
 		this.tfFilter = new JTextField("", 20);
 		this.comboFilter = new JComboBox<String>(Methods.getTableFilterOptions());
-		this.butFilter = new JButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
+		this.butFilter = new GButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 		this.labGuide = new JLabel ("<html> " + Methods.getLanguageText(XMLIdentifier.NOTE_TEXT) + ": " + "<br/>" + Methods.getLanguageText(XMLIdentifier.TABLE_FILTER_GUIDE_USAGE_TEXT) + "</html>");
 		GridBagConstraints c = new GridBagConstraints();
 		

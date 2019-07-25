@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,6 +20,7 @@ import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.gui.CustomDialog;
+import diary.gui.GButton;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
 import diary.methods.Methods;
@@ -38,7 +38,7 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 	private JPanel panelBelow, panelBelowLeft, panelBelowRight;
 	private PatientDataForm patientForm;
 	private JLabel labTitle;
-	private JButton butCancel, butSave;
+	private GButton butCancel, butSave;
 	private JScrollPane scroll;
 	
 	//Conditioning
@@ -96,7 +96,7 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butCancel = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.CANCEL_TEXT));
+		this.butCancel = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.CANCEL_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -114,7 +114,7 @@ public class PatientDataRegisterationForm extends JPanel implements ActionListen
 	{
 		//Initialization
 		this.panelBelowRight = new JPanel();
-		this.butSave = new JButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.SAVE_TEXT));
+		this.butSave = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.SAVE_TEXT));
 		
 		//Properties
 		this.panelBelowRight.setLayout(new FlowLayout(FlowLayout.RIGHT));

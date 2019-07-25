@@ -6,11 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import diary.constants.Constants;
@@ -18,15 +15,11 @@ import diary.constants.Globals;
 import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
-import diary.gui.CustomDialog;
+import diary.gui.GButton;
 import diary.interfaces.LanguageListener;
-import diary.methods.FileOperation;
 import diary.methods.Methods;
-import diary.methods.PainDataOperation;
 import diary.patientdata.PatientData;
-import giantsweetroll.date.Date;
 import giantsweetroll.gui.swing.Gbm;
-import giantsweetroll.message.MessageManager;
 
 public class EntryLogButtonControl extends JPanel implements ActionListener, LanguageListener
 {
@@ -36,7 +29,7 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 	 */
 	private static final long serialVersionUID = -3986380191389634823L;
 
-	private JButton button;
+	private GButton button;
 	private JLabel label, labelDirection;
 	private EntryLog entryLog;
 	
@@ -56,13 +49,13 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 		this.buttonType = next;
 		if (next)
 		{
-			this.button = new JButton(Methods.getLanguageText(XMLIdentifier.NEXT_TEXT));
+			this.button = new GButton(Methods.getLanguageText(XMLIdentifier.NEXT_TEXT));
 			this.button.setMnemonic(KeyEvent.VK_RIGHT);
 			this.labelDirection = new JLabel(RIGHT_DIRECTION);
 		}
 		else
 		{
-			this.button = new JButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+			this.button = new GButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 			this.button.setMnemonic(KeyEvent.VK_LEFT);
 			this.labelDirection = new JLabel(LEFT_DIRECTION);
 		}

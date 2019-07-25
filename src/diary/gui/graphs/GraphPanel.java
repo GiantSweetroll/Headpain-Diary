@@ -13,7 +13,6 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,6 +29,7 @@ import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
+import diary.gui.GButton;
 import diary.gui.ImageExportPanel;
 import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
@@ -57,7 +57,7 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	private Graph graph;
 	private JScrollPane scrollGraph;
 	private DateRangePanel panelDateRange;
-	private JButton butBack, 
+	private GButton butBack, 
 					butRefresh, 
 					butSwitchGraph, 
 					buttonSave, 
@@ -178,7 +178,7 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	{
 		//Initialization
 		this.panelBelowLeft = new JPanel();
-		this.butBack = new JButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
+		this.butBack = new GButton(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		
 		//Properties
 		this.panelBelowLeft.setOpaque(false);
@@ -196,10 +196,10 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	{
 		//Initialization
 		this.panelBelowCenter = new JPanel();
-		this.butRefresh = new JButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
-		this.butSwitchGraph = new JButton(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
-		this.buttonSave = new JButton(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
-		this.butOptions = new JButton (Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT));
+		this.butRefresh = new GButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
+		this.butSwitchGraph = new GButton(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
+		this.buttonSave = new GButton(Methods.getLanguageText(XMLIdentifier.EXPORT_TEXT));
+		this.butOptions = new GButton (Methods.getLanguageText(XMLIdentifier.OPTIONS_TEXT));
 		
 		//Properties
 		this.panelBelowCenter.setOpaque(false);

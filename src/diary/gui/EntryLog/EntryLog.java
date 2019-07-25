@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +23,7 @@ import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.CustomDialog;
+import diary.gui.GButton;
 import diary.gui.EntryLog.forms.ActiveUser;
 import diary.gui.EntryLog.forms.Comments;
 import diary.gui.EntryLog.forms.DateTimeSelect;
@@ -54,7 +54,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	private JPanel panelTop, panelInput, panelBelow, panelCenter;
 	private EntryLogMapPanel panelEntryLogMap;
 	private JLabel labTitle;
-	private JButton butCancel, butSave;
+	private GButton butCancel, butSave;
 	private EntryLogButtonControl butBack, butNext;
 	private ActiveUser activeUser;
 	private Comments comments;
@@ -163,7 +163,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		//Initialization
 		this.panelTop = new JPanel();
 		this.labTitle = new JLabel(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_TITLE), SwingConstants.CENTER);
-		this.butCancel = new JButton(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
+		this.butCancel = new GButton(Methods.getLanguageText(XMLIdentifier.CANCEL_TEXT));
 		
 		//Properties
 		this.panelTop.setLayout(new BorderLayout(10, 20));
@@ -190,7 +190,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.panelState = EntryLog.PROFILE_SELECTION;
 		this.butBack = new EntryLogButtonControl(this, EntryLogButtonControl.BACK, "");
 		this.butNext = new EntryLogButtonControl(this, EntryLogButtonControl.NEXT, "");
-		this.butSave = new JButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
+		this.butSave = new GButton(Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
 		JPanel panel = new JPanel();
 		
 		//Properties
