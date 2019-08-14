@@ -1138,4 +1138,11 @@ public class Methods
     	
     	return arr;
     }
+    
+    public static ImageIcon setImageSizeRelativeToScreen(ImageIcon image, int percentage)
+    {
+    	return Methods.resizeImageByRatio
+				(image, Methods.getPercentage
+						(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, percentage)));
+    }
 }

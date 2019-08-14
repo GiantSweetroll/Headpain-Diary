@@ -65,7 +65,8 @@ public class RecentMedication extends FormElement
 	{
 		if (this.recentMedication.getSelectedIndex() == 0 || this.recentMedication.getItem().equals(""))
 		{
-			return PainDataIdentifier.NONE;
+	//		return PainDataIdentifier.NONE;
+			return "";
 		}
 		else
 		{
@@ -76,7 +77,8 @@ public class RecentMedication extends FormElement
 	{
 		if (this.medicineComplaint.getSelectedIndex() == 0 || this.medicineComplaint.getItem().equals(""))
 		{
-			return PainDataIdentifier.NONE;
+//			return PainDataIdentifier.NONE;
+			return "";
 		}
 		else
 		{
@@ -90,7 +92,7 @@ public class RecentMedication extends FormElement
 			this.recentMedication.setSelectedIndex(0);
 		}
 		else
-		{
+		{  
 			this.recentMedication.setActiveItem(item);
 		}
 	}
@@ -114,9 +116,10 @@ public class RecentMedication extends FormElement
 	public void refreshHistories(PatientData patient)
 	{
 		this.recentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION, patient);
-		this.recentMedication.setActiveItem(patient.getLastRecentMeds());
+//		this.recentMedication.setActiveItem(patient.getLastRecentMeds());
 		this.medicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT, patient);
-		this.medicineComplaint.setActiveItem(patient.getLastMedicineComplaint());
+//		this.medicineComplaint.setActiveItem(patient.getLastMedicineComplaint());
+		this.setData(patient.getLastRecentMeds(), patient.getLastMedicineComplaint());
 	}
 	
 	//Overridden Methods

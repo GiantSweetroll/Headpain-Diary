@@ -32,7 +32,6 @@ import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import giantsweetroll.ImageManager;
 import giantsweetroll.gui.swing.ScrollPaneManager;
-import giantsweetroll.message.MessageManager;
 
 public class MainMenu extends JPanel implements ActionListener, LanguageListener
 {
@@ -41,7 +40,10 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	 */
 	private static final long serialVersionUID = -3475768587288928741L;
 	
-	private JLabel labLogo, labCreatedBy, labName, labSupport;
+	private JLabel labLogo,
+					labCreatedBy, 
+					labName, 
+					labSupport;
 	private List<JLabel> supportersList;
 	private GButton butSettings, butExit, butManagePatients;
 	private ImageTextButton butNewEntry, butGraph, butTable;
@@ -67,12 +69,14 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	private final String SETTINGS = "settings";
 	private final String EXIT = "exit";
 	private final String MANAGE_PATIENTS = "manage patients";
+	private final int SMALL_LOGO_SCALE = 15,
+						LARGE_LOGO_SCALE = 35;
 //	private final Dimension IMAGE_BUTTONS_SIZE = new Dimension(200, 180);
 //	private final Dimension IMAGE_SUPPORTERS_SIZE = new Dimension(120, 100);
 //	private final Dimension IMAGE_LOGO_SIZE = new Dimension(320, 280);
 	
 	//Constructors
-	public MainMenu()
+ 	public MainMenu()
 	{
 		this.init();
 	}
@@ -171,7 +175,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	{
 		//Initialization
 		this.panelCenterTop = new JPanel();
-		this.labLogo = new JLabel();
+		this.labLogo = new JLabel(Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.SMALL_LOGO_SCALE));
 		/*
 		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
 		this.labLogo = new JLabel(Methods.resizeImageByRatio
@@ -202,6 +206,8 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		//Add to panel
 		spr.putConstraint(SpringLayout.EAST, this.labLogo, 0, SpringLayout.EAST, this.panelCenterTop);
 		spr.putConstraint(SpringLayout.WEST, this.labLogo, 0, SpringLayout.WEST, this.panelCenterTop);
+		spr.putConstraint(SpringLayout.SOUTH, this.labLogo, 0, SpringLayout.SOUTH, this.panelCenterTop);
+		spr.putConstraint(SpringLayout.NORTH, this.labLogo, 0, SpringLayout.NORTH, this.panelCenterTop);
 		spr.putConstraint(SpringLayout.EAST, this.labVersion, Constants.INSETS_BASE*-1, SpringLayout.EAST, this.panelCenterTop);
 		this.panelCenterTop.add(this.labLogo);
 		this.panelCenterTop.add(this.labVersion);
@@ -413,22 +419,17 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	//Other Methods
 	public void setImagesFullscreenMode()
 	{
-		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
-		this.labLogo.setIcon(Methods.resizeImageByRatio
-									(image, Methods.getPercentage
-												(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 35))));
+		labLogo.setIcon(Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.LARGE_LOGO_SCALE));
 		this.labLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		MessageManager.showDialog("Fullscreen");
+		this.labLogo.setVerticalAlignment(SwingConstants.CENTER);
 		this.panelCenterTop.revalidate();
 		this.panelCenterTop.repaint();
 	}
 	public void setImagesWindowedMode()
 	{
-		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
-		this.labLogo.setIcon(Methods.resizeImageByRatio
-									(image, Methods.getPercentage
-												(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, 15))));
+		labLogo.setIcon(Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.SMALL_LOGO_SCALE));
 		this.labLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labLogo.setVerticalAlignment(SwingConstants.CENTER);
 		this.panelCenterTop.revalidate();
 		this.panelCenterTop.repaint();
 	}

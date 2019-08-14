@@ -16,4 +16,7 @@
      <city>Jakarta</city>
      <initial_diagnosis/>
      <final_diagnosis/>
+     <last_pain_kind>Throbbing</last_pain_kind>
+     <recent_med_complaint/>
+     <last_trigger>Stressor</last_trigger>
 </patient>

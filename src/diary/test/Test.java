@@ -1,5 +1,7 @@
 package diary.test;
 
+import java.awt.BorderLayout;
+import java.awt.MediaTracker;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,11 +13,16 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 import diary.constants.ImageConstants;
+import giantsweetroll.ImageManager;
 
 public class Test
 {	
@@ -104,9 +111,53 @@ public class Test
 		label.setIcon(icon);
 		JOptionPane.showMessageDialog(null, label);
 	}
+	public static void labelUpdateIcon3()
+	{
+	    final JFrame frame = new JFrame("TEST");
+	    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+	    final JLabel label = new JLabel();
+	    ImageIcon icon = ImageManager.getImageIcon(ImageConstants.MEDICAL_MEDIA);
+
+	    frame.getContentPane().setLayout(new BorderLayout());
+	    frame.getContentPane().add(label, BorderLayout.CENTER);
+	    frame.setSize(800,800);
+
+	    SwingUtilities.invokeLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            frame.setVisible(true);
+	        }
+	    });
+
+
+	    try {
+	        Thread.currentThread().sleep(1000);
+	    } catch (InterruptedException e) {
+	        e.printStackTrace();
+	    }
+
+	    final ImageIcon finalIcon = icon;
+	    SwingUtilities.invokeLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            if(finalIcon != null && finalIcon.getImageLoadStatus() == MediaTracker.COMPLETE){
+	               label.setIcon(finalIcon);
+	               try {
+					Thread.currentThread().sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	               ImageIcon icon2 = ImageManager.getImageIcon(ImageConstants.FKUI);
+	               label.setIcon(icon2);
+	            }
+	        }
+	    });
+	}
 	
 	public static void main(String args[])
 	{
-		labelUpdateIcon2();
+		labelUpdateIcon3();
 	}
 }
