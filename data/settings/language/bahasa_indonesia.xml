@@ -143,6 +143,7 @@
 	 <text identifier="export to text">Ekspor ke</text>
      <text identifier="select all text">Pilih Semua</text>
      <text identifier="disselect all text">Batalkan Seleksi</text>	 
+	 <text identifier="edit text">Edit</text>
 	 <text identifier="profile text">Profil</text>
      <text identifier="graph category label">Tampilkan</text>
      <text identifier="graph category entries vs date text">Frekuensi vs Hari</text>

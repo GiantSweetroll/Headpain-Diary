@@ -49,15 +49,7 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 		this.enableComponents(enabled);
 	}
 	
-	//Methods
-	public void enableComponents(boolean enable)
-	{
-		this.comboMonth.setEnabled(enable);
-		this.comboYear.setEnabled(enable);
-		this.comboDay.setEnabled(enable);
-		this.butAuto.setEnabled(enable);
-		this.butDefault.setEnabled(enable);
-	}
+	//Create GUI
 	private final void init()
 	{
 		//Initialization
@@ -102,15 +94,15 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 		this.add(this.butAuto, c);							//Auto Button
 	}
 	
-	private void refreshDayRange()
-	{	
-		this.comboDay.setModel(new DefaultComboBoxModel<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
-																				Short.parseShort(this.comboYear.getSelectedItem().toString()))));
-		
-		this.revalidate();
-		this.repaint();
+	//Public Methods
+	public void enableComponents(boolean enable)
+	{
+		this.comboMonth.setEnabled(enable);
+		this.comboYear.setEnabled(enable);
+		this.comboDay.setEnabled(enable);
+		this.butAuto.setEnabled(enable);
+		this.butDefault.setEnabled(enable);
 	}
-	
 	public void setDate(Date date)
 	{
 		this.comboYear.setSelectedItem(Integer.toString(date.getYear()));
@@ -182,9 +174,29 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 	public Date getDate()
 	{
 		return new Date(Integer.parseInt(this.getDay()), this.getMonthValue(), Integer.parseInt(this.getYear()));
+	}	
+	
+	//Private Methods
+	private void refreshDayRange()
+	{	
+		int index = this.comboDay.getSelectedIndex();
+		this.comboDay.setModel(new DefaultComboBoxModel<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
+																				Short.parseShort(this.comboYear.getSelectedItem().toString()))));
+		int size = this.comboDay.getModel().getSize();
+		if (index <= size-1)
+		{
+			this.comboDay.setSelectedIndex(index);
+		}
+		else
+		{
+			this.comboDay.setSelectedIndex(size-1);		//Last index
+		}
+		
+		this.revalidate();
+		this.repaint();
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void setEnabled(boolean enable)
 	{

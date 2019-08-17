@@ -143,6 +143,7 @@
      <text identifier="export to text">Export To</text>
      <text identifier="select all text">Select All</text>
      <text identifier="disselect all text">Deselect All</text>
+     <text identifier="edit text">Edit</text>
      <text identifier="graph category label">Show</text>
      <text identifier="graph category entries vs date text">Frequency vs Day</text>
      <text identifier="graph category intensity average vs date text">Average Intensity vs Day</text>

@@ -85,8 +85,12 @@ public class PainKind extends FormElement
 	}
 	public void refreshHistory(PatientData patient)
 	{
-		this.painKind.refresh(Globals.HISTORY_PAIN_KIND, patient);
-		this.painKind.setActiveItem(patient.getLastPainKind());
+		try
+		{
+			this.painKind.refresh(Globals.HISTORY_PAIN_KIND, patient);
+			this.painKind.setActiveItem(patient.getLastPainKind());
+		}
+		catch(NullPointerException ex) {}
 	}
 	
 	//Overridden Methods

@@ -37,6 +37,7 @@ import diary.methods.FileOperation;
 import diary.methods.Methods;
 import diary.methods.PatientDataOperation;
 import giantsweetroll.gui.swing.Gbm;
+import giantsweetroll.gui.swing.ScrollPaneManager;
 import giantsweetroll.message.MessageManager;
 
 public class PatientDataManagePanel extends JPanel implements ActionListener, LanguageListener
@@ -47,14 +48,21 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	 */
 	private static final long serialVersionUID = -7220293959734922865L;
 	
-	private JPanel panelTop, panelTopLeft, panelTable, panelBelowLeft, panelBelowCenter, panelBelowRight, panelBelow;
+	private JPanel panelTop, 
+					panelTopLeft, 
+					panelTable, 
+					panelBelowLeft, 
+					panelBelowCenter, 
+					panelBelowRight, 
+					panelBelow,
+					panelFilter;
 	private JCheckBox checkMedRec, checkName, checkDOB;
 	private JTextField tfMedRec, tfName;
 	private DateRangePanel panelDateRange;
 	private GButton butBack, 
 					butNew, 
 					butDelete, 
-					butSelect, 
+					butEdit, 
 					butFilter, 
 					butRefresh, 
 					butCopyData, 
@@ -64,7 +72,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	private List<PatientData> patients;
 	private List<String> selectedPatientIDs;
 	private PatientData activePatient;
-	private JScrollPane scrollTable;
+	private JScrollPane scrollTable, scrollFilter;
 	
 	//Constants
 	private final String BACK = "back";
@@ -143,7 +151,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.panelBelowCenter = new JPanel();
 		this.butDelete = new GButton(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
 		this.butRefresh = new GButton(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
-		this.butSelect = new GButton(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.butEdit = new GButton(Methods.getLanguageText(XMLIdentifier.EDIT_TEXT));
 		this.butCopyData = new GButton(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL));
 		this.butSelectAll = new GButton(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
 		this.butDeselectAll = new GButton(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
@@ -161,11 +169,11 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butRefresh.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.butRefresh.setForeground(Color.white);
 		this.butRefresh.setMnemonic(KeyEvent.VK_R);
-		this.butSelect.setActionCommand(this.SELECT);
-		this.butSelect.addActionListener(this);
-		this.butSelect.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
-		this.butSelect.setForeground(Color.white);
-		this.butSelect.setMnemonic(KeyEvent.VK_S);
+		this.butEdit.setActionCommand(this.SELECT);
+		this.butEdit.addActionListener(this);
+		this.butEdit.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
+		this.butEdit.setForeground(Color.white);
+		this.butEdit.setMnemonic(KeyEvent.VK_S);
 		this.butCopyData.setActionCommand(this.COPY_DATA);
 		this.butCopyData.addActionListener(this);
 		this.butCopyData.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
@@ -186,7 +194,12 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.panelBelowCenter.add(this.butDelete);
 		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butCopyData);
-		this.panelBelowCenter.add(this.butSelect);
+		this.panelBelowCenter.add(this.butEdit);
+		//TODO Debugging (to be removed in final version)
+		for (int i=0; i<5; i++)
+		{
+			this.panelBelowCenter.add(new GButton("Button " + (i+1)));
+		}
 	}
 	private void initPanelBelow()
 	{
@@ -211,12 +224,8 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 	{
 		//Initialization
 		this.panelTopLeft = new JPanel();
-		this.checkMedRec = new JCheckBox (Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
-		this.tfMedRec = new JTextField("", 10);
-		this.checkName = new JCheckBox(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
-		this.tfName = new JTextField("", 20);
-		this.checkDOB = new JCheckBox(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL));
-		this.panelDateRange = new DateRangePanel();
+		this.initPanelFilter();
+		this.scrollFilter = ScrollPaneManager.generateDefaultScrollPane(this.panelFilter, 10, 10);
 		this.butFilter = new GButton(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT));
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -224,30 +233,53 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.panelTopLeft.setLayout(new GridBagLayout());
 		this.panelTopLeft.setOpaque(false);
 //		this.setBorder(BorderFactory.createTitledBorder(Constants.LANGUAGE.getTextMap().get(XMLIdentifier.FILTER_TEXT)));
-		this.checkDOB.setOpaque(false);
-		this.checkMedRec.setOpaque(false);
-		this.checkName.setOpaque(false);
 		this.butFilter.setActionCommand(this.FILTER);
 		this.butFilter.addActionListener(this);
 		
 		//Add to panel
 		Gbm.goToOrigin(c);
 		c.insets = Constants.INSETS_TOP_COMPONENT;
-		c.fill = GridBagConstraints.BOTH;
-		this.panelTopLeft.add(this.checkMedRec, c);					//Medical Record Check Box
-		Gbm.nextGridColumn(c);
-		this.panelTopLeft.add(this.tfMedRec, c);					//Medical Record Text Field
-		Gbm.newGridLine(c);
-		c.insets = Constants.INSETS_GENERAL;
-		this.panelTopLeft.add(this.checkName, c);					//Name Check Box
-		Gbm.nextGridColumn(c);
-		this.panelTopLeft.add(this.tfName, c);						//Name Text Field
-		Gbm.newGridLine(c);
-		this.panelTopLeft.add(this.checkDOB, c);					//DOB Check Box
-		Gbm.nextGridColumn(c);
-		this.panelTopLeft.add(this.panelDateRange, c);				//DOB Panel
+//		c.fill = GridBagConstraints.BOTH;
+		c.anchor = GridBagConstraints.WEST;
+		this.panelTopLeft.add(this.scrollFilter, c);				//Filter Panel
 		Gbm.newGridLine(c);
 		this.panelTopLeft.add(this.butFilter, c);					//Filter Button
+	}
+	private void initPanelFilter()
+	{
+		//Initialization
+		this.panelFilter = new JPanel();
+		this.checkMedRec = new JCheckBox (Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
+		this.tfMedRec = new JTextField("", 10);
+		this.checkName = new JCheckBox(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
+		this.tfName = new JTextField("", 20);
+		this.checkDOB = new JCheckBox(Globals.LANGUAGE.getTextMap().get(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL));
+		this.panelDateRange = new DateRangePanel();
+		GridBagConstraints c = new GridBagConstraints();
+		
+		//Properties
+		this.panelFilter.setLayout(new GridBagLayout());
+		this.panelFilter.setOpaque(false);
+		this.checkDOB.setOpaque(false);
+		this.checkMedRec.setOpaque(false);
+		this.checkName.setOpaque(false);
+		
+		//Add to panel
+		Gbm.goToOrigin(c);
+		c.insets = Constants.INSETS_TOP_COMPONENT;
+		c.fill = GridBagConstraints.BOTH;
+		this.panelFilter.add(this.checkMedRec, c);					//Medical Record Check Box
+		Gbm.nextGridColumn(c);
+		this.panelFilter.add(this.tfMedRec, c);					//Medical Record Text Field
+		Gbm.newGridLine(c);
+		c.insets = Constants.INSETS_GENERAL;
+		this.panelFilter.add(this.checkName, c);					//Name Check Box
+		Gbm.nextGridColumn(c);
+		this.panelFilter.add(this.tfName, c);						//Name Text Field
+		Gbm.newGridLine(c);
+		this.panelFilter.add(this.checkDOB, c);					//DOB Check Box
+		Gbm.nextGridColumn(c);
+		this.panelFilter.add(this.panelDateRange, c);				//DOB Panel
 	}
 	private void initPanelTop()
 	{
@@ -286,7 +318,7 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		}
 		catch(NullPointerException ex) {}
 	
-		this.butSelect.setEnabled(false);
+		this.butEdit.setEnabled(false);
 		this.butDelete.setEnabled(false);
 		this.butCopyData.setEnabled(false);
 		
@@ -389,20 +421,20 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 			
 			if (selected==1)
 			{
-				this.butSelect.setEnabled(true);
+				this.butEdit.setEnabled(true);
 				this.butDelete.setEnabled(true);
 				this.butCopyData.setEnabled(true);
 			}
 			else if (selected > 1)
 			{
-				this.butSelect.setEnabled(false);
+				this.butEdit.setEnabled(false);
 				this.butDelete.setEnabled(true);;
 				this.butCopyData.setEnabled(true);
 			}
 			else
 			{
 				this.butDelete.setEnabled(false);
-				this.butSelect.setEnabled(false);
+				this.butEdit.setEnabled(false);
 				this.butCopyData.setEnabled(false);
 			}
 		}
@@ -530,11 +562,12 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.butBack.setText(Methods.getLanguageText(XMLIdentifier.BACK_TEXT));
 		this.butDelete.setText(Methods.getLanguageText(XMLIdentifier.DELETE_TEXT));
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
-		this.butSelect.setText(Methods.getLanguageText(XMLIdentifier.SELECT_TEXT));
+		this.butEdit.setText(Methods.getLanguageText(XMLIdentifier.EDIT_TEXT));
 		this.butRefresh.setText(Methods.getLanguageText(XMLIdentifier.REFRESH_TEXT));
 		this.butNew.setText(Methods.getLanguageText(XMLIdentifier.NEW_TEXT));
 		this.butSelectAll.setText(Methods.getLanguageText(XMLIdentifier.SELECT_ALL_TEXT));
 		this.butDeselectAll.setText(Methods.getLanguageText(XMLIdentifier.DISSELECT_ALL_TEXT));
+		this.butCopyData.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_MANAGE_PANEL_COPY_DATA_LABEL));
 		this.table.changeTableHeaders(Methods.getPatientTableHeaders());
 		this.panelDateRange.revalidateLanguage();
 		this.revalidate();

@@ -115,11 +115,15 @@ public class RecentMedication extends FormElement
 	
 	public void refreshHistories(PatientData patient)
 	{
-		this.recentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION, patient);
-//		this.recentMedication.setActiveItem(patient.getLastRecentMeds());
-		this.medicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT, patient);
-//		this.medicineComplaint.setActiveItem(patient.getLastMedicineComplaint());
-		this.setData(patient.getLastRecentMeds(), patient.getLastMedicineComplaint());
+		try
+		{
+			this.recentMedication.refresh(Globals.HISTORY_RECENT_MEDICATION, patient);
+//			this.recentMedication.setActiveItem(patient.getLastRecentMeds());
+			this.medicineComplaint.refresh(Globals.HISTORY_MEDICINE_COMPLAINT, patient);
+//			this.medicineComplaint.setActiveItem(patient.getLastMedicineComplaint());
+			this.setData(patient.getLastRecentMeds(), patient.getLastMedicineComplaint());
+		}
+		catch(NullPointerException ex) {}
 	}
 	
 	//Overridden Methods

@@ -57,8 +57,12 @@ public class Trigger extends FormElement
 	//Methods
 	public void refreshHistory(PatientData patient)
 	{
-		this.trigger.refresh(Globals.HISTORY_TRIGGER, patient);
-		this.trigger.setActiveItem(patient.getLastTrigger());
+		try
+		{
+			this.trigger.refresh(Globals.HISTORY_TRIGGER, patient);
+			this.trigger.setActiveItem(patient.getLastTrigger());
+		}
+		catch(NullPointerException ex) {}
 	}
 	
 	//Overridden Methods

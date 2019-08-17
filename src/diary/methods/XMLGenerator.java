@@ -221,6 +221,7 @@ public class XMLGenerator
 		appendComponentToMap(doc, map, XMLIdentifier.EXPORT_TO_TEXT, "Export To");
 		appendComponentToMap(doc, map, XMLIdentifier.SELECT_ALL_TEXT, "Select All");
 		appendComponentToMap(doc, map, XMLIdentifier.DISSELECT_ALL_TEXT, "Deselect All");
+		appendComponentToMap(doc, map, XMLIdentifier.EDIT_TEXT, "Edit");
 		
 		//Graph
 //		appendComponentToMap(doc, map, XMLIdentifier.GRAPH_CATEGORY_LABEL, "Category");

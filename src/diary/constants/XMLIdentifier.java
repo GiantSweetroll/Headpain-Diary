@@ -15,7 +15,6 @@ public class XMLIdentifier
 	public static final String SECTION_MAIN_MENU = "main menu";
 	public static final String SECTION_ENTRY_LOG = "entry log";
 	public static final String SECTION_PAIN_POSITION = "pain position";
-	public static final String SECTION_MISC = "misc";
 	
 	//Misc
 	public static final String BACK_TEXT = "back text";
@@ -76,6 +75,7 @@ public class XMLIdentifier
 	public static final String EXPORT_TO_TEXT = "export to text";
 	public static final String SELECT_ALL_TEXT = "select all text";
 	public static final String DISSELECT_ALL_TEXT = "disselect all text";
+	public static final String EDIT_TEXT = "edit text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
