@@ -179,11 +179,20 @@ public class DatePanel extends JPanel implements ActionListener, LanguageListene
 	//Private Methods
 	private void refreshDayRange()
 	{	
-		int index = this.comboDay.getSelectedIndex();
+		int index = -1;
+		try
+		{
+			index = this.comboDay.getSelectedIndex();
+		}
+		catch(NullPointerException ex) {}
 		this.comboDay.setModel(new DefaultComboBoxModel<String>(DateOperation.getMaxDaysString(Byte.parseByte(Integer.toString(this.comboMonth.getSelectedIndex()+1)), 
 																				Short.parseShort(this.comboYear.getSelectedItem().toString()))));
 		int size = this.comboDay.getModel().getSize();
-		if (index <= size-1)
+		if (index < 0)
+		{
+			this.comboDay.setSelectedIndex(0);			//First index
+		}
+		else if (index <= size-1)
 		{
 			this.comboDay.setSelectedIndex(index);
 		}
