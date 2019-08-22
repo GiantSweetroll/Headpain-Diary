@@ -350,7 +350,7 @@ public class Methods
 		catch(NullPointerException ex){}
 		mainFrame.getFrameInstance().setExtendedState(JFrame.NORMAL);
 		mainFrame.getFrameInstance().setUndecorated(false);
-		mainFrame.getFrameInstance().setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
+		mainFrame.getFrameInstance().setSize((Constants.SCREENSIZE.width/4)*3, (Constants.SCREENSIZE.height/4)*3);
 		mainFrame.getFrameInstance().setResizable(false);
 		mainFrame.getFrameInstance().setLocationRelativeTo(null);
 		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

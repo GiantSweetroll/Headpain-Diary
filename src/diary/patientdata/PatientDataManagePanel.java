@@ -195,11 +195,6 @@ public class PatientDataManagePanel extends JPanel implements ActionListener, La
 		this.panelBelowCenter.add(this.butRefresh);
 		this.panelBelowCenter.add(this.butCopyData);
 		this.panelBelowCenter.add(this.butEdit);
-		//TODO Debugging (to be removed in final version)
-		for (int i=0; i<5; i++)
-		{
-			this.panelBelowCenter.add(new GButton("Button " + (i+1)));
-		}
 	}
 	private void initPanelBelow()
 	{
