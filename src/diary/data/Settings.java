@@ -92,7 +92,7 @@ public class Settings
 	//Private methods
 	private void generateDefaultData()
 	{
-		 this.map.put(Settings.WINDOW_MODE, Settings.WINDOWED);
+		 this.map.put(Settings.WINDOW_MODE, Settings.FULLSCREEN);
 		 File file = new File(Constants.DATABASE_DEFAULT_PATH);
 		 this.map.put(Settings.DATABASE_PATH, file.getAbsolutePath());
 		 file = new File(Constants.PATIENTS_LIST_DEFAULT_PATH);
