@@ -49,17 +49,29 @@ public class GraphSettingsPanel extends JPanel implements LanguageListener
 	{
 		return this.enableDataValues.isSelected();
 	}
+	protected void setDataValuesEnabled(boolean b)
+	{
+		this.enableDataValues.setSelected(b);
+	}
 	
 	protected boolean isDisplayVoidData()
 	{
 		return this.displayVoidData.isSelected();
+	}
+	protected void setDisplayVoidData(boolean b)
+	{
+		this.displayVoidData.setSelected(b);
 	}
 	
 	protected boolean isDisplayDataPoints()
 	{
 		return this.displayDataPoints.isSelected();
 	}
-
+	protected void setDisplayDataPoints(boolean b)
+	{
+		this.displayDataPoints.setSelected(b);
+	}
+	
 	@Override
 	public void revalidateLanguage() 
 	{

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments>NOT TEST DATA</comments>
+     <date_month>12</date_month>
+     <time_minute>11</time_minute>
+     <activity>Whatsapp</activity>
+     <recent_medication>Sulcolon</recent_medication>
+     <date_day>6</date_day>
+     <medicine_complaint/>
+     <pain_location_custom pain_loc_id="0">kan7</pain_location_custom>
+     <pain_kind>Nyut-nyutan</pain_kind>
+     <duration>32</duration>
+     <intensity>2</intensity>
+     <time_hour>18</time_hour>
+</Entry>
