@@ -126,7 +126,6 @@ public class XMLIdentifier
 	public static final String ENTRY_LOG_ELEMENT_TYPE_DATE_TIME = "entry log element type date time";
 	public static final String ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION = "entry log element type recent medication";
 	
-	
 	//Default Activities
 	public static final String DEFAULT_TRIGGERS_PHYSICAL_ACTIVITY = "default triggers physical activity";
 	public static final String DEFAULT_TRIGGERS_STRESSOR = "default triggers stressor";
