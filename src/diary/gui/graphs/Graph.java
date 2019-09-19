@@ -190,11 +190,6 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.drawAxes(g, Color.BLACK, this.getWidth()-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
 		try
 		{
-			if (this.displayDataPoint)
-			{
-				this.drawDataPoints(g, Color.GREEN, this.DATA_POINT_WIDTH);
-			}
-
 			this.generateDataPoints(this.yAxisValues);
 			this.drawAxesMarkers(g, Color.BLACK);
 			this.drawXAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
@@ -217,6 +212,11 @@ public abstract class Graph extends JPanel implements LanguageListener
 			{
 				this.axesPaddingWithPanelEdgeBelow += this.getBelowAxesDifferenceWithPanelEdgeBelow();
 				this.repaint();
+			}
+			
+			if (this.displayDataPoint)
+			{
+				this.drawDataPoints(g, Color.GREEN, this.DATA_POINT_WIDTH);
 			}
 		}
 		catch(ArithmeticException ex)
@@ -296,9 +296,9 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected void generateDataPoints(List<Double> dataValues)
 	{
 		//Set Distance between each data entry in the x-axis
-		double xDiff = this.axesLength.x/dataValues.size();
+		double xDiff = GNumbers.round(this.axesLength.x/dataValues.size(), 0);
 		//Set distance between each unit increment in the y-axis
-		double yDiff = this.axesLength.y/Methods.getHighestValue(dataValues);
+		double yDiff = GNumbers.round(this.axesLength.y/Methods.getHighestValue(dataValues), 0);
 		
 		//Translate into coordinate points
 		this.dataPoints = new ArrayList<Point>();
@@ -426,7 +426,12 @@ public abstract class Graph extends JPanel implements LanguageListener
 		g.setFont(Constants.FONT_GENERAL_BOLD);
 		for (int i=0; i<this.yAxisValues.size(); i++)
 		{
-			String text = Double.toString(GNumbers.round(this.yAxisValues.get(i), this.DECIMAL_PLACES));
+			Double value = GNumbers.round(this.yAxisValues.get(i), this.DECIMAL_PLACES);
+			if (value <= 0d)
+			{
+				continue;
+			}
+			String text = Double.toString(value);
 			int textWidth = g.getFontMetrics().stringWidth(text);
 			
 			g.drawString(text, this.dataPoints.get(i).x - textWidth/2, this.dataPoints.get(i).y - this.GENERAL_PADDING);
@@ -473,7 +478,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 			}
 		}
 		
-		if (this.showGraphLinesOfX)
+		if (this.showGraphLinesOfX)		//Displaying Graph Lines of X
 		{
 			for (Point marker : this.dataPoints)
 			{
