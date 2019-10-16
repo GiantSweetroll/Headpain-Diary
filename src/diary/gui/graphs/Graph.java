@@ -309,6 +309,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 			Double doubleCoordinate = (double)this.axesOrigin.y - yDiff*roundedDataValue;
 			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(doubleCoordinate, this.DECIMAL_PLACES)));
 			xPos+=xDiff; 
+//			MessageManager.printLine("(" + this.dataPoints.get((int)i).x + ", " + this.dataPoints.get((int)i).y);
 		}
 	}
 	protected abstract void drawDataPoints(Graphics g, Color c, int width);
