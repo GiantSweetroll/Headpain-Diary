@@ -10,6 +10,7 @@ import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.PainEntryDataVoid;
 import giantsweetroll.date.Date;
+import giantsweetroll.message.MessageManager;
 
 public class PainDataOperation 
 {	
@@ -560,6 +561,10 @@ public class PainDataOperation
 				if (!Date.areSameDate(dateMin, dateMax))
 				{
 					subList.add(new PainEntryDataVoid(dateMin));
+				}
+				if (dateMin.isLaterThan(dateMax))
+				{
+					break;
 				}
 			}
 			
