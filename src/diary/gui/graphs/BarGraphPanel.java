@@ -17,6 +17,8 @@ public class BarGraphPanel extends Graph
 	 */
 	private static final long serialVersionUID = -636744451243862364L;
 	
+	private final Color BAR_COLOR = Color.RED;
+	
 	//Constructors
 	public BarGraphPanel(LinkedHashMap<String, Double> dataMap)
 	{
@@ -53,7 +55,7 @@ public class BarGraphPanel extends Graph
 	{
 		super.paintComponent(g);
 		
-		this.drawDataPoints(g, Color.RED, 20);
+//		this.drawDataPoints(g, Color.RED, 20);
 		
 		this.repaint();
 	}
@@ -61,7 +63,7 @@ public class BarGraphPanel extends Graph
 	@Override
 	protected void drawDataPoints(Graphics g, Color c, int width)
 	{
-		g.setColor(c);
+		g.setColor(this.BAR_COLOR);
 		
 		for (int i=0; i<super.dataPoints.size(); i++)
 		{
