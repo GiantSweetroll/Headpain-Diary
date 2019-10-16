@@ -224,7 +224,7 @@ public class PainDataOperation
 			}
 			
 			String painKind = entry.getPainKind();
-			painKind = Methods.convertPainKindIDToLanguage(painKind);
+//			painKind = Methods.convertPainKindIDToLanguage(painKind);
 			try
 			{
 				map.put(painKind, map.get(painKind) + 1d);
