@@ -22,6 +22,7 @@ public class BarGraphPanel extends Graph
 	//Constructors
 	public BarGraphPanel(LinkedHashMap<String, Double> dataMap)
 	{
+		super(dataMap);
 		super.setMaxMarkersInXAxis(dataMap.size());
 	}
 	public BarGraphPanel(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
@@ -49,13 +50,12 @@ public class BarGraphPanel extends Graph
 		return true;
 	}
 	
-	//Overriden Methods
+	//Overridden Methods
 	@Override
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		
-//		this.drawDataPoints(g, Color.RED, 20);
+		this.drawDataPoints(g, this.BAR_COLOR, 10);			//This is required so that the bars shows up in the first run
 		
 		this.repaint();
 	}
@@ -63,7 +63,7 @@ public class BarGraphPanel extends Graph
 	@Override
 	protected void drawDataPoints(Graphics g, Color c, int width)
 	{
-		g.setColor(this.BAR_COLOR);
+		g.setColor(c);
 		
 		for (int i=0; i<super.dataPoints.size(); i++)
 		{
@@ -154,6 +154,7 @@ public class BarGraphPanel extends Graph
 			g2.setTransform(defaultAt);
 		}
 	}
+	@Deprecated
 	@Override
 	public void revalidateLanguage() 
 	{
