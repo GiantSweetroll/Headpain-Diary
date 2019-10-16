@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2019</date_year>
+     <comments>NOT TEST DATA</comments>
+     <date_month>1</date_month>
+     <time_minute>08</time_minute>
+     <activity>Coding</activity>
+     <recent_medication>Sulcolon</recent_medication>
+     <date_day>21</date_day>
+     <medicine_complaint/>
+     <pain_location_custom pain_loc_id="0">dpn10</pain_location_custom>
+     <pain_kind>Mata digencet</pain_kind>
+     <duration>14</duration>
+     <intensity>3</intensity>
+     <time_hour>20</time_hour>
+</Entry>

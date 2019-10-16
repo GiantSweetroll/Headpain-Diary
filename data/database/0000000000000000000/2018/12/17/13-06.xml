@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2018</date_year>
+     <comments>NOT TEST DATA
+
+Pain location: eyebrows</comments>
+     <date_month>12</date_month>
+     <time_minute>06</time_minute>
+     <activity>Watching</activity>
+     <recent_medication>Sulcolon</recent_medication>
+     <date_day>17</date_day>
+     <medicine_complaint/>
+     <pain_location_custom pain_loc_id="0">dpn10</pain_location_custom>
+     <pain_kind>Nyut-nyutan</pain_kind>
+     <duration>3</duration>
+     <intensity>1</intensity>
+     <time_hour>13</time_hour>
+</Entry>
