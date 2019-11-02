@@ -18,6 +18,7 @@ import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
+import giantsweetroll.message.MessageManager;
 import giantsweetroll.numbers.GNumbers;
 
 public abstract class Graph extends JPanel implements LanguageListener
@@ -342,19 +343,22 @@ public abstract class Graph extends JPanel implements LanguageListener
 		}
 		
 		//Draw Y-Axis Marker Labels
-		int yDiff = this.axesLength.y/this.MAX_MARKERS_IN_Y_AXIS;
+		double yDiff = (double)this.axesLength.y/(double)this.MAX_MARKERS_IN_Y_AXIS;
+	//	MessageManager.printLine("yDiff: " + this.axesLength.y + "/" + this.MAX_MARKERS_IN_Y_AXIS + " = " + yDiff);
 		this.yAxisMarkerPoints = new ArrayList<Point>();
 		for (int i=1; i<=this.MAX_MARKERS_IN_Y_AXIS; i++)
 		{
 			int x = this.axesOrigin.x - this.AXES_POINTERS_LENGTH/2;
-			int y = this.axesOrigin.y - (yDiff*i);
+			int y = this.axesOrigin.y - (int)GNumbers.round((yDiff*(double)i), 0);
 			g.drawLine(x, 
 						y, 
 						this.axesOrigin.x + this.AXES_POINTERS_LENGTH/2, 
 						y);
 			
 			this.yAxisMarkerPoints.add(new Point(x, y));	//Take note of the coordinate position of each Y-Axis markers
+//			System.out.println("Y marker: " + this.yAxisMarkerPoints.get(i-1).y);
 		}
+//		System.out.println();
 	}
 	protected void drawYAxisMarkerLabels(Graphics g, Color c, Font font)
 	{
