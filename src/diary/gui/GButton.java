@@ -28,7 +28,8 @@ public class GButton extends JButton
 	//Methods
 	private void init()
 	{
-		this.setOpaque(true);
+//		this.setContentAreaFilled(false);
+//		this.setBorder(new RoundedBorder(5, Constants.COLOR_MAIN_MENU_BUTTONS));
 		this.setForeground(Color.WHITE);
 		this.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.setFont(Constants.FONT_GENERAL);
