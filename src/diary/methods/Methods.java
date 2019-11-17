@@ -26,6 +26,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.FontUIResource;
@@ -1144,5 +1145,27 @@ public class Methods
     	return Methods.resizeImageByRatio
 				(image, Methods.getPercentage
 						(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, percentage)));
+    }
+    
+    //LookAndFeel Methods
+    public static LookAndFeel getCurrentLookAndFeel()
+    {
+    	return UIManager.getLookAndFeel();
+    }
+    public static void setToSystemLookAndFeel()
+    {
+    	try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch(Exception ex) {}
+    }
+    public static void setLookAndFeel(LookAndFeel lf)
+    {
+    	try
+		{
+			UIManager.setLookAndFeel(lf);
+		}
+		catch(Exception ex) {}
     }
 }

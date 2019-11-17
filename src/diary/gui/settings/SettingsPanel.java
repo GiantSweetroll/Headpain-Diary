@@ -25,7 +25,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.xml.parsers.ParserConfigurationException;
@@ -153,12 +152,8 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				LookAndFeel oldLF = UIManager.getLookAndFeel();
-				try
-				{
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				}
-				catch(Exception ex) {}
+				LookAndFeel oldLF = Methods.getCurrentLookAndFeel();
+				Methods.setToSystemLookAndFeel();
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				jfc.setDialogTitle(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_PATH_SELECT_TEXT));
@@ -169,11 +164,7 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 					tfDatabasePath.setText(jfc.getSelectedFile().getAbsolutePath());
 				}
 				
-				try
-				{
-					UIManager.setLookAndFeel(oldLF);
-				}
-				catch(Exception ex) {}
+				Methods.setLookAndFeel(oldLF);
 			}
 		});
 		butDefaultDatabase.addActionListener(new ActionListener()
@@ -210,12 +201,8 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				LookAndFeel oldLF = UIManager.getLookAndFeel();
-				try
-				{
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				}
-				catch(Exception ex) {}
+				LookAndFeel oldLF = Methods.getCurrentLookAndFeel();
+				Methods.setToSystemLookAndFeel();
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 				jfc.setDialogTitle(Methods.getLanguageText(XMLIdentifier.SETTINGS_DATABASE_USERS_SELECT_TEXT));
@@ -226,11 +213,7 @@ public class SettingsPanel extends JPanel implements ActionListener, LanguageLis
 					tfUserDatabasePath.setText(jfc.getSelectedFile().getAbsolutePath());
 				}
 				
-				try
-				{
-					UIManager.setLookAndFeel(oldLF);
-				}
-				catch(Exception ex) {}
+				Methods.setLookAndFeel(oldLF);
 			}
 		});
 		butDefaultUserDatabase.addActionListener(new ActionListener()

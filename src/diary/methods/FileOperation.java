@@ -855,12 +855,8 @@ public class FileOperation
 	
 	public static void exportImage(BufferedImage image)
 	{
-		LookAndFeel oldLF = UIManager.getLookAndFeel();
-		try
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}
-		catch(Exception ex) {}
+		LookAndFeel oldLF = Methods.getCurrentLookAndFeel();
+		Methods.setToSystemLookAndFeel();
 		JFileChooser jfc = new JFileChooser();
 		jfc.setCurrentDirectory(new File("." + File.separator));
 		
@@ -884,11 +880,7 @@ public class FileOperation
 			}
 		}
 		
-		try
-		{
-			UIManager.setLookAndFeel(oldLF);
-		}
-		catch(Exception ex) {}
+		Methods.setLookAndFeel(oldLF);
 	}
 	
 	public static String getExtension(File file)
@@ -915,12 +907,8 @@ public class FileOperation
 		}
 		
 		//Create File Dialog
-		LookAndFeel oldLF = UIManager.getLookAndFeel();
-		try
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}
-		catch(Exception ex) {}
+		LookAndFeel oldLF = Methods.getCurrentLookAndFeel();
+		Methods.setToSystemLookAndFeel();
 		
 		JFileChooser jfc = new JFileChooser();
 		jfc.setCurrentDirectory(new File("." + File.separator));
@@ -961,16 +949,12 @@ public class FileOperation
 			}
 		}
 		
-		try
-		{
-			UIManager.setLookAndFeel(oldLF);
-		}
-		catch(Exception ex) {}
+		Methods.setLookAndFeel(oldLF);
 	}
 	
 	public static void exportPainEntriesAsTxt(PatientData patient, List<PainEntryData> entries)
 	{
-		LookAndFeel oldLF = UIManager.getLookAndFeel();
+		LookAndFeel oldLF = Methods.getCurrentLookAndFeel();
 		try
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
