@@ -359,8 +359,8 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	private void initGraphScroll(Graph graph)
 	{
 		this.scrollGraph = new JScrollPane(graph, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		this.scrollGraph.getVerticalScrollBar().setUnitIncrement(10);
-		this.scrollGraph.getHorizontalScrollBar().setUnitIncrement(10);
+		this.scrollGraph.getVerticalScrollBar().setUnitIncrement(20);
+		this.scrollGraph.getHorizontalScrollBar().setUnitIncrement(20);
 		this.scrollGraph.setOpaque(false);
 		this.scrollGraph.getViewport().setOpaque(false);
 	}

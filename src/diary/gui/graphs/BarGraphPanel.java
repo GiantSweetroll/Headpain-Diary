@@ -55,9 +55,8 @@ public class BarGraphPanel extends Graph
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		this.drawDataPoints(g, this.BAR_COLOR, 10);			//This is required so that the bars shows up in the first run
-		
-		this.repaint();
+		this.drawDataPoints(this.graph2DImage, this.BAR_COLOR, 10);			//This is required so that the bars shows up in the first run
+		g.drawImage(this.getGraphImage(), 0, 0, null);
 	}
 
 	@Override

@@ -1,11 +1,14 @@
 package diary.gui.graphs;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,7 +21,6 @@ import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
-import giantsweetroll.message.MessageManager;
 import giantsweetroll.numbers.GNumbers;
 
 public abstract class Graph extends JPanel implements LanguageListener
@@ -32,6 +34,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	private String xAxisName;
 	private String yAxisName;
 	private LinkedHashMap<String, Double> dataMap;
+	private BufferedImage graphImage;
 	
 	protected Point axesOrigin;
 	protected Point axesLength;
@@ -49,6 +52,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected int axesPaddingWithPanelEdgeBelow = 50;
 	protected int axesPaddingWithPanelEdgeTop = 50;
 	protected int xAxisNameTextHeight;
+	protected Graphics2D graph2DImage;
 	
 	//Options
 	protected boolean enableDataValueMarkers;
@@ -57,6 +61,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected boolean showGraphLinesOfX;
 	
 	//Constants
+	protected final Dimension GRAPH_IMAGE_SIZE = new Dimension(1024, 768);
 	protected final int DATA_POINT_WIDTH = 10;
 	protected final int AXES_POINTERS_LENGTH = 15;
 	protected final int MARKER_LABEL_PADDING = 5;
@@ -70,33 +75,24 @@ public abstract class Graph extends JPanel implements LanguageListener
 	//Constructors
 	public Graph(LinkedHashMap<String, Double> dataMap) 
 	{
-		this.dataMap = dataMap;
-		this.xAxisName = "";
-		this.yAxisName = "";
-		this.maxYAxisMarkerLabelLength = 0;
-		this.maxXAxisMarkerLabelHeight = 0;
-		this.yAxisNameTextHeight = 0;
-		this.xAxisLabels = new ArrayList<String>();
-		this.yAxisValues = new ArrayList<Double>();
-		this.yAxisMarkerPoints = new ArrayList<Point>();
-		this.dataPoints = new ArrayList<Point>();
-		
-		this.enableDataValueMarkers = false;
-		this.displayDataPoint = true;
-		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
-		this.showGraphLinesOfX = true;
-		this.showGraphLinesOfY = true;
-		
-		for (Map.Entry<String, Double> entry : dataMap.entrySet())
-		{
-			this.xAxisLabels.add(entry.getKey());
-			this.yAxisValues.add(entry.getValue());
-		}
-		
-		this.setOpaque(false);
+		this.init(dataMap, "", "");
 	}
 	public Graph(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
 	{
+		this.init(dataMap, xAxisName, yAxisName);
+	}
+	public Graph(String xAxisName, String yAxisName)
+	{
+		this.init(null, xAxisName, yAxisName);
+	}
+	public Graph()
+	{
+		this.init(null, "", "");
+	}
+	
+	//Methods
+	private void init(LinkedHashMap<String, Double> dataMap, String xAxisName, String yAxisName)
+	{
 		this.dataMap = dataMap;
 		this.xAxisName = xAxisName;
 		this.yAxisName = yAxisName;
@@ -107,6 +103,9 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.yAxisValues = new ArrayList<Double>();
 		this.yAxisMarkerPoints = new ArrayList<Point>();
 		this.dataPoints = new ArrayList<Point>();
+		this.graphImage = new BufferedImage(this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height, BufferedImage.TYPE_INT_ARGB);
+		this.graph2DImage = this.graphImage.createGraphics();
+		this.graph2DImage.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
 		
 		this.enableDataValueMarkers = false;
 		this.displayDataPoint = true;
@@ -114,72 +113,18 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.showGraphLinesOfX = true;
 		this.showGraphLinesOfY = true;
 		
-		for (Map.Entry<String, Double> entry : dataMap.entrySet())
+		if (dataMap != null)
 		{
-			this.xAxisLabels.add(entry.getKey());
-			this.yAxisValues.add(entry.getValue());
+			for (Map.Entry<String, Double> entry : dataMap.entrySet())
+			{
+				this.xAxisLabels.add(entry.getKey());
+				this.yAxisValues.add(entry.getValue());
+			}
 		}
 		
 		this.setOpaque(false);		
+		this.setPreferredSize(this.GRAPH_IMAGE_SIZE);
 	}
-	public Graph(String xAxisName, String yAxisName)
-	{
-	//	this.dataMap = dataMap;
-		this.xAxisName = xAxisName;
-		this.yAxisName = yAxisName;
-		this.maxYAxisMarkerLabelLength = 0;
-		this.maxXAxisMarkerLabelHeight = 0;
-		this.yAxisNameTextHeight = 0;
-		this.xAxisLabels = new ArrayList<String>();
-		this.yAxisValues = new ArrayList<Double>();
-		this.yAxisMarkerPoints = new ArrayList<Point>();
-		this.dataPoints = new ArrayList<Point>();
-		
-		this.enableDataValueMarkers = false;
-		this.displayDataPoint = true;
-		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
-		this.showGraphLinesOfX = true;
-		this.showGraphLinesOfY = true;
-		
-		/*
-		for (Map.Entry<String, Double> entry : dataMap.entrySet())
-		{
-			this.xAxisLabels.add(entry.getKey());
-			this.yAxisValues.add(entry.getValue());
-		}		*/
-		
-		this.setOpaque(false);
-	}
-	public Graph()
-	{
-	//	this.dataMap = dataMap;
-		this.xAxisName = "";
-		this.yAxisName = "";
-		this.maxYAxisMarkerLabelLength = 0;
-		this.maxXAxisMarkerLabelHeight = 0;
-		this.yAxisNameTextHeight = 0;
-		this.xAxisLabels = new ArrayList<String>();
-		this.yAxisValues = new ArrayList<Double>();
-		this.yAxisMarkerPoints = new ArrayList<Point>();
-		this.dataPoints = new ArrayList<Point>();
-		
-		this.enableDataValueMarkers = false;
-		this.displayDataPoint = true;
-		this.maxMarkersXAxis = this.MAX_MARKERS_IN_X_AXIS;
-		this.showGraphLinesOfX = true;
-		this.showGraphLinesOfY = true;
-		
-		/*
-		for (Map.Entry<String, Double> entry : dataMap.entrySet())
-		{
-			this.xAxisLabels.add(entry.getKey());
-			this.yAxisValues.add(entry.getValue());
-		}		*/
-		
-		this.setOpaque(false);		
-	}
-	
-	//Methods
 	@Override
 	public void paintComponent(Graphics g)
 	{
@@ -187,21 +132,26 @@ public abstract class Graph extends JPanel implements LanguageListener
 		
 	//	g.setFont(Constants.FONT_GENERAL);
 		
-		this.axesOrigin = new Point(this.axesPaddingWithPanelEdgeSides, this.getHeight()-this.axesPaddingWithPanelEdgeBelow);
-		this.drawAxes(g, Color.BLACK, this.getWidth()-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
+		g.setColor(Color.WHITE);
+//		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		this.graph2DImage.setColor(Color.WHITE);
+		this.graph2DImage.fillRect(0, 0, this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height);
+
+		this.axesOrigin = new Point(this.axesPaddingWithPanelEdgeSides, this.GRAPH_IMAGE_SIZE.height-this.axesPaddingWithPanelEdgeBelow);
+		this.drawAxes(this.graph2DImage, Color.BLACK, this.GRAPH_IMAGE_SIZE.width-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
 		try
 		{
 			this.generateDataPoints(this.yAxisValues);
-			this.drawAxesMarkers(g, Color.BLACK);
-			this.drawXAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
-			this.drawYAxisMarkerLabels(g, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
-			this.drawGraphLines(g, Color.LIGHT_GRAY);
-			this.drawAxisNames(g, Color.BLACK, Color.BLACK, this.xAxisName, this.yAxisName);
-			this.drawRecentMedicationText(g, Color.BLACK);
-			g.setFont(Constants.FONT_GENERAL);
+			this.drawAxesMarkers(this.graph2DImage, Color.BLACK);
+			this.drawXAxisMarkerLabels(this.graph2DImage, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
+			this.drawYAxisMarkerLabels(this.graph2DImage, Constants.COLOR_GRAPH_AXES_MARKER_LABELS, Constants.FONT_GENERAL_BOLD);
+			this.drawGraphLines(this.graph2DImage, Color.LIGHT_GRAY);
+			this.drawAxisNames(this.graph2DImage, Color.BLACK, Color.BLACK, this.xAxisName, this.yAxisName);
+			this.drawRecentMedicationText(this.graph2DImage, Color.BLACK);
+			this.graph2DImage.setFont(Constants.FONT_GENERAL);
 			if (this.enableDataValueMarkers)
 			{
-				this.drawDataValues(g, Color.BLACK);
+				this.drawDataValues(this.graph2DImage, Color.BLACK);
 			}
 			
 			if (this.getBehindAxesDifferenceWithPanelEdgeLeft()>0)
@@ -217,13 +167,26 @@ public abstract class Graph extends JPanel implements LanguageListener
 			
 			if (this.displayDataPoint)
 			{
-				this.drawDataPoints(g, Color.GREEN, this.DATA_POINT_WIDTH);
+				this.drawDataPoints(this.graph2DImage, Color.GREEN, this.DATA_POINT_WIDTH);
 			}
 		}
 		catch(ArithmeticException ex)
 		{
 //			ex.printStackTrace();
 		}
+		
+//		g.drawImage(this.graphImage, 
+//					this.GRAPH_IMAGE_SIZE.width,
+//					0, 
+//					this.GRAPH_IMAGE_SIZE.width,
+//					this.GRAPH_IMAGE_SIZE.height, 
+//					0, 
+//					0, 
+//					0, 
+//					this.GRAPH_IMAGE_SIZE.height, 
+//					Color.WHITE, 
+//					null);
+//		g.drawImage(this.graphImage, 0, 0, null);
 	}
 	protected void setMaxMarkersInXAxis(int max)
 	{
@@ -275,6 +238,10 @@ public abstract class Graph extends JPanel implements LanguageListener
 	{
 		this.xAxisLabels = labels;
 	}
+	public BufferedImage getGraphImage()
+	{
+		return this.graphImage;
+	}
 	
 	//Draw Sections
 	protected void drawAxes(Graphics g, Color c, int xEnd, int yEnd)
@@ -299,7 +266,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 		//Set Distance between each data entry in the x-axis
 		double xDiff = GNumbers.round(this.axesLength.x/dataValues.size(), 0);
 		//Set distance between each unit increment in the y-axis
-		double yDiff = GNumbers.round(this.axesLength.y/Methods.getHighestValue(dataValues), 0);
+		double yDiff = GNumbers.round((float)this.axesLength.y/(float)Methods.getHighestValue(dataValues), 0);
 		
 		//Translate into coordinate points
 		this.dataPoints = new ArrayList<Point>();

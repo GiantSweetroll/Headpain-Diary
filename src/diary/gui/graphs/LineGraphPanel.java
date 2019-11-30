@@ -28,9 +28,8 @@ public class LineGraphPanel extends Graph
 	{
 		super.paintComponent(g);
 		
-		this.drawConnectingLines(g, Color.RED);
-		
-		this.repaint();
+		this.drawConnectingLines(super.graph2DImage, Color.RED);
+		g.drawImage(this.getGraphImage(), 0, 0, null);
 	}
 	
 	//Drawing parts of the graph
@@ -54,6 +53,10 @@ public class LineGraphPanel extends Graph
 		g.setColor(c);
 		for (int i=0; i<this.dataPoints.size(); i++)
 		{
+			if (this.dataPoints.get(i).y == this.axesOrigin.y)	//Skip data with 0 values
+			{
+				continue;
+			}
 			g.fillOval(this.dataPoints.get(i).x - width/2, this.dataPoints.get(i).y - width/2, width, width);
 /*			System.out.println("Data point: " + this.dataPoints.get(i).x + ", " + this.dataPoints.get(i).y);
 			System.out.println("Y-Axis: " + this.yAxisMarkerPoints.get(this.yAxisMarkerPoints.size()-1).y);
