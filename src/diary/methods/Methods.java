@@ -724,6 +724,11 @@ public class Methods
 		return "<html>" + text + "<font color='red'>" + Constants.REQUIRED_IDENTIFIER + "</font></html>";
 	}
 	
+	public static final String makeStringBold(String text)
+	{
+		return "<html>" + "<b>" + text + "</b>" + "</html>";
+	}
+	
 	public static void removeDuplicatesFromStringList(List<String> list)
 	{
 		for (int i=0; i<list.size()-1; i++)
