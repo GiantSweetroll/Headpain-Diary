@@ -1,12 +1,14 @@
 package diary.gui.graphs;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -106,6 +108,8 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.graphImage = new BufferedImage(this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height, BufferedImage.TYPE_INT_ARGB);
 		this.graph2DImage = this.graphImage.createGraphics();
 		this.graph2DImage.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
+		this.graph2DImage.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+									        RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);	//Text Anti-Aliasing
 		
 		this.enableDataValueMarkers = false;
 		this.displayDataPoint = true;
@@ -135,6 +139,9 @@ public abstract class Graph extends JPanel implements LanguageListener
 		g.setColor(Color.WHITE);
 //		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		this.graph2DImage.setColor(Color.WHITE);
+		this.graph2DImage.setStroke(new BasicStroke(3));
+//		this.graph2DImage.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+//							                RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
 		this.graph2DImage.fillRect(0, 0, this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height);
 
 		this.axesOrigin = new Point(this.axesPaddingWithPanelEdgeSides, this.GRAPH_IMAGE_SIZE.height-this.axesPaddingWithPanelEdgeBelow);
@@ -244,6 +251,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	}
 	
 	//Draw Sections
+	protected abstract void drawDataPoints(Graphics g, Color c, int width);
 	protected void drawAxes(Graphics g, Color c, int xEnd, int yEnd)
 	{
 		g.setColor(c);
@@ -276,11 +284,10 @@ public abstract class Graph extends JPanel implements LanguageListener
 			Double roundedDataValue = GNumbers.round(dataValues.get((int)i), this.DECIMAL_PLACES);
 			Double doubleCoordinate = (double)this.axesOrigin.y - yDiff*roundedDataValue;
 			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(doubleCoordinate, this.DECIMAL_PLACES)));
-			xPos+=xDiff; 
+			xPos+=xDiff;
 //			MessageManager.printLine("(" + this.dataPoints.get((int)i).x + ", " + this.dataPoints.get((int)i).y);
 		}
 	}
-	protected abstract void drawDataPoints(Graphics g, Color c, int width);
 	protected void drawAxesMarkers(Graphics g, Color c)
 	{
 		g.setColor(c);

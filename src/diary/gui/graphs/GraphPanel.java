@@ -422,12 +422,19 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 				Methods.exportPanelImage(imagePanel, false);
 				*/
 				PatientData patient = this.activePatientPanel.getSelectedPatientData();
+				/*
 				ImageExportPanel exportImage = new ImageExportPanel(patient.getName(), 
 																	patient.getID(), 
 																	this.panelDateRange.getDateRangeAsString(), 
 																	Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(), 
 																	new TitledGraph(this.comboCategory.getSelectedItem().toString(), this.graph));
-				FileOperation.exportPanelImage(exportImage, true);
+				FileOperation.exportPanelImage(exportImage, true);	*/
+				FileOperation.exportImage(Methods.getGraphExportImage(patient.getName(), 
+											patient.getID(), 
+											this.panelDateRange.getDateRangeAsString(), 
+											Globals.GRAPH_FILTER_PANEL.getRecentMedicationFilter(),
+											this.comboCategory.getSelectedItem().toString(),
+											this.graph.getGraphImage()));
 				break;
 				
 			case OPTIONS:

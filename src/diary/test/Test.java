@@ -9,11 +9,11 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +23,7 @@ import javax.swing.WindowConstants;
 
 import diary.constants.ImageConstants;
 import giantsweetroll.ImageManager;
+import giantsweetroll.message.MessageManager;
 
 public class Test
 {	

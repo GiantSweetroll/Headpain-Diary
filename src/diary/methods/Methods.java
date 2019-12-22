@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
@@ -1145,6 +1146,42 @@ public class Methods
     	return Methods.resizeImageByRatio
 				(image, Methods.getPercentage
 						(image, Methods.getPercentageValue(Constants.SCREENSIZE.width, percentage)));
+    }
+    
+    public static BufferedImage getGraphExportImage(String name, String medID, String dateRange, String medication, String title, BufferedImage graphImage)
+    {
+    	BufferedImage image = new BufferedImage(graphImage.getWidth(), 1080, BufferedImage.TYPE_INT_RGB);
+    	Graphics2D g2d = image.createGraphics();
+    	int textHeight = g2d.getFontMetrics().getHeight();
+    	Point pos = new Point(5, 0);
+    	final int padding = 5;
+    	
+    	//Draw Background
+    	g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
+    	
+    	//Draw Description on top
+    	g2d.setFont(Constants.FONT_GENERAL);
+    	g2d.setColor(Color.BLACK);
+    	pos.y += textHeight + padding;
+    	g2d.drawString(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL)+ ": " + name, pos.x, pos.y);
+    	pos.y += textHeight + padding;
+    	g2d.drawString(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL)+ ": " + medID, pos.x, pos.y);
+    	pos.y += textHeight + padding;
+    	g2d.drawString(Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT)+ ": " + dateRange, pos.x, pos.y);
+    	pos.y += textHeight + padding;
+    	g2d.drawString(Methods.getLanguageText(XMLIdentifier.RECENT_MEDICATION_LABEL)+ ": " + medication, pos.x, pos.y);
+    	pos.y += textHeight + padding*3;
+    	pos.x = (image.getWidth()/2) - (g2d.getFontMetrics().stringWidth(title));
+    	g2d.setFont(Constants.FONT_SUB_TITLE);
+    	g2d.drawString(title, pos.x, pos.y);
+    	pos.y += textHeight + padding*3;
+    	pos.x = 0;
+    	
+    	//Draw graph image
+    	g2d.drawImage(graphImage, pos.x, pos.y, null);
+ //   	g2d.drawImage(graphImage, pos.x, pos.y, image.getWidth() - 100, image.getHeight()-pos.y, null);
+    	
+    	return image;
     }
     
     //LookAndFeel Methods
