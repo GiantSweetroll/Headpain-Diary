@@ -4,6 +4,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
@@ -23,12 +24,12 @@ public class PatientDataTextPanel extends JPanel implements LanguageListener
 	{
 		//Initialization
 		this.patient = patient;
-		this.labName = new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL) + ": " + this.patient.getName());
-		this.labMedID = new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL) + ": " + this.patient.getID());
-		this.labDOB = new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL) + ": " + this.patient.getDOBString());
-		this.labSex = new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL) + ": " + Methods.convertSexToLanguage(this.patient.getSex()));
-		this.labJob = new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL) + ": " + this.patient.getOccupation());
-		this.labCity = new JLabel("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL) + ": " + this.patient.getCity());
+		this.labName = new JLabel("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL) + ": " + "</b>" + this.patient.getName() + "</html>");
+		this.labMedID = new JLabel("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL) + ": " + "</b>" + this.patient.getID() + "</html>");
+		this.labDOB = new JLabel("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL) + ": " + "</b>" + this.patient.getDOBString() + "</html>");
+		this.labSex = new JLabel("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL) + ": " + "</b>" + Methods.convertSexToLanguage(this.patient.getSex()) + "</html>");
+		this.labJob = new JLabel("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL) + ": " + "</b>" + this.patient.getOccupation() + "</html>");
+		this.labCity = new JLabel("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL) + ": " + "</b>" + this.patient.getCity() + "</html>");
 		
 		//Properties
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -49,11 +50,11 @@ public class PatientDataTextPanel extends JPanel implements LanguageListener
 	@Override
 	public void revalidateLanguage() 
 	{
-		this.labName.setText("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL) + ": " + this.patient.getName());
-		this.labMedID.setText("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL) + ": " + this.patient.getID());
-		this.labDOB.setText("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL) + ": " + this.patient.getDOBString());
-		this.labSex.setText("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL) + ": " + Methods.convertSexToLanguage(this.patient.getSex()));
-		this.labJob.setText("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL) + ": " + this.patient.getOccupation());
-		this.labCity.setText("  " + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL) + ": " + this.patient.getCity());
+		this.labName.setText("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL) + ": " + "</b>" + this.patient.getName() + "</html>");
+		this.labMedID.setText("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL) + ": " + "</b>" + this.patient.getID() + "</html>");
+		this.labDOB.setText("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_DOB_LABEL) + ": " + "</b>" + this.patient.getDOBString() + "</html>");
+		this.labSex.setText("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_SEX_LABEL) + ": " + "</b>" + Methods.convertSexToLanguage(this.patient.getSex()) + "</html>");
+		this.labJob.setText("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_OCCUPATION_LABEL) + ": " + "</b>" + this.patient.getOccupation() + "</html>");
+		this.labCity.setText("<html>" + "  " + "<b>" + Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_CITY_LABEL) + ": " + "</b>" + this.patient.getCity() + "</html>");
 	}
 }
