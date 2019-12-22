@@ -73,6 +73,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected final int DECIMAL_PLACES = 1;
 	protected final int X_AXIS_NAME_PADDING = 20;
 	protected final int Y_AXIS_NAME_PADDING = 20;
+	private final int STROKE_SIZE = 3;
 	
 	//Constructors
 	public Graph(LinkedHashMap<String, Double> dataMap) 
@@ -139,7 +140,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 		g.setColor(Color.WHITE);
 //		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		this.graph2DImage.setColor(Color.WHITE);
-		this.graph2DImage.setStroke(new BasicStroke(3));
+		this.graph2DImage.setStroke(new BasicStroke(this.STROKE_SIZE));
 //		this.graph2DImage.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 //							                RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
 		this.graph2DImage.fillRect(0, 0, this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height);
@@ -453,7 +454,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 		{
 			for (Point marker : this.yAxisMarkerPoints)
 			{
-				g.drawLine(this.axesOrigin.x, marker.y, this.xAxisEndCoordinates.x, marker.y);
+				g.drawLine(this.axesOrigin.x+this.STROKE_SIZE, marker.y, this.xAxisEndCoordinates.x, marker.y);
 			}
 		}
 		
@@ -461,7 +462,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 		{
 			for (Point marker : this.dataPoints)
 			{
-				g.drawLine(marker.x, this.axesOrigin.y, marker.x, this.yAxisEndCoordinates.y);
+				g.drawLine(marker.x, this.axesOrigin.y-this.STROKE_SIZE, marker.x, this.yAxisEndCoordinates.y);
 			}
 		}
 	}

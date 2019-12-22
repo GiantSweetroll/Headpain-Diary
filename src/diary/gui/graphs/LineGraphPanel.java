@@ -29,6 +29,7 @@ public class LineGraphPanel extends Graph
 		super.paintComponent(g);
 		
 		this.drawConnectingLines(super.graph2DImage, Color.RED);
+		this.drawAxes(super.graph2DImage, Color.BLACK, super.GRAPH_IMAGE_SIZE.width-super.axesPaddingWithPanelEdgeSides, super.axesPaddingWithPanelEdgeTop);
 		g.drawImage(this.getGraphImage(), 0, 0, null);
 	}
 	
