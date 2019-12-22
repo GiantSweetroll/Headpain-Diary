@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -117,6 +116,6 @@ public class PatientDataFilterPanel extends JPanel implements ItemListener, Lang
 	{
 		this.checkName.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_NAME_LABEL));
 		this.checkID.setText(Methods.getLanguageText(XMLIdentifier.PATIENT_DATA_FORM_MED_ID_LABEL));
-		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
+//		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
 	}
 }

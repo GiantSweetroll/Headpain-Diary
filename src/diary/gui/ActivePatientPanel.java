@@ -1,6 +1,5 @@
 package diary.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,16 +9,16 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
+import diary.constants.Constants;
 import diary.constants.Globals;
 import diary.constants.XMLIdentifier;
 import diary.interfaces.LanguageListener;
@@ -32,7 +31,7 @@ import diary.patientdata.PatientDataForm;
 import diary.patientdata.PatientDataRenderer;
 import diary.patientdata.PatientDataTextPanel;
 
-public class ActivePatientPanel extends JPanel implements ItemListener, ActionListener, LanguageListener
+public class ActivePatientPanel extends JPanel implements ActionListener, LanguageListener
 {
 
 	/**
@@ -42,12 +41,12 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 	
 	private JLabel labUser;
 	private JComboBox<PatientData> comboUsers;
-	private JRadioButton radShow;
 	private PatientDataForm dataForm;
 	private PatientDataTextPanel dataText;
-	private JPanel panelCenter, panelSelection, panelShow, panelFilter;
+	private JPanel panelFilter;
 	private PatientDataFilterPanel patientFilter;
-	private GButton buttonFilter;
+	private GButton buttonFilter, buttonDetails;
+	private List<PatientData> patientList;
 	
 	//Constructors
 	public ActivePatientPanel()
@@ -64,29 +63,18 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 	private void init()
 	{
 		//Initialization
-		this.initPanelCenter();
+		this.labUser = new JLabel(Methods.getLanguageText(XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT), SwingConstants.CENTER);
+		this.patientList = FileOperation.getListOfPatients();
+		this.comboUsers = new JComboBox<PatientData>(this.patientList.toArray(new PatientData[this.patientList.size()]));
+		this.buttonDetails = new GButton(Methods.getLanguageText(XMLIdentifier.SHOW_DETAILS_TEXT));
+		this.buttonFilter = new GButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 		this.initPanelFilter();
 		
 		//Properties
-		this.setLayout(new BorderLayout());
-		this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
+		this.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.INSETS_BASE, Constants.INSETS_BASE));
 		this.setOpaque(false);
-		
-		//Add to panel
-		this.add(this.panelCenter, BorderLayout.CENTER);	
-		this.add(this.panelFilter, BorderLayout.EAST);
-	}
-	private void initPanelSelection()
-	{
-		//Initialization
-		this.panelSelection = new JPanel();
-		this.labUser = new JLabel(Methods.getLanguageText(XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT), SwingConstants.CENTER);
-		List<PatientData> list = FileOperation.getListOfPatients();
-		this.comboUsers = new JComboBox<PatientData>(list.toArray(new PatientData[list.size()]));
-		
-		//Properties
-		this.panelSelection.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
-		this.panelSelection.setOpaque(false);
+		this.buttonFilter.addActionListener(this);
+//		this.buttonFilter.setAlignmentX(CENTER_ALIGNMENT);
 		this.comboUsers.setRenderer(new PatientDataRenderer());
 		this.comboUsers.setBackground(Color.WHITE);
 		this.comboUsers.addItemListener(new ItemListener()
@@ -94,7 +82,6 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 					@Override
 					public void itemStateChanged(ItemEvent e)
 					{
-						displayPatientDetails();
 						Methods.refresHistories(getSelectedPatientData());
 						/*
 						if (MainFrame.jComponent instanceof EntryLog)
@@ -111,65 +98,49 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 					}
 					
 				});
+		this.buttonDetails.addActionListener(new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						dataForm = new PatientDataForm((PatientData)comboUsers.getSelectedItem(), false);
+						dataText = new PatientDataTextPanel(dataForm.getData());
+						JOptionPane.showMessageDialog(null, dataText, Methods.getLanguageText(XMLIdentifier.DETAILS_TEXT), JOptionPane.INFORMATION_MESSAGE);
+					}
+				});
 		
 		//Add to panel
-		this.panelSelection.add(this.labUser);
-		this.panelSelection.add(this.comboUsers);
-	}
-	private void initPanelCenter()
-	{
-		//Initialization
-		this.panelCenter = new JPanel();
-		this.initPanelSelection();
-		this.initPanelShow();
-		
-		//Properties
-		this.panelCenter.setLayout(new BoxLayout(this.panelCenter, BoxLayout.Y_AXIS));
-		this.panelCenter.setOpaque(false);
-		
-		//Add to panel
-		this.panelCenter.add(this.panelSelection);
-		this.panelCenter.add(this.panelShow);
-	}
-	private void initPanelShow()
-	{
-		//Initialization
-		this.panelShow = new JPanel();
-		this.radShow = new JRadioButton(Methods.getLanguageText(XMLIdentifier.DETAILS_TEXT));
-		
-		//Properties
-		this.panelShow.setLayout(new FlowLayout(FlowLayout.LEFT));
-		this.panelShow.setOpaque(false);
-		this.radShow.addItemListener(this);
-		this.radShow.setOpaque(false);
-		
-		//Add to panel
-		this.panelShow.add(this.radShow);
+		this.add(this.labUser);
+		this.add(this.comboUsers);
+		this.add(this.buttonDetails);
+		this.add(this.buttonFilter);
 	}
 	public void initPanelFilter()
 	{
 		//Initialization
 		this.panelFilter = new JPanel();
 		this.patientFilter = new PatientDataFilterPanel();
-		this.buttonFilter = new GButton(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
 		
 		//Properties
 		this.panelFilter.setLayout(new BoxLayout(this.panelFilter, BoxLayout.Y_AXIS));
 		this.panelFilter.setOpaque(false);
-		this.patientFilter.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
-		this.buttonFilter.addActionListener(this);
+//		this.patientFilter.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT)));
 		this.patientFilter.setAlignmentX(CENTER_ALIGNMENT);
-		this.buttonFilter.setAlignmentX(CENTER_ALIGNMENT);
 		
 		//Add to panel
 		this.panelFilter.add(this.patientFilter);
 		this.panelFilter.add(Box.createRigidArea(new Dimension(5, 5)));			///Empty Component for BoxLayout spacing
-		this.panelFilter.add(this.buttonFilter);
-		this.panelFilter.add(Box.createRigidArea(new Dimension(5, 5)));			///Empty Component for BoxLayout spacing
 	}
 	public PatientData getSelectedPatientData()
 	{
-		return (PatientData)this.comboUsers.getSelectedItem();
+		if (this.patientList.size() == 0)
+		{
+			return null;
+		}
+		else
+		{
+			return (PatientData)this.comboUsers.getSelectedItem();
+		}
 	}
 	public void setSelectedPatient(PatientData patient)
 	{
@@ -197,8 +168,8 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 	public void refresh()
 	{
 		PatientData active = this.getSelectedPatientData();
-		List<PatientData> list = FileOperation.getListOfPatients();
-		this.comboUsers.setModel(new DefaultComboBoxModel<PatientData>(list.toArray(new PatientData[list.size()])));
+		this.patientList = FileOperation.getListOfPatients();
+		this.comboUsers.setModel(new DefaultComboBoxModel<PatientData>(this.patientList.toArray(new PatientData[this.patientList.size()])));
 		try
 		{
 			for (int i=0; i<this.comboUsers.getItemCount(); i++)
@@ -217,35 +188,6 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 		}
 		this.revalidate();
 		this.repaint();
-	}
-	private void displayPatientDetails()
-	{
-		if (this.radShow.isSelected())
-		{
-			try
-			{
-				this.remove(this.dataText);
-				this.revalidate();
-				this.repaint();
-			}
-			catch (NullPointerException ex) {}
-			
-			this.dataForm = new PatientDataForm((PatientData)this.comboUsers.getSelectedItem(), false);
-			this.dataText = new PatientDataTextPanel(dataForm.getData());
-			this.add(this.dataText, BorderLayout.SOUTH);
-			this.revalidate();
-			this.repaint();
-		}
-		else
-		{
-			try
-			{
-				this.remove(this.dataText);
-				this.revalidate();
-				this.repaint();
-			}
-			catch (NullPointerException ex) {}
-		}
 	}
 	public boolean isPatientSelected()
 	{
@@ -266,29 +208,20 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 	{
 		this.comboUsers.requestFocus();
 	}
-	
-	//Interfaces
-	@Override
-	public void itemStateChanged(ItemEvent e)
+	public void filter()
 	{
-		this.displayPatientDetails();
-	}
-
-	public void actionPerformed(ActionEvent e)
-	{
-		List<PatientData> list = FileOperation.getListOfPatients();
+		this.patientList = FileOperation.getListOfPatients();
 		if (this.patientFilter.isNameFilterSelected())
 		{
-			list = PatientDataOperation.filter(list, PatientData.NAME, this.patientFilter.getNameFilterKeyword());
+			this.patientList = PatientDataOperation.filter(this.patientList, PatientData.NAME, this.patientFilter.getNameFilterKeyword());
 		}
 		
 		if (this.patientFilter.isIDFilterSelected())
 		{
-			list = PatientDataOperation.filter(list, PatientData.MEDICAL_RECORD_ID, this.patientFilter.getIDFilterKeyword());
+			this.patientList = PatientDataOperation.filter(this.patientList, PatientData.MEDICAL_RECORD_ID, this.patientFilter.getIDFilterKeyword());
 		}
 		
-		this.comboUsers.setModel(new DefaultComboBoxModel<PatientData>(list.toArray(new PatientData[list.size()])));
-		this.displayPatientDetails();
+		this.comboUsers.setModel(new DefaultComboBoxModel<PatientData>(this.patientList.toArray(new PatientData[this.patientList.size()])));
 		Globals.HISTORY_RECENT_MEDICATION.refresh(this.getSelectedPatientData());
 		Globals.HISTORY_MEDICINE_COMPLAINT.refresh(this.getSelectedPatientData());
 		Globals.HISTORY_PAIN_KIND.refresh(this.getSelectedPatientData());
@@ -298,11 +231,23 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 		this.repaint();
 	}
 	
+	//Interfaces
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		JOptionPane.showMessageDialog(null, this.panelFilter, Methods.getLanguageText(XMLIdentifier.FILTER_TEXT), JOptionPane.PLAIN_MESSAGE);
+		this.filter();
+	}
+	
+	public void showDetailsButtonClicked(ActionEvent e)
+	{
+		JOptionPane.showMessageDialog(null, this.dataText);
+	}
+	
 	@Override
 	public void revalidateLanguage() 
 	{
 		this.labUser.setText(Methods.getLanguageText(XMLIdentifier.ACTIVE_PATIENT_PANEL_PATIENT_TEXT));
-		this.radShow.setText(Methods.getLanguageText(XMLIdentifier.DETAILS_TEXT));
 		this.patientFilter.revalidateLanguage();
 		try
 		{
@@ -310,5 +255,6 @@ public class ActivePatientPanel extends JPanel implements ItemListener, ActionLi
 		}
 		catch(NullPointerException ex){}
 		this.buttonFilter.setText(Methods.getLanguageText(XMLIdentifier.FILTER_TEXT));
+		this.buttonDetails.setText(Methods.getLanguageText(XMLIdentifier.SHOW_DETAILS_TEXT));
 	}
 }
