@@ -76,6 +76,7 @@ public class XMLIdentifier
 	public static final String SELECT_ALL_TEXT = "select all text";
 	public static final String DISSELECT_ALL_TEXT = "disselect all text";
 	public static final String EDIT_TEXT = "edit text";
+	public static final String SHOW_DETAILS_TEXT = "show details text";
 	
 	//Main Menu
 	public static final String NEW_ENTRY_BUTTON_TEXT = "new entry button";
