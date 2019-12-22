@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import diary.constants.Constants;
@@ -30,7 +29,6 @@ import diary.data.PainEntryData;
 import diary.gui.ActivePatientPanel;
 import diary.gui.DateRangePanel;
 import diary.gui.GButton;
-import diary.gui.ImageExportPanel;
 import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.FileOperation;
@@ -47,8 +45,9 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	 * 
 	 */
 	private static final long serialVersionUID = 5865211789435235389L;
-	private JPanel panelTop, 
-					panelTopLeft, 
+	private JPanel panelGraphConfig,
+					panelGraphCategory,
+					panelLeft,
 					panelBelow, 
 					panelBelowLeft, 
 					panelBelowCenter;
@@ -64,7 +63,6 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 					butOptions;
 	private GraphSettingsPanel panelGraphSettings;
 	private ActivePatientPanel activePatientPanel;
-	private JTabbedPane graphConfig;
 	
 	//Condition storing
 	private boolean graphReversed;
@@ -85,79 +83,86 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	private void init()
 	{
 		//Initialization
-		this.initPanelTop();
+		this.initPanelLeft();
 		this.initPanelBelow();
-		JScrollPane scroll = ScrollPaneManager.generateDefaultScrollPane(this.panelTop, 10, 10);
+		JScrollPane scroll = ScrollPaneManager.generateDefaultScrollPane(this.panelLeft, 10, 10);
 		
 		//Properties
 		this.setLayout(new BorderLayout());
 //		this.setOpaque(false);
 		this.setBackground(Color.WHITE);
+		this.panelLeft.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		this.panelGraphSettings.setDisplayVoidData(true);
 //		scroll.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		this.initGraph();
 		
 		//add to panel
-		this.add(scroll, BorderLayout.NORTH);
+		this.add(scroll, BorderLayout.WEST);
 		this.add(this.panelBelow, BorderLayout.SOUTH);
 	}
-	private void initPanelTop()
+	private void initPanelGraphConfig()
 	{
 		//Initialization
-		this.panelTop = new JPanel();
-		this.initPanelTopLeft();
+		this.panelGraphConfig = new JPanel();
 		this.activePatientPanel = new ActivePatientPanel();
 		this.panelDateRange = new DateRangePanel();
-		this.graphConfig = new JTabbedPane();
+		this.panelGraphSettings = new GraphSettingsPanel(false);
+		this.initPanelGraphCategory();
+		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
-		this.panelTop.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
-//		this.panelTop.setOpaque(false);
-		this.panelTop.setLayout(new BorderLayout());
-		this.panelTopLeft.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//		this.panelGraphConfig.setLayout(new BoxLayout(this.panelGraphConfig, BoxLayout.Y_AXIS));
+		this.panelGraphConfig.setLayout(new GridBagLayout());
+		this.panelGraphConfig.setOpaque(false);
 		this.panelDateRange.dateFrom.autoSetDate();
 		this.panelDateRange.dateFrom.setAsDefaultDataThis();
 		this.panelDateRange.dateTo.autoSetDate();
 		this.panelDateRange.dateTo.setAsDefaultDataThis();
-		this.panelDateRange.setOpaque(true);
-		this.panelDateRange.setBackground(Color.white);
-		this.panelDateRange.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		this.activePatientPanel.setOpaque(true);
 		this.activePatientPanel.setBackground(Color.WHITE);
-		this.activePatientPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT), this.panelTopLeft);
-		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT), this.activePatientPanel);
-		this.graphConfig.addTab(Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT), this.panelDateRange);
-
+		
 		//Add to panel
-		this.panelTop.add(this.graphConfig, BorderLayout.CENTER);
+		Gbm.goToOrigin(c);
+		c.anchor = GridBagConstraints.FIRST_LINE_START;
+		c.insets = Constants.INSETS_GENERAL;
+		this.panelGraphConfig.add(this.activePatientPanel, c);
+		Gbm.newGridLine(c);
+		this.panelGraphConfig.add(this.panelDateRange, c);
+		Gbm.newGridLine(c);
+		this.panelGraphConfig.add(this.panelGraphCategory, c);
+		Gbm.newGridLine(c);
+		this.panelGraphConfig.add(this.panelGraphSettings, c);
 	}
-	private void initPanelTopLeft()
+	private void initPanelLeft()
 	{
 		//Initialization
-		this.panelTopLeft = new JPanel();
+		this.panelLeft = new JPanel();
+		this.initPanelGraphConfig();
+		
+		//Properties
+		this.panelLeft.setLayout(new BorderLayout());
+		this.panelLeft.setBackground(Constants.COLOR_MAIN_MENU_BACKGROUND);
+		
+		//Add to panel
+		this.panelLeft.add(this.panelGraphConfig, BorderLayout.NORTH);
+	}
+	private void initPanelGraphCategory()
+	{
+		//Initialization
+		this.panelGraphCategory = new JPanel();
 		this.labCategory = new JLabel(Methods.getLanguageText(XMLIdentifier.GRAPH_CATEGORY_LABEL), SwingConstants.RIGHT);
 		this.comboCategory = new JComboBox<String>(Methods.getGraphCategories());
-		this.panelGraphSettings = new GraphSettingsPanel();
-		GridBagConstraints c = new GridBagConstraints();
 		
 		//Properties
 //		this.panelTopLeft.setOpaque(false);
-		this.panelTopLeft.setBackground(Color.white);
-		this.panelTopLeft.setLayout(new GridBagLayout());
+		this.panelGraphCategory.setOpaque(false);
+		this.panelGraphCategory.setLayout(new FlowLayout(FlowLayout.LEFT, Constants.INSETS_BASE, Constants.INSETS_BASE));
 		this.comboCategory.setBackground(Color.WHITE);
 	//	this.labCategory.setForeground(Color.white);
 		
 		//Add to panel
-		Gbm.goToOrigin(c);
-		c.insets = Constants.INSETS_TOP_COMPONENT;
-		this.panelTopLeft.add(this.labCategory, c);					//Category
-		Gbm.nextGridColumn(c);
-		this.panelTopLeft.add(this.comboCategory, c);				//Category Selection
-		Gbm.newGridLine(c);
-		c.gridwidth = 2;
-		this.panelTopLeft.add(this.panelGraphSettings, c);			//Graph Settings Panel
+		this.panelGraphCategory.add(this.labCategory);					//Category
+		this.panelGraphCategory.add(this.comboCategory);				//Category Selection
 	}
 	private void initPanelBelow()
 	{
@@ -459,9 +464,9 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.butSwitchGraph.setText(Methods.getLanguageText(XMLIdentifier.SWITCH_TEXT));
 		this.refreshGraph();
 		this.panelGraphSettings.revalidateLanguage();
-		this.graphConfig.setTitleAt(0, Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT));
-		this.graphConfig.setTitleAt(1, Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT));
-		this.graphConfig.setTitleAt(2, Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT));
+//		this.graphConfig.setTitleAt(0, Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT));
+//		this.graphConfig.setTitleAt(1, Methods.getLanguageText(XMLIdentifier.PROFILE_TEXT));
+//		this.graphConfig.setTitleAt(2, Methods.getLanguageText(XMLIdentifier.DATE_RANGE_TEXT));
 		
 		this.comboCategory.setSelectedIndex(categoryIndex);
 		

@@ -18,18 +18,20 @@ public class GraphSettingsPanel extends JPanel implements LanguageListener
 	private static final long serialVersionUID = 6912507407501414504L;
 	
 	private JCheckBox enableDataValues, displayVoidData, displayDataPoints;
+	private boolean drawBorder;
 	
-	protected GraphSettingsPanel()
+	protected GraphSettingsPanel(boolean drawBorder)
 	{
-		this.init();
+		this.init(drawBorder);
 	}
 	
-	private void init()
+	private void init(boolean drawBorder)
 	{
 		//Initialization
 		this.enableDataValues = new JCheckBox(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES));
 		this.displayVoidData = new JCheckBox(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_DISPLAY_VOID_DATA));
 		this.displayDataPoints = new JCheckBox(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_DISPLAY_DATA_POINTS));
+		this.drawBorder = drawBorder;
 		
 		//Properties
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -37,7 +39,10 @@ public class GraphSettingsPanel extends JPanel implements LanguageListener
 		this.enableDataValues.setOpaque(false);
 		this.displayDataPoints.setOpaque(false);
 		this.displayVoidData.setOpaque(false);
-		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT)));
+		if (this.drawBorder)
+		{
+			this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT)));
+		}
 		
 		//add to panel
 		this.add(this.enableDataValues);
@@ -72,10 +77,22 @@ public class GraphSettingsPanel extends JPanel implements LanguageListener
 		this.displayDataPoints.setSelected(b);
 	}
 	
+	protected boolean isDrawBorder()
+	{
+		return this.drawBorder;
+	}
+	protected void setDrawBorder(boolean drawBorder)
+	{
+		this.drawBorder = drawBorder;
+	}
+	
 	@Override
 	public void revalidateLanguage() 
 	{
-		this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT)));
+		if (this.drawBorder)
+		{
+			this.setBorder(BorderFactory.createTitledBorder(Methods.getLanguageText(XMLIdentifier.SETTINGS_BUTTON_TEXT)));
+		}
 		this.displayDataPoints.setText(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_DISPLAY_DATA_POINTS));
 		this.enableDataValues.setText(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_ENABLE_DATA_VALUES));
 		this.displayVoidData.setText(Methods.getLanguageText(XMLIdentifier.GRAPH_SETTINGS_DISPLAY_VOID_DATA));
