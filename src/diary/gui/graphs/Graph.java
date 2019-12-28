@@ -63,7 +63,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected boolean showGraphLinesOfX;
 	
 	//Constants
-	protected final Dimension GRAPH_IMAGE_SIZE = new Dimension(1024, 768);
+	protected final Dimension GRAPH_IMAGE_SIZE = new Dimension(1280, 1024);
 	protected final int DATA_POINT_WIDTH = 10;
 	protected final int AXES_POINTERS_LENGTH = 15;
 	protected final int MARKER_LABEL_PADDING = 5;
@@ -111,6 +111,8 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.graph2DImage.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
 		this.graph2DImage.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 									        RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);	//Text Anti-Aliasing
+		this.graph2DImage.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+											RenderingHints.VALUE_ANTIALIAS_ON);				//Anti-aliasing for the graph lines
 		
 		this.enableDataValueMarkers = false;
 		this.displayDataPoint = true;

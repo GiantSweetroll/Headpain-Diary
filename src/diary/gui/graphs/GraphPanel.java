@@ -124,8 +124,9 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		//Add to panel
 		Gbm.goToOrigin(c);
 		c.anchor = GridBagConstraints.FIRST_LINE_START;
-		c.insets = Constants.INSETS_GENERAL;
+		c.insets = Constants.INSETS_TOP_COMPONENT;
 		this.panelGraphConfig.add(this.activePatientPanel, c);
+		c.insets = Constants.INSETS_GENERAL;
 		Gbm.newGridLine(c);
 		this.panelGraphConfig.add(this.panelDateRange, c);
 		Gbm.newGridLine(c);

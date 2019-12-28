@@ -2,7 +2,11 @@ package diary.gui.graphs;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.LinkedHashMap;
+
+import diary.methods.Methods;
+import giantsweetroll.numbers.GNumbers;
 
 public class LineGraphPanel extends Graph
 {
@@ -34,9 +38,9 @@ public class LineGraphPanel extends Graph
 	}
 	
 	//Drawing parts of the graph
-	private void drawConnectingLines(Graphics g, Color c)
+	private void drawConnectingLines(Graphics g, Color color)
 	{
-		g.setColor(c);
+		g.setColor(color);
 		
 		for (int i=0; i<this.dataPoints.size()-1; i++)
 		{
@@ -44,6 +48,34 @@ public class LineGraphPanel extends Graph
 						this.dataPoints.get(i).y, 
 						this.dataPoints.get(i+1).x,
 						this.dataPoints.get(i+1).y);
+			
+//			//Create cosine function
+//			Point current = this.dataPoints.get(i);
+//			Point next = this.dataPoints.get(i+1);
+////			if (current.y == super.axesOrigin.y)
+////			{
+////				continue;
+////			}
+//			if (current.y == next.y)
+//			{
+//				g.drawLine(current.x, current.y, next.x, next.y);
+//				continue;
+//			}
+//			
+//			double period = (next.x - current.x)*2d;
+//			double a = (double)(current.y - next.y)/2d;
+//			double b = 2d*Math.PI/period;
+//			double d = (double)(current.y + next.y)/2d;
+//			double c = (double)((current.x > next.x ? next.x : current.x) + (current.x > next.x ? current.x : next.x))/2d;
+//			for (int x=current.x; x<next.x; x++)
+//			{
+//				int y = (int)GNumbers.round(Methods.getCosineFunction(a, b, c, d, x), 0);
+//				if (y < super.axesOrigin.y)		//If y coordinate is above the y coordinate of the origin
+//				{
+//					//g.fillOval(x, y, super.DATA_POINT_WIDTH, super.DATA_POINT_WIDTH);
+//					g.drawLine(x, y, x+1, (int)GNumbers.round(Methods.getCosineFunction(a, b, c, d, x+1), 0));
+//				}
+//			}
 		}
 	}
 
