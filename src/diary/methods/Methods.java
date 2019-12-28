@@ -1189,6 +1189,16 @@ public class Methods
     	return image;
     }
     
+    public static final double getCosineFunction(double a, double b, double c, double d, int x)
+    {
+    	return a*Math.cos(b*(x-c))+d;
+    }
+    
+    public static final double getSineFunction(double a, double b, double c, double d, int x)
+    {
+    	return a*Math.sin(b*(x-c))+d;
+    }
+    
     //LookAndFeel Methods
     public static LookAndFeel getCurrentLookAndFeel()
     {
