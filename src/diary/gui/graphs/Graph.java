@@ -277,19 +277,36 @@ public abstract class Graph extends JPanel implements LanguageListener
 		//Set Distance between each data entry in the x-axis
 		double xDiff = GNumbers.round(this.axesLength.x/dataValues.size(), 0);
 		//Set distance between each unit increment in the y-axis
-		double yDiff = GNumbers.round((float)this.axesLength.y/(float)Methods.getHighestValue(dataValues), 0);
+		double yDiff = (double)Math.round((float)this.axesLength.y/(float)Methods.getHighestValue(dataValues));
+		System.out.println(this.axesLength.y + " / " + Methods.getHighestValue(dataValues));
+		System.out.println("yDiff: " + yDiff);
 		
 		//Translate into coordinate points
 		this.dataPoints = new ArrayList<Point>();
 		int xPos = (int)GNumbers.round(xDiff, 1);
-		for (double i=0; i<dataValues.size(); i++)
+		double maxY = 0d;
+		int axesYStart = this.axesOrigin.y;
+		int axesYEnd = this.axesOrigin.y - this.axesLength.y;	//Y coordinate of where the Y-Axis ends
+		for (int i=0; i<dataValues.size(); i++)
 		{
-			Double roundedDataValue = GNumbers.round(dataValues.get((int)i), this.DECIMAL_PLACES);
-			Double doubleCoordinate = (double)this.axesOrigin.y - yDiff*roundedDataValue;
-			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, (int)GNumbers.round(doubleCoordinate, this.DECIMAL_PLACES)));
+			Double doubleCoordinate = (double)this.axesOrigin.y - yDiff*dataValues.get(i);
+			int yCoordinate = (int)GNumbers.round(doubleCoordinate, this.DECIMAL_PLACES);
+			if (yCoordinate > maxY)
+			{
+				maxY = yCoordinate;
+			}
+//			if (yCoordinate < axesYEnd)	//If the data point is more than the Y-Axis, force it to follow
+//			{
+//				yCoordinate = axesYEnd;
+//			}
+			this.dataPoints.add(new Point(this.axesOrigin.x + xPos, yCoordinate));
 			xPos+=xDiff;
 //			MessageManager.printLine("(" + this.dataPoints.get((int)i).x + ", " + this.dataPoints.get((int)i).y);
 		}
+		System.out.println("Y-axis start: " + axesYStart);
+		System.out.println("Y-axis end: " + axesYEnd);
+		System.out.println("Largest y: " + maxY);
+		System.out.println();
 	}
 	protected void drawAxesMarkers(Graphics g, Color c)
 	{

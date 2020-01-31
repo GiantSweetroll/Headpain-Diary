@@ -90,7 +90,10 @@ public class LineGraphPanel extends Graph
 			{
 				continue;
 			}
-			g.fillOval(this.dataPoints.get(i).x - width/2, this.dataPoints.get(i).y - width/2, width, width);
+			g.fillOval(this.dataPoints.get(i).x - width/2, 
+						this.dataPoints.get(i).y - width/2, 
+						width, 
+						width);
 /*			System.out.println("Data point: " + this.dataPoints.get(i).x + ", " + this.dataPoints.get(i).y);
 			System.out.println("Y-Axis: " + this.yAxisMarkerPoints.get(this.yAxisMarkerPoints.size()-1).y);
 			System.out.println("Y-Axis Tip: " + (this.axesOrigin.y - this.axesLength.y));
