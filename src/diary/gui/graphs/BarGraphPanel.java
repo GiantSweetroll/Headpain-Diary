@@ -66,7 +66,12 @@ public class BarGraphPanel extends Graph
 		
 		for (int i=0; i<super.dataPoints.size(); i++)
 		{
-			g.fillRect(super.dataPoints.get(i).x-width/2, super.dataPoints.get(i).y, width, super.axesOrigin.y - super.dataPoints.get(i).y);
+			int currentY = super.dataPoints.get(i).y;
+			
+			g.fillRect(super.dataPoints.get(i).x-width/2, 
+						super.dataPoints.get(i).y, 
+						width, 
+						super.axesOrigin.y - currentY);
 		}
 	}	
 	
@@ -76,7 +81,7 @@ public class BarGraphPanel extends Graph
 		g.setColor(c);
 		g.setFont(font);
 		
-		if (this.xAxisMarkerLabelHaveSpace(g))
+		if (this.xAxisMarkerLabelHaveSpace(g))	//Check if the labels have space
 		{
 			//Draw Labels Horizontally
 			int diff = 0;

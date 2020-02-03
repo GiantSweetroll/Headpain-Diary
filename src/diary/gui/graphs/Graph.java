@@ -73,7 +73,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected final int DECIMAL_PLACES = 1;
 	protected final int X_AXIS_NAME_PADDING = 20;
 	protected final int Y_AXIS_NAME_PADDING = 20;
-	private final int STROKE_SIZE = 3;
+	private final int STROKE_SIZE = 1;
 	
 	//Constructors
 	public Graph(LinkedHashMap<String, Double> dataMap) 
@@ -148,7 +148,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.graph2DImage.fillRect(0, 0, this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height);
 
 		this.axesOrigin = new Point(this.axesPaddingWithPanelEdgeSides, this.GRAPH_IMAGE_SIZE.height-this.axesPaddingWithPanelEdgeBelow);
-		this.drawAxes(this.graph2DImage, Color.BLACK, this.GRAPH_IMAGE_SIZE.width-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
+		this.drawAxesWithDefaultSettings();
 		try
 		{
 			this.generateDataPoints(this.yAxisValues);
@@ -252,6 +252,18 @@ public abstract class Graph extends JPanel implements LanguageListener
 	{
 		return this.graphImage;
 	}
+	public void setGraphImageSize(int width, int height)
+	{
+		this.graphImage = Methods.resize(this.graphImage, width, height);
+	}
+	public void setGraphImageSize(Dimension dim)
+	{
+		this.setGraphImageSize(dim.width, dim.height);
+	}
+	protected void drawAxesWithDefaultSettings()
+	{
+		this.drawAxes(this.graph2DImage, Color.BLACK, this.GRAPH_IMAGE_SIZE.width-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
+	}
 	
 	//Draw Sections
 	protected abstract void drawDataPoints(Graphics g, Color c, int width);
@@ -277,24 +289,33 @@ public abstract class Graph extends JPanel implements LanguageListener
 		//Set Distance between each data entry in the x-axis
 		double xDiff = GNumbers.round(this.axesLength.x/dataValues.size(), 0);
 		//Set distance between each unit increment in the y-axis
-		double yDiff = (double)Math.round((float)this.axesLength.y/(float)Methods.getHighestValue(dataValues));
-		System.out.println(this.axesLength.y + " / " + Methods.getHighestValue(dataValues));
-		System.out.println("yDiff: " + yDiff);
+//		double incr = (float)this.axesLength.y/(float)Methods.getHighestValue(dataValues);
+//		System.out.println("Increment: " + incr);
+////		double yDiff = (double)Math.round(incr);
+//		double yDiff = incr;
+		double yDiff = (float)this.axesLength.y/(float)Methods.getHighestValue(dataValues);
+//		System.out.println(this.axesLength.y + " / " + Methods.getHighestValue(dataValues));
+//		System.out.println("yDiff: " + yDiff);
 		
 		//Translate into coordinate points
 		this.dataPoints = new ArrayList<Point>();
 		int xPos = (int)GNumbers.round(xDiff, 1);
-		double maxY = 0d;
-		int axesYStart = this.axesOrigin.y;
-		int axesYEnd = this.axesOrigin.y - this.axesLength.y;	//Y coordinate of where the Y-Axis ends
+//		double maxY = 0d;
+//		double minY = Double.MAX_VALUE;
+//		int axesYStart = this.axesOrigin.y;
+//		int axesYEnd = this.axesOrigin.y - this.axesLength.y;	//Y coordinate of where the Y-Axis ends
 		for (int i=0; i<dataValues.size(); i++)
 		{
 			Double doubleCoordinate = (double)this.axesOrigin.y - yDiff*dataValues.get(i);
 			int yCoordinate = (int)GNumbers.round(doubleCoordinate, this.DECIMAL_PLACES);
-			if (yCoordinate > maxY)
-			{
-				maxY = yCoordinate;
-			}
+//			if (yCoordinate > maxY)
+//			{
+//				maxY = yCoordinate;
+//			}
+//			else if (yCoordinate < minY)
+//			{
+//				minY = yCoordinate;
+//			}
 //			if (yCoordinate < axesYEnd)	//If the data point is more than the Y-Axis, force it to follow
 //			{
 //				yCoordinate = axesYEnd;
@@ -303,10 +324,11 @@ public abstract class Graph extends JPanel implements LanguageListener
 			xPos+=xDiff;
 //			MessageManager.printLine("(" + this.dataPoints.get((int)i).x + ", " + this.dataPoints.get((int)i).y);
 		}
-		System.out.println("Y-axis start: " + axesYStart);
-		System.out.println("Y-axis end: " + axesYEnd);
-		System.out.println("Largest y: " + maxY);
-		System.out.println();
+//		System.out.println("Y-axis start: " + axesYStart);
+//		System.out.println("Y-axis end: " + axesYEnd);
+//		System.out.println("Largest y: " + maxY);
+//		System.out.println("Smallest y: " + minY);
+//		System.out.println();
 	}
 	protected void drawAxesMarkers(Graphics g, Color c)
 	{
@@ -473,7 +495,10 @@ public abstract class Graph extends JPanel implements LanguageListener
 		{
 			for (Point marker : this.yAxisMarkerPoints)
 			{
-				g.drawLine(this.axesOrigin.x+this.STROKE_SIZE, marker.y, this.xAxisEndCoordinates.x, marker.y);
+				g.drawLine(this.axesOrigin.x+this.STROKE_SIZE, 	//+ SROKE_SIZE so that it does not get drawn on the Y-Axis
+							marker.y, 
+							this.xAxisEndCoordinates.x, 
+							marker.y);
 			}
 		}
 		
@@ -481,7 +506,10 @@ public abstract class Graph extends JPanel implements LanguageListener
 		{
 			for (Point marker : this.dataPoints)
 			{
-				g.drawLine(marker.x, this.axesOrigin.y-this.STROKE_SIZE, marker.x, this.yAxisEndCoordinates.y);
+				g.drawLine(marker.x, 
+							this.axesOrigin.y-this.STROKE_SIZE, //- SROKE_SIZE so that it does not get drawn on the X-Axis
+							marker.x, 
+							this.yAxisEndCoordinates.y);
 			}
 		}
 	}

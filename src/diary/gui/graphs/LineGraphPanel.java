@@ -2,11 +2,7 @@ package diary.gui.graphs;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.util.LinkedHashMap;
-
-import diary.methods.Methods;
-import giantsweetroll.numbers.GNumbers;
 
 public class LineGraphPanel extends Graph
 {
@@ -33,7 +29,7 @@ public class LineGraphPanel extends Graph
 		super.paintComponent(g);
 		
 		this.drawConnectingLines(super.graph2DImage, Color.RED);
-		this.drawAxes(super.graph2DImage, Color.BLACK, super.GRAPH_IMAGE_SIZE.width-super.axesPaddingWithPanelEdgeSides, super.axesPaddingWithPanelEdgeTop);
+		super.drawAxesWithDefaultSettings();		//To hide connecting lines on the X-Axis
 		g.drawImage(this.getGraphImage(), 0, 0, null);
 	}
 	
@@ -100,6 +96,7 @@ public class LineGraphPanel extends Graph
 			System.out.println();	*/
 		}
 	}
+	@Deprecated
 	@Override
 	public void revalidateLanguage() {}
 }

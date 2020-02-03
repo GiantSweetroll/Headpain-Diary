@@ -388,7 +388,7 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 	{
 		return this.activePatientPanel;
 	}
-
+	
 	//Interfaces
 	@Override
 	public void actionPerformed(ActionEvent e)
