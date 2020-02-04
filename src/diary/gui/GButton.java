@@ -30,6 +30,13 @@ public class GButton extends JButton
 	{
 //		this.setContentAreaFilled(false);
 //		this.setBorder(new RoundedBorder(5, Constants.COLOR_MAIN_MENU_BUTTONS));
+		
+		if (!this.isOpaque())		//In mac, isOpaque is false
+		{
+			this.setOpaque(true);
+			this.setBorderPainted(false);
+		}
+		
 		this.setForeground(Color.WHITE);
 		this.setBackground(Constants.COLOR_MAIN_MENU_BUTTONS);
 		this.setFont(Constants.FONT_GENERAL);
