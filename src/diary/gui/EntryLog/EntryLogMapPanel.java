@@ -58,15 +58,15 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 	public EntryLogMapPanel()
 	{
 		//Initialization
-		this.bProfile = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PROFILE_TEXT));
-		this.bDateTime = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DATE_TIME_TEXT));
-		this.bDuration = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DURATION_TEXT));
-		this.bPainLoc = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_LOCATION_TEXT));
-		this.bPainKind = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_KIND_TEXT));
-		this.bIntensity = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_INTENSITY_TEXT));
-		this.bTrigger = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT));
-		this.bRecMeds = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_RECENT_MEDICATION_TEXT));
-		this.bComments = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_COMMENTS_TEXT));
+		this.bProfile = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PROFILE_TEXT), true);
+		this.bDateTime = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DATE_TIME_TEXT), true);
+		this.bDuration = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DURATION_TEXT), true);
+		this.bPainLoc = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_LOCATION_TEXT), true);
+		this.bPainKind = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_KIND_TEXT), true);
+		this.bIntensity = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_INTENSITY_TEXT), true);
+		this.bTrigger = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT), true);
+		this.bRecMeds = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_RECENT_MEDICATION_TEXT), false);
+		this.bComments = new EntryLogMapButton(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_COMMENTS_TEXT), false);
 		this.buttons = new ArrayList<EntryLogMapButton>();
 		this.lastButtonPress = 0;
 		

@@ -161,4 +161,11 @@ public class RecentMedication extends FormElement
 		this.medicineComplaint.revalidateLanguage();
 		this.getFormTitleLabel().setText(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_RECENT_MEDICATION));
 	}
+	
+
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_RECENT_MEDICATION_TEXT);
+	}
 }

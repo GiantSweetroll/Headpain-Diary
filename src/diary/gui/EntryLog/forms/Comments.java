@@ -86,4 +86,10 @@ public class Comments extends FormElement<String>
 	{
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.COMMENTS_LABEL));
 	}
+	
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_COMMENTS_TEXT);
+	}
 }

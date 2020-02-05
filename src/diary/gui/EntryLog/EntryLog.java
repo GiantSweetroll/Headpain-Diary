@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -28,6 +29,7 @@ import diary.gui.EntryLog.forms.ActiveUser;
 import diary.gui.EntryLog.forms.Comments;
 import diary.gui.EntryLog.forms.DateTimeSelect;
 import diary.gui.EntryLog.forms.Duration;
+import diary.gui.EntryLog.forms.FormElement;
 import diary.gui.EntryLog.forms.Intensity;
 import diary.gui.EntryLog.forms.PainKind;
 import diary.gui.EntryLog.forms.PainLocation;
@@ -65,6 +67,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	private PainLocation painLoc;
 	private RecentMedication recentMeds;
 	private Trigger trigger;
+	private List<FormElement> forms;
 	private PainEntryData oldEntry;
 	private PatientData oldPatient;
 	private JScrollPane scrollCenter;
@@ -133,6 +136,7 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.painLoc = new PainLocation();
 		this.recentMeds = new RecentMedication();
 		this.trigger = new Trigger();
+		this.forms = new ArrayList<FormElement>();
 		
 		//Properties
 		this.panelInput.setLayout(new CardLayout());
@@ -146,6 +150,17 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.painLoc.setName(EntryLog.PAIN_LOCATION);
 		this.recentMeds.setName(EntryLog.RECENT_MEDICATION);
 		this.trigger.setName(EntryLog.TRIGGER);
+		
+		//Add to forms
+		this.forms.add(this.activeUser);
+		this.forms.add(this.dateTime);
+		this.forms.add(this.duration);
+		this.forms.add(this.painLoc);
+		this.forms.add(this.painKind);
+		this.forms.add(this.intensity);
+		this.forms.add(this.trigger);
+		this.forms.add(this.recentMeds);
+		this.forms.add(this.comments);
 		
 		//Add to panel
 		this.panelInput.add(this.activeUser, EntryLog.ACTIVE_PATIENT);
@@ -323,15 +338,29 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	
 	public boolean allRequiredFieldsFilled()
 	{
-		return this.activeUser.allFilled() &&
-				this.comments.allFilled() &&
-				this.dateTime.allFilled() &&
-				this.duration.allFilled() &&
-				this.intensity.allFilled() &&
-				this.painKind.allFilled() &&
-				this.painLoc.allFilled() &&
-				this.recentMeds.allFilled() &&
-				this.trigger.allFilled();
+		for (FormElement<?> form : this.forms)
+		{
+			if (!form.allFilled())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public List<String> getUnfilledRequiredFieldsNames()
+	{
+		List<String> list = new ArrayList<String>();
+		
+		for (FormElement<?> form : this.forms)
+		{
+			if (!form.allFilled())
+			{
+				list.add(form.getName());
+			}
+		}
+		
+		return list;
 	}
 	
 	public void setAsNewEntry(boolean bool)
@@ -500,7 +529,15 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		}
 		else
 		{
-			MessageManager.showErrorDialog(Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT),
+			String msg = Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TEXT) + "\n";
+			List<String> fields = this.getUnfilledRequiredFieldsNames();
+			
+			for (String name : fields)
+			{
+				msg += "\n- " + name;
+			}
+			
+			MessageManager.showErrorDialog(msg,
 											Methods.getLanguageText(XMLIdentifier.ERROR_REQUIRED_FIELDS_DIALOG_TITLE));
 		}		
 	}

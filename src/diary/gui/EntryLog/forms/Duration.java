@@ -347,4 +347,10 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 		this.revalidate();
 		this.repaint();
 	}
+
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DURATION_TEXT);
+	}
 }

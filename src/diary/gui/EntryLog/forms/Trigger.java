@@ -169,14 +169,12 @@ public class Trigger extends FormElement
 	@Override
 	public boolean allFilled()
 	{
-		if (this.trigger.getSelectedIndex() == Methods.getDefaultTriggers().length)		//If last index = Other
-		{
-//			return !Methods.getTextData(this.tf).equals("");
-			return !this.trigger.getItem().equals("");
-		}
-		else
-		{
-			return true;
-		}
+		return !this.trigger.getItem().trim().equals("");
+	}
+	
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT);
 	}
 }

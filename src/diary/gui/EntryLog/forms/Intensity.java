@@ -181,4 +181,10 @@ public class Intensity extends FormElement<Integer> implements KeyListener, Chan
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.INTENSITY_LABEL));
 		this.painDetail.setText(Methods.getLanguageText(XMLIdentifier.INTENSITIY_DESCRIPTION_LABEL));
 	}
+
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_INTENSITY_TEXT);
+	}
 }

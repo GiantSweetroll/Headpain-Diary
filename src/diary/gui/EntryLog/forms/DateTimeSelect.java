@@ -131,4 +131,10 @@ public class DateTimeSelect extends FormElement
 		this.date.revalidateLanguage();
 		this.time.revalidateLanguage();
 	}
+
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DATE_TIME_TEXT);
+	}
 }

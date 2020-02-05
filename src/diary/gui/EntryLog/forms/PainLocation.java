@@ -87,4 +87,11 @@ public class PainLocation extends FormElement
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.SELECT_LOCATION_LABEL));
 		this.painLocation.revalidateLanguage();
 	}
+	
+
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_LOCATION_TEXT);
+	}
 }

@@ -5,6 +5,7 @@ import java.awt.Color;
 import diary.constants.Constants;
 import diary.gui.GButton;
 import diary.interfaces.GUIFunction;
+import diary.methods.Methods;
 
 public class EntryLogMapButton extends GButton implements GUIFunction
 {
@@ -15,10 +16,14 @@ public class EntryLogMapButton extends GButton implements GUIFunction
 	private static final long serialVersionUID = -873903782280068320L;
 	
 	private Color defaultForeground, defaultBackground;
+	private boolean required;
 	
-	public EntryLogMapButton(String text)
+	public EntryLogMapButton(String text, boolean required)
 	{
-		super(text);
+		super(required? Methods.createTextWithRequiredIdentifier(text): text);
+
+		//Initialization
+		this.required = required;
 		
 		//Properties
 	//	this.setOpaque(false);
@@ -43,7 +48,23 @@ public class EntryLogMapButton extends GButton implements GUIFunction
 			this.resetDefaults();
 		}
 	}
-
+	
+	public boolean isRequired()
+	{
+		return this.required;
+	}
+	public void setRequired(boolean b)
+	{
+		this.required = b;
+	}
+	
+	//Overridden Methods
+	@Override
+	public void setText(String text)
+	{
+		super.setText(this.isRequired()? Methods.createTextWithRequiredIdentifier(text) : text);
+	}
+	
 	@Override
 	public void resetDefaults()
 	{

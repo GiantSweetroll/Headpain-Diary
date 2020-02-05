@@ -21,7 +21,7 @@ public class ActiveUser extends FormElement<PatientData>
 	
 	public ActiveUser(ActivePatientPanel patient)
 	{
-		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER), false);
+		super(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER), true);
 		
 		//Initialization
 		this.patient = patient;
@@ -80,5 +80,11 @@ public class ActiveUser extends FormElement<PatientData>
 	{
 		this.setFormTitle(Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_ELEMENT_TYPE_ACTIVE_USER));
 		this.patient.revalidateLanguage();
+	}
+	
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PROFILE_TEXT);
 	}
 }

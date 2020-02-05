@@ -204,15 +204,7 @@ public class PainKind extends FormElement
 	@Override
 	public boolean allFilled() 
 	{
-		if (this.painKind.getSelectedIndex() == Methods.getDefaultPainKinds().length)		//If last index = Other
-		{
-//			return !Methods.getTextData(this.tf).equals("");
-			return !this.painKind.getItem().equals("");
-		}
-		else
-		{
-			return true;
-		}
+		return !this.painKind.getItem().trim().equals("");
 	}
 
 	@Override
@@ -223,5 +215,11 @@ public class PainKind extends FormElement
 		this.painKind.revalidateLanguage(Methods.getDefaultPainKinds());
 		this.revalidate();
 		this.repaint();
+	}
+
+	@Override
+	public String getName()
+	{
+		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_KIND_TEXT);
 	}
 }
