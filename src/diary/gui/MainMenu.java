@@ -123,7 +123,6 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.panelCenter = new JPanel();
 		this.initPanelCenterCenter();
 		this.initPanelCenterBelow();
-		this.initPanelCenterTop();
 		
 		//Properties
 		this.panelCenter.setLayout(new BorderLayout());
@@ -131,7 +130,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		
 		//Add to panel
 		this.panelCenter.add(this.panelCenterCenter, BorderLayout.CENTER);
-		this.panelCenter.add(this.panelCenterTop, BorderLayout.NORTH);
+//		this.panelCenter.add(this.panelCenterTop, BorderLayout.NORTH);
 		this.panelCenter.add(this.panelCenterBelow, BorderLayout.SOUTH);
 	}
 	private void initPanelCenterBelow()
@@ -179,7 +178,8 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	{
 		//Initialization
 		this.panelCenterTop = new JPanel();
-		this.labLogo = new JLabel(Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.SMALL_LOGO_SCALE));
+//		this.labLogo = new JLabel(Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.SMALL_LOGO_SCALE));
+		this.labLogo = new JLabel();
 		/*
 		ImageIcon image = ImageManager.getImageIcon(ImageConstants.LOGO);
 		this.labLogo = new JLabel(Methods.resizeImageByRatio
@@ -195,17 +195,19 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.panelCenterTop.setLayout(spr);
 		this.panelCenterTop.setOpaque(false);
 //		this.labLogo.setFont(Constants.FONT_GENERAL);
+		this.labLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		this.labLogo.setVerticalAlignment(SwingConstants.CENTER);
 		this.labLogo.setForeground(Color.WHITE);
 		this.labVersion.setForeground(Color.WHITE);
 		this.labVersion.setHorizontalAlignment(SwingConstants.RIGHT);
-		if (MainFrame.isFullScreen)
-		{
-			this.setImagesFullscreenMode();
-		}
-		else
-		{
-			this.setImagesWindowedMode();
-		}
+//		if (MainFrame.isFullScreen)
+//		{
+//			this.setImagesFullscreenMode();
+//		}
+//		else
+//		{
+//			this.setImagesWindowedMode();
+//		}
 		
 		//Add to panel
 		spr.putConstraint(SpringLayout.EAST, this.labLogo, 0, SpringLayout.EAST, this.panelCenterTop);
@@ -423,19 +425,13 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	//Other Methods
 	public void setImagesFullscreenMode()
 	{
-		labLogo.setIcon(Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.LARGE_LOGO_SCALE));
-		this.labLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		this.labLogo.setVerticalAlignment(SwingConstants.CENTER);
-		this.panelCenterTop.revalidate();
-		this.panelCenterTop.repaint();
+		ImageIcon img = Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.LARGE_LOGO_SCALE);
+		this.labLogo.setIcon(img);
 	}
 	public void setImagesWindowedMode()
 	{
-		labLogo.setIcon(Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.SMALL_LOGO_SCALE));
-		this.labLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		this.labLogo.setVerticalAlignment(SwingConstants.CENTER);
-		this.panelCenterTop.revalidate();
-		this.panelCenterTop.repaint();
+		ImageIcon img = Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.SMALL_LOGO_SCALE);
+		this.labLogo.setIcon(img);
 	}
 	
 	//Interfaces
@@ -473,7 +469,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 			
 		case SETTINGS:
 	//		MainFrame.changePanel(Globals.SETTINGS_PANEL);
-		Globals.MAIN_FRAME.changePanel(PanelName.SETTING_PANEL);
+			Globals.MAIN_FRAME.changePanel(PanelName.SETTING_PANEL);
 			break;
 			
 		case EXIT:
