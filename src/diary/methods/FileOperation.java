@@ -50,27 +50,13 @@ public class FileOperation
 	public static final boolean entryExists(PatientData patient, PainEntryData entry)
 	{
 		File file = new File(Methods.generatePainDataFilePathName(patient, entry));
-		if (file.exists())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return file.exists();
 	}
 	
 	public static final boolean dataExists(String path)
 	{
 		File file = new File(path);
-		if (file.exists())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return file.exists();
 	}
 	
 	public static final void saveSettings(Settings setting)
@@ -122,14 +108,7 @@ public class FileOperation
 	{
 		File file = new File(Constants.LANGUAGE_FOLDER_PATH);
 		
-		if (file.exists())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return file.exists();
 	}
 	
 	public static List<PainEntryData> getListOfEntries(String patientID, Date from, Date to)
