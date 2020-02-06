@@ -73,7 +73,6 @@ public class Methods
 		}
 	}
 	
-	
 	public static String generatePainDataFolderPathName(PatientData patient, PainEntryData entry)
 	{
 		return Globals.setting.getDataMap().get(Settings.DATABASE_PATH) + File.separator +
@@ -330,11 +329,11 @@ public class Methods
 	public static void makeFullscreen(MainFrame mainFrame)
 	{
 		mainFrame.getFrameInstance().dispose();
-		try
-		{
-			mainFrame.getFrameInstance().add(mainFrame.getPanelCanvas());
-		}
-		catch(NullPointerException ex){}
+//		try
+//		{
+//			mainFrame.getFrameInstance().add(mainFrame.getPanelCanvas());
+//		}
+//		catch(NullPointerException ex){}
 		mainFrame.getFrameInstance().setExtendedState(JFrame.MAXIMIZED_BOTH);
 		mainFrame.getFrameInstance().setUndecorated(true);
 		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -345,11 +344,11 @@ public class Methods
 	public static void makeWindowed(MainFrame mainFrame)
 	{
 		mainFrame.getFrameInstance().dispose();
-		try
-		{
-			mainFrame.getFrameInstance().add(mainFrame.getPanelCanvas());
-		}
-		catch(NullPointerException ex){}
+//		try
+//		{
+//			mainFrame.getFrameInstance().add(mainFrame.getPanelCanvas());
+//		}
+//		catch(NullPointerException ex){}
 		mainFrame.getFrameInstance().setExtendedState(JFrame.NORMAL);
 		mainFrame.getFrameInstance().setUndecorated(false);
 		mainFrame.getFrameInstance().setSize((Constants.SCREENSIZE.width/4)*3, (Constants.SCREENSIZE.height/4)*3);
@@ -1197,6 +1196,19 @@ public class Methods
     public static final double getSineFunction(double a, double b, double c, double d, int x)
     {
     	return a*Math.sin(b*(x-c))+d;
+    }
+    
+    public static final BufferedImage resize(BufferedImage img, int newWidth, int newHeight)
+    {
+    	Image tmp = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+    	BufferedImage bi = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+    	
+    	Graphics2D g2d = bi.createGraphics();
+    	g2d.drawImage(tmp, 0, 0, null);
+    	g2d.dispose();
+    	
+    	return bi;
+    	
     }
     
     //LookAndFeel Methods
