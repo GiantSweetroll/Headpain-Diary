@@ -73,9 +73,9 @@ public class Main
 							Globals.ENTRY_LOG = new EntryLog();
 							Globals.MAIN_FRAME = new MainFrame();
 							Constants.FILTER_IMAGE_FILES = new FileNameExtensionFilter(Methods.getLanguageText(XMLIdentifier.IMAGE_FILES_TEXT), 
-									"jpg",
-									"png",
-									"jpeg");
+																												"jpg",
+																												"png",
+																												"jpeg");
 							Globals.HISTORY_MEDICINE_COMPLAINT.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 							Globals.HISTORY_RECENT_MEDICATION.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
 							Globals.HISTORY_PAIN_KIND.refresh(Globals.ENTRY_LOG.getActivePatientPanel().getSelectedPatientData());
