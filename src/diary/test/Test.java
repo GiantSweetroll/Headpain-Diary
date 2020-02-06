@@ -1,7 +1,10 @@
 package diary.test;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.MediaTracker;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,21 +12,23 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import diary.constants.Constants;
 import diary.constants.ImageConstants;
 import giantsweetroll.ImageManager;
-import giantsweetroll.message.MessageManager;
 
 public class Test
 {	
@@ -156,8 +161,93 @@ public class Test
 	        }
 	    });
 	}
+	public static void labelUpdateIcon4()
+	{
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
+		JLabel label = new JLabel(icon);
+		JButton button = new JButton("Change Me!");
+		
+		panel.add(label);
+		frame.add(panel, BorderLayout.CENTER);
+		frame.add(button, BorderLayout.SOUTH);
+		
+		button.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						frame.dispose();
+						ImageIcon temp = new ImageIcon(ImageConstants.FKUI);
+						label.setIcon(temp);
+						frame.add(panel, BorderLayout.CENTER);
+						frame.add(button, BorderLayout.SOUTH);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
+						frame.setResizable(false);
+						frame.setLocationRelativeTo(null);
+						frame.setVisible(true);
+					}
+				});
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+	public static void labelUpdateIcon5()
+	{
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
+		JLabel label = new JLabel(icon);
+		JButton button = new JButton("Change Me!");
+		SpringLayout spr = new SpringLayout();
+		
+		panel.setLayout(spr);
+		
+		spr.putConstraint(SpringLayout.EAST, label, 0, SpringLayout.EAST, panel);
+		spr.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, panel);
+		spr.putConstraint(SpringLayout.SOUTH, label, 0, SpringLayout.SOUTH, panel);
+		spr.putConstraint(SpringLayout.NORTH, label, 0, SpringLayout.NORTH, panel);
+		
+		
+		panel.add(label);
+		frame.add(panel, BorderLayout.CENTER);
+		frame.add(button, BorderLayout.SOUTH);
+		
+		button.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+//						frame.dispose();
+						ImageIcon temp = new ImageIcon(ImageConstants.FKUI);
+						label.setIcon(temp);
+//						frame.add(panel, BorderLayout.CENTER);
+//						frame.add(button, BorderLayout.SOUTH);
+//						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//						frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
+//						frame.setResizable(false);
+//						frame.setLocationRelativeTo(null);
+//						frame.setVisible(true);
+					}
+				});
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
 	
 	public static void main(String args[])
 	{
+		labelUpdateIcon5();
+	}
+	
+	private static void print(Object obj)
+	{
+		System.out.println(obj);
 	}
 }
