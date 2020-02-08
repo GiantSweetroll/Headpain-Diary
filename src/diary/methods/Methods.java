@@ -3,6 +3,7 @@ package diary.methods;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
@@ -24,6 +25,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -46,6 +48,7 @@ import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.interfaces.LanguageListener;
 import diary.patientdata.PatientData;
+import giantsweetroll.ImageManager;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.numbers.GNumbers;
 import giantsweetroll.xml.dom.XMLManager;
@@ -338,7 +341,7 @@ public class Methods
 		mainFrame.getFrameInstance().setUndecorated(true);
 		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getFrameInstance().setVisible(true);
-		Globals.MAIN_MENU.setImagesFullscreenMode();
+//		Globals.MAIN_MENU.setImagesFullscreenMode();
 		MainFrame.isFullScreen = true;
 	}
 	public static void makeWindowed(MainFrame mainFrame)
@@ -356,7 +359,7 @@ public class Methods
 		mainFrame.getFrameInstance().setLocationRelativeTo(null);
 		mainFrame.getFrameInstance().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getFrameInstance().setVisible(true);
-		Globals.MAIN_MENU.setImagesWindowedMode();
+//		Globals.MAIN_MENU.setImagesWindowedMode();
 		MainFrame.isFullScreen = false;
 	}
 
@@ -473,6 +476,13 @@ public class Methods
 		double widthNew = (image.getIconWidth()/100d)*percentage;
 		double heightNew = (image.getIconHeight()/100d)*percentage;
 		img = img.getScaledInstance((int)GNumbers.round(widthNew, 0), (int)GNumbers.round(heightNew, 0), Image.SCALE_SMOOTH);
+		return new ImageIcon(img);
+	}
+	
+	public static ImageIcon resizeImage(ImageIcon image, Dimension dim)
+	{
+		Image img = image.getImage();
+		img = img.getScaledInstance(dim.width, dim.height, Image.SCALE_SMOOTH);
 		return new ImageIcon(img);
 	}
 	
@@ -1209,6 +1219,44 @@ public class Methods
     	
     	return bi;
     	
+    }
+    
+    public static final Dimension getScaledDimension(Dimension originalDim, Dimension boundary)
+    {
+    	//Maintains aspect ratio of the resized dimensions
+    	int widthOri = originalDim.width;
+    	int heightOri = originalDim.height;
+    	int widthBound = boundary.width;
+    	int heightBound = boundary.height;
+    	int widthNew = widthOri;
+    	int heightNew = heightOri;
+    	
+    	//Check if width needs to be scaled
+    	if (widthOri != widthBound)
+    	{
+    		widthNew = widthBound;		//scale width to fit
+    		heightNew = (widthNew * heightOri)/widthOri;		//scale the height accordingly, maintaining aspect ratio
+    	}
+    	
+    	//Check if height needs to be scaled as well
+    	if (heightNew > heightBound)
+    	{
+    		heightNew = heightBound;	//Scale height to fit
+    		widthNew = (heightNew * widthOri)/heightOri;		//Scale the width accordingly, maintaing aspect ratio
+    	}
+    	
+    	return new Dimension(widthNew, heightNew);
+    }
+    
+    public static final void setLabelImageDimensionToComponent(ImageIcon image, JLabel label, JComponent component)
+    {
+    	ImageIcon logo = image;
+		Dimension ori = new Dimension(logo.getIconWidth(), logo.getIconHeight());
+		Dimension dim = Methods.getScaledDimension(ori, component.getSize());
+		if (dim.width != 0 && dim.height != 0)
+		{
+			label.setIcon(Methods.resizeImage(logo, dim));
+		}
     }
     
     //LookAndFeel Methods

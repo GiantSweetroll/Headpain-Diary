@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -73,8 +74,8 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	private final String SETTINGS = "settings";
 	private final String EXIT = "exit";
 	private final String MANAGE_PATIENTS = "manage patients";
-	private final int SMALL_LOGO_SCALE = 15,
-						LARGE_LOGO_SCALE = 35;
+//	private final int SMALL_LOGO_SCALE = 15,
+//						LARGE_LOGO_SCALE = 50;
 //	private final Dimension IMAGE_BUTTONS_SIZE = new Dimension(200, 180);
 //	private final Dimension IMAGE_SUPPORTERS_SIZE = new Dimension(120, 100);
 //	private final Dimension IMAGE_LOGO_SIZE = new Dimension(320, 280);
@@ -423,6 +424,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	}
 	
 	//Other Methods
+	/*
 	public void setImagesFullscreenMode()
 	{
 		ImageIcon img = Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.LARGE_LOGO_SCALE);
@@ -432,7 +434,7 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 	{
 		ImageIcon img = Methods.setImageSizeRelativeToScreen(ImageManager.getImageIcon(ImageConstants.LOGO), this.SMALL_LOGO_SCALE);
 		this.labLogo.setIcon(img);
-	}
+	}	*/
 	
 	//Interfaces
 	@Override
@@ -494,5 +496,15 @@ public class MainMenu extends JPanel implements ActionListener, LanguageListener
 		this.butManagePatients.setText(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TEXT));
 		this.butManagePatients.setToolTipText(Methods.getLanguageText(XMLIdentifier.MANAGE_PATIENTS_BUTTON_TOOLTIP));
 		this.butExit.setText(Methods.getLanguageText(XMLIdentifier.EXIT_BUTTON_TEXT));
+	}
+
+	//Overridden Methods
+	@Override
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		
+		//Resize logo to fit the container
+		Methods.setLabelImageDimensionToComponent(ImageManager.getImageIcon(ImageConstants.LOGO), this.labLogo, this.panelCenterTop);
 	}
 }
