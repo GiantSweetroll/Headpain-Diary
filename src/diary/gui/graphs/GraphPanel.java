@@ -332,10 +332,6 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.graph.displayDataPoint(this.panelGraphSettings.isDisplayDataPoints());
 		this.initGraphScroll(graph);
-		
-		this.add(this.scrollGraph, BorderLayout.CENTER);
-		this.revalidate();
-		this.repaint();
 	}
 	private void initReverseGraph()
 	{
@@ -356,10 +352,6 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		}
 		this.graph.displayDataValues(this.panelGraphSettings.isDataValuesEnabled());
 		this.initGraphScroll(graph);
-		
-		this.add(this.scrollGraph, BorderLayout.CENTER);
-		this.revalidate();
-		this.repaint();
 	}
 
 	private void initGraphScroll(Graph graph)
@@ -369,6 +361,10 @@ public class GraphPanel extends JPanel implements ActionListener, LanguageListen
 		this.scrollGraph.getHorizontalScrollBar().setUnitIncrement(20);
 		this.scrollGraph.setOpaque(false);
 		this.scrollGraph.getViewport().setOpaque(false);
+		
+		this.add(this.scrollGraph, BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public void refreshGraph()
