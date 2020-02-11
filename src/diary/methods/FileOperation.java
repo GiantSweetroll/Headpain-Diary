@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
@@ -837,6 +838,12 @@ public class FileOperation
 		LookAndFeel oldLF = Methods.getCurrentLookAndFeel();
 		Methods.setToSystemLookAndFeel();
 		JFileChooser jfc = new JFileChooser();
+		jfc.setAcceptAllFileFilterUsed(false);
+		
+		//Add file filters
+		jfc.addChoosableFileFilter(new FileNameExtensionFilter("Portable Network Graphics - PNG", "png"));
+		jfc.addChoosableFileFilter(new FileNameExtensionFilter("Joint Photographic Experts Group - JPG, JPEG", "jpg", "jpeg"));
+		
 		jfc.setCurrentDirectory(new File("." + File.separator));
 		
 		int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
@@ -890,8 +897,12 @@ public class FileOperation
 		Methods.setToSystemLookAndFeel();
 		
 		JFileChooser jfc = new JFileChooser();
+		jfc.setAcceptAllFileFilterUsed(false);
+		
+		//Add File filters
+		jfc.addChoosableFileFilter(new FileNameExtensionFilter("XLS", "xls"));
+		
 		jfc.setCurrentDirectory(new File("." + File.separator));
-		jfc.addChoosableFileFilter(new FileTypeFilter(".xls", "Microsoft Excel Documents"));
 		
 		int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
 		if (response == JFileChooser.APPROVE_OPTION)
@@ -941,6 +952,11 @@ public class FileOperation
 		catch(Exception ex) {}
 		
 		JFileChooser jfc = new JFileChooser();
+		jfc.setAcceptAllFileFilterUsed(false);
+		
+		//Add file filters
+		jfc.addChoosableFileFilter(new FileNameExtensionFilter("Comma-Separated Values - CSV", "csv"));
+		
 		jfc.setCurrentDirectory(new File("." + File.separator));
 		
 		int response = jfc.showDialog(null, Methods.getLanguageText(XMLIdentifier.SAVE_TEXT));
