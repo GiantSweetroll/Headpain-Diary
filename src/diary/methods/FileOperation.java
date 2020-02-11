@@ -35,7 +35,6 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.Settings;
-import diary.fileFilters.FileTypeFilter;
 import diary.gui.ImageExportPanel;
 import diary.gui.graphs.GraphPanel;
 import diary.gui.table.Table;
