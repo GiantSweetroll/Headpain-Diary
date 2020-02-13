@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -20,7 +22,7 @@ import diary.patientdata.PatientData;
 import giantsweetroll.GGUtilities;
 import giantsweetroll.gui.swing.Gbm;
 
-public class HistoryPanel extends JPanel implements GUIFunction, ActionListener, LanguageListener
+public class HistoryPanel extends JPanel implements GUIFunction, ActionListener, LanguageListener, FocusListener
 {
 
 	/**
@@ -202,4 +204,13 @@ public class HistoryPanel extends JPanel implements GUIFunction, ActionListener,
 	{
 		this.refresh();
 	}
+	
+	@Override
+	public void focusGained(FocusEvent e) 
+	{
+		this.comboHistory.requestFocusInWindow();
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {}
 }
