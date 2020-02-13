@@ -2,6 +2,7 @@ package diary.gui.EntryLog.forms;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.FocusEvent;
 
 import diary.constants.Constants;
 import diary.constants.Globals;
@@ -177,4 +178,13 @@ public class Trigger extends FormElement
 	{
 		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_TRIGGER_TEXT);
 	}
+	
+	@Override
+	public void focusGained(FocusEvent e) 
+	{
+		this.trigger.requestFocusInWindow();
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {}
 }

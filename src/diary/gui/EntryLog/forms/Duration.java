@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -353,4 +354,13 @@ public class Duration extends FormElement implements KeyListener, ActionListener
 	{
 		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DURATION_TEXT);
 	}
+	
+	@Override
+	public void focusGained(FocusEvent e) 
+	{
+		this.slider.requestFocusInWindow();
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {}
 }

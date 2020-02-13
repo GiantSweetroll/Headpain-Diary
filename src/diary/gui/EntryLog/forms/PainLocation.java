@@ -1,6 +1,7 @@
 package diary.gui.EntryLog.forms;
 
 import java.awt.BorderLayout;
+import java.awt.event.FocusEvent;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -94,4 +95,10 @@ public class PainLocation extends FormElement
 	{
 		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_PAIN_LOCATION_TEXT);
 	}
+	
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+	@Override
+	public void focusLost(FocusEvent e) {}
 }

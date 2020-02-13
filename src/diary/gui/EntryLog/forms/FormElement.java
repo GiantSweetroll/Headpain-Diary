@@ -1,5 +1,7 @@
 package diary.gui.EntryLog.forms;
 
+import java.awt.event.FocusListener;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,7 +11,7 @@ import diary.interfaces.GUIFunction;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 
-public abstract class FormElement<T> extends JScrollPane implements GUIFunction, LanguageListener
+public abstract class FormElement<T> extends JScrollPane implements GUIFunction, LanguageListener, FocusListener
 {
 
 	/**
@@ -44,6 +46,8 @@ public abstract class FormElement<T> extends JScrollPane implements GUIFunction,
 		this.setOpaque(false);
 		this.setFormTitle(name);
 		this.labName.setFont(Constants.FONT_HEADER);
+		
+		this.addFocusListener(this);
 	}
 
 	//Methods

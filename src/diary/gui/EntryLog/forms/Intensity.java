@@ -3,6 +3,7 @@ package diary.gui.EntryLog.forms;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -187,4 +188,13 @@ public class Intensity extends FormElement<Integer> implements KeyListener, Chan
 	{
 		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_INTENSITY_TEXT);
 	}
+
+	@Override
+	public void focusGained(FocusEvent arg0) 
+	{
+		this.slider.requestFocusInWindow();
+	}
+
+	@Override
+	public void focusLost(FocusEvent arg0) {}
 }

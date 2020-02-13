@@ -2,6 +2,7 @@ package diary.gui.EntryLog.forms;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.FocusEvent;
 
 import diary.constants.Constants;
 import diary.constants.XMLIdentifier;
@@ -137,4 +138,10 @@ public class DateTimeSelect extends FormElement
 	{
 		return Methods.getLanguageText(XMLIdentifier.ENTRY_LOG_MAP_BUTTON_DATE_TIME_TEXT);
 	}
+	
+	@Override
+	public void focusGained(FocusEvent e) {}
+
+	@Override
+	public void focusLost(FocusEvent e) {}
 }
