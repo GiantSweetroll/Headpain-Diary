@@ -306,6 +306,11 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 		this.panelState = state;
 	}
 	
+	public FormElement getFormElementAtIndex(int index)
+	{
+		return this.forms.get(index);
+	}
+	
 	public PainEntryData getData()
 	{
 		PainEntryData entry = new PainEntryData();
@@ -455,10 +460,10 @@ public class EntryLog extends JPanel implements GUIFunction, ActionListener, Lan
 	{
 		this.updateLastSelection(patient, entry);
 		FileOperation.savePatientData(patient);
-		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, this.getSelectedPatient(), entry.getRecentMedication());
-		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, this.getSelectedPatient(), entry.getMedicineComplaint());
-		FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, this.getSelectedPatient(), entry.getPainKind());
-		FileOperation.updateHistory(Globals.HISTORY_TRIGGER, this.getSelectedPatient(), entry.getTrigger());
+		FileOperation.updateHistory(Globals.HISTORY_RECENT_MEDICATION, patient, entry.getRecentMedication());
+		FileOperation.updateHistory(Globals.HISTORY_MEDICINE_COMPLAINT, patient, entry.getMedicineComplaint());
+		FileOperation.updateHistory(Globals.HISTORY_PAIN_KIND, patient, entry.getPainKind());
+		FileOperation.updateHistory(Globals.HISTORY_TRIGGER, patient, entry.getTrigger());
 		FileOperation.exportPainData(patient, entry);
 		
 		if (!this.isNewEntry())
