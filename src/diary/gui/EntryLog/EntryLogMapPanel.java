@@ -209,6 +209,7 @@ public class EntryLogMapPanel extends JPanel implements ActionListener, Language
 		}
 		
 		this.updateSelection();
+		Globals.ENTRY_LOG.getFormElementAtIndex(Globals.ENTRY_LOG.getPanelState()).requestFocusInWindow();
 	}
 
 	@Override

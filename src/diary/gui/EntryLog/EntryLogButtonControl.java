@@ -16,6 +16,7 @@ import diary.constants.PanelName;
 import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.gui.GButton;
+import diary.gui.EntryLog.forms.FormElement;
 import diary.interfaces.LanguageListener;
 import diary.methods.Methods;
 import diary.patientdata.PatientData;
@@ -97,9 +98,9 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 		//Change entry log active center panel
 		if (this.buttonType == EntryLogButtonControl.BACK)
 		{	
-			if (this.entryLog.getPanelState() == EntryLog.PROFILE_SELECTION)
+			if (this.entryLog.getPanelState() == EntryLog.PROFILE_SELECTION)	//If the current panel is the profile selection
 			{
-				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);
+				Globals.MAIN_FRAME.changePanel(PanelName.MAIN_MENU);	//Go to main menu
 			}
 			else
 			{
@@ -108,6 +109,7 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 				this.entryLog.setPanelState(state);
 				((CardLayout)this.entryLog.getPanelInput().getLayout()).previous(this.entryLog.getPanelInput());
 				Globals.ENTRY_LOG.getFormSelectionMapPanel().updateSelection();
+				Globals.ENTRY_LOG.getFormElementAtIndex(state).requestFocusInWindow();		//Set to focus
 			}
 		}
 		else
@@ -126,8 +128,9 @@ public class EntryLogButtonControl extends JPanel implements ActionListener, Lan
 				this.entryLog.setPanelState(state);
 				((CardLayout)this.entryLog.getPanelInput().getLayout()).next(this.entryLog.getPanelInput());
 				Globals.ENTRY_LOG.getFormSelectionMapPanel().updateSelection();
+				Globals.ENTRY_LOG.getFormElementAtIndex(state).requestFocusInWindow();		//Set to focus
 			}
-		}		
+		}
 	}
 	
 	//Interface
