@@ -42,7 +42,8 @@ public class BarGraphPanel extends Graph
 		}
 		
 		//Check if there's room
-		if (pixlesNeeded > super.getWidth())
+//		if (pixlesNeeded > super.getWidth())
+		if (pixlesNeeded > super.axesLength.x)
 		{
 			return false;
 		}
