@@ -48,7 +48,6 @@ import diary.data.Settings;
 import diary.gui.MainFrame;
 import diary.interfaces.LanguageListener;
 import diary.patientdata.PatientData;
-import giantsweetroll.ImageManager;
 import giantsweetroll.files.FileManager;
 import giantsweetroll.numbers.GNumbers;
 import giantsweetroll.xml.dom.XMLManager;
@@ -1213,12 +1212,11 @@ public class Methods
     	Image tmp = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
     	BufferedImage bi = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
     	
-    	Graphics2D g2d = bi.createGraphics();
-    	g2d.drawImage(tmp, 0, 0, null);
-    	g2d.dispose();
+//    	Graphics2D g2d = bi.createGraphics();
+//    	g2d.drawImage(tmp, 0, 0, null);
+//    	g2d.dispose();
     	
     	return bi;
-    	
     }
     
     public static final Dimension getScaledDimension(Dimension originalDim, Dimension boundary)
@@ -1242,7 +1240,7 @@ public class Methods
     	if (heightNew > heightBound)
     	{
     		heightNew = heightBound;	//Scale height to fit
-    		widthNew = (heightNew * widthOri)/heightOri;		//Scale the width accordingly, maintaing aspect ratio
+    		widthNew = (heightNew * widthOri)/heightOri;		//Scale the width accordingly, maintaining aspect ratio
     	}
     	
     	return new Dimension(widthNew, heightNew);
