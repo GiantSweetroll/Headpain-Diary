@@ -10,7 +10,6 @@ import diary.constants.XMLIdentifier;
 import diary.data.PainEntryData;
 import diary.data.PainEntryDataVoid;
 import giantsweetroll.date.Date;
-import giantsweetroll.message.MessageManager;
 
 public class PainDataOperation 
 {	
