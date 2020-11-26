@@ -1083,7 +1083,7 @@ public class FileOperation
 		{
 			FileOperation.zipFolder(zos, new File(Constants.HISTORY_FOLDER_PATH + id), "history" + File.separator);										//Export History
 			FileOperation.zipFile(new File(Globals.setting.getUserDatabasePath() + File.separator + id + ".xml"), Globals.setting.getUserDatabaseFolderName() + File.separator, zos);		//Export Patient Data
-			FileOperation.zipFolder(zos, new File(Globals.setting.getEntriesDatabasePath() + File.separator + id), Globals.setting.getEntriesDatawbaseFolderName() + File.separator);		//Export All Database
+			FileOperation.zipFolder(zos, new File(Globals.setting.getEntriesDatabasePath() + File.separator + id), Globals.setting.getEntriesDatabaseFolderName() + File.separator);		//Export All Database
 		}
 		
 		zos.close();
@@ -1108,7 +1108,7 @@ public class FileOperation
 				File yearFile = new File(monthFile.getParent());
 			
 				//Zip Entry
-				FileOperation.zipFile(xmlFile, Globals.setting.getEntriesDatawbaseFolderName() + File.separator + id + File.separator + yearFile.getName() + File.separator + monthFile.getName() + File.separator + dayFile.getName() + File.separator, zos);
+				FileOperation.zipFile(xmlFile, Globals.setting.getEntriesDatabaseFolderName() + File.separator + id + File.separator + yearFile.getName() + File.separator + monthFile.getName() + File.separator + dayFile.getName() + File.separator, zos);
 			}
 		}
 		
