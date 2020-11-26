@@ -55,6 +55,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected int axesPaddingWithPanelEdgeTop = 50;
 	protected int xAxisNameTextHeight;
 	protected Graphics2D graph2DImage;
+	protected final Dimension graphImageSize = new Dimension(1280, 720);
 	
 	//Options
 	protected boolean enableDataValueMarkers;
@@ -63,12 +64,11 @@ public abstract class Graph extends JPanel implements LanguageListener
 	protected boolean showGraphLinesOfX;
 	
 	//Constants
-	protected final Dimension GRAPH_IMAGE_SIZE = new Dimension(1280, 1024);
 	protected final int DATA_POINT_WIDTH = 10;
 	protected final int AXES_POINTERS_LENGTH = 15;
 	protected final int MARKER_LABEL_PADDING = 5;
 	protected final int MAX_MARKERS_IN_Y_AXIS = 10;
-	protected final int MAX_MARKERS_IN_X_AXIS = 4;	
+	protected final int MAX_MARKERS_IN_X_AXIS = 5;
 	protected final int GENERAL_PADDING = 10;
 	protected final int DECIMAL_PLACES = 1;
 	protected final int X_AXIS_NAME_PADDING = 20;
@@ -106,7 +106,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.yAxisValues = new ArrayList<Double>();
 		this.yAxisMarkerPoints = new ArrayList<Point>();
 		this.dataPoints = new ArrayList<Point>();
-		this.graphImage = new BufferedImage(this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height, BufferedImage.TYPE_INT_ARGB);
+		this.graphImage = new BufferedImage(this.graphImageSize.width, this.graphImageSize.height, BufferedImage.TYPE_INT_ARGB);
 		this.graph2DImage = this.graphImage.createGraphics();
 		this.graph2DImage.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
 		this.graph2DImage.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
@@ -130,7 +130,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 		}
 		
 		this.setOpaque(false);		
-		this.setPreferredSize(this.GRAPH_IMAGE_SIZE);
+		this.setPreferredSize(this.graphImageSize);
 	}
 	@Override
 	public void paintComponent(Graphics g)
@@ -145,9 +145,9 @@ public abstract class Graph extends JPanel implements LanguageListener
 		this.graph2DImage.setStroke(new BasicStroke(this.STROKE_SIZE));
 //		this.graph2DImage.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 //							                RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
-		this.graph2DImage.fillRect(0, 0, this.GRAPH_IMAGE_SIZE.width, this.GRAPH_IMAGE_SIZE.height);
+		this.graph2DImage.fillRect(0, 0, this.graphImageSize.width, this.graphImageSize.height);
 
-		this.axesOrigin = new Point(this.axesPaddingWithPanelEdgeSides, this.GRAPH_IMAGE_SIZE.height-this.axesPaddingWithPanelEdgeBelow);
+		this.axesOrigin = new Point(this.axesPaddingWithPanelEdgeSides, this.graphImageSize.height-this.axesPaddingWithPanelEdgeBelow);
 		this.drawAxesWithDefaultSettings();
 		try
 		{
@@ -254,7 +254,9 @@ public abstract class Graph extends JPanel implements LanguageListener
 	}
 	public void setGraphImageSize(int width, int height)
 	{
-		this.graphImage = Methods.resize(this.graphImage, width, height);
+		this.graphImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		this.graph2DImage = this.graphImage.createGraphics();
+		this.repaint();
 	}
 	public void setGraphImageSize(Dimension dim)
 	{
@@ -262,7 +264,7 @@ public abstract class Graph extends JPanel implements LanguageListener
 	}
 	protected void drawAxesWithDefaultSettings()
 	{
-		this.drawAxes(this.graph2DImage, Color.BLACK, this.GRAPH_IMAGE_SIZE.width-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
+		this.drawAxes(this.graph2DImage, Color.BLACK, this.graphImageSize.width-this.axesPaddingWithPanelEdgeSides, this.axesPaddingWithPanelEdgeTop);
 	}
 	
 	//Draw Sections
