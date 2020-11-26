@@ -153,7 +153,7 @@ public class Settings
 		File file = new File(this.getUserDatabasePath());
 		return file.getName();
 	}
-	public String getEntriesDatawbaseFolderName()
+	public String getEntriesDatabaseFolderName()
 	{
 		File file = new File(this.getEntriesDatabasePath());
 		return file.getName();
