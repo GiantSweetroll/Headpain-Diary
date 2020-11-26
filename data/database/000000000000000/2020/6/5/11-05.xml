@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2020</date_year>
+     <comments/>
+     <date_month>6</date_month>
+     <time_minute>05</time_minute>
+     <activity>Stressor</activity>
+     <recent_medication/>
+     <date_day>5</date_day>
+     <medicine_complaint/>
+     <pain_kind>Throbbing</pain_kind>
+     <duration>1</duration>
+     <intensity>4</intensity>
+     <pain_location_preset pain_loc_id="0">eyes and forhead</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">face left and head</pain_location_preset>
+     <time_hour>11</time_hour>
+</Entry>

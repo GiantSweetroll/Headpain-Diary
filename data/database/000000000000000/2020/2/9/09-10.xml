@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry>
+     <date_year>2020</date_year>
+     <comments/>
+     <date_month>2</date_month>
+     <time_minute>10</time_minute>
+     <activity>Physical Activity</activity>
+     <recent_medication/>
+     <date_day>9</date_day>
+     <medicine_complaint/>
+     <pain_kind>Pulsating</pain_kind>
+     <duration>345600</duration>
+     <intensity>3</intensity>
+     <pain_location_preset pain_loc_id="0">head back</pain_location_preset>
+     <pain_location_preset pain_loc_id="1">eyes and forhead</pain_location_preset>
+     <time_hour>09</time_hour>
+</Entry>
