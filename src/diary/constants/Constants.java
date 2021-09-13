@@ -18,7 +18,7 @@ import giantsweetroll.numbers.GNumbers;
 
 public final class Constants 
 {
-	public static final String PROGRAM_TITLE = "My Headpain Diary";
+	public static final String PROGRAM_TITLE = "Guardian Headache Diary";
 	public static final String VERSION = "0.3.2b.r.1";
 	
 	public static final Dimension SCREENSIZE = GGUtilities.getScreenSize();
