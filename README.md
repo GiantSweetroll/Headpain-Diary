@@ -111,7 +111,7 @@ To get a local copy of the project up and running , follow these simple steps.
 ## Usage
 The app is in Indonesian by default but you may change to English translation in the application settings.
 
-To see how to use the app, please refer to `Usage.pdf` location at `docs/Usage.pdf`.
+To see how to use the app, please refer to `Usage.pdf` location at `docs/Usage.pdf`, or refer [here](https://github.com/GiantSweetroll/Headpain-Diary/blob/master/docs/Usage.pdf).
 
 
 <!-- ACKNOWLEDGMENTS -->
