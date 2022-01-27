@@ -1,10 +1,10 @@
 package diary.test;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.MediaTracker;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,19 +16,10 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-
-import diary.constants.Constants;
-import diary.constants.ImageConstants;
-import giantsweetroll.ImageManager;
 
 public class Test
 {	
@@ -93,157 +84,59 @@ public class Test
 		}
 	}
 	
-	public static void labelUpdateIcon()
+	public static void main(String args[])
 	{
-		JLabel label = new JLabel();
-		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
-		label.setIcon(icon);
-		ImageIcon icon2 = new ImageIcon(ImageConstants.FKUI);
-		label.setIcon(icon2);
-		JOptionPane.showMessageDialog(null, label);
-		ImageIcon icon3 = new ImageIcon(ImageConstants.MEDICAL_MEDIA);
-		label.setIcon(icon3);
-		JOptionPane.showMessageDialog(null, label);
-	}
-	public static void labelUpdateIcon2()
-	{
-		JLabel label = new JLabel();
-		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
-		label.setIcon(icon);
-		icon = new ImageIcon(ImageConstants.FKUI);
-		label.setIcon(icon);
-		JOptionPane.showMessageDialog(null, label);
-		icon = new ImageIcon(ImageConstants.MEDICAL_MEDIA);
-		label.setIcon(icon);
-		JOptionPane.showMessageDialog(null, label);
-	}
-	public static void labelUpdateIcon3()
-	{
-	    final JFrame frame = new JFrame("TEST");
-	    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-	    final JLabel label = new JLabel();
-	    ImageIcon icon = ImageManager.getImageIcon(ImageConstants.MEDICAL_MEDIA);
-
-	    frame.getContentPane().setLayout(new BorderLayout());
-	    frame.getContentPane().add(label, BorderLayout.CENTER);
-	    frame.setSize(800,800);
-
-	    SwingUtilities.invokeLater(new Runnable() {
-	        @Override
-	        public void run() {
-	            frame.setVisible(true);
-	        }
-	    });
-
-
-	    try {
-	        Thread.currentThread().sleep(1000);
-	    } catch (InterruptedException e) {
-	        e.printStackTrace();
-	    }
-
-	    final ImageIcon finalIcon = icon;
-	    SwingUtilities.invokeLater(new Runnable() {
-	        @Override
-	        public void run() {
-	            if(finalIcon != null && finalIcon.getImageLoadStatus() == MediaTracker.COMPLETE){
-	               label.setIcon(finalIcon);
-	               try {
-					Thread.currentThread().sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	               ImageIcon icon2 = ImageManager.getImageIcon(ImageConstants.FKUI);
-	               label.setIcon(icon2);
-	            }
-	        }
-	    });
-	}
-	public static void labelUpdateIcon4()
-	{
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
-		JLabel label = new JLabel(icon);
-		JButton button = new JButton("Change Me!");
-		
-		panel.add(label);
-		frame.add(panel, BorderLayout.CENTER);
-		frame.add(button, BorderLayout.SOUTH);
-		
-		button.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-					{
-						frame.dispose();
-						ImageIcon temp = new ImageIcon(ImageConstants.FKUI);
-						label.setIcon(temp);
-						frame.add(panel, BorderLayout.CENTER);
-						frame.add(button, BorderLayout.SOUTH);
-						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
-						frame.setResizable(false);
-						frame.setLocationRelativeTo(null);
-						frame.setVisible(true);
-					}
-				});
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
-	public static void labelUpdateIcon5()
-	{
+		//Initialize
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
-		ImageIcon icon = new ImageIcon(ImageConstants.LOGO);
-		JLabel label = new JLabel(icon);
-		JButton button = new JButton("Change Me!");
-		SpringLayout spr = new SpringLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		JLabel label1 = new JLabel("Hello");
+		JLabel label2 = new JLabel("World");
+		JLabel label3 = new JLabel("KLJDSAKDASJLDKSJDLKAJDKLJADJADL:ADAS");
 		
-		panel.setLayout(spr);
+		//Panel properties
+		panel.setLayout(new GridBagLayout());
+		label1.setOpaque(true);
+		label1.setBackground(Color.BLUE);
+		label1.setForeground(Color.white);
+		label3.setOpaque(true);
+		label3.setBackground(Color.cyan);
 		
-		spr.putConstraint(SpringLayout.EAST, label, 0, SpringLayout.EAST, panel);
-		spr.putConstraint(SpringLayout.WEST, label, 0, SpringLayout.WEST, panel);
-		spr.putConstraint(SpringLayout.SOUTH, label, 0, SpringLayout.SOUTH, panel);
-		spr.putConstraint(SpringLayout.NORTH, label, 0, SpringLayout.NORTH, panel);
+		//Add to panel
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(10, 10, 10, 10);
+		panel.add(label1, c);
+		c.gridx = 1;
+		panel.add(label2, c);
+		c.gridwidth = 2;
+		c.gridx = 0;
+		c.gridy = 1;
+		panel.add(label3, c);
 		
+		//Add panel to frame
+		frame.add(panel);
 		
-		panel.add(label);
-		frame.add(panel, BorderLayout.CENTER);
-		frame.add(button, BorderLayout.SOUTH);
-		
-		button.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-					{
-//						frame.dispose();
-						ImageIcon temp = new ImageIcon(ImageConstants.FKUI);
-						label.setIcon(temp);
-//						frame.add(panel, BorderLayout.CENTER);
-//						frame.add(button, BorderLayout.SOUTH);
-//						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//						frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
-//						frame.setResizable(false);
-//						frame.setLocationRelativeTo(null);
-//						frame.setVisible(true);
-					}
-				});
-		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(Constants.SCREENSIZE.width/2, (Constants.SCREENSIZE.height/4)*3);
-		frame.setResizable(false);
+		//Frame properties
+		frame.setSize(500, 500);
 		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 	
-	public static void main(String args[])
+	private static void goToNextLayout(CardLayout card)
 	{
-		labelUpdateIcon5();
+	}
+	
+	private static void viewDetails()
+	{
+		
+	}
+	
+	private static void hashGenerator(int num, int i)
+	{
+		int val = (num + i * (1 + (num % 10))) % 11;
+		System.out.println(val);
 	}
 	
 	private static void print(Object obj)
